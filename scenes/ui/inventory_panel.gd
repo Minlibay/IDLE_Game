@@ -82,7 +82,7 @@ func _ready() -> void:
 	for i in GameState.ARMY_RELIC_SLOTS:
 		var relic_slot := _make_slot(relic_grid, RELIC_SLOT_SIZE)
 		relic_slot.empty_frame = UI_DIR + "slot_relic.png"
-		relic_slot.empty_tooltip = "Реликвия армии: пусто.\nРеликвии выпадают с монстров и усиливают армию замка."
+		relic_slot.empty_tooltip = tr("Реликвия армии: пусто.\nРеликвии выпадают с монстров и усиливают армию замка.")
 		_relic_slots.append(relic_slot)
 	for i in GameState.INVENTORY_SIZE:
 		_bag_slots.append(_make_slot(bag_grid, SLOT_SIZE))
@@ -129,9 +129,9 @@ func close() -> void:
 ## Заголовки разделов: «✦ Название ———».
 func _build_titles() -> void:
 	var sections := {
-		"VBox/Body/EquipSection/VBox": "Экипировка",
-		"VBox/Body/StatsSection/VBox": "Герой",
-		"VBox/Body/DetailsSection/VBox": "Описание предмета",
+		"VBox/Body/EquipSection/VBox": tr("Экипировка"),
+		"VBox/Body/StatsSection/VBox": tr("Герой"),
+		"VBox/Body/DetailsSection/VBox": tr("Описание предмета"),
 	}
 	_build_bag_tabs()
 	for path: String in sections:
@@ -140,10 +140,10 @@ func _build_titles() -> void:
 		box.add_child(title)
 		box.move_child(title, 0)
 	# Внутри раздела «Экипировка» — подзаголовок реликвий, в «Герое» — подзаголовок армии.
-	var relic_title := _make_title("Реликвии армии")
+	var relic_title := _make_title(tr("Реликвии армии"))
 	relic_grid.get_parent().add_child(relic_title)
 	relic_grid.get_parent().move_child(relic_title, relic_grid.get_index())
-	var army_title := _make_title("Армия")
+	var army_title := _make_title(tr("Армия"))
 	army_stats.get_parent().add_child(army_title)
 	army_stats.get_parent().move_child(army_title, army_stats.get_index())
 
@@ -153,8 +153,8 @@ func _build_bag_tabs() -> void:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 4)
 	var group := ButtonGroup.new()
-	_bag_tab = _make_tab("Сумка", group, false)
-	_treasure_tab = _make_tab("Сокровищница", group, true)
+	_bag_tab = _make_tab(tr("Сумка"), group, false)
+	_treasure_tab = _make_tab(tr("Сокровищница"), group, true)
 	_bag_tab.button_pressed = true
 	row.add_child(_bag_tab)
 	row.add_child(_treasure_tab)
@@ -165,7 +165,7 @@ func _build_bag_tabs() -> void:
 	_treasure_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_treasure_info.clip_text = true
 	_treasure_info.mouse_filter = Control.MOUSE_FILTER_PASS
-	_treasure_info.tooltip_text = "Сокровища (именные, уникальные, сетовые) находятся раз в несколько часов игры,\nне чаще недельного лимита. Позже их можно будет продавать на торговой площадке Steam."
+	_treasure_info.tooltip_text = tr("Сокровища (именные, уникальные, сетовые) находятся раз в несколько часов игры,\nне чаще недельного лимита. Позже их можно будет продавать на торговой площадке Steam.")
 	row.add_child(_treasure_info)
 	var box := get_node("VBox/Body/BagSection/VBox") as VBoxContainer
 	box.add_child(row)
@@ -189,13 +189,13 @@ func _make_tab(text: String, group: ButtonGroup, treasures: bool) -> Button:
 func _update_treasure_info() -> void:
 	var cap := WorldService.treasure_week_cap()
 	if not WorldService.is_logged_in() or cap <= 0:
-		_treasure_info.text = "Нужна связь с сервером"
+		_treasure_info.text = tr("Нужна связь с сервером")
 		return
 	var count := WorldService.treasure_week_count()
 	if count >= cap:
-		_treasure_info.text = "Неделя %d/%d — дальше со след. недели" % [count, cap]
+		_treasure_info.text = tr("Неделя %d/%d — дальше со след. недели") % [count, cap]
 	else:
-		_treasure_info.text = "Находка ~%s · неделя %d/%d" % [UiFormat.duration(WorldService.treasure_seconds_left()), count, cap]
+		_treasure_info.text = tr("Находка ~%s · неделя %d/%d") % [UiFormat.duration(WorldService.treasure_seconds_left()), count, cap]
 
 
 func _make_title(text: String) -> HBoxContainer:
@@ -213,7 +213,7 @@ func _make_slot(parent: Container, slot_size: Vector2) -> ItemSlot:
 func _make_equip_slot(slot: int, parent: Container) -> ItemSlot:
 	var item_slot := _make_slot(parent, SLOT_SIZE)
 	item_slot.empty_frame = UI_DIR + EMPTY_SLOT_FRAMES[slot] + ".png"
-	item_slot.empty_tooltip = "%s: пусто" % ItemBase.slot_name(slot)
+	item_slot.empty_tooltip = tr("%s: пусто") % ItemBase.slot_name(slot)
 	return item_slot
 
 
@@ -243,7 +243,7 @@ func _refresh() -> void:
 		var item: Item = shown[i] if i < shown.size() else null
 		_bag_slots[i].set_item(item)
 		_bag_slots[i].set_selected(item != null and item == _selected)
-		_bag_slots[i].empty_tooltip = "Пусто: сокровища находятся за время игры" if _show_treasures else ""
+		_bag_slots[i].empty_tooltip = tr("Пусто: сокровища находятся за время игры") if _show_treasures else ""
 	for slot: int in _equip_slots:
 		var equipped: Item = GameState.equipment.get(slot)
 		_equip_slots[slot].set_item(equipped)
@@ -252,8 +252,8 @@ func _refresh() -> void:
 		var relic: Item = GameState.army_relics[i] if i < GameState.army_relics.size() else null
 		_relic_slots[i].set_item(relic)
 		_relic_slots[i].set_selected(relic != null and relic == _selected)
-	count_label.text = "Сумка: %d / %d" % [GameState.inventory.size(), GameState.INVENTORY_SIZE]
-	_treasure_tab.text = "Сокровищница (%d)" % GameState.treasures.size() if not GameState.treasures.is_empty() else "Сокровищница"
+	count_label.text = tr("Сумка: %d / %d") % [GameState.inventory.size(), GameState.INVENTORY_SIZE]
+	_treasure_tab.text = tr("Сокровищница (%d)") % GameState.treasures.size() if not GameState.treasures.is_empty() else tr("Сокровищница")
 	_update_treasure_info()
 	_update_stats()
 	_update_details()
@@ -290,11 +290,11 @@ func _update_stats() -> void:
 	gold_label.text = _format_int(GameState.gold)
 	var stats := GameState.get_hero_stats()
 	_fill_rows(hero_stats, [
-		["health", "Здоровье", str(roundi(stats.max_hp))],
-		["attack", "Урон", str(roundi(stats.damage))],
-		["defense", "Броня", str(roundi(stats.armor))],
-		["battle", "Крит", "%d%%" % roundi(stats.crit_chance * 100.0)],
-		["time", "Атака раз в", "%.2f с" % stats.attack_interval],
+		["health", tr("Здоровье"), str(roundi(stats.max_hp))],
+		["attack", tr("Урон"), str(roundi(stats.damage))],
+		["defense", tr("Броня"), str(roundi(stats.armor))],
+		["battle", tr("Крит"), "%d%%" % roundi(stats.crit_chance * 100.0)],
+		["time", tr("Атака раз в"), tr("%.2f с") % stats.attack_interval],
 	])
 	var rows := []
 	var bonuses := GameState.get_army_gear_bonuses()
@@ -303,7 +303,7 @@ func _update_stats() -> void:
 		if bonuses.has(stat_name):
 			rows.append([STAT_ICONS[key], _short_stat_name(key), "+%s%%" % str(bonuses[stat_name])])
 	if rows.is_empty():
-		rows.append(["banner", "Нет реликвий", ""])
+		rows.append(["banner", tr("Нет реликвий"), ""])
 	_fill_rows(army_stats, rows)
 
 
@@ -313,22 +313,22 @@ func _update_details() -> void:
 		button.disabled = not has_item
 	_big_slot.set_item(_selected)
 	if not has_item:
-		item_name_label.text = "Выберите предмет"
+		item_name_label.text = tr("Выберите предмет")
 		item_name_label.modulate = Color.WHITE
-		item_tier_label.text = "Нажмите на предмет в сумке или экипировке"
+		item_tier_label.text = tr("Нажмите на предмет в сумке или экипировке")
 		item_tier_label.modulate = COLOR_HINT
 		description_label.text = ""
 		_fill_rows(item_stats, [])
-		equip_button.text = "Надеть"
-		sell_button.text = "Продать"
-		upgrade_button.text = "Заточить"
+		equip_button.text = tr("Надеть")
+		sell_button.text = tr("Продать")
+		upgrade_button.text = tr("Заточить")
 		return
 
 	var base := _selected.get_base()
 	item_name_label.text = _selected.get_display_name()
 	item_name_label.modulate = _selected.get_tier_color()
 	var level := _selected.get_treasure_level() if _selected.is_treasure() else _selected.item_level
-	item_tier_label.text = "%s · %s · ур. %d" % [_selected.get_tier_name(), ItemBase.slot_name(base.slot), level]
+	item_tier_label.text = tr("%s · %s · ур. %d") % [_selected.get_tier_name(), ItemBase.slot_name(base.slot), level]
 	item_tier_label.modulate = _selected.get_tier_color().lerp(COLOR_HINT, 0.4)
 	var description := base.description
 	if not base.allowed_classes.is_empty():
@@ -336,7 +336,7 @@ func _update_details() -> void:
 		for id in base.allowed_classes:
 			var class_data := Database.get_class_data(id)
 			names.append(class_data.display_name if class_data else id)
-		description += ("\n" if description != "" else "") + "Только: " + ", ".join(names)
+		description += ("\n" if description != "" else "") + tr("Только: ") + ", ".join(names)
 	description_label.text = description
 	var rows := []
 	var stats := _selected.get_stats()
@@ -350,28 +350,28 @@ func _update_details() -> void:
 	set_info.visible = set_info.text != ""
 
 	var equipped := GameState.is_equipped(_selected)
-	equip_button.text = "Снять" if equipped else "Надеть"
+	equip_button.text = tr("Снять") if equipped else tr("Надеть")
 	equip_button.disabled = not equipped and not GameState.can_equip(_selected)
-	sell_button.text = "Продать (%d з)" % _selected.get_sell_price()
+	sell_button.text = tr("Продать (%d з)") % _selected.get_sell_price()
 	sell_button.disabled = equipped
 	if _selected.is_treasure():
-		sell_button.text = "Площадка Steam"
+		sell_button.text = tr("Площадка Steam")
 		sell_button.disabled = true
-		sell_button.tooltip_text = "Сокровища будут продаваться на торговой площадке Steam (после выхода игры)."
-		upgrade_button.text = "Без заточки"
+		sell_button.tooltip_text = tr("Сокровища будут продаваться на торговой площадке Steam (после выхода игры).")
+		upgrade_button.text = tr("Без заточки")
 		upgrade_button.disabled = true
-		upgrade_button.tooltip_text = "Сокровища не затачиваются: их сила растёт вместе с рекордом волны героя."
+		upgrade_button.tooltip_text = tr("Сокровища не затачиваются: их сила растёт вместе с рекордом волны героя.")
 		fuse_button.disabled = true
 		return
 	if _selected.upgrade_level >= Item.MAX_UPGRADE_LEVEL:
-		upgrade_button.text = "Заточка: макс."
+		upgrade_button.text = tr("Заточка: макс.")
 		upgrade_button.disabled = true
 	else:
 		var cost := ItemUpgrader.get_upgrade_cost(_selected)
-		upgrade_button.text = "Заточить: %d з (%d%%)" % [cost, roundi(ItemUpgrader.get_success_chance(_selected) * 100.0)]
+		upgrade_button.text = tr("Заточить: %d з (%d%%)") % [cost, roundi(ItemUpgrader.get_success_chance(_selected) * 100.0)]
 		upgrade_button.disabled = GameState.gold < cost
 	fuse_button.disabled = not ItemUpgrader.can_fuse(_selected)
-	fuse_button.tooltip_text = "Нужно 3 предмета тира «%s» в слот «%s» в сумке" % [
+	fuse_button.tooltip_text = tr("Нужно 3 предмета тира «%s» в слот «%s» в сумке") % [
 		_selected.get_tier_name(), ItemBase.slot_name(base.slot)]
 
 
@@ -382,7 +382,7 @@ func _set_text(base: ItemBase) -> String:
 		return ""
 	var count := GameState.get_set_piece_count(item_set.id)
 	var lines := PackedStringArray()
-	lines.append("[color=#%s]Сет «%s» (%d/%d)[/color]" % [item_set.color.to_html(false), item_set.display_name, count, item_set.get_piece_count()])
+	lines.append(tr("[color=#%s]Сет «%s» (%d/%d)[/color]") % [item_set.color.to_html(false), item_set.display_name, count, item_set.get_piece_count()])
 	for bonus in item_set.bonuses:
 		var color := COLOR_SET_ACTIVE if count >= bonus.pieces else COLOR_SET_INACTIVE
 		var text := ItemSetData.describe_bonus(bonus)
@@ -391,7 +391,7 @@ func _set_text(base: ItemBase) -> String:
 			if modifier.skill_id != "":
 				var skill := _find_skill(modifier.skill_id)
 				if skill:
-					text = text.replace("урона умений", "урона «%s»" % skill.display_name)
+					text = text.replace(tr("урона умений"), tr("урона «%s»") % skill.display_name)
 		lines.append("[color=#%s]%s[/color]" % [color.to_html(false), text])
 	return "\n".join(lines)
 
@@ -432,7 +432,7 @@ func _fill_rows(grid: GridContainer, rows: Array) -> void:
 
 
 func _short_stat_name(key: String) -> String:
-	return str(Item.STAT_NAMES.get(key, key)).trim_suffix(", %")
+	return tr(str(Item.STAT_NAMES.get(key, key))).trim_suffix(", %")
 
 
 ## 12480 -> «12 480».
@@ -458,7 +458,7 @@ func _on_equip_pressed() -> void:
 		return
 	if GameState.is_equipped(_selected):
 		if not GameState.unequip_item(_selected):
-			_show_result("Сумка полна", COLOR_BAD)
+			_show_result(tr("Сумка полна"), COLOR_BAD)
 	else:
 		GameState.equip(_selected)
 
@@ -469,7 +469,7 @@ func _on_sell_pressed() -> void:
 	var price := _selected.get_sell_price()
 	GameState.sell_item(_selected)
 	_selected = null
-	_show_result("Продано за %d з" % price, COLOR_OK)
+	_show_result(tr("Продано за %d з") % price, COLOR_OK)
 	_refresh()
 
 
@@ -478,13 +478,13 @@ func _on_upgrade_pressed() -> void:
 		return
 	match ItemUpgrader.try_upgrade(_selected):
 		ItemUpgrader.Result.SUCCESS:
-			_show_result("Успех! Теперь +%d" % _selected.upgrade_level, COLOR_OK)
+			_show_result(tr("Успех! Теперь +%d") % _selected.upgrade_level, COLOR_OK)
 		ItemUpgrader.Result.FAILED:
-			_show_result("Неудача… золото потрачено", COLOR_BAD)
+			_show_result(tr("Неудача… золото потрачено"), COLOR_BAD)
 		ItemUpgrader.Result.NOT_ENOUGH_GOLD:
-			_show_result("Не хватает золота", COLOR_BAD)
+			_show_result(tr("Не хватает золота"), COLOR_BAD)
 		ItemUpgrader.Result.MAX_LEVEL:
-			_show_result("Максимальная заточка", COLOR_BAD)
+			_show_result(tr("Максимальная заточка"), COLOR_BAD)
 	_refresh()
 
 
@@ -493,10 +493,10 @@ func _on_fuse_pressed() -> void:
 		return
 	var result := ItemUpgrader.fuse(_selected)
 	if result == null:
-		_show_result("Нечего сливать", COLOR_BAD)
+		_show_result(tr("Нечего сливать"), COLOR_BAD)
 		return
 	_selected = result
-	_show_result("Получено: %s (%s)" % [result.get_display_name(), result.get_tier_name()], result.get_tier_color())
+	_show_result(tr("Получено: %s (%s)") % [result.get_display_name(), result.get_tier_name()], result.get_tier_color())
 	_refresh()
 
 

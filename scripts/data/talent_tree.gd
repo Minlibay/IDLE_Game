@@ -26,6 +26,13 @@ var _by_id: Dictionary = {}
 var _by_cell: Dictionary = {}
 
 
+## Сбрасывает собранные узлы: при следующем обращении сетка соберётся заново (например, на другом языке).
+func reset() -> void:
+	_talents.clear()
+	_by_id.clear()
+	_by_cell.clear()
+
+
 func get_talents() -> Array[TalentData]:
 	_ensure_built()
 	return _talents
@@ -80,8 +87,8 @@ func _ensure_built() -> void:
 			if cell == center:
 				talent = TalentData.new()
 				talent.id = START_ID
-				talent.display_name = "Начало пути"
-				talent.description = "Отсюда растёт сетка талантов. Изучайте узлы рядом с уже изученными."
+				talent.display_name = tr("Начало пути")
+				talent.description = tr("Отсюда растёт сетка талантов. Изучайте узлы рядом с уже изученными.")
 				talent.kind = TalentData.Kind.START
 				talent.icon = load("res://assets/ui/icons/talents.png")
 			elif keystone_cells.has(cell):
@@ -130,7 +137,7 @@ func _make_minor(cell: Vector2i, region: int, distance: float) -> TalentData:
 	talent.kind = TalentData.Kind.MINOR
 	talent.region = region
 	talent.modifiers = [_scaled(source, 1.0 + distance * distance_growth)]
-	talent.display_name = StatModifier.STAT_TITLES[source.stat]
+	talent.display_name = tr(StatModifier.STAT_TITLES[source.stat])
 	return talent
 
 
@@ -145,7 +152,7 @@ func _make_notable(cell: Vector2i, region: int, distance: float, index: int) -> 
 	talent.region = region
 	talent.modifiers = [_scaled(pool[first], scale), _scaled(pool[second], scale)]
 	var names := regions[region].notable_names
-	talent.display_name = names[index % names.size()] if not names.is_empty() else regions[region].display_name
+	talent.display_name = tr(names[index % names.size()]) if not names.is_empty() else regions[region].display_name
 	return talent
 
 

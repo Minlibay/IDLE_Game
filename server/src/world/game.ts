@@ -11,6 +11,7 @@
 // Идти в чужую или ничью зону можно только с армией: один герой зоны не захватывает.
 // Проигравший на карте теряет всю армию, его герой возвращается в замок.
 // Замок захватить нельзя; защитник замка при поражении теряет только часть армии.
+// Союзники по гильдии (guilds.ts) друг на друга не нападают; победы на карте дают опыт гильдии.
 
 import { randomUUID } from "node:crypto";
 import type { Cost, GameData } from "../gameData.ts";
@@ -20,6 +21,7 @@ import { addArmies, armyTotal, compact, hasUnits, isEmpty, subtractArmies, type 
 import { applyLosses, resolveBattle, type BattleResult, type BattleSettings } from "./battle.ts";
 import { generateZones, type GeneratorSettings, type Zone } from "./generator.ts";
 import { hexDistance, isAdjacent } from "./grid.ts";
+import { Guilds, type GuildSettings } from "./guilds.ts";
 import {
   advanceKingdom, armyMultiplier, cancelOrder, consume, createKingdom, kingdomView, pay, recruit, refund,
   startBuilding, storageCapacity, type ExtraBonuses, type Kingdom, type KingdomSettings,
@@ -63,11 +65,14 @@ export type Player = {
   treasureWeek: number;
   treasureWeekCount: number;
   treasureSavedPlaytimeMs: number;
+  /** Гильдия игрока (null — без гильдии) и когда он из неё вышел (null — не выходил; для ожидания перед вступлением в новую). */
+  guildId: number | null;
+  guildLeftAt: number | null;
 };
 
 export type OwnedTreasure = { uid: string; itemId: string; at: number };
 
-export type ReportSide = { name: string; army: Army; lost: Army; power: number; heroLevel: number };
+export type ReportSide = { name: string; tag?: string | null; army: Army; lost: Army; power: number; heroLevel: number };
 
 export type ReportData = {
   kind: "battle" | "capture" | "zone_lost" | "info" | "raid" | "treasure";
@@ -75,13 +80,16 @@ export type ReportData = {
   tier: number;
   won: boolean;
   text: string;
+  /** Тот же текст шаблоном «… {name} …» и его параметры: клиент переводит шаблон на язык игрока. */
+  template?: string;
+  args?: Record<string, string | number>;
   attacker?: ReportSide;
   defender?: ReportSide;
   /** Добыча набега (ресурсы). */
   loot?: Cost;
 };
 
-export type GameSettings = GeneratorSettings & BattleSettings & KingdomSettings & {
+export type GameSettings = GeneratorSettings & BattleSettings & KingdomSettings & GuildSettings & {
   worldSeed: number;
   marchSeconds: number;
   castleMarchSeconds: number;
@@ -126,6 +134,7 @@ export function weekIndex(now: number): number {
 
 export class Game {
   readonly zones: Zone[];
+  readonly guilds: Guilds;
   private players = new Map<number, Player>();
   private playersByToken = new Map<string, Player>();
   private version: number;
@@ -164,6 +173,12 @@ export class Game {
     }
     this.nextPlayerId = maxId + 1;
     if (regenerate) this.relocatePlayers();
+    this.guilds = new Guilds(storage, settings, {
+      getPlayer: (id) => this.players.get(id),
+      findPlayerByName: (name) => [...this.players.values()].find((other) => other.name.toLowerCase() === name.toLowerCase()),
+      savePlayer: (player) => this.savePlayer(player),
+      syncKingdom: (player, time) => this.sync(player, time),
+    });
   }
 
   get worldVersion(): number {
@@ -198,6 +213,9 @@ export class Game {
         heroLevel: player.heroLevel,
         marching: player.march !== null,
         protectedUntil: this.protectedUntil(player, now),
+        guildId: player.guildId,
+        guildTag: this.guilds.tagOf(player),
+        guildColor: this.guilds.colorOf(player),
       })),
     };
   }
@@ -246,6 +264,8 @@ export class Game {
       shieldUntil: player.shieldUntil,
       depositAvailable: Math.floor(this.depositBank(player, now)),
       incoming: this.incomingAttacks(player),
+      guild: this.guilds.summary(player, now),
+      guildInvites: this.guilds.invitesFor(player, now),
       reports: this.storage.loadReports(player.id, this.settings.reportsKept) satisfies StoredReport[],
       serverTime: now,
     };
@@ -288,6 +308,8 @@ export class Game {
       treasureWeek: weekIndex(now),
       treasureWeekCount: 0,
       treasureSavedPlaytimeMs: 0,
+      guildId: null,
+      guildLeftAt: null,
     };
     castle.ownerId = id;
     castle.isCastle = true;
@@ -366,6 +388,7 @@ export class Game {
     const enemy = target.ownerId !== null && target.ownerId !== player.id ? this.players.get(target.ownerId) : undefined;
     const raid = target.isCastle && enemy !== undefined;
     if (target.isCastle && target.ownerId !== player.id && !enemy) throw new GameError("Этот замок нельзя атаковать");
+    if (enemy && this.guilds.areAllies(player, enemy)) throw new GameError("Нельзя нападать на союзника по гильдии");
     if (raid && this.protectedUntil(enemy, now) > now) throw new GameError("Замок под защитой — напасть пока нельзя");
     if (target.ownerId !== player.id && isEmpty(player.army)) {
       throw new GameError(raid ? "Для набега нужна армия" : "Без армии зону не занять — возьмите солдат из замка");
@@ -466,10 +489,12 @@ export class Game {
     advanceKingdom(player.kingdom, this.data, now, this.settings, this.fieldArmies(player), this.armyBonuses(player));
   }
 
-  /** Всё, что усиливает армию на сервере помимо зданий: захваченные зоны + реликвии армии. */
+  /** Всё, что усиливает армию на сервере помимо зданий: захваченные зоны, реликвии армии, бонус гильдии. */
   private armyBonuses(player: Player): ExtraBonuses {
     const bonuses = this.territoryBonuses(player);
     for (const [stat, value] of Object.entries(player.armyGear)) bonuses[stat] = (bonuses[stat] ?? 0) + value;
+    const guildBonus = this.guilds.bonusPercent(player);
+    if (guildBonus > 0) bonuses.ARMY_POWER = (bonuses.ARMY_POWER ?? 0) + guildBonus;
     return bonuses;
   }
 
@@ -526,7 +551,7 @@ export class Game {
       player.treasureWeekCount += 1;
       found = true;
       const quality = { named: "Именной", unique: "Уникальный", legendary: "Легендарный" }[info.quality];
-      this.report(player.id, now, { kind: "treasure", zoneId: player.castleZone, tier: 0, won: true, text: `Найдено сокровище: ${info.name} (${quality})` });
+      this.report(player.id, now, { kind: "treasure", zoneId: player.castleZone, tier: 0, won: true, ...say("Найдено сокровище: {item} ({quality})", { item: info.name, quality }) });
     }
     return found;
   }
@@ -579,6 +604,7 @@ export class Game {
       result.push({
         attacker: other.name,
         attackerId: other.id,
+        attackerTag: this.guilds.tagOf(other),
         fromZone: other.march.fromZone,
         toZone: zone.id,
         castle: zone.isCastle,
@@ -619,36 +645,42 @@ export class Game {
       this.abortMarch(player, march, zone, now, "Поход сорван: зону нельзя захватить");
       return;
     }
+    // Пока шли, могли оказаться в одной гильдии.
+    if (this.guilds.areAllies(player, defender)) {
+      this.abortMarch(player, march, zone, now, "Поход сорван: {name} — ваш союзник по гильдии", { name: defender.name });
+      return;
+    }
     this.sync(defender, now);
     if (zone.isCastle) this.arriveAtCastle(player, defender, march, zone, now);
     else this.arriveAtEnemy(player, defender, zone, now);
   }
 
-  private abortMarch(player: Player, march: March, zone: Zone, now: number, text: string): void {
+  private abortMarch(player: Player, march: March, zone: Zone, now: number, text: string, args: Record<string, string | number> = {}): void {
     player.heroZone = this.zones[march.fromZone].ownerId === player.id ? march.fromZone : player.castleZone;
     this.savePlayer(player);
-    this.report(player.id, now, { kind: "info", zoneId: zone.id, tier: zone.tier, won: false, text });
+    this.report(player.id, now, { kind: "info", zoneId: zone.id, tier: zone.tier, won: false, ...say(text, args) });
   }
 
   private arriveAtNeutral(player: Player, zone: Zone, now: number): void {
     if (isEmpty(zone.neutral)) {
       this.capture(zone, player);
-      this.report(player.id, now, { kind: "capture", zoneId: zone.id, tier: zone.tier, won: true, text: "Зона занята без боя" });
+      this.report(player.id, now, { kind: "capture", zoneId: zone.id, tier: zone.tier, won: true, ...say("Зона занята без боя") });
       return;
     }
     const result = this.battle(player.army, player.heroLevel, this.attackMultiplier(player), zone.neutral, 0, 1);
-    const sides = this.reportSides(player.name, player.army, player.heroLevel, "Нейтралы", zone.neutral, 0, result);
+    const sides = this.reportSides(player, player.army, player.heroLevel, null, zone.neutral, 0, result);
     if (result.attackerWins) {
       player.army = result.attackerArmy;
       zone.neutral = {};
       this.capture(zone, player);
-      this.report(player.id, now, { kind: "battle", zoneId: zone.id, tier: zone.tier, won: true, text: "Нейтралы разбиты, зона захвачена", ...sides });
+      this.guilds.addWinXp(player, this.settings.guildXpPerNeutralTier * zone.tier, now);
+      this.report(player.id, now, { kind: "battle", zoneId: zone.id, tier: zone.tier, won: true, ...say("Нейтралы разбиты, зона захвачена"), ...sides });
     } else {
       zone.neutral = result.defenderArmy;
       player.army = {};
       this.sendHome(player);
       this.touch(zone);
-      this.report(player.id, now, { kind: "battle", zoneId: zone.id, tier: zone.tier, won: false, text: "Армия погибла в бою с нейтралами, герой вернулся в замок", ...sides });
+      this.report(player.id, now, { kind: "battle", zoneId: zone.id, tier: zone.tier, won: false, ...say("Армия погибла в бою с нейтралами, герой вернулся в замок"), ...sides });
     }
   }
 
@@ -658,16 +690,17 @@ export class Game {
 
     if (isEmpty(defenderArmy) && !defenderPresent) {
       this.capture(zone, attacker);
-      this.report(attacker.id, now, { kind: "capture", zoneId: zone.id, tier: zone.tier, won: true, text: `Зона игрока ${defender.name} была без защиты — захвачена` });
-      this.report(defender.id, now, { kind: "zone_lost", zoneId: zone.id, tier: zone.tier, won: false, text: `${attacker.name} занял вашу зону без боя (гарнизона не было)` });
+      this.report(attacker.id, now, { kind: "capture", zoneId: zone.id, tier: zone.tier, won: true, ...say("Зона игрока {name} была без защиты — захвачена", { name: defender.name }) });
+      this.report(defender.id, now, { kind: "zone_lost", zoneId: zone.id, tier: zone.tier, won: false, ...say("{name} занял вашу зону без боя (гарнизона не было)", { name: attacker.name }) });
       return;
     }
 
     const defenderHero = defenderPresent ? defender.heroLevel : 0;
     const result = this.battle(attacker.army, attacker.heroLevel, this.attackMultiplier(attacker), defenderArmy, defenderHero, this.defenseMultiplier(defender));
-    const sides = this.reportSides(attacker.name, attacker.army, attacker.heroLevel, defender.name, defenderArmy, defenderHero, result);
+    const sides = this.reportSides(attacker, attacker.army, attacker.heroLevel, defender, defenderArmy, defenderHero, result);
 
     if (result.attackerWins) {
+      this.guilds.addWinXp(attacker, this.settings.guildXpPerPvpWin, now);
       attacker.army = result.attackerArmy;
       zone.garrison = {};
       if (defenderPresent) {
@@ -675,21 +708,22 @@ export class Game {
         this.sendHome(defender);
       }
       this.capture(zone, attacker);
-      this.report(attacker.id, now, { kind: "battle", zoneId: zone.id, tier: zone.tier, won: true, text: `Победа над ${defender.name}, зона захвачена`, ...sides });
+      this.report(attacker.id, now, { kind: "battle", zoneId: zone.id, tier: zone.tier, won: true, ...say("Победа над {name}, зона захвачена", { name: defender.name }), ...sides });
       this.report(defender.id, now, {
         kind: "zone_lost", zoneId: zone.id, tier: zone.tier, won: false,
-        text: defenderPresent ? `${attacker.name} разбил вашу армию, герой вернулся в замок` : `${attacker.name} разбил гарнизон и захватил зону`,
+        ...say(defenderPresent ? "{name} разбил вашу армию, герой вернулся в замок" : "{name} разбил гарнизон и захватил зону", { name: attacker.name }),
         ...sides,
       });
     } else {
+      this.guilds.addWinXp(defender, this.settings.guildXpPerPvpWin, now);
       attacker.army = {};
       this.sendHome(attacker);
       if (defenderPresent) [zone.garrison, defender.army] = splitSurvivors(result.defenderArmy, [zone.garrison, defender.army]);
       else zone.garrison = result.defenderArmy;
       this.savePlayer(defender);
       this.touch(zone);
-      this.report(attacker.id, now, { kind: "battle", zoneId: zone.id, tier: zone.tier, won: false, text: `Поражение от ${defender.name}: армия погибла, герой вернулся в замок`, ...sides });
-      this.report(defender.id, now, { kind: "battle", zoneId: zone.id, tier: zone.tier, won: true, text: `Атака ${attacker.name} отбита`, ...sides });
+      this.report(attacker.id, now, { kind: "battle", zoneId: zone.id, tier: zone.tier, won: false, ...say("Поражение от {name}: армия погибла, герой вернулся в замок", { name: defender.name }), ...sides });
+      this.report(defender.id, now, { kind: "battle", zoneId: zone.id, tier: zone.tier, won: true, ...say("Атака {name} отбита", { name: attacker.name }), ...sides });
     }
   }
 
@@ -700,7 +734,7 @@ export class Game {
    */
   private arriveAtCastle(attacker: Player, defender: Player, march: March, zone: Zone, now: number): void {
     if (this.protectedUntil(defender, now) > now) {
-      this.abortMarch(attacker, march, zone, now, `Замок ${defender.name} под щитом — набег сорван`);
+      this.abortMarch(attacker, march, zone, now, "Замок {name} под щитом — набег сорван", { name: defender.name });
       return;
     }
     const kingdom = defender.kingdom;
@@ -711,6 +745,7 @@ export class Game {
     const result = this.battle(attacker.army, attacker.heroLevel, this.attackMultiplier(attacker), defenderArmy, defenderHero, this.defenseMultiplier(defender));
 
     if (result.attackerWins) {
+      this.guilds.addWinXp(attacker, this.settings.guildXpPerPvpWin, now);
       const losses = applyLosses(defenderArmy, this.settings.raidDefenderLoss);
       this.splitCastleDefenders(defender, heroHome, losses.remaining);
       const loot = this.plunder(kingdom);
@@ -719,21 +754,22 @@ export class Game {
       defender.shieldUntil = now + this.settings.raidShieldHours * HOUR_MS;
       attacker.army = result.attackerArmy;
       attacker.heroZone = this.zones[march.fromZone].ownerId === attacker.id ? march.fromZone : attacker.castleZone;
-      const sides = this.reportSides(attacker.name, result.attackerArmy, attacker.heroLevel, defender.name, defenderArmy, defenderHero, result);
+      const sides = this.reportSides(attacker, result.attackerArmy, attacker.heroLevel, defender, defenderArmy, defenderHero, result);
       sides.attacker.army = addArmies(result.attackerArmy, result.attackerLost);
       sides.defender.lost = losses.lost;
       this.savePlayer(attacker);
       this.savePlayer(defender);
-      this.report(attacker.id, now, { kind: "raid", zoneId: zone.id, tier: zone.tier, won: true, text: `Набег на замок ${defender.name} удался`, loot, ...sides });
-      this.report(defender.id, now, { kind: "raid", zoneId: zone.id, tier: zone.tier, won: false, text: `${attacker.name} разграбил ваш замок. Замок под щитом ${this.settings.raidShieldHours} ч`, loot, ...sides });
+      this.report(attacker.id, now, { kind: "raid", zoneId: zone.id, tier: zone.tier, won: true, ...say("Набег на замок {name} удался", { name: defender.name }), loot, ...sides });
+      this.report(defender.id, now, { kind: "raid", zoneId: zone.id, tier: zone.tier, won: false, ...say("{name} разграбил ваш замок. Замок под щитом {hours} ч", { name: attacker.name, hours: this.settings.raidShieldHours }), loot, ...sides });
     } else {
-      const sides = this.reportSides(attacker.name, attacker.army, attacker.heroLevel, defender.name, defenderArmy, defenderHero, result);
+      this.guilds.addWinXp(defender, this.settings.guildXpPerPvpWin, now);
+      const sides = this.reportSides(attacker, attacker.army, attacker.heroLevel, defender, defenderArmy, defenderHero, result);
       attacker.army = {};
       this.sendHome(attacker);
       this.splitCastleDefenders(defender, heroHome, result.defenderArmy);
       this.savePlayer(defender);
-      this.report(attacker.id, now, { kind: "raid", zoneId: zone.id, tier: zone.tier, won: false, text: `Набег на замок ${defender.name} отбит: армия погибла, герой вернулся в замок`, ...sides });
-      this.report(defender.id, now, { kind: "raid", zoneId: zone.id, tier: zone.tier, won: true, text: `Набег ${attacker.name} на ваш замок отбит`, ...sides });
+      this.report(attacker.id, now, { kind: "raid", zoneId: zone.id, tier: zone.tier, won: false, ...say("Набег на замок {name} отбит: армия погибла, герой вернулся в замок", { name: defender.name }), ...sides });
+      this.report(defender.id, now, { kind: "raid", zoneId: zone.id, tier: zone.tier, won: true, ...say("Набег {name} на ваш замок отбит", { name: attacker.name }), ...sides });
     }
   }
 
@@ -775,14 +811,21 @@ export class Game {
     );
   }
 
+  /** Стороны боя для отчёта; defender = null — нейтралы. */
   private reportSides(
-    attackerName: string, attackerArmy: Army, attackerHero: number,
-    defenderName: string, defenderArmy: Army, defenderHero: number,
+    attacker: Player, attackerArmy: Army, attackerHero: number,
+    defender: Player | null, defenderArmy: Army, defenderHero: number,
     result: BattleResult,
   ): { attacker: ReportSide; defender: ReportSide } {
     return {
-      attacker: { name: attackerName, army: attackerArmy, lost: result.attackerLost, power: Math.round(result.attackerPower), heroLevel: attackerHero },
-      defender: { name: defenderName, army: defenderArmy, lost: result.defenderLost, power: Math.round(result.defenderPower), heroLevel: defenderHero },
+      attacker: {
+        name: attacker.name, tag: this.guilds.tagOf(attacker),
+        army: attackerArmy, lost: result.attackerLost, power: Math.round(result.attackerPower), heroLevel: attackerHero,
+      },
+      defender: {
+        name: defender?.name ?? "Нейтралы", tag: defender ? this.guilds.tagOf(defender) : null,
+        army: defenderArmy, lost: result.defenderLost, power: Math.round(result.defenderPower), heroLevel: defenderHero,
+      },
     };
   }
 
@@ -816,6 +859,8 @@ export class Game {
     player.treasureWeek ??= weekIndex(now);
     player.treasureWeekCount ??= 0;
     player.treasureSavedPlaytimeMs ??= player.treasurePlaytimeMs;
+    player.guildId ??= null;
+    player.guildLeftAt ??= null;
   }
 
   /** После пересоздания мира: каждому игроку — новый замок; армия и замок сохраняются. */
@@ -878,6 +923,12 @@ export class Game {
   private report(playerId: number, now: number, data: ReportData): void {
     this.storage.addReport(playerId, now, data, this.settings.reportsKept);
   }
+}
+
+/** Текст отчёта из шаблона «… {name} …» — вместе с самим шаблоном, чтобы клиент мог его перевести. */
+function say(template: string, args: Record<string, string | number> = {}): Pick<ReportData, "text" | "template" | "args"> {
+  const text = template.replace(/\{(\w+)\}/g, (_, key: string) => String(args[key] ?? ""));
+  return { text, template, args };
 }
 
 /**

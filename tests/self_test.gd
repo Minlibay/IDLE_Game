@@ -25,6 +25,7 @@ func _ready() -> void:
 	await _test_battle_replay()
 	await _test_biome_ground()
 	await _test_skill_mechanics()
+	_test_translation()
 	await _test_hero_chase()
 	await _test_skill_casting()
 	if _errors.is_empty():
@@ -653,6 +654,26 @@ func _wait_for(condition: Callable, timeout: float) -> bool:
 	return condition.call()
 
 
+## Английский перевод: данные (.tres и каталог сокровищ), строки кода, шаблоны отчётов сервера; возврат на русский.
+func _test_translation() -> void:
+	var goblin := Database.get_monster("goblin")
+	var power_strike: SkillData = Database.get_class_data("warrior").skills[0]
+	var set_piece := Database.get_item_base("w_emberforge_helmet")
+	TranslationServer.set_locale("en")
+	Database.retranslate()
+	_check(goblin.display_name == "Goblin", "monster name not translated: %s" % goblin.display_name)
+	_check(power_strike.display_name == "Power Strike", "skill name not translated: %s" % power_strike.display_name)
+	_check(set_piece != null and set_piece.display_name == "Emberforge Helm", "set piece not translated")
+	_check(UiFormat.duration(125) == "2 min 5 s", "duration not translated: %s" % UiFormat.duration(125))
+	var report := {"text": "Набег на замок Бор удался", "template": "Набег на замок {name} удался", "args": {"name": "Бор"}}
+	_check(WorldService.report_text(report) == "The raid on Бор's castle succeeded", "report template not translated: %s" % WorldService.report_text(report))
+	_check(WorldService.report_text({"text": "Зона занята без боя"}) == "Zone taken without a fight", "old report text not translated")
+	TranslationServer.set_locale("ru")
+	Database.retranslate()
+	_check(goblin.display_name == "Гоблин", "monster name not restored: %s" % goblin.display_name)
+	_check(set_piece.display_name == "Шлем Закалённого горна", "set piece not restored: %s" % set_piece.display_name)
+
+
 ## Оглушение останавливает монстра, урон со временем тикает, добивание усиливает удар по раненой цели.
 func _test_skill_mechanics() -> void:
 	var hero := get_tree().get_first_node_in_group(Hero.GROUP) as Hero
@@ -682,13 +703,10 @@ func _test_skill_mechanics() -> void:
 	boss.global_position = Vector3(hero.global_position.x + 40.0, 0, 0)
 	boss.stun(2.0)
 	_check(boss._stun_left <= 1.01, "boss stun must be halved")
-	# Верх босса выше боевой полосы — окно должно получить выступ над ним.
-	var battle := hero.get_parent()
-	if battle.has_method("_update_window_overlays"):
-		battle._update_window_overlays()
-		var strip_top := float(battle.get_viewport().size.y - DesktopWindow.BATTLE_INTERACTIVE_HEIGHT)
-		var raised := DesktopWindow._overlays.any(func(r: Rect2) -> bool: return r.position.y < strip_top)
-		_check(raised, "no window overlay above the boss: %s" % str(DesktopWindow._overlays))
+	# Окно рисуется целиком, а клики принимает только боевая полоса.
+	var window_height := float(get_window().size.y)
+	_check(DesktopWindow.accepts_clicks_at(Vector2(100, window_height - 20.0)), "battle strip must accept clicks")
+	_check(not DesktopWindow.accepts_clicks_at(Vector2(100, 10.0)), "area above the strip must pass clicks through")
 	x_before = monster.global_position.x
 	monster.knockback(hero.global_position.x, 2.0)
 	await get_tree().create_timer(0.3).timeout

@@ -152,19 +152,6 @@ func _setup_visual(frames: SpriteFrames, reference_height: int, world_height: fl
 	_play(ANIM_IDLE)
 
 
-## Границы всего, что рисуется у фигуры (спрайт, полоска здоровья, подписи), в мировых координатах.
-func get_visual_bounds() -> AABB:
-	var box := AABB(global_position, Vector3.ZERO)
-	var pending: Array[Node] = [self]
-	while not pending.is_empty():
-		var node: Node = pending.pop_back()
-		pending.append_array(node.get_children())
-		var visual_node := node as VisualInstance3D
-		if visual_node and visual_node.is_visible_in_tree():
-			box = box.merge(visual_node.global_transform * visual_node.get_aabb())
-	return box
-
-
 func _play(animation: StringName) -> void:
 	visual.play(animation)
 	# Ноги на земле, корпус — в точке бойца (кадры разных анимаций разной ширины).

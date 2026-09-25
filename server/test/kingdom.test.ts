@@ -238,6 +238,10 @@ describe("castle raids", () => {
     const report = game.playerView(attacker, arrival).reports[0].data;
     assert.equal(report.kind, "raid");
     assert.equal(report.loot?.gold, expectedGold);
+    // Шаблон для перевода на клиенте: текст = шаблон с подставленными параметрами.
+    assert.equal(report.template, "Набег на замок {name} удался");
+    assert.deepEqual(report.args, { name: defender.name });
+    assert.equal(report.text, `Набег на замок ${defender.name} удался`);
     assert.ok(attacker.kingdom.resources.gold >= gameData.kingdom.startResources.gold + expectedGold);
     assert.equal(defender.kingdom.resources.wood, 50, "resources below the protected amount are safe");
     assert.equal(defender.kingdom.army.militia, 10 * (1 - settings.raidDefenderLoss));

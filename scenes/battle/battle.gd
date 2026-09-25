@@ -41,12 +41,6 @@ const OFFLINE_MESSAGE_DURATION := 7.0
 var _resting := false
 var _zzz_timer := 0.0
 var _ground_texture: Texture2D
-var _overlay_timer := 0.0
-
-## Как часто пересчитываются выступы окна над высокими фигурами.
-const OVERLAY_INTERVAL := 0.15
-## Шаг сетки выступов в пикселях: мелкие шевеления фигур не пересобирают регион окна.
-const OVERLAY_GRID := 16.0
 
 @onready var camera: Camera3D = $Camera3D
 @onready var ground: MeshInstance3D = $Ground
@@ -88,10 +82,6 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	_overlay_timer -= delta
-	if _overlay_timer <= 0.0:
-		_overlay_timer = OVERLAY_INTERVAL
-		_update_window_overlays()
 	if not hero.is_alive():
 		return
 	if _resting:
@@ -120,14 +110,14 @@ func start_rest() -> void:
 		monster.queue_free()
 	hero.set_resting(true)
 	hud.set_resting(true)
-	hud.show_message("Герой устал и отдыхает…")
+	hud.show_message(tr("Герой устал и отдыхает…"))
 
 
 func _end_rest() -> void:
 	_resting = false
 	hero.set_resting(false)
 	hud.set_resting(false)
-	hud.show_message("Герой отдохнул и снова в бою!")
+	hud.show_message(tr("Герой отдохнул и снова в бою!"))
 	wave_manager.start_wave(GameState.wave)
 
 
@@ -144,12 +134,12 @@ func _show_offline_report() -> void:
 	for unit_id: String in trained:
 		var unit := Database.get_unit(unit_id)
 		if unit:
-			parts.append("обучено: %s ×%d" % [unit.display_name, int(trained[unit_id])])
+			parts.append(tr("обучено: %s ×%d") % [unit.display_name, int(trained[unit_id])])
 	for built: String in report.get("built", []):
-		parts.append("построено: " + built)
+		parts.append(tr("построено: ") + built)
 	if parts.is_empty():
 		return
-	hud.show_message("Пока вас не было (%s): %s" % [
+	hud.show_message(tr("Пока вас не было (%s): %s") % [
 		UiFormat.duration(report.get("real_seconds", 0.0)), ", ".join(parts)], OFFLINE_MESSAGE_DURATION)
 
 
@@ -169,6 +159,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		hud.toggle_kingdom()
 	elif key.keycode == KEY_M:
 		hud.toggle_map()
+	elif key.keycode == KEY_G:
+		hud.toggle_guild()
 	elif key.keycode >= KEY_1 and key.keycode <= KEY_9:
 		hero.skill_caster.try_cast_index(key.keycode - KEY_1)
 
@@ -176,23 +168,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _hero_enter() -> void:
 	hero.home_x = _lane_point(HERO_SCREEN_X).x
 	hero.walk_in(_lane_point(HERO_ENTER_SCREEN_X), _lane_point(HERO_SCREEN_X), HERO_ENTER_TIME)
-
-
-## Боссы и элиты с именем выше боевой полосы: окно должно рисоваться и над ними.
-func _update_window_overlays() -> void:
-	var rects: Array[Rect2] = []
-	for node in get_tree().get_nodes_in_group(Monster.GROUP):
-		var monster := node as Monster
-		if monster == null or not monster.is_alive() or camera.is_position_behind(monster.global_position):
-			continue
-		var box := monster.get_visual_bounds()
-		var top_left := camera.unproject_position(Vector3(box.position.x, box.end.y, monster.global_position.z))
-		var top_right := camera.unproject_position(Vector3(box.end.x, box.end.y, monster.global_position.z))
-		var x0 := floorf((top_left.x - 8.0) / OVERLAY_GRID) * OVERLAY_GRID
-		var x1 := ceilf((top_right.x + 8.0) / OVERLAY_GRID) * OVERLAY_GRID
-		var y := floorf((minf(top_left.y, top_right.y) - 8.0) / OVERLAY_GRID) * OVERLAY_GRID
-		rects.append(Rect2(x0, y, x1 - x0, OVERLAY_GRID))
-	DesktopWindow.set_battle_overlays(rects)
 
 
 func _layout() -> void:
@@ -224,7 +199,7 @@ func _spawn_monster(data: MonsterData, wave: int, elite_id := "", at: Variant = 
 	monster.summon_requested.connect(func(minion: MonsterData, point: Vector3) -> void:
 		_spawn_monster(minion, wave, "", point))
 	if monster.is_elite():
-		hud.show_message("Элита: %s!" % monster.get_display_name())
+		hud.show_message(tr("Элита: %s!") % monster.get_display_name())
 	monster.damaged.connect(_on_actor_damaged.bind(monster))
 	monster.died.connect(_on_monster_died)
 	monster.damaged.connect(_on_monster_damaged)
@@ -250,7 +225,7 @@ func _on_monster_died(actor: Actor) -> void:
 		hero.heal(hero.max_hp * hero.kill_heal, false)
 	var gold := roundi(data.gold_reward * pow(GOLD_GROWTH_PER_WAVE, level) * gold_bonus)
 	GameState.add_gold(gold)
-	_float_text(monster.global_position + Vector3(0.0, monster.visual_height * 0.5, 0.3), "+%d з" % gold, COLOR_GOLD, 0.8)
+	_float_text(monster.global_position + Vector3(0.0, monster.visual_height * 0.5, 0.3), tr("+%d з") % gold, COLOR_GOLD, 0.8)
 
 	var item := LootGenerator.roll_drop(data, monster.wave_level,
 		GameState.get_bonus(StatModifier.Stat.DROP_CHANCE) / 100.0 + monster.drop_bonus)
@@ -273,7 +248,7 @@ func _on_monster_damaged(amount: float, _is_crit: bool) -> void:
 func _on_hero_died(_actor: Actor) -> void:
 	wave_manager.stop()
 	GameState.set_wave(GameState.wave - 1)
-	hud.show_message("Герой пал! Отступаем на волну %d" % GameState.wave)
+	hud.show_message(tr("Герой пал! Отступаем на волну %d") % GameState.wave)
 	await get_tree().create_timer(RESPAWN_DELAY).timeout
 	if not is_inside_tree():
 		return
@@ -327,9 +302,9 @@ func _on_wave_started(wave: int) -> void:
 	var biome := Database.get_biome_for_wave(wave)
 	if wave_manager.is_boss_wave(wave):
 		var bosses := Database.get_monsters_for_wave(wave, true)
-		hud.show_message("Волна %d — БОСС: %s!" % [wave, bosses[0].display_name if not bosses.is_empty() else "?"])
+		hud.show_message(tr("Волна %d — БОСС: %s!") % [wave, bosses[0].display_name if not bosses.is_empty() else "?"])
 	elif biome and Database.get_wave_in_biome(wave) == 1:
-		hud.show_message("%s — волны %d–%d" % [biome.display_name, wave, wave + Database.WAVES_PER_BIOME - 1])
+		hud.show_message(tr("%s — волны %d–%d") % [biome.display_name, wave, wave + Database.WAVES_PER_BIOME - 1])
 
 
 func _on_wave_cleared(wave: int) -> void:
@@ -351,10 +326,10 @@ func _on_leveled_up(new_level: int) -> void:
 	hero.apply_stats(GameState.get_hero_stats(), true)
 	hero.play_action(&"victory")
 	_float_text(hero.global_position + Vector3(0.0, hero.visual_height + 0.3, 0.3),
-		"Уровень %d!" % new_level, COLOR_GOLD, 1.5, 1.0, 1.5)
+		tr("Уровень %d!") % new_level, COLOR_GOLD, 1.5, 1.0, 1.5)
 	for skill in hero.skill_caster.skills:
 		if skill.unlock_level == new_level:
-			hud.show_message("Новое умение: %s!" % skill.display_name)
+			hud.show_message(tr("Новое умение: %s!") % skill.display_name)
 
 
 func _on_skill_cast(skill: SkillData) -> void:

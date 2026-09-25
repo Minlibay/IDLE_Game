@@ -8,6 +8,8 @@ signal zone_selected(zone_id: int)
 const HEX_SIZE := 14.0
 ## С какого масштаба показывать номер уровня зоны.
 const TIER_LABEL_ZOOM := 2.4
+## С какого приближения над замками видны теги гильдий.
+const GUILD_TAG_ZOOM := 1.2
 ## Центрировать можно, только когда окно уже раскрыто (в режиме полоски карта слишком низкая).
 const MIN_FOCUS_HEIGHT := 400.0
 
@@ -118,7 +120,7 @@ func _zone_at(screen_point: Vector2) -> int:
 func _draw() -> void:
 	var font := get_theme_default_font()
 	if WorldService.zones.is_empty():
-		draw_string(font, size * 0.5 - Vector2(80, 0), "Загрузка карты…", HORIZONTAL_ALIGNMENT_LEFT, -1, 16)
+		draw_string(font, size * 0.5 - Vector2(80, 0), tr("Загрузка карты…"), HORIZONTAL_ALIGNMENT_LEFT, -1, 16)
 		return
 	var visible_rect := Rect2(-pan / zoom, size / zoom).grow(HEX_SIZE * 3.0)
 	var radius := HEX_SIZE * zoom
@@ -158,7 +160,7 @@ func _draw() -> void:
 	_draw_heroes(radius, my_id)
 
 
-## Заливка и рамка цветом владельца поверх местности.
+## Заливка цветом владельца поверх местности; рамка — цветом его гильдии (если он в гильдии).
 func _draw_owner(center: Vector2, radius: float, zone: Dictionary, my_id: int) -> void:
 	var owner := WorldService.get_player(zone.owner)
 	var color := Color(str(owner.get("color", "#888888")))
@@ -166,7 +168,21 @@ func _draw_owner(center: Vector2, radius: float, zone: Dictionary, my_id: int) -
 	var corners := HexGrid.corners(center, radius * 0.86)
 	draw_colored_polygon(corners, Color(color, OWNER_TINT_ALPHA if mine else OWNER_TINT_ALPHA * 0.8))
 	corners.append(corners[0])
-	draw_polyline(corners, color if mine else color.darkened(0.25), 2.0 if mine else 1.2)
+	var guild_color: Variant = owner.get("guildColor")
+	if guild_color is String:
+		draw_polyline(corners, Color(guild_color), maxf(2.0, 2.5 * zoom))
+	else:
+		draw_polyline(corners, color if mine else color.darkened(0.25), 2.0 if mine else 1.2)
+	# Тег гильдии над замком, когда карта достаточно приближена.
+	var tag: Variant = owner.get("guildTag")
+	if zone.castle and tag is String and zoom >= GUILD_TAG_ZOOM:
+		var font := get_theme_default_font()
+		var font_size := int(10 * zoom)
+		var text := "[%s]" % tag
+		var width := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
+		draw_string_outline(font, center + Vector2(-width * 0.5, -radius * 0.75), text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, 3, Color(0, 0, 0, 0.8))
+		draw_string(font, center + Vector2(-width * 0.5, -radius * 0.75), text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size,
+			Color(guild_color) if guild_color is String else Color.WHITE)
 
 
 ## Маркер (замок, знамя, герой) по центру точки; size — высота маркера.

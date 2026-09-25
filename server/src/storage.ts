@@ -6,6 +6,7 @@ import { dirname } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import type { Zone } from "./world/generator.ts";
 import type { Player, ReportData } from "./world/game.ts";
+import type { Guild } from "./world/guilds.ts";
 
 const SCHEMA = `
 CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NULL);
@@ -18,6 +19,7 @@ CREATE TABLE IF NOT EXISTS reports (
   data TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS reports_by_player ON reports (player_id, id);
+CREATE TABLE IF NOT EXISTS guilds (id INTEGER PRIMARY KEY, data TEXT NOT NULL);
 `;
 
 export type StoredReport = { id: number; createdAt: number; data: ReportData };
@@ -75,6 +77,20 @@ export class Storage {
     this.db.prepare(
       "INSERT INTO players (id, token, data) VALUES (?, ?, ?) ON CONFLICT(id) DO UPDATE SET token = excluded.token, data = excluded.data",
     ).run(player.id, player.token, JSON.stringify(player));
+  }
+
+  loadGuilds(): Guild[] {
+    const rows = this.db.prepare("SELECT data FROM guilds ORDER BY id").all() as { data: string }[];
+    return rows.map((row) => JSON.parse(row.data) as Guild);
+  }
+
+  saveGuild(guild: Guild): void {
+    this.db.prepare("INSERT INTO guilds (id, data) VALUES (?, ?) ON CONFLICT(id) DO UPDATE SET data = excluded.data")
+      .run(guild.id, JSON.stringify(guild));
+  }
+
+  deleteGuild(id: number): void {
+    this.db.prepare("DELETE FROM guilds WHERE id = ?").run(id);
   }
 
   addReport(playerId: number, createdAt: number, data: ReportData, keep: number): void {

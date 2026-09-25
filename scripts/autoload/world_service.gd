@@ -12,6 +12,10 @@ signal new_reports(reports: Array)
 signal world_updated
 signal login_changed(logged_in: bool)
 signal request_failed(message: String)
+## Обновилось окно гильдии (участники, приглашения, чат).
+signal guild_updated
+## Игрока пригласили в гильдию.
+signal guild_invited(invite: Dictionary)
 ## Внутренний: запрос карты завершён (запросы карты выполняются по очереди).
 signal _world_request_done
 
@@ -59,16 +63,25 @@ var _event_refresh_timer := 0.0
 var _gear_report_timer := -1.0
 ## Уже показанные угрозы и отчёты (чтобы не сообщать дважды).
 var _known_attacks: Dictionary = {}
+var _known_guild_invites: Dictionary = {}
+## Окно гильдии с сервера (GET /api/guild) и накопленный чат; пусто — не загружено или гильдии нет.
+var guild: Dictionary = {}
+var guild_chat: Array = []
+## До какого сообщения чат прочитан (для счётчика новых сообщений на кнопке).
+var _guild_read_id := 0
 var _last_report_id := -1
 var _class_reported := false
 ## Как на сервере (config.ts maxNameLength).
 const MAX_NAME_LENGTH := 20
+## Сколько сообщений чата гильдии держим (как на сервере, guildChatKept).
+const GUILD_CHAT_KEPT := 100
 
 
 func _ready() -> void:
 	var args := OS.get_cmdline_user_args()
 	if GameState.autotest:
-		enabled = args.has("--world-test")
+		# --world-online: автотест с сервером карты без сценария world_test (например, для скриншотов окон).
+		enabled = args.has("--world-test") or args.has("--world-online")
 		_config_path = "user://world_server_autotest.cfg"
 		server_url = LOCAL_URL
 	_load_config()
@@ -226,7 +239,7 @@ func auto_connect() -> bool:
 	_auto_connecting = true
 	var base_name := GameState.hero_name.strip_edges().left(MAX_NAME_LENGTH)
 	if base_name == "":
-		base_name = "Герой"
+		base_name = tr("Герой")
 	var result := await register(base_name, server_url)
 	if not result.ok and int(result.get("status", 0)) == 409:
 		var suffix := str(randi_range(100, 999))
@@ -239,6 +252,10 @@ func logout() -> void:
 	token = ""
 	me = {}
 	_known_attacks.clear()
+	_known_guild_invites.clear()
+	guild = {}
+	guild_chat.clear()
+	_guild_read_id = 0
 	_last_report_id = -1
 	GameState.kingdom.mark_unsynced()
 	_save_config()
@@ -321,7 +338,7 @@ func kingdom_cancel(index: int) -> Dictionary:
 func deposit_gold(amount: int) -> Dictionary:
 	amount = mini(amount, GameState.gold)
 	if amount <= 0 or not GameState.try_spend_gold(amount):
-		return {"ok": false, "error": "Нет золота"}
+		return {"ok": false, "error": tr("Нет золота")}
 	var result := await _request(HTTPClient.METHOD_POST, "/api/kingdom/deposit", {"gold": amount})
 	var accepted := 0
 	if result.ok:
@@ -340,6 +357,123 @@ func report_hero_level() -> void:
 		if GameState.has_character():
 			body.classId = GameState.class_id
 		_action("/api/hero", body, false)
+
+
+# --- Гильдия -----------------------------------------------------------------------
+
+## Коротко о своей гильдии из /api/me (пусто — без гильдии).
+func my_guild() -> Dictionary:
+	var summary: Variant = me.get("guild")
+	return summary if summary is Dictionary else {}
+
+
+func guild_invites() -> Array:
+	return me.get("guildInvites", [])
+
+
+func guild_role() -> String:
+	return str(my_guild().get("role", ""))
+
+
+func can_manage_guild() -> bool:
+	return guild_role() in ["leader", "officer"]
+
+
+## Союзник по гильдии (не я сам).
+func is_ally(player_id: Variant) -> bool:
+	var summary := my_guild()
+	if summary.is_empty() or player_id == null or int(player_id) == my_id():
+		return false
+	var other := get_player(player_id)
+	return other.get("guildId") != null and int(other.guildId) == int(summary.id)
+
+
+## Имя игрока с тегом гильдии: «[ТЕГ] Имя».
+func tagged_name(name: String, tag: Variant) -> String:
+	return "[%s] %s" % [tag, name] if tag is String and tag != "" else name
+
+
+func player_display_name(player_id: Variant) -> String:
+	var other := get_player(player_id)
+	return tagged_name(str(other.get("name", "?")), other.get("guildTag"))
+
+
+func unread_guild_messages() -> int:
+	var summary := my_guild()
+	return maxi(0, int(summary.get("lastMessageId", 0)) - _guild_read_id) if not summary.is_empty() else 0
+
+
+func mark_guild_chat_read() -> void:
+	var last := int(my_guild().get("lastMessageId", _guild_read_id))
+	if last == _guild_read_id:
+		return
+	_guild_read_id = last
+	me_updated.emit()
+
+
+## Загружает окно гильдии; чат — только новые сообщения.
+func refresh_guild() -> Dictionary:
+	var result := await _request(HTTPClient.METHOD_GET, "/api/guild?since=%d" % _last_chat_id())
+	if result.ok:
+		_apply_guild(result.data.guild)
+		_apply_me(result.data.me)
+	return result
+
+
+func guild_create(guild_name: String, tag: String, color: String) -> Dictionary:
+	return await _guild_action("/api/guild/create", {"name": guild_name, "tag": tag, "color": color}, true)
+
+
+func guild_invite(player_name: String) -> Dictionary:
+	return await _guild_action("/api/guild/invite", {"name": player_name})
+
+
+func guild_cancel_invite(player_id: int) -> Dictionary:
+	return await _guild_action("/api/guild/invite/cancel", {"playerId": player_id})
+
+
+func guild_accept(guild_id: int) -> Dictionary:
+	return await _guild_action("/api/guild/accept", {"guildId": guild_id}, true)
+
+
+func guild_decline(guild_id: int) -> Dictionary:
+	return await _guild_action("/api/guild/decline", {"guildId": guild_id})
+
+
+func guild_leave() -> Dictionary:
+	return await _guild_action("/api/guild/leave", {}, true)
+
+
+func guild_kick(player_id: int) -> Dictionary:
+	return await _guild_action("/api/guild/kick", {"playerId": player_id}, true)
+
+
+func guild_set_role(player_id: int, role: String) -> Dictionary:
+	return await _guild_action("/api/guild/role", {"playerId": player_id, "role": role})
+
+
+func guild_transfer(player_id: int) -> Dictionary:
+	return await _guild_action("/api/guild/transfer", {"playerId": player_id})
+
+
+func guild_disband() -> Dictionary:
+	return await _guild_action("/api/guild/disband", {}, true)
+
+
+## Взнос золота из казны замка: 1 золото = 1 опыт гильдии.
+func guild_donate(gold: int) -> Dictionary:
+	return await _guild_action("/api/guild/donate", {"gold": gold})
+
+
+func guild_send_message(text: String) -> Dictionary:
+	return await _guild_action("/api/guild/chat", {"text": text, "since": _last_chat_id()})
+
+
+## Текст сообщения чата: системные приходят шаблоном и переводятся.
+func guild_message_text(message: Dictionary) -> String:
+	if message.get("system", false) and message.has("template"):
+		return report_text(message)
+	return str(message.get("text", ""))
 
 
 # --- Сокровища ---------------------------------------------------------------------
@@ -366,6 +500,39 @@ func _action(path: String, body: Dictionary, refresh_map := true) -> Dictionary:
 		if refresh_map:
 			refresh_world()
 	return result
+
+
+func _guild_action(path: String, body: Dictionary, refresh_map := false) -> Dictionary:
+	var result := await _request(HTTPClient.METHOD_POST, path, body)
+	if result.ok:
+		_apply_guild(result.data.guild)
+		_apply_me(result.data.me)
+		# Тег и цвет гильдии видны на карте — после вступления, выхода и т.п. карту стоит обновить.
+		if refresh_map:
+			refresh_world()
+	return result
+
+
+func _apply_guild(view: Variant) -> void:
+	if not view is Dictionary:
+		guild = {}
+		guild_chat.clear()
+		guild_updated.emit()
+		return
+	if int(view.id) != int(guild.get("id", -1)):
+		guild_chat.clear()
+	var last := _last_chat_id()
+	for message: Dictionary in view.get("chat", []):
+		if int(message.id) > last:
+			guild_chat.append(message)
+	if guild_chat.size() > GUILD_CHAT_KEPT:
+		guild_chat = guild_chat.slice(guild_chat.size() - GUILD_CHAT_KEPT)
+	guild = view
+	guild_updated.emit()
+
+
+func _last_chat_id() -> int:
+	return int(guild_chat.back().id) if not guild_chat.is_empty() else 0
 
 
 func _apply_me(data: Dictionary) -> void:
@@ -395,6 +562,18 @@ func _detect_news() -> void:
 		if not _known_attacks.has(key):
 			incoming_attack.emit(attack)
 	_known_attacks = current
+	var invites := {}
+	for invite: Dictionary in guild_invites():
+		var key := "%d:%d" % [int(invite.guildId), int(invite.expiresAt)]
+		invites[key] = true
+		if not _known_guild_invites.has(key):
+			guild_invited.emit(invite)
+	_known_guild_invites = invites
+	if my_guild().is_empty():
+		_guild_read_id = 0
+	elif _guild_read_id == 0:
+		# Первое знакомство с гильдией (запуск игры): старые сообщения не считаем новыми.
+		_guild_read_id = int(my_guild().get("lastMessageId", 0))
 	var reports: Array = me.get("reports", [])
 	if reports.is_empty():
 		return
@@ -419,7 +598,7 @@ func _flush_consumption() -> void:
 
 func _request(method: int, path: String, body: Variant = null) -> Dictionary:
 	if not enabled:
-		return {"ok": false, "error": "Сеть отключена", "status": 0}
+		return {"ok": false, "error": tr("Сеть отключена"), "status": 0}
 	var http := HTTPRequest.new()
 	http.timeout = REQUEST_TIMEOUT
 	add_child(http)
@@ -431,27 +610,45 @@ func _request(method: int, path: String, body: Variant = null) -> Dictionary:
 	var request_token := token
 	if http.request(server_url + path, headers, method, payload) != OK:
 		http.queue_free()
-		return _fail("Не удалось отправить запрос", 0)
+		return _fail(tr("Не удалось отправить запрос"), 0)
 	var response: Array = await http.request_completed
 	http.queue_free()
 	var result: int = response[0]
 	var code: int = response[1]
 	var bytes: PackedByteArray = response[3]
 	if token != request_token and not path.begins_with("/api/auth/"):
-		return {"ok": false, "error": "Устаревший ответ", "status": 0, "stale": true}
+		return {"ok": false, "error": tr("Устаревший ответ"), "status": 0, "stale": true}
 	if result != HTTPRequest.RESULT_SUCCESS:
 		connected = false
-		return _fail("Нет связи с сервером (%s)" % server_url, 0)
+		return _fail(tr("Нет связи с сервером (%s)") % server_url, 0)
 	connected = true
 	var data: Variant = JSON.parse_string(bytes.get_string_from_utf8())
 	if code == 401 and token != "":
 		logout()
 	if code != 200:
-		var message := "Ошибка сервера (%d)" % code
+		var message := tr("Ошибка сервера (%d)") % code
 		if data is Dictionary and data.has("error"):
-			message = str(data.error)
+			message = tr(str(data.error))
 		return _fail(message, code)
 	return {"ok": true, "data": data}
+
+
+## Текст отчёта на языке игрока: сервер присылает шаблон «… {name} …» с параметрами
+## (старые отчёты — только готовый русский текст).
+func report_text(data: Dictionary) -> String:
+	if not data.has("template"):
+		return tr(str(data.get("text", "")))
+	var args := {}
+	var raw: Dictionary = data.get("args", {})
+	for key: String in raw:
+		# Имена сокровищ и качество переводятся, имена игроков остаются как есть.
+		args[key] = tr(str(raw[key])) if raw[key] is String else raw[key]
+	return tr(str(data.template)).format(args)
+
+
+## Имя стороны боя: «Нейтралы» переводятся, имена игроков — нет; у игроков в гильдии — тег.
+func side_name(side: Dictionary) -> String:
+	return tagged_name(tr(str(side.get("name", ""))), side.get("tag"))
 
 
 func _fail(message: String, code: int) -> Dictionary:

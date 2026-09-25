@@ -83,6 +83,61 @@ func _ready() -> void:
 	item_sets = catalog.sets
 	for treasure in treasures:
 		_items_by_id[treasure.id] = treasure
+	retranslate()
+
+
+## Переводит тексты данных (имена, описания) на текущий язык Settings.
+## Русский оригинал каждого поля запоминается в мета-поле ресурса, так что язык можно менять сколько угодно раз.
+func retranslate() -> void:
+	var seen := {}
+	for list: Array in [classes, monsters, items, buildings, needs, units, biomes, treasures, item_sets.values()]:
+		for data: Object in list:
+			_translate_object(data, seen)
+	# Узлы талантов собираются из названий при первом обращении — пересобираем с новыми названиями.
+	for class_data in classes:
+		if class_data.talent_tree:
+			class_data.talent_tree.reset()
+
+
+## Данные — ресурсы и объекты со своим скриптом (ItemSetData — RefCounted); текстуры и сцены пропускаются.
+func _translate_object(data: Object, seen: Dictionary) -> void:
+	if data == null or seen.has(data) or data.get_script() == null:
+		return
+	seen[data] = true
+	var originals: Dictionary = data.get_meta(&"i18n", {})
+	for property in data.get_property_list():
+		if not property.usage & (PROPERTY_USAGE_STORAGE | PROPERTY_USAGE_SCRIPT_VARIABLE):
+			continue
+		var key: String = property.name
+		var value: Variant = data.get(key)
+		match typeof(value):
+			TYPE_STRING:
+				if originals.has(key) or _is_russian(value):
+					originals[key] = originals.get(key, value)
+					data.set(key, tr(originals[key]))
+			TYPE_PACKED_STRING_ARRAY:
+				if originals.has(key) or Array(value).any(_is_russian):
+					originals[key] = originals.get(key, value)
+					var translated := PackedStringArray()
+					for text: String in originals[key]:
+						translated.append(tr(text))
+					data.set(key, translated)
+			TYPE_OBJECT:
+				_translate_object(value, seen)
+			TYPE_ARRAY:
+				for element: Variant in value:
+					if element is Object:
+						_translate_object(element, seen)
+	if not originals.is_empty():
+		data.set_meta(&"i18n", originals)
+
+
+static func _is_russian(text: String) -> bool:
+	for i in text.length():
+		var code := text.unicode_at(i)
+		if (code >= 0x0410 and code <= 0x044F) or code == 0x0401 or code == 0x0451:
+			return true
+	return false
 
 
 func get_class_data(id: String) -> CharacterClass:

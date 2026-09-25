@@ -59,7 +59,7 @@ func describe(multiplier := 1.0) -> String:
 	var amount := value * multiplier
 	var sign_text := "+" if amount >= 0.0 else "-"
 	var unit := "" if stat == Stat.ARMOR else "%"
-	return "%s%s%s %s" % [sign_text, format_number(absf(amount)), unit, STAT_LABELS[stat]]
+	return "%s%s%s %s" % [sign_text, format_number(absf(amount)), unit, tr(STAT_LABELS[stat])]
 
 
 ## Описания списка бонусов через запятую.

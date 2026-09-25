@@ -45,7 +45,7 @@ func _init() -> void:
 
 
 static func resource_name(resource_id: String) -> String:
-	return RESOURCE_NAMES.get(resource_id, resource_id)
+	return TranslationServer.translate(RESOURCE_NAMES.get(resource_id, resource_id))
 
 
 static func resource_icon(resource_id: String) -> Texture2D:
@@ -138,15 +138,15 @@ func can_afford(cost: Dictionary) -> bool:
 func get_upgrade_block_reason(building: BuildingData) -> String:
 	var level := get_level(building)
 	if level >= building.max_level:
-		return "Максимальный уровень"
+		return tr("Максимальный уровень")
 	if not synced:
-		return "Нет связи с сервером"
+		return tr("Нет связи с сервером")
 	if is_constructing():
-		return "Строители заняты: %s" % get_construction_building().display_name
+		return tr("Строители заняты: %s") % get_construction_building().display_name
 	if level >= get_max_allowed_level(building):
-		return "Нужна Ратуша %d-го уровня" % (level + 1)
+		return tr("Нужна Ратуша %d-го уровня") % (level + 1)
 	if not can_afford(get_upgrade_cost(building)):
-		return "Не хватает ресурсов"
+		return tr("Не хватает ресурсов")
 	return ""
 
 
@@ -295,7 +295,7 @@ func _changes_since_cache() -> Dictionary:
 	for building in Database.buildings:
 		var level := get_level(building)
 		if level > int(cached_levels.get(building.id, 0)):
-			built.append("%s ур. %d" % [building.display_name, level])
+			built.append(tr("%s ур. %d") % [building.display_name, level])
 	var trained := {}
 	var cached_units: Dictionary = (_cached.get("army", {}) as Dictionary).get("units", {})
 	for unit_id: String in army.units:

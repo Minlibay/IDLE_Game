@@ -89,8 +89,8 @@ func get_treasure_level() -> int:
 
 func get_tier_name() -> String:
 	if is_treasure():
-		return ItemBase.QUALITY_NAMES.get(get_base().quality, "")
-	return TIER_NAMES[tier]
+		return tr(ItemBase.QUALITY_NAMES.get(get_base().quality, ""))
+	return tr(TIER_NAMES[tier])
 
 
 func get_tier_color() -> Color:

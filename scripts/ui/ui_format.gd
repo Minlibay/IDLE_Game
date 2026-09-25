@@ -10,10 +10,10 @@ static func duration(seconds: float) -> String:
 	var minutes := (total % 3600) / 60
 	var secs := total % 60
 	if hours > 0:
-		return "%d ч %d мин" % [hours, minutes]
+		return TranslationServer.translate("%d ч %d мин") % [hours, minutes]
 	if minutes > 0:
-		return "%d мин %d с" % [minutes, secs] if secs > 0 else "%d мин" % minutes
-	return "%d с" % secs
+		return TranslationServer.translate("%d мин %d с") % [minutes, secs] if secs > 0 else TranslationServer.translate("%d мин") % minutes
+	return TranslationServer.translate("%d с") % secs
 
 
 ## Стоимость в виде «60 Дерево, 30 Камень, 100 Золото».

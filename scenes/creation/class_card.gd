@@ -26,10 +26,10 @@ func setup(p_class: CharacterClass) -> void:
 			skill_names.append(skill.display_name)
 	description_label.text = p_class.description
 	if not skill_names.is_empty():
-		description_label.text += "\nУмения: " + ", ".join(skill_names)
-	stats_label.text = "HP %d · Урон %d · %s" % [
+		description_label.text += tr("\nУмения: ") + ", ".join(skill_names)
+	stats_label.text = tr("HP %d · Урон %d · %s") % [
 		roundi(p_class.base_max_hp), roundi(p_class.base_damage),
-		"Дальний бой" if p_class.is_ranged() else "Ближний бой"]
+		tr("Дальний бой") if p_class.is_ranged() else tr("Ближний бой")]
 
 
 func _on_toggled(pressed: bool) -> void:

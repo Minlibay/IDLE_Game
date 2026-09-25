@@ -11,6 +11,9 @@
 [ext_resource type="Texture2D" path="res://assets/ui/icons/kingdom.png" id="9"]
 [ext_resource type="Texture2D" path="res://assets/ui/icons/map.png" id="10"]
 [ext_resource type="Texture2D" path="res://assets/ui/icons/gold.png" id="11"]
+[ext_resource type="PackedScene" path="res://scenes/ui/settings_panel.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://scenes/ui/guild_panel.tscn" id="13"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/banner.png" id="14"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1")
@@ -56,6 +59,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Герой · Воин · ур. 1"
 clip_text = true
+
+[node name="TrayButton" type="Button" parent="Root/BottomBar/StatsPanel/VBox/NameRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(18, 17)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Свернуть в трей (игра продолжится)"
+theme_type_variation = &"TrayButton"
+
+[node name="SettingsButton" type="Button" parent="Root/BottomBar/StatsPanel/VBox/NameRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(18, 17)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Настройки"
+theme_type_variation = &"SettingsButton"
 
 [node name="QuitButton" type="Button" parent="Root/BottomBar/StatsPanel/VBox/NameRow"]
 unique_name_in_owner = true
@@ -154,6 +173,15 @@ tooltip_text = "Мировая карта [M]"
 text = "Карта"
 icon = ExtResource("10")
 
+[node name="GuildButton" type="Button" parent="Root/BottomBar/StatsPanel/VBox/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/icon_max_width = 18
+tooltip_text = "Гильдия [G]"
+text = "Гильдия"
+icon = ExtResource("14")
+
 [node name="SkillPanel" type="PanelContainer" parent="Root/BottomBar"]
 layout_mode = 2
 size_flags_vertical = 8
@@ -172,7 +200,7 @@ theme_override_constants/separation = 6
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Применять умения автоматически.
-Вручную — клик по умению или клавиши 1, 2, 3."
+Вручную — клик по умению или клавиши 1–9."
 toggle_mode = true
 button_pressed = true
 text = "Авто"
@@ -220,6 +248,16 @@ visible = false
 layout_mode = 1
 
 [node name="WorldMap" parent="Root" instance=ExtResource("6")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="GuildPanel" parent="Root" instance=ExtResource("13")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="SettingsPanel" parent="Root" instance=ExtResource("12")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1

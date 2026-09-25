@@ -32,7 +32,7 @@ func _ready() -> void:
 	var args := _parse_user_args()
 	if GameState.autotest and not GameState.has_character():
 		var class_id: String = args.get("class", Database.classes[0].id)
-		GameState.create_character("Тест", class_id)
+		GameState.create_character(tr("Тест"), class_id)
 		GameState.level = int(args.get("level", 1))
 		if args.has("wave"):
 			GameState.wave = maxi(1, int(args.wave))
@@ -48,6 +48,7 @@ func _ready() -> void:
 		_show_battle()
 	else:
 		_show_creation()
+	Settings.language_changed.connect(_on_language_changed)
 
 	if args.has("open-inventory") and _current.has_node("HUD"):
 		(_current.get_node("HUD") as Hud).inventory_panel.open.call_deferred()
@@ -59,6 +60,10 @@ func _ready() -> void:
 		var hud := _current.get_node("HUD") as Hud
 		hud.kingdom_panel.tabs.current_tab = 1
 		hud.kingdom_panel.open.call_deferred()
+	if args.has("open-guild") and _current.has_node("HUD"):
+		(_current.get_node("HUD") as Hud).guild_panel.open.call_deferred()
+	if args.has("open-settings") and _current.has_node("HUD"):
+		(_current.get_node("HUD") as Hud).settings_panel.open.call_deferred()
 	if args.has("open-map") and _current.has_node("HUD"):
 		(_current.get_node("HUD") as Hud).world_map.open.call_deferred()
 	if args.has("world-test"):
@@ -75,6 +80,16 @@ func _ready() -> void:
 		_take_screenshot_later(str(args.screenshot))
 	if args.has("quit-after-seconds"):
 		get_tree().create_timer(float(args["quit-after-seconds"]), true, false, true).timeout.connect(get_tree().quit)
+
+
+## Тексты, собранные кодом, проще всего обновить, пересоздав текущий экран (прогресс хранится в GameState).
+func _on_language_changed() -> void:
+	if _current is CharacterCreation:
+		_show_creation()
+		return
+	_show_battle()
+	if _current.has_node("HUD"):
+		(_current.get_node("HUD") as Hud).settings_panel.open.call_deferred()
 
 
 func _show_creation() -> void:

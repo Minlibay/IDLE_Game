@@ -44,6 +44,7 @@ describe("treasure drops by playtime", () => {
     assert.equal(view.treasureWeekCount, 1);
     assert.ok(view.treasureNextMs > 0 && view.treasureNextMs <= INTERVAL);
     assert.equal(view.reports[0].data.kind, "treasure");
+    assert.equal(view.reports[0].data.template, "Найдено сокровище: {item} ({quality})");
   });
 
   it("closed game does not accumulate playtime", () => {

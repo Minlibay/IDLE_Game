@@ -72,6 +72,33 @@ export const CONFIG = {
   // Шансы качества находки (веса).
   treasureWeights: { named: 65, unique: 25, legendary: 10 },
 
+  // Гильдии. Создание — золото из казны замка. Места: база + за каждый уровень.
+  guildCreateCost: Number(env.GUILD_CREATE_COST ?? 1000),
+  guildNameMinLength: 3,
+  guildNameMaxLength: 24,
+  guildTagMinLength: 2,
+  guildTagMaxLength: 4,
+  guildBaseSlots: 20,
+  guildSlotsPerLevel: 5,
+  // Опыт для уровня (всего): 1-й … 7-й (7-й — максимум, 50 мест). Опыт: 1 золото взноса = 1, победы на карте.
+  guildLevelXp: [0, 5_000, 15_000, 35_000, 70_000, 120_000, 200_000],
+  guildInviteHours: 48,
+  // После выхода или исключения вступить в другую гильдию можно только через столько часов.
+  guildRejoinHours: 24,
+  // Глава не заходил столько дней — главенство переходит офицеру (или самому давнему участнику).
+  guildLeaderInactiveDays: 14,
+  // Бонус к силе армии: % за участника, потолок = base + perLevel × (уровень − 1).
+  guildBonusPerMember: 1,
+  guildBonusBaseCap: 5,
+  guildBonusCapPerLevel: 1,
+  // Опыт гильдии за победы участников: над нейтралами — × уровень зоны; над игроками (и отбитая атака).
+  guildXpPerNeutralTier: 30,
+  guildXpPerPvpWin: 200,
+  guildChatKept: 100,
+  guildChatMaxLength: 200,
+  guildChatCooldownMs: 1000,
+  guildColors: ["#e05a4f", "#f0a038", "#e8d44d", "#6cc75a", "#3fbfb0", "#4a90e2", "#8f6ae0", "#d65fb5", "#c8c8d0", "#8b6a4a"],
+
   maxUnitsPerType: 1_000_000,
   maxNameLength: 20,
   reportsKept: 30,

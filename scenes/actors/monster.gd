@@ -114,7 +114,7 @@ func setup(p_data: MonsterData, p_wave: int, p_target: Actor, p_elite_id := "") 
 
 func get_display_name() -> String:
 	if elite_id != "":
-		return "%s %s" % [ELITE_MODIFIERS[elite_id].name, data.display_name]
+		return tr("%s %s") % [tr(ELITE_MODIFIERS[elite_id].name), data.display_name]
 	return data.display_name
 
 

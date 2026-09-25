@@ -69,4 +69,4 @@ func is_treasure() -> bool:
 
 
 static func slot_name(value: int) -> String:
-	return SLOT_NAMES.get(value, "?")
+	return TranslationServer.translate(SLOT_NAMES.get(value, "?"))

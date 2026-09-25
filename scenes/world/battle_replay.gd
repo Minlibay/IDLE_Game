@@ -84,13 +84,13 @@ func play(report: Dictionary) -> void:
 	await get_tree().process_frame
 	if not visible:
 		return
-	title_label.text = str(_data.get("text", "Бой"))
+	title_label.text = WorldService.report_text(_data) if _data.has("text") else tr("Бой")
 	var attacker: Dictionary = _data.attacker
 	var defender: Dictionary = _data.defender
 	_build_side("attacker", attacker, 1, _side_color(attacker))
 	_build_side("defender", defender, -1, _side_color(defender))
-	attacker_label.text = "%s · сила %d" % [attacker.name, int(attacker.power)]
-	defender_label.text = "сила %d · %s" % [int(defender.power), defender.name]
+	attacker_label.text = tr("%s · сила %d") % [WorldService.side_name(attacker), int(attacker.power)]
+	defender_label.text = tr("сила %d · %s") % [int(defender.power), WorldService.side_name(defender)]
 	result_label.text = ""
 	skip_button.disabled = false
 	_phase = Phase.CHARGE
@@ -300,16 +300,16 @@ func _finish() -> void:
 		figure.cheer()
 	var won := bool(_data.get("won", false))
 	var lines := PackedStringArray()
-	lines.append("Победа!" if won else "Поражение")
-	lines.append("Потери: %s — %s · %s — %s" % [
-		_data.attacker.name, _army_text(_data.attacker.get("lost", {})),
-		_data.defender.name, _army_text(_data.defender.get("lost", {}))])
+	lines.append(tr("Победа!") if won else tr("Поражение"))
+	lines.append(tr("Потери: %s — %s · %s — %s") % [
+		WorldService.side_name(_data.attacker), _army_text(_data.attacker.get("lost", {})),
+		WorldService.side_name(_data.defender), _army_text(_data.defender.get("lost", {}))])
 	var loot: Dictionary = _data.get("loot", {})
 	if not loot.is_empty():
 		var parts := PackedStringArray()
 		for resource_id: String in loot:
 			parts.append("%d %s" % [int(loot[resource_id]), KingdomState.resource_name(resource_id)])
-		lines.append("Добыча: " + ", ".join(parts))
+		lines.append(tr("Добыча: ") + ", ".join(parts))
 	result_label.text = "\n".join(lines)
 	result_label.modulate = COLOR_WIN if won else COLOR_LOSS
 
@@ -360,7 +360,7 @@ func _army_text(army: Dictionary) -> String:
 	for unit_id: String in army:
 		var unit := Database.get_unit(unit_id)
 		parts.append("%d %s" % [int(army[unit_id]), unit.display_name if unit else unit_id])
-	return ", ".join(parts) if not parts.is_empty() else "нет"
+	return ", ".join(parts) if not parts.is_empty() else tr("нет")
 
 
 func _speed() -> float:

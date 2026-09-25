@@ -7,6 +7,7 @@ import type { GameData } from "./gameData.ts";
 import { sanitizeArmy } from "./world/army.ts";
 import { GameError, type Game, type Player } from "./world/game.ts";
 import { KingdomError } from "./world/kingdom.ts";
+import { GuildError } from "./world/guilds.ts";
 
 type Context = {
   url: URL;
@@ -30,6 +31,19 @@ export function createHttpServer(game: Game, gameData: GameData, settings: HttpS
       throw new GameError((error as Error).message);
     }
   };
+
+  const guildReply = (player: Player, now: number, since = 0) => ({
+    guild: game.guilds.view(player, since, now),
+    me: game.playerView(player, now),
+  });
+  /** Действие с гильдией: выполнить и вернуть окно гильдии (чат — с since, если передан). */
+  const guildAction = (work: (context: Context) => unknown, since: (body: Record<string, unknown>) => number = () => 0): Route => ({
+    auth: true,
+    handle: (context) => {
+      work(context);
+      return guildReply(context.player, context.now, since(context.body));
+    },
+  });
 
   const routes: Record<string, Route> = {
     "GET /api/health": { auth: false, handle: () => ({ ok: true, version: game.worldVersion }) },
@@ -140,6 +154,24 @@ export function createHttpServer(game: Game, gameData: GameData, settings: HttpS
       },
     },
 
+    // --- Гильдии: каждое действие возвращает окно гильдии и состояние игрока. ---
+    "GET /api/guild": {
+      auth: true,
+      handle: ({ player, url, now }) => guildReply(player, now, Number(url.searchParams.get("since") ?? 0) || 0),
+    },
+    "POST /api/guild/create": guildAction(({ player, body, now }) => game.guilds.create(player, body.name, body.tag, body.color, now)),
+    "POST /api/guild/invite": guildAction(({ player, body, now }) => game.guilds.invite(player, body.name, now)),
+    "POST /api/guild/invite/cancel": guildAction(({ player, body }) => game.guilds.cancelInvite(player, body.playerId)),
+    "POST /api/guild/accept": guildAction(({ player, body, now }) => game.guilds.accept(player, body.guildId, now)),
+    "POST /api/guild/decline": guildAction(({ player, body }) => game.guilds.decline(player, body.guildId)),
+    "POST /api/guild/leave": guildAction(({ player, now }) => game.guilds.leave(player, now)),
+    "POST /api/guild/kick": guildAction(({ player, body, now }) => game.guilds.kick(player, body.playerId, now)),
+    "POST /api/guild/role": guildAction(({ player, body, now }) => game.guilds.setRole(player, body.playerId, body.role, now)),
+    "POST /api/guild/transfer": guildAction(({ player, body, now }) => game.guilds.transfer(player, body.playerId, now)),
+    "POST /api/guild/disband": guildAction(({ player }) => game.guilds.disband(player)),
+    "POST /api/guild/donate": guildAction(({ player, body, now }) => game.guilds.donate(player, body.gold, now)),
+    "POST /api/guild/chat": guildAction(({ player, body, now }) => game.guilds.postMessage(player, body.text, now), (body) => Number(body.since) || 0),
+
     "POST /api/kingdom/deposit": {
       auth: true,
       handle: ({ player, body, now }) => {
@@ -169,6 +201,7 @@ export function createHttpServer(game: Game, gameData: GameData, settings: HttpS
       const reply = (status: number, payload: unknown) => send(req, res, status, payload, settings.gzipMinBytes);
       if (error instanceof GameError) return reply(error.status, { error: error.message });
       if (error instanceof KingdomError) return reply(400, { error: error.message });
+      if (error instanceof GuildError) return reply(error.status, { error: error.message });
       if (error instanceof SyntaxError) return reply(400, { error: "Некорректный JSON" });
       console.error(error);
       reply(500, { error: "Внутренняя ошибка сервера" });

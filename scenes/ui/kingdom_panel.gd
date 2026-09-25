@@ -113,11 +113,11 @@ func _setup_styles() -> void:
 	construction_row.add_theme_stylebox_override("panel", UiStyles.texture_style(UI_DIR + "queue_row.png", 8, Vector4(8, 3, 8, 4)))
 	big_icon_frame.add_theme_stylebox_override("panel", UiStyles.texture_style(UiStyles.SLOT_DIR + "tier_epic.png", 8, Vector4(6, 6, 6, 6)))
 	var buildings_box := buildings_grid.get_parent()
-	var title := UiStyles.make_section_title("Здания")
+	var title := UiStyles.make_section_title(tr("Здания"))
 	buildings_box.add_child(title)
 	buildings_box.move_child(title, 0)
 	var details_box := name_label.get_parent().get_parent().get_parent()
-	var details_title := UiStyles.make_section_title("Описание здания")
+	var details_title := UiStyles.make_section_title(tr("Описание здания"))
 	details_box.add_child(details_title)
 	details_box.move_child(details_title, 0)
 
@@ -183,7 +183,7 @@ func _refresh() -> void:
 		var labels: Array = _resource_labels[resource_id]
 		var rate := kingdom.get_production_per_minute(resource_id)
 		(labels[0] as Label).text = "%d/%d" % [floori(kingdom.get_resource(resource_id)), roundi(kingdom.get_storage_capacity(resource_id))]
-		(labels[1] as Label).text = "+%s/м" % StatModifier.format_number(rate) if rate > 0.0 else ""
+		(labels[1] as Label).text = tr("+%s/м") % StatModifier.format_number(rate) if rate > 0.0 else ""
 	_update_status_row()
 	if army_view.visible:
 		army_view.refresh()
@@ -195,11 +195,11 @@ func _refresh() -> void:
 		slot.update_state(kingdom.get_level(slot.building), kingdom.can_upgrade(slot.building), ratio, slot.building == _selected)
 	construction_bar.visible = constructing != null
 	if constructing:
-		construction_label.text = "Стройка: %s ур. %d — %s" % [
+		construction_label.text = tr("Стройка: %s ур. %d — %s") % [
 			constructing.display_name, kingdom.get_construction_level(), UiFormat.duration(kingdom.get_construction_left())]
 		construction_bar.value = kingdom.get_construction_ratio()
 	else:
-		construction_label.text = "Строители свободны — выберите здание"
+		construction_label.text = tr("Строители свободны — выберите здание")
 	_update_details()
 
 
@@ -208,26 +208,26 @@ func _update_status_row() -> void:
 	var icon := ICON_SHIELD
 	var danger := false
 	if not WorldService.is_logged_in():
-		parts.append("Нет связи с сервером — замок только для просмотра")
+		parts.append(tr("Нет связи с сервером — замок только для просмотра"))
 	elif not GameState.kingdom.synced:
-		parts.append("Загрузка замка с сервера…")
+		parts.append(tr("Загрузка замка с сервера…"))
 	for attack: Dictionary in WorldService.get_incoming():
 		if attack.castle:
 			danger = true
-			parts.append("%s идёт на замок (%d солдат) — %s" % [attack.attacker, int(attack.units),
+			parts.append(tr("%s идёт на замок (%d солдат) — %s") % [attack.attacker, int(attack.units),
 				UiFormat.duration(WorldService.time_until(float(attack.arrivesAt)))])
 	var protection := WorldService.my_protection_until()
 	if protection > 0.0:
-		parts.append("Замок под защитой ещё %s" % UiFormat.duration(WorldService.time_until(protection)))
+		parts.append(tr("Замок под защитой ещё %s") % UiFormat.duration(WorldService.time_until(protection)))
 	elif parts.is_empty():
-		parts.append("Замок без защиты — армия в замке отражает набеги")
+		parts.append(tr("Замок без защиты — армия в замке отражает набеги"))
 	status_icon.texture = ICON_SWORDS if danger else icon
 	status_label.text = " · ".join(parts)
 	status_label.modulate = COLOR_BAD if danger else Color.WHITE
 	var amount := mini(GameState.gold, WorldService.deposit_available())
-	deposit_button.text = "Внести в казну %d" % amount if amount > 0 else "Внести в казну"
+	deposit_button.text = tr("Внести в казну %d") % amount if amount > 0 else tr("Внести в казну")
 	deposit_button.disabled = amount <= 0 or not GameState.kingdom.synced
-	deposit_button.tooltip_text = "Золото героя → казна замка. Лимит копится со временем и растёт с уровнем героя (сейчас %d)." \
+	deposit_button.tooltip_text = tr("Золото героя → казна замка. Лимит копится со временем и растёт с уровнем героя (сейчас %d).") \
 		% WorldService.deposit_available()
 
 
@@ -238,14 +238,14 @@ func _update_details() -> void:
 	var level := kingdom.get_level(_selected)
 	big_icon.texture = _selected.icon
 	name_label.text = _selected.display_name
-	level_label.text = "Уровень %d / %d" % [level, _selected.max_level] if level > 0 else "Не построено"
+	level_label.text = tr("Уровень %d / %d") % [level, _selected.max_level] if level > 0 else tr("Не построено")
 	description_label.text = _selected.description
 
 	var lines := PackedStringArray()
 	if level > 0:
-		lines.append("Сейчас: " + _effect_text(_selected, level))
+		lines.append(tr("Сейчас: ") + _effect_text(_selected, level))
 	if level < _selected.max_level:
-		lines.append("→ Ур. %d: %s" % [level + 1, _effect_text(_selected, level + 1)])
+		lines.append(tr("→ Ур. %d: %s") % [level + 1, _effect_text(_selected, level + 1)])
 	effect_label.text = "\n".join(lines)
 
 	var maxed := level >= _selected.max_level
@@ -263,13 +263,13 @@ func _update_details() -> void:
 			var have := kingdom.get_resource(resource_id)
 			_cost_labels[resource_id].text = "%d / %d" % [mini(floori(have), roundi(need)), roundi(need)]
 			_cost_labels[resource_id].modulate = COLOR_OK if have >= need else COLOR_BAD
-		time_label.text = "Время стройки: " + UiFormat.duration(_selected.get_build_time(level + 1))
+		time_label.text = tr("Время стройки: ") + UiFormat.duration(_selected.get_build_time(level + 1))
 
 	var reason := kingdom.get_upgrade_block_reason(_selected)
 	upgrade_button.disabled = reason != ""
-	upgrade_button.text = "Построить" if level == 0 else "Улучшить до ур. %d" % (level + 1)
+	upgrade_button.text = tr("Построить") if level == 0 else tr("Улучшить до ур. %d") % (level + 1)
 	if maxed:
-		upgrade_button.text = "Максимум"
+		upgrade_button.text = tr("Максимум")
 	reason_label.text = reason if not maxed else ""
 
 
@@ -277,15 +277,15 @@ func _update_details() -> void:
 func _effect_text(building: BuildingData, level: int) -> String:
 	var parts := PackedStringArray()
 	if building.produces != "":
-		parts.append("+%s %s/мин" % [StatModifier.format_number(building.production_per_level * level),
+		parts.append(tr("+%s %s/мин") % [StatModifier.format_number(building.production_per_level * level),
 			KingdomState.resource_name(building.produces)])
 	if building.storage_per_level > 0.0:
-		parts.append("склад %d, казна %d" % [roundi(KingdomState.BASE_STORAGE + building.storage_per_level * level),
+		parts.append(tr("склад %d, казна %d") % [roundi(KingdomState.BASE_STORAGE + building.storage_per_level * level),
 			roundi((KingdomState.BASE_STORAGE + building.storage_per_level * level) * KingdomState.GOLD_STORAGE_MULTIPLIER)])
 	if building.army_capacity_per_level > 0:
-		parts.append("армия %d мест" % (building.army_capacity_per_level * level))
+		parts.append(tr("армия %d мест") % (building.army_capacity_per_level * level))
 	if building.is_town_hall:
-		parts.append("здания до ур. %d" % level)
+		parts.append(tr("здания до ур. %d") % level)
 	if not building.modifiers.is_empty():
 		parts.append(StatModifier.describe_list(building.modifiers, level))
 	return ", ".join(parts)

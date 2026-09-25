@@ -37,6 +37,10 @@
 [ext_resource type="Texture2D" path="res://assets/ui/buttons/button_hover_blue.png" id="67"]
 [ext_resource type="Texture2D" path="res://assets/ui/buttons/button_pressed_blue.png" id="68"]
 [ext_resource type="Texture2D" path="res://assets/ui/inventory/section.png" id="69"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/tray_small.png" id="70"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/tray_small_hover.png" id="71"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/settings_small.png" id="72"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/settings_small_hover.png" id="73"]
 
 [sub_resource type="StyleBoxTexture" id="Tex_panel_window"]
 content_margin_left = 12.0
@@ -244,6 +248,50 @@ texture_margin_top = 0.0
 texture_margin_right = 0.0
 texture_margin_bottom = 0.0
 
+[sub_resource type="StyleBoxTexture" id="Tex_tray"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("70")
+texture_margin_left = 0.0
+texture_margin_top = 0.0
+texture_margin_right = 0.0
+texture_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_tray_hover"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("71")
+texture_margin_left = 0.0
+texture_margin_top = 0.0
+texture_margin_right = 0.0
+texture_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_settings"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("72")
+texture_margin_left = 0.0
+texture_margin_top = 0.0
+texture_margin_right = 0.0
+texture_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_settings_hover"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("73")
+texture_margin_left = 0.0
+texture_margin_top = 0.0
+texture_margin_right = 0.0
+texture_margin_bottom = 0.0
+
 [sub_resource type="StyleBoxTexture" id="Tex_bar_frame"]
 texture = ExtResource("21")
 texture_margin_left = 3.0
@@ -437,6 +485,18 @@ CloseButton/styles/hover = SubResource("Tex_close_hover")
 CloseButton/styles/hover_pressed = SubResource("Tex_close_hover")
 CloseButton/styles/normal = SubResource("Tex_close")
 CloseButton/styles/pressed = SubResource("Tex_close_hover")
+SettingsButton/base_type = &"Button"
+SettingsButton/styles/disabled = SubResource("Tex_settings")
+SettingsButton/styles/hover = SubResource("Tex_settings_hover")
+SettingsButton/styles/hover_pressed = SubResource("Tex_settings_hover")
+SettingsButton/styles/normal = SubResource("Tex_settings")
+SettingsButton/styles/pressed = SubResource("Tex_settings_hover")
+TrayButton/base_type = &"Button"
+TrayButton/styles/disabled = SubResource("Tex_tray")
+TrayButton/styles/hover = SubResource("Tex_tray_hover")
+TrayButton/styles/hover_pressed = SubResource("Tex_tray_hover")
+TrayButton/styles/normal = SubResource("Tex_tray")
+TrayButton/styles/pressed = SubResource("Tex_tray_hover")
 HSeparator/constants/separation = 8
 HSeparator/styles/separator = SubResource("Tex_separator")
 Label/colors/font_color = Color(0.92, 0.9, 0.96, 1)

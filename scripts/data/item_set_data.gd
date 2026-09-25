@@ -29,5 +29,5 @@ func get_piece_count() -> int:
 static func describe_bonus(bonus: Bonus) -> String:
 	var text := "(%d) %s" % [bonus.pieces, StatModifier.describe_list(bonus.modifiers)]
 	if bonus.aura:
-		text += ", аура героя"
+		text += TranslationServer.translate(", аура героя")
 	return text

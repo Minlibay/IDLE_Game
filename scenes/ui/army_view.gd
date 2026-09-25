@@ -58,8 +58,8 @@ func _ready() -> void:
 	for key: String in ["attack", "defense", "housing", "upkeep"]:
 		var icon_name: String = {"attack": "attack", "defense": "defense", "housing": "castle", "upkeep": "food"}[key]
 		_stat_labels[key] = UiStyles.add_chip(stat_chips, load(ICON_DIR + icon_name + ".png"))
-		_stat_labels[key].get_parent().get_parent().tooltip_text = {"attack": "Атака солдата", "defense": "Защита солдата",
-			"housing": "Мест в армии", "upkeep": "Еды в минуту"}[key]
+		_stat_labels[key].get_parent().get_parent().tooltip_text = {"attack": tr("Атака солдата"), "defense": tr("Защита солдата"),
+			"housing": tr("Мест в армии"), "upkeep": tr("Еды в минуту")}[key]
 	for unit in Database.units:
 		var slot: UnitSlot = UNIT_SLOT_SCENE.instantiate()
 		units_grid.add_child(slot)
@@ -78,16 +78,16 @@ func _ready() -> void:
 
 func _add_titles() -> void:
 	var titles := {
-		"SummarySection/VBox": ["Армия замка", 0],
-		"UnitsSection/VBox": ["Отряды", 0],
-		"RecruitSection/VBox": ["Найм", 0],
+		"SummarySection/VBox": [tr("Армия замка"), 0],
+		"UnitsSection/VBox": [tr("Отряды"), 0],
+		"RecruitSection/VBox": [tr("Найм"), 0],
 	}
 	for path: String in titles:
 		var box := get_node(path) as VBoxContainer
 		var title := UiStyles.make_section_title(titles[path][0])
 		box.add_child(title)
 		box.move_child(title, int(titles[path][1]))
-	var queue_title := UiStyles.make_section_title("Очередь обучения", 11)
+	var queue_title := UiStyles.make_section_title(tr("Очередь обучения"), 11)
 	var summary := get_node("SummarySection/VBox") as VBoxContainer
 	summary.add_child(queue_title)
 	summary.move_child(queue_title, queue_list.get_parent().get_index())
@@ -98,14 +98,14 @@ func refresh() -> void:
 	if not is_visible_in_tree():
 		return
 	var army := GameState.kingdom.army
-	power_label.text = "Сила армии: %d" % roundi(army.get_power())
-	power_label.tooltip_text = "Атака ×%.2f · Защита ×%.2f\nЗдания, захваченные зоны, реликвии армии%s" % [
-		army.get_attack_multiplier(), army.get_defense_multiplier(), ", голод" if army.starving else ""]
+	power_label.text = tr("Сила армии: %d") % roundi(army.get_power())
+	power_label.tooltip_text = tr("Атака ×%.2f · Защита ×%.2f\nЗдания, захваченные зоны, реликвии армии%s") % [
+		army.get_attack_multiplier(), army.get_defense_multiplier(), tr(", голод") if army.starving else ""]
 	power_label.mouse_filter = Control.MOUSE_FILTER_PASS
-	_army_labels.attack.text = "Атака %d · Защита %d" % [roundi(army.get_attack()), roundi(army.get_defense())]
-	_army_labels.soldiers.text = "Солдат в замке: %d" % army.get_total_units()
-	_army_labels.housing.text = "Места: %d / %d" % [army.get_housing_used(), army.get_capacity()]
-	_army_labels.upkeep.text = "Содержание: %s еды/мин" % StatModifier.format_number(snappedf(army.get_upkeep_per_minute(), 0.01))
+	_army_labels.attack.text = tr("Атака %d · Защита %d") % [roundi(army.get_attack()), roundi(army.get_defense())]
+	_army_labels.soldiers.text = tr("Солдат в замке: %d") % army.get_total_units()
+	_army_labels.housing.text = tr("Места: %d / %d") % [army.get_housing_used(), army.get_capacity()]
+	_army_labels.upkeep.text = tr("Содержание: %s еды/мин") % StatModifier.format_number(snappedf(army.get_upkeep_per_minute(), 0.01))
 	capacity_bar.value = float(army.get_housing_used()) / maxf(1.0, float(army.get_capacity()))
 	starving_ribbon.visible = army.starving
 	for i in _queue_labels.size():
@@ -135,7 +135,7 @@ func _update_details() -> void:
 	var army := GameState.kingdom.army
 	var kingdom := GameState.kingdom
 	portrait.texture = _selected.icon
-	name_label.text = "%s (в замке: %d)" % [_selected.display_name, army.get_count(_selected)]
+	name_label.text = tr("%s (в замке: %d)") % [_selected.display_name, army.get_count(_selected)]
 	description_label.text = _selected.description
 	_stat_labels.attack.text = StatModifier.format_number(_selected.attack)
 	_stat_labels.defense.text = StatModifier.format_number(_selected.defense)
@@ -155,12 +155,12 @@ func _update_details() -> void:
 		var need := float(total_cost[resource_id])
 		_cost_labels[resource_id].text = str(ceili(need))
 		_cost_labels[resource_id].modulate = COLOR_OK if kingdom.get_resource(resource_id) >= need else COLOR_BAD
-	time_label.text = "Обучение: %s" % UiFormat.duration(army.get_training_time(_selected) * _amount)
+	time_label.text = tr("Обучение: %s") % UiFormat.duration(army.get_training_time(_selected) * _amount)
 	amount_label.text = str(_amount)
 
 	var reason := army.get_recruit_block_reason(_selected, _amount)
 	recruit_button.disabled = reason != ""
-	recruit_button.text = "Нанять ×%d" % _amount
+	recruit_button.text = tr("Нанять ×%d") % _amount
 	reason_label.text = reason
 
 
@@ -173,7 +173,7 @@ func _rebuild_queue() -> void:
 	var army := GameState.kingdom.army
 	if army.queue.is_empty():
 		var empty := Label.new()
-		empty.text = "Очередь пуста — выберите отряд и нажмите «Нанять»"
+		empty.text = tr("Очередь пуста — выберите отряд и нажмите «Нанять»")
 		empty.add_theme_font_size_override("font_size", 10)
 		empty.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		empty.modulate = Color(0.7, 0.7, 0.78)
@@ -204,7 +204,7 @@ func _rebuild_queue() -> void:
 		cancel.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 		cancel.custom_minimum_size = Vector2(20, 20)
 		cancel.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		cancel.tooltip_text = "Отменить (ресурсы вернутся)"
+		cancel.tooltip_text = tr("Отменить (ресурсы вернутся)")
 		cancel.pressed.connect(army.cancel_order.bind(i))
 		row.add_child(cancel)
 		row_panel.add_child(row)

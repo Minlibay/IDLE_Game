@@ -86,24 +86,24 @@ func _learn(talent: TalentData) -> void:
 	if talent == null:
 		return
 	if GameState.learn_talent(talent):
-		_show_result("Изучено: %s" % talent.display_name, COLOR_OK)
+		_show_result(tr("Изучено: %s") % talent.display_name, COLOR_OK)
 	elif GameState.get_talent_rank(talent) >= talent.max_rank:
-		_show_result("Уже изучено", COLOR_HINT)
+		_show_result(tr("Уже изучено"), COLOR_HINT)
 	elif not GameState.is_talent_reachable(talent):
-		_show_result("Сначала изучите соседний узел", COLOR_BAD)
+		_show_result(tr("Сначала изучите соседний узел"), COLOR_BAD)
 	else:
-		_show_result("Нет свободных очков", COLOR_BAD)
+		_show_result(tr("Нет свободных очков"), COLOR_BAD)
 
 
 func _refresh() -> void:
 	if not visible or _tree == null:
 		return
 	var available := GameState.get_available_talent_points()
-	points_label.text = "Свободных очков: %d · изучено %d из %d" % [
+	points_label.text = tr("Свободных очков: %d · изучено %d из %d") % [
 		available, GameState.get_talent_points_spent(), _tree.get_talents().size() - 1]
 	points_label.modulate = COLOR_POINTS if available > 0 else COLOR_HINT
 	reset_button.disabled = GameState.get_talent_points_spent() == 0
-	reset_button.text = ("Точно? %d з" if _reset_armed else "Сброс (%d з)") % GameState.get_talent_reset_cost()
+	reset_button.text = (tr("Точно? %d з") if _reset_armed else tr("Сброс (%d з)")) % GameState.get_talent_reset_cost()
 	_update_legend()
 	_update_details()
 	grid_view.queue_redraw()
@@ -115,15 +115,15 @@ func _update_details() -> void:
 	var rank := GameState.get_talent_rank(_selected)
 	name_label.text = _selected.display_name
 	var region_name := _tree.regions[_selected.region].display_name if _selected.kind != TalentData.Kind.START else ""
-	kind_label.text = KIND_NAMES[_selected.kind] + (" · сектор «%s»" % region_name if region_name != "" else "")
+	kind_label.text = tr(KIND_NAMES[_selected.kind]) + (tr(" · сектор «%s»") % region_name if region_name != "" else "")
 	info_label.text = _selected.get_description(1)
 	requirement_label.text = ""
 	if rank == 0 and not GameState.is_talent_reachable(_selected):
-		requirement_label.text = "Недоступно: изучайте узлы по цепочке от центра"
+		requirement_label.text = tr("Недоступно: изучайте узлы по цепочке от центра")
 	elif rank == 0 and GameState.get_available_talent_points() == 0:
-		requirement_label.text = "Нет свободных очков — они даются за уровень"
+		requirement_label.text = tr("Нет свободных очков — они даются за уровень")
 	learn_button.disabled = not GameState.can_learn_talent(_selected)
-	learn_button.text = "Изучено" if rank > 0 else "Изучить (или двойной клик)"
+	learn_button.text = tr("Изучено") if rank > 0 else tr("Изучить (или двойной клик)")
 
 
 ## Легенда: сколько узлов изучено в каждом секторе.
@@ -151,9 +151,9 @@ func _on_reset_pressed() -> void:
 		return
 	_reset_armed = false
 	if GameState.reset_talents():
-		_show_result("Таланты сброшены, очки возвращены", COLOR_OK)
+		_show_result(tr("Таланты сброшены, очки возвращены"), COLOR_OK)
 	else:
-		_show_result("Не хватает золота на сброс", COLOR_BAD)
+		_show_result(tr("Не хватает золота на сброс"), COLOR_BAD)
 	_refresh()
 
 

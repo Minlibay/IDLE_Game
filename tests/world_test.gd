@@ -4,7 +4,8 @@ extends Node
 ##   Godot.exe --headless --path . -- --autotest --world-test --quit-after-seconds=90
 ## В консоли должно появиться «WORLDTEST OK».
 ## Сценарий: замок с сервера → стройка казарм → найм ополченцев → армия на карту → захват зоны →
-## гарнизон → возвращение в замок; еда героя и взнос золота в казну.
+## гарнизон → возвращение в замок; еда героя и взнос золота в казну; гильдия (создание, приглашение
+## второго игрока, чат, взнос, тег на карте).
 
 const TIMEOUT_MSEC := 30000
 
@@ -127,6 +128,65 @@ func _run() -> void:
 		var treasure: Item = GameState.treasures[0]
 		_check(treasure.is_treasure() and treasure.get_base().can_be_used_by(GameState.class_id), "treasure of a wrong class")
 		print("  treasure found: %s (%s)" % [treasure.get_display_name(), treasure.get_tier_name()])
+
+	await _guild_flow()
+
+
+## Гильдия: создать, пригласить второго игрока (он отвечает прямыми запросами со своим токеном), чат, взнос.
+func _guild_flow() -> void:
+	var gold := GameState.kingdom.get_resource("gold")
+	if not _check(gold >= 1000.0, "not enough treasury gold to found a guild: %d" % gold):
+		return
+	var tag := "Т%d" % (randi() % 100)
+	var created := await WorldService.guild_create("Гильдия %s" % tag, tag, "#4a90e2")
+	if not _check(created.ok, "guild create failed: %s" % created.get("error", "")):
+		return
+	_check(WorldService.guild_role() == "leader" and str(WorldService.my_guild().tag) == tag.to_upper(), "guild summary wrong")
+	_check(GameState.kingdom.get_resource("gold") <= gold - 1000.0 + 1.0, "guild cost not paid from the treasury")
+
+	var friend_name := "Друг%d" % (randi() % 1_000_000)
+	var friend := await _raw(HTTPClient.METHOD_POST, "/api/auth/register", {"name": friend_name})
+	if not _check(friend.code == 200, "second player register failed"):
+		return
+	var friend_token: String = friend.data.token
+	var invite := await WorldService.guild_invite(friend_name)
+	_check(invite.ok, "invite failed: %s" % invite.get("error", ""))
+	var friend_me := await _raw(HTTPClient.METHOD_GET, "/api/me", null, friend_token)
+	var invites: Array = friend_me.data.get("guildInvites", [])
+	if not _check(invites.size() == 1, "friend did not get the invite"):
+		return
+	var accept := await _raw(HTTPClient.METHOD_POST, "/api/guild/accept", {"guildId": invites[0].guildId}, friend_token)
+	_check(accept.code == 200, "friend could not accept: %s" % str(accept.data))
+
+	await WorldService.refresh_guild()
+	_check(WorldService.guild.get("members", []).size() == 2, "guild must have 2 members")
+	var sent := await WorldService.guild_send_message("Привет, гильдия!")
+	_check(sent.ok and str(WorldService.guild_chat.back().text) == "Привет, гильдия!", "chat message not delivered")
+	await _raw(HTTPClient.METHOD_POST, "/api/guild/chat", {"text": "Привет от друга"}, friend_token)
+	await WorldService.refresh_guild()
+	_check(str(WorldService.guild_chat.back().text) == "Привет от друга", "friend's message not received")
+	var donate := await WorldService.guild_donate(100)
+	_check(donate.ok and int(WorldService.guild.get("xp", 0)) >= 100, "donation did not give guild experience")
+
+	await WorldService.refresh_world()
+	var friend_id := int(accept.data.me.id)
+	_check(WorldService.is_ally(friend_id), "friend must be an ally on the map")
+	_check(str(WorldService.get_player(WorldService.my_id()).get("guildTag", "")) == tag.to_upper(), "guild tag not on the map")
+	print("  guild flow ok: [%s] created, %s joined, chat and donation work" % [tag.to_upper(), friend_name])
+
+
+## Запрос к серверу от имени другого игрока (у WorldService — только свой токен).
+func _raw(method: int, path: String, body: Variant, auth_token := "") -> Dictionary:
+	var http := HTTPRequest.new()
+	add_child(http)
+	var headers := PackedStringArray(["Content-Type: application/json"])
+	if auth_token != "":
+		headers.append("Authorization: Bearer " + auth_token)
+	http.request(WorldService.LOCAL_URL + path, headers, method, JSON.stringify(body) if body != null else "")
+	var response: Array = await http.request_completed
+	http.queue_free()
+	var data: Variant = JSON.parse_string((response[3] as PackedByteArray).get_string_from_utf8())
+	return {"code": int(response[1]), "data": data if data is Dictionary else {}}
 
 
 func _wait_until(condition: Callable, message: String) -> bool:

@@ -56,7 +56,7 @@ func _refresh() -> void:
 	for need in Database.needs:
 		_bars[need.id].value = GameState.needs.get_value(need)
 	rest_button.disabled = _resting or not GameState.needs.can_rest_manually()
-	rest_button.text = "Спит…" if _resting else "Отдых"
+	rest_button.text = tr("Спит…") if _resting else tr("Отдых")
 	_refresh_tooltips()
 
 
@@ -64,17 +64,17 @@ func _refresh_tooltips() -> void:
 	for need in Database.needs:
 		var level := GameState.needs.get_level(need)
 		var lines := PackedStringArray()
-		lines.append("%s: %d / 100 (%s)" % [need.display_name, roundi(GameState.needs.get_value(need)), LEVEL_NAMES[level]])
+		lines.append("%s: %d / 100 (%s)" % [need.display_name, roundi(GameState.needs.get_value(need)), tr(LEVEL_NAMES[level])])
 		if need.consumes_resource != "":
-			lines.append("Запас: %d %s — герой берёт сам" % [
+			lines.append(tr("Запас: %d %s — герой берёт сам") % [
 				floori(GameState.kingdom.get_resource(need.consumes_resource)),
 				KingdomState.resource_name(need.consumes_resource)])
 		if need.restored_by_rest:
-			lines.append("На нуле герой уходит отдыхать")
+			lines.append(tr("На нуле герой уходит отдыхать"))
 		if not need.satisfied_modifiers.is_empty():
-			lines.append("От %d: %s" % [roundi(need.satisfied_threshold), StatModifier.describe_list(need.satisfied_modifiers)])
+			lines.append(tr("От %d: %s") % [roundi(need.satisfied_threshold), StatModifier.describe_list(need.satisfied_modifiers)])
 		if not need.low_modifiers.is_empty():
-			lines.append("Ниже %d: %s" % [roundi(need.low_threshold), StatModifier.describe_list(need.low_modifiers)])
+			lines.append(tr("Ниже %d: %s") % [roundi(need.low_threshold), StatModifier.describe_list(need.low_modifiers)])
 		_rows[need.id].tooltip_text = "\n".join(lines)
 
 

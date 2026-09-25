@@ -108,18 +108,18 @@ func get_max_recruitable(unit: UnitData) -> int:
 ## Почему нельзя нанять count солдат ("" — можно). Окончательно решает сервер.
 func get_recruit_block_reason(unit: UnitData, count: int) -> String:
 	if not _kingdom().synced:
-		return "Нет связи с сервером"
+		return tr("Нет связи с сервером")
 	if not is_unlocked(unit):
 		var building := get_required_building(unit)
-		return "Нужно: %s %d-го уровня" % [building.display_name, unit.required_level]
+		return tr("Нужно: %s %d-го уровня") % [building.display_name, unit.required_level]
 	if count <= 0:
-		return "Укажите количество"
+		return tr("Укажите количество")
 	if queue.size() >= MAX_QUEUE:
-		return "Очередь обучения заполнена"
+		return tr("Очередь обучения заполнена")
 	if count * unit.housing > get_free_capacity():
-		return "Не хватает места в армии (свободно %d)" % get_free_capacity()
+		return tr("Не хватает места в армии (свободно %d)") % get_free_capacity()
 	if not _kingdom().can_afford(KingdomState.multiply_cost(unit.cost, count)):
-		return "Не хватает ресурсов"
+		return tr("Не хватает ресурсов")
 	return ""
 
 

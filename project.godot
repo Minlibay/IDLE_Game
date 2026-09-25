@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Settings="*res://scripts/autoload/settings.gd"
 Database="*res://scripts/autoload/database.gd"
 GameState="*res://scripts/autoload/game_state.gd"
 DesktopWindow="*res://scripts/autoload/desktop_window.gd"
@@ -35,6 +36,11 @@ window/per_pixel_transparency/allowed=true
 [gui]
 
 theme/custom="res://assets/ui/theme.tres"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://locale/en.po")
+locale/fallback="ru"
 
 [physics]
 
