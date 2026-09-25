@@ -9,6 +9,8 @@ export type BattleSide = {
   army: Army;
   /** 0 — героя нет (нейтралы, пустой гарнизон). */
   heroLevel: number;
+  /** Множитель силы отрядов (бонусы зданий, голод). По умолчанию 1. */
+  multiplier?: number;
 };
 
 export type BattleSettings = {
@@ -36,8 +38,8 @@ export function resolveBattle(
   random: () => number = Math.random,
 ): BattleResult {
   const roll = () => 1 + (random() * 2 - 1) * settings.luck;
-  const attackerPower = (attackOf(attacker.army, units) + attacker.heroLevel * settings.heroPowerPerLevel) * roll();
-  const defenderPower = (defenseOf(defender.army, units) + defender.heroLevel * settings.heroPowerPerLevel) * roll();
+  const attackerPower = (attackOf(attacker.army, units) * (attacker.multiplier ?? 1) + attacker.heroLevel * settings.heroPowerPerLevel) * roll();
+  const defenderPower = (defenseOf(defender.army, units) * (defender.multiplier ?? 1) + defender.heroLevel * settings.heroPowerPerLevel) * roll();
   const attackerWins = attackerPower > defenderPower;
 
   const winnerPower = Math.max(attackerPower, defenderPower);
@@ -58,7 +60,8 @@ export function resolveBattle(
   };
 }
 
-function applyLosses(army: Army, ratio: number): { remaining: Army; lost: Army } {
+/** Каждый отряд теряет долю ratio (округление вверх). */
+export function applyLosses(army: Army, ratio: number): { remaining: Army; lost: Army } {
   const remaining: Army = {};
   const lost: Army = {};
   for (const [id, count] of Object.entries(army)) {

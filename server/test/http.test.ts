@@ -33,6 +33,8 @@ describe("http api", () => {
     assert.equal(me.status, 200);
     assert.equal(me.json.name, "Http");
 
+    assert.equal((await call("POST", "/api/army/deploy", { units: { militia: 3 } }, token)).status, 400, "no soldiers in the castle yet");
+    game.getPlayerByToken(token)!.kingdom.army = { militia: 3 };
     const deploy = await call("POST", "/api/army/deploy", { units: { militia: 3 } }, token);
     assert.equal(deploy.status, 200);
     assert.deepEqual(deploy.json.army, { militia: 3 });
@@ -58,5 +60,29 @@ describe("http api", () => {
     const bad = await call("POST", "/api/army/deploy", { units: { dragon: 5 } }, reg.json.token);
     assert.equal(bad.status, 400);
     assert.match(bad.json.error, /unknown unit/);
+  });
+
+  it("castle actions go through the server", async () => {
+    const reg = await call("POST", "/api/auth/register", { name: "Builder" });
+    const token = reg.json.token as string;
+    assert.equal(reg.json.me.kingdom.levels.town_hall, 1);
+
+    const built = await call("POST", "/api/kingdom/build", { building: "farm" }, token);
+    assert.equal(built.status, 200);
+    assert.equal(built.json.kingdom.construction.id, "farm");
+
+    const busy = await call("POST", "/api/kingdom/build", { building: "well" }, token);
+    assert.equal(busy.status, 400);
+    assert.match(busy.json.error, /заняты/);
+
+    const noBarracks = await call("POST", "/api/kingdom/recruit", { unit: "militia", count: 1 }, token);
+    assert.equal(noBarracks.status, 400);
+
+    const eaten = await call("POST", "/api/kingdom/consume", { resources: { food: 2 } }, token);
+    assert.equal(eaten.status, 200);
+    assert.equal(eaten.json.taken.food, 2);
+
+    const deposit = await call("POST", "/api/kingdom/deposit", { gold: 50 }, token);
+    assert.equal(deposit.status, 400, "allowance is empty right after registration");
   });
 });

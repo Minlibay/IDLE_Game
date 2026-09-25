@@ -32,6 +32,9 @@ const MARKER_BANNER := preload("res://assets/ui/map/marker_banner.png")
 const MARKER_HERO := preload("res://assets/ui/map/marker_hero.png")
 const OUTLINE_SELECTED := preload("res://assets/ui/map/outline_selected.png")
 const OUTLINE_TARGET := preload("res://assets/ui/map/outline_target.png")
+## Щит защищённого замка и линии чужих походов на мои зоны.
+const COLOR_SHIELD := Color(0.45, 0.75, 1.0, 0.9)
+const COLOR_INCOMING := Color(1.0, 0.35, 0.3)
 
 
 var selected_zone := -1
@@ -139,6 +142,8 @@ func _draw() -> void:
 			_draw_owner(center, radius, zone, my_id)
 		if zone.castle:
 			_draw_marker(MARKER_CASTLE, center, radius * 1.3)
+			if WorldService.is_castle_protected(zone.owner):
+				draw_arc(center, radius * 0.8, 0.0, TAU, 24, COLOR_SHIELD, maxf(1.5, 2.0 * zoom))
 		elif int(zone.garrison) > 0:
 			_draw_marker(MARKER_BANNER, center + Vector2(radius * 0.45, -radius * 0.3), radius * 0.8)
 		if zoom >= TIER_LABEL_ZOOM and not zone.castle:
@@ -149,6 +154,7 @@ func _draw() -> void:
 	if selected_zone >= 0:
 		_draw_outline(selected_zone, radius, OUTLINE_SELECTED)
 	_draw_march()
+	_draw_incoming()
 	_draw_heroes(radius, my_id)
 
 
@@ -198,6 +204,15 @@ func _draw_march() -> void:
 	var b := _screen_center(to)
 	draw_dashed_line(a, b, Color(1, 0.9, 0.4), 2.0, 6.0)
 	_draw_marker(MARKER_HERO, a.lerp(b, WorldService.march_progress()), HEX_SIZE * zoom * 0.9)
+
+
+## Чужие армии, идущие на мои зоны и замок.
+func _draw_incoming() -> void:
+	for attack: Dictionary in WorldService.get_incoming():
+		var from := WorldService.get_zone(int(attack.fromZone))
+		var to := WorldService.get_zone(int(attack.toZone))
+		if not from.is_empty() and not to.is_empty():
+			draw_dashed_line(_screen_center(from), _screen_center(to), COLOR_INCOMING, 2.5, 5.0)
 
 
 ## Мой герой — золотое кольцо, чужие — кольцо цвета игрока.

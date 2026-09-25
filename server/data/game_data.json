@@ -1,24 +1,293 @@
 {
+  "buildings": {
+    "barracks": {
+      "armyCapacityPerLevel": 10,
+      "baseBuildTime": 40.0,
+      "baseCost": {
+        "food": 30,
+        "gold": 150,
+        "stone": 60,
+        "wood": 80
+      },
+      "buildTimeGrowth": 1.5,
+      "costGrowth": 1.6,
+      "maxLevel": 10,
+      "modifiers": [
+        {
+          "stat": "MAX_HP",
+          "value": 4.0
+        },
+        {
+          "stat": "ARMOR",
+          "value": 2.0
+        },
+        {
+          "stat": "TRAINING_SPEED",
+          "value": 5.0
+        }
+      ],
+      "produces": "",
+      "productionPerLevel": 0.0,
+      "storagePerLevel": 0.0,
+      "townHall": false
+    },
+    "farm": {
+      "armyCapacityPerLevel": 0,
+      "baseBuildTime": 10.0,
+      "baseCost": {
+        "gold": 20,
+        "wood": 30
+      },
+      "buildTimeGrowth": 1.45,
+      "costGrowth": 1.55,
+      "maxLevel": 10,
+      "modifiers": [],
+      "produces": "food",
+      "productionPerLevel": 1.0,
+      "storagePerLevel": 0.0,
+      "townHall": false
+    },
+    "forge": {
+      "armyCapacityPerLevel": 0,
+      "baseBuildTime": 40.0,
+      "baseCost": {
+        "gold": 150,
+        "stone": 80,
+        "wood": 50
+      },
+      "buildTimeGrowth": 1.5,
+      "costGrowth": 1.6,
+      "maxLevel": 10,
+      "modifiers": [
+        {
+          "stat": "DAMAGE",
+          "value": 3.0
+        },
+        {
+          "stat": "ARMY_POWER",
+          "value": 2.0
+        }
+      ],
+      "produces": "",
+      "productionPerLevel": 0.0,
+      "storagePerLevel": 0.0,
+      "townHall": false
+    },
+    "market": {
+      "armyCapacityPerLevel": 0,
+      "baseBuildTime": 30.0,
+      "baseCost": {
+        "gold": 120,
+        "stone": 40,
+        "water": 20,
+        "wood": 60
+      },
+      "buildTimeGrowth": 1.5,
+      "costGrowth": 1.6,
+      "maxLevel": 10,
+      "modifiers": [
+        {
+          "stat": "GOLD_FIND",
+          "value": 5.0
+        }
+      ],
+      "produces": "gold",
+      "productionPerLevel": 3.0,
+      "storagePerLevel": 0.0,
+      "townHall": false
+    },
+    "quarry": {
+      "armyCapacityPerLevel": 0,
+      "baseBuildTime": 12.0,
+      "baseCost": {
+        "gold": 30,
+        "wood": 40
+      },
+      "buildTimeGrowth": 1.45,
+      "costGrowth": 1.55,
+      "maxLevel": 10,
+      "modifiers": [],
+      "produces": "stone",
+      "productionPerLevel": 1.5,
+      "storagePerLevel": 0.0,
+      "townHall": false
+    },
+    "sawmill": {
+      "armyCapacityPerLevel": 0,
+      "baseBuildTime": 12.0,
+      "baseCost": {
+        "gold": 30,
+        "wood": 20
+      },
+      "buildTimeGrowth": 1.45,
+      "costGrowth": 1.55,
+      "maxLevel": 10,
+      "modifiers": [],
+      "produces": "wood",
+      "productionPerLevel": 2.0,
+      "storagePerLevel": 0.0,
+      "townHall": false
+    },
+    "stable": {
+      "armyCapacityPerLevel": 5,
+      "baseBuildTime": 60.0,
+      "baseCost": {
+        "food": 40,
+        "gold": 250,
+        "stone": 80,
+        "wood": 120
+      },
+      "buildTimeGrowth": 1.5,
+      "costGrowth": 1.65,
+      "maxLevel": 10,
+      "modifiers": [
+        {
+          "stat": "ARMY_POWER",
+          "value": 3.0
+        }
+      ],
+      "produces": "",
+      "productionPerLevel": 0.0,
+      "storagePerLevel": 0.0,
+      "townHall": false
+    },
+    "tavern": {
+      "armyCapacityPerLevel": 0,
+      "baseBuildTime": 30.0,
+      "baseCost": {
+        "food": 20,
+        "gold": 100,
+        "stone": 30,
+        "wood": 60
+      },
+      "buildTimeGrowth": 1.5,
+      "costGrowth": 1.6,
+      "maxLevel": 10,
+      "modifiers": [
+        {
+          "stat": "REST_SPEED",
+          "value": 20.0
+        },
+        {
+          "stat": "NEED_DECAY",
+          "value": 4.0
+        }
+      ],
+      "produces": "",
+      "productionPerLevel": 0.0,
+      "storagePerLevel": 0.0,
+      "townHall": false
+    },
+    "town_hall": {
+      "armyCapacityPerLevel": 5,
+      "baseBuildTime": 60.0,
+      "baseCost": {
+        "gold": 200,
+        "stone": 80,
+        "wood": 100
+      },
+      "buildTimeGrowth": 1.6,
+      "costGrowth": 1.7,
+      "maxLevel": 10,
+      "modifiers": [],
+      "produces": "gold",
+      "productionPerLevel": 2.0,
+      "storagePerLevel": 150.0,
+      "townHall": true
+    },
+    "well": {
+      "armyCapacityPerLevel": 0,
+      "baseBuildTime": 10.0,
+      "baseCost": {
+        "gold": 20,
+        "stone": 15,
+        "wood": 20
+      },
+      "buildTimeGrowth": 1.45,
+      "costGrowth": 1.55,
+      "maxLevel": 10,
+      "modifiers": [],
+      "produces": "water",
+      "productionPerLevel": 1.0,
+      "storagePerLevel": 0.0,
+      "townHall": false
+    }
+  },
+  "kingdom": {
+    "baseStorage": 100.0,
+    "goldStorageMultiplier": 5.0,
+    "maxQueue": 5,
+    "resources": [
+      "food",
+      "water",
+      "wood",
+      "stone",
+      "gold"
+    ],
+    "startResources": {
+      "food": 30.0,
+      "gold": 200.0,
+      "stone": 40.0,
+      "water": 30.0,
+      "wood": 80.0
+    },
+    "starvingPowerMultiplier": 0.5
+  },
   "units": {
     "archer": {
       "attack": 9.0,
+      "cost": {
+        "food": 15,
+        "gold": 25,
+        "wood": 25
+      },
       "defense": 3.0,
-      "housing": 1
+      "housing": 1,
+      "requiredBuilding": "barracks",
+      "requiredLevel": 3,
+      "trainTime": 18.0,
+      "upkeep": 0.08
     },
     "knight": {
       "attack": 16.0,
+      "cost": {
+        "food": 40,
+        "gold": 90,
+        "stone": 20
+      },
       "defense": 14.0,
-      "housing": 3
+      "housing": 3,
+      "requiredBuilding": "stable",
+      "requiredLevel": 1,
+      "trainTime": 45.0,
+      "upkeep": 0.3
     },
     "militia": {
       "attack": 3.0,
+      "cost": {
+        "food": 10,
+        "gold": 10
+      },
       "defense": 2.0,
-      "housing": 1
+      "housing": 1,
+      "requiredBuilding": "barracks",
+      "requiredLevel": 1,
+      "trainTime": 8.0,
+      "upkeep": 0.05
     },
     "spearman": {
       "attack": 4.0,
+      "cost": {
+        "food": 15,
+        "gold": 20,
+        "wood": 10
+      },
       "defense": 8.0,
-      "housing": 1
+      "housing": 1,
+      "requiredBuilding": "barracks",
+      "requiredLevel": 2,
+      "trainTime": 15.0,
+      "upkeep": 0.08
     }
   }
 }

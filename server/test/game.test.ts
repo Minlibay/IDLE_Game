@@ -3,7 +3,7 @@ import { describe, it } from "node:test";
 import { Storage } from "../src/storage.ts";
 import { GameError, type Game, type Player } from "../src/world/game.ts";
 import { hexDistance, neighbors, zoneId } from "../src/world/grid.ts";
-import { createGame, settings } from "./helpers.ts";
+import { createGame, giveArmy, settings } from "./helpers.ts";
 
 const MARCH_MS = settings.marchSeconds * 1000;
 
@@ -56,14 +56,16 @@ describe("game rules", () => {
   it("strong army captures a neutral zone; weak army dies and hero returns home", () => {
     const { game } = createGame();
     const player = game.register("A", 0);
-    game.deploy(player, { knight: 50 });
+    giveArmy(player, { knight: 50 });
+    game.deploy(player, { knight: 50 }, 0);
     const target = neighbourZone(game, player);
     march(game, player, target, 0);
     assert.equal(game.zones[target].ownerId, player.id);
     assert.equal(player.heroZone, target);
 
     const weak = game.register("Weak", 0);
-    game.deploy(weak, { militia: 1 });
+    giveArmy(weak, { militia: 1 });
+    game.deploy(weak, { militia: 1 }, 0);
     const hard = neighbourZone(game, weak, (id) => Object.keys(game.zones[id].neutral).length > 0);
     game.zones[hard].neutral = { knight: 500 };
     march(game, weak, hard, 0);
@@ -124,45 +126,41 @@ describe("game rules", () => {
   it("garrison defends the zone while the hero is away", () => {
     const { game } = createGame();
     const player = game.register("A", 0);
-    game.deploy(player, { knight: 60 });
+    giveArmy(player, { knight: 60 });
+    game.deploy(player, { knight: 60 }, 0);
     const zone = neighbourZone(game, player);
     march(game, player, zone, 0);
     const afterCapture = player.army.knight ?? 0; // часть рыцарей погибла в бою с нейтралами
-    game.garrison(player, { knight: 20 });
+    game.garrison(player, { knight: 20 }, 0);
     assert.deepEqual(game.zones[zone].garrison, { knight: 20 });
     assert.deepEqual(player.army, { knight: afterCapture - 20 });
-    game.withdraw(player, { knight: 5 });
+    game.withdraw(player, { knight: 5 }, 0);
     assert.deepEqual(game.zones[zone].garrison, { knight: 15 });
-    assert.throws(() => game.withdraw(player, { knight: 99 }), GameError);
+    assert.throws(() => game.withdraw(player, { knight: 99 }, 0), GameError);
   });
 
-  it("castles cannot be attacked", () => {
-    const { game } = createGame();
-    const a = game.register("A", 0);
-    const b = game.register("B", 0);
-    a.heroZone = neighbors(game.zones[b.castleZone], settings.gridCols, settings.gridRows)
-      .map((hex) => zoneId(hex.col, hex.row, settings.gridCols))[0];
-    assert.throws(() => game.move(a, b.castleZone, 0), /замок/i);
-  });
-
-  it("deploy and recall only at the castle", () => {
+  it("deploy and recall only at the castle, units come from the castle army", () => {
     const { game } = createGame();
     const player = game.register("A", 0);
-    game.deploy(player, { militia: 10 });
-    assert.deepEqual(game.recall(player, { militia: 4 }), { militia: 4 });
+    assert.throws(() => game.deploy(player, { militia: 1 }, 0), /нет столько/);
+    giveArmy(player, { militia: 10 });
+    game.deploy(player, { militia: 10 }, 0);
+    assert.deepEqual(game.recall(player, { militia: 4 }, 0), { militia: 4 });
     assert.deepEqual(player.army, { militia: 6 });
-    assert.throws(() => game.recall(player, { militia: 100 }), GameError);
+    assert.deepEqual(player.kingdom.army, { militia: 4 });
+    assert.throws(() => game.recall(player, { militia: 100 }, 0), GameError);
     player.heroZone = neighbourZone(game, player);
-    assert.throws(() => game.deploy(player, { militia: 1 }), /замке/);
+    assert.throws(() => game.deploy(player, { militia: 1 }, 0), /замке/);
   });
 
   it("owned zones give passive bonuses", () => {
     const { game } = createGame();
     const player = game.register("A", 0);
-    game.deploy(player, { knight: 100 });
+    giveArmy(player, { knight: 100 });
+    game.deploy(player, { knight: 100 }, 0);
     const zone = neighbourZone(game, player);
     march(game, player, zone, 0);
-    const view = game.playerView(player);
+    const view = game.playerView(player, 0);
     assert.equal(view.zonesOwned, 2);
     const bonus = game.zones[zone].bonus;
     assert.ok((view.bonuses[bonus.stat] ?? 0) >= bonus.value);
@@ -172,7 +170,8 @@ describe("game rules", () => {
     const storage = new Storage(":memory:");
     const small = createGame({ gridCols: 20, gridRows: 20 }, storage).game;
     const player = small.register("A", 0);
-    small.deploy(player, { knight: 7 });
+    giveArmy(player, { knight: 7 });
+    small.deploy(player, { knight: 7 }, 0);
     const big = createGame({}, storage).game;
     assert.equal(big.zones.length, settings.gridCols * settings.gridRows);
     const moved = big.getPlayerByToken(player.token);
@@ -187,7 +186,8 @@ describe("game rules", () => {
     const storage = new Storage(":memory:");
     const first = createGame({}, storage).game;
     const player = first.register("A", 0);
-    first.deploy(player, { knight: 5 });
+    giveArmy(player, { knight: 5 });
+    first.deploy(player, { knight: 5 }, 0);
     const second = createGame({}, storage).game;
     const loaded = second.getPlayerByToken(player.token);
     assert.ok(loaded);
@@ -197,11 +197,11 @@ describe("game rules", () => {
 
   it("world view returns only changed zones with since", () => {
     const { game } = createGame();
-    const full = game.worldView(0);
+    const full = game.worldView(0, 0);
     game.register("A", 0);
     const before = game.worldVersion;
     game.register("B", 0);
-    const delta = game.worldView(before);
+    const delta = game.worldView(before, 0);
     assert.equal(delta.zones.length, 1);
     assert.equal(full.zones.length, game.zones.length);
   });

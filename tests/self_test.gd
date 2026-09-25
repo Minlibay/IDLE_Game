@@ -161,6 +161,20 @@ func _test_talents() -> void:
 	_check(GameState.get_talent_points_spent() == 0, "talents not cleared after reset")
 	_check(is_equal_approx(GameState.get_talent_bonus(neighbor.modifiers[0].stat), 0.0), "bonus remains after reset")
 
+## Состояние замка, как его присылает сервер (Game.playerView().kingdom).
+func _server_view(levels: Dictionary, resources: Dictionary, army := {}) -> Dictionary:
+	var view := {
+		"resources": resources,
+		"levels": levels,
+		"construction": null,
+		"army": {"units": {}, "queue": [], "starving": false, "capacity": 0, "housingUsed": 0,
+			"upkeep": 0.0, "attack": 0.0, "defense": 0.0, "powerMultiplier": 1.0, "trainTimes": {}},
+	}
+	(view.army as Dictionary).merge(army, true)
+	return view
+
+
+## Замок — зеркало сервера: правила экономики проверяют тесты сервера (server/test/kingdom.test.ts).
 func _test_kingdom() -> void:
 	var kingdom := GameState.kingdom
 	_check(Database.buildings.size() >= 9, "buildings not loaded")
@@ -169,45 +183,68 @@ func _test_kingdom() -> void:
 	var farm := Database.get_building("farm")
 	var forge := Database.get_building("forge")
 	_check(kingdom.get_level(town_hall) == 1, "town hall must start at level 1")
-	_check(kingdom.get_level(farm) == 0, "farm must start unbuilt")
+	_check(not kingdom.can_upgrade(farm), "actions must be blocked until the server state arrives")
+	_check(kingdom.get_upgrade_block_reason(farm).contains("сервер"), "no 'server' reason before sync")
 
-	GameState.add_gold(1_000_000)
-	for resource_id: String in KingdomState.RESOURCES:
-		kingdom.resources[resource_id] = 200.0
-	_check(kingdom.start_upgrade(farm), "cannot start farm: " + kingdom.get_upgrade_block_reason(farm))
-	_check(not kingdom.can_upgrade(forge), "second construction allowed while building")
-	kingdom.simulate(farm.get_build_time(1) + 1.0)
-	_check(kingdom.get_level(farm) == 1, "farm not finished by simulate()")
-	_check(kingdom.get_production_per_minute("food") > 0.0, "farm does not produce food")
-
-	var food_before := kingdom.get_resource("food")
-	var report := kingdom.simulate(600.0)
-	_check(kingdom.get_resource("food") > food_before, "no offline food production")
-	_check((report.resources as Dictionary).has("food"), "offline report missing food")
-	kingdom.simulate(KingdomState.MAX_OFFLINE_SECONDS)
-	_check(kingdom.get_resource("food") <= kingdom.get_storage_capacity() + 0.01, "storage capacity exceeded")
-
-	# Уровень зданий ограничен Ратушей.
-	kingdom.levels[farm.id] = kingdom.get_town_hall_level()
+	var rich := {"food": 200.0, "water": 200.0, "wood": 200.0, "stone": 200.0, "gold": 1000.0}
+	kingdom.apply_server(_server_view({"town_hall": 1, "farm": 1}, rich))
+	_check(kingdom.synced, "kingdom not synced after apply_server")
+	_check(kingdom.get_level(farm) == 1, "levels not applied from the server")
+	_check(is_equal_approx(kingdom.get_resource("gold"), 1000.0), "treasury not applied")
+	_check(kingdom.get_storage_capacity("gold") > kingdom.get_storage_capacity("food"), "treasury must hold more")
 	_check(kingdom.get_upgrade_block_reason(farm).contains("Ратуша"), "town hall limit not enforced")
+	_check(kingdom.can_upgrade(Database.get_building("well")), "well must be buildable")
 
-	# Бонус здания попадает в характеристики героя.
+	# Между ответами сервера производство показывается плавно, но не выше склада.
+	var food_before := kingdom.get_resource("food")
+	kingdom.tick(60.0)
+	_check(kingdom.get_resource("food") > food_before, "no predicted production")
+	kingdom.tick(100000.0)
+	_check(kingdom.get_resource("food") <= kingdom.get_storage_capacity("food") + 0.01, "prediction exceeded storage")
+
+	# Стройка с сервера: занятые строители, прогресс по времени.
+	var now := WorldService.server_now_ms()
+	var view := _server_view({"town_hall": 1, "farm": 1}, rich)
+	view.construction = {"id": "well", "level": 1, "startedAt": now - 5000.0, "finishAt": now + 5000.0}
+	kingdom.apply_server(view)
+	_check(kingdom.is_constructing() and not kingdom.can_upgrade(forge), "second construction allowed while building")
+	_check(kingdom.get_construction_ratio() > 0.3 and kingdom.get_construction_ratio() < 0.7, "construction ratio wrong")
+	_check(not kingdom.needs_refresh(), "refresh requested before the construction ends")
+	view.construction.finishAt = now - 1.0
+	kingdom.apply_server(view)
+	_check(kingdom.needs_refresh(), "no refresh when the construction time is over")
+
+	# Достроенное здание: сигнал и бонус к герою.
+	var finished := []
+	kingdom.construction_finished.connect(func(building: BuildingData, _level: int) -> void: finished.append(building.id))
 	var damage_before: float = GameState.get_hero_stats().damage
-	kingdom.levels[forge.id] = 3
-	kingdom._rebuild_bonuses()
+	kingdom.apply_server(_server_view({"town_hall": 3, "farm": 1, "forge": 3}, rich))
+	_check(finished.has("forge"), "construction_finished not emitted")
 	_check(GameState.get_bonus(StatModifier.Stat.DAMAGE) >= 9.0, "forge bonus not applied")
 	_check(GameState.get_hero_stats().damage > damage_before, "forge did not raise hero damage")
 
-	# Оффлайн-прогресс при загрузке.
-	kingdom.start_upgrade(Database.get_building("sawmill"))
+	# Отчёт «пока вас не было»: первое состояние с сервера сравнивается с кэшем из сохранения.
 	GameState.save_game()
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(GameState.save_path))
 	data.saved_at = Time.get_unix_time_from_system() - 3600.0
 	FileAccess.open(GameState.save_path, FileAccess.WRITE).store_string(JSON.stringify(data))
 	GameState.load_game()
-	_check(not GameState.offline_report.is_empty(), "offline report not produced after 1h")
-	_check(kingdom.get_level(Database.get_building("sawmill")) == 1, "construction not finished offline")
-	_check(kingdom.get_level(forge) == 3, "building levels lost after load")
+	_check(not kingdom.synced, "cache from the save must not count as server state")
+	_check(kingdom.get_level(forge) == 3, "cached building levels lost after load")
+	var richer := rich.duplicate()
+	richer.food = 250.0
+	# Сцена боя показывает отчёт и сразу очищает его, поэтому ловим сигналами.
+	var reports := []
+	var ready := []
+	var capture := func(changes: Dictionary) -> void: reports.append(changes)
+	var mark_ready := func() -> void: ready.append(true)
+	kingdom.first_sync.connect(capture, CONNECT_ONE_SHOT)
+	GameState.offline_report_ready.connect(mark_ready, CONNECT_ONE_SHOT)
+	kingdom.apply_server(_server_view({"town_hall": 3, "farm": 1, "forge": 3, "sawmill": 1}, richer, {"units": {"militia": 4}}))
+	var report: Dictionary = reports[0] if not reports.is_empty() else {}
+	_check(not ready.is_empty(), "offline report not produced after 1h")
+	_check((report.get("built", []) as Array).size() == 1, "offline report missing the new building")
+	_check(int((report.get("trained", {}) as Dictionary).get("militia", 0)) == 4, "offline report missing trained units")
 	GameState.offline_report = {}
 
 
@@ -227,8 +264,8 @@ func _test_needs() -> void:
 	needs.reset()
 	_check(needs.get_level(hunger) == NeedsState.Level.SATISFIED, "needs must start satisfied")
 
-	# Автоматическая еда со склада.
-	kingdom.resources["food"] = 10.0
+	# Автоматическая еда со склада (склад известен после ответа сервера).
+	kingdom.apply_server(_server_view({"town_hall": 1}, {"food": 10.0, "water": 10.0}))
 	needs.values[hunger.id] = 50.0
 	needs.tick(0.01)
 	_check(needs.get_value(hunger) > 60.0, "hero did not eat automatically")
@@ -249,7 +286,8 @@ func _test_needs() -> void:
 		needs.rest_tick(1.0)
 	_check(needs.is_rested(), "rest did not restore energy")
 	needs.reset()
-	kingdom.resources["food"] = 50.0
+	kingdom.take_pending_consumption()
+	kingdom.reset()
 
 
 func _test_army() -> void:
@@ -259,63 +297,48 @@ func _test_army() -> void:
 	kingdom.reset()
 	var militia := Database.get_unit("militia")
 	var knight := Database.get_unit("knight")
+	var resources := {"food": 500.0, "water": 500.0, "wood": 500.0, "stone": 500.0, "gold": 1000.0}
+	kingdom.apply_server(_server_view({"town_hall": 1}, resources))
 	_check(not army.is_unlocked(militia), "militia must need barracks")
 	_check(army.get_recruit_block_reason(militia, 1) != "", "recruit allowed without barracks")
 
-	kingdom.levels["barracks"] = 2
-	kingdom._rebuild_bonuses()
-	for resource_id: String in KingdomState.RESOURCES:
-		kingdom.resources[resource_id] = 500.0
-	GameState.add_gold(1_000_000)
+	var now := WorldService.server_now_ms()
+	kingdom.apply_server(_server_view({"town_hall": 2, "barracks": 2}, resources, {
+		"units": {"militia": 5},
+		"queue": [{"id": "militia", "count": 2, "total": 3, "nextAt": now + 4000.0, "perUnitMs": 8000.0}],
+		"capacity": 25, "housingUsed": 7, "upkeep": 0.25, "attack": 15.0, "defense": 10.0, "trainTimes": {"militia": 7600.0},
+	}))
 	_check(army.is_unlocked(militia), "militia locked with barracks 2")
 	_check(not army.is_unlocked(knight), "knight must need stable")
-	_check(army.get_capacity() >= 20, "barracks did not add army capacity")
+	_check(army.get_count(militia) == 5 and army.get_total_units() == 5, "units not applied from the server")
+	_check(army.get_free_capacity() == 18, "free capacity wrong")
+	_check(is_equal_approx(army.get_power(), 25.0), "army power not applied")
+	_check(is_equal_approx(army.get_training_time(militia), 7.6), "training time not taken from the server")
+	var left := army.get_order_time_left(0)
+	_check(left > 11.0 and left <= 12.0, "order time left wrong: %f" % left)
+	_check(army.get_recruit_block_reason(militia, 19) != "", "capacity limit not enforced")
+	_check(army.get_recruit_block_reason(militia, 3) == "", "recruit blocked: " + army.get_recruit_block_reason(militia, 3))
+	_check(army.get_max_recruitable(militia) == 18, "max recruitable wrong: %d" % army.get_max_recruitable(militia))
 
-	var food_before := kingdom.get_resource("food")
-	_check(army.recruit(militia, 5), "cannot recruit 5 militia: " + army.get_recruit_block_reason(militia, 5))
-	_check(kingdom.get_resource("food") < food_before, "recruit cost not paid")
-	_check(army.get_recruit_block_reason(militia, army.get_capacity()) != "", "capacity limit not enforced")
+	# Заказ обучен: сигнал.
+	var completed := []
+	army.order_completed.connect(func(unit: UnitData, count: int) -> void: completed.append([unit.id, count]))
+	kingdom.apply_server(_server_view({"town_hall": 2, "barracks": 2}, resources, {"units": {"militia": 7}, "capacity": 25, "housingUsed": 7}))
+	_check(completed.size() == 1 and completed[0] == ["militia", 3], "order_completed not emitted: %s" % str(completed))
 
-	# Отмена возвращает ресурсы.
-	army.recruit(militia, 2)
-	var food_mid := kingdom.get_resource("food")
-	army.cancel_order(1)
-	_check(kingdom.get_resource("food") > food_mid, "cancel did not refund")
+	# Голод приходит с сервера.
+	kingdom.apply_server(_server_view({"town_hall": 2, "barracks": 2}, resources, {"units": {"militia": 7}, "starving": true}))
+	_check(army.starving, "starving flag not applied")
 
-	# Обучение (в том числе через оффлайн-прогресс королевства).
-	var report := kingdom.simulate(militia.train_time * 5 + 1.0)
-	_check(army.get_count(militia) == 5, "militia not trained: %d" % army.get_count(militia))
-	_check(int((report.trained as Dictionary).get("militia", 0)) == 5, "offline report missing trained units")
-	var power := army.get_power()
-	_check(power > 0.0, "army power is zero")
-
-	# Кузница усиливает армию.
-	kingdom.levels["forge"] = 5
-	kingdom._rebuild_bonuses()
-	_check(army.get_power() > power, "forge did not raise army power")
-
-	# Без еды армия слабеет, но не умирает.
-	var fed_power := army.get_power()
-	kingdom.resources["food"] = 0.0
-	kingdom.simulate(60.0)
-	_check(army.starving, "army must starve without food")
-	_check(army.get_count(militia) == 5, "starving army lost units")
-	_check(army.get_power() < fed_power, "starving did not reduce power")
-	kingdom.resources["food"] = 500.0
-	kingdom.simulate(1.0)
-	_check(not army.starving, "army still starving with food")
-
-	# Задел для карты мира.
-	army.remove_units({"militia": 2})
-	_check(army.get_count(militia) == 3, "remove_units failed")
-	army.add_units({"militia": 2})
-
-	# Сохранение.
-	army.recruit(militia, 3)
-	GameState.save_game()
-	GameState.load_game()
-	_check(kingdom.army.get_count(militia) == 5, "army lost after load")
-	_check(kingdom.army.queue.size() == 1, "training queue lost after load")
+	# Еда героя: списывается сразу, на сервер уходит пачкой.
+	kingdom.apply_server(_server_view({"town_hall": 1}, resources))
+	_check(kingdom.try_consume("food", 3.0), "hero cannot eat with food in storage")
+	_check(is_equal_approx(kingdom.get_resource("food"), 497.0), "food not subtracted locally")
+	kingdom.apply_server(_server_view({"town_hall": 1}, resources))
+	_check(is_equal_approx(kingdom.get_resource("food"), 497.0), "pending consumption must stay subtracted until sent")
+	var pending := kingdom.take_pending_consumption()
+	_check(is_equal_approx(float(pending.get("food", 0.0)), 3.0), "pending consumption wrong")
+	_check(kingdom.take_pending_consumption().is_empty(), "pending consumption not cleared")
 	kingdom.reset()
 
 

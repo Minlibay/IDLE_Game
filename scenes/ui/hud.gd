@@ -8,6 +8,9 @@ signal rest_requested
 const SKILL_BUTTON_SCENE := preload("res://scenes/ui/skill_button.tscn")
 const MESSAGE_DURATION := 2.4
 const COLOR_HIGHLIGHT := Color(1.0, 0.85, 0.35)
+const COLOR_DANGER := Color(1.0, 0.45, 0.4)
+## Важные сообщения (нападение, набег) висят дольше.
+const ALERT_DURATION := 6.0
 ## Как часто проверять, можно ли что-то построить (подсветка кнопки королевства).
 const KINGDOM_HINT_INTERVAL := 0.5
 
@@ -44,6 +47,9 @@ func _ready() -> void:
 	GameState.talents_changed.connect(_refresh)
 	GameState.kingdom.construction_finished.connect(_on_construction_finished)
 	GameState.kingdom.army.order_completed.connect(_on_order_completed)
+	WorldService.incoming_attack.connect(_on_incoming_attack)
+	WorldService.new_reports.connect(_on_new_reports)
+	WorldService.me_updated.connect(_update_map_button)
 	inventory_button.pressed.connect(toggle_inventory)
 	talents_button.pressed.connect(toggle_talents)
 	kingdom_button.pressed.connect(toggle_kingdom)
@@ -142,6 +148,28 @@ func _update_kingdom_button() -> void:
 				break
 	kingdom_button.modulate = COLOR_HIGHLIGHT if can_build else Color.WHITE
 	kingdom_button.text = "Замок (!)" if can_build else "Замок"
+
+
+## «Карта (!)» красным, пока на игрока идёт чужая армия.
+func _update_map_button() -> void:
+	var danger := not WorldService.get_incoming().is_empty()
+	map_button.modulate = COLOR_DANGER if danger else Color.WHITE
+	map_button.text = "Карта (!)" if danger else "Карта"
+
+
+func _on_incoming_attack(attack: Dictionary) -> void:
+	var target := "ваш замок" if attack.castle else "вашу зону #%d" % int(attack.toZone)
+	show_message("⚔ %s идёт на %s (%d солдат), прибудет через %s" % [attack.attacker, target, int(attack.units),
+		UiFormat.duration(WorldService.time_until(float(attack.arrivesAt)))], ALERT_DURATION)
+
+
+func _on_new_reports(reports: Array) -> void:
+	# Показываем самое свежее важное событие: набег или потерю зоны.
+	for report: Dictionary in reports:
+		var data: Dictionary = report.data
+		if data.kind in ["raid", "zone_lost"]:
+			show_message(str(data.text), ALERT_DURATION)
+			return
 
 
 func _on_construction_finished(building: BuildingData, level: int) -> void:

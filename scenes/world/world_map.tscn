@@ -201,7 +201,7 @@ text = "Войти"
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.7, 0.78, 1)
 theme_override_font_sizes/font_size = 11
-text = "Сервер запускается командой npm start в папке server/. Позже вход будет через Steam."
+text = "Автоматически войти не получилось (например, имя занято). Укажите другое имя. Позже вход будет через Steam."
 autowrap_mode = 3
 
 [node name="ArmyDialog" type="PanelContainer" parent="."]

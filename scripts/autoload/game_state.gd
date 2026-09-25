@@ -13,6 +13,8 @@ signal inventory_changed
 signal leveled_up(new_level: int)
 ## Изменились вложенные таланты (изучение или сброс).
 signal talents_changed
+## Готов отчёт «пока вас не было» (приходит после первого ответа сервера о замке).
+signal offline_report_ready
 
 const SAVE_VERSION := 1
 const INVENTORY_SIZE := 60
@@ -52,6 +54,8 @@ var kingdom := KingdomState.new()
 var needs := NeedsState.new()
 ## Отчёт об оффлайн-прогрессе после загрузки (пусто — не было). Показывает и очищает бой.
 var offline_report: Dictionary = {}
+## Сколько секунд игра была закрыта (для отчёта; 0 — отчёт не нужен).
+var _offline_seconds := 0.0
 ## Бонусы захваченных зон мировой карты: StatModifier.Stat -> значение (присылает WorldService).
 var territory_bonuses: Dictionary = {}
 
@@ -59,6 +63,7 @@ var territory_bonuses: Dictionary = {}
 func _ready() -> void:
 	needs.setup(kingdom)
 	kingdom.bonuses_changed.connect(stats_changed.emit)
+	kingdom.first_sync.connect(_on_kingdom_first_sync)
 	needs.state_changed.connect(stats_changed.emit)
 	if autotest:
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(save_path))
@@ -436,12 +441,21 @@ func load_game() -> void:
 	_apply_offline_progress(float(data.get("saved_at", 0.0)))
 
 
-## Королевство работает, пока игра закрыта (до KingdomState.MAX_OFFLINE_SECONDS).
+## Замок живёт на сервере и пока игра закрыта; что изменилось — станет ясно после первого ответа сервера.
 func _apply_offline_progress(saved_at: float) -> void:
 	offline_report = {}
+	_offline_seconds = 0.0
 	if saved_at <= 0.0:
 		return
 	var elapsed := Time.get_unix_time_from_system() - saved_at
 	if elapsed >= OFFLINE_REPORT_MIN_SECONDS:
-		offline_report = kingdom.simulate(elapsed)
-		offline_report.real_seconds = elapsed
+		_offline_seconds = elapsed
+
+
+func _on_kingdom_first_sync(report: Dictionary) -> void:
+	if _offline_seconds <= 0.0 or report.is_empty():
+		return
+	offline_report = report
+	offline_report.real_seconds = _offline_seconds
+	_offline_seconds = 0.0
+	offline_report_ready.emit()

@@ -65,6 +65,7 @@ func _ready() -> void:
 	hud.set_hero_health(hero.hp, hero.max_hp)
 	wave_manager.start_wave(GameState.wave)
 	_show_offline_report()
+	GameState.offline_report_ready.connect(_show_offline_report)
 
 
 func _process(delta: float) -> void:

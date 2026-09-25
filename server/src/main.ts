@@ -8,7 +8,7 @@ import { Game } from "./world/game.ts";
 
 const gameData = loadGameData(CONFIG.gameDataPath);
 const storage = new Storage(CONFIG.dbPath);
-const game = new Game(storage, gameData.units, CONFIG);
+const game = new Game(storage, gameData, CONFIG);
 const server = createHttpServer(game, gameData, CONFIG);
 
 const ticker = setInterval(() => {

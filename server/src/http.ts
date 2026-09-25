@@ -6,6 +6,7 @@ import { gzipSync } from "node:zlib";
 import type { GameData } from "./gameData.ts";
 import { sanitizeArmy } from "./world/army.ts";
 import { GameError, type Game, type Player } from "./world/game.ts";
+import { KingdomError } from "./world/kingdom.ts";
 
 type Context = {
   url: URL;
@@ -19,7 +20,7 @@ type Route = {
   handle: (ctx: Context) => unknown;
 };
 
-export type HttpSettings = { maxBodyBytes: number; maxUnitsPerType: number; marchSeconds: number; gzipMinBytes: number };
+export type HttpSettings = { maxBodyBytes: number; maxUnitsPerType: number; marchSeconds: number; castleMarchSeconds: number; gzipMinBytes: number };
 
 export function createHttpServer(game: Game, gameData: GameData, settings: HttpSettings): Server {
   const units = (input: unknown) => {
@@ -35,45 +36,49 @@ export function createHttpServer(game: Game, gameData: GameData, settings: HttpS
 
     "GET /api/config": {
       auth: false,
-      handle: () => ({ marchSeconds: settings.marchSeconds, units: gameData.units }),
+      handle: () => ({
+        marchSeconds: settings.marchSeconds,
+        castleMarchSeconds: settings.castleMarchSeconds,
+        units: gameData.units,
+      }),
     },
 
     "POST /api/auth/register": {
       auth: false,
       handle: ({ body, now }) => {
         const player = game.register(String(body.name ?? ""), now);
-        return { token: player.token, me: game.playerView(player) };
+        return { token: player.token, me: game.playerView(player, now) };
       },
     },
 
     "GET /api/world": {
       auth: true,
-      handle: ({ url }) => game.worldView(Number(url.searchParams.get("since") ?? 0) || 0),
+      handle: ({ url, now }) => game.worldView(Number(url.searchParams.get("since") ?? 0) || 0, now),
     },
 
-    "GET /api/me": { auth: true, handle: ({ player }) => game.playerView(player) },
+    "GET /api/me": { auth: true, handle: ({ player, now }) => game.playerView(player, now) },
 
     "POST /api/hero": {
       auth: true,
-      handle: ({ player, body }) => {
-        game.setHeroLevel(player, body.level);
-        return game.playerView(player);
+      handle: ({ player, body, now }) => {
+        game.setHeroLevel(player, body.level, now);
+        return game.playerView(player, now);
       },
     },
 
     "POST /api/army/deploy": {
       auth: true,
-      handle: ({ player, body }) => {
-        game.deploy(player, units(body.units));
-        return game.playerView(player);
+      handle: ({ player, body, now }) => {
+        game.deploy(player, units(body.units), now);
+        return game.playerView(player, now);
       },
     },
 
     "POST /api/army/recall": {
       auth: true,
-      handle: ({ player, body }) => {
-        const returned = game.recall(player, units(body.units));
-        return { returned, me: game.playerView(player) };
+      handle: ({ player, body, now }) => {
+        const returned = game.recall(player, units(body.units), now);
+        return { returned, me: game.playerView(player, now) };
       },
     },
 
@@ -81,23 +86,63 @@ export function createHttpServer(game: Game, gameData: GameData, settings: HttpS
       auth: true,
       handle: ({ player, body, now }) => {
         game.move(player, body.zoneId, now);
-        return game.playerView(player);
+        return game.playerView(player, now);
       },
     },
 
     "POST /api/garrison": {
       auth: true,
-      handle: ({ player, body }) => {
-        game.garrison(player, units(body.units));
-        return game.playerView(player);
+      handle: ({ player, body, now }) => {
+        game.garrison(player, units(body.units), now);
+        return game.playerView(player, now);
       },
     },
 
     "POST /api/garrison/withdraw": {
       auth: true,
-      handle: ({ player, body }) => {
-        game.withdraw(player, units(body.units));
-        return game.playerView(player);
+      handle: ({ player, body, now }) => {
+        game.withdraw(player, units(body.units), now);
+        return game.playerView(player, now);
+      },
+    },
+
+    "POST /api/kingdom/build": {
+      auth: true,
+      handle: ({ player, body, now }) => {
+        game.build(player, body.building, now);
+        return game.playerView(player, now);
+      },
+    },
+
+    "POST /api/kingdom/recruit": {
+      auth: true,
+      handle: ({ player, body, now }) => {
+        game.recruit(player, body.unit, body.count, now);
+        return game.playerView(player, now);
+      },
+    },
+
+    "POST /api/kingdom/cancel": {
+      auth: true,
+      handle: ({ player, body, now }) => {
+        game.cancelTraining(player, body.index, now);
+        return game.playerView(player, now);
+      },
+    },
+
+    "POST /api/kingdom/consume": {
+      auth: true,
+      handle: ({ player, body, now }) => {
+        const taken = game.consume(player, body.resources, now);
+        return { taken, me: game.playerView(player, now) };
+      },
+    },
+
+    "POST /api/kingdom/deposit": {
+      auth: true,
+      handle: ({ player, body, now }) => {
+        const accepted = game.deposit(player, body.gold, now);
+        return { accepted, me: game.playerView(player, now) };
       },
     },
   };
@@ -121,6 +166,7 @@ export function createHttpServer(game: Game, gameData: GameData, settings: HttpS
     } catch (error) {
       const reply = (status: number, payload: unknown) => send(req, res, status, payload, settings.gzipMinBytes);
       if (error instanceof GameError) return reply(error.status, { error: error.message });
+      if (error instanceof KingdomError) return reply(400, { error: error.message });
       if (error instanceof SyntaxError) return reply(400, { error: "Некорректный JSON" });
       console.error(error);
       reply(500, { error: "Внутренняя ошибка сервера" });

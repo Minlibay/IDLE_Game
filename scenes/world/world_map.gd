@@ -1,6 +1,6 @@
 class_name WorldMap
 extends Control
-## Окно мировой карты: зоны, поход героя, армия на карте, гарнизоны, отчёты о боях.
+## Окно мировой карты: зоны, поход героя, армия на карте, гарнизоны, набеги на замки, отчёты о боях.
 ## Все правила — на сервере (WorldService); здесь только интерфейс.
 
 enum DialogMode { NONE, DEPLOY, RECALL, GARRISON, WITHDRAW }
@@ -87,6 +87,9 @@ func open() -> void:
 	url_edit.text = WorldService.server_url
 	name_edit.text = GameState.hero_name
 	_refresh()
+	if not WorldService.is_logged_in():
+		await WorldService.auto_connect()
+		_refresh()
 	if WorldService.is_logged_in():
 		await WorldService.refresh_me()
 		await WorldService.refresh_world(WorldService.zones.is_empty())
@@ -146,6 +149,13 @@ func _update_status() -> void:
 		status_label.text = "Герой в замке"
 	else:
 		status_label.text = "Герой в зоне #%d" % WorldService.hero_zone()
+	var incoming := WorldService.get_incoming()
+	if not incoming.is_empty():
+		var first: Dictionary = incoming[0]
+		status_label.text += " · ⚔ %s идёт на %s — %s" % [first.attacker, "ваш замок" if first.castle else "зону #%d" % int(first.toZone),
+			UiFormat.duration(WorldService.time_until(float(first.arrivesAt)))]
+	elif WorldService.my_protection_until() > 0.0:
+		status_label.text += " · замок под защитой ещё %s" % UiFormat.duration(WorldService.time_until(WorldService.my_protection_until()))
 	var army := WorldService.get_my_army()
 	army_label.text = "Армия с героем: %d · атака %d · зон: %d" % [
 		_army_count(army), roundi(_army_stat(army, "attack")), int(WorldService.me.get("zonesOwned", 0))]
@@ -180,11 +190,19 @@ func _update_zone_panel() -> void:
 	var neutral: Dictionary = zone.neutral
 	if not neutral.is_empty():
 		lines.append("Нейтралы: %s\nЗащита ≈ %d" % [_army_text(neutral), roundi(_army_stat(neutral, "defense"))])
-	if mine:
+	if mine and zone.castle:
+		lines.append("Армия замка: " + _army_text(GameState.kingdom.army.units))
+	elif mine:
 		var garrison := WorldService.get_my_garrison(_selected)
 		lines.append("Гарнизон: " + (_army_text(garrison) if not garrison.is_empty() else "нет — зону займут без боя!"))
 	elif zone.owner != null and not zone.castle:
 		lines.append("Гарнизон: %d солдат" % int(zone.garrison))
+	elif zone.owner != null:
+		if WorldService.is_castle_protected(zone.owner):
+			var until := float(WorldService.get_player(zone.owner).get("protectedUntil", 0.0))
+			lines.append("Замок под защитой ещё %s" % UiFormat.duration(WorldService.time_until(until)))
+		else:
+			lines.append("Набег: победа даёт часть ресурсов замка, поход дольше обычного")
 	for player: Dictionary in WorldService.players.values():
 		if int(player.heroZone) == _selected and not player.marching:
 			lines.append("Здесь герой: %s (ур. %d)" % [player.name, int(player.heroLevel)])
@@ -193,9 +211,12 @@ func _update_zone_panel() -> void:
 
 	var adjacent := WorldService.are_adjacent(WorldService.hero_zone(), _selected)
 	var enemy_castle: bool = zone.castle and not mine
-	move_button.disabled = WorldService.is_marching() or not adjacent or enemy_castle
+	var raid_blocked := enemy_castle and (WorldService.is_castle_protected(zone.owner) or WorldService.get_my_army().is_empty())
+	move_button.disabled = WorldService.is_marching() or not adjacent or raid_blocked
 	if mine:
 		move_button.text = "Перейти сюда"
+	elif enemy_castle:
+		move_button.text = "Набег на замок"
 	elif zone.owner != null:
 		move_button.text = "Напасть на игрока"
 	elif not neutral.is_empty():
@@ -204,6 +225,10 @@ func _update_zone_panel() -> void:
 		move_button.text = "Занять зону"
 	if not adjacent and not hero_here:
 		move_button.tooltip_text = "Идти можно только в соседнюю с героем зону"
+	elif enemy_castle and WorldService.get_my_army().is_empty():
+		move_button.tooltip_text = "Для набега нужна армия с героем"
+	elif zone.owner != null and not mine and WorldService.my_protection_until() > 0.0:
+		move_button.tooltip_text = "Нападение на игрока снимет защиту вашего замка"
 	else:
 		move_button.tooltip_text = ""
 	move_button.visible = not hero_here
@@ -394,6 +419,12 @@ func _report_details(data: Dictionary) -> String:
 			"Атака" if key == "attacker" else "Защита", side.name, int(side.power), int(side.heroLevel)])
 		lines.append("  армия: %s" % _army_text(side.army))
 		lines.append("  потери: %s" % _army_text(side.lost))
+	var loot: Dictionary = data.get("loot", {})
+	if not loot.is_empty():
+		var parts := PackedStringArray()
+		for resource_id: String in loot:
+			parts.append("%d %s" % [int(loot[resource_id]), KingdomState.resource_name(resource_id)])
+		lines.append("Добыча: " + ", ".join(parts))
 	return "\n".join(lines)
 
 

@@ -18,6 +18,8 @@ export const CONFIG = {
 
   // Поход в соседнюю зону, секунд.
   marchSeconds: Number(env.MARCH_SECONDS ?? 20),
+  // Поход на чужой замок (набег) дольше — у защитника есть время подготовиться.
+  castleMarchSeconds: Number(env.CASTLE_MARCH_SECONDS ?? 90),
   tickMs: 1000,
 
   // Бой: атака атакующего против защиты обороняющегося.
@@ -39,6 +41,23 @@ export const CONFIG = {
   bonusPerTier: 0.3,
   // Имена совпадают с StatModifier.Stat в клиенте.
   bonusStats: ["GOLD_FIND", "XP_GAIN", "DAMAGE", "ARMY_POWER", "TRAINING_SPEED", "DROP_CHANCE", "MAX_HP"],
+
+  // Экономика замка. DEV_SPEED > 1 ускоряет стройку и обучение (и даёт больше стартовых ресурсов) — для тестов.
+  devSpeed: Number(env.DEV_SPEED ?? 1),
+
+  // Набеги на замки: добыча = raidLootShare × (ресурс − raidProtectedResource).
+  raidLootShare: 0.2,
+  raidProtectedResource: 100,
+  // Защитник проигранного набега теряет эту долю армии (не всю, в отличие от боёв на карте).
+  raidDefenderLoss: 0.5,
+  // Щит после набега и защита новичка, часов.
+  raidShieldHours: 4,
+  newbieProtectionHours: 72,
+
+  // Взнос золота героя в казну: лимит копится depositPerLevelPerMinute × уровень героя в минуту,
+  // максимум — за depositBankMinutes минут.
+  depositPerLevelPerMinute: 2,
+  depositBankMinutes: 12 * 60,
 
   maxUnitsPerType: 1_000_000,
   maxNameLength: 20,
