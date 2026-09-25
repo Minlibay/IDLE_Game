@@ -12,6 +12,8 @@ extends RefCounted
 ## Статы — имена StatModifier.Stat; значения — проценты (ARMOR — единицы брони).
 
 const DIR := "res://data/treasures/"
+## Свои иконки сокровищ: <id>.png (нарезаются tools/place_set_icons.gd). Нет файла — иконка слота в цвете сета.
+const ICON_DIR := "res://assets/sprites/treasures/"
 const SET_SLOTS := ["helmet", "shoulders", "armor", "legs", "boots"]
 const SLOTS := {
 	"helmet": ItemBase.Slot.HELMET, "shoulders": ItemBase.Slot.SHOULDERS, "armor": ItemBase.Slot.ARMOR,
@@ -63,7 +65,8 @@ func _load_file(path: String, mob_items: Array[ItemBase]) -> void:
 			var base := _make_item("%s_%s" % [item_set.id, slot_key], "%s %s" % [slot_names.get(slot_key, slot_key), entry.of],
 				ItemBase.Quality.LEGENDARY, slot_key, class_id, mods, item_set.lore, mob_items)
 			base.set_id = item_set.id
-			base.icon_tint = item_set.color.lerp(Color.WHITE, 0.35)
+			if not _has_own_icon(base.id):
+				base.icon_tint = item_set.color.lerp(Color.WHITE, 0.35)
 			item_set.piece_ids.append(base.id)
 			items.append(base)
 		if focus.size() > 0:
@@ -98,7 +101,14 @@ func _make_item(id: String, display_name: String, quality: int, slot_key: String
 		base.base_stats = template.base_stats.duplicate()
 		base.icon = template.icon
 	base.icon_tint = ItemBase.QUALITY_COLORS.get(quality, Color.WHITE).lerp(Color.WHITE, 0.45)
+	if _has_own_icon(id):
+		base.icon = load(ICON_DIR + id + ".png")
+		base.icon_tint = Color.WHITE
 	return base
+
+
+func _has_own_icon(id: String) -> bool:
+	return ResourceLoader.exists(ICON_DIR + id + ".png")
 
 
 func _template(slot: int, class_id: String, mob_items: Array[ItemBase]) -> ItemBase:

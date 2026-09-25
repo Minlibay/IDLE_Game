@@ -25,7 +25,13 @@
      "lore": "Надевший их командует не голосом, а одним взглядом."},
     {"id": "w_ashen", "season": 1, "name": "Пепельный страж", "of": "Пепельного стража", "color": "#7d6b5d",
      "focus": ["REGEN", "MAX_HP"], "skill": "whirlwind", "proc": {"KILL_HEAL": 3},
-     "lore": "Выжили в пожаре, спалившем целый легион."}
+     "lore": "Выжили в пожаре, спалившем целый легион."},
+    {"id": "w_celestial", "season": 1, "name": "Небесный страж", "of": "Небесного стража", "color": "#ffd24a",
+     "focus": ["MAX_HP", "CRIT_CHANCE"], "skill": "war_cry", "proc": {"KILL_HEAL": 3},
+     "lore": "Крылья на шлеме — дар ангела последнему защитнику павшего храма."},
+    {"id": "w_voidborn", "season": 1, "name": "Порождение бездны", "of": "Порождения бездны", "color": "#9a4dff",
+     "focus": ["DAMAGE", "LIFESTEAL"], "skill": "whirlwind", "proc": {"DOUBLE_STRIKE": 12},
+     "lore": "Выкованы по ту сторону разлома. По ночам они шепчут хозяину."}
   ],
   "items": [
     {"id": "w_n_dawnblade", "quality": "named", "slot": "weapon", "name": "Клинок Последнего Рассвета", "mods": {"DAMAGE": 5, "CRIT_CHANCE": 1.5}, "lore": "Этим мечом закончили Долгую ночь."},
