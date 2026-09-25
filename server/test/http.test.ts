@@ -38,8 +38,18 @@ describe("http api", () => {
     assert.deepEqual(deploy.json.army, { militia: 3 });
 
     const world = await call("GET", "/api/world?since=0", undefined, token);
-    assert.equal(world.json.zones.length, 2000);
+    assert.equal(world.json.zones.length, settings.gridCols * settings.gridRows);
     assert.ok(world.json.players.some((player: { name: string }) => player.name === "Http"));
+  });
+
+  it("large responses are gzip-compressed", async () => {
+    const reg = await call("POST", "/api/auth/register", { name: "Gzip" });
+    const response = await fetch(base + "/api/world?since=0", {
+      headers: { Authorization: `Bearer ${reg.json.token}`, "Accept-Encoding": "gzip" },
+    });
+    assert.equal(response.headers.get("content-encoding"), "gzip");
+    const body = (await response.json()) as { zones: unknown[] };
+    assert.equal(body.zones.length, settings.gridCols * settings.gridRows);
   });
 
   it("rejects missing token and bad input", async () => {

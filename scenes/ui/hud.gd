@@ -30,7 +30,7 @@ var _kingdom_hint_timer := 0.0
 @onready var auto_cast_button: Button = %AutoCastButton
 @onready var needs_panel: NeedsPanel = %NeedsPanel
 @onready var inventory_panel: InventoryPanel = %InventoryPanel
-@onready var talent_panel: TalentPanel = %TalentPanel
+@onready var talent_grid: TalentGrid = %TalentGrid
 @onready var kingdom_panel: KingdomPanel = %KingdomPanel
 @onready var world_map: WorldMap = %WorldMap
 
@@ -87,7 +87,7 @@ func toggle_inventory() -> void:
 
 
 func toggle_talents() -> void:
-	_toggle_panel(talent_panel)
+	_toggle_panel(talent_grid)
 
 
 func toggle_kingdom() -> void:
@@ -110,7 +110,7 @@ func show_message(text: String, duration := MESSAGE_DURATION) -> void:
 
 ## Одновременно открыто только одно окно.
 func _toggle_panel(panel: Control) -> void:
-	for other: Control in [inventory_panel, talent_panel, kingdom_panel, world_map]:
+	for other: Control in [inventory_panel, talent_grid, kingdom_panel, world_map]:
 		if other != panel:
 			other.close()
 	panel.toggle()

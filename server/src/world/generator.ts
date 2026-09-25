@@ -1,4 +1,4 @@
-// Генерация мира: 2000 зон, уровни от краёв к центру, нейтральные армии и бонусы.
+// Генерация мира: gridCols × gridRows зон, уровни от краёв к центру, нейтральные армии и бонусы.
 
 import type { UnitStats } from "../gameData.ts";
 import type { Army } from "./army.ts";

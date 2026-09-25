@@ -31,6 +31,12 @@ const ICON_NAMES := [
 	"rest_speed", "need_decay", "training_speed", "army_power",
 ]
 const ICON_DIR := "res://assets/sprites/talents/"
+## Названия малых узлов талантов по стату (в порядке Stat).
+const STAT_TITLES := [
+	"Сила удара", "Живучесть", "Закалка", "Проворство", "Меткость", "Жестокость", "Мастерство",
+	"Быстрота умений", "Хватка", "Удача торговца", "Мудрость", "Везение", "Восстановление",
+	"Кровожадность", "Сон воина", "Выносливость", "Муштра", "Командование",
+]
 ## Подписи для describe() (в порядке Stat).
 const STAT_LABELS := [
 	"урона", "здоровья", "брони", "скорости атаки", "шанса крита", "крит. урона", "урона умений",
@@ -80,6 +86,17 @@ static func read_bonus(source: Dictionary, value_stat: int, value_skill_id := ""
 	if value_skill_id != "":
 		total += float(source.get(bonus_key(value_stat, value_skill_id), 0.0))
 	return total
+
+
+## Иконки держатся в кэше: текстура, загруженная прямо в _draw() и нигде не сохранённая,
+## освобождается до отрисовки кадра — и вместо иконки рисуется белый квадрат.
+static var _icon_cache: Dictionary = {}
+
+
+static func get_icon(value_stat: int) -> Texture2D:
+	if not _icon_cache.has(value_stat):
+		_icon_cache[value_stat] = load(get_icon_path(value_stat))
+	return _icon_cache[value_stat]
 
 
 static func get_icon_path(value_stat: int) -> String:

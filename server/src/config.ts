@@ -10,9 +10,10 @@ export const CONFIG = {
   gameDataPath: env.GAME_DATA_PATH ?? "data/game_data.json",
   worldSeed: Number(env.WORLD_SEED ?? 20260925),
 
-  // Карта: 50 × 40 = 2000 шестиугольных зон. Уровень 1 — края, уровень 10 — центр.
-  gridCols: 50,
-  gridRows: 40,
+  // Карта: 100 × 100 = 10 000 шестиугольных зон. Уровень 1 — края, уровень 10 — центр.
+  // При смене размера существующий мир пересоздаётся (аккаунты сохраняются, замки — новые).
+  gridCols: 100,
+  gridRows: 100,
   tiers: 10,
 
   // Поход в соседнюю зону, секунд.
@@ -43,4 +44,6 @@ export const CONFIG = {
   maxNameLength: 20,
   reportsKept: 30,
   maxBodyBytes: 64 * 1024,
+  // Ответы крупнее этого сжимаются gzip (полная карта ~1.5 МБ -> в разы меньше).
+  gzipMinBytes: 2048,
 } as const;

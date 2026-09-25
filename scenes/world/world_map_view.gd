@@ -1,20 +1,15 @@
 class_name WorldMapView
-extends Control
+extends PanZoomView
 ## Отрисовка мировой карты: шестиугольные зоны, владельцы, замки, герои, поход.
-## Перетаскивание — левая/правая кнопка мыши, масштаб — колесо, клик — выбрать зону.
+## Перетаскивание и масштаб — из PanZoomView; клик — выбрать зону.
 
 signal zone_selected(zone_id: int)
 
 const HEX_SIZE := 14.0
-const MIN_ZOOM := 0.35
-const MAX_ZOOM := 3.0
-const ZOOM_STEP := 1.15
-const DRAG_THRESHOLD := 4.0
 ## С какого масштаба показывать номер уровня зоны.
 const TIER_LABEL_ZOOM := 2.4
 ## Центрировать можно, только когда окно уже раскрыто (в режиме полоски карта слишком низкая).
 const MIN_FOCUS_HEIGHT := 400.0
-
 
 const TILE_DIR := "res://assets/ui/map/"
 ## Местность по уровню зоны: [максимальный уровень, [[местность, вес], ...]].
@@ -38,13 +33,8 @@ const MARKER_HERO := preload("res://assets/ui/map/marker_hero.png")
 const OUTLINE_SELECTED := preload("res://assets/ui/map/outline_selected.png")
 const OUTLINE_TARGET := preload("res://assets/ui/map/outline_target.png")
 
-var zoom := 1.0
-var pan := Vector2.ZERO
-var selected_zone := -1
 
-var _dragging := false
-var _drag_moved := false
-var _drag_distance := 0.0
+var selected_zone := -1
 ## Отложенное центрирование на герое: ждём данные зон и раскрытия окна.
 var _focus_pending := false
 ## Кэш местности по id зоны.
@@ -52,8 +42,8 @@ var _terrain_cache: Dictionary = {}
 
 
 func _ready() -> void:
-	clip_contents = true
-	mouse_filter = Control.MOUSE_FILTER_STOP
+	# Карта 100×100 — разрешаем отдалить так, чтобы она помещалась целиком.
+	min_zoom = 0.12
 	WorldService.world_updated.connect(queue_redraw)
 	WorldService.me_updated.connect(queue_redraw)
 
@@ -81,8 +71,7 @@ func center_on(zone_id: int) -> void:
 	var zone := WorldService.get_zone(zone_id)
 	if zone.is_empty():
 		return
-	pan = size * 0.5 - HexGrid.center(int(zone.col), int(zone.row), HEX_SIZE) * zoom
-	queue_redraw()
+	center_on_point(HexGrid.center(int(zone.col), int(zone.row), HEX_SIZE))
 
 
 func select(zone_id: int) -> void:
@@ -91,40 +80,10 @@ func select(zone_id: int) -> void:
 	zone_selected.emit(zone_id)
 
 
-func _gui_input(event: InputEvent) -> void:
-	var button := event as InputEventMouseButton
-	if button:
-		if button.pressed and button.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
-			_zoom_at(button.position, ZOOM_STEP if button.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / ZOOM_STEP)
-			accept_event()
-		elif button.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT]:
-			if button.pressed:
-				_dragging = true
-				_drag_moved = false
-				_drag_distance = 0.0
-			else:
-				if _dragging and not _drag_moved and button.button_index == MOUSE_BUTTON_LEFT:
-					var zone_id := _zone_at(button.position)
-					if zone_id >= 0:
-						select(zone_id)
-				_dragging = false
-			accept_event()
-		return
-	var motion := event as InputEventMouseMotion
-	if motion and _dragging:
-		_drag_distance += motion.relative.length()
-		if _drag_distance > DRAG_THRESHOLD:
-			_drag_moved = true
-			pan += motion.relative
-			queue_redraw()
-		accept_event()
-
-
-func _zoom_at(point: Vector2, factor: float) -> void:
-	var map_point := (point - pan) / zoom
-	zoom = clampf(zoom * factor, MIN_ZOOM, MAX_ZOOM)
-	pan = point - map_point * zoom
-	queue_redraw()
+func _on_click(screen_point: Vector2) -> void:
+	var zone_id := _zone_at(screen_point)
+	if zone_id >= 0:
+		select(zone_id)
 
 
 ## Зона под точкой экрана (-1 — нет).

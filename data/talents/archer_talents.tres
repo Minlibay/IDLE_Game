@@ -1,199 +1,245 @@
 [gd_resource type="Resource" script_class="TalentTree" format=3]
 
 [ext_resource type="Script" path="res://scripts/data/talent_tree.gd" id="1"]
-[ext_resource type="Script" path="res://scripts/data/talent_data.gd" id="2"]
-[ext_resource type="Script" path="res://scripts/data/stat_modifier.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/data/talent_region.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/talent_data.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/data/stat_modifier.gd" id="4"]
 
 [sub_resource type="Resource" id="Mod_1"]
-script = ExtResource("3")
+script = ExtResource("4")
 stat = 4
-value = 2.0
+value = 0.7
 
 [sub_resource type="Resource" id="Mod_2"]
-script = ExtResource("3")
+script = ExtResource("4")
 stat = 5
-value = 15.0
+value = 2.5
 
 [sub_resource type="Resource" id="Mod_3"]
-script = ExtResource("3")
-stat = 6
-value = 20.0
-skill_id = "aimed_shot"
+script = ExtResource("4")
+stat = 3
+value = 1.2
 
 [sub_resource type="Resource" id="Mod_4"]
-script = ExtResource("3")
+script = ExtResource("4")
+stat = 0
+value = 0.8
+
+[sub_resource type="Resource" id="Mod_5"]
+script = ExtResource("4")
+stat = 6
+value = 1.5
+
+[sub_resource type="Resource" id="Region_0"]
+script = ExtResource("2")
+display_name = "Меткость"
+color = Color(0.45, 0.9, 0.45, 1)
+minor_modifiers = Array[ExtResource("4")]([SubResource("Mod_1"), SubResource("Mod_2"), SubResource("Mod_3"), SubResource("Mod_4"), SubResource("Mod_5")])
+notable_names = PackedStringArray("Орлиный глаз", "Смертельная стрела", "Натянутая тетива", "Охотничий инстинкт", "Шквал стрел", "Точность снайпера", "Лёгкая рука", "Ветер в оперении", "Выстрел в сердце", "Быстрая перезарядка", "Следопыт", "Меткий глаз")
+
+[sub_resource type="Resource" id="Mod_6"]
+script = ExtResource("4")
+stat = 1
+value = 1.5
+
+[sub_resource type="Resource" id="Mod_7"]
+script = ExtResource("4")
+stat = 2
+value = 1.0
+
+[sub_resource type="Resource" id="Mod_8"]
+script = ExtResource("4")
+stat = 12
+value = 5.0
+
+[sub_resource type="Resource" id="Mod_9"]
+script = ExtResource("4")
+stat = 13
+value = 0.3
+
+[sub_resource type="Resource" id="Mod_10"]
+script = ExtResource("4")
+stat = 15
+value = 1.0
+
+[sub_resource type="Resource" id="Region_1"]
+script = ExtResource("2")
+display_name = "Защита"
+color = Color(0.4, 0.65, 1, 1)
+minor_modifiers = Array[ExtResource("4")]([SubResource("Mod_6"), SubResource("Mod_7"), SubResource("Mod_8"), SubResource("Mod_9"), SubResource("Mod_10")])
+notable_names = PackedStringArray("Стальная кожа", "Несгибаемость", "Живая крепость", "Второе дыхание", "Каменный щит", "Стойкость ветерана", "Кровь героя", "Бастион", "Панцирь", "Неутомимость", "Щит веры", "Железная воля")
+
+[sub_resource type="Resource" id="Mod_11"]
+script = ExtResource("4")
+stat = 17
+value = 1.0
+
+[sub_resource type="Resource" id="Mod_12"]
+script = ExtResource("4")
+stat = 16
+value = 2.0
+
+[sub_resource type="Resource" id="Mod_13"]
+script = ExtResource("4")
+stat = 9
+value = 2.0
+
+[sub_resource type="Resource" id="Mod_14"]
+script = ExtResource("4")
+stat = 10
+value = 1.5
+
+[sub_resource type="Resource" id="Mod_15"]
+script = ExtResource("4")
+stat = 11
+value = 1.5
+
+[sub_resource type="Resource" id="Mod_16"]
+script = ExtResource("4")
+stat = 8
+value = 3.0
+
+[sub_resource type="Resource" id="Mod_17"]
+script = ExtResource("4")
+stat = 15
+value = 1.0
+
+[sub_resource type="Resource" id="Mod_18"]
+script = ExtResource("4")
+stat = 14
+value = 3.0
+
+[sub_resource type="Resource" id="Region_2"]
+script = ExtResource("2")
+display_name = "Лидерство"
+color = Color(0.95, 0.75, 0.3, 1)
+minor_modifiers = Array[ExtResource("4")]([SubResource("Mod_11"), SubResource("Mod_12"), SubResource("Mod_13"), SubResource("Mod_14"), SubResource("Mod_15"), SubResource("Mod_16"), SubResource("Mod_17"), SubResource("Mod_18")])
+notable_names = PackedStringArray("Полевой лагерь", "Казна королевства", "Военный совет", "Наука войны", "Трофеи", "Верные знамёна", "Сбор налогов", "Боевая выучка", "Походный марш", "Слава правителя", "Королевская милость", "Дорога побед")
+
+[sub_resource type="Resource" id="Mod_19"]
+script = ExtResource("4")
 stat = 7
 value = 40.0
 skill_id = "aimed_shot"
 
-[sub_resource type="Resource" id="Mod_5"]
-script = ExtResource("3")
+[sub_resource type="Resource" id="Mod_20"]
+script = ExtResource("4")
 stat = 0
 value = 10.0
 
-[sub_resource type="Resource" id="Mod_6"]
+[sub_resource type="Resource" id="Key_0"]
 script = ExtResource("3")
-stat = 3
-value = 4.0
-
-[sub_resource type="Resource" id="Mod_7"]
-script = ExtResource("3")
-stat = 8
-value = 20.0
-
-[sub_resource type="Resource" id="Mod_8"]
-script = ExtResource("3")
-stat = 6
-value = 20.0
-skill_id = "multishot"
-
-[sub_resource type="Resource" id="Mod_9"]
-script = ExtResource("3")
-stat = 7
-value = 15.0
-
-[sub_resource type="Resource" id="Mod_10"]
-script = ExtResource("3")
-stat = 1
-value = 5.0
-
-[sub_resource type="Resource" id="Mod_11"]
-script = ExtResource("3")
-stat = 2
-value = 4.0
-
-[sub_resource type="Resource" id="Mod_12"]
-script = ExtResource("3")
-stat = 9
-value = 10.0
-
-[sub_resource type="Resource" id="Mod_13"]
-script = ExtResource("3")
-stat = 11
-value = 30.0
-
-[sub_resource type="Resource" id="Talent_archer_keen_eye"]
-script = ExtResource("2")
-id = "archer_keen_eye"
-display_name = "Зоркий глаз"
-description = "+{value}% шанса крита."
-branch = 0
-row = 0
-max_rank = 5
-modifiers = Array[ExtResource("3")]([SubResource("Mod_1")])
-
-[sub_resource type="Resource" id="Talent_archer_deadly_aim"]
-script = ExtResource("2")
-id = "archer_deadly_aim"
-display_name = "Смертельная точность"
-description = "+{value}% критического урона."
-branch = 0
-row = 1
-max_rank = 3
-modifiers = Array[ExtResource("3")]([SubResource("Mod_2")])
-
-[sub_resource type="Resource" id="Talent_archer_steady_hand"]
-script = ExtResource("2")
-id = "archer_steady_hand"
-display_name = "Твёрдая рука"
-description = "Прицельный выстрел: +{value}% урона."
-branch = 0
-row = 2
-max_rank = 3
-modifiers = Array[ExtResource("3")]([SubResource("Mod_3")])
-
-[sub_resource type="Resource" id="Talent_archer_sniper"]
-script = ExtResource("2")
 id = "archer_sniper"
 display_name = "Снайпер"
 description = "Прицельный выстрел: −{value}% перезарядки. +{value2}% урона."
-branch = 0
-row = 3
-max_rank = 1
-modifiers = Array[ExtResource("3")]([SubResource("Mod_4"), SubResource("Mod_5")])
+kind = 2
+region = 0
+region_offset = -1.0
+modifiers = Array[ExtResource("4")]([SubResource("Mod_19"), SubResource("Mod_20")])
 
-[sub_resource type="Resource" id="Talent_archer_light_hand"]
-script = ExtResource("2")
-id = "archer_light_hand"
-display_name = "Лёгкая рука"
-description = "+{value}% скорости атаки."
-branch = 1
-row = 0
-max_rank = 5
-modifiers = Array[ExtResource("3")]([SubResource("Mod_6")])
+[sub_resource type="Resource" id="Mod_21"]
+script = ExtResource("4")
+stat = 7
+value = 15.0
 
-[sub_resource type="Resource" id="Talent_archer_rapid_click"]
-script = ExtResource("2")
-id = "archer_rapid_click"
-display_name = "Быстрый клик"
-description = "Клик ускоряет атаку на {value}% сильнее."
-branch = 1
-row = 1
-max_rank = 3
-modifiers = Array[ExtResource("3")]([SubResource("Mod_7")])
+[sub_resource type="Resource" id="Mod_22"]
+script = ExtResource("4")
+stat = 6
+value = 40.0
+skill_id = "multishot"
 
-[sub_resource type="Resource" id="Talent_archer_arrow_storm"]
-script = ExtResource("2")
-id = "archer_arrow_storm"
-display_name = "Шквал стрел"
-description = "Залп: +{value}% урона."
-branch = 1
-row = 2
-max_rank = 3
-modifiers = Array[ExtResource("3")]([SubResource("Mod_8")])
-
-[sub_resource type="Resource" id="Talent_archer_hurricane"]
-script = ExtResource("2")
+[sub_resource type="Resource" id="Key_1"]
+script = ExtResource("3")
 id = "archer_hurricane"
 display_name = "Ураган"
-description = "Все умения: −{value}% перезарядки."
-branch = 1
-row = 3
-max_rank = 1
-modifiers = Array[ExtResource("3")]([SubResource("Mod_9")])
+description = "Все умения: −{value}% перезарядки, залп +{value2}% урона."
+kind = 2
+region = 0
+region_offset = 1.0
+modifiers = Array[ExtResource("4")]([SubResource("Mod_21"), SubResource("Mod_22")])
 
-[sub_resource type="Resource" id="Talent_archer_vitality"]
-script = ExtResource("2")
-id = "archer_vitality"
-display_name = "Живучесть"
-description = "+{value}% здоровья."
-branch = 2
-row = 0
-max_rank = 5
-modifiers = Array[ExtResource("3")]([SubResource("Mod_10")])
+[sub_resource type="Resource" id="Mod_23"]
+script = ExtResource("4")
+stat = 1
+value = 25.0
 
-[sub_resource type="Resource" id="Talent_archer_leather"]
-script = ExtResource("2")
-id = "archer_leather"
-display_name = "Кожаный доспех"
-description = "+{value} брони."
-branch = 2
-row = 1
-max_rank = 3
-modifiers = Array[ExtResource("3")]([SubResource("Mod_11")])
+[sub_resource type="Resource" id="Mod_24"]
+script = ExtResource("4")
+stat = 2
+value = 30.0
 
-[sub_resource type="Resource" id="Talent_archer_looter"]
-script = ExtResource("2")
-id = "archer_looter"
-display_name = "Мародёр"
-description = "+{value}% золота."
-branch = 2
-row = 2
-max_rank = 3
-modifiers = Array[ExtResource("3")]([SubResource("Mod_12")])
+[sub_resource type="Resource" id="Key_2"]
+script = ExtResource("3")
+id = "archer_unbreakable"
+display_name = "Несокрушимый"
+description = "+{value}% здоровья и +{value2} брони."
+kind = 2
+region = 1
+region_offset = -1.0
+modifiers = Array[ExtResource("4")]([SubResource("Mod_23"), SubResource("Mod_24")])
 
-[sub_resource type="Resource" id="Talent_archer_treasure_hunter"]
-script = ExtResource("2")
-id = "archer_treasure_hunter"
-display_name = "Охотник за сокровищами"
-description = "+{value}% шанса выпадения предметов."
-branch = 2
-row = 3
-max_rank = 1
-modifiers = Array[ExtResource("3")]([SubResource("Mod_13")])
+[sub_resource type="Resource" id="Mod_25"]
+script = ExtResource("4")
+stat = 12
+value = 150.0
+
+[sub_resource type="Resource" id="Mod_26"]
+script = ExtResource("4")
+stat = 13
+value = 4.0
+
+[sub_resource type="Resource" id="Key_3"]
+script = ExtResource("3")
+id = "archer_undying"
+display_name = "Бессмертный"
+description = "+{value}% регенерации и {value2}% вампиризма."
+kind = 2
+region = 1
+region_offset = 1.0
+modifiers = Array[ExtResource("4")]([SubResource("Mod_25"), SubResource("Mod_26")])
+
+[sub_resource type="Resource" id="Mod_27"]
+script = ExtResource("4")
+stat = 17
+value = 25.0
+
+[sub_resource type="Resource" id="Mod_28"]
+script = ExtResource("4")
+stat = 16
+value = 40.0
+
+[sub_resource type="Resource" id="Key_4"]
+script = ExtResource("3")
+id = "archer_warlord"
+display_name = "Полководец"
+description = "+{value}% силы армии и +{value2}% скорости обучения."
+kind = 2
+region = 2
+region_offset = -1.0
+modifiers = Array[ExtResource("4")]([SubResource("Mod_27"), SubResource("Mod_28")])
+
+[sub_resource type="Resource" id="Mod_29"]
+script = ExtResource("4")
+stat = 9
+value = 30.0
+
+[sub_resource type="Resource" id="Mod_30"]
+script = ExtResource("4")
+stat = 11
+value = 30.0
+
+[sub_resource type="Resource" id="Key_5"]
+script = ExtResource("3")
+id = "archer_treasurer"
+display_name = "Казначей"
+description = "+{value}% золота и +{value2}% шанса дропа."
+kind = 2
+region = 2
+region_offset = 1.0
+modifiers = Array[ExtResource("4")]([SubResource("Mod_29"), SubResource("Mod_30")])
 
 [resource]
 script = ExtResource("1")
-branch_names = PackedStringArray("Меткость", "Скорость", "Выживание")
-points_per_row = 3
-talents = Array[ExtResource("2")]([SubResource("Talent_archer_keen_eye"), SubResource("Talent_archer_deadly_aim"), SubResource("Talent_archer_steady_hand"), SubResource("Talent_archer_sniper"), SubResource("Talent_archer_light_hand"), SubResource("Talent_archer_rapid_click"), SubResource("Talent_archer_arrow_storm"), SubResource("Talent_archer_hurricane"), SubResource("Talent_archer_vitality"), SubResource("Talent_archer_leather"), SubResource("Talent_archer_looter"), SubResource("Talent_archer_treasure_hunter")])
+grid_size = Vector2i(25, 24)
+regions = Array[ExtResource("2")]([SubResource("Region_0"), SubResource("Region_1"), SubResource("Region_2")])
+keystones = Array[ExtResource("3")]([SubResource("Key_0"), SubResource("Key_1"), SubResource("Key_2"), SubResource("Key_3"), SubResource("Key_4"), SubResource("Key_5")])

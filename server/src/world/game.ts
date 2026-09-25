@@ -84,8 +84,12 @@ export class Game {
     this.random = random;
 
     const saved = storage.loadZones();
-    if (saved.length === 0) {
+    const expected = settings.gridCols * settings.gridRows;
+    const regenerate = saved.length !== expected;
+    if (regenerate) {
+      if (saved.length > 0) console.warn(`World size changed (${saved.length} -> ${expected} zones): regenerating, players get new castles`);
       this.zones = generateZones(units, settings, settings.worldSeed);
+      storage.clearZones();
       storage.saveZones(this.zones);
       storage.setMeta("version", "0");
     } else {
@@ -100,6 +104,7 @@ export class Game {
       maxId = Math.max(maxId, player.id);
     }
     this.nextPlayerId = maxId + 1;
+    if (regenerate) this.relocatePlayers();
   }
 
   get worldVersion(): number {
@@ -421,6 +426,22 @@ export class Game {
     player.heroZone = player.castleZone;
     player.march = null;
     this.savePlayer(player);
+  }
+
+  /** После пересоздания мира: каждому игроку — новый замок; армия с героем сохраняется. */
+  private relocatePlayers(): void {
+    for (const player of this.players.values()) {
+      const castle = this.pickCastleZone();
+      castle.ownerId = player.id;
+      castle.isCastle = true;
+      castle.neutral = {};
+      castle.garrison = {};
+      player.castleZone = castle.id;
+      player.heroZone = castle.id;
+      player.march = null;
+      this.touch(castle);
+      this.savePlayer(player);
+    }
   }
 
   private pickCastleZone(): Zone {

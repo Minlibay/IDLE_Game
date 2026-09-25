@@ -2,6 +2,7 @@
 // Вход пока через регистрацию по имени (dev); позже — Steam-тикеты.
 
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
+import { gzipSync } from "node:zlib";
 import type { GameData } from "./gameData.ts";
 import { sanitizeArmy } from "./world/army.ts";
 import { GameError, type Game, type Player } from "./world/game.ts";
@@ -18,7 +19,7 @@ type Route = {
   handle: (ctx: Context) => unknown;
 };
 
-export type HttpSettings = { maxBodyBytes: number; maxUnitsPerType: number; marchSeconds: number };
+export type HttpSettings = { maxBodyBytes: number; maxUnitsPerType: number; marchSeconds: number; gzipMinBytes: number };
 
 export function createHttpServer(game: Game, gameData: GameData, settings: HttpSettings): Server {
   const units = (input: unknown) => {
@@ -105,29 +106,40 @@ export function createHttpServer(game: Game, gameData: GameData, settings: HttpS
     try {
       const url = new URL(req.url ?? "/", "http://localhost");
       const route = routes[`${req.method} ${url.pathname}`];
-      if (!route) return send(res, 404, { error: "Not found" });
+      const reply = (status: number, payload: unknown) => send(req, res, status, payload, settings.gzipMinBytes);
+      if (!route) return reply(404, { error: "Not found" });
 
       const body = req.method === "POST" ? await readJson(req, settings.maxBodyBytes) : {};
       let player: Player | undefined;
       if (route.auth) {
         const token = (req.headers.authorization ?? "").replace(/^Bearer\s+/i, "");
         player = token ? game.getPlayerByToken(token) : undefined;
-        if (!player) return send(res, 401, { error: "Нужно войти заново" });
+        if (!player) return reply(401, { error: "Нужно войти заново" });
       }
       const result = route.handle({ url, body, player: player as Player, now: Date.now() });
-      send(res, 200, result);
+      reply(200, result);
     } catch (error) {
-      if (error instanceof GameError) return send(res, error.status, { error: error.message });
-      if (error instanceof SyntaxError) return send(res, 400, { error: "Некорректный JSON" });
+      const reply = (status: number, payload: unknown) => send(req, res, status, payload, settings.gzipMinBytes);
+      if (error instanceof GameError) return reply(error.status, { error: error.message });
+      if (error instanceof SyntaxError) return reply(400, { error: "Некорректный JSON" });
       console.error(error);
-      send(res, 500, { error: "Внутренняя ошибка сервера" });
+      reply(500, { error: "Внутренняя ошибка сервера" });
     }
   });
 }
 
-function send(res: ServerResponse, status: number, payload: unknown): void {
-  const body = JSON.stringify(payload);
-  res.writeHead(status, { "Content-Type": "application/json; charset=utf-8", "Content-Length": Buffer.byteLength(body) });
+/** JSON-ответ; крупные ответы сжимаются gzip, если клиент это поддерживает (Godot — да). */
+function send(req: IncomingMessage, res: ServerResponse, status: number, payload: unknown, gzipMinBytes: number): void {
+  const json = Buffer.from(JSON.stringify(payload), "utf8");
+  const acceptsGzip = /\bgzip\b/.test(String(req.headers["accept-encoding"] ?? ""));
+  const headers: Record<string, string | number> = { "Content-Type": "application/json; charset=utf-8" };
+  let body = json;
+  if (acceptsGzip && json.length >= gzipMinBytes) {
+    body = gzipSync(json);
+    headers["Content-Encoding"] = "gzip";
+  }
+  headers["Content-Length"] = body.length;
+  res.writeHead(status, headers);
   res.end(body);
 }
 

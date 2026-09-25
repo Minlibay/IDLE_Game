@@ -56,6 +56,10 @@ export class Storage {
       .run(zone.id, JSON.stringify(zone));
   }
 
+  clearZones(): void {
+    this.db.exec("DELETE FROM zones");
+  }
+
   saveZones(zones: Zone[]): void {
     this.transaction(() => {
       for (const zone of zones) this.saveZone(zone);

@@ -48,7 +48,7 @@ func _ready() -> void:
 	if args.has("open-inventory") and _current.has_node("HUD"):
 		(_current.get_node("HUD") as Hud).inventory_panel.open.call_deferred()
 	if args.has("open-talents") and _current.has_node("HUD"):
-		(_current.get_node("HUD") as Hud).talent_panel.open.call_deferred()
+		(_current.get_node("HUD") as Hud).talent_grid.open.call_deferred()
 	if args.has("open-kingdom") and _current.has_node("HUD"):
 		(_current.get_node("HUD") as Hud).kingdom_panel.open.call_deferred()
 	if args.has("open-army") and _current.has_node("HUD"):

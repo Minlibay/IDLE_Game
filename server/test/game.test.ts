@@ -46,7 +46,7 @@ describe("game rules", () => {
   it("can only move to adjacent zones and not while marching", () => {
     const { game } = createGame();
     const player = game.register("A", 0);
-    const far = (player.castleZone + 1000) % 2000;
+    const far = (player.castleZone + game.zones.length / 2) % game.zones.length;
     assert.throws(() => game.move(player, far, 0), /соседнюю/);
     const target = neighbourZone(game, player);
     game.move(player, target, 0);
@@ -168,6 +168,21 @@ describe("game rules", () => {
     assert.ok((view.bonuses[bonus.stat] ?? 0) >= bonus.value);
   });
 
+  it("changing the world size regenerates the map and relocates players", () => {
+    const storage = new Storage(":memory:");
+    const small = createGame({ gridCols: 20, gridRows: 20 }, storage).game;
+    const player = small.register("A", 0);
+    small.deploy(player, { knight: 7 });
+    const big = createGame({}, storage).game;
+    assert.equal(big.zones.length, settings.gridCols * settings.gridRows);
+    const moved = big.getPlayerByToken(player.token);
+    assert.ok(moved, "account must survive the resize");
+    assert.deepEqual(moved.army, { knight: 7 }, "army with the hero is kept");
+    assert.equal(big.zones[moved.castleZone].ownerId, player.id);
+    assert.equal(big.zones[moved.castleZone].isCastle, true);
+    assert.equal(moved.heroZone, moved.castleZone);
+  });
+
   it("world state survives a restart", () => {
     const storage = new Storage(":memory:");
     const first = createGame({}, storage).game;
@@ -188,6 +203,6 @@ describe("game rules", () => {
     game.register("B", 0);
     const delta = game.worldView(before);
     assert.equal(delta.zones.length, 1);
-    assert.equal(full.zones.length, 2000);
+    assert.equal(full.zones.length, game.zones.length);
   });
 });

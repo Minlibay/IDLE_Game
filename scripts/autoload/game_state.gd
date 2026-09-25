@@ -146,7 +146,10 @@ func get_talent_tree() -> TalentTree:
 	return c.talent_tree if c else null
 
 
+## Стартовый узел сетки изучен всегда.
 func get_talent_rank(talent: TalentData) -> int:
+	if talent.kind == TalentData.Kind.START:
+		return 1
 	return talent_ranks.get(talent.id, 0)
 
 
@@ -154,14 +157,15 @@ func get_talent_points_total() -> int:
 	return (level - 1) * TALENT_POINTS_PER_LEVEL
 
 
-## Учитываются только таланты текущего дерева (устаревшие id из сохранения игнорируются).
+## Учитываются только узлы текущей сетки (устаревшие id из сохранения игнорируются — очки возвращаются).
 func get_talent_points_spent() -> int:
 	var tree := get_talent_tree()
 	if tree == null:
 		return 0
 	var spent := 0
-	for talent in tree.talents:
-		spent += get_talent_rank(talent)
+	for talent in tree.get_talents():
+		if talent.kind != TalentData.Kind.START:
+			spent += get_talent_rank(talent)
 	return spent
 
 
@@ -169,25 +173,21 @@ func get_available_talent_points() -> int:
 	return maxi(0, get_talent_points_total() - get_talent_points_spent())
 
 
-func get_branch_points(branch: int) -> int:
+## Узел доступен, если рядом (по 4 сторонам) есть изученный узел или старт.
+func is_talent_reachable(talent: TalentData) -> bool:
 	var tree := get_talent_tree()
 	if tree == null:
-		return 0
-	var spent := 0
-	for talent in tree.get_talents_in_branch(branch):
-		spent += get_talent_rank(talent)
-	return spent
-
-
-func is_talent_row_unlocked(talent: TalentData) -> bool:
-	var tree := get_talent_tree()
-	return tree != null and get_branch_points(talent.branch) >= tree.get_required_points(talent)
+		return false
+	for neighbor in tree.neighbors(talent):
+		if get_talent_rank(neighbor) > 0:
+			return true
+	return false
 
 
 func can_learn_talent(talent: TalentData) -> bool:
 	return get_available_talent_points() > 0 \
 		and get_talent_rank(talent) < talent.max_rank \
-		and is_talent_row_unlocked(talent)
+		and is_talent_reachable(talent)
 
 
 ## Вкладывает 1 очко в талант.
@@ -258,7 +258,7 @@ func _rebuild_talent_bonuses() -> void:
 	var tree := get_talent_tree()
 	if tree == null:
 		return
-	for talent in tree.talents:
+	for talent in tree.get_talents():
 		var rank := get_talent_rank(talent)
 		if rank <= 0:
 			continue

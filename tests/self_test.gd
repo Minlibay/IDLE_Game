@@ -103,35 +103,55 @@ func _test_talents() -> void:
 		_check(class_tree != null, "%s: no talent tree" % class_data.id)
 		if class_tree == null:
 			continue
-		_check(class_tree.branch_names.size() == 3, "%s: expected 3 branches" % class_data.id)
+		var talents := class_tree.get_talents()
+		_check(talents.size() == class_tree.grid_size.x * class_tree.grid_size.y,
+			"%s: grid has %d nodes" % [class_data.id, talents.size()])
+		_check(talents.size() >= 590, "%s: expected ~600 talents" % class_data.id)
 		var ids := {}
-		for talent in class_tree.talents:
+		var kinds := {}
+		for talent in talents:
 			_check(not ids.has(talent.id), "duplicate talent id " + talent.id)
 			ids[talent.id] = true
+			kinds[talent.kind] = int(kinds.get(talent.kind, 0)) + 1
 			_check(talent.get_icon() != null, "talent without icon: " + talent.id)
 			_check(not talent.get_description(1).contains("{"), "unfilled description: " + talent.id)
+		_check(int(kinds.get(TalentData.Kind.START, 0)) == 1, "%s: exactly one start node" % class_data.id)
+		_check(int(kinds.get(TalentData.Kind.KEYSTONE, 0)) == class_tree.keystones.size(), "%s: keystones not placed" % class_data.id)
+		_check(int(kinds.get(TalentData.Kind.NOTABLE, 0)) >= 20, "%s: too few notables" % class_data.id)
 
 	var tree := GameState.get_talent_tree()
+	GameState.talent_ranks.clear()
+	GameState._on_talents_updated()
 	GameState.level = 30
 	GameState.add_gold(1_000_000)
-	var first := tree.get_talents_in_branch(0)[0]
-	var locked := tree.get_talents_in_branch(1)[1]
-	_check(not GameState.can_learn_talent(locked), "row 1 talent learnable without branch points")
+	var start := tree.get_start()
+	_check(GameState.get_talent_rank(start) == 1, "start node must be learned")
+	var neighbor := tree.neighbors(start)[0]
+	var far := tree.at(Vector2i.ZERO)
+	_check(GameState.can_learn_talent(neighbor), "neighbour of start must be learnable")
+	_check(not GameState.can_learn_talent(far), "far node learnable without a path")
 	var stats_before := GameState.get_hero_stats()
-	for i in first.max_rank:
-		_check(GameState.learn_talent(first), "cannot learn rank %d of %s" % [i + 1, first.id])
-	_check(not GameState.learn_talent(first), "learned above max rank")
-	_check(GameState.get_talent_bonus(first.modifiers[0].stat) > 0.0, "talent bonus not applied")
-	_check(GameState.get_hero_stats() != stats_before, "talent did not change hero stats")
+	_check(GameState.learn_talent(neighbor), "cannot learn neighbour of start")
+	_check(not GameState.learn_talent(neighbor), "learned the same node twice")
+	_check(GameState.get_talent_bonus(neighbor.modifiers[0].stat) > 0.0, "talent bonus not applied")
+	_check(GameState.get_hero_stats() != stats_before or neighbor.modifiers[0].stat >= StatModifier.Stat.CLICK_POWER,
+		"talent did not change hero stats")
+	# Цепочка: следующий узел за изученным становится доступен.
+	var next: TalentData = null
+	for candidate in tree.neighbors(neighbor):
+		if GameState.get_talent_rank(candidate) == 0:
+			next = candidate
+			break
+	_check(next != null and GameState.can_learn_talent(next), "path does not extend from learned node")
 
-	# Бонус к конкретному умению не должен действовать на остальные.
-	for talent in tree.talents:
-		for modifier in talent.modifiers:
+	# Бонус ключевого таланта к конкретному умению не действует на остальные.
+	for keystone in tree.keystones:
+		for modifier in keystone.modifiers:
 			if modifier.skill_id != "" and modifier.stat == StatModifier.Stat.SKILL_DAMAGE:
-				talent_rank_force(talent, 1)
-				_check(GameState.get_skill_power(modifier.skill_id) > 1.0, "skill talent not applied to " + modifier.skill_id)
-				_check(is_equal_approx(GameState.get_skill_power("__other__"), 1.0 + GameState.get_talent_bonus(StatModifier.Stat.SKILL_DAMAGE) / 100.0),
-					"skill-specific talent leaked to other skills")
+				talent_rank_force(keystone, 1)
+				_check(GameState.get_skill_power(modifier.skill_id) > 1.0, "keystone not applied to " + modifier.skill_id)
+				_check(is_equal_approx(GameState.get_skill_power("__other__"), 1.0 + GameState.get_bonus(StatModifier.Stat.SKILL_DAMAGE) / 100.0),
+					"skill-specific keystone leaked to other skills")
 
 	GameState.save_game()
 	var spent := GameState.get_talent_points_spent()
@@ -139,8 +159,7 @@ func _test_talents() -> void:
 	_check(GameState.get_talent_points_spent() == spent, "talents lost after load")
 	_check(GameState.reset_talents(), "talent reset failed")
 	_check(GameState.get_talent_points_spent() == 0, "talents not cleared after reset")
-	_check(is_equal_approx(GameState.get_talent_bonus(first.modifiers[0].stat), 0.0), "bonus remains after reset")
-
+	_check(is_equal_approx(GameState.get_talent_bonus(neighbor.modifiers[0].stat), 0.0), "bonus remains after reset")
 
 func _test_kingdom() -> void:
 	var kingdom := GameState.kingdom

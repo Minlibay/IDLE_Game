@@ -29,7 +29,8 @@ func _run() -> void:
 	var login := await WorldService.register(player_name, WorldService.DEFAULT_URL)
 	if not _check(login.ok, "register failed: %s" % login.get("error", "")):
 		return
-	_check(WorldService.zones.size() == 2000, "world has %d zones, expected 2000" % WorldService.zones.size())
+	_check(WorldService.zones.size() == WorldService.cols * WorldService.rows and WorldService.zones.size() >= 2000,
+		"world has %d zones (%dx%d)" % [WorldService.zones.size(), WorldService.cols, WorldService.rows])
 	_check(WorldService.is_hero_at_castle(), "hero must start at the castle")
 
 	# Армия из замка → на карту.

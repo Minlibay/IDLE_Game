@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/ui/inventory_panel.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://scenes/ui/talent_panel.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/talents/talent_grid.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/ui/kingdom_panel.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://scenes/ui/needs_panel.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://scenes/world/world_map.tscn" id="6"]
@@ -209,7 +209,7 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[node name="TalentPanel" parent="Root" instance=ExtResource("3")]
+[node name="TalentGrid" parent="Root" instance=ExtResource("3")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1

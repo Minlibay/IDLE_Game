@@ -29,8 +29,9 @@ describe("grid", () => {
 describe("generator", () => {
   const zones = generateZones(units, settings, 1);
 
-  it("creates 2000 zones", () => {
-    assert.equal(zones.length, 2000);
+  it("creates gridCols × gridRows zones (10 000)", () => {
+    assert.equal(zones.length, settings.gridCols * settings.gridRows);
+    assert.equal(zones.length, 10_000);
   });
 
   it("neutral armies get stronger towards the centre", () => {
