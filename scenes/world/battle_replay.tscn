@@ -1,0 +1,131 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/world/battle_replay.gd" id="1"]
+[sub_resource type="Gradient" id="Gradient_field"]
+colors = PackedColorArray(0.2, 0.3, 0.18, 1, 0.3, 0.42, 0.22, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture_field"]
+gradient = SubResource("Gradient_field")
+fill_to = Vector2(0, 1)
+
+[node name="BattleReplay" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -340.0
+offset_top = -190.0
+offset_right = 340.0
+offset_bottom = 190.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Header" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ReplayTitle" type="Label" parent="VBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "Бой"
+text_overrun_behavior = 3
+
+[node name="SpeedButton" type="Button" parent="VBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Скорость повтора"
+text = "×1"
+
+[node name="SkipButton" type="Button" parent="VBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Пропустить"
+
+[node name="ReplayCloseButton" type="Button" parent="VBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Закрыть"
+
+[node name="Sides" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="AttackerBox" type="VBoxContainer" parent="VBox/Sides"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AttackerLabel" type="Label" parent="VBox/Sides/AttackerBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Атака"
+
+[node name="AttackerBar" type="ProgressBar" parent="VBox/Sides/AttackerBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_type_variation = &"BarHealth"
+value = 100.0
+show_percentage = false
+
+[node name="Versus" type="Label" parent="VBox/Sides"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 16
+text = "⚔"
+vertical_alignment = 1
+
+[node name="DefenderBox" type="VBoxContainer" parent="VBox/Sides"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DefenderLabel" type="Label" parent="VBox/Sides/DefenderBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Защита"
+horizontal_alignment = 2
+
+[node name="DefenderBar" type="ProgressBar" parent="VBox/Sides/DefenderBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_type_variation = &"BarHealth"
+value = 100.0
+fill_mode = 1
+show_percentage = false
+
+[node name="Field" type="Control" parent="VBox"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(640, 250)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="Ground" type="TextureRect" parent="VBox/Field"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture_field")
+expand_mode = 1
+
+[node name="ResultLabel" type="Label" parent="VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+autowrap_mode = 3

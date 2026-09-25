@@ -8,6 +8,7 @@
 //   • чужая зона без гарнизона и без хозяина — захват без боя;
 //   • чужая зона с гарнизоном и/или хозяином с армией — бой (PvP);
 //   • чужой замок — набег: бой с армией замка; победа = часть ресурсов, щит защитнику.
+// Идти в чужую или ничью зону можно только с армией: один герой зоны не захватывает.
 // Проигравший на карте теряет всю армию, его герой возвращается в замок.
 // Замок захватить нельзя; защитник замка при поражении теряет только часть армии.
 
@@ -294,9 +295,9 @@ export class Game {
     const enemy = target.ownerId !== null && target.ownerId !== player.id ? this.players.get(target.ownerId) : undefined;
     const raid = target.isCastle && enemy !== undefined;
     if (target.isCastle && target.ownerId !== player.id && !enemy) throw new GameError("Этот замок нельзя атаковать");
-    if (raid) {
-      if (this.protectedUntil(enemy, now) > now) throw new GameError("Замок под защитой — напасть пока нельзя");
-      if (isEmpty(player.army)) throw new GameError("Для набега нужна армия");
+    if (raid && this.protectedUntil(enemy, now) > now) throw new GameError("Замок под защитой — напасть пока нельзя");
+    if (target.ownerId !== player.id && isEmpty(player.army)) {
+      throw new GameError(raid ? "Для набега нужна армия" : "Без армии зону не занять — возьмите солдат из замка");
     }
     // Нападение на игрока снимает защиту новичка.
     if (enemy) player.protectionUntil = Math.min(player.protectionUntil, now);
@@ -455,6 +456,12 @@ export class Game {
     if (zone.ownerId === player.id) {
       player.heroZone = zone.id;
       this.savePlayer(player);
+      return;
+    }
+
+    // Страховка для походов, начатых до проверки армии в move().
+    if (isEmpty(player.army)) {
+      this.abortMarch(player, march, zone, now, "Поход сорван: без армии зону не занять");
       return;
     }
 

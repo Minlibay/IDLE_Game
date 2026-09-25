@@ -43,9 +43,28 @@ describe("game rules", () => {
     assert.throws(() => game.register("a", 0), GameError);
   });
 
+  it("hero without an army cannot capture zones, but can walk to its own", () => {
+    const { game } = createGame();
+    const player = game.register("A", 0);
+    const target = neighbourZone(game, player);
+    game.zones[target].neutral = {};
+    assert.throws(() => game.move(player, target, 0), /Без армии/);
+    game.zones[target].ownerId = player.id;
+    march(game, player, target, 0);
+    assert.equal(player.heroZone, target, "own zone is reachable without an army");
+
+    // Поход, начатый без проверки (старое сохранение), срывается по прибытии.
+    const next = neighbourZone(game, player, (id) => game.zones[id].ownerId === null);
+    player.march = { fromZone: target, toZone: next, startedAt: 0, arrivesAt: MARCH_MS };
+    game.tick(MARCH_MS * 2);
+    assert.equal(game.zones[next].ownerId, null);
+    assert.equal(player.heroZone, target);
+  });
+
   it("can only move to adjacent zones and not while marching", () => {
     const { game } = createGame();
     const player = game.register("A", 0);
+    player.army = { militia: 1 };
     const far = (player.castleZone + game.zones.length / 2) % game.zones.length;
     assert.throws(() => game.move(player, far, 0), /соседнюю/);
     const target = neighbourZone(game, player);
@@ -87,6 +106,7 @@ describe("game rules", () => {
       .find((id) => !game.zones[id].isCastle)!;
     game.zones[approach].ownerId = attacker.id;
     attacker.heroZone = approach;
+    attacker.army = { militia: 1 };
 
     march(game, attacker, zone, 0);
     assert.equal(game.zones[zone].ownerId, attacker.id, "undefended zone must be captured");

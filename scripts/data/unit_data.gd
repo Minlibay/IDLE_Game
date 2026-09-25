@@ -7,6 +7,8 @@ extends Resource
 @export var display_name := ""
 @export_multiline var description := ""
 @export var icon: Texture2D
+## Фигурка солдата для повтора боя (вид сбоку, смотрит вправо). Пусто — рисуется кодом.
+@export var battle_sprite: Texture2D
 @export var order := 0
 
 @export_group("Stats")

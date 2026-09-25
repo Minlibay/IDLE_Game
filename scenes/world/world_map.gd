@@ -1,6 +1,7 @@
 class_name WorldMap
 extends Control
-## Окно мировой карты: зоны, поход героя, армия на карте, гарнизоны, набеги на замки, отчёты о боях.
+## Окно мировой карты: зоны, поход героя, армия на карте, гарнизоны, набеги на замки, отчёты о боях
+## и их повтор (BattleReplay: как толпы сходятся и дерутся).
 ## Все правила — на сервере (WorldService); здесь только интерфейс.
 
 enum DialogMode { NONE, DEPLOY, RECALL, GARRISON, WITHDRAW }
@@ -49,6 +50,7 @@ var _error_tween: Tween
 @onready var confirm_button: Button = %ConfirmButton
 @onready var cancel_button: Button = %CancelButton
 @onready var error_label: Label = %ErrorLabel
+@onready var battle_replay: BattleReplay = %BattleReplay
 
 
 func _ready() -> void:
@@ -67,6 +69,7 @@ func _ready() -> void:
 	WorldService.world_updated.connect(_refresh)
 	WorldService.login_changed.connect(func(_logged_in: bool) -> void: _refresh())
 	WorldService.request_failed.connect(_show_error)
+	WorldService.new_reports.connect(_on_new_reports)
 	error_label.modulate.a = 0.0
 
 
@@ -100,6 +103,7 @@ func close() -> void:
 	if not visible:
 		return
 	_close_dialog()
+	battle_replay.close()
 	hide()
 	WorldService.set_polling(false)
 	DesktopWindow.exit_map_mode()
@@ -211,8 +215,9 @@ func _update_zone_panel() -> void:
 
 	var adjacent := WorldService.are_adjacent(WorldService.hero_zone(), _selected)
 	var enemy_castle: bool = zone.castle and not mine
-	var raid_blocked := enemy_castle and (WorldService.is_castle_protected(zone.owner) or WorldService.get_my_army().is_empty())
-	move_button.disabled = WorldService.is_marching() or not adjacent or raid_blocked
+	var no_army := not mine and WorldService.get_my_army().is_empty()
+	var raid_blocked := enemy_castle and WorldService.is_castle_protected(zone.owner)
+	move_button.disabled = WorldService.is_marching() or not adjacent or raid_blocked or no_army
 	if mine:
 		move_button.text = "Перейти сюда"
 	elif enemy_castle:
@@ -225,8 +230,8 @@ func _update_zone_panel() -> void:
 		move_button.text = "Занять зону"
 	if not adjacent and not hero_here:
 		move_button.tooltip_text = "Идти можно только в соседнюю с героем зону"
-	elif enemy_castle and WorldService.get_my_army().is_empty():
-		move_button.tooltip_text = "Для набега нужна армия с героем"
+	elif no_army:
+		move_button.tooltip_text = "Без армии зону не занять: в замке нажмите «Армию из замка →»"
 	elif zone.owner != null and not mine and WorldService.my_protection_until() > 0.0:
 		move_button.tooltip_text = "Нападение на игрока снимет защиту вашего замка"
 	else:
@@ -252,17 +257,37 @@ func _update_reports() -> void:
 	for i in mini(REPORTS_SHOWN, reports.size()):
 		var report: Dictionary = reports[i]
 		var data: Dictionary = report.data
+		var row := HBoxContainer.new()
 		var label := Label.new()
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		label.add_theme_font_size_override("font_size", 11)
 		label.text = "%s %s · зона #%d · %s" % ["✔" if data.won else "✖", data.text, int(data.zoneId), _ago(float(report.createdAt))]
 		label.modulate = COLOR_WIN if data.won else COLOR_LOSS
 		label.tooltip_text = _report_details(data)
 		label.mouse_filter = Control.MOUSE_FILTER_PASS
-		reports_list.add_child(label)
+		row.add_child(label)
+		if BattleReplay.can_replay(report):
+			var watch := Button.new()
+			watch.text = "▶"
+			watch.tooltip_text = "Посмотреть бой"
+			watch.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+			watch.pressed.connect(battle_replay.play.bind(report))
+			row.add_child(watch)
+		reports_list.add_child(row)
 
 
 # --- Действия -----------------------------------------------------------------------
+
+## Новый бой, пока карта открыта, — сразу показываем повтор (самый свежий).
+func _on_new_reports(reports: Array) -> void:
+	if not visible or battle_replay.visible:
+		return
+	for report: Dictionary in reports:
+		if BattleReplay.can_replay(report):
+			battle_replay.play(report)
+			return
+
 
 func _on_zone_selected(zone_id: int) -> void:
 	_selected = zone_id

@@ -19,6 +19,7 @@ func _ready() -> void:
 	_test_kingdom()
 	_test_needs()
 	_test_army()
+	await _test_battle_replay()
 	await _test_skill_casting()
 	if _errors.is_empty():
 		print("SELFTEST OK")
@@ -340,6 +341,38 @@ func _test_army() -> void:
 	_check(is_equal_approx(float(pending.get("food", 0.0)), 3.0), "pending consumption wrong")
 	_check(kingdom.take_pending_consumption().is_empty(), "pending consumption not cleared")
 	kingdom.reset()
+
+
+## Повтор боя: погибает столько фигурок, сколько потерь в отчёте; у проигравшего на карте — все.
+func _test_battle_replay() -> void:
+	var replay: BattleReplay = load("res://scenes/world/battle_replay.tscn").instantiate()
+	get_tree().root.add_child(replay)
+	var report := {"id": 42, "createdAt": 0, "data": {
+		"kind": "battle", "zoneId": 1, "tier": 1, "won": true, "text": "Нейтралы разбиты",
+		"attacker": {"name": "Я", "army": {"militia": 100, "archer": 20}, "lost": {"militia": 50}, "power": 500, "heroLevel": 3},
+		"defender": {"name": "Нейтралы", "army": {"spearman": 30}, "lost": {"spearman": 30}, "power": 240, "heroLevel": 0},
+	}}
+	_check(BattleReplay.can_replay(report), "battle report must be replayable")
+	_check(not BattleReplay.can_replay({"id": 1, "data": {"kind": "capture", "text": "x"}}), "capture without battle is not replayable")
+	replay.play(report)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var attacker := replay.get_side_stats("attacker")
+	var defender := replay.get_side_stats("defender")
+	_check(attacker.figures <= BattleReplay.MAX_FIGURES_PER_SIDE + 1, "too many figures: %d" % attacker.figures)
+	replay.skip()
+	attacker = replay.get_side_stats("attacker")
+	defender = replay.get_side_stats("defender")
+	_check(defender.dead == defender.figures, "loser must lose every figure: %s" % str(defender))
+	_check(attacker.dead == attacker.planned_deaths and attacker.dead > 0, "attacker deaths wrong: %s" % str(attacker))
+	_check(attacker.dead < attacker.figures, "winner must keep survivors (and the hero)")
+	# Повтор одинаков при каждом просмотре.
+	replay.play(report)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_check(replay.get_side_stats("attacker").planned_deaths == attacker.planned_deaths, "replay is not deterministic")
+	replay.close()
+	replay.queue_free()
 
 
 ## Ставит ранг напрямую (в обход требований) — только для тестов.
