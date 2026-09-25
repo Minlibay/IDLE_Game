@@ -36,6 +36,8 @@ var is_resting := false
 var _base_stats: Dictionary = {}
 var _buffs: Array[Buff] = []
 var _click_tween: Tween
+var _walk_tween: Tween
+var _walk_duration := 0.0
 
 @onready var skill_caster: SkillCaster = $SkillCaster
 
@@ -44,7 +46,10 @@ func setup(p_class: CharacterClass, stats: Dictionary, p_effects_parent: Node) -
 	class_data = p_class
 	effects_parent = p_effects_parent
 	add_to_group(GROUP)
-	set_sprite(p_class.sprite, p_class.sprite_height, false)
+	if p_class.sprite_frames:
+		set_sprite_frames(p_class.sprite_frames, p_class.sprite_height, false)
+	else:
+		set_sprite(p_class.sprite, p_class.sprite_height, false)
 	health_bar.set_fill_color(HEALTH_BAR_COLOR)
 	apply_stats(stats, true)
 	skill_caster.setup(self, p_class)
@@ -64,10 +69,32 @@ func revive() -> void:
 	_update_health()
 
 
+## Герой идёт из точки from в точку to (появление в начале боя и после возрождения).
+func walk_in(from: Vector3, to: Vector3, duration: float) -> void:
+	position = from
+	_is_moving = true
+	set_base_animation(&"walk")
+	_walk_duration = duration
+	_walk_tween = create_tween()
+	_walk_tween.tween_property(self, "position", to, duration)
+	await _walk_tween.finished
+	_is_moving = false
+	set_base_animation(ANIM_IDLE)
+
+
+## Мгновенно довести героя до места (например, для просмотра анимаций).
+func finish_walk() -> void:
+	if _walk_tween and _walk_tween.is_running():
+		_walk_tween.custom_step(_walk_duration)
+
+
 func set_resting(value: bool) -> void:
 	is_resting = value
-	pose_scale = REST_POSE if value else Vector3.ONE
-	visual.modulate = Color(0.75, 0.75, 0.9) if value else Color.WHITE
+	set_base_animation(&"rest" if value else ANIM_IDLE)
+	# Нет анимации отдыха — «присаживаем» статичный спрайт.
+	pose_scale = REST_POSE if value and not has_animation(&"rest") else Vector3.ONE
+	# Затемнение «сна» — только для статичного спрайта; нарисованная анимация отдыха и так понятна.
+	visual.modulate = Color(0.75, 0.75, 0.9) if value and not has_animation(&"rest") else Color.WHITE
 
 
 func register_click() -> void:
@@ -208,7 +235,8 @@ func _tick(delta: float) -> void:
 
 func _attack(target: Monster) -> void:
 	var hit := roll_hit()
-	lunge(signf(target.global_position.x - global_position.x))
+	if not play_action(&"attack"):
+		lunge(signf(target.global_position.x - global_position.x))
 	if class_data.is_ranged():
 		launch_projectile(target, hit)
 	else:

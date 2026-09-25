@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/need_data.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/data/stat_modifier.gd" id="2"]
-[ext_resource type="Texture2D" path="res://assets/sprites/needs/hunger.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/food.png" id="3"]
 
 [sub_resource type="Resource" id="Sat_1"]
 script = ExtResource("2")
@@ -26,6 +26,7 @@ display_name = "Сытость"
 icon = ExtResource("3")
 order = 0
 bar_color = Color(0.95, 0.6, 0.25, 1)
+bar_theme_variation = &"BarHunger"
 decay_per_minute = 3.0
 consumes_resource = "food"
 restore_per_unit = 20.0

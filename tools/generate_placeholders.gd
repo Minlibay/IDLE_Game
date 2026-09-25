@@ -2,6 +2,7 @@ extends SceneTree
 ## Генерирует временные пиксельные спрайты-заглушки.
 ## Запуск: Godot.exe --headless --path . --script res://tools/generate_placeholders.gd
 ## Чтобы поставить свои арты — просто замените PNG с тем же именем в assets/sprites/.
+## Существующие файлы НЕ перезаписываются (чтобы не затереть готовые арты). Перегенерировать всё: -- --force
 ## Правило для артов: персонаж смотрит ВПРАВО, прозрачный фон, ноги у нижнего края картинки.
 
 const OUT_DIR := "res://assets/sprites/"
@@ -19,11 +20,12 @@ const CYAN := Color(0.35, 0.9, 1.0)
 const EYE := Color(0.1, 0.1, 0.15)
 
 var _rng := RandomNumberGenerator.new()
+var _force := OS.get_cmdline_user_args().has("--force")
 
 
 func _initialize() -> void:
 	_rng.seed = 1337
-	for sub in ["heroes", "monsters", "items", "fx", "skills", "talents", "resources", "buildings", "needs"]:
+	for sub in ["heroes", "monsters", "items", "fx", "skills", "talents", "resources", "buildings", "needs", "units"]:
 		DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT_DIR + sub))
 
 	_save(_warrior(), "heroes/warrior.png")
@@ -94,6 +96,15 @@ func _initialize() -> void:
 	_save(_bld_forge(), "buildings/forge.png")
 	_save(_bld_barracks(), "buildings/barracks.png")
 	_save(_bld_market(), "buildings/market.png")
+	_save(_bld_stable(), "buildings/stable.png")
+
+	# Отряды армии (имена = id отряда) и иконки новых бонусов.
+	_save(_unit_militia(), "units/militia.png")
+	_save(_unit_spearman(), "units/spearman.png")
+	_save(_unit_archer(), "units/archer.png")
+	_save(_unit_knight(), "units/knight.png")
+	_save(_talent_training_speed(), "talents/training_speed.png")
+	_save(_talent_army_power(), "talents/army_power.png")
 
 	# Потребности героя.
 	_save(_need_hunger(), "needs/hunger.png")
@@ -785,6 +796,79 @@ func _bld_market() -> Image:
 	return img
 
 
+func _bld_stable() -> Image:
+	var img := _house(Color(0.45, 0.35, 0.25), BROWN, Color(0.75, 0.6, 0.4))
+	_rect(img, 4, 9, 8, 1, BROWN.darkened(0.2))
+	_rect(img, 10, 9, 2, 2, Color(0.95, 0.85, 0.5))
+	return img
+
+
+# --- Отряды армии (16x16) ------------------------------------------------------
+
+## Маленький солдатик: голова, тело нужного цвета, ноги.
+func _soldier(bg: Color, body: Color) -> Image:
+	var img := _skill_bg(bg)
+	_rect(img, 6, 3, 4, 4, SKIN)
+	_rect(img, 5, 7, 6, 5, body)
+	_rect(img, 6, 12, 1, 2, BROWN)
+	_rect(img, 9, 12, 1, 2, BROWN)
+	return img
+
+
+func _unit_militia() -> Image:
+	var img := _soldier(Color(0.45, 0.4, 0.3), LEATHER)
+	_rect(img, 12, 2, 1, 11, BROWN)
+	_rect(img, 11, 2, 3, 1, SILVER)
+	_px(img, 11, 1, SILVER)
+	_px(img, 13, 1, SILVER)
+	return img
+
+
+func _unit_spearman() -> Image:
+	var img := _soldier(Color(0.3, 0.4, 0.55), STEEL)
+	_rect(img, 12, 1, 1, 13, BROWN)
+	_rect(img, 12, 1, 1, 2, SILVER)
+	_rect(img, 2, 7, 3, 5, RED)
+	_rect(img, 6, 2, 4, 2, STEEL.darkened(0.2))
+	return img
+
+
+func _unit_archer() -> Image:
+	var img := _soldier(Color(0.3, 0.5, 0.3), Color(0.25, 0.55, 0.3))
+	for y in range(3, 13):
+		_px(img, 12 + roundi(sin(float(y - 3) / 9.0 * PI) * 2.0), y, BROWN)
+	_rect(img, 12, 3, 1, 10, Color(0.9, 0.9, 0.85))
+	return img
+
+
+func _unit_knight() -> Image:
+	var img := _skill_bg(Color(0.5, 0.4, 0.2))
+	_rect(img, 3, 9, 9, 3, Color(0.55, 0.4, 0.3))
+	_rect(img, 11, 7, 3, 3, Color(0.55, 0.4, 0.3))
+	_rect(img, 4, 12, 1, 2, BROWN)
+	_rect(img, 10, 12, 1, 2, BROWN)
+	_rect(img, 6, 3, 4, 3, SILVER)
+	_rect(img, 5, 6, 5, 3, STEEL)
+	_rect(img, 7, 1, 2, 2, RED)
+	return img
+
+
+func _talent_training_speed() -> Image:
+	var img := _talent_skill_cooldown()
+	_rect(img, 11, 10, 3, 3, LEATHER)
+	return img
+
+
+func _talent_army_power() -> Image:
+	var img := _skill_bg(Color(0.55, 0.3, 0.15))
+	for i in 10:
+		_px(img, 3 + i, 12 - i, SILVER)
+		_px(img, 3 + i, 3 + i, SILVER)
+	_rect(img, 3, 11, 2, 2, GOLD)
+	_rect(img, 11, 11, 2, 2, GOLD)
+	return img
+
+
 # --- Потребности (16x16) -------------------------------------------------------
 
 func _need_hunger() -> Image:
@@ -852,6 +936,8 @@ func _outline(img: Image) -> void:
 
 
 func _save(img: Image, relative_path: String, outline := true) -> void:
+	if not _force and FileAccess.file_exists(OUT_DIR + relative_path):
+		return
 	if outline:
 		_outline(img)
 	var err := img.save_png(OUT_DIR + relative_path)

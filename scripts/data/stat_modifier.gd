@@ -19,6 +19,8 @@ enum Stat {
 	LIFESTEAL,      ## % нанесённого урона возвращается здоровьем
 	REST_SPEED,     ## % скорости отдыха (восстановления бодрости)
 	NEED_DECAY,     ## % замедления голода/жажды/усталости
+	TRAINING_SPEED, ## % скорости обучения армии
+	ARMY_POWER,     ## % силы армии (атака и защита)
 }
 ## Новые значения добавляйте ТОЛЬКО в конец: в .tres статы хранятся числами.
 
@@ -26,14 +28,14 @@ enum Stat {
 const ICON_NAMES := [
 	"damage", "max_hp", "armor", "attack_speed", "crit_chance", "crit_damage", "skill_damage",
 	"skill_cooldown", "click_power", "gold_find", "xp_gain", "drop_chance", "regen", "lifesteal",
-	"rest_speed", "need_decay",
+	"rest_speed", "need_decay", "training_speed", "army_power",
 ]
 const ICON_DIR := "res://assets/sprites/talents/"
 ## Подписи для describe() (в порядке Stat).
 const STAT_LABELS := [
 	"урона", "здоровья", "брони", "скорости атаки", "шанса крита", "крит. урона", "урона умений",
 	"сокращения перезарядки", "силы клика", "золота", "опыта", "шанса дропа", "регенерации",
-	"вампиризма", "скорости отдыха", "замедления голода и жажды",
+	"вампиризма", "скорости отдыха", "замедления голода и жажды", "скорости обучения", "силы армии",
 ]
 
 @export var stat: Stat = Stat.DAMAGE
@@ -84,8 +86,10 @@ static func get_icon_path(value_stat: int) -> String:
 	return ICON_DIR + ICON_NAMES[value_stat] + ".png"
 
 
-## 4.0 -> "4", 2.5 -> "2.5"
+## 4.0 -> "4", 2.5 -> "2.5", 0.05 -> "0.05"
 static func format_number(number: float) -> String:
 	if is_equal_approx(number, roundf(number)):
 		return str(roundi(number))
-	return "%.1f" % number
+	if is_equal_approx(number, snappedf(number, 0.1)):
+		return "%.1f" % number
+	return "%.2f" % number

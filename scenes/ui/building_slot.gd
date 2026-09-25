@@ -1,13 +1,9 @@
 class_name BuildingSlot
 extends Button
-## Ячейка здания: иконка, уровень, полоска стройки. Зелёная рамка — можно улучшить.
+## Ячейка здания: иконка, уровень, полоска стройки.
+## Рамки: пустая — не построено, фиолетовая — построено, зелёная — можно улучшить, золотая — строится.
 
 signal building_pressed(building: BuildingData)
-
-const COLOR_NOT_BUILT := Color(0.3, 0.3, 0.36)
-const COLOR_BUILT := Color(0.55, 0.6, 0.75)
-const COLOR_CAN_UPGRADE := Color(0.45, 0.9, 0.45)
-const COLOR_CONSTRUCTING := Color(1.0, 0.75, 0.25)
 
 var building: BuildingData
 
@@ -30,10 +26,10 @@ func update_state(level: int, can_upgrade: bool, construction_ratio: float, sele
 	level_label.text = str(level) if level > 0 else ""
 	build_bar.visible = construction_ratio >= 0.0
 	build_bar.value = maxf(construction_ratio, 0.0)
-	var border := COLOR_BUILT if level > 0 else COLOR_NOT_BUILT
+	var frame := "slot_skill" if level > 0 else "slot_empty"
 	if construction_ratio >= 0.0:
-		border = COLOR_CONSTRUCTING
+		frame = "tier_legendary"
 	elif can_upgrade:
-		border = COLOR_CAN_UPGRADE
-	UiStyles.apply_slot_style(self, border, selected)
+		frame = "tier_uncommon"
+	UiStyles.apply_slot_frame(self, frame, selected)
 	self_modulate = Color.WHITE if level > 0 or construction_ratio >= 0.0 else Color(0.55, 0.55, 0.6)

@@ -61,6 +61,8 @@ func try_cast(skill: SkillData) -> bool:
 	var target := hero.find_target()
 	if skill.effect.requires_target() and target == null:
 		return false
+	if skill.animation != &"":
+		hero.play_action(skill.animation)
 	skill.effect.execute(hero, target, GameState.get_skill_power(skill.id))
 	var cooldown := skill.cooldown * GameState.get_skill_cooldown_multiplier(skill.id)
 	_cooldowns[skill.id] = cooldown

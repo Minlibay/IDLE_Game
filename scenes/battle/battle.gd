@@ -4,6 +4,9 @@ extends Node3D
 ## Где стоит герой и откуда выходят монстры (доля ширины экрана).
 const HERO_SCREEN_X := 0.2
 const SPAWN_SCREEN_X := 1.03
+## Герой выходит из-за левого края экрана к своей позиции.
+const HERO_ENTER_SCREEN_X := -0.03
+const HERO_ENTER_TIME := 1.5
 ## Разброс монстров по глубине, чтобы толпа выглядела объёмнее.
 const SPAWN_DEPTH_SPREAD := 0.35
 const RESPAWN_DELAY := 2.5
@@ -58,6 +61,7 @@ func _ready() -> void:
 	wave_manager.wave_cleared.connect(_on_wave_cleared)
 
 	_layout()
+	_hero_enter()
 	hud.set_hero_health(hero.hp, hero.max_hp)
 	wave_manager.start_wave(GameState.wave)
 	_show_offline_report()
@@ -69,7 +73,8 @@ func _process(delta: float) -> void:
 	if _resting:
 		GameState.needs.rest_tick(delta)
 		_zzz_timer -= delta
-		if _zzz_timer <= 0.0:
+		# У героя с нарисованной анимацией отдыха «z» уже есть в самом рисунке.
+		if _zzz_timer <= 0.0 and not hero.has_animation(&"rest"):
 			_zzz_timer = REST_ZZZ_INTERVAL
 			_float_text(hero.global_position + Vector3(0.3, hero.visual_height, 0.3), "Zzz", COLOR_REST, 1.0, 0.8, 1.4)
 		if GameState.needs.is_rested():
@@ -111,6 +116,11 @@ func _show_offline_report() -> void:
 	var gained: Dictionary = report.get("resources", {})
 	for resource_id: String in gained:
 		parts.append("+%d %s" % [roundi(gained[resource_id]), KingdomState.resource_name(resource_id)])
+	var trained: Dictionary = report.get("trained", {})
+	for unit_id: String in trained:
+		var unit := Database.get_unit(unit_id)
+		if unit:
+			parts.append("обучено: %s ×%d" % [unit.display_name, int(trained[unit_id])])
 	for built: String in report.get("built", []):
 		parts.append("построено: " + built)
 	if parts.is_empty():
@@ -133,8 +143,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		hud.toggle_talents()
 	elif key.keycode == KEY_K:
 		hud.toggle_kingdom()
+	elif key.keycode == KEY_M:
+		hud.toggle_map()
 	elif key.keycode >= KEY_1 and key.keycode <= KEY_9:
 		hero.skill_caster.try_cast_index(key.keycode - KEY_1)
+
+
+func _hero_enter() -> void:
+	hero.walk_in(_lane_point(HERO_ENTER_SCREEN_X), _lane_point(HERO_SCREEN_X), HERO_ENTER_TIME)
 
 
 func _layout() -> void:
@@ -169,7 +185,8 @@ func _spawn_monster(data: MonsterData, wave: int) -> void:
 func _on_actor_damaged(amount: float, is_crit: bool, actor: Actor) -> void:
 	var color := COLOR_HERO_DAMAGE if actor == hero else (COLOR_CRIT if is_crit else COLOR_DAMAGE)
 	var text := str(maxi(1, roundi(amount))) + ("!" if is_crit else "")
-	var pos := actor.global_position + Vector3(randf_range(-0.2, 0.2), actor.visual_height, 0.3)
+	# Разброс по X и Y, чтобы цифры частых ударов не слипались в одно число.
+	var pos := actor.global_position + Vector3(randf_range(-0.4, 0.4), actor.visual_height + randf_range(0.0, 0.35), 0.3)
 	_float_text(pos, text, color, 1.4 if is_crit else 1.0)
 
 
@@ -212,6 +229,7 @@ func _on_hero_died(_actor: Actor) -> void:
 	for monster in monsters_root.get_children():
 		monster.queue_free()
 	hero.revive()
+	_hero_enter()
 	wave_manager.start_wave(GameState.wave)
 
 
@@ -236,6 +254,7 @@ func _on_stats_changed() -> void:
 
 func _on_leveled_up(new_level: int) -> void:
 	hero.apply_stats(GameState.get_hero_stats(), true)
+	hero.play_action(&"victory")
 	_float_text(hero.global_position + Vector3(0.0, hero.visual_height + 0.3, 0.3),
 		"Уровень %d!" % new_level, COLOR_GOLD, 1.5, 1.0, 1.5)
 	for skill in hero.skill_caster.skills:

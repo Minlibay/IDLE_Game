@@ -23,6 +23,7 @@ var _kingdom_hint_timer := 0.0
 @onready var inventory_button: Button = %InventoryButton
 @onready var talents_button: Button = %TalentsButton
 @onready var kingdom_button: Button = %KingdomButton
+@onready var map_button: Button = %MapButton
 @onready var quit_button: Button = %QuitButton
 @onready var message_label: Label = %MessageLabel
 @onready var skill_list: HBoxContainer = %SkillList
@@ -31,6 +32,7 @@ var _kingdom_hint_timer := 0.0
 @onready var inventory_panel: InventoryPanel = %InventoryPanel
 @onready var talent_panel: TalentPanel = %TalentPanel
 @onready var kingdom_panel: KingdomPanel = %KingdomPanel
+@onready var world_map: WorldMap = %WorldMap
 
 
 func _ready() -> void:
@@ -41,9 +43,11 @@ func _ready() -> void:
 	GameState.character_changed.connect(_refresh)
 	GameState.talents_changed.connect(_refresh)
 	GameState.kingdom.construction_finished.connect(_on_construction_finished)
+	GameState.kingdom.army.order_completed.connect(_on_order_completed)
 	inventory_button.pressed.connect(toggle_inventory)
 	talents_button.pressed.connect(toggle_talents)
 	kingdom_button.pressed.connect(toggle_kingdom)
+	map_button.pressed.connect(toggle_map)
 	quit_button.pressed.connect(_on_quit_pressed)
 	needs_panel.rest_requested.connect(rest_requested.emit)
 	message_label.modulate.a = 0.0
@@ -60,7 +64,8 @@ func _process(delta: float) -> void:
 func set_hero_health(current: float, maximum: float) -> void:
 	hp_bar.max_value = maximum
 	hp_bar.value = current
-	hp_text.text = "%d / %d" % [ceili(current), roundi(maximum)]
+	# Оба значения округляются одинаково, иначе при регенерации бывает «729 / 728».
+	hp_text.text = "%d / %d" % [ceili(current), ceili(maximum)]
 
 
 ## Создаёт кнопки умений героя (клавиши 1, 2, 3...).
@@ -89,6 +94,10 @@ func toggle_kingdom() -> void:
 	_toggle_panel(kingdom_panel)
 
 
+func toggle_map() -> void:
+	_toggle_panel(world_map)
+
+
 func show_message(text: String, duration := MESSAGE_DURATION) -> void:
 	message_label.text = text
 	if _message_tween:
@@ -101,7 +110,7 @@ func show_message(text: String, duration := MESSAGE_DURATION) -> void:
 
 ## Одновременно открыто только одно окно.
 func _toggle_panel(panel: Control) -> void:
-	for other: Control in [inventory_panel, talent_panel, kingdom_panel]:
+	for other: Control in [inventory_panel, talent_panel, kingdom_panel, world_map]:
 		if other != panel:
 			other.close()
 	panel.toggle()
@@ -114,7 +123,8 @@ func _refresh() -> void:
 	xp_bar.max_value = GameState.xp_to_next_level()
 	xp_bar.value = GameState.xp
 	xp_bar.tooltip_text = "Опыт: %d / %d" % [GameState.xp, GameState.xp_to_next_level()]
-	gold_label.text = "Золото: %d" % GameState.gold
+	gold_label.text = str(GameState.gold)
+	gold_label.tooltip_text = "Золото"
 	var points := GameState.get_available_talent_points()
 	talents_button.text = "Таланты (%d)" % points if points > 0 else "Таланты"
 	talents_button.modulate = COLOR_HIGHLIGHT if points > 0 else Color.WHITE
@@ -131,11 +141,15 @@ func _update_kingdom_button() -> void:
 				can_build = true
 				break
 	kingdom_button.modulate = COLOR_HIGHLIGHT if can_build else Color.WHITE
-	kingdom_button.text = "Королевство (!)" if can_build else "Королевство"
+	kingdom_button.text = "Замок (!)" if can_build else "Замок"
 
 
 func _on_construction_finished(building: BuildingData, level: int) -> void:
 	show_message("Построено: %s, ур. %d" % [building.display_name, level])
+
+
+func _on_order_completed(unit: UnitData, count: int) -> void:
+	show_message("Обучено: %s ×%d" % [unit.display_name, count])
 
 
 func _on_quit_pressed() -> void:

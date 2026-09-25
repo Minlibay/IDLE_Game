@@ -8,6 +8,10 @@ extends Node
 ##   --open-inventory        сразу открыть инвентарь (для скриншотов)
 ##   --open-talents          сразу открыть таланты (для скриншотов)
 ##   --open-kingdom          сразу открыть королевство (для скриншотов)
+##   --open-army             сразу открыть вкладку «Армия» (для скриншотов)
+##   --open-map              сразу открыть мировую карту
+##   --world-test            проверка связи с сервером карты (tests/world_test.gd; сервер должен быть запущен)
+##   --preview-anim=имя:кадр  показать кадр анимации героя (проверка артов; с --timescale=0.01 мир почти замирает)
 ##   --tired                 бодрость на нуле — герой сразу уходит отдыхать
 ##   --selftest              прогнать проверку логики предметов (tests/self_test.gd)
 ##   --timescale=4           ускорить время
@@ -17,6 +21,7 @@ extends Node
 const CREATION_SCENE := preload("res://scenes/creation/character_creation.tscn")
 const BATTLE_SCENE := preload("res://scenes/battle/battle.tscn")
 const SELF_TEST_SCRIPT := preload("res://tests/self_test.gd")
+const WORLD_TEST_SCRIPT := preload("res://tests/world_test.gd")
 const SCREENSHOT_DELAY := 6.0
 
 var _current: Node
@@ -46,6 +51,18 @@ func _ready() -> void:
 		(_current.get_node("HUD") as Hud).talent_panel.open.call_deferred()
 	if args.has("open-kingdom") and _current.has_node("HUD"):
 		(_current.get_node("HUD") as Hud).kingdom_panel.open.call_deferred()
+	if args.has("open-army") and _current.has_node("HUD"):
+		var hud := _current.get_node("HUD") as Hud
+		hud.kingdom_panel.tabs.current_tab = 1
+		hud.kingdom_panel.open.call_deferred()
+	if args.has("open-map") and _current.has_node("HUD"):
+		(_current.get_node("HUD") as Hud).world_map.open.call_deferred()
+	if args.has("world-test"):
+		var world_test := Node.new()
+		world_test.set_script(WORLD_TEST_SCRIPT)
+		add_child(world_test)
+	if args.has("preview-anim") and _current.has_node("Hero"):
+		_preview_animation.call_deferred(_current.get_node("Hero") as Hero, str(args["preview-anim"]))
 	if args.has("selftest"):
 		var self_test := Node.new()
 		self_test.set_script(SELF_TEST_SCRIPT)
@@ -71,6 +88,18 @@ func _replace_current(scene: PackedScene) -> Node:
 	_current = scene.instantiate()
 	add_child(_current)
 	return _current
+
+
+## Ставит героя в заданный кадр анимации и замораживает её (для проверки артов).
+func _preview_animation(hero: Hero, spec: String) -> void:
+	var parts := spec.split(":")
+	var animation := StringName(parts[0])
+	hero.finish_walk()
+	if not hero.play_action(animation):
+		push_warning("No animation '%s'" % animation)
+		return
+	hero.visual.set_frame_and_progress(int(parts[1]) if parts.size() > 1 else 0, 0.0)
+	hero.visual.pause()
 
 
 func _take_screenshot_later(path: String) -> void:

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/need_data.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/data/stat_modifier.gd" id="2"]
-[ext_resource type="Texture2D" path="res://assets/sprites/needs/thirst.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/water.png" id="3"]
 
 [sub_resource type="Resource" id="Sat_1"]
 script = ExtResource("2")
@@ -21,6 +21,7 @@ display_name = "Жажда"
 icon = ExtResource("3")
 order = 1
 bar_color = Color(0.35, 0.65, 1, 1)
+bar_theme_variation = &"BarThirst"
 decay_per_minute = 4.0
 consumes_resource = "water"
 restore_per_unit = 20.0

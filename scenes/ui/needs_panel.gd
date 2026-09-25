@@ -27,14 +27,16 @@ func _ready() -> void:
 		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		row.add_child(icon)
 		var bar := ProgressBar.new()
-		bar.custom_minimum_size = Vector2(96, 9)
+		bar.custom_minimum_size = Vector2(96, 11)
 		bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		bar.show_percentage = false
 		bar.max_value = NeedsState.MAX_VALUE
 		bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		bar.add_theme_stylebox_override("background", _bar_style(Color(0.03, 0.03, 0.05, 0.95)))
-		bar.add_theme_stylebox_override("fill", _bar_style(need.bar_color))
+		if need.bar_theme_variation != &"":
+			bar.theme_type_variation = need.bar_theme_variation
+		else:
+			bar.add_theme_stylebox_override("fill", _bar_style(need.bar_color))
 		row.add_child(bar)
 		bars_box.add_child(row)
 		_bars[need.id] = bar

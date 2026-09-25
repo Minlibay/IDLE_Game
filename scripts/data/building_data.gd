@@ -29,6 +29,8 @@ extends Resource
 @export var production_per_level := 0.0
 ## Прибавка к вместимости склада за каждый уровень.
 @export var storage_per_level := 0.0
+## Прибавка к вместимости армии замка за каждый уровень.
+@export var army_capacity_per_level := 0
 ## Бонусы за каждый уровень (как у талантов).
 @export var modifiers: Array[StatModifier] = []
 

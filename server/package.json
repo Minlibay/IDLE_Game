@@ -1,0 +1,16 @@
+{
+  "name": "idle-heroes-world-server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Сервер мировой карты Desktop Idle Heroes: зоны, армии, захваты, PvP.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/main.ts",
+    "dev": "node --disable-warning=ExperimentalWarning --watch src/main.ts",
+    "test": "node --disable-warning=ExperimentalWarning --test \"test/**/*.test.ts\"",
+    "typecheck": "npx -y -p typescript@5 tsc --noEmit"
+  }
+}

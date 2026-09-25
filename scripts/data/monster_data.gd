@@ -10,6 +10,8 @@ extends Resource
 ## Спрайт монстра. Рисуется смотрящим ВПРАВО — в игре отражается автоматически.
 @export var sprite: Texture2D
 @export var sprite_height := 1.2
+## Покадровые анимации (idle, walk, attack, hurt, death). Пусто — статичный sprite.
+@export var sprite_frames: SpriteFrames
 
 @export_group("Stats")
 @export var base_hp := 30.0

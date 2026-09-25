@@ -1,0 +1,24 @@
+{
+  "units": {
+    "archer": {
+      "attack": 9.0,
+      "defense": 3.0,
+      "housing": 1
+    },
+    "knight": {
+      "attack": 16.0,
+      "defense": 14.0,
+      "housing": 3
+    },
+    "militia": {
+      "attack": 3.0,
+      "defense": 2.0,
+      "housing": 1
+    },
+    "spearman": {
+      "attack": 4.0,
+      "defense": 8.0,
+      "housing": 1
+    }
+  }
+}

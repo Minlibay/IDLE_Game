@@ -1,0 +1,266 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/world/world_map.gd" id="1"]
+[ext_resource type="Script" path="res://scenes/world/world_map_view.gd" id="2"]
+
+[node name="WorldMap" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.06, 0.09, 1)
+
+[node name="MapView" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 56.0
+offset_right = -328.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2")
+
+[node name="TopBar" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_type_variation = &"PanelHeader"
+
+[node name="HBox" type="HBoxContainer" parent="TopBar"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="TopBar/HBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Карта мира"
+
+[node name="StatusLabel" type="Label" parent="TopBar/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.85, 0.45, 1)
+
+[node name="ArmyLabel" type="Label" parent="TopBar/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="DeployButton" type="Button" parent="TopBar/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Отправить солдат из армии замка к герою на карту (герой должен быть в замке)"
+text = "Армию из замка →"
+
+[node name="RecallButton" type="Button" parent="TopBar/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Вернуть солдат с карты в армию замка (герой должен быть в замке)"
+text = "← В замок"
+
+[node name="CenterButton" type="Button" parent="TopBar/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "К герою"
+
+[node name="CloseButton" type="Button" parent="TopBar/HBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Закрыть [M]"
+
+[node name="SidePanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = 56.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="SidePanel"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ZoneTitle" type="Label" parent="SidePanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Выберите зону на карте"
+
+[node name="ZoneInfo" type="Label" parent="SidePanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 3
+
+[node name="MoveButton" type="Button" parent="SidePanel/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Поход"
+
+[node name="GarrisonButton" type="Button" parent="SidePanel/VBox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+tooltip_text = "Оставить часть армии защищать эту зону"
+text = "Оставить гарнизон"
+
+[node name="WithdrawButton" type="Button" parent="SidePanel/VBox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Забрать из гарнизона"
+
+[node name="Separator" type="HSeparator" parent="SidePanel/VBox"]
+layout_mode = 2
+
+[node name="ReportsTitle" type="Label" parent="SidePanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.78, 1)
+text = "События"
+
+[node name="ReportsScroll" type="ScrollContainer" parent="SidePanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ReportsList" type="VBoxContainer" parent="SidePanel/VBox/ReportsScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="LoginPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -110.0
+offset_right = 190.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="LoginPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="LoginPanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Вход на сервер карты"
+
+[node name="UrlEdit" type="LineEdit" parent="LoginPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Адрес сервера"
+
+[node name="NameEdit" type="LineEdit" parent="LoginPanel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Имя правителя"
+max_length = 20
+
+[node name="LoginButton" type="Button" parent="LoginPanel/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "Войти"
+
+[node name="Hint" type="Label" parent="LoginPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.78, 1)
+theme_override_font_sizes/font_size = 11
+text = "Сервер запускается командой npm start в папке server/. Позже вход будет через Steam."
+autowrap_mode = 3
+
+[node name="ArmyDialog" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -120.0
+offset_right = 200.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="ArmyDialog"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="DialogTitle" type="Label" parent="ArmyDialog/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+
+[node name="DialogRows" type="VBoxContainer" parent="ArmyDialog/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="HBoxContainer" parent="ArmyDialog/VBox"]
+layout_mode = 2
+
+[node name="ConfirmButton" type="Button" parent="ArmyDialog/VBox/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Подтвердить"
+
+[node name="CancelButton" type="Button" parent="ArmyDialog/VBox/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Отмена"
+
+[node name="ErrorLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -48.0
+offset_right = 700.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.5, 0.45, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 15

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="UnitData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/unit_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/units/knight.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "knight"
+display_name = "Рыцарь"
+description = "Тяжёлая конница. Дорого, но очень сильно. Занимает 3 места."
+icon = ExtResource("2")
+order = 3
+attack = 16.0
+defense = 14.0
+housing = 3
+upkeep_per_minute = 0.3
+cost = {
+"food": 40,
+"stone": 20,
+"gold": 90
+}
+train_time = 45.0
+required_building = "stable"
+required_level = 1

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="UnitData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/unit_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/units/militia.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "militia"
+display_name = "Ополченец"
+description = "Крестьяне с вилами. Дёшево и быстро, но слабо."
+icon = ExtResource("2")
+order = 0
+attack = 3.0
+defense = 2.0
+housing = 1
+upkeep_per_minute = 0.05
+cost = {
+"food": 10,
+"gold": 10
+}
+train_time = 8.0
+required_building = "barracks"
+required_level = 1

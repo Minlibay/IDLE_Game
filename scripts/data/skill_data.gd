@@ -15,3 +15,5 @@ extends Resource
 ## С какого уровня героя умение доступно.
 @export var unlock_level := 1
 @export var effect: SkillEffect
+## Анимация героя при применении (имя из его SpriteFrames, например power_strike). Пусто — без анимации.
+@export var animation: StringName = &""

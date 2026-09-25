@@ -21,3 +21,4 @@ color = Color(1, 0.6, 0.2, 1)
 cooldown = 20.0
 unlock_level = 10
 effect = SubResource("Resource_effect")
+animation = &"war_cry"

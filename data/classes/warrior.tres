@@ -7,6 +7,7 @@
 [ext_resource type="Resource" path="res://data/skills/warrior_whirlwind.tres" id="12"]
 [ext_resource type="Resource" path="res://data/skills/warrior_war_cry.tres" id="13"]
 [ext_resource type="Resource" path="res://data/talents/warrior_talents.tres" id="20"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/heroes/warrior/warrior_frames.tres" id="21"]
 
 [resource]
 script = ExtResource("1")
@@ -15,6 +16,7 @@ display_name = "Воин"
 description = "Много здоровья и брони. Бьёт в ближнем бою."
 order = 0
 sprite = ExtResource("2")
+sprite_frames = ExtResource("21")
 sprite_height = 1.6
 base_max_hp = 140.0
 hp_per_level = 18.0

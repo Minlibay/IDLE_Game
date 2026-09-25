@@ -1,10 +1,8 @@
 class_name ItemSlot
 extends Button
-## Ячейка предмета: иконка, рамка цвета тира, уровень заточки.
+## Ячейка предмета: иконка, рамка редкости (assets/ui/slots/), уровень заточки.
 
 signal item_pressed(item: Item)
-
-const EMPTY_BORDER := Color(0.3, 0.3, 0.36)
 
 var item: Item
 var _selected := false
@@ -36,4 +34,4 @@ func _on_pressed() -> void:
 
 
 func _apply_style() -> void:
-	UiStyles.apply_slot_style(self, item.get_tier_color() if item else EMPTY_BORDER, _selected)
+	UiStyles.apply_slot_frame(self, UiStyles.tier_frame(item.tier) if item else "slot_empty", _selected)

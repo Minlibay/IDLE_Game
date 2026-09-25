@@ -1,0 +1,107 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/army_view.gd" id="1"]
+
+[node name="ArmyView" type="HBoxContainer"]
+theme_override_constants/separation = 14
+script = ExtResource("1")
+
+[node name="Summary" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="PowerLabel" type="Label" parent="Summary"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.45, 1)
+theme_override_font_sizes/font_size = 15
+text = "Сила армии: 0"
+
+[node name="ArmyStatsLabel" type="Label" parent="Summary"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+
+[node name="StarvingLabel" type="Label" parent="Summary"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.45, 0.4, 1)
+theme_override_font_sizes/font_size = 11
+text = "Армии нечего есть! Сила −50%"
+
+[node name="QueueTitle" type="Label" parent="Summary"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.78, 1)
+theme_override_font_sizes/font_size = 11
+text = "Обучение:"
+
+[node name="QueueList" type="VBoxContainer" parent="Summary"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="UnitsGrid" type="GridContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 2
+
+[node name="Details" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="UnitNameLabel" type="Label" parent="Details"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+
+[node name="UnitInfoLabel" type="Label" parent="Details"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 3
+
+[node name="UnitCostBox" type="HBoxContainer" parent="Details"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="UnitTimeLabel" type="Label" parent="Details"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.78, 1)
+theme_override_font_sizes/font_size = 11
+
+[node name="AmountRow" type="HBoxContainer" parent="Details"]
+layout_mode = 2
+
+[node name="AmountSpin" type="SpinBox" parent="Details/AmountRow"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 999.0
+value = 1.0
+
+[node name="MaxButton" type="Button" parent="Details/AmountRow"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Сколько можно нанять сейчас"
+text = "Макс."
+
+[node name="RecruitButton" type="Button" parent="Details/AmountRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Нанять"
+
+[node name="RecruitReasonLabel" type="Label" parent="Details"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.6, 0.45, 1)
+theme_override_font_sizes/font_size = 11

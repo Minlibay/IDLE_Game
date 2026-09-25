@@ -18,6 +18,7 @@ func _ready() -> void:
 	_test_talents()
 	_test_kingdom()
 	_test_needs()
+	_test_army()
 	await _test_skill_casting()
 	if _errors.is_empty():
 		print("SELFTEST OK")
@@ -230,6 +231,73 @@ func _test_needs() -> void:
 	_check(needs.is_rested(), "rest did not restore energy")
 	needs.reset()
 	kingdom.resources["food"] = 50.0
+
+
+func _test_army() -> void:
+	var kingdom := GameState.kingdom
+	var army := kingdom.army
+	_check(Database.units.size() >= 4, "units not loaded")
+	kingdom.reset()
+	var militia := Database.get_unit("militia")
+	var knight := Database.get_unit("knight")
+	_check(not army.is_unlocked(militia), "militia must need barracks")
+	_check(army.get_recruit_block_reason(militia, 1) != "", "recruit allowed without barracks")
+
+	kingdom.levels["barracks"] = 2
+	kingdom._rebuild_bonuses()
+	for resource_id: String in KingdomState.RESOURCES:
+		kingdom.resources[resource_id] = 500.0
+	GameState.add_gold(1_000_000)
+	_check(army.is_unlocked(militia), "militia locked with barracks 2")
+	_check(not army.is_unlocked(knight), "knight must need stable")
+	_check(army.get_capacity() >= 20, "barracks did not add army capacity")
+
+	var food_before := kingdom.get_resource("food")
+	_check(army.recruit(militia, 5), "cannot recruit 5 militia: " + army.get_recruit_block_reason(militia, 5))
+	_check(kingdom.get_resource("food") < food_before, "recruit cost not paid")
+	_check(army.get_recruit_block_reason(militia, army.get_capacity()) != "", "capacity limit not enforced")
+
+	# Отмена возвращает ресурсы.
+	army.recruit(militia, 2)
+	var food_mid := kingdom.get_resource("food")
+	army.cancel_order(1)
+	_check(kingdom.get_resource("food") > food_mid, "cancel did not refund")
+
+	# Обучение (в том числе через оффлайн-прогресс королевства).
+	var report := kingdom.simulate(militia.train_time * 5 + 1.0)
+	_check(army.get_count(militia) == 5, "militia not trained: %d" % army.get_count(militia))
+	_check(int((report.trained as Dictionary).get("militia", 0)) == 5, "offline report missing trained units")
+	var power := army.get_power()
+	_check(power > 0.0, "army power is zero")
+
+	# Кузница усиливает армию.
+	kingdom.levels["forge"] = 5
+	kingdom._rebuild_bonuses()
+	_check(army.get_power() > power, "forge did not raise army power")
+
+	# Без еды армия слабеет, но не умирает.
+	var fed_power := army.get_power()
+	kingdom.resources["food"] = 0.0
+	kingdom.simulate(60.0)
+	_check(army.starving, "army must starve without food")
+	_check(army.get_count(militia) == 5, "starving army lost units")
+	_check(army.get_power() < fed_power, "starving did not reduce power")
+	kingdom.resources["food"] = 500.0
+	kingdom.simulate(1.0)
+	_check(not army.starving, "army still starving with food")
+
+	# Задел для карты мира.
+	army.remove_units({"militia": 2})
+	_check(army.get_count(militia) == 3, "remove_units failed")
+	army.add_units({"militia": 2})
+
+	# Сохранение.
+	army.recruit(militia, 3)
+	GameState.save_game()
+	GameState.load_game()
+	_check(kingdom.army.get_count(militia) == 5, "army lost after load")
+	_check(kingdom.army.queue.size() == 1, "training queue lost after load")
+	kingdom.reset()
 
 
 ## Ставит ранг напрямую (в обход требований) — только для тестов.

@@ -4,6 +4,7 @@
 
 [node name="SkillButton" type="Button"]
 custom_minimum_size = Vector2(46, 46)
+theme_type_variation = &"SquareButton"
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("1")

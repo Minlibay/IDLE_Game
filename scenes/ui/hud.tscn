@@ -5,27 +5,12 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/talent_panel.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/ui/kingdom_panel.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://scenes/ui/needs_panel.tscn" id="5"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBox_bar_bg"]
-bg_color = Color(0.03, 0.03, 0.05, 0.95)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBox_hp_fill"]
-bg_color = Color(0.82, 0.2, 0.25, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBox_xp_fill"]
-bg_color = Color(0.35, 0.6, 1, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+[ext_resource type="PackedScene" path="res://scenes/world/world_map.tscn" id="6"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/inventory.png" id="7"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/talents.png" id="8"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/kingdom.png" id="9"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/map.png" id="10"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/gold.png" id="11"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1")
@@ -39,48 +24,56 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="StatsPanel" type="PanelContainer" parent="Root"]
+[node name="BottomBar" type="HBoxContainer" parent="Root"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 12.0
 offset_top = -140.0
-offset_right = 296.0
+offset_right = 720.0
 offset_bottom = -12.0
 grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 10
 
-[node name="VBox" type="VBoxContainer" parent="Root/StatsPanel"]
+[node name="StatsPanel" type="PanelContainer" parent="Root/BottomBar"]
+custom_minimum_size = Vector2(284, 0)
+layout_mode = 2
+size_flags_vertical = 8
+theme_type_variation = &"PanelSmall"
+
+[node name="VBox" type="VBoxContainer" parent="Root/BottomBar/StatsPanel"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="NameRow" type="HBoxContainer" parent="Root/StatsPanel/VBox"]
+[node name="NameRow" type="HBoxContainer" parent="Root/BottomBar/StatsPanel/VBox"]
 layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="Root/StatsPanel/VBox/NameRow"]
+[node name="NameLabel" type="Label" parent="Root/BottomBar/StatsPanel/VBox/NameRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Герой · Воин · ур. 1"
 clip_text = true
 
-[node name="QuitButton" type="Button" parent="Root/StatsPanel/VBox/NameRow"]
+[node name="QuitButton" type="Button" parent="Root/BottomBar/StatsPanel/VBox/NameRow"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(22, 0)
+custom_minimum_size = Vector2(18, 17)
 layout_mode = 2
+size_flags_vertical = 4
 tooltip_text = "Сохранить и выйти"
-text = "✕"
+theme_type_variation = &"CloseButton"
 
-[node name="HpBar" type="ProgressBar" parent="Root/StatsPanel/VBox"]
+[node name="HpBar" type="ProgressBar" parent="Root/BottomBar/StatsPanel/VBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 14)
+custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
-theme_override_styles/background = SubResource("StyleBox_bar_bg")
-theme_override_styles/fill = SubResource("StyleBox_hp_fill")
+theme_type_variation = &"BarHealth"
 value = 100.0
 show_percentage = false
 
-[node name="HpText" type="Label" parent="Root/StatsPanel/VBox/HpBar"]
+[node name="HpText" type="Label" parent="Root/BottomBar/StatsPanel/VBox/HpBar"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -93,76 +86,89 @@ text = "100 / 100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="XpBar" type="ProgressBar" parent="Root/StatsPanel/VBox"]
+[node name="XpBar" type="ProgressBar" parent="Root/BottomBar/StatsPanel/VBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 6)
+custom_minimum_size = Vector2(0, 9)
 layout_mode = 2
 mouse_filter = 1
-theme_override_styles/background = SubResource("StyleBox_bar_bg")
-theme_override_styles/fill = SubResource("StyleBox_xp_fill")
+theme_type_variation = &"BarXp"
 show_percentage = false
 
-[node name="InfoRow" type="HBoxContainer" parent="Root/StatsPanel/VBox"]
+[node name="InfoRow" type="HBoxContainer" parent="Root/BottomBar/StatsPanel/VBox"]
 layout_mode = 2
 
-[node name="GoldLabel" type="Label" parent="Root/StatsPanel/VBox/InfoRow"]
+[node name="GoldIcon" type="TextureRect" parent="Root/BottomBar/StatsPanel/VBox/InfoRow"]
+layout_mode = 2
+texture = ExtResource("11")
+stretch_mode = 5
+
+[node name="GoldLabel" type="Label" parent="Root/BottomBar/StatsPanel/VBox/InfoRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.82, 0.3, 1)
 text = "Золото: 0"
 
-[node name="WaveLabel" type="Label" parent="Root/StatsPanel/VBox/InfoRow"]
+[node name="WaveLabel" type="Label" parent="Root/BottomBar/StatsPanel/VBox/InfoRow"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
 text = "Волна 1"
 
-[node name="Buttons" type="HBoxContainer" parent="Root/StatsPanel/VBox"]
+[node name="Buttons" type="HBoxContainer" parent="Root/BottomBar/StatsPanel/VBox"]
 layout_mode = 2
 
-[node name="InventoryButton" type="Button" parent="Root/StatsPanel/VBox/Buttons"]
+[node name="InventoryButton" type="Button" parent="Root/BottomBar/StatsPanel/VBox/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/icon_max_width = 18
 tooltip_text = "Инвентарь [I]"
 text = "Сумка"
+icon = ExtResource("7")
 
-[node name="TalentsButton" type="Button" parent="Root/StatsPanel/VBox/Buttons"]
+[node name="TalentsButton" type="Button" parent="Root/BottomBar/StatsPanel/VBox/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/icon_max_width = 18
 tooltip_text = "Дерево талантов [T]"
 text = "Таланты"
+icon = ExtResource("8")
 
-[node name="KingdomButton" type="Button" parent="Root/StatsPanel/VBox/Buttons"]
+[node name="KingdomButton" type="Button" parent="Root/BottomBar/StatsPanel/VBox/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Королевство [K]"
-text = "Королевство"
+theme_override_constants/icon_max_width = 18
+tooltip_text = "Королевство: здания и армия [K]"
+text = "Замок"
+icon = ExtResource("9")
 
-[node name="SkillPanel" type="PanelContainer" parent="Root"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 308.0
-offset_top = -72.0
-offset_right = 508.0
-offset_bottom = -12.0
-grow_vertical = 0
+[node name="MapButton" type="Button" parent="Root/BottomBar/StatsPanel/VBox/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/icon_max_width = 18
+tooltip_text = "Мировая карта [M]"
+text = "Карта"
+icon = ExtResource("10")
 
-[node name="HBox" type="HBoxContainer" parent="Root/SkillPanel"]
+[node name="SkillPanel" type="PanelContainer" parent="Root/BottomBar"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_type_variation = &"PanelSmall"
+
+[node name="HBox" type="HBoxContainer" parent="Root/BottomBar/SkillPanel"]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="SkillList" type="HBoxContainer" parent="Root/SkillPanel/HBox"]
+[node name="SkillList" type="HBoxContainer" parent="Root/BottomBar/SkillPanel/HBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="AutoCastButton" type="Button" parent="Root/SkillPanel/HBox"]
+[node name="AutoCastButton" type="CheckButton" parent="Root/BottomBar/SkillPanel/HBox"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Применять умения автоматически.
@@ -171,17 +177,11 @@ toggle_mode = true
 button_pressed = true
 text = "Авто"
 
-[node name="NeedsPanel" parent="Root" instance=ExtResource("5")]
+[node name="NeedsPanel" parent="Root/BottomBar" instance=ExtResource("5")]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 536.0
-offset_top = -72.0
-offset_right = 736.0
-offset_bottom = -12.0
-grow_vertical = 0
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 8
 
 [node name="MessageLabel" type="Label" parent="Root"]
 unique_name_in_owner = true
@@ -215,6 +215,11 @@ visible = false
 layout_mode = 1
 
 [node name="KingdomPanel" parent="Root" instance=ExtResource("4")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="WorldMap" parent="Root" instance=ExtResource("6")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1

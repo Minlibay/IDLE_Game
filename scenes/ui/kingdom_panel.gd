@@ -1,6 +1,6 @@
 class_name KingdomPanel
 extends PanelContainer
-## Королевство: ресурсы и склад, сетка зданий, детали выбранного здания, стройка.
+## Королевство: ресурсы и склад; вкладки «Здания» (сетка, детали, стройка) и «Армия» (ArmyView).
 
 const BUILDING_SLOT_SCENE := preload("res://scenes/ui/building_slot.tscn")
 const COLOR_OK := Color(0.45, 0.9, 0.45)
@@ -14,6 +14,8 @@ var _cost_labels: Dictionary[String, Label] = {}
 var _cost_key := ""
 
 @onready var resource_bar: HBoxContainer = %ResourceBar
+@onready var tabs: TabContainer = %Tabs
+@onready var army_view: ArmyView = %ArmyView
 @onready var close_button: Button = %CloseButton
 @onready var buildings_grid: GridContainer = %BuildingsGrid
 @onready var construction_label: Label = %ConstructionLabel
@@ -31,8 +33,11 @@ var _cost_key := ""
 func _ready() -> void:
 	close_button.pressed.connect(close)
 	upgrade_button.pressed.connect(_on_upgrade_pressed)
+	tabs.set_tab_title(0, "Здания")
+	tabs.set_tab_title(1, "Армия")
+	tabs.tab_changed.connect(func(_tab: int) -> void: _refresh())
 	for resource_id: String in KingdomState.RESOURCES:
-		var label := _add_resource_item(resource_bar, resource_id)
+		var label := UiStyles.add_resource_item(resource_bar, resource_id)
 		_resource_labels[resource_id] = label
 	for building in Database.buildings:
 		var slot: BuildingSlot = BUILDING_SLOT_SCENE.instantiate()
@@ -96,6 +101,7 @@ func _refresh() -> void:
 	else:
 		construction_label.text = "Строители свободны"
 	_update_details()
+	army_view.refresh()
 
 
 func _update_details() -> void:
@@ -145,6 +151,8 @@ func _effect_text(building: BuildingData, level: int) -> String:
 			KingdomState.resource_name(building.produces)])
 	if building.storage_per_level > 0.0:
 		parts.append("склад %d" % roundi(KingdomState.BASE_STORAGE + building.storage_per_level * level))
+	if building.army_capacity_per_level > 0:
+		parts.append("армия %d мест" % (building.army_capacity_per_level * level))
 	if building.is_town_hall:
 		parts.append("здания до ур. %d" % level)
 	if not building.modifiers.is_empty():
@@ -158,7 +166,7 @@ func _rebuild_cost(cost: Dictionary) -> void:
 		child.queue_free()
 	_cost_labels.clear()
 	for resource_id: String in cost:
-		var label := _add_resource_item(cost_box, resource_id)
+		var label := UiStyles.add_resource_item(cost_box, resource_id)
 		label.text = str(int(cost[resource_id]))
 		_cost_labels[resource_id] = label
 
@@ -166,22 +174,3 @@ func _rebuild_cost(cost: Dictionary) -> void:
 func _on_upgrade_pressed() -> void:
 	if _selected:
 		GameState.kingdom.start_upgrade(_selected)
-
-
-func _add_resource_item(parent: Container, resource_id: String) -> Label:
-	var box := HBoxContainer.new()
-	box.add_theme_constant_override("separation", 2)
-	box.tooltip_text = KingdomState.resource_name(resource_id)
-	box.mouse_filter = Control.MOUSE_FILTER_PASS
-	var icon := TextureRect.new()
-	icon.texture = KingdomState.resource_icon(resource_id)
-	icon.custom_minimum_size = Vector2(16, 16)
-	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	box.add_child(icon)
-	var label := Label.new()
-	label.add_theme_font_size_override("font_size", 12)
-	box.add_child(label)
-	parent.add_child(box)
-	return label

@@ -20,3 +20,4 @@ color = Color(0.7, 0.85, 1, 1)
 cooldown = 10.0
 unlock_level = 5
 effect = SubResource("Resource_effect")
+animation = &"whirlwind"

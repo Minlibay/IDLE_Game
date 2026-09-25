@@ -122,8 +122,36 @@ enum, иконку в `assets/sprites/talents/` и применить его в 
 Новое здание: скопируйте `.tres` из `data/buildings/` — стоимость, рост цены, время,
 производство (`produces`, `production_per_level`) и бонусы `modifiers` за уровень.
 
-Бонусы талантов, зданий и потребностей складываются в `GameState.get_bonus()`.
+### Армия замка
 
+Вкладка «Армия» в окне королевства. У каждого замка своя армия (`KingdomState.army`).
+Отряды (`data/units/`): Ополченец, Копейщик, Лучник (Казармы 1–3 ур.), Рыцарь (Конюшня).
+У отряда: атака, защита, места в армии, содержание (еда/мин), стоимость и время обучения.
+
+- Вместимость армии дают Ратуша, Казармы и Конюшня (`army_capacity_per_level`).
+- Найм — очередь обучения (до 5 заказов), идёт и оффлайн; отмена возвращает ресурсы.
+- Армия ест еду со склада. Нет еды — сила армии −50%, солдаты не умирают.
+- Бонусы: скорость обучения (Казармы), сила армии (Кузница, Конюшня).
+- Задел для карты мира: `army.get_attack()`, `get_defense()`, `get_power()`,
+  `add_units()`, `remove_units()`.
+Бонусы талантов, зданий и потребностей (и армии) складываются в `GameState.get_bonus()`.
+
+### Мировая карта (онлайн)
+
+Кнопка «Карта» или клавиша **M** — окно раскрывается на большую часть экрана.
+Нужен запущенный сервер (cd server && npm start, подробности — [server/README.md](server/README.md)).
+
+- 2000 зон; чем ближе к центру, тем сильнее нейтральная армия и больше бонус.
+- «Армию из замка →» — отправить солдат из армии замка к герою на карту (герой в замке).
+- Клик по соседней зоне → «Атаковать / Занять / Напасть». Поход идёт по таймеру.
+- Зона без гарнизона, когда вас там нет, захватывается другим игроком без боя.
+  Если вы в зоне (или там гарнизон) — будет бой. Проигравший теряет армию, герой — в замок.
+- «Оставить гарнизон» — защитить зону, пока герой идёт дальше.
+- Бонусы захваченных зон работают в игре (`GameState.get_bonus`).
+
+Клиент: `scripts/autoload/world_service.gd` (запросы и кэш), `scenes/world/` (карта).
+Проверка связи: сервер с `MARCH_SECONDS=2`, затем
+`Godot.exe --headless --path . -- --autotest --world-test --quit-after-seconds=60`.
 ## Арты из ChatGPT
 
 Замените PNG в `assets/sprites/` на файлы с **тем же именем** — или укажите новый
@@ -138,6 +166,34 @@ transparent background, feet at the bottom edge, no shadow, consistent style»*.
 
 Вернуть заглушки: `Godot.exe --headless --path . --script res://tools/generate_placeholders.gd`.
 
+## Анимации персонажей
+
+Исходные ленты (кадры в ряд, из ChatGPT) — `assets/sprites/heroes/<класс>/source/<класс>_<анимация>.png`.
+
+1. Нарезать ленту (фигуры целиком, общая область, ноги на одной линии; рост — как у idle):
+   `Godot.exe --headless --path . --script res://tools/slice_animation_strip.gd -- <исходник> res://assets/sprites/heroes/warrior/warrior_<анимация>.png --match=res://assets/sprites/heroes/warrior/warrior_idle.json`
+   (для самой idle — без `--match`).
+2. `Godot.exe --headless --path . --import`
+3. Собрать анимации: `Godot.exe --headless --path . --script res://tools/build_sprite_frames.gd -- res://assets/sprites/heroes/warrior warrior`
+   → `warrior_frames.tres` (указан в `data/classes/warrior.tres`, поле `sprite_frames`).
+
+Имена анимаций: `idle`, `walk`, `rest` (фоновые, зациклены), `attack`, `hurt`, `death`, `victory` и анимации
+умений (`SkillData.animation`, у воина — `power_strike`, `whirlwind`, `war_cry`). Скорость и зацикливание —
+в `tools/build_sprite_frames.gd`. Каких анимаций нет — те просто не играются.
+## Интерфейс из сгенерированных листов
+
+Исходники листов — `assets/ui/source/` (как прислали), нарезка — `assets/ui/<группа>/`,
+подключение — `assets/ui/theme.tres` (StyleBoxTexture с отступами 9-slice).
+
+1. Нарезать лист (убирает светлый фон, находит элементы, уменьшает до пиксель-арта):
+   `Godot.exe --headless --path . --script res://tools/slice_ui_sheet.gd -- res://assets/ui/source/<лист> res://assets/ui/<группа> <префикс>`
+2. Измерить отступы 9-slice:
+   `Godot.exe --headless --path . --script res://tools/measure_ui_margins.gd -- res://assets/ui/<группа>/<файл>.png`
+3. Если импорт падает с «No loader found» — тема ссылается на ещё не импортированные картинки:
+   временно уберите строку `theme/custom` из `project.godot`, выполните `--import`, верните строку.
+
+Варианты панелей в теме: обычная `PanelContainer` (окна), `PanelSmall` (нижний HUD, подсказки),
+`PanelHeader` (верхняя полоса карты) — задаются через `theme_type_variation`.
 ## Дальше (к Steam и Торговой площадке)
 
 1. Steamworks (GodotSteam), достижения, облачные сохранения.

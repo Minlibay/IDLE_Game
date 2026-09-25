@@ -1,0 +1,146 @@
+// HTTP API (JSON). Авторизация: заголовок "Authorization: Bearer <token>".
+// Вход пока через регистрацию по имени (dev); позже — Steam-тикеты.
+
+import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
+import type { GameData } from "./gameData.ts";
+import { sanitizeArmy } from "./world/army.ts";
+import { GameError, type Game, type Player } from "./world/game.ts";
+
+type Context = {
+  url: URL;
+  body: Record<string, unknown>;
+  player: Player;
+  now: number;
+};
+
+type Route = {
+  auth: boolean;
+  handle: (ctx: Context) => unknown;
+};
+
+export type HttpSettings = { maxBodyBytes: number; maxUnitsPerType: number; marchSeconds: number };
+
+export function createHttpServer(game: Game, gameData: GameData, settings: HttpSettings): Server {
+  const units = (input: unknown) => {
+    try {
+      return sanitizeArmy(input, gameData.units, settings.maxUnitsPerType);
+    } catch (error) {
+      throw new GameError((error as Error).message);
+    }
+  };
+
+  const routes: Record<string, Route> = {
+    "GET /api/health": { auth: false, handle: () => ({ ok: true, version: game.worldVersion }) },
+
+    "GET /api/config": {
+      auth: false,
+      handle: () => ({ marchSeconds: settings.marchSeconds, units: gameData.units }),
+    },
+
+    "POST /api/auth/register": {
+      auth: false,
+      handle: ({ body, now }) => {
+        const player = game.register(String(body.name ?? ""), now);
+        return { token: player.token, me: game.playerView(player) };
+      },
+    },
+
+    "GET /api/world": {
+      auth: true,
+      handle: ({ url }) => game.worldView(Number(url.searchParams.get("since") ?? 0) || 0),
+    },
+
+    "GET /api/me": { auth: true, handle: ({ player }) => game.playerView(player) },
+
+    "POST /api/hero": {
+      auth: true,
+      handle: ({ player, body }) => {
+        game.setHeroLevel(player, body.level);
+        return game.playerView(player);
+      },
+    },
+
+    "POST /api/army/deploy": {
+      auth: true,
+      handle: ({ player, body }) => {
+        game.deploy(player, units(body.units));
+        return game.playerView(player);
+      },
+    },
+
+    "POST /api/army/recall": {
+      auth: true,
+      handle: ({ player, body }) => {
+        const returned = game.recall(player, units(body.units));
+        return { returned, me: game.playerView(player) };
+      },
+    },
+
+    "POST /api/move": {
+      auth: true,
+      handle: ({ player, body, now }) => {
+        game.move(player, body.zoneId, now);
+        return game.playerView(player);
+      },
+    },
+
+    "POST /api/garrison": {
+      auth: true,
+      handle: ({ player, body }) => {
+        game.garrison(player, units(body.units));
+        return game.playerView(player);
+      },
+    },
+
+    "POST /api/garrison/withdraw": {
+      auth: true,
+      handle: ({ player, body }) => {
+        game.withdraw(player, units(body.units));
+        return game.playerView(player);
+      },
+    },
+  };
+
+  return createServer(async (req, res) => {
+    try {
+      const url = new URL(req.url ?? "/", "http://localhost");
+      const route = routes[`${req.method} ${url.pathname}`];
+      if (!route) return send(res, 404, { error: "Not found" });
+
+      const body = req.method === "POST" ? await readJson(req, settings.maxBodyBytes) : {};
+      let player: Player | undefined;
+      if (route.auth) {
+        const token = (req.headers.authorization ?? "").replace(/^Bearer\s+/i, "");
+        player = token ? game.getPlayerByToken(token) : undefined;
+        if (!player) return send(res, 401, { error: "Нужно войти заново" });
+      }
+      const result = route.handle({ url, body, player: player as Player, now: Date.now() });
+      send(res, 200, result);
+    } catch (error) {
+      if (error instanceof GameError) return send(res, error.status, { error: error.message });
+      if (error instanceof SyntaxError) return send(res, 400, { error: "Некорректный JSON" });
+      console.error(error);
+      send(res, 500, { error: "Внутренняя ошибка сервера" });
+    }
+  });
+}
+
+function send(res: ServerResponse, status: number, payload: unknown): void {
+  const body = JSON.stringify(payload);
+  res.writeHead(status, { "Content-Type": "application/json; charset=utf-8", "Content-Length": Buffer.byteLength(body) });
+  res.end(body);
+}
+
+async function readJson(req: IncomingMessage, maxBytes: number): Promise<Record<string, unknown>> {
+  const chunks: Buffer[] = [];
+  let size = 0;
+  for await (const chunk of req) {
+    size += (chunk as Buffer).length;
+    if (size > maxBytes) throw new GameError("Слишком большой запрос", 413);
+    chunks.push(chunk as Buffer);
+  }
+  if (size === 0) return {};
+  const parsed: unknown = JSON.parse(Buffer.concat(chunks).toString("utf8"));
+  if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) throw new GameError("Ожидался JSON-объект");
+  return parsed as Record<string, unknown>;
+}

@@ -24,7 +24,10 @@ func setup(p_data: MonsterData, p_wave: int, p_target: Actor) -> void:
 	attack_interval = data.attack_interval
 	attack_range = data.attack_range
 	attack_cooldown = attack_interval * 0.5
-	set_sprite(data.sprite, data.sprite_height, true)
+	if data.sprite_frames:
+		set_sprite_frames(data.sprite_frames, data.sprite_height, true)
+	else:
+		set_sprite(data.sprite, data.sprite_height, true)
 	add_to_group(GROUP)
 	_update_health()
 
@@ -38,11 +41,14 @@ func _tick(delta: float) -> void:
 		if not _is_blocked(signf(dx)):
 			position.x += signf(dx) * data.move_speed * delta
 			_is_moving = true
+		set_base_animation(&"walk" if _is_moving else ANIM_IDLE)
 		return
+	set_base_animation(ANIM_IDLE)
 	attack_cooldown -= delta
 	if attack_cooldown <= 0.0:
 		attack_cooldown = attack_interval
-		lunge(signf(dx))
+		if not play_action(&"attack"):
+			lunge(signf(dx))
 		var hit := roll_hit()
 		target.take_hit(hit.amount, hit.is_crit)
 

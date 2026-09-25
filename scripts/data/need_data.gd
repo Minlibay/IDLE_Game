@@ -9,6 +9,8 @@ extends Resource
 @export var icon: Texture2D
 @export var order := 0
 @export var bar_color := Color(0.9, 0.6, 0.2)
+## Вариант полоски из темы (BarHunger, BarThirst, BarEnergy...). Пусто — плоская полоска цвета bar_color.
+@export var bar_theme_variation: StringName = &""
 ## Сколько единиц шкалы теряется за минуту боя.
 @export var decay_per_minute := 3.0
 

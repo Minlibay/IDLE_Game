@@ -7,10 +7,13 @@ enum Mode { FULL, BATTLE }
 const WINDOW_HEIGHT := 340
 ## Высота нижней зоны, которая принимает клики в бою. Выше — клики уходят на рабочий стол.
 const BATTLE_INTERACTIVE_HEIGHT := 190
+## Какую долю экрана занимает окно в режиме карты.
+const MAP_SCREEN_SHARE := 0.9
 
 var _enabled := false
 var _mode := Mode.FULL
 var _modal_count := 0
+var _map_mode := false
 
 
 func _ready() -> void:
@@ -23,11 +26,30 @@ func _ready() -> void:
 	window.always_on_top = true
 	window.transparent = true
 	window.transparent_bg = true
-	var usable := DisplayServer.screen_get_usable_rect(window.current_screen)
-	window.size = Vector2i(usable.size.x, WINDOW_HEIGHT)
-	window.position = Vector2i(usable.position.x, usable.end.y - WINDOW_HEIGHT)
+	_apply_strip_geometry()
 	window.size_changed.connect(_apply)
 	_apply()
+
+
+## Режим карты: окно раскрывается на большую часть экрана и целиком принимает клики.
+func enter_map_mode() -> void:
+	if not _enabled or _map_mode:
+		return
+	_map_mode = true
+	var window := get_window()
+	var usable := DisplayServer.screen_get_usable_rect(window.current_screen)
+	var map_size := Vector2i(Vector2(usable.size) * MAP_SCREEN_SHARE)
+	window.size = map_size
+	window.position = usable.position + (usable.size - map_size) / 2
+	push_modal()
+
+
+func exit_map_mode() -> void:
+	if not _map_mode:
+		return
+	_map_mode = false
+	_apply_strip_geometry()
+	pop_modal()
 
 
 ## Всё окно принимает клики (экран создания героя).
@@ -64,3 +86,11 @@ func _apply() -> void:
 	DisplayServer.window_set_mouse_passthrough(PackedVector2Array([
 		Vector2(0, top), Vector2(size.x, top), size, Vector2(0, size.y),
 	]))
+
+
+## Полоска во всю ширину экрана над панелью задач.
+func _apply_strip_geometry() -> void:
+	var window := get_window()
+	var usable := DisplayServer.screen_get_usable_rect(window.current_screen)
+	window.size = Vector2i(usable.size.x, WINDOW_HEIGHT)
+	window.position = Vector2i(usable.position.x, usable.end.y - WINDOW_HEIGHT)

@@ -13,6 +13,8 @@ extends Resource
 @export var sprite: Texture2D
 ## Высота спрайта в мире (в метрах). Размер картинки в пикселях не важен.
 @export var sprite_height := 1.6
+## Покадровые анимации (tools/build_sprite_frames.gd). Пусто — статичный sprite с программной анимацией.
+@export var sprite_frames: SpriteFrames
 ## Если задан — герой атакует снарядами (дальний бой).
 @export var projectile_texture: Texture2D
 

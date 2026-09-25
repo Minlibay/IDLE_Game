@@ -52,6 +52,8 @@ var kingdom := KingdomState.new()
 var needs := NeedsState.new()
 ## Отчёт об оффлайн-прогрессе после загрузки (пусто — не было). Показывает и очищает бой.
 var offline_report: Dictionary = {}
+## Бонусы захваченных зон мировой карты: StatModifier.Stat -> значение (присылает WorldService).
+var territory_bonuses: Dictionary = {}
 
 
 func _ready() -> void:
@@ -210,10 +212,23 @@ func reset_talents() -> bool:
 	return true
 
 
-## Суммарный бонус к стату от всех источников: таланты + здания + потребности.
+## Суммарный бонус к стату от всех источников: таланты + здания + потребности + территории.
 ## С skill_id — плюс бонусы, действующие только на это умение.
 func get_bonus(stat: int, skill_id := "") -> float:
-	return get_talent_bonus(stat, skill_id) + kingdom.get_bonus(stat, skill_id) + needs.get_bonus(stat, skill_id)
+	return get_talent_bonus(stat, skill_id) + kingdom.get_bonus(stat, skill_id) + needs.get_bonus(stat, skill_id) \
+		+ float(territory_bonuses.get(stat, 0.0))
+
+
+## Бонусы территорий с сервера: {"GOLD_FIND": 1.5, ...} (имена = StatModifier.Stat).
+func set_territory_bonuses(by_name: Dictionary) -> void:
+	var converted := {}
+	for stat_name: String in by_name:
+		var stat: int = StatModifier.Stat.get(stat_name, -1)
+		if stat >= 0:
+			converted[stat] = float(by_name[stat_name])
+	if converted != territory_bonuses:
+		territory_bonuses = converted
+		stats_changed.emit()
 
 
 ## Бонус только от талантов.

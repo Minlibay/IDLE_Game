@@ -1,64 +1,287 @@
 [gd_resource type="Theme" format=3]
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_panel"]
+[ext_resource type="Texture2D" path="res://assets/ui/panels/panel_window.png" id="1"]
+[ext_resource type="Texture2D" path="res://assets/ui/panels/panel_small.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/ui/panels/header_bar.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/ui/panels/tab.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/ui/panels/tab_selected.png" id="5"]
+[ext_resource type="Texture2D" path="res://assets/ui/panels/separator.png" id="6"]
+[ext_resource type="Texture2D" path="res://assets/ui/panels/scroll_track.png" id="7"]
+[ext_resource type="Texture2D" path="res://assets/ui/panels/scroll_grabber.png" id="8"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/button_normal.png" id="9"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/button_hover.png" id="10"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/button_pressed.png" id="11"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/button_disabled.png" id="12"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/square_normal.png" id="13"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/square_hover.png" id="14"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/square_pressed.png" id="15"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/square_disabled.png" id="16"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/close_small.png" id="17"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/close_small_hover.png" id="18"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/toggle_off_small.png" id="19"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/toggle_on_small.png" id="20"]
+[ext_resource type="Texture2D" path="res://assets/ui/bars/bar_frame.png" id="21"]
+[ext_resource type="Texture2D" path="res://assets/ui/bars/fill_health.png" id="22"]
+[ext_resource type="Texture2D" path="res://assets/ui/bars/fill_xp.png" id="23"]
+[ext_resource type="Texture2D" path="res://assets/ui/bars/fill_energy.png" id="24"]
+[ext_resource type="Texture2D" path="res://assets/ui/bars/fill_hunger.png" id="25"]
+[ext_resource type="Texture2D" path="res://assets/ui/bars/fill_thirst.png" id="26"]
+[ext_resource type="Texture2D" path="res://assets/ui/bars/fill_build.png" id="27"]
+
+[sub_resource type="StyleBoxTexture" id="Tex_panel_window"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+texture = ExtResource("1")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 17.0
+texture_margin_bottom = 17.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_panel_small"]
 content_margin_left = 8.0
 content_margin_top = 6.0
 content_margin_right = 8.0
 content_margin_bottom = 6.0
-bg_color = Color(0.07, 0.07, 0.1, 0.9)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.38, 0.32, 0.5, 0.9)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+texture = ExtResource("2")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 5.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_btn_normal"]
-content_margin_left = 8.0
-content_margin_top = 3.0
-content_margin_right = 8.0
-content_margin_bottom = 3.0
-bg_color = Color(0.2, 0.18, 0.28, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+[sub_resource type="StyleBoxTexture" id="Tex_header"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+texture = ExtResource("3")
+texture_margin_left = 12.0
+texture_margin_top = 11.0
+texture_margin_right = 13.0
+texture_margin_bottom = 9.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_btn_hover"]
-content_margin_left = 8.0
-content_margin_top = 3.0
-content_margin_right = 8.0
-content_margin_bottom = 3.0
-bg_color = Color(0.3, 0.27, 0.42, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+[sub_resource type="StyleBoxTexture" id="Tex_tab"]
+content_margin_left = 12.0
+content_margin_top = 5.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
+texture = ExtResource("4")
+texture_margin_left = 8.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 5.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_btn_pressed"]
-content_margin_left = 8.0
-content_margin_top = 3.0
-content_margin_right = 8.0
-content_margin_bottom = 3.0
-bg_color = Color(0.45, 0.33, 0.7, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+[sub_resource type="StyleBoxTexture" id="Tex_tab_hover"]
+content_margin_left = 12.0
+content_margin_top = 5.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
+texture = ExtResource("4")
+texture_margin_left = 8.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 5.0
+modulate_color = Color(1.35, 1.3, 1.5, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_btn_disabled"]
-content_margin_left = 8.0
-content_margin_top = 3.0
-content_margin_right = 8.0
-content_margin_bottom = 3.0
-bg_color = Color(0.13, 0.12, 0.17, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+[sub_resource type="StyleBoxTexture" id="Tex_tab_selected"]
+content_margin_left = 12.0
+content_margin_top = 5.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
+texture = ExtResource("5")
+texture_margin_left = 8.0
+texture_margin_top = 10.0
+texture_margin_right = 8.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_separator"]
+texture = ExtResource("6")
+texture_margin_left = 7.0
+texture_margin_top = 2.0
+texture_margin_right = 7.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_scroll_track"]
+texture = ExtResource("7")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 4.0
+texture_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_scroll_grabber"]
+texture = ExtResource("8")
+texture_margin_left = 6.0
+texture_margin_top = 10.0
+texture_margin_right = 6.0
+texture_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_scroll_grabber_hover"]
+texture = ExtResource("8")
+texture_margin_left = 6.0
+texture_margin_top = 10.0
+texture_margin_right = 6.0
+texture_margin_bottom = 9.0
+modulate_color = Color(1.25, 1.2, 1.35, 1)
+
+[sub_resource type="StyleBoxTexture" id="Tex_btn_normal"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+texture = ExtResource("9")
+texture_margin_left = 11.0
+texture_margin_top = 11.0
+texture_margin_right = 11.0
+texture_margin_bottom = 11.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_btn_hover"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+texture = ExtResource("10")
+texture_margin_left = 11.0
+texture_margin_top = 11.0
+texture_margin_right = 11.0
+texture_margin_bottom = 11.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_btn_pressed"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+texture = ExtResource("11")
+texture_margin_left = 11.0
+texture_margin_top = 11.0
+texture_margin_right = 11.0
+texture_margin_bottom = 11.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_btn_disabled"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+texture = ExtResource("12")
+texture_margin_left = 11.0
+texture_margin_top = 11.0
+texture_margin_right = 11.0
+texture_margin_bottom = 11.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_square_normal"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+texture = ExtResource("13")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_square_hover"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+texture = ExtResource("14")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_square_pressed"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+texture = ExtResource("15")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_square_disabled"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+texture = ExtResource("16")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_close"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("17")
+texture_margin_left = 0.0
+texture_margin_top = 0.0
+texture_margin_right = 0.0
+texture_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_close_hover"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("18")
+texture_margin_left = 0.0
+texture_margin_top = 0.0
+texture_margin_right = 0.0
+texture_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_bar_frame"]
+texture = ExtResource("21")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_fill_health"]
+texture = ExtResource("22")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_fill_xp"]
+texture = ExtResource("23")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_fill_energy"]
+texture = ExtResource("24")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_fill_hunger"]
+texture = ExtResource("25")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_fill_thirst"]
+texture = ExtResource("26")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id="Tex_fill_build"]
+texture = ExtResource("27")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBox_empty"]
 
@@ -74,13 +297,72 @@ border_color = Color(0.45, 0.33, 0.7, 1)
 [resource]
 default_font_size = 13
 Button/colors/font_disabled_color = Color(0.5, 0.5, 0.55, 1)
-Button/styles/disabled = SubResource("StyleBox_btn_disabled")
+Button/styles/disabled = SubResource("Tex_btn_disabled")
 Button/styles/focus = SubResource("StyleBox_empty")
-Button/styles/hover = SubResource("StyleBox_btn_hover")
-Button/styles/hover_pressed = SubResource("StyleBox_btn_pressed")
-Button/styles/normal = SubResource("StyleBox_btn_normal")
-Button/styles/pressed = SubResource("StyleBox_btn_pressed")
+Button/styles/hover = SubResource("Tex_btn_hover")
+Button/styles/hover_pressed = SubResource("Tex_btn_pressed")
+Button/styles/normal = SubResource("Tex_btn_normal")
+Button/styles/pressed = SubResource("Tex_btn_pressed")
+Button/constants/h_separation = 4
+CheckButton/constants/h_separation = 6
+CheckButton/icons/checked = ExtResource("20")
+CheckButton/icons/unchecked = ExtResource("19")
+CheckButton/styles/hover = SubResource("StyleBox_empty")
+CheckButton/styles/hover_pressed = SubResource("StyleBox_empty")
+CheckButton/styles/normal = SubResource("StyleBox_empty")
+CheckButton/styles/pressed = SubResource("StyleBox_empty")
+CloseButton/base_type = &"Button"
+CloseButton/styles/disabled = SubResource("Tex_close")
+CloseButton/styles/hover = SubResource("Tex_close_hover")
+CloseButton/styles/hover_pressed = SubResource("Tex_close_hover")
+CloseButton/styles/normal = SubResource("Tex_close")
+CloseButton/styles/pressed = SubResource("Tex_close_hover")
+HSeparator/constants/separation = 8
+HSeparator/styles/separator = SubResource("Tex_separator")
 Label/colors/font_color = Color(0.92, 0.9, 0.96, 1)
 LineEdit/styles/focus = SubResource("StyleBox_empty")
 LineEdit/styles/normal = SubResource("StyleBox_line_edit")
-PanelContainer/styles/panel = SubResource("StyleBox_panel")
+PanelContainer/styles/panel = SubResource("Tex_panel_window")
+ProgressBar/styles/background = SubResource("Tex_bar_frame")
+ProgressBar/styles/fill = SubResource("Tex_fill_xp")
+BarHealth/base_type = &"ProgressBar"
+BarHealth/styles/fill = SubResource("Tex_fill_health")
+BarXp/base_type = &"ProgressBar"
+BarXp/styles/fill = SubResource("Tex_fill_xp")
+BarEnergy/base_type = &"ProgressBar"
+BarEnergy/styles/fill = SubResource("Tex_fill_energy")
+BarHunger/base_type = &"ProgressBar"
+BarHunger/styles/fill = SubResource("Tex_fill_hunger")
+BarThirst/base_type = &"ProgressBar"
+BarThirst/styles/fill = SubResource("Tex_fill_thirst")
+BarBuild/base_type = &"ProgressBar"
+BarBuild/styles/fill = SubResource("Tex_fill_build")
+PanelHeader/base_type = &"PanelContainer"
+PanelHeader/styles/panel = SubResource("Tex_header")
+PanelSmall/base_type = &"PanelContainer"
+PanelSmall/styles/panel = SubResource("Tex_panel_small")
+SquareButton/base_type = &"Button"
+SquareButton/styles/disabled = SubResource("Tex_square_disabled")
+SquareButton/styles/hover = SubResource("Tex_square_hover")
+SquareButton/styles/hover_pressed = SubResource("Tex_square_pressed")
+SquareButton/styles/normal = SubResource("Tex_square_normal")
+SquareButton/styles/pressed = SubResource("Tex_square_pressed")
+TabBar/colors/font_selected_color = Color(1, 0.9, 0.6, 1)
+TabBar/colors/font_unselected_color = Color(0.75, 0.72, 0.82, 1)
+TabBar/styles/tab_focus = SubResource("StyleBox_empty")
+TabBar/styles/tab_hovered = SubResource("Tex_tab_hover")
+TabBar/styles/tab_selected = SubResource("Tex_tab_selected")
+TabBar/styles/tab_unselected = SubResource("Tex_tab")
+TabContainer/colors/font_hovered_color = Color(1, 1, 1, 1)
+TabContainer/colors/font_selected_color = Color(1, 0.9, 0.6, 1)
+TabContainer/colors/font_unselected_color = Color(0.75, 0.72, 0.82, 1)
+TabContainer/styles/tab_focus = SubResource("StyleBox_empty")
+TabContainer/styles/tab_hovered = SubResource("Tex_tab_hover")
+TabContainer/styles/tab_selected = SubResource("Tex_tab_selected")
+TabContainer/styles/tab_unselected = SubResource("Tex_tab")
+TooltipPanel/styles/panel = SubResource("Tex_panel_small")
+VScrollBar/styles/grabber = SubResource("Tex_scroll_grabber")
+VScrollBar/styles/grabber_highlight = SubResource("Tex_scroll_grabber_hover")
+VScrollBar/styles/grabber_pressed = SubResource("Tex_scroll_grabber_hover")
+VScrollBar/styles/scroll = SubResource("Tex_scroll_track")
+VScrollBar/styles/scroll_focus = SubResource("Tex_scroll_track")

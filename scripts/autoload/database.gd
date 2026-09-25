@@ -7,16 +7,19 @@ const MONSTERS_DIR := "res://data/monsters"
 const ITEMS_DIR := "res://data/items"
 const BUILDINGS_DIR := "res://data/buildings"
 const NEEDS_DIR := "res://data/needs"
+const UNITS_DIR := "res://data/units"
 
 var classes: Array[CharacterClass] = []
 var monsters: Array[MonsterData] = []
 var items: Array[ItemBase] = []
 var buildings: Array[BuildingData] = []
 var needs: Array[NeedData] = []
+var units: Array[UnitData] = []
 
 var _classes_by_id: Dictionary[String, CharacterClass] = {}
 var _items_by_id: Dictionary[String, ItemBase] = {}
 var _buildings_by_id: Dictionary[String, BuildingData] = {}
+var _units_by_id: Dictionary[String, UnitData] = {}
 
 
 func _ready() -> void:
@@ -51,6 +54,13 @@ func _ready() -> void:
 			needs.append(need)
 	needs.sort_custom(func(a: NeedData, b: NeedData) -> bool: return a.order < b.order)
 
+	for res in _load_dir(UNITS_DIR):
+		var unit := res as UnitData
+		if unit:
+			units.append(unit)
+			_units_by_id[unit.id] = unit
+	units.sort_custom(func(a: UnitData, b: UnitData) -> bool: return a.order < b.order)
+
 
 func get_class_data(id: String) -> CharacterClass:
 	return _classes_by_id.get(id)
@@ -62,6 +72,10 @@ func get_item_base(id: String) -> ItemBase:
 
 func get_building(id: String) -> BuildingData:
 	return _buildings_by_id.get(id)
+
+
+func get_unit(id: String) -> UnitData:
+	return _units_by_id.get(id)
 
 
 func get_items_for_slot(slot: int) -> Array[ItemBase]:

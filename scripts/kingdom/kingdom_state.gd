@@ -1,6 +1,7 @@
 class_name KingdomState
 extends RefCounted
-## Королевство: ресурсы, уровни зданий, стройка (одна за раз), производство и оффлайн-прогресс.
+## Королевство (замок): ресурсы, уровни зданий, стройка (одна за раз), производство,
+## армия (army) и оффлайн-прогресс.
 ## Живёт внутри GameState (GameState.kingdom) и сохраняется вместе с ним.
 
 signal resources_changed
@@ -25,6 +26,12 @@ var construction_level := 0
 var construction_left := 0.0
 var construction_total := 0.0
 var _bonuses: Dictionary = {}
+## Армия этого замка.
+var army := ArmyState.new()
+
+
+func _init() -> void:
+	army.setup(self)
 
 
 static func resource_name(resource_id: String) -> String:
@@ -33,6 +40,14 @@ static func resource_name(resource_id: String) -> String:
 
 static func resource_icon(resource_id: String) -> Texture2D:
 	return load(RESOURCE_ICON_DIR + resource_id + ".png")
+
+
+## Стоимость × количество.
+static func multiply_cost(cost: Dictionary, count: int) -> Dictionary:
+	var result := {}
+	for resource_id: String in cost:
+		result[resource_id] = float(cost[resource_id]) * count
+	return result
 
 
 ## Новое королевство: стартовые ресурсы и Ратуша 1-го уровня.
@@ -45,6 +60,7 @@ func reset() -> void:
 		if building.is_town_hall:
 			levels[building.id] = 1
 	_clear_construction()
+	army.reset()
 	_rebuild_bonuses()
 	resources_changed.emit()
 	buildings_changed.emit()
@@ -142,12 +158,8 @@ func get_construction_ratio() -> float:
 func start_upgrade(building: BuildingData) -> bool:
 	if not can_upgrade(building):
 		return false
-	var cost := get_upgrade_cost(building)
-	for resource_id: String in cost:
-		if resource_id == "gold":
-			GameState.try_spend_gold(int(cost[resource_id]))
-		else:
-			resources[resource_id] -= float(cost[resource_id])
+	if not pay(get_upgrade_cost(building)):
+		return false
 	construction_id = building.id
 	construction_level = get_level(building) + 1
 	construction_total = building.get_build_time(construction_level)
@@ -155,6 +167,29 @@ func start_upgrade(building: BuildingData) -> bool:
 	resources_changed.emit()
 	buildings_changed.emit()
 	return true
+
+
+## Списывает стоимость (ресурсы + золото). false — не хватает, ничего не списано.
+func pay(cost: Dictionary) -> bool:
+	if not can_afford(cost):
+		return false
+	for resource_id: String in cost:
+		if resource_id == "gold":
+			GameState.try_spend_gold(ceili(float(cost[resource_id])))
+		else:
+			resources[resource_id] -= float(cost[resource_id])
+	resources_changed.emit()
+	return true
+
+
+## Возвращает ресурсы (например, при отмене найма).
+func refund(cost: Dictionary) -> void:
+	for resource_id: String in cost:
+		if resource_id == "gold":
+			GameState.add_gold(floori(float(cost[resource_id])))
+		else:
+			resources[resource_id] = float(resources.get(resource_id, 0.0)) + float(cost[resource_id])
+	resources_changed.emit()
 
 
 ## Забирает ресурс со склада (например, еду для героя).
@@ -172,18 +207,24 @@ func tick(delta: float) -> void:
 	resources_changed.emit()
 
 
-## Оффлайн-прогресс. Возвращает отчёт {seconds, resources: {id: прирост}, built: [..]}.
+## Оффлайн-прогресс. Отчёт: {seconds, resources: {id: прирост}, built: [..], trained: {unit_id: count}}.
 func simulate(seconds: float) -> Dictionary:
 	seconds = clampf(seconds, 0.0, MAX_OFFLINE_SECONDS)
 	var before := resources.duplicate()
+	var units_before := army.units.duplicate()
 	var built := _advance(seconds)
 	var gained := {}
 	for resource_id: String in RESOURCES:
 		var delta: float = resources.get(resource_id, 0.0) - float(before.get(resource_id, 0.0))
 		if delta >= 1.0:
 			gained[resource_id] = delta
+	var trained := {}
+	for unit_id: String in army.units:
+		var count: int = army.units[unit_id] - int(units_before.get(unit_id, 0))
+		if count > 0:
+			trained[unit_id] = count
 	resources_changed.emit()
-	return {"seconds": seconds, "resources": gained, "built": built}
+	return {"seconds": seconds, "resources": gained, "built": built, "trained": trained}
 
 
 # --- Внутреннее -----------------------------------------------------------------
@@ -197,6 +238,7 @@ func _advance(seconds: float) -> PackedStringArray:
 		if is_constructing():
 			step = clampf(construction_left, 0.0, remaining)
 		_produce(step)
+		army.advance(step)
 		remaining -= step
 		if is_constructing():
 			construction_left -= step
@@ -215,6 +257,14 @@ func _produce(seconds: float) -> void:
 			continue
 		var current: float = resources.get(resource_id, 0.0)
 		resources[resource_id] = maxf(current, minf(capacity, current + rate * seconds / 60.0))
+	# Содержание армии: солдаты едят со склада. Нет еды — армия слабеет (не умирает).
+	var upkeep := army.get_upkeep_per_minute() * seconds / 60.0
+	if upkeep > 0.0:
+		var food: float = resources.get("food", 0.0)
+		army.set_starving(food < upkeep)
+		resources["food"] = maxf(0.0, food - upkeep)
+	else:
+		army.set_starving(false)
 
 
 func _finish_construction() -> String:
@@ -258,6 +308,7 @@ func to_dict() -> Dictionary:
 			"left": construction_left,
 			"total": construction_total,
 		},
+		"army": army.to_dict(),
 	}
 
 
@@ -278,6 +329,8 @@ func from_dict(data: Dictionary) -> void:
 		construction_level = int(saved_construction.get("level", 1))
 		construction_total = maxf(0.0, float(saved_construction.get("total", 0.0)))
 		construction_left = clampf(float(saved_construction.get("left", 0.0)), 0.0, construction_total)
+	var saved_army: Variant = data.get("army", {})
+	army.from_dict(saved_army if saved_army is Dictionary else {})
 	_rebuild_bonuses()
 	resources_changed.emit()
 	buildings_changed.emit()

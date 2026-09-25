@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="UnitData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/unit_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/units/spearman.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "spearman"
+display_name = "Копейщик"
+description = "Стена щитов и копий: крепкая защита."
+icon = ExtResource("2")
+order = 1
+attack = 4.0
+defense = 8.0
+housing = 1
+upkeep_per_minute = 0.08
+cost = {
+"food": 15,
+"wood": 10,
+"gold": 20
+}
+train_time = 15.0
+required_building = "barracks"
+required_level = 2

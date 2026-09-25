@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/need_data.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/data/stat_modifier.gd" id="2"]
-[ext_resource type="Texture2D" path="res://assets/sprites/needs/energy.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/rest.png" id="3"]
 
 [sub_resource type="Resource" id="Sat_1"]
 script = ExtResource("2")
@@ -31,6 +31,7 @@ display_name = "Бодрость"
 icon = ExtResource("3")
 order = 2
 bar_color = Color(0.7, 0.55, 1, 1)
+bar_theme_variation = &"BarEnergy"
 decay_per_minute = 2.0
 restored_by_rest = true
 satisfied_modifiers = Array[ExtResource("2")]([SubResource("Sat_1"), SubResource("Sat_2")])

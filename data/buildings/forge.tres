@@ -9,11 +9,16 @@ script = ExtResource("2")
 stat = 0
 value = 3.0
 
+[sub_resource type="Resource" id="Mod_2"]
+script = ExtResource("2")
+stat = 17
+value = 2.0
+
 [resource]
 script = ExtResource("1")
 id = "forge"
 display_name = "Кузница"
-description = "Кузнецы точат оружие героя."
+description = "Кузнецы точат оружие героя и куют снаряжение для армии."
 icon = ExtResource("3")
 order = 6
 max_level = 10
@@ -25,4 +30,4 @@ base_cost = {
 cost_growth = 1.6
 base_build_time = 40.0
 build_time_growth = 1.5
-modifiers = Array[ExtResource("2")]([SubResource("Mod_1")])
+modifiers = Array[ExtResource("2")]([SubResource("Mod_1"), SubResource("Mod_2")])
