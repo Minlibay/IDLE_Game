@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BiomeData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/biome_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/ground_mountains.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "mountains"
+display_name = "Горы"
+order = 2
+color = Color(0.816, 0.541, 0.290, 1)
+ground_texture = ExtResource("2")

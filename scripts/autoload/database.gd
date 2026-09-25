@@ -8,6 +8,9 @@ const ITEMS_DIR := "res://data/items"
 const BUILDINGS_DIR := "res://data/buildings"
 const NEEDS_DIR := "res://data/needs"
 const UNITS_DIR := "res://data/units"
+const BIOMES_DIR := "res://data/biomes"
+## Сколько волн длится биом (последняя — волна босса).
+const WAVES_PER_BIOME := 10
 
 var classes: Array[CharacterClass] = []
 var monsters: Array[MonsterData] = []
@@ -15,6 +18,8 @@ var items: Array[ItemBase] = []
 var buildings: Array[BuildingData] = []
 var needs: Array[NeedData] = []
 var units: Array[UnitData] = []
+## Биомы по порядку: лес → кладбище → горы → … и снова по кругу.
+var biomes: Array[BiomeData] = []
 ## Сокровища (именные, уникальные, сетовые) из data/treasures/*.json — в пул дропа с монстров не входят.
 var treasures: Array[ItemBase] = []
 var item_sets: Dictionary[String, ItemSetData] = {}
@@ -23,6 +28,7 @@ var _classes_by_id: Dictionary[String, CharacterClass] = {}
 var _items_by_id: Dictionary[String, ItemBase] = {}
 var _buildings_by_id: Dictionary[String, BuildingData] = {}
 var _units_by_id: Dictionary[String, UnitData] = {}
+var _monsters_by_id: Dictionary[String, MonsterData] = {}
 
 
 func _ready() -> void:
@@ -37,6 +43,13 @@ func _ready() -> void:
 		var monster := res as MonsterData
 		if monster:
 			monsters.append(monster)
+			_monsters_by_id[monster.id] = monster
+
+	for res in _load_dir(BIOMES_DIR):
+		var biome := res as BiomeData
+		if biome:
+			biomes.append(biome)
+	biomes.sort_custom(func(a: BiomeData, b: BiomeData) -> bool: return a.order < b.order)
 
 	for res in _load_dir(ITEMS_DIR):
 		var item := res as ItemBase
@@ -105,9 +118,29 @@ func get_items_for_slot(slot: int) -> Array[ItemBase]:
 	return result
 
 
+func get_monster(id: String) -> MonsterData:
+	return _monsters_by_id.get(id)
+
+
+## Биом волны: по 10 волн на биом, после последнего — снова первый.
+func get_biome_for_wave(wave: int) -> BiomeData:
+	if biomes.is_empty():
+		return null
+	return biomes[int((maxi(1, wave) - 1) / WAVES_PER_BIOME) % biomes.size()]
+
+
+## Номер волны внутри биома: 1..10.
+func get_wave_in_biome(wave: int) -> int:
+	return (maxi(1, wave) - 1) % WAVES_PER_BIOME + 1
+
+
+## Монстры волны: из биома этой волны, открывшиеся к её номеру внутри биома (min_wave).
 func get_monsters_for_wave(wave: int, bosses: bool) -> Array[MonsterData]:
+	var biome := get_biome_for_wave(wave)
+	var local_wave := get_wave_in_biome(wave)
 	var result: Array[MonsterData] = []
-	result.assign(monsters.filter(func(m: MonsterData) -> bool: return m.is_boss == bosses and m.min_wave <= wave))
+	result.assign(monsters.filter(func(m: MonsterData) -> bool:
+		return m.is_boss == bosses and (biome == null or m.biome == biome.id) and (bosses or m.min_wave <= local_wave)))
 	return result
 
 

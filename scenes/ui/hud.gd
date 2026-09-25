@@ -135,7 +135,9 @@ func _refresh() -> void:
 	var points := GameState.get_available_talent_points()
 	talents_button.text = "Таланты (%d)" % points if points > 0 else "Таланты"
 	talents_button.modulate = COLOR_HIGHLIGHT if points > 0 else Color.WHITE
-	wave_label.text = "Волна %d (рекорд %d)" % [GameState.wave, GameState.best_wave]
+	var biome := Database.get_biome_for_wave(GameState.wave)
+	wave_label.text = "Волна %d · %s (рекорд %d)" % [GameState.wave, biome.display_name if biome else "", GameState.best_wave]
+	wave_label.modulate = biome.color.lerp(Color.WHITE, 0.5) if biome else Color.WHITE
 
 
 ## Подсветка «Королевства», когда строители свободны и что-то можно построить.

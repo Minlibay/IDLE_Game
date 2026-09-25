@@ -13,9 +13,9 @@ albedo_texture = ExtResource("5")
 uv1_scale = Vector3(40, 1, 1)
 texture_filter = 0
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+[sub_resource type="QuadMesh" id="PlaneMesh_ground"]
 material = SubResource("Material_ground")
-size = Vector2(80, 3)
+size = Vector2(80, 0.52)
 
 [node name="Battle" type="Node3D"]
 script = ExtResource("1")
@@ -25,6 +25,7 @@ transform = Transform3D(1, 0, 0, 0, 0.995037, 0.0995037, 0, -0.0995037, 0.995037
 fov = 30.0
 
 [node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0.45)
 mesh = SubResource("PlaneMesh_ground")
 
 [node name="Hero" parent="." instance=ExtResource("2")]

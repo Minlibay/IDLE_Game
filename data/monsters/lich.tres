@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/lich.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/monster/frost_orb.png" id="3"]
+
+[resource]
+script = ExtResource("1")
+id = "lich"
+display_name = "Лич"
+role = 1
+biome = "graveyard"
+sprite = ExtResource("2")
+sprite_height = 2.7
+base_hp = 900.0
+base_damage = 26.0
+attack_interval = 1.7
+attack_range = 6.5
+move_speed = 1.6
+armor = 10.0
+preferred_range = 5.0
+projectile_texture = ExtResource("3")
+boss_abilities = PackedStringArray("summon", "shield")
+summon_id = "skeleton"
+xp_reward = 180
+gold_reward = 120
+drop_chance = 1.0
+min_wave = 10
+spawn_weight = 1.0
+is_boss = true

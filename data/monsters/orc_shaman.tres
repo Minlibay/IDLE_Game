@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/orc_shaman.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/monster/poison_orb.png" id="3"]
+
+[resource]
+script = ExtResource("1")
+id = "orc_shaman"
+display_name = "Орк-шаман"
+role = 3
+biome = "mountains"
+sprite = ExtResource("2")
+sprite_height = 1.8
+base_hp = 115.0
+base_damage = 8.0
+attack_interval = 2.0
+attack_range = 5.5
+move_speed = 2.3
+preferred_range = 4.5
+projectile_texture = ExtResource("3")
+projectile_tint = Color(1.0, 0.6, 0.3, 1)
+heal_percent = 20.0
+buff_percent = 25.0
+xp_reward = 19
+gold_reward = 10
+drop_chance = 0.15
+min_wave = 4
+spawn_weight = 0.8

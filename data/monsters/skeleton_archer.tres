@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/skeleton_archer.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/monster/bone_arrow.png" id="3"]
+
+[resource]
+script = ExtResource("1")
+id = "skeleton_archer"
+display_name = "Скелет-лучник"
+role = 1
+biome = "graveyard"
+sprite = ExtResource("2")
+sprite_height = 1.6
+base_hp = 55.0
+base_damage = 8.0
+attack_interval = 1.6
+attack_range = 6.0
+move_speed = 2.6
+preferred_range = 5.5
+projectile_texture = ExtResource("3")
+xp_reward = 13
+gold_reward = 7
+drop_chance = 0.12
+min_wave = 3
+spawn_weight = 1.5

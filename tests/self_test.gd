@@ -10,6 +10,7 @@ func _ready() -> void:
 	await get_tree().process_frame
 	_test_data_loaded()
 	_test_loot()
+	_test_monsters()
 	_test_equip()
 	_test_new_slots_and_relics()
 	_test_treasures()
@@ -22,6 +23,8 @@ func _ready() -> void:
 	_test_needs()
 	_test_army()
 	await _test_battle_replay()
+	await _test_biome_ground()
+	await _test_hero_chase()
 	await _test_skill_casting()
 	if _errors.is_empty():
 		print("SELFTEST OK")
@@ -51,6 +54,81 @@ func _test_loot() -> void:
 	for i in 20:
 		var item := LootGenerator.roll_drop(boss, 10)
 		_check(item != null and item.tier >= Item.Tier.UNCOMMON, "boss must always drop uncommon+")
+
+
+## Биомы, роли, лимиты ролей в волне, элиты, шаман и щит босса.
+func _test_monsters() -> void:
+	_check(Database.biomes.size() >= 3, "biomes not loaded")
+	_check(Database.get_biome_for_wave(1).id == "forest" and Database.get_biome_for_wave(10).id == "forest", "waves 1-10 must be forest")
+	_check(Database.get_biome_for_wave(11).id == "graveyard", "wave 11 must be graveyard")
+	_check(Database.get_biome_for_wave(21).id == "mountains", "wave 21 must be mountains")
+	_check(Database.get_biome_for_wave(Database.biomes.size() * Database.WAVES_PER_BIOME + 1).id == "forest", "biomes must cycle")
+	for biome in Database.biomes:
+		var first_wave := biome.order * Database.WAVES_PER_BIOME + 1
+		var pool := Database.get_monsters_for_wave(first_wave + 8, false)
+		_check(not pool.is_empty() and pool.all(func(m: MonsterData) -> bool: return m.biome == biome.id), "wrong monsters in " + biome.id)
+		var roles := {}
+		for monster in pool:
+			roles[monster.role] = true
+		_check(roles.size() == 4, "biome %s must have all 4 roles, has %d" % [biome.id, roles.size()])
+		_check(Database.get_monsters_for_wave(first_wave + 9, true).size() == 1, "biome %s must have one boss" % biome.id)
+
+	# Лимиты ролей: шаман один, громил не больше двух (в волне до 8 монстров).
+	var manager := WaveManager.new()
+	for i in 200:
+		var wave := manager.build_wave(9)
+		var shamans := wave.filter(func(m: MonsterData) -> bool: return m.role == MonsterData.Role.SHAMAN).size()
+		var brutes := wave.filter(func(m: MonsterData) -> bool: return m.role == MonsterData.Role.BRUTE).size()
+		if shamans > 1 or brutes > 2:
+			_check(false, "role limits broken: %d shamans, %d brutes" % [shamans, brutes])
+			break
+	var elites := manager.assign_elites(manager.build_wave(40), 40)
+	_check(elites.filter(func(e: Dictionary) -> bool: return e.elite != "").size() <= 2, "too many elites")
+	manager.free()
+
+	var hero := get_tree().get_first_node_in_group(Hero.GROUP) as Hero
+	if hero == null:
+		return
+	var scene: PackedScene = load("res://scenes/actors/monster.tscn")
+	# Элита: сильнее, награды больше, имя с модификатором.
+	var goblin_data := Database.get_monster("goblin")
+	var elite: Monster = scene.instantiate()
+	add_child(elite)
+	elite.setup(goblin_data, 5, hero, "stoneskin")
+	var normal: Monster = scene.instantiate()
+	add_child(normal)
+	normal.setup(goblin_data, 5, hero)
+	_check(elite.is_elite() and elite.max_hp > normal.max_hp * 2.0 and elite.armor > normal.armor, "elite is not stronger")
+	_check(elite.reward_multiplier > 1.0 and elite.get_display_name().begins_with("Каменнокожий"), "elite rewards/name wrong")
+
+	# Шаман лечит раненого и усиливает союзников рядом.
+	var shaman: Monster = scene.instantiate()
+	add_child(shaman)
+	shaman.setup(Database.get_monster("goblin_shaman"), 5, hero)
+	shaman.position = Vector3(50, 0, 0)
+	normal.position = Vector3(51, 0, 0)
+	elite.position = Vector3(200, 0, 0)
+	normal.hp = normal.max_hp * 0.3
+	shaman._ability_cooldown = 0.0
+	shaman._update_shaman(0.1)
+	_check(normal.hp > normal.max_hp * 0.3, "shaman did not heal the wounded ally")
+	_check(normal._buff_multiplier > 1.0, "shaman did not buff the ally")
+	_check(elite._buff_multiplier == 1.0, "shaman buffed a far ally")
+
+	# Щит босса: на половине здоровья урон поглощается.
+	var lich: Monster = scene.instantiate()
+	add_child(lich)
+	lich.setup(Database.get_monster("lich"), 20, hero)
+	lich.position = Vector3(300, 0, 0)
+	lich.take_hit(lich.max_hp * 0.6 * (100.0 + lich.armor) / 100.0)
+	_check(lich._shield > 0.0, "boss shield did not appear at half health")
+	var hp_before := lich.hp
+	lich.take_hit(lich._shield * 0.5)
+	_check(is_equal_approx(lich.hp, hp_before), "shield did not absorb the hit")
+	for monster in [elite, normal, shaman, lich]:
+		monster.remove_from_group(Monster.GROUP)
+		monster.queue_free()
+	print("  monsters ok: elite, shaman heal/buff, boss shield")
 
 
 func _test_equip() -> void:
@@ -511,6 +589,62 @@ func _test_battle_replay() -> void:
 	replay.queue_free()
 
 
+## Земля меняется по биомам: плавно проявляется поверх старой.
+func _test_biome_ground() -> void:
+	var battle := get_tree().get_first_node_in_group(Hero.GROUP).get_parent() if get_tree().get_first_node_in_group(Hero.GROUP) else null
+	if battle == null or not battle.has_method("_set_ground_for_wave"):
+		return
+	var wave := 3 * Database.WAVES_PER_BIOME + 5
+	battle._set_ground_for_wave(wave, true)
+	await get_tree().create_timer(battle.GROUND_FADE_TIME + 0.3).timeout
+	var material := battle.ground.material_override as StandardMaterial3D
+	_check(material != null and material.albedo_texture == Database.get_biome_for_wave(wave).ground_texture, "ground did not change to the biome")
+	battle._set_ground_for_wave(GameState.wave, false)
+
+
+## Герой ближнего боя сам идёт к дальнему стрелку, а после его смерти возвращается на свою точку.
+func _test_hero_chase() -> void:
+	var hero := get_tree().get_first_node_in_group(Hero.GROUP) as Hero
+	if hero == null or hero.attack_range >= 6.0:
+		return  # стрелки (лучник, маг) и так достают дальних врагов
+	var battle := hero.get_parent()
+	battle.wave_manager.stop()
+	for node in get_tree().get_nodes_in_group(Monster.GROUP):
+		node.remove_from_group(Monster.GROUP)
+		node.queue_free()
+	await get_tree().process_frame
+	hero.revive()
+	hero.finish_walk()
+	hero.global_position.x = hero.home_x
+	var archer: Monster = load("res://scenes/actors/monster.tscn").instantiate()
+	battle.monsters_root.add_child(archer)
+	archer.setup(Database.get_monster("goblin_archer"), 1, hero)
+	archer.max_hp = 1.0e9
+	archer.hp = archer.max_hp
+	archer.damage = 0.0
+	archer.global_position = Vector3(hero.home_x + 7.0, 0.0, 0.0)
+	var reached := await _wait_for(func() -> bool: return absf(archer.global_position.x - hero.global_position.x) <= hero.attack_range, 5.0)
+	_check(reached, "hero did not walk to the ranged monster")
+	archer.remove_from_group(Monster.GROUP)
+	archer.queue_free()
+	var home := await _wait_for(func() -> bool: return absf(hero.global_position.x - hero.home_x) < 0.05, 5.0)
+	_check(home, "hero did not return home after the fight")
+	for i in 3:
+		await get_tree().process_frame
+	_check(not hero.visual.flip_h and not hero._is_moving, "hero must stop and face right at home")
+	battle.wave_manager.start_wave(GameState.wave)
+
+
+func _wait_for(condition: Callable, timeout: float) -> bool:
+	var left := timeout
+	while left > 0.0:
+		if condition.call():
+			return true
+		await get_tree().process_frame
+		left -= get_process_delta_time()
+	return condition.call()
+
+
 ## Ставит ранг напрямую (в обход требований) — только для тестов.
 func talent_rank_force(talent: TalentData, rank: int) -> void:
 	GameState.talent_ranks[talent.id] = rank
@@ -533,6 +667,7 @@ func _test_skill_casting() -> void:
 		if not hero.is_alive():
 			hero.revive()
 		caster.reset_cooldowns()
+		hero.clear_buffs()  # автокаст мог уже наложить этот бафф — тогда урон не вырастет
 		var damage_before := hero.damage
 		_check(caster.try_cast(skill), "cannot cast '%s'" % skill.id)
 		_check(caster.get_cooldown_left(skill) > 0.0, "'%s' did not go on cooldown" % skill.id)

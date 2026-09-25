@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/giant_spider.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/monster/poison_orb.png" id="3"]
+
+[resource]
+script = ExtResource("1")
+id = "giant_spider"
+display_name = "Гигантский паук"
+role = 1
+biome = "cursed"
+sprite = ExtResource("2")
+sprite_height = 1.2
+base_hp = 100.0
+base_damage = 13.0
+attack_interval = 1.5
+attack_range = 5.5
+move_speed = 3.2
+preferred_range = 4.8
+projectile_texture = ExtResource("3")
+xp_reward = 19
+gold_reward = 9
+drop_chance = 0.13
+min_wave = 2
+spawn_weight = 1.5

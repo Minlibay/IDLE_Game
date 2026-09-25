@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/kobold.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "kobold"
+display_name = "Кобольд"
+role = 0
+biome = "mountains"
+sprite = ExtResource("2")
+sprite_height = 1.2
+base_hp = 80.0
+base_damage = 10.0
+attack_interval = 0.9
+attack_range = 1.4
+move_speed = 3.4
+xp_reward = 14
+gold_reward = 7
+drop_chance = 0.12
+min_wave = 1
+spawn_weight = 3.0

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/zombie.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "zombie"
+display_name = "Зомби"
+role = 2
+biome = "graveyard"
+sprite = ExtResource("2")
+sprite_height = 1.7
+base_hp = 170.0
+base_damage = 11.0
+attack_interval = 1.9
+attack_range = 1.5
+move_speed = 1.4
+armor = 20.0
+xp_reward = 18
+gold_reward = 9
+drop_chance = 0.15
+min_wave = 2
+spawn_weight = 1.2

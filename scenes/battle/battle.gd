@@ -10,6 +10,15 @@ const HERO_ENTER_TIME := 1.5
 ## Разброс монстров по глубине, чтобы толпа выглядела объёмнее.
 const SPAWN_DEPTH_SPREAD := 0.35
 const RESPAWN_DELAY := 2.5
+## Сколько секунд земля нового биома проявляется поверх старой.
+const GROUND_FADE_TIME := 1.2
+## Земля — вертикальная полоса перед героем и монстрами (вид сбоку, как край платформы), без перекоса перспективы.
+## Плотность её пикселей (на единицу мира) — как у спрайтов монстров.
+const GROUND_TEXELS_PER_UNIT := 52.0
+## Доля высоты полосы над линией ног: там травинки и кромка травы, ниже — земля.
+const GROUND_SURFACE_SHARE := 0.3
+## Полоса позади персонажей (они на глубине от -0.35 до 0.35): их ноги ложатся на траву, как в 2D-играх.
+const GROUND_Z := -0.6
 const NEXT_WAVE_DELAY := 1.0
 ## Рост наград с каждой волной.
 const XP_GROWTH_PER_WAVE := 1.08
@@ -31,8 +40,10 @@ const OFFLINE_MESSAGE_DURATION := 7.0
 ## Герой отдыхает: волны на паузе, восстанавливается бодрость.
 var _resting := false
 var _zzz_timer := 0.0
+var _ground_texture: Texture2D
 
 @onready var camera: Camera3D = $Camera3D
+@onready var ground: MeshInstance3D = $Ground
 @onready var hero: Hero = $Hero
 @onready var monsters_root: Node3D = $Monsters
 @onready var effects_root: Node3D = $Effects
@@ -64,6 +75,7 @@ func _ready() -> void:
 	_hero_enter()
 	hud.set_hero_health(hero.hp, hero.max_hp)
 	hero.set_aura(GameState.get_aura_color())
+	_set_ground_for_wave(GameState.wave, false)
 	wave_manager.start_wave(GameState.wave)
 	_show_offline_report()
 	GameState.offline_report_ready.connect(_show_offline_report)
@@ -152,10 +164,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _hero_enter() -> void:
+	hero.home_x = _lane_point(HERO_SCREEN_X).x
 	hero.walk_in(_lane_point(HERO_ENTER_SCREEN_X), _lane_point(HERO_SCREEN_X), HERO_ENTER_TIME)
 
 
 func _layout() -> void:
+	hero.home_x = _lane_point(HERO_SCREEN_X).x
 	hero.position = _lane_point(HERO_SCREEN_X)
 
 
@@ -171,13 +185,19 @@ func _lane_point(screen_x_ratio: float) -> Vector3:
 	return Vector3((hit as Vector3).x, 0.0, 0.0)
 
 
-func _spawn_monster(data: MonsterData, wave: int) -> void:
+## at — где появиться (помощники босса); по умолчанию — из-за правого края экрана.
+func _spawn_monster(data: MonsterData, wave: int, elite_id := "", at: Variant = null) -> void:
 	var monster: Monster = MONSTER_SCENE.instantiate()
 	monsters_root.add_child(monster)
-	var spawn := _lane_point(SPAWN_SCREEN_X)
-	spawn.z = randf_range(-SPAWN_DEPTH_SPREAD, SPAWN_DEPTH_SPREAD)
+	var spawn: Vector3 = at if at is Vector3 else _lane_point(SPAWN_SCREEN_X)
+	if not at is Vector3:
+		spawn.z = randf_range(-SPAWN_DEPTH_SPREAD, SPAWN_DEPTH_SPREAD)
 	monster.position = spawn
-	monster.setup(data, wave, hero)
+	monster.setup(data, wave, hero, elite_id)
+	monster.summon_requested.connect(func(minion: MonsterData, point: Vector3) -> void:
+		_spawn_monster(minion, wave, "", point))
+	if monster.is_elite():
+		hud.show_message("Элита: %s!" % monster.get_display_name())
 	monster.damaged.connect(_on_actor_damaged.bind(monster))
 	monster.died.connect(_on_monster_died)
 	monster.damaged.connect(_on_monster_damaged)
@@ -196,8 +216,8 @@ func _on_monster_died(actor: Actor) -> void:
 	var monster := actor as Monster
 	var data := monster.data
 	var level := monster.wave_level - 1
-	var xp_bonus := 1.0 + GameState.get_bonus(StatModifier.Stat.XP_GAIN) / 100.0
-	var gold_bonus := 1.0 + GameState.get_bonus(StatModifier.Stat.GOLD_FIND) / 100.0
+	var xp_bonus := (1.0 + GameState.get_bonus(StatModifier.Stat.XP_GAIN) / 100.0) * monster.reward_multiplier
+	var gold_bonus := (1.0 + GameState.get_bonus(StatModifier.Stat.GOLD_FIND) / 100.0) * monster.reward_multiplier
 	GameState.add_xp(roundi(data.xp_reward * pow(XP_GROWTH_PER_WAVE, level) * xp_bonus))
 	if hero.kill_heal > 0.0:
 		hero.heal(hero.max_hp * hero.kill_heal, false)
@@ -206,7 +226,7 @@ func _on_monster_died(actor: Actor) -> void:
 	_float_text(monster.global_position + Vector3(0.0, monster.visual_height * 0.5, 0.3), "+%d з" % gold, COLOR_GOLD, 0.8)
 
 	var item := LootGenerator.roll_drop(data, monster.wave_level,
-		GameState.get_bonus(StatModifier.Stat.DROP_CHANCE) / 100.0)
+		GameState.get_bonus(StatModifier.Stat.DROP_CHANCE) / 100.0 + monster.drop_bonus)
 	if item == null:
 		return
 	GameState.add_item(item)
@@ -237,9 +257,52 @@ func _on_hero_died(_actor: Actor) -> void:
 	wave_manager.start_wave(GameState.wave)
 
 
+## Земля биома: при смене биома новая проявляется поверх старой (animate), при запуске — сразу.
+func _set_ground_for_wave(wave: int, animate: bool) -> void:
+	var biome := Database.get_biome_for_wave(wave)
+	var texture: Texture2D = biome.ground_texture if biome and biome.ground_texture else null
+	if texture == null or texture == _ground_texture:
+		return
+	_ground_texture = texture
+	if ground.material_override == null:
+		ground.material_override = (ground.mesh.surface_get_material(0) as StandardMaterial3D).duplicate()
+	if not animate:
+		_apply_ground_texture(ground.material_override, texture)
+		return
+	var overlay := MeshInstance3D.new()
+	overlay.mesh = ground.mesh
+	var material := (ground.material_override as StandardMaterial3D).duplicate() as StandardMaterial3D
+	_apply_ground_texture(material, texture)
+	material.albedo_color = Color(1, 1, 1, 0)
+	overlay.material_override = material
+	overlay.position = ground.position + Vector3(0, 0, 0.002)
+	add_child(overlay)
+	var tween := create_tween()
+	tween.tween_property(material, "albedo_color:a", 1.0, GROUND_FADE_TIME)
+	tween.tween_callback(func() -> void:
+		_apply_ground_texture(ground.material_override, texture)
+		overlay.queue_free())
+
+
+## Текстура земли: повтор по ширине и высота полосы — так, чтобы пиксели были квадратными и того же
+## размера, что у монстров; кромка травы — на линии ног.
+func _apply_ground_texture(material: StandardMaterial3D, texture: Texture2D) -> void:
+	material.albedo_texture = texture
+	var quad := ground.mesh as QuadMesh
+	var tile_width := texture.get_width() / GROUND_TEXELS_PER_UNIT
+	material.uv1_scale = Vector3(quad.size.x / tile_width, 1.0, 1.0)
+	quad.size.y = texture.get_height() / GROUND_TEXELS_PER_UNIT
+	ground.position = Vector3(0.0, quad.size.y * (GROUND_SURFACE_SHARE - 0.5), GROUND_Z)
+
+
 func _on_wave_started(wave: int) -> void:
+	_set_ground_for_wave(wave, true)
+	var biome := Database.get_biome_for_wave(wave)
 	if wave_manager.is_boss_wave(wave):
-		hud.show_message("Волна %d — БОСС!" % wave)
+		var bosses := Database.get_monsters_for_wave(wave, true)
+		hud.show_message("Волна %d — БОСС: %s!" % [wave, bosses[0].display_name if not bosses.is_empty() else "?"])
+	elif biome and Database.get_wave_in_biome(wave) == 1:
+		hud.show_message("%s — волны %d–%d" % [biome.display_name, wave, wave + Database.WAVES_PER_BIOME - 1])
 
 
 func _on_wave_cleared(wave: int) -> void:

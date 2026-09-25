@@ -25,6 +25,8 @@ var max_hp := 100.0
 var hp := 100.0
 var damage := 10.0
 var armor := 0.0
+## Обычный цвет спрайта (оттенок монстра, элиты); к нему возвращается вспышка удара.
+var base_modulate := Color.WHITE
 var attack_interval := 1.0
 var attack_range := 1.5
 var crit_chance := 0.0
@@ -221,7 +223,7 @@ func _flash() -> void:
 		_flash_tween.kill()
 	visual.modulate = Color(1.0, 0.45, 0.45)
 	_flash_tween = create_tween()
-	_flash_tween.tween_property(visual, "modulate", Color.WHITE, 0.2)
+	_flash_tween.tween_property(visual, "modulate", base_modulate, 0.2)
 
 
 func _die() -> void:
@@ -256,7 +258,7 @@ func _start_death_fade() -> void:
 func _reset_visual() -> void:
 	_dying = false
 	_action_playing = false
-	visual.modulate = Color.WHITE
+	visual.modulate = base_modulate
 	visual.scale = Vector3.ONE
 	visual.position = Vector3.ZERO
 	visual.alpha_cut = _alpha_cut_mode

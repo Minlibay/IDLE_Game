@@ -7,6 +7,8 @@
 script = ExtResource("1")
 id = "slime"
 display_name = "Слизень"
+role = 0
+biome = "forest"
 sprite = ExtResource("2")
 sprite_height = 0.8
 base_hp = 30.0

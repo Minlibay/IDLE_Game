@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/werewolf.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "werewolf"
+display_name = "Оборотень"
+role = 0
+biome = "cursed"
+sprite = ExtResource("2")
+sprite_height = 1.8
+base_hp = 120.0
+base_damage = 14.0
+attack_interval = 0.9
+attack_range = 1.5
+move_speed = 3.6
+xp_reward = 20
+gold_reward = 10
+drop_chance = 0.13
+min_wave = 1
+spawn_weight = 3.0

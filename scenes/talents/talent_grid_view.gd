@@ -173,13 +173,14 @@ func _draw_node(talent: TalentData, screen_center: Vector2) -> void:
 		frame = FRAME_MAXED
 		modulate = Color.WHITE if reachable else KEYSTONE_LOCKED_MODULATE
 	var rect := Rect2(screen_center - Vector2.ONE * node_size * 0.5, Vector2.ONE * node_size)
+	# Свечение выделения — под узлом: у картинки непрозрачная середина, видны только края вокруг.
+	if talent == selected:
+		draw_texture_rect(FRAME_SELECTED, rect.grow(node_size * 0.12), false)
 	draw_texture_rect(frame, rect, false, modulate)
 	var icon := talent.get_icon()
 	if icon:
 		var icon_size := node_size * ICON_SHARE
 		draw_texture_rect(icon, Rect2(screen_center - Vector2.ONE * icon_size * 0.5, Vector2.ONE * icon_size), false, modulate)
-	if talent == selected:
-		draw_texture_rect(FRAME_SELECTED, rect.grow(node_size * 0.12), false)
 
 
 func _cell_center(cell: Vector2i) -> Vector2:

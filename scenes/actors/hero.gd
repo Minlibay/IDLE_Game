@@ -41,6 +41,13 @@ var _aura: Sprite3D
 var _aura_tween: Tween
 ## Отдыхает (не атакует, быстрее лечится). Управляет Battle.
 var is_resting := false
+## Своя точка на поле боя (её задаёт Battle). Бойцов ближнего боя герой ждёт здесь; если вблизи никого,
+## а вдали стоят стрелки/шаманы — идёт к ним, после боя возвращается.
+var home_x := 0.0
+## Скорость, с которой герой идёт к дальним врагам и обратно.
+const CHASE_SPEED := 4.0
+## Герой подходит на эту долю своей дальности атаки.
+const CHASE_REACH := 0.8
 var _base_stats: Dictionary = {}
 var _buffs: Array[Buff] = []
 var _click_tween: Tween
@@ -231,16 +238,59 @@ func _tick(delta: float) -> void:
 		var rest_bonus := REST_REGEN_MULTIPLIER if is_resting else 1.0
 		hp = minf(max_hp, hp + max_hp * REGEN_PER_SECOND * regen_multiplier * rest_bonus * delta)
 		_update_health()
-	if is_resting:
+	if is_resting or (_walk_tween and _walk_tween.is_running()):
 		return
 	attack_cooldown = maxf(0.0, attack_cooldown - delta)
-	if attack_cooldown > 0.0:
-		return
 	var target := find_target()
 	if target == null:
+		_reposition(delta)
+		return
+	_halt()
+	if attack_cooldown > 0.0:
 		return
 	attack_cooldown = attack_interval
 	_attack(target)
+
+
+## Вблизи врагов нет: идти к дальнему врагу (если бойцов ближнего боя не осталось) или домой.
+func _reposition(delta: float) -> void:
+	var goal_x := home_x
+	var enemy := _ranged_enemy_to_chase()
+	if enemy:
+		var side := signf(enemy.global_position.x - global_position.x)
+		goal_x = enemy.global_position.x - side * attack_range * CHASE_REACH
+	var dx := goal_x - global_position.x
+	if absf(dx) <= CHASE_SPEED * delta:
+		global_position.x = goal_x
+		_halt()
+		return
+	global_position.x += signf(dx) * CHASE_SPEED * delta
+	if not _is_moving:
+		_is_moving = true
+		set_base_animation(&"walk")
+	visual.flip_h = dx < 0.0
+
+
+## Ближайший дальний враг, к которому стоит идти. Пока жив хоть один боец ближнего боя — никого:
+## бойцы сами подойдут, герой ждёт их на своей точке.
+func _ranged_enemy_to_chase() -> Monster:
+	var nearest: Monster = null
+	for node in get_tree().get_nodes_in_group(Monster.GROUP):
+		var monster := node as Monster
+		if monster == null or not monster.is_alive():
+			continue
+		if not monster.data.is_ranged():
+			return null
+		if nearest == null or absf(monster.global_position.x - global_position.x) < absf(nearest.global_position.x - global_position.x):
+			nearest = monster
+	return nearest
+
+
+func _halt() -> void:
+	visual.flip_h = false
+	if _is_moving:
+		_is_moving = false
+		set_base_animation(ANIM_IDLE)
 
 
 func _attack(target: Monster) -> void:

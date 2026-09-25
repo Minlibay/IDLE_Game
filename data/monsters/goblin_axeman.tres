@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/goblin_axeman.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "goblin_axeman"
+display_name = "Гоблин-рубака"
+role = 0
+biome = "forest"
+sprite = ExtResource("2")
+sprite_height = 1.2
+base_hp = 55.0
+base_damage = 8.0
+attack_interval = 1.1
+attack_range = 1.4
+move_speed = 3.0
+xp_reward = 9
+gold_reward = 5
+drop_chance = 0.1
+min_wave = 6
+spawn_weight = 1.5

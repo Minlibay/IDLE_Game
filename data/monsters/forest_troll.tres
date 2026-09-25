@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/forest_troll.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "forest_troll"
+display_name = "Лесной тролль"
+role = 2
+biome = "forest"
+sprite = ExtResource("2")
+sprite_height = 1.9
+base_hp = 130.0
+base_damage = 9.0
+attack_interval = 1.8
+attack_range = 1.6
+move_speed = 1.6
+armor = 25.0
+xp_reward = 16
+gold_reward = 8
+drop_chance = 0.15
+min_wave = 5
+spawn_weight = 1.0

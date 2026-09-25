@@ -7,6 +7,8 @@
 script = ExtResource("1")
 id = "skeleton"
 display_name = "Скелет"
+role = 0
+biome = "graveyard"
 sprite = ExtResource("2")
 sprite_height = 1.6
 base_hp = 70.0
@@ -17,5 +19,5 @@ move_speed = 2.8
 xp_reward = 12
 gold_reward = 6
 drop_chance = 0.12
-min_wave = 6
-spawn_weight = 2.0
+min_wave = 1
+spawn_weight = 3.0

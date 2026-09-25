@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/moss_giant.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "moss_giant"
+display_name = "Мшистый великан"
+role = 2
+biome = "cursed"
+sprite = ExtResource("2")
+sprite_height = 2.9
+base_hp = 2000.0
+base_damage = 38.0
+attack_interval = 2.0
+attack_range = 2.0
+move_speed = 1.4
+armor = 35.0
+boss_abilities = PackedStringArray("slam", "summon", "enrage")
+summon_id = "giant_spider"
+xp_reward = 320
+gold_reward = 220
+drop_chance = 1.0
+min_wave = 10
+spawn_weight = 1.0
+is_boss = true

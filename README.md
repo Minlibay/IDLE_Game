@@ -58,8 +58,21 @@ tools/generate_placeholders.gd  генератор временных спрай
 
 - **Класс**: скопируйте `data/classes/warrior.tres`, поменяйте `id`, имя, статы, спрайт.
   Если задать `projectile_texture`, класс будет стрелять снарядами.
-- **Монстр**: скопируйте `.tres` из `data/monsters/`. `min_wave` — с какой волны появляется,
-  `is_boss` — только на каждой 10-й волне.
+- **Монстр**: скопируйте `.tres` из `data/monsters/`. `biome` — в каком биоме, `min_wave` — с какой волны
+  внутри биома (1–10), `is_boss` — босс биома (10-я волна). `role` — поведение: боец, стрелок
+  (`preferred_range`, `projectile_texture`), громила (`armor`), шаман (`heal_percent`, `buff_percent`).
+  Приёмы босса — `boss_abilities`: `slam`, `summon` (+ `summon_id`), `shield`, `enrage`.
+  Пока нет своей картинки — чужой спрайт с `tint`. Листы монстров от ChatGPT (вид сбоку, лицом вправо,
+  исходники — `assets/ui/source/monsters/`): нарезать `tools/slice_ui_sheet.gd -- <лист> <папка> p 4`,
+  разложить `tools/place_sheet_sprites.gd -- <папка> p res://assets/sprites/monsters 4 <id1> <id2> …`
+  (ячейку пропустить — `-`); снаряды монстров — `assets/sprites/fx/monster/`.
+- **Биом**: `.tres` в `data/biomes/` (порядок, название, цвет, `ground_texture` — земля под ногами;
+  при смене биома новая земля плавно проявляется). Земля — вертикальная полоса позади персонажей
+  (вид сбоку, как край платформы); полосы от ChatGPT (`assets/ui/source/ground_strips.webp`) нарезаются
+  `tools/slice_ui_sheet.gd -- <лист> <папка> p 4` и делаются бесшовными
+  `tools/make_ground_tile.gd -- <полоса.png> res://assets/sprites/fx/ground_<биом>.png`. По 10 волн на биом:
+  лес → кладбище → горы → проклятая чаща → снова лес (сильнее). Элиты (случайный монстр с модификатором — бешеный,
+  каменнокожий, вампир, могучий): больше здоровья и урона, золотое имя, втрое больше наград.
 - **Предмет**: скопируйте `.tres` из `data/items/`. `allowed_classes` пустой — подходит всем,
   `drop_weight` — относительный шанс выпадения (1 — обычно, 0.5 — вдвое реже).
   Слоты героя: шлем, плечи, броня, ноги, оружие, ботинки, аксессуар.
@@ -249,6 +262,9 @@ transparent background, feet at the bottom edge, no shadow, consistent style»*.
 `ui_kingdom.webp` (детали — `assets/ui/kingdom/`); иконки зданий, ресурсов, отрядов — из `ui_kingdom_icons.webp`,
 фигурки солдат для повтора боя — из `ui_units_battle.webp` (`battle_sprite` в `data/units/*.tres`).
 Нарисованную на рамке иконку можно стереть: `tools/clear_ui_interior.gd`.
+После нарезки спрайтов (предметы, монстры, здания, сокровища) один раз прогоните
+`tools/clean_white_background.gd -- <папка>`: он убирает остатки белого фона — «карманы» внутри силуэта
+(между луком и тетивой) и светлую кайму по краю; белые детали рисунка не трогает.
 Общие элементы, собираемые в коде (плашки, заголовки разделов, стили из картинок) — `scripts/ui/ui_styles.gd`.
 Окна в полосе рабочего стола должны помещаться по высоте в 340 px (`DesktopWindow.WINDOW_HEIGHT`).
 ## Дальше (к Steam и Торговой площадке)

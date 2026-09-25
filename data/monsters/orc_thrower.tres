@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/orc_thrower.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/monster/orc_axe.png" id="3"]
+
+[resource]
+script = ExtResource("1")
+id = "orc_thrower"
+display_name = "Орк-метатель"
+role = 1
+biome = "mountains"
+sprite = ExtResource("2")
+sprite_height = 1.7
+base_hp = 95.0
+base_damage = 13.0
+attack_interval = 1.7
+attack_range = 6.0
+move_speed = 2.6
+preferred_range = 5.0
+projectile_texture = ExtResource("3")
+xp_reward = 16
+gold_reward = 8
+drop_chance = 0.13
+min_wave = 3
+spawn_weight = 1.5

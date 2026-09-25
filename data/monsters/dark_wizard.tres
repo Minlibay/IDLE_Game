@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/dark_wizard.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/monster/necro_orb.png" id="3"]
+
+[resource]
+script = ExtResource("1")
+id = "dark_wizard"
+display_name = "Тёмный маг"
+role = 3
+biome = "cursed"
+sprite = ExtResource("2")
+sprite_height = 1.7
+base_hp = 130.0
+base_damage = 10.0
+attack_interval = 1.9
+attack_range = 5.5
+move_speed = 2.3
+preferred_range = 4.5
+projectile_texture = ExtResource("3")
+heal_percent = 20.0
+buff_percent = 30.0
+xp_reward = 24
+gold_reward = 12
+drop_chance = 0.16
+min_wave = 4
+spawn_weight = 0.8

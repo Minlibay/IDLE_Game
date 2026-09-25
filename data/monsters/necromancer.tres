@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/necromancer.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/monster/necro_orb.png" id="3"]
+
+[resource]
+script = ExtResource("1")
+id = "necromancer"
+display_name = "Некромант"
+role = 3
+biome = "graveyard"
+sprite = ExtResource("2")
+sprite_height = 1.8
+base_hp = 65.0
+base_damage = 5.0
+attack_interval = 2.0
+attack_range = 5.5
+move_speed = 2.3
+preferred_range = 4.5
+projectile_texture = ExtResource("3")
+heal_percent = 18.0
+buff_percent = 25.0
+xp_reward = 16
+gold_reward = 9
+drop_chance = 0.14
+min_wave = 5
+spawn_weight = 0.8

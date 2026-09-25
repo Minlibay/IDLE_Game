@@ -58,6 +58,13 @@ func _initialize() -> void:
 	_save(_orb(), "fx/orb.png", false)
 	_save(_shadow(), "fx/shadow.png", false)
 	_save(_ground(), "fx/ground.png", false)
+	# Земля биомов (имена = ground_<id биома>.png).
+	_save(_ground_with(Color(0.42, 0.47, 0.36), Color(0.3, 0.27, 0.25),
+		[Color(0.85, 0.83, 0.75), Color(0.55, 0.55, 0.55)], 0.012), "fx/ground_graveyard.png", false)
+	_save(_ground_with(Color(0.5, 0.49, 0.46), Color(0.4, 0.33, 0.27),
+		[Color(0.68, 0.67, 0.64), Color(0.35, 0.34, 0.33)], 0.03), "fx/ground_mountains.png", false)
+	_save(_ground_with(Color(0.3, 0.22, 0.36), Color(0.16, 0.12, 0.18),
+		[Color(0.75, 0.45, 1.0), Color(0.45, 1.0, 0.6)], 0.01), "fx/ground_cursed.png", false)
 	_save(_ring(), "fx/ring.png", false)
 	_save(_fireball(), "fx/fireball.png", false)
 
@@ -489,9 +496,13 @@ func _shadow() -> Image:
 
 ## Полоса земли: сверху (дальний край) трава плавно проявляется, снизу — край земли.
 func _ground() -> Image:
+	return _ground_with(Color(0.36, 0.62, 0.3), Color(0.45, 0.32, 0.2),
+		[Color(1, 0.9, 0.3), Color(1, 0.55, 0.7), Color.WHITE], 0.006)
+
+
+## Полоса земли: трава (сверху — редеет), кромка, земля снизу; specks — цветные крапинки (цветы, камешки, кости).
+func _ground_with(grass: Color, dirt: Color, specks: Array, speck_chance: float) -> Image:
 	var img := _new(64, 96)
-	var grass := Color(0.36, 0.62, 0.3)
-	var dirt := Color(0.45, 0.32, 0.2)
 	for y in img.get_height():
 		for x in img.get_width():
 			var c := grass
@@ -508,8 +519,8 @@ func _ground() -> Image:
 						continue
 			var v := _rng.randf_range(-0.06, 0.06)
 			c = Color(c.r + v, c.g + v, c.b + v * 0.5)
-			if y < 74 and _rng.randf() < 0.006:
-				c = [Color(1, 0.9, 0.3), Color(1, 0.55, 0.7), Color.WHITE].pick_random()
+			if y < 74 and _rng.randf() < speck_chance:
+				c = specks.pick_random()
 			img.set_pixel(x, y, c)
 	for x in img.get_width():
 		img.set_pixel(x, 73, grass.darkened(0.3))

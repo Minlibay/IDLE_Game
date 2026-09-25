@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/stone_golem.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "stone_golem"
+display_name = "Каменный голем"
+role = 2
+biome = "mountains"
+sprite = ExtResource("2")
+sprite_height = 2.8
+base_hp = 1400.0
+base_damage = 32.0
+attack_interval = 2.1
+attack_range = 2.0
+move_speed = 1.3
+armor = 40.0
+boss_abilities = PackedStringArray("slam", "shield")
+xp_reward = 240
+gold_reward = 160
+drop_chance = 1.0
+min_wave = 10
+spawn_weight = 1.0
+is_boss = true

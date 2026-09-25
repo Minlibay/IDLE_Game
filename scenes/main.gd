@@ -5,6 +5,7 @@ extends Node
 ##   --autotest              отдельное свежее сохранение, герой создаётся автоматически
 ##   --class=archer          класс героя для автотеста
 ##   --level=10              уровень героя для автотеста
+##   --wave=11               начать с этой волны (проверка биомов и боссов)
 ##   --open-inventory        сразу открыть инвентарь (для скриншотов)
 ##   --open-talents          сразу открыть таланты (для скриншотов)
 ##   --open-kingdom          сразу открыть королевство (для скриншотов)
@@ -33,6 +34,9 @@ func _ready() -> void:
 		var class_id: String = args.get("class", Database.classes[0].id)
 		GameState.create_character("Тест", class_id)
 		GameState.level = int(args.get("level", 1))
+		if args.has("wave"):
+			GameState.wave = maxi(1, int(args.wave))
+			GameState.best_wave = GameState.wave
 	if args.has("tired"):
 		for need in Database.needs:
 			if need.restored_by_rest:
