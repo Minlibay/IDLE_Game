@@ -1,0 +1,143 @@
+class_name Hud
+extends CanvasLayer
+## Интерфейс боя: герой (HP, опыт, золото, волна), умения, потребности, окна
+## (сумка, таланты, королевство) и всплывающие сообщения.
+
+signal rest_requested
+
+const SKILL_BUTTON_SCENE := preload("res://scenes/ui/skill_button.tscn")
+const MESSAGE_DURATION := 2.4
+const COLOR_HIGHLIGHT := Color(1.0, 0.85, 0.35)
+## Как часто проверять, можно ли что-то построить (подсветка кнопки королевства).
+const KINGDOM_HINT_INTERVAL := 0.5
+
+var _message_tween: Tween
+var _kingdom_hint_timer := 0.0
+
+@onready var name_label: Label = %NameLabel
+@onready var hp_bar: ProgressBar = %HpBar
+@onready var hp_text: Label = %HpText
+@onready var xp_bar: ProgressBar = %XpBar
+@onready var gold_label: Label = %GoldLabel
+@onready var wave_label: Label = %WaveLabel
+@onready var inventory_button: Button = %InventoryButton
+@onready var talents_button: Button = %TalentsButton
+@onready var kingdom_button: Button = %KingdomButton
+@onready var quit_button: Button = %QuitButton
+@onready var message_label: Label = %MessageLabel
+@onready var skill_list: HBoxContainer = %SkillList
+@onready var auto_cast_button: Button = %AutoCastButton
+@onready var needs_panel: NeedsPanel = %NeedsPanel
+@onready var inventory_panel: InventoryPanel = %InventoryPanel
+@onready var talent_panel: TalentPanel = %TalentPanel
+@onready var kingdom_panel: KingdomPanel = %KingdomPanel
+
+
+func _ready() -> void:
+	auto_cast_button.button_pressed = GameState.auto_cast
+	auto_cast_button.toggled.connect(func(pressed: bool) -> void: GameState.auto_cast = pressed)
+	GameState.progress_changed.connect(_refresh)
+	GameState.currency_changed.connect(_refresh)
+	GameState.character_changed.connect(_refresh)
+	GameState.talents_changed.connect(_refresh)
+	GameState.kingdom.construction_finished.connect(_on_construction_finished)
+	inventory_button.pressed.connect(toggle_inventory)
+	talents_button.pressed.connect(toggle_talents)
+	kingdom_button.pressed.connect(toggle_kingdom)
+	quit_button.pressed.connect(_on_quit_pressed)
+	needs_panel.rest_requested.connect(rest_requested.emit)
+	message_label.modulate.a = 0.0
+	_refresh()
+
+
+func _process(delta: float) -> void:
+	_kingdom_hint_timer -= delta
+	if _kingdom_hint_timer <= 0.0:
+		_kingdom_hint_timer = KINGDOM_HINT_INTERVAL
+		_update_kingdom_button()
+
+
+func set_hero_health(current: float, maximum: float) -> void:
+	hp_bar.max_value = maximum
+	hp_bar.value = current
+	hp_text.text = "%d / %d" % [ceili(current), roundi(maximum)]
+
+
+## Создаёт кнопки умений героя (клавиши 1, 2, 3...).
+func setup_skills(caster: SkillCaster) -> void:
+	for child in skill_list.get_children():
+		child.queue_free()
+	for i in caster.skills.size():
+		var button: SkillButton = SKILL_BUTTON_SCENE.instantiate()
+		skill_list.add_child(button)
+		button.setup(caster.skills[i], caster, str(i + 1))
+
+
+func set_resting(value: bool) -> void:
+	needs_panel.set_resting(value)
+
+
+func toggle_inventory() -> void:
+	_toggle_panel(inventory_panel)
+
+
+func toggle_talents() -> void:
+	_toggle_panel(talent_panel)
+
+
+func toggle_kingdom() -> void:
+	_toggle_panel(kingdom_panel)
+
+
+func show_message(text: String, duration := MESSAGE_DURATION) -> void:
+	message_label.text = text
+	if _message_tween:
+		_message_tween.kill()
+	message_label.modulate.a = 1.0
+	_message_tween = create_tween()
+	_message_tween.tween_interval(duration)
+	_message_tween.tween_property(message_label, "modulate:a", 0.0, 0.6)
+
+
+## Одновременно открыто только одно окно.
+func _toggle_panel(panel: Control) -> void:
+	for other: Control in [inventory_panel, talent_panel, kingdom_panel]:
+		if other != panel:
+			other.close()
+	panel.toggle()
+
+
+func _refresh() -> void:
+	var class_data := GameState.get_class_data()
+	var class_name_text := class_data.display_name if class_data else "?"
+	name_label.text = "%s · %s · ур. %d" % [GameState.hero_name, class_name_text, GameState.level]
+	xp_bar.max_value = GameState.xp_to_next_level()
+	xp_bar.value = GameState.xp
+	xp_bar.tooltip_text = "Опыт: %d / %d" % [GameState.xp, GameState.xp_to_next_level()]
+	gold_label.text = "Золото: %d" % GameState.gold
+	var points := GameState.get_available_talent_points()
+	talents_button.text = "Таланты (%d)" % points if points > 0 else "Таланты"
+	talents_button.modulate = COLOR_HIGHLIGHT if points > 0 else Color.WHITE
+	wave_label.text = "Волна %d (рекорд %d)" % [GameState.wave, GameState.best_wave]
+
+
+## Подсветка «Королевства», когда строители свободны и что-то можно построить.
+func _update_kingdom_button() -> void:
+	var kingdom := GameState.kingdom
+	var can_build := false
+	if not kingdom.is_constructing():
+		for building in Database.buildings:
+			if kingdom.can_upgrade(building):
+				can_build = true
+				break
+	kingdom_button.modulate = COLOR_HIGHLIGHT if can_build else Color.WHITE
+	kingdom_button.text = "Королевство (!)" if can_build else "Королевство"
+
+
+func _on_construction_finished(building: BuildingData, level: int) -> void:
+	show_message("Построено: %s, ур. %d" % [building.display_name, level])
+
+
+func _on_quit_pressed() -> void:
+	GameState.save_game()
+	get_tree().quit()

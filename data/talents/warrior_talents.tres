@@ -1,0 +1,210 @@
+[gd_resource type="Resource" script_class="TalentTree" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/talent_tree.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/talent_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/stat_modifier.gd" id="3"]
+
+[sub_resource type="Resource" id="Mod_1"]
+script = ExtResource("3")
+stat = 0
+value = 4.0
+
+[sub_resource type="Resource" id="Mod_2"]
+script = ExtResource("3")
+stat = 4
+value = 2.0
+
+[sub_resource type="Resource" id="Mod_3"]
+script = ExtResource("3")
+stat = 6
+value = 10.0
+
+[sub_resource type="Resource" id="Mod_4"]
+script = ExtResource("3")
+stat = 6
+value = 100.0
+skill_id = "power_strike"
+
+[sub_resource type="Resource" id="Mod_5"]
+script = ExtResource("3")
+stat = 7
+value = 25.0
+skill_id = "power_strike"
+
+[sub_resource type="Resource" id="Mod_6"]
+script = ExtResource("3")
+stat = 1
+value = 5.0
+
+[sub_resource type="Resource" id="Mod_7"]
+script = ExtResource("3")
+stat = 2
+value = 6.0
+
+[sub_resource type="Resource" id="Mod_8"]
+script = ExtResource("3")
+stat = 12
+value = 50.0
+
+[sub_resource type="Resource" id="Mod_9"]
+script = ExtResource("3")
+stat = 1
+value = 20.0
+
+[sub_resource type="Resource" id="Mod_10"]
+script = ExtResource("3")
+stat = 2
+value = 25.0
+
+[sub_resource type="Resource" id="Mod_11"]
+script = ExtResource("3")
+stat = 3
+value = 4.0
+
+[sub_resource type="Resource" id="Mod_12"]
+script = ExtResource("3")
+stat = 13
+value = 2.0
+
+[sub_resource type="Resource" id="Mod_13"]
+script = ExtResource("3")
+stat = 8
+value = 20.0
+
+[sub_resource type="Resource" id="Mod_14"]
+script = ExtResource("3")
+stat = 7
+value = 30.0
+skill_id = "whirlwind"
+
+[sub_resource type="Resource" id="Mod_15"]
+script = ExtResource("3")
+stat = 7
+value = 30.0
+skill_id = "war_cry"
+
+[sub_resource type="Resource" id="Talent_warrior_strength"]
+script = ExtResource("2")
+id = "warrior_strength"
+display_name = "Сила"
+description = "+{value}% урона."
+branch = 0
+row = 0
+max_rank = 5
+modifiers = Array[ExtResource("3")]([SubResource("Mod_1")])
+
+[sub_resource type="Resource" id="Talent_warrior_brutality"]
+script = ExtResource("2")
+id = "warrior_brutality"
+display_name = "Жестокость"
+description = "+{value}% шанса крита."
+branch = 0
+row = 1
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_2")])
+
+[sub_resource type="Resource" id="Talent_warrior_technique"]
+script = ExtResource("2")
+id = "warrior_technique"
+display_name = "Мастер приёмов"
+description = "+{value}% урона умений."
+branch = 0
+row = 2
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_3")])
+
+[sub_resource type="Resource" id="Talent_warrior_crushing"]
+script = ExtResource("2")
+id = "warrior_crushing"
+display_name = "Сокрушение"
+description = "Мощный удар: +{value}% урона и −{value2}% перезарядки."
+branch = 0
+row = 3
+max_rank = 1
+modifiers = Array[ExtResource("3")]([SubResource("Mod_4"), SubResource("Mod_5")])
+
+[sub_resource type="Resource" id="Talent_warrior_toughness"]
+script = ExtResource("2")
+id = "warrior_toughness"
+display_name = "Стойкость"
+description = "+{value}% здоровья."
+branch = 1
+row = 0
+max_rank = 5
+modifiers = Array[ExtResource("3")]([SubResource("Mod_6")])
+
+[sub_resource type="Resource" id="Talent_warrior_plate"]
+script = ExtResource("2")
+id = "warrior_plate"
+display_name = "Латы"
+description = "+{value} брони."
+branch = 1
+row = 1
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_7")])
+
+[sub_resource type="Resource" id="Talent_warrior_second_wind"]
+script = ExtResource("2")
+id = "warrior_second_wind"
+display_name = "Второе дыхание"
+description = "+{value}% регенерации здоровья."
+branch = 1
+row = 2
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_8")])
+
+[sub_resource type="Resource" id="Talent_warrior_unbreakable"]
+script = ExtResource("2")
+id = "warrior_unbreakable"
+display_name = "Несокрушимый"
+description = "+{value}% здоровья и +{value2} брони."
+branch = 1
+row = 3
+max_rank = 1
+modifiers = Array[ExtResource("3")]([SubResource("Mod_9"), SubResource("Mod_10")])
+
+[sub_resource type="Resource" id="Talent_warrior_quick_hands"]
+script = ExtResource("2")
+id = "warrior_quick_hands"
+display_name = "Быстрые руки"
+description = "+{value}% скорости атаки."
+branch = 2
+row = 0
+max_rank = 5
+modifiers = Array[ExtResource("3")]([SubResource("Mod_11")])
+
+[sub_resource type="Resource" id="Talent_warrior_bloodlust"]
+script = ExtResource("2")
+id = "warrior_bloodlust"
+display_name = "Кровожадность"
+description = "{value}% нанесённого урона возвращается здоровьем."
+branch = 2
+row = 1
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_12")])
+
+[sub_resource type="Resource" id="Talent_warrior_heavy_hand"]
+script = ExtResource("2")
+id = "warrior_heavy_hand"
+display_name = "Тяжёлая рука"
+description = "Клик ускоряет атаку на {value}% сильнее."
+branch = 2
+row = 2
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_13")])
+
+[sub_resource type="Resource" id="Talent_warrior_battle_fury"]
+script = ExtResource("2")
+id = "warrior_battle_fury"
+display_name = "Боевое безумие"
+description = "Вихрь и Боевой клич: −{value}% перезарядки."
+branch = 2
+row = 3
+max_rank = 1
+modifiers = Array[ExtResource("3")]([SubResource("Mod_14"), SubResource("Mod_15")])
+
+[resource]
+script = ExtResource("1")
+branch_names = PackedStringArray("Оружие", "Защита", "Ярость")
+points_per_row = 3
+talents = Array[ExtResource("2")]([SubResource("Talent_warrior_strength"), SubResource("Talent_warrior_brutality"), SubResource("Talent_warrior_technique"), SubResource("Talent_warrior_crushing"), SubResource("Talent_warrior_toughness"), SubResource("Talent_warrior_plate"), SubResource("Talent_warrior_second_wind"), SubResource("Talent_warrior_unbreakable"), SubResource("Talent_warrior_quick_hands"), SubResource("Talent_warrior_bloodlust"), SubResource("Talent_warrior_heavy_hand"), SubResource("Talent_warrior_battle_fury")])

@@ -1,0 +1,141 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/kingdom_panel.gd" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_bar_bg"]
+bg_color = Color(0.03, 0.03, 0.05, 0.95)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_bar_fill"]
+bg_color = Color(1, 0.75, 0.25, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="KingdomPanel" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -420.0
+offset_top = -162.0
+offset_right = 420.0
+offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="VBox/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Королевство"
+
+[node name="ResourceBar" type="HBoxContainer" parent="VBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="CloseButton" type="Button" parent="VBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Закрыть [K]"
+
+[node name="Body" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 14
+
+[node name="Left" type="VBoxContainer" parent="VBox/Body"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="BuildingsGrid" type="GridContainer" parent="VBox/Body/Left"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 5
+
+[node name="ConstructionLabel" type="Label" parent="VBox/Body/Left"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.45, 1)
+theme_override_font_sizes/font_size = 12
+text = "Строители свободны"
+
+[node name="ConstructionBar" type="ProgressBar" parent="VBox/Body/Left"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBox_bar_bg")
+theme_override_styles/fill = SubResource("StyleBox_bar_fill")
+max_value = 1.0
+show_percentage = false
+
+[node name="Details" type="VBoxContainer" parent="VBox/Body"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="BuildingNameLabel" type="Label" parent="VBox/Body/Details"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+
+[node name="BuildingLevelLabel" type="Label" parent="VBox/Body/Details"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.78, 1)
+theme_override_font_sizes/font_size = 11
+
+[node name="BuildingDescriptionLabel" type="Label" parent="VBox/Body/Details"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 3
+
+[node name="BuildingEffectLabel" type="Label" parent="VBox/Body/Details"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.6, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 3
+
+[node name="CostBox" type="HBoxContainer" parent="VBox/Body/Details"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BuildTimeLabel" type="Label" parent="VBox/Body/Details"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.78, 1)
+theme_override_font_sizes/font_size = 11
+
+[node name="UpgradeButton" type="Button" parent="VBox/Body/Details"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+text = "Улучшить"
+
+[node name="ReasonLabel" type="Label" parent="VBox/Body/Details"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.6, 0.45, 1)
+theme_override_font_sizes/font_size = 11

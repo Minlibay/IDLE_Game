@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="NeedData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/need_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/stat_modifier.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/needs/energy.png" id="3"]
+
+[sub_resource type="Resource" id="Sat_1"]
+script = ExtResource("2")
+stat = 10
+value = 10.0
+
+[sub_resource type="Resource" id="Sat_2"]
+script = ExtResource("2")
+stat = 9
+value = 5.0
+
+[sub_resource type="Resource" id="Low_1"]
+script = ExtResource("2")
+stat = 0
+value = -10.0
+
+[sub_resource type="Resource" id="Low_2"]
+script = ExtResource("2")
+stat = 3
+value = -10.0
+
+[resource]
+script = ExtResource("1")
+id = "energy"
+display_name = "Бодрость"
+icon = ExtResource("3")
+order = 2
+bar_color = Color(0.7, 0.55, 1, 1)
+decay_per_minute = 2.0
+restored_by_rest = true
+satisfied_modifiers = Array[ExtResource("2")]([SubResource("Sat_1"), SubResource("Sat_2")])
+low_modifiers = Array[ExtResource("2")]([SubResource("Low_1"), SubResource("Low_2")])

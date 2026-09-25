@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/skeleton.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "skeleton"
+display_name = "Скелет"
+sprite = ExtResource("2")
+sprite_height = 1.6
+base_hp = 70.0
+base_damage = 9.0
+attack_interval = 1.3
+attack_range = 1.5
+move_speed = 2.8
+xp_reward = 12
+gold_reward = 6
+drop_chance = 0.12
+min_wave = 6
+spawn_weight = 2.0

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/skills/area_effect.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/whirlwind.png" id="3"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("2")
+damage_multiplier = 1.5
+radius = 3.0
+color = Color(0.7, 0.85, 1, 1)
+
+[resource]
+script = ExtResource("1")
+id = "whirlwind"
+display_name = "Вихрь"
+description = "Удар по всем врагам вокруг на 150% урона."
+icon = ExtResource("3")
+color = Color(0.7, 0.85, 1, 1)
+cooldown = 10.0
+unlock_level = 5
+effect = SubResource("Resource_effect")

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/character_class.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/heroes/archer.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/arrow.png" id="3"]
+[ext_resource type="Script" path="res://scripts/data/skill_data.gd" id="10"]
+[ext_resource type="Resource" path="res://data/skills/archer_aimed_shot.tres" id="11"]
+[ext_resource type="Resource" path="res://data/skills/archer_multishot.tres" id="12"]
+[ext_resource type="Resource" path="res://data/skills/archer_hunter_fury.tres" id="13"]
+[ext_resource type="Resource" path="res://data/talents/archer_talents.tres" id="20"]
+
+[resource]
+script = ExtResource("1")
+id = "archer"
+display_name = "Лучник"
+description = "Быстрые выстрелы издалека и частые криты."
+order = 1
+sprite = ExtResource("2")
+sprite_height = 1.6
+projectile_texture = ExtResource("3")
+base_max_hp = 90.0
+hp_per_level = 11.0
+base_damage = 9.0
+damage_per_level = 2.2
+base_armor = 3.0
+attack_interval = 0.75
+attack_range = 14.0
+crit_chance = 0.15
+skills = Array[ExtResource("10")]([ExtResource("11"), ExtResource("12"), ExtResource("13")])
+talent_tree = ExtResource("20")

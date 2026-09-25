@@ -1,0 +1,15 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/effects/floating_text.gd" id="1"]
+
+[node name="FloatingText" type="Label3D"]
+pixel_size = 0.006
+billboard = 1
+no_depth_test = true
+render_priority = 10
+outline_render_priority = 9
+outline_modulate = Color(0, 0, 0, 1)
+text = "0"
+font_size = 44
+outline_size = 12
+script = ExtResource("1")

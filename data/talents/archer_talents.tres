@@ -1,0 +1,199 @@
+[gd_resource type="Resource" script_class="TalentTree" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/talent_tree.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/talent_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/stat_modifier.gd" id="3"]
+
+[sub_resource type="Resource" id="Mod_1"]
+script = ExtResource("3")
+stat = 4
+value = 2.0
+
+[sub_resource type="Resource" id="Mod_2"]
+script = ExtResource("3")
+stat = 5
+value = 15.0
+
+[sub_resource type="Resource" id="Mod_3"]
+script = ExtResource("3")
+stat = 6
+value = 20.0
+skill_id = "aimed_shot"
+
+[sub_resource type="Resource" id="Mod_4"]
+script = ExtResource("3")
+stat = 7
+value = 40.0
+skill_id = "aimed_shot"
+
+[sub_resource type="Resource" id="Mod_5"]
+script = ExtResource("3")
+stat = 0
+value = 10.0
+
+[sub_resource type="Resource" id="Mod_6"]
+script = ExtResource("3")
+stat = 3
+value = 4.0
+
+[sub_resource type="Resource" id="Mod_7"]
+script = ExtResource("3")
+stat = 8
+value = 20.0
+
+[sub_resource type="Resource" id="Mod_8"]
+script = ExtResource("3")
+stat = 6
+value = 20.0
+skill_id = "multishot"
+
+[sub_resource type="Resource" id="Mod_9"]
+script = ExtResource("3")
+stat = 7
+value = 15.0
+
+[sub_resource type="Resource" id="Mod_10"]
+script = ExtResource("3")
+stat = 1
+value = 5.0
+
+[sub_resource type="Resource" id="Mod_11"]
+script = ExtResource("3")
+stat = 2
+value = 4.0
+
+[sub_resource type="Resource" id="Mod_12"]
+script = ExtResource("3")
+stat = 9
+value = 10.0
+
+[sub_resource type="Resource" id="Mod_13"]
+script = ExtResource("3")
+stat = 11
+value = 30.0
+
+[sub_resource type="Resource" id="Talent_archer_keen_eye"]
+script = ExtResource("2")
+id = "archer_keen_eye"
+display_name = "Зоркий глаз"
+description = "+{value}% шанса крита."
+branch = 0
+row = 0
+max_rank = 5
+modifiers = Array[ExtResource("3")]([SubResource("Mod_1")])
+
+[sub_resource type="Resource" id="Talent_archer_deadly_aim"]
+script = ExtResource("2")
+id = "archer_deadly_aim"
+display_name = "Смертельная точность"
+description = "+{value}% критического урона."
+branch = 0
+row = 1
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_2")])
+
+[sub_resource type="Resource" id="Talent_archer_steady_hand"]
+script = ExtResource("2")
+id = "archer_steady_hand"
+display_name = "Твёрдая рука"
+description = "Прицельный выстрел: +{value}% урона."
+branch = 0
+row = 2
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_3")])
+
+[sub_resource type="Resource" id="Talent_archer_sniper"]
+script = ExtResource("2")
+id = "archer_sniper"
+display_name = "Снайпер"
+description = "Прицельный выстрел: −{value}% перезарядки. +{value2}% урона."
+branch = 0
+row = 3
+max_rank = 1
+modifiers = Array[ExtResource("3")]([SubResource("Mod_4"), SubResource("Mod_5")])
+
+[sub_resource type="Resource" id="Talent_archer_light_hand"]
+script = ExtResource("2")
+id = "archer_light_hand"
+display_name = "Лёгкая рука"
+description = "+{value}% скорости атаки."
+branch = 1
+row = 0
+max_rank = 5
+modifiers = Array[ExtResource("3")]([SubResource("Mod_6")])
+
+[sub_resource type="Resource" id="Talent_archer_rapid_click"]
+script = ExtResource("2")
+id = "archer_rapid_click"
+display_name = "Быстрый клик"
+description = "Клик ускоряет атаку на {value}% сильнее."
+branch = 1
+row = 1
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_7")])
+
+[sub_resource type="Resource" id="Talent_archer_arrow_storm"]
+script = ExtResource("2")
+id = "archer_arrow_storm"
+display_name = "Шквал стрел"
+description = "Залп: +{value}% урона."
+branch = 1
+row = 2
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_8")])
+
+[sub_resource type="Resource" id="Talent_archer_hurricane"]
+script = ExtResource("2")
+id = "archer_hurricane"
+display_name = "Ураган"
+description = "Все умения: −{value}% перезарядки."
+branch = 1
+row = 3
+max_rank = 1
+modifiers = Array[ExtResource("3")]([SubResource("Mod_9")])
+
+[sub_resource type="Resource" id="Talent_archer_vitality"]
+script = ExtResource("2")
+id = "archer_vitality"
+display_name = "Живучесть"
+description = "+{value}% здоровья."
+branch = 2
+row = 0
+max_rank = 5
+modifiers = Array[ExtResource("3")]([SubResource("Mod_10")])
+
+[sub_resource type="Resource" id="Talent_archer_leather"]
+script = ExtResource("2")
+id = "archer_leather"
+display_name = "Кожаный доспех"
+description = "+{value} брони."
+branch = 2
+row = 1
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_11")])
+
+[sub_resource type="Resource" id="Talent_archer_looter"]
+script = ExtResource("2")
+id = "archer_looter"
+display_name = "Мародёр"
+description = "+{value}% золота."
+branch = 2
+row = 2
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_12")])
+
+[sub_resource type="Resource" id="Talent_archer_treasure_hunter"]
+script = ExtResource("2")
+id = "archer_treasure_hunter"
+display_name = "Охотник за сокровищами"
+description = "+{value}% шанса выпадения предметов."
+branch = 2
+row = 3
+max_rank = 1
+modifiers = Array[ExtResource("3")]([SubResource("Mod_13")])
+
+[resource]
+script = ExtResource("1")
+branch_names = PackedStringArray("Меткость", "Скорость", "Выживание")
+points_per_row = 3
+talents = Array[ExtResource("2")]([SubResource("Talent_archer_keen_eye"), SubResource("Talent_archer_deadly_aim"), SubResource("Talent_archer_steady_hand"), SubResource("Talent_archer_sniper"), SubResource("Talent_archer_light_hand"), SubResource("Talent_archer_rapid_click"), SubResource("Talent_archer_arrow_storm"), SubResource("Talent_archer_hurricane"), SubResource("Talent_archer_vitality"), SubResource("Talent_archer_leather"), SubResource("Talent_archer_looter"), SubResource("Talent_archer_treasure_hunter")])

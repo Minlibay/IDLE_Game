@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/character_class.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/heroes/mage.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/orb.png" id="3"]
+[ext_resource type="Script" path="res://scripts/data/skill_data.gd" id="10"]
+[ext_resource type="Resource" path="res://data/skills/mage_fireball.tres" id="11"]
+[ext_resource type="Resource" path="res://data/skills/mage_meteor.tres" id="12"]
+[ext_resource type="Resource" path="res://data/skills/mage_arcane_shield.tres" id="13"]
+[ext_resource type="Resource" path="res://data/talents/mage_talents.tres" id="20"]
+
+[resource]
+script = ExtResource("1")
+id = "mage"
+display_name = "Маг"
+description = "Медленные, но мощные магические снаряды."
+order = 2
+sprite = ExtResource("2")
+sprite_height = 1.6
+projectile_texture = ExtResource("3")
+base_max_hp = 80.0
+hp_per_level = 10.0
+base_damage = 18.0
+damage_per_level = 3.5
+base_armor = 2.0
+attack_interval = 1.4
+attack_range = 12.0
+crit_chance = 0.08
+skills = Array[ExtResource("10")]([ExtResource("11"), ExtResource("12"), ExtResource("13")])
+talent_tree = ExtResource("20")

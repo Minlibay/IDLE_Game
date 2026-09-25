@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="BuildingData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/building_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/stat_modifier.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/buildings/town_hall.png" id="3"]
+
+[resource]
+script = ExtResource("1")
+id = "town_hall"
+display_name = "Ратуша"
+description = "Сердце королевства. Уровень Ратуши ограничивает уровень остальных зданий и расширяет склад."
+icon = ExtResource("3")
+order = 0
+max_level = 10
+is_town_hall = true
+base_cost = {
+"wood": 100,
+"stone": 80,
+"gold": 200
+}
+cost_growth = 1.7
+base_build_time = 60.0
+build_time_growth = 1.6
+storage_per_level = 150.0
+modifiers = Array[ExtResource("2")]([])

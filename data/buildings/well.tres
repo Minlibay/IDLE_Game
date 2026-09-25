@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="BuildingData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/building_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/stat_modifier.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/buildings/well.png" id="3"]
+
+[resource]
+script = ExtResource("1")
+id = "well"
+display_name = "Колодец"
+description = "Даёт воду: герой пьёт сам, когда хочет пить."
+icon = ExtResource("3")
+order = 2
+max_level = 10
+base_cost = {
+"wood": 20,
+"stone": 15,
+"gold": 20
+}
+cost_growth = 1.55
+base_build_time = 10.0
+build_time_growth = 1.45
+produces = "water"
+production_per_level = 1.0
+modifiers = Array[ExtResource("2")]([])

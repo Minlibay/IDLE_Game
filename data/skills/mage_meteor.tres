@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/skills/area_effect.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/meteor.png" id="3"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("2")
+damage_multiplier = 3.5
+radius = 3.5
+center_on_target = true
+color = Color(1, 0.45, 0.2, 1)
+
+[resource]
+script = ExtResource("1")
+id = "meteor"
+display_name = "Метеор"
+description = "350% урона по всем врагам в большой области вокруг цели."
+icon = ExtResource("3")
+color = Color(1, 0.45, 0.2, 1)
+cooldown = 14.0
+unlock_level = 5
+effect = SubResource("Resource_effect")

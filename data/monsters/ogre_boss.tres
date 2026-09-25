@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/ogre.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "ogre_boss"
+display_name = "Огр-вожак"
+sprite = ExtResource("2")
+sprite_height = 2.4
+base_hp = 600.0
+base_damage = 22.0
+attack_interval = 1.8
+attack_range = 1.9
+move_speed = 1.8
+xp_reward = 120
+gold_reward = 80
+drop_chance = 1.0
+min_wave = 10
+spawn_weight = 1.0
+is_boss = true

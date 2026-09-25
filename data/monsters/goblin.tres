@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="MonsterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/monster_data.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/goblin.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "goblin"
+display_name = "Гоблин"
+sprite = ExtResource("2")
+sprite_height = 1.2
+base_hp = 45.0
+base_damage = 6.0
+attack_interval = 1.0
+attack_range = 1.4
+move_speed = 3.2
+xp_reward = 8
+gold_reward = 4
+drop_chance = 0.1
+min_wave = 3
+spawn_weight = 2.0

@@ -1,0 +1,199 @@
+[gd_resource type="Resource" script_class="TalentTree" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/talent_tree.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/talent_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/stat_modifier.gd" id="3"]
+
+[sub_resource type="Resource" id="Mod_1"]
+script = ExtResource("3")
+stat = 0
+value = 4.0
+
+[sub_resource type="Resource" id="Mod_2"]
+script = ExtResource("3")
+stat = 6
+value = 20.0
+skill_id = "fireball"
+
+[sub_resource type="Resource" id="Mod_3"]
+script = ExtResource("3")
+stat = 5
+value = 15.0
+
+[sub_resource type="Resource" id="Mod_4"]
+script = ExtResource("3")
+stat = 6
+value = 40.0
+skill_id = "meteor"
+
+[sub_resource type="Resource" id="Mod_5"]
+script = ExtResource("3")
+stat = 7
+value = 30.0
+skill_id = "meteor"
+
+[sub_resource type="Resource" id="Mod_6"]
+script = ExtResource("3")
+stat = 6
+value = 6.0
+
+[sub_resource type="Resource" id="Mod_7"]
+script = ExtResource("3")
+stat = 7
+value = 5.0
+
+[sub_resource type="Resource" id="Mod_8"]
+script = ExtResource("3")
+stat = 8
+value = 20.0
+
+[sub_resource type="Resource" id="Mod_9"]
+script = ExtResource("3")
+stat = 3
+value = 25.0
+
+[sub_resource type="Resource" id="Mod_10"]
+script = ExtResource("3")
+stat = 1
+value = 6.0
+
+[sub_resource type="Resource" id="Mod_11"]
+script = ExtResource("3")
+stat = 2
+value = 5.0
+
+[sub_resource type="Resource" id="Mod_12"]
+script = ExtResource("3")
+stat = 12
+value = 50.0
+
+[sub_resource type="Resource" id="Mod_13"]
+script = ExtResource("3")
+stat = 10
+value = 25.0
+
+[sub_resource type="Resource" id="Talent_mage_heat"]
+script = ExtResource("2")
+id = "mage_heat"
+display_name = "Жар"
+description = "+{value}% урона."
+branch = 0
+row = 0
+max_rank = 5
+modifiers = Array[ExtResource("3")]([SubResource("Mod_1")])
+
+[sub_resource type="Resource" id="Talent_mage_flames"]
+script = ExtResource("2")
+id = "mage_flames"
+display_name = "Пламя"
+description = "Огненный шар: +{value}% урона."
+branch = 0
+row = 1
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_2")])
+
+[sub_resource type="Resource" id="Talent_mage_ignite"]
+script = ExtResource("2")
+id = "mage_ignite"
+display_name = "Воспламенение"
+description = "+{value}% критического урона."
+branch = 0
+row = 2
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_3")])
+
+[sub_resource type="Resource" id="Talent_mage_starfall"]
+script = ExtResource("2")
+id = "mage_starfall"
+display_name = "Звездопад"
+description = "Метеор: +{value}% урона и −{value2}% перезарядки."
+branch = 0
+row = 3
+max_rank = 1
+modifiers = Array[ExtResource("3")]([SubResource("Mod_4"), SubResource("Mod_5")])
+
+[sub_resource type="Resource" id="Talent_mage_focus"]
+script = ExtResource("2")
+id = "mage_focus"
+display_name = "Концентрация"
+description = "+{value}% урона умений."
+branch = 1
+row = 0
+max_rank = 5
+modifiers = Array[ExtResource("3")]([SubResource("Mod_6")])
+
+[sub_resource type="Resource" id="Talent_mage_quick_cast"]
+script = ExtResource("2")
+id = "mage_quick_cast"
+display_name = "Быстрое чтение"
+description = "Все умения: −{value}% перезарядки."
+branch = 1
+row = 1
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_7")])
+
+[sub_resource type="Resource" id="Talent_mage_arcane_pulse"]
+script = ExtResource("2")
+id = "mage_arcane_pulse"
+display_name = "Магический импульс"
+description = "Клик ускоряет атаку на {value}% сильнее."
+branch = 1
+row = 2
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_8")])
+
+[sub_resource type="Resource" id="Talent_mage_mana_flow"]
+script = ExtResource("2")
+id = "mage_mana_flow"
+display_name = "Поток маны"
+description = "+{value}% скорости атаки."
+branch = 1
+row = 3
+max_rank = 1
+modifiers = Array[ExtResource("3")]([SubResource("Mod_9")])
+
+[sub_resource type="Resource" id="Talent_mage_barrier"]
+script = ExtResource("2")
+id = "mage_barrier"
+display_name = "Барьер"
+description = "+{value}% здоровья."
+branch = 2
+row = 0
+max_rank = 5
+modifiers = Array[ExtResource("3")]([SubResource("Mod_10")])
+
+[sub_resource type="Resource" id="Talent_mage_mage_armor"]
+script = ExtResource("2")
+id = "mage_mage_armor"
+display_name = "Магическая броня"
+description = "+{value} брони."
+branch = 2
+row = 1
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_11")])
+
+[sub_resource type="Resource" id="Talent_mage_restoration"]
+script = ExtResource("2")
+id = "mage_restoration"
+display_name = "Восстановление"
+description = "+{value}% регенерации здоровья."
+branch = 2
+row = 2
+max_rank = 3
+modifiers = Array[ExtResource("3")]([SubResource("Mod_12")])
+
+[sub_resource type="Resource" id="Talent_mage_wisdom"]
+script = ExtResource("2")
+id = "mage_wisdom"
+display_name = "Мудрость"
+description = "+{value}% опыта."
+branch = 2
+row = 3
+max_rank = 1
+modifiers = Array[ExtResource("3")]([SubResource("Mod_13")])
+
+[resource]
+script = ExtResource("1")
+branch_names = PackedStringArray("Огонь", "Тайная магия", "Защита")
+points_per_row = 3
+talents = Array[ExtResource("2")]([SubResource("Talent_mage_heat"), SubResource("Talent_mage_flames"), SubResource("Talent_mage_ignite"), SubResource("Talent_mage_starfall"), SubResource("Talent_mage_focus"), SubResource("Talent_mage_quick_cast"), SubResource("Talent_mage_arcane_pulse"), SubResource("Talent_mage_mana_flow"), SubResource("Talent_mage_barrier"), SubResource("Talent_mage_mage_armor"), SubResource("Talent_mage_restoration"), SubResource("Talent_mage_wisdom")])

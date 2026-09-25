@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="BuildingData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/building_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/stat_modifier.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/buildings/sawmill.png" id="3"]
+
+[resource]
+script = ExtResource("1")
+id = "sawmill"
+display_name = "Лесопилка"
+description = "Заготавливает дерево для построек."
+icon = ExtResource("3")
+order = 3
+max_level = 10
+base_cost = {
+"wood": 20,
+"gold": 30
+}
+cost_growth = 1.55
+base_build_time = 12.0
+build_time_growth = 1.45
+produces = "wood"
+production_per_level = 2.0
+modifiers = Array[ExtResource("2")]([])

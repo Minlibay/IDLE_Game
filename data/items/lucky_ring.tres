@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemBase" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_base.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/ring.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "lucky_ring"
+display_name = "Кольцо удачи"
+slot = 3
+icon = ExtResource("2")
+base_stats = {
+"attack_speed": 4.0,
+"crit_chance": 2.0
+}

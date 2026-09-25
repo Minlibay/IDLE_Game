@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/effects/skill_burst.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/ring.png" id="2"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ring"]
+
+[sub_resource type="StandardMaterial3D" id="Material_ring"]
+resource_local_to_scene = true
+render_priority = 2
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("2")
+
+[node name="SkillBurst" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Ring" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+mesh = SubResource("QuadMesh_ring")
+material_override = SubResource("Material_ring")

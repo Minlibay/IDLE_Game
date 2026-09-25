@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/character_class.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/heroes/warrior.png" id="2"]
+[ext_resource type="Script" path="res://scripts/data/skill_data.gd" id="10"]
+[ext_resource type="Resource" path="res://data/skills/warrior_power_strike.tres" id="11"]
+[ext_resource type="Resource" path="res://data/skills/warrior_whirlwind.tres" id="12"]
+[ext_resource type="Resource" path="res://data/skills/warrior_war_cry.tres" id="13"]
+[ext_resource type="Resource" path="res://data/talents/warrior_talents.tres" id="20"]
+
+[resource]
+script = ExtResource("1")
+id = "warrior"
+display_name = "Воин"
+description = "Много здоровья и брони. Бьёт в ближнем бою."
+order = 0
+sprite = ExtResource("2")
+sprite_height = 1.6
+base_max_hp = 140.0
+hp_per_level = 18.0
+base_damage = 12.0
+damage_per_level = 2.5
+base_armor = 10.0
+attack_interval = 1.0
+attack_range = 2.0
+crit_chance = 0.05
+skills = Array[ExtResource("10")]([ExtResource("11"), ExtResource("12"), ExtResource("13")])
+talent_tree = ExtResource("20")

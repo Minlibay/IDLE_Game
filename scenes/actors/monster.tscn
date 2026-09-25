@@ -1,0 +1,36 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/actors/monster.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/fx/shadow.png" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/actors/health_bar_3d.tscn" id="3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/monsters/slime.png" id="4"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_shadow"]
+size = Vector2(1, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="Material_shadow"]
+render_priority = 1
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("2")
+
+[node name="Monster" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Shadow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0.01, 0)
+mesh = SubResource("QuadMesh_shadow")
+material_override = SubResource("Material_shadow")
+
+[node name="Visual" type="Sprite3D" parent="."]
+offset = Vector2(0, 12)
+flip_h = true
+pixel_size = 0.033
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("4")
+
+[node name="HealthBar" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)

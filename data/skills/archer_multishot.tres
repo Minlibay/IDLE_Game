@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/skills/multi_shot_effect.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/multishot.png" id="3"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("2")
+projectile_count = 5
+damage_multiplier = 0.8
+
+[resource]
+script = ExtResource("1")
+id = "multishot"
+display_name = "Залп"
+description = "5 стрел по ближайшим врагам, по 80% урона."
+icon = ExtResource("3")
+color = Color(0.6, 1, 0.6, 1)
+cooldown = 9.0
+unlock_level = 5
+effect = SubResource("Resource_effect")

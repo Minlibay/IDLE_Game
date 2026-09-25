@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="BuildingData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/building_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/stat_modifier.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/buildings/forge.png" id="3"]
+
+[sub_resource type="Resource" id="Mod_1"]
+script = ExtResource("2")
+stat = 0
+value = 3.0
+
+[resource]
+script = ExtResource("1")
+id = "forge"
+display_name = "Кузница"
+description = "Кузнецы точат оружие героя."
+icon = ExtResource("3")
+order = 6
+max_level = 10
+base_cost = {
+"wood": 50,
+"stone": 80,
+"gold": 150
+}
+cost_growth = 1.6
+base_build_time = 40.0
+build_time_growth = 1.5
+modifiers = Array[ExtResource("2")]([SubResource("Mod_1")])

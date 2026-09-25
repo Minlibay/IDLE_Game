@@ -1,0 +1,285 @@
+extends Node
+## Быстрая проверка логики предметов и сохранений.
+## Запуск: Godot.exe --headless --path . -- --autotest --selftest --quit-after-seconds=3
+## В консоли должно появиться «SELFTEST OK».
+
+var _errors := PackedStringArray()
+
+
+func _ready() -> void:
+	await get_tree().process_frame
+	_test_data_loaded()
+	_test_loot()
+	_test_equip()
+	_test_upgrade()
+	_test_fusion()
+	_test_save_load()
+	_test_skill_data()
+	_test_talents()
+	_test_kingdom()
+	_test_needs()
+	await _test_skill_casting()
+	if _errors.is_empty():
+		print("SELFTEST OK")
+	else:
+		printerr("SELFTEST FAILED:\n  " + "\n  ".join(_errors))
+
+
+func _check(condition: bool, message: String) -> void:
+	if not condition:
+		_errors.append(message)
+
+
+func _test_data_loaded() -> void:
+	_check(Database.classes.size() >= 3, "classes not loaded")
+	_check(Database.monsters.size() >= 3, "monsters not loaded")
+	_check(Database.items.size() >= 6, "items not loaded")
+	_check(GameState.has_character(), "autotest character not created")
+	_check(GameState.equipment.has(ItemBase.Slot.WEAPON), "starter weapon not equipped")
+
+
+func _test_loot() -> void:
+	var counts := [0, 0, 0, 0, 0]
+	for i in 2000:
+		counts[LootGenerator.roll_tier(20)] += 1
+	_check(counts[Item.Tier.COMMON] > counts[Item.Tier.RARE], "tier weights look wrong: %s" % str(counts))
+	var boss: MonsterData = Database.get_monsters_for_wave(10, true)[0]
+	for i in 20:
+		var item := LootGenerator.roll_drop(boss, 10)
+		_check(item != null and item.tier >= Item.Tier.UNCOMMON, "boss must always drop uncommon+")
+
+
+func _test_equip() -> void:
+	var armor_base := Database.get_items_for_slot(ItemBase.Slot.ARMOR)[0]
+	var armor := LootGenerator.create_item(armor_base, Item.Tier.RARE, 5)
+	GameState.add_item(armor)
+	var hp_before: float = GameState.get_hero_stats().max_hp
+	_check(GameState.equip(armor), "cannot equip armor")
+	_check(GameState.get_hero_stats().max_hp > hp_before, "armor did not increase max_hp")
+	_check(not GameState.inventory.has(armor), "equipped item still in bag")
+	_check(GameState.unequip(ItemBase.Slot.ARMOR), "cannot unequip armor")
+	_check(GameState.inventory.has(armor), "unequipped item not in bag")
+
+
+func _test_upgrade() -> void:
+	GameState.add_gold(10_000_000)
+	var item := LootGenerator.create_item(Database.items[0], Item.Tier.COMMON, 1)
+	GameState.add_item(item)
+	var damage_before := item.get_stats().duplicate()
+	for i in 100:
+		ItemUpgrader.try_upgrade(item)
+	_check(item.upgrade_level == Item.MAX_UPGRADE_LEVEL, "upgrade did not reach max: %d" % item.upgrade_level)
+	_check(ItemUpgrader.try_upgrade(item) == ItemUpgrader.Result.MAX_LEVEL, "upgrade above max allowed")
+	for key: String in damage_before:
+		_check(float(item.get_stats()[key]) > float(damage_before[key]), "upgrade did not raise " + key)
+
+
+func _test_fusion() -> void:
+	var base := Database.get_items_for_slot(ItemBase.Slot.HELMET)[0]
+	var parts: Array[Item] = []
+	for i in 3:
+		var part := LootGenerator.create_item(base, Item.Tier.RARE, 7)
+		parts.append(part)
+		GameState.add_item(part)
+	_check(ItemUpgrader.can_fuse(parts[0]), "fusion not available with 3 rare helmets")
+	var result := ItemUpgrader.fuse(parts[0])
+	_check(result != null and result.tier == Item.Tier.EPIC, "fusion did not produce epic")
+	for part in parts:
+		_check(not GameState.inventory.has(part), "fusion ingredient not consumed")
+
+
+func _test_skill_data() -> void:
+	for class_data in Database.classes:
+		_check(class_data.skills.size() == 3, "%s: expected 3 skills, got %d" % [class_data.id, class_data.skills.size()])
+		for skill in class_data.skills:
+			_check(skill != null and skill.effect != null and skill.icon != null,
+				"%s: broken skill resource" % class_data.id)
+
+
+func _test_talents() -> void:
+	for class_data in Database.classes:
+		var class_tree := class_data.talent_tree
+		_check(class_tree != null, "%s: no talent tree" % class_data.id)
+		if class_tree == null:
+			continue
+		_check(class_tree.branch_names.size() == 3, "%s: expected 3 branches" % class_data.id)
+		var ids := {}
+		for talent in class_tree.talents:
+			_check(not ids.has(talent.id), "duplicate talent id " + talent.id)
+			ids[talent.id] = true
+			_check(talent.get_icon() != null, "talent without icon: " + talent.id)
+			_check(not talent.get_description(1).contains("{"), "unfilled description: " + talent.id)
+
+	var tree := GameState.get_talent_tree()
+	GameState.level = 30
+	GameState.add_gold(1_000_000)
+	var first := tree.get_talents_in_branch(0)[0]
+	var locked := tree.get_talents_in_branch(1)[1]
+	_check(not GameState.can_learn_talent(locked), "row 1 talent learnable without branch points")
+	var stats_before := GameState.get_hero_stats()
+	for i in first.max_rank:
+		_check(GameState.learn_talent(first), "cannot learn rank %d of %s" % [i + 1, first.id])
+	_check(not GameState.learn_talent(first), "learned above max rank")
+	_check(GameState.get_talent_bonus(first.modifiers[0].stat) > 0.0, "talent bonus not applied")
+	_check(GameState.get_hero_stats() != stats_before, "talent did not change hero stats")
+
+	# Бонус к конкретному умению не должен действовать на остальные.
+	for talent in tree.talents:
+		for modifier in talent.modifiers:
+			if modifier.skill_id != "" and modifier.stat == StatModifier.Stat.SKILL_DAMAGE:
+				talent_rank_force(talent, 1)
+				_check(GameState.get_skill_power(modifier.skill_id) > 1.0, "skill talent not applied to " + modifier.skill_id)
+				_check(is_equal_approx(GameState.get_skill_power("__other__"), 1.0 + GameState.get_talent_bonus(StatModifier.Stat.SKILL_DAMAGE) / 100.0),
+					"skill-specific talent leaked to other skills")
+
+	GameState.save_game()
+	var spent := GameState.get_talent_points_spent()
+	GameState.load_game()
+	_check(GameState.get_talent_points_spent() == spent, "talents lost after load")
+	_check(GameState.reset_talents(), "talent reset failed")
+	_check(GameState.get_talent_points_spent() == 0, "talents not cleared after reset")
+	_check(is_equal_approx(GameState.get_talent_bonus(first.modifiers[0].stat), 0.0), "bonus remains after reset")
+
+
+func _test_kingdom() -> void:
+	var kingdom := GameState.kingdom
+	_check(Database.buildings.size() >= 9, "buildings not loaded")
+	kingdom.reset()
+	var town_hall := Database.get_building("town_hall")
+	var farm := Database.get_building("farm")
+	var forge := Database.get_building("forge")
+	_check(kingdom.get_level(town_hall) == 1, "town hall must start at level 1")
+	_check(kingdom.get_level(farm) == 0, "farm must start unbuilt")
+
+	GameState.add_gold(1_000_000)
+	for resource_id: String in KingdomState.RESOURCES:
+		kingdom.resources[resource_id] = 200.0
+	_check(kingdom.start_upgrade(farm), "cannot start farm: " + kingdom.get_upgrade_block_reason(farm))
+	_check(not kingdom.can_upgrade(forge), "second construction allowed while building")
+	kingdom.simulate(farm.get_build_time(1) + 1.0)
+	_check(kingdom.get_level(farm) == 1, "farm not finished by simulate()")
+	_check(kingdom.get_production_per_minute("food") > 0.0, "farm does not produce food")
+
+	var food_before := kingdom.get_resource("food")
+	var report := kingdom.simulate(600.0)
+	_check(kingdom.get_resource("food") > food_before, "no offline food production")
+	_check((report.resources as Dictionary).has("food"), "offline report missing food")
+	kingdom.simulate(KingdomState.MAX_OFFLINE_SECONDS)
+	_check(kingdom.get_resource("food") <= kingdom.get_storage_capacity() + 0.01, "storage capacity exceeded")
+
+	# Уровень зданий ограничен Ратушей.
+	kingdom.levels[farm.id] = kingdom.get_town_hall_level()
+	_check(kingdom.get_upgrade_block_reason(farm).contains("Ратуша"), "town hall limit not enforced")
+
+	# Бонус здания попадает в характеристики героя.
+	var damage_before: float = GameState.get_hero_stats().damage
+	kingdom.levels[forge.id] = 3
+	kingdom._rebuild_bonuses()
+	_check(GameState.get_bonus(StatModifier.Stat.DAMAGE) >= 9.0, "forge bonus not applied")
+	_check(GameState.get_hero_stats().damage > damage_before, "forge did not raise hero damage")
+
+	# Оффлайн-прогресс при загрузке.
+	kingdom.start_upgrade(Database.get_building("sawmill"))
+	GameState.save_game()
+	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(GameState.save_path))
+	data.saved_at = Time.get_unix_time_from_system() - 3600.0
+	FileAccess.open(GameState.save_path, FileAccess.WRITE).store_string(JSON.stringify(data))
+	GameState.load_game()
+	_check(not GameState.offline_report.is_empty(), "offline report not produced after 1h")
+	_check(kingdom.get_level(Database.get_building("sawmill")) == 1, "construction not finished offline")
+	_check(kingdom.get_level(forge) == 3, "building levels lost after load")
+	GameState.offline_report = {}
+
+
+func _test_needs() -> void:
+	var needs := GameState.needs
+	var kingdom := GameState.kingdom
+	var hunger: NeedData = null
+	var energy: NeedData = null
+	for need in Database.needs:
+		if need.consumes_resource == "food":
+			hunger = need
+		if need.restored_by_rest:
+			energy = need
+	_check(hunger != null and energy != null, "hunger/energy needs not loaded")
+	if hunger == null or energy == null:
+		return
+	needs.reset()
+	_check(needs.get_level(hunger) == NeedsState.Level.SATISFIED, "needs must start satisfied")
+
+	# Автоматическая еда со склада.
+	kingdom.resources["food"] = 10.0
+	needs.values[hunger.id] = 50.0
+	needs.tick(0.01)
+	_check(needs.get_value(hunger) > 60.0, "hero did not eat automatically")
+	_check(kingdom.get_resource("food") < 10.0, "food not consumed")
+
+	# Голод без еды — штраф.
+	kingdom.resources["food"] = 0.0
+	needs.values[hunger.id] = 0.0
+	needs.tick(0.01)
+	_check(needs.get_level(hunger) == NeedsState.Level.LOW, "hunger must be LOW at 0")
+	_check(GameState.get_bonus(StatModifier.Stat.DAMAGE) < GameState.get_talent_bonus(StatModifier.Stat.DAMAGE) \
+		+ kingdom.get_bonus(StatModifier.Stat.DAMAGE), "hunger penalty not applied")
+
+	# Усталость → отдых → бодрость восстановлена.
+	needs.values[energy.id] = 0.0
+	_check(needs.needs_rest(), "hero must want rest at 0 energy")
+	for i in 200:
+		needs.rest_tick(1.0)
+	_check(needs.is_rested(), "rest did not restore energy")
+	needs.reset()
+	kingdom.resources["food"] = 50.0
+
+
+## Ставит ранг напрямую (в обход требований) — только для тестов.
+func talent_rank_force(talent: TalentData, rank: int) -> void:
+	GameState.talent_ranks[talent.id] = rank
+	GameState._on_talents_updated()
+
+
+## Ждёт монстра в радиусе атаки и по очереди применяет все умения героя.
+func _test_skill_casting() -> void:
+	var hero := get_tree().get_first_node_in_group(Hero.GROUP) as Hero
+	if hero == null:
+		_check(false, "hero not found in battle")
+		return
+	GameState.level = 10  # открыть все умения
+	GameState.auto_cast = false
+	var caster := hero.skill_caster
+	for skill in caster.skills:
+		if not await _wait_for_target(hero):
+			_check(false, "no monster in range to test '%s'" % skill.id)
+			break
+		if not hero.is_alive():
+			hero.revive()
+		caster.reset_cooldowns()
+		var damage_before := hero.damage
+		_check(caster.try_cast(skill), "cannot cast '%s'" % skill.id)
+		_check(caster.get_cooldown_left(skill) > 0.0, "'%s' did not go on cooldown" % skill.id)
+		var buff := skill.effect as BuffEffect
+		if buff and buff.stat == BuffEffect.Stat.DAMAGE:
+			_check(hero.damage > damage_before, "'%s' did not raise damage" % skill.id)
+		print("  skill ok: ", skill.id)
+	GameState.auto_cast = true
+
+
+func _wait_for_target(hero: Hero, timeout_msec := 30000) -> bool:
+	var start := Time.get_ticks_msec()
+	while hero.find_target() == null:
+		if Time.get_ticks_msec() - start > timeout_msec:
+			return false
+		await get_tree().process_frame
+	return true
+
+
+func _test_save_load() -> void:
+	var count := GameState.inventory.size()
+	var gold := GameState.gold
+	var level := GameState.level
+	GameState.save_game()
+	GameState.load_game()
+	_check(GameState.inventory.size() == count, "inventory size changed after load")
+	_check(GameState.gold == gold, "gold changed after load")
+	_check(GameState.level == level, "level changed after load")
+	_check(GameState.equipment.has(ItemBase.Slot.WEAPON), "equipment lost after load")

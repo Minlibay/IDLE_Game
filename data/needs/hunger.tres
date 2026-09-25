@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="NeedData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/need_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/stat_modifier.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/needs/hunger.png" id="3"]
+
+[sub_resource type="Resource" id="Sat_1"]
+script = ExtResource("2")
+stat = 1
+value = 10.0
+
+[sub_resource type="Resource" id="Sat_2"]
+script = ExtResource("2")
+stat = 12
+value = 50.0
+
+[sub_resource type="Resource" id="Low_1"]
+script = ExtResource("2")
+stat = 0
+value = -15.0
+
+[resource]
+script = ExtResource("1")
+id = "hunger"
+display_name = "Сытость"
+icon = ExtResource("3")
+order = 0
+bar_color = Color(0.95, 0.6, 0.25, 1)
+decay_per_minute = 3.0
+consumes_resource = "food"
+restore_per_unit = 20.0
+satisfied_modifiers = Array[ExtResource("2")]([SubResource("Sat_1"), SubResource("Sat_2")])
+low_modifiers = Array[ExtResource("2")]([SubResource("Low_1")])
