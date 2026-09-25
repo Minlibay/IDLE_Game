@@ -10,7 +10,7 @@ signal closed
 enum Phase { IDLE, CHARGE, FIGHT, DONE }
 
 const MAX_FIGURES_PER_SIDE := 36
-const FIGURE_HEIGHT := 28.0
+const FIGURE_HEIGHT := 32.0
 const HERO_HEIGHT := 44.0
 ## Фаза сближения и фаза схватки, секунд (при скорости ×1).
 const CHARGE_TIME := 1.3

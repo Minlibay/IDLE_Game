@@ -7,6 +7,7 @@
 script = ExtResource("1")
 id = "hunting_bow"
 display_name = "Охотничий лук"
+description = "Лёгкий лук охотника — бьёт метко и далеко."
 slot = 0
 icon = ExtResource("2")
 base_stats = {

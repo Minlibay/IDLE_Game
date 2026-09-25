@@ -7,6 +7,7 @@
 script = ExtResource("1")
 id = "oak_staff"
 display_name = "Дубовый посох"
+description = "Дубовый посох с кристаллом, в котором копится магия."
 slot = 0
 icon = ExtResource("2")
 base_stats = {

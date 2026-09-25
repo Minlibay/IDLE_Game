@@ -19,6 +19,8 @@ var facing := 1
 ## Тело (картинка или нарисованный солдатик): его качаем, двигаем при ударе и роняем.
 var _body: Node2D
 var _height := 30.0
+## Цвет стороны: кольцо под ногами (картинку отряда целиком не перекрашиваем).
+var _side_color := Color.WHITE
 var _moving := false
 var _cheering := false
 var _phase := 0.0
@@ -28,6 +30,7 @@ var _phase := 0.0
 func setup(texture: Texture2D, height: float, p_facing: int, tint: Color, phase: float, unit_style := "") -> void:
 	facing = p_facing
 	_height = height
+	_side_color = tint
 	# Живые поверх павших; павшие — поверх фона поля (он на уровне 0).
 	z_index = 1
 	_phase = phase
@@ -40,6 +43,7 @@ func setup(texture: Texture2D, height: float, p_facing: int, tint: Color, phase:
 		sprite.scale = Vector2.ONE * height / float(texture.get_height())
 		sprite.flip_h = facing < 0
 		_body = sprite
+		tint = Color.WHITE.lerp(tint, 0.2)
 	else:
 		var drawn := SoldierDrawing.new()
 		drawn.style = unit_style
@@ -68,6 +72,8 @@ func _draw() -> void:
 	# Тень под ногами.
 	draw_set_transform(Vector2.ZERO, 0.0, Vector2(1.0, 0.35))
 	draw_circle(Vector2.ZERO, _height * 0.28, Color(0, 0, 0, 0.28 if alive else 0.15))
+	if alive:
+		draw_arc(Vector2.ZERO, _height * 0.3, 0.0, TAU, 16, Color(_side_color, 0.8), 2.0)
 
 
 ## Бег в точку за duration секунд.

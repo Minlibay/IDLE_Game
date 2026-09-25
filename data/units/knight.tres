@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/data/unit_data.gd" id="1"]
 [ext_resource type="Texture2D" path="res://assets/sprites/units/knight.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/units/battle/knight.png" id="3"]
 
 [resource]
 script = ExtResource("1")
@@ -9,6 +10,7 @@ id = "knight"
 display_name = "Рыцарь"
 description = "Тяжёлая конница. Дорого, но очень сильно. Занимает 3 места."
 icon = ExtResource("2")
+battle_sprite = ExtResource("3")
 order = 3
 attack = 16.0
 defense = 14.0

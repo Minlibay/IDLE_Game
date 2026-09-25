@@ -216,6 +216,17 @@ transparent background, feet at the bottom edge, no shadow, consistent style»*.
 
 Варианты панелей в теме: обычная `PanelContainer` (окна), `PanelSmall` (нижний HUD, подсказки),
 `PanelHeader` (верхняя полоса карты) — задаются через `theme_type_variation`.
+`PanelSection` — рамка разделов (окно инвентаря). Цветные кнопки: `ButtonGreen`, `ButtonRed`, `ButtonBlue`
+(перекрашены из обычной кнопки: `tools/recolor_ui.gd -- <исходник> <результат> <оттенок>`).
+
+Окно инвентаря собрано по макету `assets/ui/source/ui_inventory_mockup.webp` из листа
+`ui_inventory.webp` (детали — `assets/ui/inventory/`); иконки предметов — из `ui_items.webp`.
+Окно королевства — по макетам `ui_kingdom_buildings_mockup.webp` / `ui_kingdom_army_mockup.webp` из листа
+`ui_kingdom.webp` (детали — `assets/ui/kingdom/`); иконки зданий, ресурсов, отрядов — из `ui_kingdom_icons.webp`,
+фигурки солдат для повтора боя — из `ui_units_battle.webp` (`battle_sprite` в `data/units/*.tres`).
+Нарисованную на рамке иконку можно стереть: `tools/clear_ui_interior.gd`.
+Общие элементы, собираемые в коде (плашки, заголовки разделов, стили из картинок) — `scripts/ui/ui_styles.gd`.
+Окна в полосе рабочего стола должны помещаться по высоте в 340 px (`DesktopWindow.WINDOW_HEIGHT`).
 ## Дальше (к Steam и Торговой площадке)
 
 1. Steamworks (GodotSteam), достижения, облачные сохранения.

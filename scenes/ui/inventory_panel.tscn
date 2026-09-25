@@ -1,6 +1,32 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/inventory_panel.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/ui/inventory/plaque_bag.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/ui/inventory/plaque_gold.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/ui/inventory/close.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/ui/inventory/hero_alcove.png" id="5"]
+
+[sub_resource type="StyleBoxTexture" id="Style_bag_plaque"]
+content_margin_left = 42.0
+content_margin_top = 4.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+texture = ExtResource("2")
+texture_margin_left = 40.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="Style_gold_plaque"]
+content_margin_left = 40.0
+content_margin_top = 4.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+texture = ExtResource("3")
+texture_margin_left = 38.0
+texture_margin_top = 11.0
+texture_margin_right = 10.0
+texture_margin_bottom = 11.0
 
 [node name="InventoryPanel" type="PanelContainer"]
 anchors_preset = 8
@@ -8,136 +34,255 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -420.0
-offset_top = -200.0
-offset_right = 420.0
-offset_bottom = 200.0
+offset_left = -540.0
+offset_top = -168.0
+offset_right = 540.0
+offset_bottom = 168.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_type_variation = &"PanelSection"
 script = ExtResource("1")
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 5
 
 [node name="Header" type="HBoxContainer" parent="VBox"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="VBox/Header"]
+[node name="BagPlaque" type="PanelContainer" parent="VBox/Header"]
+custom_minimum_size = Vector2(0, 33)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_bag_plaque")
+
+[node name="Row" type="HBoxContainer" parent="VBox/Header/BagPlaque"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="VBox/Header/BagPlaque/Row"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Инвентарь"
 
-[node name="CountLabel" type="Label" parent="VBox/Header"]
+[node name="CountLabel" type="Label" parent="VBox/Header/BagPlaque/Row"]
 unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.73, 0.85, 1)
+theme_override_font_sizes/font_size = 13
+text = "Сумка: 0 / 60"
+
+[node name="Spacer" type="Control" parent="VBox/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.65, 0.65, 0.72, 1)
-text = "Сумка: 0 / 60"
-horizontal_alignment = 1
 
-[node name="CloseButton" type="Button" parent="VBox/Header"]
+[node name="GoldPlaque" type="PanelContainer" parent="VBox/Header"]
+custom_minimum_size = Vector2(150, 32)
+layout_mode = 2
+tooltip_text = "Золото героя"
+theme_override_styles/panel = SubResource("Style_gold_plaque")
+
+[node name="GoldLabel" type="Label" parent="VBox/Header/GoldPlaque"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Закрыть [I]"
+theme_override_colors/font_color = Color(1, 0.84, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="CloseButton" type="TextureButton" parent="VBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Закрыть [I]"
+texture_normal = ExtResource("4")
 
 [node name="Body" type="HBoxContainer" parent="VBox"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 10
+theme_override_constants/separation = 6
 
-[node name="EquipmentBox" type="VBoxContainer" parent="VBox/Body"]
-custom_minimum_size = Vector2(212, 0)
+[node name="EquipSection" type="PanelContainer" parent="VBox/Body"]
 layout_mode = 2
+theme_type_variation = &"PanelSection"
 
-[node name="EquipTitle" type="Label" parent="VBox/Body/EquipmentBox"]
+[node name="VBox" type="VBoxContainer" parent="VBox/Body/EquipSection"]
 layout_mode = 2
-text = "Экипировка"
+theme_override_constants/separation = 4
 
-[node name="EquipGrid" type="GridContainer" parent="VBox/Body/EquipmentBox"]
+[node name="Doll" type="HBoxContainer" parent="VBox/Body/EquipSection/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LeftSlots" type="VBoxContainer" parent="VBox/Body/EquipSection/VBox/Doll"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/h_separation = 8
-theme_override_constants/v_separation = 4
-columns = 4
+theme_override_constants/separation = 4
 
-[node name="RelicTitle" type="Label" parent="VBox/Body/EquipmentBox"]
+[node name="Alcove" type="TextureRect" parent="VBox/Body/EquipSection/VBox/Doll"]
+custom_minimum_size = Vector2(126, 172)
 layout_mode = 2
-tooltip_text = "Реликвии усиливают армию замка: силу, атаку, защиту, скорость обучения, расход еды."
-mouse_filter = 1
-text = "Реликвии армии"
+texture = ExtResource("5")
+expand_mode = 1
 
-[node name="RelicGrid" type="GridContainer" parent="VBox/Body/EquipmentBox"]
+[node name="HeroSprite" type="TextureRect" parent="VBox/Body/EquipSection/VBox/Doll/Alcove"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 22.0
+offset_right = -14.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RightSlots" type="VBoxContainer" parent="VBox/Body/EquipSection/VBox/Doll"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/h_separation = 8
-theme_override_constants/v_separation = 4
-columns = 4
+theme_override_constants/separation = 4
 
-[node name="StatsLabel" type="Label" parent="VBox/Body/EquipmentBox"]
+[node name="RelicGrid" type="GridContainer" parent="VBox/Body/EquipSection/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(212, 0)
-autowrap_mode = 3
-theme_override_colors/font_color = Color(0.75, 0.75, 0.82, 1)
-theme_override_font_sizes/font_size = 11
+theme_override_constants/h_separation = 3
+columns = 6
 
-[node name="Scroll" type="ScrollContainer" parent="VBox/Body"]
+[node name="StatsSection" type="PanelContainer" parent="VBox/Body"]
+custom_minimum_size = Vector2(172, 0)
+layout_mode = 2
+theme_type_variation = &"PanelSection"
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Body/StatsSection"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HeroStats" type="GridContainer" parent="VBox/Body/StatsSection/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 2
+columns = 3
+
+[node name="ArmyStats" type="GridContainer" parent="VBox/Body/StatsSection/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 2
+columns = 3
+
+[node name="BagSection" type="PanelContainer" parent="VBox/Body"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"PanelSection"
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Body/BagSection"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Scroll" type="ScrollContainer" parent="VBox/Body/BagSection/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="BagGrid" type="GridContainer" parent="VBox/Body/Scroll"]
+[node name="BagGrid" type="GridContainer" parent="VBox/Body/BagSection/VBox/Scroll"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 4
 columns = 8
 
-[node name="Details" type="VBoxContainer" parent="VBox/Body"]
-custom_minimum_size = Vector2(230, 0)
+[node name="DetailsSection" type="PanelContainer" parent="VBox/Body"]
+custom_minimum_size = Vector2(252, 0)
+layout_mode = 2
+theme_type_variation = &"PanelSection"
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Body/DetailsSection"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Top" type="HBoxContainer" parent="VBox/Body/DetailsSection/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BigSlot" type="Control" parent="VBox/Body/DetailsSection/VBox/Top"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 2
 
-[node name="ItemNameLabel" type="Label" parent="VBox/Body/Details"]
+[node name="Titles" type="VBoxContainer" parent="VBox/Body/DetailsSection/VBox/Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="ItemNameLabel" type="Label" parent="VBox/Body/DetailsSection/VBox/Top/Titles"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 14
 text = "Выберите предмет"
 autowrap_mode = 3
 
-[node name="ItemInfoLabel" type="Label" parent="VBox/Body/Details"]
+[node name="ItemTierLabel" type="Label" parent="VBox/Body/DetailsSection/VBox/Top/Titles"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+autowrap_mode = 3
+
+[node name="DescriptionLabel" type="Label" parent="VBox/Body/DetailsSection/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.62, 0.6, 0.72, 1)
+theme_override_font_sizes/font_size = 10
+autowrap_mode = 3
+
+[node name="ItemStats" type="GridContainer" parent="VBox/Body/DetailsSection/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 12
-autowrap_mode = 3
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 2
+columns = 3
 
-[node name="ActionRow1" type="HBoxContainer" parent="VBox/Body/Details"]
+[node name="ActionRow1" type="HBoxContainer" parent="VBox/Body/DetailsSection/VBox"]
 layout_mode = 2
 
-[node name="EquipButton" type="Button" parent="VBox/Body/Details/ActionRow1"]
+[node name="EquipButton" type="Button" parent="VBox/Body/DetailsSection/VBox/ActionRow1"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"ButtonGreen"
+theme_override_font_sizes/font_size = 12
 text = "Надеть"
 
-[node name="SellButton" type="Button" parent="VBox/Body/Details/ActionRow1"]
+[node name="SellButton" type="Button" parent="VBox/Body/DetailsSection/VBox/ActionRow1"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"ButtonRed"
+theme_override_font_sizes/font_size = 12
 text = "Продать"
 
-[node name="UpgradeButton" type="Button" parent="VBox/Body/Details"]
+[node name="ActionRow2" type="HBoxContainer" parent="VBox/Body/DetailsSection/VBox"]
+layout_mode = 2
+
+[node name="UpgradeButton" type="Button" parent="VBox/Body/DetailsSection/VBox/ActionRow2"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"ButtonBlue"
+theme_override_font_sizes/font_size = 12
 text = "Заточить"
 
-[node name="FuseButton" type="Button" parent="VBox/Body/Details"]
+[node name="FuseButton" type="Button" parent="VBox/Body/DetailsSection/VBox/ActionRow2"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Слить 3→1"
 
-[node name="ResultLabel" type="Label" parent="VBox/Body/Details"]
+[node name="ResultLabel" type="Label" parent="VBox/Body/DetailsSection/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 10
 autowrap_mode = 3

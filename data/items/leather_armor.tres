@@ -7,6 +7,7 @@
 script = ExtResource("1")
 id = "leather_armor"
 display_name = "Кожаная броня"
+description = "Прочная кожа защищает, не сковывая движений."
 slot = 1
 icon = ExtResource("2")
 base_stats = {

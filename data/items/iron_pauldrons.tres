@@ -7,6 +7,7 @@
 script = ExtResource("1")
 id = "iron_pauldrons"
 display_name = "Железные наплечники"
+description = "Принимают на себя удары, летящие в плечо."
 slot = 4
 icon = ExtResource("2")
 base_stats = {

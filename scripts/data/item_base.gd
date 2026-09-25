@@ -22,6 +22,8 @@ const HERO_SLOTS: Array[int] = [Slot.HELMET, Slot.SHOULDERS, Slot.ARMOR, Slot.LE
 
 @export var id := ""
 @export var display_name := ""
+## Короткое описание для карточки предмета.
+@export_multiline var description := ""
 @export var slot: Slot = Slot.WEAPON
 @export var icon: Texture2D
 ## Базовые статы для обычного тира 1-го уровня. Ключи героя: damage, max_hp, armor, attack_speed,

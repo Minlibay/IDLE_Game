@@ -1,107 +1,215 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/army_view.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/ui/kingdom/icon_swords.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/ui/kingdom/icon_hourglass.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/ui/kingdom/minus.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/ui/kingdom/plus.png" id="5"]
+[ext_resource type="Texture2D" path="res://assets/ui/kingdom/max.png" id="6"]
 
 [node name="ArmyView" type="HBoxContainer"]
-theme_override_constants/separation = 14
+theme_override_constants/separation = 6
 script = ExtResource("1")
 
-[node name="Summary" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(220, 0)
+[node name="SummarySection" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(318, 0)
+layout_mode = 2
+theme_type_variation = &"PanelSection"
+
+[node name="VBox" type="VBoxContainer" parent="SummarySection"]
 layout_mode = 2
 theme_override_constants/separation = 3
 
-[node name="PowerLabel" type="Label" parent="Summary"]
+[node name="PowerRow" type="HBoxContainer" parent="SummarySection/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="PowerIcon" type="TextureRect" parent="SummarySection/VBox/PowerRow"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PowerLabel" type="Label" parent="SummarySection/VBox/PowerRow"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.8, 0.45, 1)
 theme_override_font_sizes/font_size = 15
 text = "Сила армии: 0"
 
-[node name="ArmyStatsLabel" type="Label" parent="Summary"]
+[node name="ArmyStats" type="GridContainer" parent="SummarySection/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 1
+columns = 2
 
-[node name="StarvingLabel" type="Label" parent="Summary"]
+[node name="CapacityBar" type="ProgressBar" parent="SummarySection/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+theme_type_variation = &"BarBuild"
+max_value = 1.0
+show_percentage = false
+
+[node name="StarvingRibbon" type="PanelContainer" parent="SummarySection/VBox"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.45, 0.4, 1)
+
+[node name="StarvingLabel" type="Label" parent="SummarySection/VBox/StarvingRibbon"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 11
-text = "Армии нечего есть! Сила −50%"
+text = "⚠ Армия голодает — сила −50%"
 
-[node name="QueueTitle" type="Label" parent="Summary"]
+[node name="QueueScroll" type="ScrollContainer" parent="SummarySection/VBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.7, 0.78, 1)
-theme_override_font_sizes/font_size = 11
-text = "Обучение:"
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
-[node name="QueueList" type="VBoxContainer" parent="Summary"]
+[node name="QueueList" type="VBoxContainer" parent="SummarySection/VBox/QueueScroll"]
 unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/separation = 1
-
-[node name="UnitsGrid" type="GridContainer" parent="."]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_constants/h_separation = 6
-theme_override_constants/v_separation = 6
-columns = 2
-
-[node name="Details" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 3
 
-[node name="UnitNameLabel" type="Label" parent="Details"]
+[node name="UnitsSection" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"PanelSection"
+
+[node name="VBox" type="VBoxContainer" parent="UnitsSection"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="UnitsGrid" type="GridContainer" parent="UnitsSection/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 15
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 4
 
-[node name="UnitInfoLabel" type="Label" parent="Details"]
-unique_name_in_owner = true
+[node name="RecruitSection" type="PanelContainer" parent="."]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 12
-autowrap_mode = 3
+size_flags_horizontal = 3
+theme_type_variation = &"PanelSection"
 
-[node name="UnitCostBox" type="HBoxContainer" parent="Details"]
-unique_name_in_owner = true
+[node name="VBox" type="VBoxContainer" parent="RecruitSection"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Top" type="HBoxContainer" parent="RecruitSection/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="UnitTimeLabel" type="Label" parent="Details"]
+[node name="PortraitFrame" type="PanelContainer" parent="RecruitSection/VBox/Top"]
 unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.7, 0.78, 1)
-theme_override_font_sizes/font_size = 11
-
-[node name="AmountRow" type="HBoxContainer" parent="Details"]
+custom_minimum_size = Vector2(62, 62)
 layout_mode = 2
 
-[node name="AmountSpin" type="SpinBox" parent="Details/AmountRow"]
+[node name="Portrait" type="TextureRect" parent="RecruitSection/VBox/Top/PortraitFrame"]
 unique_name_in_owner = true
 layout_mode = 2
-min_value = 1.0
-max_value = 999.0
-value = 1.0
+expand_mode = 1
+stretch_mode = 5
 
-[node name="MaxButton" type="Button" parent="Details/AmountRow"]
-unique_name_in_owner = true
-layout_mode = 2
-tooltip_text = "Сколько можно нанять сейчас"
-text = "Макс."
-
-[node name="RecruitButton" type="Button" parent="Details/AmountRow"]
-unique_name_in_owner = true
+[node name="Titles" type="VBoxContainer" parent="RecruitSection/VBox/Top"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Нанять"
+theme_override_constants/separation = 1
 
-[node name="RecruitReasonLabel" type="Label" parent="Details"]
+[node name="UnitNameLabel" type="Label" parent="RecruitSection/VBox/Top/Titles"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.6, 0.45, 1)
+theme_override_colors/font_color = Color(0.85, 0.6, 1, 1)
+theme_override_font_sizes/font_size = 15
+
+[node name="UnitDescriptionLabel" type="Label" parent="RecruitSection/VBox/Top/Titles"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.62, 0.6, 0.72, 1)
+theme_override_font_sizes/font_size = 10
+autowrap_mode = 3
+
+[node name="StatChips" type="HBoxContainer" parent="RecruitSection/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="UnitCostBox" type="HBoxContainer" parent="RecruitSection/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TimeRow" type="HBoxContainer" parent="RecruitSection/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Hourglass" type="TextureRect" parent="RecruitSection/VBox/TimeRow"]
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+texture = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="UnitTimeLabel" type="Label" parent="RecruitSection/VBox/TimeRow"]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_font_sizes/font_size = 11
+
+[node name="Spacer" type="Control" parent="RecruitSection/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ActionRow" type="HBoxContainer" parent="RecruitSection/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="MinusButton" type="TextureButton" parent="RecruitSection/VBox/ActionRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Меньше (Shift — по 10)"
+texture_normal = ExtResource("4")
+
+[node name="ValueBox" type="PanelContainer" parent="RecruitSection/VBox/ActionRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+
+[node name="AmountLabel" type="Label" parent="RecruitSection/VBox/ActionRow/ValueBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlusButton" type="TextureButton" parent="RecruitSection/VBox/ActionRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Больше (Shift — по 10)"
+texture_normal = ExtResource("5")
+
+[node name="MaxButton" type="TextureButton" parent="RecruitSection/VBox/ActionRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Максимум (по месту и ресурсам)"
+texture_normal = ExtResource("6")
+
+[node name="RecruitButton" type="Button" parent="RecruitSection/VBox/ActionRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"ButtonGreen"
+theme_override_font_sizes/font_size = 12
+text = "Нанять"
+
+[node name="RecruitReasonLabel" type="Label" parent="RecruitSection/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.5, 1)
+theme_override_font_sizes/font_size = 10
+autowrap_mode = 3

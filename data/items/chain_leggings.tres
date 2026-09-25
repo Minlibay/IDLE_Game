@@ -7,6 +7,7 @@
 script = ExtResource("1")
 id = "chain_leggings"
 display_name = "Кольчужные поножи"
+description = "Звенят при ходьбе, зато берегут ноги."
 slot = 5
 icon = ExtResource("2")
 base_stats = {

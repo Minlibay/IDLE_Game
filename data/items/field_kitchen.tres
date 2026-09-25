@@ -7,6 +7,7 @@
 script = ExtResource("1")
 id = "field_kitchen"
 display_name = "Полевой котёл"
+description = "Горячая похлёбка: армия сыта и ест меньше."
 slot = 7
 icon = ExtResource("2")
 base_stats = {

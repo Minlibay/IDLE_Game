@@ -7,6 +7,7 @@
 script = ExtResource("1")
 id = "iron_helmet"
 display_name = "Железный шлем"
+description = "Шлем с гребнем: и защита, и повод для гордости."
 slot = 2
 icon = ExtResource("2")
 base_stats = {

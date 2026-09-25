@@ -7,6 +7,7 @@
 script = ExtResource("1")
 id = "ancestral_shield"
 display_name = "Щит предков"
+description = "Щит предков хранит тех, кто держит строй."
 slot = 7
 icon = ExtResource("2")
 base_stats = {

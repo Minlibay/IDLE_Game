@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" path="res://scenes/ui/kingdom_panel.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/ui/army_view.tscn" id="2"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBox_tabs_panel"]
-content_margin_top = 6.0
+[ext_resource type="Texture2D" path="res://assets/sprites/buildings/town_hall.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/ui/inventory/close.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/ui/kingdom/icon_shield.png" id="5"]
+[ext_resource type="Texture2D" path="res://assets/ui/kingdom/icon_hammer.png" id="6"]
+[ext_resource type="Texture2D" path="res://assets/ui/kingdom/icon_hourglass.png" id="7"]
 
 [node name="KingdomPanel" type="PanelContainer"]
 anchors_preset = 8
@@ -12,133 +14,263 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -420.0
-offset_top = -174.0
-offset_right = 420.0
-offset_bottom = 174.0
+offset_left = -540.0
+offset_top = -168.0
+offset_right = 540.0
+offset_bottom = 168.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_type_variation = &"PanelSection"
 script = ExtResource("1")
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 4
 
 [node name="Header" type="HBoxContainer" parent="VBox"]
+custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 8
+
+[node name="TitleIcon" type="TextureRect" parent="VBox/Header"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Title" type="Label" parent="VBox/Header"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Королевство"
 
+[node name="BuildingsTab" type="Button" parent="VBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 12
+toggle_mode = true
+button_pressed = true
+text = "Здания"
+
+[node name="ArmyTab" type="Button" parent="VBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 12
+toggle_mode = true
+text = "Армия"
+
 [node name="ResourceBar" type="HBoxContainer" parent="VBox/Header"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 12
-alignment = 1
+theme_override_constants/separation = 4
+alignment = 2
 
-[node name="CloseButton" type="Button" parent="VBox/Header"]
+[node name="CloseButton" type="TextureButton" parent="VBox/Header"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Закрыть [K]"
+size_flags_vertical = 4
+tooltip_text = "Закрыть [K]"
+texture_normal = ExtResource("4")
 
-[node name="Tabs" type="TabContainer" parent="VBox"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 12
-theme_override_styles/panel = SubResource("StyleBox_tabs_panel")
-current_tab = 0
-
-[node name="Body" type="HBoxContainer" parent="VBox/Tabs"]
-layout_mode = 2
-metadata/_tab_index = 0
-theme_override_constants/separation = 14
-
-[node name="Left" type="VBoxContainer" parent="VBox/Tabs/Body"]
+[node name="StatusRow" type="HBoxContainer" parent="VBox"]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="BuildingsGrid" type="GridContainer" parent="VBox/Tabs/Body/Left"]
+[node name="StatusStrip" type="PanelContainer" parent="VBox/StatusRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Row" type="HBoxContainer" parent="VBox/StatusRow/StatusStrip"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="StatusIcon" type="TextureRect" parent="VBox/StatusRow/StatusStrip/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusLabel" type="Label" parent="VBox/StatusRow/StatusStrip/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+text_overrun_behavior = 3
+
+[node name="DepositButton" type="Button" parent="VBox/StatusRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.62, 1)
+theme_override_font_sizes/font_size = 11
+text = "Внести в казну"
+
+[node name="BuildingsPage" type="HBoxContainer" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="BuildingsSection" type="PanelContainer" parent="VBox/BuildingsPage"]
+layout_mode = 2
+theme_type_variation = &"PanelSection"
+
+[node name="VBox" type="VBoxContainer" parent="VBox/BuildingsPage/BuildingsSection"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BuildingsGrid" type="GridContainer" parent="VBox/BuildingsPage/BuildingsSection/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 6
-theme_override_constants/v_separation = 6
+theme_override_constants/v_separation = 4
 columns = 5
 
-[node name="ConstructionLabel" type="Label" parent="VBox/Tabs/Body/Left"]
+[node name="ConstructionRow" type="PanelContainer" parent="VBox/BuildingsPage/BuildingsSection/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.8, 0.45, 1)
-theme_override_font_sizes/font_size = 12
+
+[node name="Row" type="HBoxContainer" parent="VBox/BuildingsPage/BuildingsSection/VBox/ConstructionRow"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Hammer" type="TextureRect" parent="VBox/BuildingsPage/BuildingsSection/VBox/ConstructionRow/Row"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Lines" type="VBoxContainer" parent="VBox/BuildingsPage/BuildingsSection/VBox/ConstructionRow/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 1
+
+[node name="ConstructionLabel" type="Label" parent="VBox/BuildingsPage/BuildingsSection/VBox/ConstructionRow/Row/Lines"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.5, 1)
+theme_override_font_sizes/font_size = 11
 text = "Строители свободны"
 
-[node name="ConstructionBar" type="ProgressBar" parent="VBox/Tabs/Body/Left"]
+[node name="ConstructionBar" type="ProgressBar" parent="VBox/BuildingsPage/BuildingsSection/VBox/ConstructionRow/Row/Lines"]
 unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(0, 11)
+custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
 theme_type_variation = &"BarBuild"
 max_value = 1.0
 show_percentage = false
 
-[node name="Details" type="VBoxContainer" parent="VBox/Tabs/Body"]
+[node name="DetailsSection" type="PanelContainer" parent="VBox/BuildingsPage"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 3
+theme_type_variation = &"PanelSection"
 
-[node name="BuildingNameLabel" type="Label" parent="VBox/Tabs/Body/Details"]
-unique_name_in_owner = true
+[node name="VBox" type="VBoxContainer" parent="VBox/BuildingsPage/DetailsSection"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 15
+theme_override_constants/separation = 4
 
-[node name="BuildingLevelLabel" type="Label" parent="VBox/Tabs/Body/Details"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.7, 0.78, 1)
-theme_override_font_sizes/font_size = 11
-
-[node name="BuildingDescriptionLabel" type="Label" parent="VBox/Tabs/Body/Details"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-autowrap_mode = 3
-
-[node name="BuildingEffectLabel" type="Label" parent="VBox/Tabs/Body/Details"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.6, 0.9, 1, 1)
-theme_override_font_sizes/font_size = 12
-autowrap_mode = 3
-
-[node name="CostBox" type="HBoxContainer" parent="VBox/Tabs/Body/Details"]
-unique_name_in_owner = true
+[node name="Top" type="HBoxContainer" parent="VBox/BuildingsPage/DetailsSection/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="BuildTimeLabel" type="Label" parent="VBox/Tabs/Body/Details"]
+[node name="BigIconFrame" type="PanelContainer" parent="VBox/BuildingsPage/DetailsSection/VBox/Top"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(68, 68)
+layout_mode = 2
+
+[node name="BigIcon" type="TextureRect" parent="VBox/BuildingsPage/DetailsSection/VBox/Top/BigIconFrame"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.7, 0.78, 1)
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Titles" type="VBoxContainer" parent="VBox/BuildingsPage/DetailsSection/VBox/Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 1
+
+[node name="BuildingNameLabel" type="Label" parent="VBox/BuildingsPage/DetailsSection/VBox/Top/Titles"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.6, 1, 1)
+theme_override_font_sizes/font_size = 15
+
+[node name="BuildingLevelLabel" type="Label" parent="VBox/BuildingsPage/DetailsSection/VBox/Top/Titles"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="BuildingDescriptionLabel" type="Label" parent="VBox/BuildingsPage/DetailsSection/VBox/Top/Titles"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.62, 0.6, 0.72, 1)
+theme_override_font_sizes/font_size = 10
+autowrap_mode = 3
+
+[node name="BuildingEffectLabel" type="Label" parent="VBox/BuildingsPage/DetailsSection/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+autowrap_mode = 3
+
+[node name="CostBox" type="HBoxContainer" parent="VBox/BuildingsPage/DetailsSection/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TimeRow" type="HBoxContainer" parent="VBox/BuildingsPage/DetailsSection/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Hourglass" type="TextureRect" parent="VBox/BuildingsPage/DetailsSection/VBox/TimeRow"]
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BuildTimeLabel" type="Label" parent="VBox/BuildingsPage/DetailsSection/VBox/TimeRow"]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_font_sizes/font_size = 11
 
-[node name="UpgradeButton" type="Button" parent="VBox/Tabs/Body/Details"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 28)
+[node name="Spacer" type="Control" parent="VBox/BuildingsPage/DetailsSection/VBox"]
 layout_mode = 2
-text = "Улучшить"
+size_flags_vertical = 3
 
-[node name="ReasonLabel" type="Label" parent="VBox/Tabs/Body/Details"]
+[node name="BottomRow" type="HBoxContainer" parent="VBox/BuildingsPage/DetailsSection/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="UpgradeButton" type="Button" parent="VBox/BuildingsPage/DetailsSection/VBox/BottomRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 28)
+layout_mode = 2
+theme_type_variation = &"ButtonGreen"
+theme_override_font_sizes/font_size = 12
+text = "Построить"
+
+[node name="ReasonLabel" type="Label" parent="VBox/BuildingsPage/DetailsSection/VBox/BottomRow"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.6, 0.45, 1)
-theme_override_font_sizes/font_size = 11
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.55, 0.5, 1)
+theme_override_font_sizes/font_size = 10
+autowrap_mode = 3
 
-[node name="ArmyView" parent="VBox/Tabs" instance=ExtResource("2")]
+[node name="ArmyView" parent="VBox" instance=ExtResource("2")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-metadata/_tab_index = 1
+size_flags_vertical = 3

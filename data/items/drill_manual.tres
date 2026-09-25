@@ -7,6 +7,7 @@
 script = ExtResource("1")
 id = "drill_manual"
 display_name = "Строевой устав"
+description = "Устав строевой подготовки: новобранцы учатся быстрее."
 slot = 7
 icon = ExtResource("2")
 base_stats = {
