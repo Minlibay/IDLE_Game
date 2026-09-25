@@ -11,6 +11,7 @@ func _ready() -> void:
 	_test_data_loaded()
 	_test_loot()
 	_test_equip()
+	_test_new_slots_and_relics()
 	_test_upgrade()
 	_test_fusion()
 	_test_save_load()
@@ -61,6 +62,61 @@ func _test_equip() -> void:
 	_check(not GameState.inventory.has(armor), "equipped item still in bag")
 	_check(GameState.unequip(ItemBase.Slot.ARMOR), "cannot unequip armor")
 	_check(GameState.inventory.has(armor), "unequipped item not in bag")
+
+
+## Плечи, ноги, ботинки и 6 слотов реликвий армии.
+func _test_new_slots_and_relics() -> void:
+	for slot: int in [ItemBase.Slot.SHOULDERS, ItemBase.Slot.LEGS, ItemBase.Slot.BOOTS]:
+		var bases := Database.get_items_for_slot(slot)
+		_check(not bases.is_empty(), "no items for slot " + ItemBase.slot_name(slot))
+		if bases.is_empty():
+			continue
+		var item := LootGenerator.create_item(bases[0], Item.Tier.RARE, 5)
+		GameState.add_item(item)
+		var hp_before: float = GameState.get_hero_stats().max_hp
+		var armor_before: float = GameState.get_hero_stats().armor
+		_check(GameState.equip(item), "cannot equip " + ItemBase.slot_name(slot))
+		_check(GameState.equipment.get(slot) == item, "item not in slot " + ItemBase.slot_name(slot))
+		_check(GameState.get_hero_stats().max_hp >= hp_before and GameState.get_hero_stats().armor > armor_before,
+			"%s did not raise hero stats" % ItemBase.slot_name(slot))
+
+	var relic_bases := Database.get_items_for_slot(ItemBase.Slot.ARMY)
+	_check(relic_bases.size() >= 6, "army relics not loaded: %d" % relic_bases.size())
+	if relic_bases.is_empty():
+		return
+	for i in GameState.army_relics.size():
+		if GameState.army_relics[i]:
+			GameState.unequip_item(GameState.army_relics[i])
+	var banner := Database.get_item_base("war_banner")
+	var hero_before: Dictionary = GameState.get_hero_stats()
+	var relics: Array[Item] = []
+	for i in GameState.ARMY_RELIC_SLOTS:
+		var relic := LootGenerator.create_item(banner, Item.Tier.COMMON, 1)
+		GameState.add_item(relic)
+		_check(GameState.equip(relic), "cannot equip relic %d" % i)
+		relics.append(relic)
+	_check(not GameState.army_relics.has(null), "relic slots not filled")
+	var power := float(GameState.get_army_gear_bonuses().get("ARMY_POWER", 0.0))
+	var expected := 0.0
+	for relic in relics:
+		expected += float(relic.get_stats().army_power)
+	_check(is_equal_approx(power, snappedf(expected, 0.1)), "army gear sum wrong: %f vs %f" % [power, expected])
+	_check(GameState.get_hero_stats().damage == hero_before.damage, "relics must not change hero stats")
+
+	# Седьмая реликвия заменяет такую же (самую дешёвую), старая уходит в сумку.
+	var better := LootGenerator.create_item(banner, Item.Tier.EPIC, 10)
+	GameState.add_item(better)
+	_check(GameState.equip(better), "cannot replace a relic when all slots are full")
+	_check(GameState.army_relics.has(better) and GameState.inventory.size() > 0, "relic replacement failed")
+	_check(float(GameState.get_army_gear_bonuses().ARMY_POWER) > power, "better relic did not raise the bonus")
+
+	# Сохранение и снятие.
+	GameState.save_game()
+	GameState.load_game()
+	_check(GameState.army_relics.size() == GameState.ARMY_RELIC_SLOTS and not GameState.army_relics.has(null), "relics lost after load")
+	var loaded: Item = GameState.army_relics[0]
+	_check(GameState.unequip_item(loaded), "cannot unequip relic")
+	_check(GameState.army_relics[0] == null and GameState.inventory.has(loaded), "unequipped relic not in the bag")
 
 
 func _test_upgrade() -> void:
@@ -169,7 +225,7 @@ func _server_view(levels: Dictionary, resources: Dictionary, army := {}) -> Dict
 		"levels": levels,
 		"construction": null,
 		"army": {"units": {}, "queue": [], "starving": false, "capacity": 0, "housingUsed": 0,
-			"upkeep": 0.0, "attack": 0.0, "defense": 0.0, "powerMultiplier": 1.0, "trainTimes": {}},
+			"upkeep": 0.0, "attack": 0.0, "defense": 0.0, "attackMultiplier": 1.0, "defenseMultiplier": 1.0, "trainTimes": {}},
 	}
 	(view.army as Dictionary).merge(army, true)
 	return view

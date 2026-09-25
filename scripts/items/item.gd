@@ -24,6 +24,19 @@ const STAT_NAMES := {
 	"armor": "Броня",
 	"attack_speed": "Скорость атаки, %",
 	"crit_chance": "Шанс крита, %",
+	"army_power": "Сила армии, %",
+	"army_attack": "Атака армии, %",
+	"army_defense": "Защита армии, %",
+	"training_speed": "Скорость обучения, %",
+	"upkeep_reduction": "Меньше еды армии, %",
+}
+## Статы реликвий армии -> имена бонусов на сервере (они же — имена StatModifier.Stat, где есть).
+const ARMY_STAT_KEYS := {
+	"army_power": "ARMY_POWER",
+	"army_attack": "ARMY_ATTACK",
+	"army_defense": "ARMY_DEFENSE",
+	"training_speed": "TRAINING_SPEED",
+	"upkeep_reduction": "UPKEEP_REDUCTION",
 }
 
 var uid := ""

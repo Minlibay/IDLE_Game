@@ -84,5 +84,12 @@ describe("http api", () => {
 
     const deposit = await call("POST", "/api/kingdom/deposit", { gold: 50 }, token);
     assert.equal(deposit.status, 400, "allowance is empty right after registration");
+
+    const gear = await call("POST", "/api/hero", { level: 3, armyGear: { ARMY_POWER: 12.5 } }, token);
+    assert.equal(gear.status, 200);
+    assert.equal(gear.json.heroLevel, 3);
+    assert.deepEqual(gear.json.armyGear, { ARMY_POWER: 12.5 });
+    const badGear = await call("POST", "/api/hero", { armyGear: { NOPE: 1 } }, token);
+    assert.equal(badGear.status, 400);
   });
 });

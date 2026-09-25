@@ -20,7 +20,7 @@ import { applyLosses, resolveBattle, type BattleResult, type BattleSettings } fr
 import { generateZones, type GeneratorSettings, type Zone } from "./generator.ts";
 import { hexDistance, isAdjacent } from "./grid.ts";
 import {
-  advanceKingdom, armyPowerMultiplier, cancelOrder, consume, createKingdom, kingdomView, pay, recruit, refund,
+  advanceKingdom, armyMultiplier, cancelOrder, consume, createKingdom, kingdomView, pay, recruit, refund,
   startBuilding, storageCapacity, type ExtraBonuses, type Kingdom, type KingdomSettings,
 } from "./kingdom.ts";
 
@@ -47,6 +47,8 @@ export type Player = {
   /** Сколько золота герой может внести в казну (копится со временем, зависит от уровня героя). */
   depositBank: number;
   depositUpdatedAt: number;
+  /** Бонусы реликвий армии героя (ARMY_POWER, ARMY_ATTACK…), уже урезанные до armyGearCaps. */
+  armyGear: Record<string, number>;
 };
 
 export type ReportSide = { name: string; army: Army; lost: Army; power: number; heroLevel: number };
@@ -77,6 +79,7 @@ export type GameSettings = GeneratorSettings & BattleSettings & KingdomSettings 
   newbieProtectionHours: number;
   depositPerLevelPerMinute: number;
   depositBankMinutes: number;
+  armyGearCaps: Readonly<Record<string, number>>;
 };
 
 export class GameError extends Error {
@@ -205,7 +208,8 @@ export class Game {
       zonesOwned: owned.length,
       bonuses,
       garrisons: owned.filter((zone) => !isEmpty(zone.garrison)).map((zone) => ({ zoneId: zone.id, army: zone.garrison })),
-      kingdom: kingdomView(player.kingdom, this.data, this.settings, this.fieldArmies(player), bonuses),
+      kingdom: kingdomView(player.kingdom, this.data, this.settings, this.fieldArmies(player), this.armyBonuses(player)),
+      armyGear: player.armyGear,
       protectionUntil: player.protectionUntil,
       shieldUntil: player.shieldUntil,
       depositAvailable: Math.floor(this.depositBank(player, now)),
@@ -243,6 +247,7 @@ export class Game {
       shieldUntil: 0,
       depositBank: 0,
       depositUpdatedAt: now,
+      armyGear: {},
     };
     castle.ownerId = id;
     castle.isCastle = true;
@@ -261,6 +266,24 @@ export class Game {
     }
     this.depositBank(player, now); // накопленное по старому уровню
     player.heroLevel = level;
+    this.savePlayer(player);
+  }
+
+  /**
+   * Бонусы реликвий армии от клиента. Предметы пока живут в клиенте, поэтому сервер принимает
+   * только известные бонусы и урезает каждый до armyGearCaps — подделка даёт не больше потолка.
+   */
+  setArmyGear(player: Player, input: unknown, now: number): void {
+    if (typeof input !== "object" || input === null || Array.isArray(input)) throw new GameError("Некорректные бонусы армии");
+    const gear: Record<string, number> = {};
+    for (const [stat, value] of Object.entries(input as Record<string, unknown>)) {
+      const cap = this.settings.armyGearCaps[stat];
+      if (cap === undefined) throw new GameError("Неизвестный бонус армии: " + stat);
+      if (typeof value !== "number" || !Number.isFinite(value) || value < 0) throw new GameError("Некорректное значение " + stat);
+      if (value > 0) gear[stat] = Math.min(cap, Math.round(value * 10) / 10);
+    }
+    this.sync(player, now); // до смены бонусов — по старым (содержание, обучение)
+    player.armyGear = gear;
     this.savePlayer(player);
   }
 
@@ -340,14 +363,14 @@ export class Game {
 
   recruit(player: Player, unitId: unknown, count: unknown, now: number): void {
     this.sync(player, now);
-    recruit(player.kingdom, this.data, String(unitId ?? ""), Number(count), now, this.settings, this.fieldArmies(player), this.territoryBonuses(player));
+    recruit(player.kingdom, this.data, String(unitId ?? ""), Number(count), now, this.settings, this.fieldArmies(player), this.armyBonuses(player));
     this.savePlayer(player);
   }
 
   cancelTraining(player: Player, index: unknown, now: number): void {
     if (typeof index !== "number" || !Number.isInteger(index)) throw new GameError("Нет такого заказа");
     this.sync(player, now);
-    cancelOrder(player.kingdom, this.data, index, now, this.settings, this.territoryBonuses(player));
+    cancelOrder(player.kingdom, this.data, index, now, this.settings, this.armyBonuses(player));
     this.savePlayer(player);
   }
 
@@ -392,7 +415,14 @@ export class Game {
 
   /** Догоняет экономику замка до now (производство, стройка, обучение, содержание армии). */
   private sync(player: Player, now: number): void {
-    advanceKingdom(player.kingdom, this.data, now, this.settings, this.fieldArmies(player), this.territoryBonuses(player));
+    advanceKingdom(player.kingdom, this.data, now, this.settings, this.fieldArmies(player), this.armyBonuses(player));
+  }
+
+  /** Всё, что усиливает армию на сервере помимо зданий: захваченные зоны + реликвии армии. */
+  private armyBonuses(player: Player): ExtraBonuses {
+    const bonuses = this.territoryBonuses(player);
+    for (const [stat, value] of Object.entries(player.armyGear)) bonuses[stat] = (bonuses[stat] ?? 0) + value;
+    return bonuses;
   }
 
   /** Бонусы захваченных зон: стат → проценты (действуют и на армию сервера, и на героя в клиенте). */
@@ -492,8 +522,7 @@ export class Game {
       this.report(player.id, now, { kind: "capture", zoneId: zone.id, tier: zone.tier, won: true, text: "Зона занята без боя" });
       return;
     }
-    const attackerPower = this.powerOf(player);
-    const result = this.battle(player.army, player.heroLevel, attackerPower, zone.neutral, 0, 1);
+    const result = this.battle(player.army, player.heroLevel, this.attackMultiplier(player), zone.neutral, 0, 1);
     const sides = this.reportSides(player.name, player.army, player.heroLevel, "Нейтралы", zone.neutral, 0, result);
     if (result.attackerWins) {
       player.army = result.attackerArmy;
@@ -521,7 +550,7 @@ export class Game {
     }
 
     const defenderHero = defenderPresent ? defender.heroLevel : 0;
-    const result = this.battle(attacker.army, attacker.heroLevel, this.powerOf(attacker), defenderArmy, defenderHero, this.powerOf(defender));
+    const result = this.battle(attacker.army, attacker.heroLevel, this.attackMultiplier(attacker), defenderArmy, defenderHero, this.defenseMultiplier(defender));
     const sides = this.reportSides(attacker.name, attacker.army, attacker.heroLevel, defender.name, defenderArmy, defenderHero, result);
 
     if (result.attackerWins) {
@@ -565,7 +594,7 @@ export class Game {
     const heroArmy = heroHome ? defender.army : {};
     const defenderArmy = addArmies(kingdom.army, heroArmy);
     const defenderHero = heroHome ? defender.heroLevel : 0;
-    const result = this.battle(attacker.army, attacker.heroLevel, this.powerOf(attacker), defenderArmy, defenderHero, this.powerOf(defender));
+    const result = this.battle(attacker.army, attacker.heroLevel, this.attackMultiplier(attacker), defenderArmy, defenderHero, this.defenseMultiplier(defender));
 
     if (result.attackerWins) {
       const losses = applyLosses(defenderArmy, this.settings.raidDefenderLoss);
@@ -611,8 +640,12 @@ export class Game {
     return loot;
   }
 
-  private powerOf(player: Player): number {
-    return armyPowerMultiplier(player.kingdom, this.data, this.territoryBonuses(player));
+  private attackMultiplier(player: Player): number {
+    return armyMultiplier(player.kingdom, this.data, "attack", this.armyBonuses(player));
+  }
+
+  private defenseMultiplier(player: Player): number {
+    return armyMultiplier(player.kingdom, this.data, "defense", this.armyBonuses(player));
   }
 
   private battle(
@@ -660,6 +693,7 @@ export class Game {
     player.shieldUntil ??= 0;
     player.depositBank ??= 0;
     player.depositUpdatedAt ??= now;
+    player.armyGear ??= {};
   }
 
   /** После пересоздания мира: каждому игроку — новый замок; армия и замок сохраняются. */

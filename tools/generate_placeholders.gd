@@ -43,6 +43,16 @@ func _initialize() -> void:
 	_save(_icon_armor(), "items/armor.png")
 	_save(_icon_helmet(), "items/helmet.png")
 	_save(_icon_ring(), "items/ring.png")
+	_save(_icon_shoulders(), "items/shoulders.png")
+	_save(_icon_legs(), "items/legs.png")
+	_save(_icon_boots(), "items/boots.png")
+	# Реликвии армии.
+	_save(_icon_banner(), "items/banner.png")
+	_save(_icon_horn(), "items/horn.png")
+	_save(_icon_tower_shield(), "items/tower_shield.png")
+	_save(_icon_drill_book(), "items/drill_book.png")
+	_save(_icon_cauldron(), "items/cauldron.png")
+	_save(_icon_standard(), "items/standard.png")
 
 	_save(_arrow(), "fx/arrow.png")
 	_save(_orb(), "fx/orb.png", false)
@@ -335,6 +345,111 @@ func _icon_ring() -> Image:
 	_ellipse(img, 8.0, 10.0, 2.8, 2.4, CLEAR)
 	_ellipse(img, 8.0, 4.5, 2.2, 2.2, RED)
 	_px(img, 7, 4, Color.WHITE)
+	return img
+
+
+func _icon_shoulders() -> Image:
+	var img := _new(16, 16)
+	_ellipse(img, 4.0, 8.0, 3.6, 3.2, STEEL)
+	_ellipse(img, 12.0, 8.0, 3.6, 3.2, STEEL)
+	_rect(img, 0, 8, 16, 5, CLEAR)
+	_rect(img, 1, 8, 6, 1, STEEL.darkened(0.3))
+	_rect(img, 9, 8, 6, 1, STEEL.darkened(0.3))
+	_rect(img, 6, 9, 4, 4, LEATHER)
+	_px(img, 3, 6, Color.WHITE)
+	_px(img, 11, 6, Color.WHITE)
+	return img
+
+
+func _icon_legs() -> Image:
+	var img := _new(16, 16)
+	_rect(img, 4, 2, 8, 3, LEATHER.darkened(0.2))
+	_rect(img, 4, 5, 3, 9, STEEL)
+	_rect(img, 9, 5, 3, 9, STEEL)
+	_rect(img, 4, 8, 3, 1, STEEL.darkened(0.3))
+	_rect(img, 9, 8, 3, 1, STEEL.darkened(0.3))
+	_rect(img, 7, 2, 2, 2, GOLD)
+	return img
+
+
+func _icon_boots() -> Image:
+	var img := _new(16, 16)
+	_rect(img, 3, 3, 4, 9, LEATHER)
+	_rect(img, 3, 11, 6, 3, LEATHER.darkened(0.2))
+	_rect(img, 9, 4, 4, 8, LEATHER)
+	_rect(img, 9, 11, 6, 3, LEATHER.darkened(0.2))
+	_rect(img, 3, 3, 4, 1, BROWN)
+	_rect(img, 9, 4, 4, 1, BROWN)
+	return img
+
+
+func _icon_banner() -> Image:
+	var img := _new(16, 16)
+	_rect(img, 3, 1, 1, 14, BROWN)
+	_rect(img, 4, 2, 9, 7, RED)
+	for x in range(4, 13):
+		_px(img, x, 9 + (x % 2), RED.darkened(0.2))
+	_ellipse(img, 8.5, 5.5, 1.8, 1.8, GOLD)
+	_px(img, 3, 0, GOLD)
+	return img
+
+
+func _icon_horn() -> Image:
+	var img := _new(16, 16)
+	for i in 11:
+		var t := float(i) / 10.0
+		var x := 2 + i
+		var y := roundi(11.0 - sin(t * PI * 0.8) * 5.0)
+		var r := int(1 + t * 2.5)
+		_rect(img, x, y - r, 1, r * 2 + 1, Color(0.93, 0.87, 0.72).darkened(0.3 * (1.0 - t)))
+	_rect(img, 5, 7, 1, 7, GOLD)
+	_rect(img, 9, 5, 1, 7, GOLD)
+	return img
+
+
+func _icon_tower_shield() -> Image:
+	var img := _new(16, 16)
+	_rect(img, 3, 2, 10, 9, STEEL)
+	_ellipse(img, 8.0, 10.0, 5.0, 5.0, STEEL)
+	_rect(img, 3, 1, 10, 1, STEEL.darkened(0.3))
+	_rect(img, 7, 3, 2, 10, Color(0.25, 0.45, 0.85))
+	_rect(img, 4, 6, 8, 2, Color(0.25, 0.45, 0.85))
+	return img
+
+
+func _icon_drill_book() -> Image:
+	var img := _new(16, 16)
+	_rect(img, 3, 2, 10, 12, Color(0.45, 0.2, 0.2))
+	_rect(img, 4, 3, 8, 10, Color(0.55, 0.25, 0.25))
+	_rect(img, 3, 2, 2, 12, Color(0.3, 0.12, 0.12))
+	_rect(img, 7, 5, 4, 1, GOLD)
+	_rect(img, 7, 7, 4, 1, GOLD)
+	_rect(img, 8, 9, 2, 2, GOLD)
+	return img
+
+
+func _icon_cauldron() -> Image:
+	var img := _new(16, 16)
+	_ellipse(img, 8.0, 10.0, 6.0, 4.5, Color(0.25, 0.25, 0.28))
+	_rect(img, 2, 6, 12, 2, Color(0.35, 0.35, 0.4))
+	_rect(img, 4, 6, 8, 1, Color(0.85, 0.6, 0.25))
+	_rect(img, 4, 14, 2, 2, Color(0.2, 0.2, 0.22))
+	_rect(img, 10, 14, 2, 2, Color(0.2, 0.2, 0.22))
+	_px(img, 6, 3, Color(0.9, 0.9, 0.9, 0.7))
+	_px(img, 9, 2, Color(0.9, 0.9, 0.9, 0.7))
+	_px(img, 8, 4, Color(0.9, 0.9, 0.9, 0.7))
+	return img
+
+
+func _icon_standard() -> Image:
+	var img := _new(16, 16)
+	_rect(img, 7, 3, 2, 12, BROWN)
+	_rect(img, 3, 3, 10, 1, GOLD)
+	_rect(img, 3, 4, 10, 6, Color(0.5, 0.2, 0.7))
+	_rect(img, 3, 10, 3, 2, Color(0.5, 0.2, 0.7))
+	_rect(img, 10, 10, 3, 2, Color(0.5, 0.2, 0.7))
+	_ellipse(img, 8.0, 7.0, 2.0, 2.0, GOLD)
+	_ellipse(img, 8.0, 2.0, 1.5, 1.5, GOLD)
 	return img
 
 

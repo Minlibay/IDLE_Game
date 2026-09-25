@@ -94,17 +94,25 @@ export function housingUsed(kingdom: Kingdom, data: GameData, otherArmies: Army[
   return used;
 }
 
-export function upkeepPerMinute(data: GameData, armies: Army[]): number {
+/** Реликвии не могут снизить содержание армии больше, чем на эту долю. */
+const MAX_UPKEEP_REDUCTION = 0.8;
+
+/** Еда в минуту на армии; UPKEEP_REDUCTION (реликвии) снижает расход. */
+export function upkeepPerMinute(data: GameData, armies: Army[], extra: ExtraBonuses = {}): number {
   let total = 0;
   for (const army of armies) {
     for (const [id, count] of Object.entries(army)) total += (data.units[id]?.upkeep ?? 0) * count;
   }
-  return total;
+  return total * (1 - Math.min(MAX_UPKEEP_REDUCTION, (extra.UPKEEP_REDUCTION ?? 0) / 100));
 }
 
-/** Множитель силы армии: бонусы зданий (Кузница, Конюшня), зон и голод. */
-export function armyPowerMultiplier(kingdom: Kingdom, data: GameData, extra: ExtraBonuses = {}): number {
-  const bonus = 1 + buildingBonus(kingdom, data, "ARMY_POWER", extra) / 100;
+/**
+ * Множитель атаки или защиты армии: общая сила (ARMY_POWER: Кузница, Конюшня, зоны, реликвии)
+ * + отдельно атака (ARMY_ATTACK) или защита (ARMY_DEFENSE) от реликвий; голод ослабляет.
+ */
+export function armyMultiplier(kingdom: Kingdom, data: GameData, kind: "attack" | "defense", extra: ExtraBonuses = {}): number {
+  const specific = kind === "attack" ? "ARMY_ATTACK" : "ARMY_DEFENSE";
+  const bonus = 1 + (buildingBonus(kingdom, data, "ARMY_POWER", extra) + buildingBonus(kingdom, data, specific, extra)) / 100;
   return bonus * (kingdom.starving ? data.kingdom.starvingPowerMultiplier : 1);
 }
 
@@ -153,7 +161,7 @@ export function advanceKingdom(
     if (kingdom.construction) next = Math.min(next, kingdom.construction.finishAt);
     if (kingdom.queue.length > 0) next = Math.min(next, kingdom.queue[0].nextAt);
     next = Math.max(next, kingdom.updatedAt);
-    produce(kingdom, data, next - kingdom.updatedAt, otherArmies);
+    produce(kingdom, data, next - kingdom.updatedAt, otherArmies, extra);
     kingdom.updatedAt = next;
 
     if (kingdom.construction && kingdom.construction.finishAt <= next) {
@@ -179,7 +187,7 @@ export function advanceKingdom(
   }
 }
 
-function produce(kingdom: Kingdom, data: GameData, ms: number, otherArmies: Army[]): void {
+function produce(kingdom: Kingdom, data: GameData, ms: number, otherArmies: Army[], extra: ExtraBonuses): void {
   if (ms <= 0) return;
   const minutes = ms / MS_PER_MINUTE;
   for (const resource of data.kingdom.resources) {
@@ -190,7 +198,7 @@ function produce(kingdom: Kingdom, data: GameData, ms: number, otherArmies: Army
     kingdom.resources[resource] = Math.max(current, Math.min(capacity, current + rate * minutes));
   }
   // Содержание армии: солдаты едят со склада. Нет еды — армия слабеет (не умирает).
-  const upkeep = upkeepPerMinute(data, [kingdom.army, ...otherArmies]) * minutes;
+  const upkeep = upkeepPerMinute(data, [kingdom.army, ...otherArmies], extra) * minutes;
   if (upkeep > 0) {
     const food = kingdom.resources.food ?? 0;
     kingdom.starving = food < upkeep;
@@ -278,7 +286,8 @@ export function kingdomView(kingdom: Kingdom, data: GameData, settings: KingdomS
     production[resource] = productionPerMinute(kingdom, data, resource);
     storage[resource] = storageCapacity(kingdom, data, resource);
   }
-  const multiplier = armyPowerMultiplier(kingdom, data, extra);
+  const attackMultiplier = armyMultiplier(kingdom, data, "attack", extra);
+  const defenseMultiplier = armyMultiplier(kingdom, data, "defense", extra);
   const trainTimes: Record<string, number> = {};
   for (const unitId of Object.keys(data.units)) trainTimes[unitId] = trainTimeMs(kingdom, data, unitId, settings, extra);
   return {
@@ -293,11 +302,12 @@ export function kingdomView(kingdom: Kingdom, data: GameData, settings: KingdomS
       starving: kingdom.starving,
       capacity: armyCapacity(kingdom, data),
       housingUsed: housingUsed(kingdom, data, otherArmies),
-      upkeep: upkeepPerMinute(data, [kingdom.army, ...otherArmies]),
-      attack: attackOf(kingdom.army, data.units) * multiplier,
-      defense: defenseOf(kingdom.army, data.units) * multiplier,
+      upkeep: upkeepPerMinute(data, [kingdom.army, ...otherArmies], extra),
+      attack: attackOf(kingdom.army, data.units) * attackMultiplier,
+      defense: defenseOf(kingdom.army, data.units) * defenseMultiplier,
       total: armyTotal(kingdom.army),
-      powerMultiplier: multiplier,
+      attackMultiplier,
+      defenseMultiplier,
       trainTimes,
     },
   };

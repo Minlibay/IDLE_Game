@@ -1,6 +1,6 @@
 class_name InventoryPanel
 extends PanelContainer
-## Инвентарь: экипировка, сумка, детали предмета и действия
+## Инвентарь: экипировка героя, реликвии армии, сумка, детали предмета и действия
 ## (надеть/снять, продать, заточить, слить 3 в 1).
 
 const ITEM_SLOT_SCENE := preload("res://scenes/ui/item_slot.tscn")
@@ -9,10 +9,12 @@ const COLOR_BAD := Color(1.0, 0.45, 0.4)
 
 var _selected: Item
 var _equip_slots: Dictionary[int, ItemSlot] = {}
+var _relic_slots: Array[ItemSlot] = []
 
 @onready var close_button: Button = %CloseButton
 @onready var count_label: Label = %CountLabel
 @onready var equip_grid: GridContainer = %EquipGrid
+@onready var relic_grid: GridContainer = %RelicGrid
 @onready var stats_label: Label = %StatsLabel
 @onready var bag_grid: GridContainer = %BagGrid
 @onready var item_name_label: Label = %ItemNameLabel
@@ -30,7 +32,7 @@ func _ready() -> void:
 	sell_button.pressed.connect(_on_sell_pressed)
 	upgrade_button.pressed.connect(_on_upgrade_pressed)
 	fuse_button.pressed.connect(_on_fuse_pressed)
-	for slot: int in ItemBase.Slot.values():
+	for slot: int in ItemBase.HERO_SLOTS:
 		var box := VBoxContainer.new()
 		box.add_theme_constant_override("separation", 1)
 		var label := Label.new()
@@ -43,8 +45,14 @@ func _ready() -> void:
 		item_slot.item_pressed.connect(_select)
 		equip_grid.add_child(box)
 		_equip_slots[slot] = item_slot
+	for i in GameState.ARMY_RELIC_SLOTS:
+		var relic_slot: ItemSlot = ITEM_SLOT_SCENE.instantiate()
+		relic_slot.item_pressed.connect(_select)
+		relic_grid.add_child(relic_slot)
+		_relic_slots.append(relic_slot)
 	GameState.inventory_changed.connect(_refresh)
 	GameState.stats_changed.connect(_refresh)
+	GameState.army_gear_changed.connect(_refresh)
 	GameState.currency_changed.connect(_update_details)
 
 
@@ -90,13 +98,33 @@ func _refresh() -> void:
 		var equipped: Item = GameState.equipment.get(slot)
 		_equip_slots[slot].set_item(equipped)
 		_equip_slots[slot].set_selected(equipped != null and equipped == _selected)
+	for i in _relic_slots.size():
+		var relic: Item = GameState.army_relics[i] if i < GameState.army_relics.size() else null
+		_relic_slots[i].set_item(relic)
+		_relic_slots[i].set_selected(relic != null and relic == _selected)
+		if relic == null:
+			_relic_slots[i].tooltip_text = "Пусто: реликвии армии выпадают с монстров"
 
 	count_label.text = "Сумка: %d / %d" % [GameState.inventory.size(), GameState.INVENTORY_SIZE]
 	var stats := GameState.get_hero_stats()
 	stats_label.text = "HP %d · Урон %d\nБроня %d · Крит %d%%\nАтака раз в %.2f с" % [
 		roundi(stats.max_hp), roundi(stats.damage), roundi(stats.armor),
-		roundi(stats.crit_chance * 100.0), stats.attack_interval]
+		roundi(stats.crit_chance * 100.0), stats.attack_interval] + _army_gear_text()
 	_update_details()
+
+
+## Бонусы реликвий армии одной строкой.
+func _army_gear_text() -> String:
+	var bonuses := GameState.get_army_gear_bonuses()
+	if bonuses.is_empty():
+		return ""
+	var parts := PackedStringArray()
+	for key: String in Item.ARMY_STAT_KEYS:
+		var stat_name: String = Item.ARMY_STAT_KEYS[key]
+		if bonuses.has(stat_name):
+			parts.append("%s +%s" % [Item.STAT_NAMES[key].trim_suffix(", %"), str(bonuses[stat_name]) + "%"])
+	return "
+Армия: " + ", ".join(parts)
 
 
 func _select(item: Item) -> void:
@@ -159,7 +187,7 @@ func _on_equip_pressed() -> void:
 	if _selected == null:
 		return
 	if GameState.is_equipped(_selected):
-		if not GameState.unequip(_selected.get_base().slot):
+		if not GameState.unequip_item(_selected):
 			_show_result("Сумка полна", COLOR_BAD)
 	else:
 		GameState.equip(_selected)

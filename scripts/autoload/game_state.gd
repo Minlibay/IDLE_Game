@@ -15,9 +15,13 @@ signal leveled_up(new_level: int)
 signal talents_changed
 ## Готов отчёт «пока вас не было» (приходит после первого ответа сервера о замке).
 signal offline_report_ready
+## Изменились реликвии армии (их бонусы уходят на сервер — см. WorldService).
+signal army_gear_changed
 
 const SAVE_VERSION := 1
 const INVENTORY_SIZE := 60
+## Слотов под реликвии армии.
+const ARMY_RELIC_SLOTS := 6
 const AUTOSAVE_INTERVAL := 30.0
 const CRIT_MULTIPLIER := 2.0
 const MAX_CRIT_CHANCE := 0.75
@@ -44,6 +48,8 @@ var best_wave := 1
 var auto_cast := true
 var inventory: Array[Item] = []
 var equipment: Dictionary[int, Item] = {}
+## Реликвии армии: ARMY_RELIC_SLOTS ячеек, null — пусто. Усиливают армию замка (на сервере).
+var army_relics: Array[Item] = []
 ## id таланта -> вложенный ранг.
 var talent_ranks: Dictionary[String, int] = {}
 ## Кэш суммарных бонусов талантов: "стат|skill_id" -> значение.
@@ -61,6 +67,7 @@ var territory_bonuses: Dictionary = {}
 
 
 func _ready() -> void:
+	_clear_relics()
 	needs.setup(kingdom)
 	kingdom.bonuses_changed.connect(stats_changed.emit)
 	kingdom.first_sync.connect(_on_kingdom_first_sync)
@@ -101,6 +108,7 @@ func create_character(p_name: String, p_class_id: String) -> void:
 	best_wave = 1
 	inventory.clear()
 	equipment.clear()
+	_clear_relics()
 	talent_ranks.clear()
 	_rebuild_talent_bonuses()
 	kingdom.reset()
@@ -326,7 +334,7 @@ func remove_item(item: Item) -> void:
 
 
 func is_equipped(item: Item) -> bool:
-	return equipment.values().has(item)
+	return equipment.values().has(item) or army_relics.has(item)
 
 
 func can_equip(item: Item) -> bool:
@@ -336,6 +344,8 @@ func can_equip(item: Item) -> bool:
 func equip(item: Item) -> bool:
 	if not can_equip(item) or not inventory.has(item):
 		return false
+	if item.get_base().is_army_relic():
+		return _equip_relic(item)
 	var slot := item.get_base().slot
 	var previous: Item = equipment.get(slot)
 	inventory.erase(item)
@@ -345,6 +355,61 @@ func equip(item: Item) -> bool:
 	inventory_changed.emit()
 	stats_changed.emit()
 	return true
+
+
+## Снимает надетый предмет (экипировку героя или реликвию) в сумку.
+func unequip_item(item: Item) -> bool:
+	var index := army_relics.find(item)
+	if index < 0:
+		return unequip(item.get_base().slot) if equipment.get(item.get_base().slot) == item else false
+	if inventory.size() >= INVENTORY_SIZE:
+		return false
+	army_relics[index] = null
+	inventory.append(item)
+	inventory_changed.emit()
+	army_gear_changed.emit()
+	return true
+
+
+## Сумма бонусов реликвий: имя бонуса на сервере (Item.ARMY_STAT_KEYS) -> проценты.
+func get_army_gear_bonuses() -> Dictionary:
+	var result := {}
+	for item in army_relics:
+		if item == null:
+			continue
+		var stats := item.get_stats()
+		for key: String in stats:
+			if Item.ARMY_STAT_KEYS.has(key):
+				var stat_name: String = Item.ARMY_STAT_KEYS[key]
+				result[stat_name] = snappedf(float(result.get(stat_name, 0.0)) + float(stats[key]), 0.1)
+	return result
+
+
+## Реликвия — в свободную ячейку; если все заняты — вместо такой же реликвии или самой дешёвой.
+func _equip_relic(item: Item) -> bool:
+	var index := army_relics.find(null)
+	if index < 0:
+		for i in army_relics.size():
+			if army_relics[i].base_id == item.base_id and (index < 0 or army_relics[i].get_sell_price() < army_relics[index].get_sell_price()):
+				index = i
+	if index < 0:
+		index = 0
+		for i in army_relics.size():
+			if army_relics[i].get_sell_price() < army_relics[index].get_sell_price():
+				index = i
+	var previous := army_relics[index]
+	inventory.erase(item)
+	if previous:
+		inventory.append(previous)
+	army_relics[index] = item
+	inventory_changed.emit()
+	army_gear_changed.emit()
+	return true
+
+
+func _clear_relics() -> void:
+	army_relics.clear()
+	army_relics.resize(ARMY_RELIC_SLOTS)
 
 
 func unequip(slot: int) -> bool:
@@ -368,7 +433,9 @@ func sell_item(item: Item) -> void:
 ## Вызывается, когда у предмета поменялись статы (например, после заточки).
 func notify_item_changed(item: Item) -> void:
 	inventory_changed.emit()
-	if is_equipped(item):
+	if army_relics.has(item):
+		army_gear_changed.emit()
+	elif is_equipped(item):
 		stats_changed.emit()
 
 
@@ -393,6 +460,7 @@ func save_game() -> void:
 		"saved_at": Time.get_unix_time_from_system(),
 		"inventory": inventory.map(func(item: Item) -> Dictionary: return item.to_dict()),
 		"equipment": equipment.values().map(func(item: Item) -> Dictionary: return item.to_dict()),
+		"army_relics": army_relics.map(func(item: Item) -> Variant: return item.to_dict() if item else null),
 	}
 	var file := FileAccess.open(save_path, FileAccess.WRITE)
 	if file == null:
@@ -433,6 +501,15 @@ func load_game() -> void:
 			var item := Item.from_dict(entry)
 			if item:
 				equipment[item.get_base().slot] = item
+	_clear_relics()
+	var saved_relics: Variant = data.get("army_relics", [])
+	if saved_relics is Array:
+		for i in mini((saved_relics as Array).size(), ARMY_RELIC_SLOTS):
+			if saved_relics[i] is Dictionary:
+				var relic := Item.from_dict(saved_relics[i])
+				if relic and relic.get_base().is_army_relic():
+					army_relics[i] = relic
+	army_gear_changed.emit()
 	_rebuild_talent_bonuses()
 	var saved_kingdom: Variant = data.get("kingdom", {})
 	kingdom.from_dict(saved_kingdom if saved_kingdom is Dictionary else {})

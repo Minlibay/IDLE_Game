@@ -57,6 +57,15 @@ func _run() -> void:
 	if not await _wait_until(func() -> bool: return army.get_count(militia) == count, "militia were not trained"):
 		return
 
+	# Реликвия армии: бонус уходит на сервер и усиливает армию замка.
+	var attack_before := army.get_attack()
+	var relic := LootGenerator.create_item(Database.get_item_base("war_horn"), Item.Tier.RARE, 1)
+	GameState.add_item(relic)
+	_check(GameState.equip(relic), "cannot equip a relic")
+	await WorldService._action("/api/hero", {"level": GameState.level, "armyGear": GameState.get_army_gear_bonuses()}, false)
+	_check(float((WorldService.me.get("armyGear", {}) as Dictionary).get("ARMY_ATTACK", 0.0)) > 0.0, "relic bonus not stored on the server")
+	_check(army.get_attack() > attack_before, "relic did not raise the castle army attack")
+
 	# Еда героя уходит на сервер.
 	var food_before := kingdom.get_resource("food")
 	_check(kingdom.try_consume("food", 5.0), "hero cannot eat")

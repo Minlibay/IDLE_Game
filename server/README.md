@@ -95,6 +95,13 @@ Godot.exe --headless --path .. --script res://tools/export_server_data.gd
   Поражение: армия атакующего гибнет, герой — в замок. Если к прибытию замок под щитом — поход срывается.
 - Защита новичка `newbieProtectionHours`; снимается, когда игрок сам нападает на игрока.
 
+### Реликвии армии
+
+Герой носит до 6 реликвий; их сумму клиент присылает в `armyGear`. Сервер принимает только
+ARMY_POWER, ARMY_ATTACK, ARMY_DEFENSE, TRAINING_SPEED, UPKEEP_REDUCTION и урезает каждый до
+`armyGearCaps`. Атака армии в бою = атака отрядов × (1 + (ARMY_POWER + ARMY_ATTACK)/100),
+защита — с ARMY_DEFENSE; UPKEEP_REDUCTION снижает расход еды (не больше 80%).
+
 Все числа — в `src/config.ts`.
 
 ## API
@@ -104,7 +111,7 @@ Godot.exe --headless --path .. --script res://tools/export_server_data.gd
 | POST | `/api/auth/register` `{name}` | регистрация, возвращает `token` |
 | GET | `/api/world?since=N` | карта (0 — целиком, N — только изменения после версии N) |
 | GET | `/api/me` | мой герой, армия, поход, бонусы, гарнизоны, замок (`kingdom`), защита, `incoming`, отчёты |
-| POST | `/api/hero` `{level}` | уровень героя |
+| POST | `/api/hero` `{level?, armyGear?}` | уровень героя; бонусы реликвий армии (урезаются до `armyGearCaps`) |
 | POST | `/api/army/deploy` `{units}` | солдаты из армии замка на карту (герой в замке) |
 | POST | `/api/army/recall` `{units}` | солдаты с карты в армию замка |
 | POST | `/api/kingdom/build` `{building}` | начать стройку следующего уровня |

@@ -146,6 +146,47 @@ describe("castle economy", () => {
   });
 });
 
+describe("army relics", () => {
+  it("relic bonuses raise attack/defense, speed up training, cut upkeep — and are capped", () => {
+    const { game } = createGame();
+    const player = game.register("A", 0);
+    giveArmy(player, { knight: 10 });
+    player.kingdom.levels.barracks = 1;
+    const before = game.playerView(player, 0).kingdom.army;
+    game.setArmyGear(player, { ARMY_ATTACK: 20, ARMY_DEFENSE: 10, TRAINING_SPEED: 50, UPKEEP_REDUCTION: 40 }, 0);
+    const after = game.playerView(player, 0).kingdom.army;
+    assert.ok(Math.abs(after.attack - before.attack * 1.2) < 1e-6, "attack +20%");
+    assert.ok(Math.abs(after.defense - before.defense * 1.1) < 1e-6, "defense +10%");
+    assert.ok(after.trainTimes.militia < before.trainTimes.militia, "training is faster");
+    assert.ok(Math.abs(after.upkeep - before.upkeep * 0.6) < 1e-9, "upkeep -40%");
+
+    game.setArmyGear(player, { ARMY_POWER: 100_000 }, 0);
+    assert.equal(player.armyGear.ARMY_POWER, settings.armyGearCaps.ARMY_POWER, "forged values are capped");
+    assert.throws(() => game.setArmyGear(player, { GOD_MODE: 5 }, 0), /Неизвестный/);
+    assert.throws(() => game.setArmyGear(player, { ARMY_POWER: -5 }, 0), GameError);
+  });
+
+  it("relic attack bonus decides a close battle", () => {
+    const weak = createGame().game;
+    const strong = createGame().game;
+    for (const [game, gear] of [[weak, {}], [strong, { ARMY_ATTACK: 60, ARMY_POWER: 60 }]] as const) {
+      const player = game.register("A", 0);
+      player.army = { militia: 10 };
+      const target = neighbors(game.zones[player.castleZone], settings.gridCols, settings.gridRows)
+        .map((hex) => zoneId(hex.col, hex.row, settings.gridCols))
+        .find((id) => !game.zones[id].isCastle)!;
+      game.zones[target].neutral = { militia: 18 }; // защита 36 против атаки 30 + герой 5
+      game.setArmyGear(player, gear, 0);
+      game.move(player, target, 0);
+      game.tick(settings.marchSeconds * 1000);
+    }
+    const weakPlayer = weak.getPlayer(1)!;
+    const strongPlayer = strong.getPlayer(1)!;
+    assert.equal(weakPlayer.heroZone, weakPlayer.castleZone, "without relics the battle is lost");
+    assert.notEqual(strongPlayer.heroZone, strongPlayer.castleZone, "relics won the battle");
+  });
+});
+
 describe("castle raids", () => {
   function setup() {
     const { game } = createGame();

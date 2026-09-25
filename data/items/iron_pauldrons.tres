@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemBase" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_base.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/shoulders.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "iron_pauldrons"
+display_name = "Железные наплечники"
+slot = 4
+icon = ExtResource("2")
+base_stats = {
+"armor": 2.5,
+"max_hp": 12.0
+}
+drop_weight = 1.0

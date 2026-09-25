@@ -27,6 +27,8 @@ const BACKGROUND_INTERVAL := 15.0
 const CONSUME_FLUSH_INTERVAL := 10.0
 ## Не чаще этого проверяем, закончилась ли стройка/обучение (секунд).
 const EVENT_REFRESH_INTERVAL := 2.0
+## Реликвии армии часто перекладывают — отправляем бонусы на сервер с небольшой задержкой.
+const GEAR_REPORT_DELAY := 1.0
 const REQUEST_TIMEOUT := 10.0
 
 var server_url := DEFAULT_URL
@@ -54,6 +56,7 @@ var _config_path := "user://world_server.cfg"
 var _auto_connecting := false
 var _consume_timer := 0.0
 var _event_refresh_timer := 0.0
+var _gear_report_timer := -1.0
 ## Уже показанные угрозы и отчёты (чтобы не сообщать дважды).
 var _known_attacks: Dictionary = {}
 var _last_report_id := -1
@@ -73,6 +76,7 @@ func _ready() -> void:
 	add_child(_poll_timer)
 	_update_poll_timer()
 	GameState.leveled_up.connect(func(_level: int) -> void: report_hero_level())
+	GameState.army_gear_changed.connect(func() -> void: _gear_report_timer = GEAR_REPORT_DELAY)
 	set_process(enabled)
 	if enabled and is_logged_in():
 		refresh_me()
@@ -87,6 +91,10 @@ func _process(delta: float) -> void:
 	if _consume_timer >= CONSUME_FLUSH_INTERVAL:
 		_consume_timer = 0.0
 		_flush_consumption()
+	if _gear_report_timer >= 0.0:
+		_gear_report_timer -= delta
+		if _gear_report_timer < 0.0:
+			report_hero_level()
 	_event_refresh_timer -= delta
 	if _event_refresh_timer <= 0.0 and GameState.kingdom.needs_refresh():
 		_event_refresh_timer = EVENT_REFRESH_INTERVAL
@@ -324,9 +332,10 @@ func deposit_gold(amount: int) -> Dictionary:
 	return result
 
 
+## Уровень героя и бонусы реликвий армии (сервер урежет их до своих потолков).
 func report_hero_level() -> void:
 	if enabled and is_logged_in():
-		_action("/api/hero", {"level": GameState.level}, false)
+		_action("/api/hero", {"level": GameState.level, "armyGear": GameState.get_army_gear_bonuses()}, false)
 
 
 # --- Внутреннее -------------------------------------------------------------------

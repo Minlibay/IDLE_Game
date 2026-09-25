@@ -37,6 +37,7 @@ func _ready() -> void:
 	if not Database.units.is_empty():
 		_selected = Database.units[0]
 	amount_spin.value_changed.connect(func(_value: float) -> void: refresh())
+	stats_label.mouse_filter = Control.MOUSE_FILTER_PASS
 	max_button.pressed.connect(_on_max_pressed)
 	recruit_button.pressed.connect(_on_recruit_pressed)
 	GameState.kingdom.army.changed.connect(_rebuild_queue)
@@ -52,6 +53,8 @@ func refresh() -> void:
 	stats_label.text = "Атака %d · Защита %d\nСолдат: %d · Места: %d / %d\nСодержание: %s еды/мин" % [
 		roundi(army.get_attack()), roundi(army.get_defense()), army.get_total_units(),
 		army.get_housing_used(), army.get_capacity(), StatModifier.format_number(snappedf(army.get_upkeep_per_minute(), 0.01))]
+	stats_label.tooltip_text = "Атака ×%.2f · Защита ×%.2f\nЗдания, захваченные зоны, реликвии армии%s" % [
+		army.get_attack_multiplier(), army.get_defense_multiplier(), ", голод" if army.starving else ""]
 	starving_label.visible = army.starving
 	for i in _queue_time_labels.size():
 		if i < army.queue.size():

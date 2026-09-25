@@ -59,6 +59,10 @@ export const CONFIG = {
   depositPerLevelPerMinute: 2,
   depositBankMinutes: 12 * 60,
 
+  // Потолки бонусов реликвий армии (сумма всех 6 слотов, %). Предметы пока считает клиент —
+  // сервер не даёт больше этих значений, сколько бы ни прислали.
+  armyGearCaps: { ARMY_POWER: 60, ARMY_ATTACK: 60, ARMY_DEFENSE: 60, TRAINING_SPEED: 100, UPKEEP_REDUCTION: 50 },
+
   maxUnitsPerType: 1_000_000,
   maxNameLength: 20,
   reportsKept: 30,

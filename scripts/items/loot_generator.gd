@@ -8,6 +8,8 @@ const BASE_TIER_WEIGHTS := [700.0, 220.0, 60.0, 17.0, 3.0]
 const RARE_WEIGHT_GROWTH_PER_WAVE := 0.04
 ## Прирост статов предмета за каждый уровень предмета.
 const STAT_GROWTH_PER_LEVEL := 0.08
+## У реликвий армии статы растут с уровнем медленнее (это проценты силы всей армии).
+const ARMY_STAT_GROWTH_PER_LEVEL := 0.01
 ## Разброс статов при выпадении (±15%).
 const STAT_ROLL_SPREAD := 0.15
 
@@ -18,9 +20,22 @@ static func roll_drop(monster: MonsterData, wave: int, drop_bonus := 0.0) -> Ite
 		return null
 	if Database.items.is_empty():
 		return null
-	var base: ItemBase = Database.items.pick_random()
+	var base := pick_item_base()
 	var min_tier: int = Item.Tier.UNCOMMON if monster.is_boss else Item.Tier.COMMON
 	return create_item(base, roll_tier(wave, min_tier), wave)
+
+
+## Случайный шаблон предмета с учётом drop_weight (реликвии армии выпадают реже).
+static func pick_item_base() -> ItemBase:
+	var total := 0.0
+	for base in Database.items:
+		total += maxf(0.0, base.drop_weight)
+	var roll := randf() * total
+	for base in Database.items:
+		roll -= maxf(0.0, base.drop_weight)
+		if roll <= 0.0:
+			return base
+	return Database.items.back()
 
 
 static func roll_tier(wave: int, min_tier: int = Item.Tier.COMMON) -> int:
@@ -48,7 +63,8 @@ static func create_item(base: ItemBase, tier: int, item_level: int) -> Item:
 	item.base_id = base.id
 	item.tier = tier
 	item.item_level = maxi(1, item_level)
-	var scale: float = Item.TIER_STAT_MULTIPLIER[tier] * (1.0 + (item.item_level - 1) * STAT_GROWTH_PER_LEVEL)
+	var growth := ARMY_STAT_GROWTH_PER_LEVEL if base.is_army_relic() else STAT_GROWTH_PER_LEVEL
+	var scale: float = Item.TIER_STAT_MULTIPLIER[tier] * (1.0 + (item.item_level - 1) * growth)
 	for key: String in base.base_stats:
 		var roll := randf_range(1.0 - STAT_ROLL_SPREAD, 1.0 + STAT_ROLL_SPREAD)
 		item.rolled_stats[key] = snappedf(float(base.base_stats[key]) * scale * roll, 0.1)

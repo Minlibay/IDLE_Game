@@ -23,7 +23,9 @@ var housing_used := 0
 var upkeep_per_minute := 0.0
 var attack := 0.0
 var defense := 0.0
-var power_multiplier := 1.0
+## Множители атаки и защиты (здания, зоны, реликвии армии, голод) — как считает сервер.
+var attack_multiplier := 1.0
+var defense_multiplier := 1.0
 ## Время обучения одного солдата на сервере, мс: unit_id -> ms.
 var train_times: Dictionary = {}
 ## Слабая ссылка на свой замок: замок владеет армией, обычная ссылка создала бы цикл (утечку памяти).
@@ -47,7 +49,8 @@ func reset() -> void:
 	upkeep_per_minute = 0.0
 	attack = 0.0
 	defense = 0.0
-	power_multiplier = 1.0
+	attack_multiplier = 1.0
+	defense_multiplier = 1.0
 	train_times.clear()
 	changed.emit()
 
@@ -124,8 +127,12 @@ func get_upkeep_per_minute() -> float:
 	return upkeep_per_minute
 
 
-func get_power_multiplier() -> float:
-	return power_multiplier
+func get_attack_multiplier() -> float:
+	return attack_multiplier
+
+
+func get_defense_multiplier() -> float:
+	return defense_multiplier
 
 
 func get_attack() -> float:
@@ -194,7 +201,8 @@ func apply_server(view: Dictionary) -> void:
 	upkeep_per_minute = float(view.get("upkeep", 0.0))
 	attack = float(view.get("attack", 0.0))
 	defense = float(view.get("defense", 0.0))
-	power_multiplier = float(view.get("powerMultiplier", 1.0))
+	attack_multiplier = float(view.get("attackMultiplier", 1.0))
+	defense_multiplier = float(view.get("defenseMultiplier", 1.0))
 	train_times = view.get("trainTimes", {})
 	# Заказ исчез из начала очереди, а солдат этого типа прибавилось — он обучен.
 	if not old_queue.is_empty() and (queue.is_empty() or queue.size() < old_queue.size()):
