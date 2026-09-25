@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/skills/strike_effect.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/poison_arrow.png" id="3"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("2")
+damage_multiplier = 1.5
+projectile_scale = 1.4
+tint = Color(0.6, 1.0, 0.4, 1)
+dot_multiplier = 3.0
+dot_duration = 6.0
+dot_color = Color(0.6, 1.0, 0.4, 1)
+
+[resource]
+script = ExtResource("1")
+id = "poison_arrow"
+display_name = "Ядовитая стрела"
+description = "150% урона и яд: ещё 300% урона за 6 с."
+icon = ExtResource("3")
+color = Color(0.5, 0.95, 0.4, 1)
+cooldown = 8.0
+unlock_level = 30
+effect = SubResource("Resource_effect")

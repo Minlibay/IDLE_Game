@@ -6,6 +6,12 @@
 [ext_resource type="Resource" path="res://data/skills/warrior_power_strike.tres" id="11"]
 [ext_resource type="Resource" path="res://data/skills/warrior_whirlwind.tres" id="12"]
 [ext_resource type="Resource" path="res://data/skills/warrior_war_cry.tres" id="13"]
+[ext_resource type="Resource" path="res://data/skills/warrior_cleave.tres" id="22"]
+[ext_resource type="Resource" path="res://data/skills/warrior_shield_bash.tres" id="23"]
+[ext_resource type="Resource" path="res://data/skills/warrior_rend.tres" id="24"]
+[ext_resource type="Resource" path="res://data/skills/warrior_earthquake.tres" id="25"]
+[ext_resource type="Resource" path="res://data/skills/warrior_last_stand.tres" id="26"]
+[ext_resource type="Resource" path="res://data/skills/warrior_execute.tres" id="27"]
 [ext_resource type="Resource" path="res://data/talents/warrior_talents.tres" id="20"]
 [ext_resource type="SpriteFrames" path="res://assets/sprites/heroes/warrior/warrior_frames.tres" id="21"]
 
@@ -26,5 +32,5 @@ base_armor = 10.0
 attack_interval = 1.0
 attack_range = 2.0
 crit_chance = 0.05
-skills = Array[ExtResource("10")]([ExtResource("11"), ExtResource("12"), ExtResource("13")])
+skills = Array[ExtResource("10")]([ExtResource("11"), ExtResource("12"), ExtResource("13"), ExtResource("22"), ExtResource("23"), ExtResource("24"), ExtResource("25"), ExtResource("26"), ExtResource("27")])
 talent_tree = ExtResource("20")

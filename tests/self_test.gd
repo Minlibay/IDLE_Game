@@ -24,6 +24,7 @@ func _ready() -> void:
 	_test_army()
 	await _test_battle_replay()
 	await _test_biome_ground()
+	await _test_skill_mechanics()
 	await _test_hero_chase()
 	await _test_skill_casting()
 	if _errors.is_empty():
@@ -304,12 +305,19 @@ func _test_fusion() -> void:
 		_check(not GameState.inventory.has(part), "fusion ingredient not consumed")
 
 
+## По умению на каждую цифру 1–9: открываются на 1, 10, 20 … 80 уровне.
 func _test_skill_data() -> void:
+	var expected_levels := [1, 10, 20, 30, 40, 50, 60, 70, 80]
 	for class_data in Database.classes:
-		_check(class_data.skills.size() == 3, "%s: expected 3 skills, got %d" % [class_data.id, class_data.skills.size()])
+		_check(class_data.skills.size() == 9, "%s: expected 9 skills, got %d" % [class_data.id, class_data.skills.size()])
+		var levels := []
 		for skill in class_data.skills:
 			_check(skill != null and skill.effect != null and skill.icon != null,
 				"%s: broken skill resource" % class_data.id)
+			if skill:
+				levels.append(skill.unlock_level)
+		levels.sort()
+		_check(levels == expected_levels, "%s: unlock levels %s" % [class_data.id, str(levels)])
 
 
 func _test_talents() -> void:
@@ -645,6 +653,71 @@ func _wait_for(condition: Callable, timeout: float) -> bool:
 	return condition.call()
 
 
+## Оглушение останавливает монстра, урон со временем тикает, добивание усиливает удар по раненой цели.
+func _test_skill_mechanics() -> void:
+	var hero := get_tree().get_first_node_in_group(Hero.GROUP) as Hero
+	if hero == null:
+		return
+	var scene: PackedScene = load("res://scenes/actors/monster.tscn")
+	var monster: Monster = scene.instantiate()
+	add_child(monster)
+	monster.setup(Database.get_monster("goblin"), 3, hero)
+	monster.global_position = Vector3(hero.global_position.x + 30.0, 0, 0)
+	monster.max_hp = 1.0e6
+	monster.hp = monster.max_hp
+	var x_before := monster.global_position.x
+	monster.stun(0.5)
+	_check(monster.is_stunned(), "stun not applied")
+	await get_tree().create_timer(0.3).timeout
+	_check(is_equal_approx(monster.global_position.x, x_before), "stunned monster moved")
+	await get_tree().create_timer(0.4).timeout
+	_check(not monster.is_stunned(), "stun did not end")
+	var hp_before := monster.hp
+	monster.apply_dot(1000.0, 1.0)
+	await get_tree().create_timer(1.3).timeout
+	_check(monster.hp < hp_before - 900.0, "damage over time did not tick fully: %f" % (hp_before - monster.hp))
+	var boss: Monster = scene.instantiate()
+	add_child(boss)
+	boss.setup(Database.get_monster("ogre_boss"), 10, hero)
+	boss.global_position = Vector3(hero.global_position.x + 40.0, 0, 0)
+	boss.stun(2.0)
+	_check(boss._stun_left <= 1.01, "boss stun must be halved")
+	# Верх босса выше боевой полосы — окно должно получить выступ над ним.
+	var battle := hero.get_parent()
+	if battle.has_method("_update_window_overlays"):
+		battle._update_window_overlays()
+		var strip_top := float(battle.get_viewport().size.y - DesktopWindow.BATTLE_INTERACTIVE_HEIGHT)
+		var raised := DesktopWindow._overlays.any(func(r: Rect2) -> bool: return r.position.y < strip_top)
+		_check(raised, "no window overlay above the boss: %s" % str(DesktopWindow._overlays))
+	x_before = monster.global_position.x
+	monster.knockback(hero.global_position.x, 2.0)
+	await get_tree().create_timer(0.3).timeout
+	_check(monster.global_position.x > x_before + 1.5, "knockback did not push the monster away")
+	# Добивание: «Казнь» бьёт раненую цель сильнее.
+	var execute := StrikeEffect.new()
+	execute.damage_multiplier = 1.0
+	execute.execute_below = 0.3
+	execute.execute_multiplier = 3.0
+	execute.force_crit = true
+	monster.hp = monster.max_hp
+	hp_before = monster.hp
+	var damage_before := hero.damage
+	hero.damage = 100.0
+	execute.execute(hero, monster)
+	await _wait_for(func() -> bool: return monster.hp < hp_before, 3.0)
+	var normal_hit := hp_before - monster.hp
+	monster.hp = monster.max_hp * 0.2
+	hp_before = monster.hp
+	execute.execute(hero, monster)
+	await _wait_for(func() -> bool: return monster.hp < hp_before, 3.0)
+	var execute_hit := hp_before - monster.hp
+	hero.damage = damage_before
+	_check(execute_hit > normal_hit * 2.0, "execute bonus not applied: %f vs %f" % [execute_hit, normal_hit])
+	for node in [monster, boss]:
+		node.remove_from_group(Monster.GROUP)
+		node.queue_free()
+
+
 ## Ставит ранг напрямую (в обход требований) — только для тестов.
 func talent_rank_force(talent: TalentData, rank: int) -> void:
 	GameState.talent_ranks[talent.id] = rank
@@ -657,7 +730,7 @@ func _test_skill_casting() -> void:
 	if hero == null:
 		_check(false, "hero not found in battle")
 		return
-	GameState.level = 10  # открыть все умения
+	GameState.level = 80  # открыть все умения (последнее — на 80-м уровне)
 	GameState.auto_cast = false
 	var caster := hero.skill_caster
 	for skill in caster.skills:

@@ -19,6 +19,6 @@ description = "+50% урона на 6 секунд."
 icon = ExtResource("3")
 color = Color(1, 0.6, 0.2, 1)
 cooldown = 20.0
-unlock_level = 10
+unlock_level = 20
 effect = SubResource("Resource_effect")
 animation = &"war_cry"

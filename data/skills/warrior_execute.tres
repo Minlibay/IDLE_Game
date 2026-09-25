@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/skills/strike_effect.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/execute.png" id="3"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("2")
+damage_multiplier = 3.0
+execute_below = 0.3
+execute_multiplier = 3.0
+
+[resource]
+script = ExtResource("1")
+id = "execute"
+display_name = "Казнь"
+description = "300% урона; по врагу с запасом здоровья меньше 30% — втрое больше."
+icon = ExtResource("3")
+color = Color(0.85, 0.15, 0.15, 1)
+cooldown = 14.0
+unlock_level = 80
+effect = SubResource("Resource_effect")
+animation = &"power_strike"

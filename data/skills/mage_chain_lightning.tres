@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/skills/chain_effect.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/chain_lightning.png" id="3"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("2")
+damage_multiplier = 1.8
+jumps = 5
+falloff = 0.85
+tint = Color(0.6, 0.85, 1.0, 1)
+
+[resource]
+script = ExtResource("1")
+id = "chain_lightning"
+display_name = "Цепная молния"
+description = "Молния бьёт цель на 180% и перескакивает ещё на 4 врагов, каждый раз на 15% слабее."
+icon = ExtResource("3")
+color = Color(0.55, 0.8, 1.0, 1)
+cooldown = 9.0
+unlock_level = 30
+effect = SubResource("Resource_effect")

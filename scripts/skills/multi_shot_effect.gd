@@ -4,6 +4,8 @@ extends SkillEffect
 
 @export var projectile_count := 5
 @export var damage_multiplier := 0.8
+## Все снаряды — критические.
+@export var force_crit := false
 @export var projectile_scale := 1.0
 @export var tint := Color.WHITE
 ## Вертикальный разнос снарядов, чтобы залп было видно.
@@ -16,5 +18,5 @@ func execute(caster: Hero, target: Monster, power := 1.0) -> void:
 		targets.append(target)
 	for i in projectile_count:
 		var offset := Vector3(0.0, (i - (projectile_count - 1) * 0.5) * spread, 0.0)
-		caster.launch_projectile(targets[i % targets.size()], caster.roll_hit(damage_multiplier * power),
+		caster.launch_projectile(targets[i % targets.size()], caster.roll_hit(damage_multiplier * power, force_crit),
 			projectile_scale, tint, null, Callable(), offset)

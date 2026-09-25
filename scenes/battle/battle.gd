@@ -41,6 +41,12 @@ const OFFLINE_MESSAGE_DURATION := 7.0
 var _resting := false
 var _zzz_timer := 0.0
 var _ground_texture: Texture2D
+var _overlay_timer := 0.0
+
+## Как часто пересчитываются выступы окна над высокими фигурами.
+const OVERLAY_INTERVAL := 0.15
+## Шаг сетки выступов в пикселях: мелкие шевеления фигур не пересобирают регион окна.
+const OVERLAY_GRID := 16.0
 
 @onready var camera: Camera3D = $Camera3D
 @onready var ground: MeshInstance3D = $Ground
@@ -82,6 +88,10 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	_overlay_timer -= delta
+	if _overlay_timer <= 0.0:
+		_overlay_timer = OVERLAY_INTERVAL
+		_update_window_overlays()
 	if not hero.is_alive():
 		return
 	if _resting:
@@ -166,6 +176,23 @@ func _unhandled_input(event: InputEvent) -> void:
 func _hero_enter() -> void:
 	hero.home_x = _lane_point(HERO_SCREEN_X).x
 	hero.walk_in(_lane_point(HERO_ENTER_SCREEN_X), _lane_point(HERO_SCREEN_X), HERO_ENTER_TIME)
+
+
+## Боссы и элиты с именем выше боевой полосы: окно должно рисоваться и над ними.
+func _update_window_overlays() -> void:
+	var rects: Array[Rect2] = []
+	for node in get_tree().get_nodes_in_group(Monster.GROUP):
+		var monster := node as Monster
+		if monster == null or not monster.is_alive() or camera.is_position_behind(monster.global_position):
+			continue
+		var box := monster.get_visual_bounds()
+		var top_left := camera.unproject_position(Vector3(box.position.x, box.end.y, monster.global_position.z))
+		var top_right := camera.unproject_position(Vector3(box.end.x, box.end.y, monster.global_position.z))
+		var x0 := floorf((top_left.x - 8.0) / OVERLAY_GRID) * OVERLAY_GRID
+		var x1 := ceilf((top_right.x + 8.0) / OVERLAY_GRID) * OVERLAY_GRID
+		var y := floorf((minf(top_left.y, top_right.y) - 8.0) / OVERLAY_GRID) * OVERLAY_GRID
+		rects.append(Rect2(x0, y, x1 - x0, OVERLAY_GRID))
+	DesktopWindow.set_battle_overlays(rects)
 
 
 func _layout() -> void:

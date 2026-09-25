@@ -7,6 +7,12 @@
 [ext_resource type="Resource" path="res://data/skills/mage_fireball.tres" id="11"]
 [ext_resource type="Resource" path="res://data/skills/mage_meteor.tres" id="12"]
 [ext_resource type="Resource" path="res://data/skills/mage_arcane_shield.tres" id="13"]
+[ext_resource type="Resource" path="res://data/skills/mage_chain_lightning.tres" id="21"]
+[ext_resource type="Resource" path="res://data/skills/mage_frost_nova.tres" id="22"]
+[ext_resource type="Resource" path="res://data/skills/mage_ignite.tres" id="23"]
+[ext_resource type="Resource" path="res://data/skills/mage_arcane_power.tres" id="24"]
+[ext_resource type="Resource" path="res://data/skills/mage_drain_life.tres" id="25"]
+[ext_resource type="Resource" path="res://data/skills/mage_armageddon.tres" id="26"]
 [ext_resource type="Resource" path="res://data/talents/mage_talents.tres" id="20"]
 
 [resource]
@@ -26,5 +32,5 @@ base_armor = 2.0
 attack_interval = 1.4
 attack_range = 12.0
 crit_chance = 0.08
-skills = Array[ExtResource("10")]([ExtResource("11"), ExtResource("12"), ExtResource("13")])
+skills = Array[ExtResource("10")]([ExtResource("11"), ExtResource("12"), ExtResource("13"), ExtResource("21"), ExtResource("22"), ExtResource("23"), ExtResource("24"), ExtResource("25"), ExtResource("26")])
 talent_tree = ExtResource("20")

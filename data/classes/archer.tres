@@ -7,6 +7,12 @@
 [ext_resource type="Resource" path="res://data/skills/archer_aimed_shot.tres" id="11"]
 [ext_resource type="Resource" path="res://data/skills/archer_multishot.tres" id="12"]
 [ext_resource type="Resource" path="res://data/skills/archer_hunter_fury.tres" id="13"]
+[ext_resource type="Resource" path="res://data/skills/archer_poison_arrow.tres" id="21"]
+[ext_resource type="Resource" path="res://data/skills/archer_snare.tres" id="22"]
+[ext_resource type="Resource" path="res://data/skills/archer_piercing_shot.tres" id="23"]
+[ext_resource type="Resource" path="res://data/skills/archer_arrow_rain.tres" id="24"]
+[ext_resource type="Resource" path="res://data/skills/archer_eagle_eye.tres" id="25"]
+[ext_resource type="Resource" path="res://data/skills/archer_deadly_volley.tres" id="26"]
 [ext_resource type="Resource" path="res://data/talents/archer_talents.tres" id="20"]
 
 [resource]
@@ -26,5 +32,5 @@ base_armor = 3.0
 attack_interval = 0.75
 attack_range = 14.0
 crit_chance = 0.15
-skills = Array[ExtResource("10")]([ExtResource("11"), ExtResource("12"), ExtResource("13")])
+skills = Array[ExtResource("10")]([ExtResource("11"), ExtResource("12"), ExtResource("13"), ExtResource("21"), ExtResource("22"), ExtResource("23"), ExtResource("24"), ExtResource("25"), ExtResource("26")])
 talent_tree = ExtResource("20")

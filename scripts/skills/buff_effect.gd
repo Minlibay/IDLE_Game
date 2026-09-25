@@ -1,11 +1,12 @@
 class_name BuffEffect
 extends SkillEffect
-## Временное усиление героя (+урон, +скорость атаки, +броня) и/или лечение.
+## Временное усиление героя (+урон, +скорость атаки, +броня, +шанс крита) и/или лечение.
 
-enum Stat { DAMAGE, ATTACK_SPEED, ARMOR }
+## Новые значения — только в конец (в .tres хранятся числами).
+enum Stat { DAMAGE, ATTACK_SPEED, ARMOR, CRIT_CHANCE }
 
 @export var stat: Stat = Stat.DAMAGE
-## DAMAGE и ATTACK_SPEED: доля (0.5 = +50%). ARMOR: единицы брони. 0 = без баффа.
+## DAMAGE, ATTACK_SPEED, CRIT_CHANCE: доля (0.5 = +50%). ARMOR: единицы брони. 0 = без баффа.
 @export var value := 0.5
 @export var duration := 6.0
 ## Лечение в долях от максимального HP (0.3 = 30%).

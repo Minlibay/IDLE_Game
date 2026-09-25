@@ -66,6 +66,11 @@ var _shield := 0.0
 var _shield_used := false
 var _enraged := false
 var _shield_sprite: Sprite3D
+## Оглушение/заморозка от умений героя: секунд осталось (монстр не ходит и не бьёт).
+var _stun_left := 0.0
+var _stun_color := Color.WHITE
+## Урон со временем (кровотечение, яд, поджог): [{per_tick, ticks_left, timer, color}].
+var _dots: Array[Dictionary] = []
 
 
 func setup(p_data: MonsterData, p_wave: int, p_target: Actor, p_elite_id := "") -> void:
@@ -124,6 +129,14 @@ func _tick(delta: float) -> void:
 	if not is_alive() or target == null or not target.is_alive():
 		return
 	_update_buff(delta)
+	_update_dots(delta)
+	if not is_alive():
+		return
+	if _stun_left > 0.0:
+		_stun_left -= delta
+		if _stun_left <= 0.0:
+			visual.modulate = base_modulate
+		return
 	if data.is_boss:
 		_update_boss(delta)
 	if data.role == MonsterData.Role.SHAMAN:
@@ -203,6 +216,69 @@ func _update_shaman(delta: float) -> void:
 
 
 ## Усиление урона от шамана (сильнейшее действующее, с обновлением времени).
+# --- Состояния от умений героя --------------------------------------------------------
+
+## Боссы наполовину устойчивы к оглушению.
+const BOSS_STUN_RESIST := 0.5
+const DOT_TICK := 0.5
+
+
+## Оглушение (color — оттенок: синий для заморозки, серый для оглушения).
+func stun(duration: float, color := Color(0.6, 0.65, 1.0)) -> void:
+	if not is_alive() or duration <= 0.0:
+		return
+	if data and data.is_boss:
+		duration *= BOSS_STUN_RESIST
+	_stun_left = maxf(_stun_left, duration)
+	_stun_color = color
+	visual.modulate = base_modulate * color
+	_set_moving_idle()
+
+
+func is_stunned() -> bool:
+	return _stun_left > 0.0
+
+
+## Урон со временем: total — весь урон за duration секунд, по тику каждые DOT_TICK.
+func apply_dot(total: float, duration: float, color := Color(0.6, 1.0, 0.4)) -> void:
+	if not is_alive() or total <= 0.0 or duration <= 0.0:
+		return
+	var ticks := maxi(1, int(duration / DOT_TICK))
+	_dots.append({"per_tick": total / ticks, "ticks_left": ticks, "timer": DOT_TICK, "color": color})
+
+
+func _update_dots(delta: float) -> void:
+	for i in range(_dots.size() - 1, -1, -1):
+		var dot: Dictionary = _dots[i]
+		dot.timer -= delta
+		if dot.timer > 0.0:
+			continue
+		dot.timer += DOT_TICK
+		dot.ticks_left -= 1
+		take_hit(dot.per_tick)
+		if not is_alive():
+			return
+		if dot.ticks_left <= 0:
+			_dots.remove_at(i)
+
+
+## Отбрасывание от героя на distance (боссы — вдвое меньше).
+func knockback(from_x: float, distance: float) -> void:
+	if not is_alive() or distance <= 0.0:
+		return
+	if data and data.is_boss:
+		distance *= BOSS_STUN_RESIST
+	var direction := signf(global_position.x - from_x)
+	if direction == 0.0:
+		direction = 1.0
+	create_tween().tween_property(self, "position:x", position.x + direction * distance, 0.2) 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+
+func _set_moving_idle() -> void:
+	_is_moving = false
+	set_base_animation(ANIM_IDLE)
+
+
 func apply_buff(multiplier: float, duration: float) -> void:
 	_buff_multiplier = maxf(_buff_multiplier, multiplier)
 	_buff_left = maxf(_buff_left, duration)

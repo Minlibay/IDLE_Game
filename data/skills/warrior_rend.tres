@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/skills/strike_effect.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/rend.png" id="3"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("2")
+damage_multiplier = 1.2
+dot_multiplier = 4.0
+dot_duration = 6.0
+dot_color = Color(1.0, 0.3, 0.3, 1)
+
+[resource]
+script = ExtResource("1")
+id = "rend"
+display_name = "Кровопускание"
+description = "120% урона и кровотечение: ещё 400% урона за 6 с."
+icon = ExtResource("3")
+color = Color(0.9, 0.2, 0.25, 1)
+cooldown = 10.0
+unlock_level = 50
+effect = SubResource("Resource_effect")
+animation = &"attack"

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/skills/strike_effect.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/cleave.png" id="3"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("2")
+damage_multiplier = 1.8
+splash_radius = 2.5
+splash_multiplier = 1.0
+splash_color = Color(1.0, 0.55, 0.3, 1)
+
+[resource]
+script = ExtResource("1")
+id = "cleave"
+display_name = "Рассекающий удар"
+description = "180% урона цели и 100% врагам вокруг неё."
+icon = ExtResource("3")
+color = Color(1.0, 0.55, 0.3, 1)
+cooldown = 9.0
+unlock_level = 30
+effect = SubResource("Resource_effect")
+animation = &"power_strike"

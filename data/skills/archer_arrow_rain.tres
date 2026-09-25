@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/skills/area_effect.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/arrow_rain.png" id="3"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("2")
+damage_multiplier = 2.5
+radius = 4.0
+center_on_target = true
+color = Color(0.95, 0.8, 0.5, 1)
+
+[resource]
+script = ExtResource("1")
+id = "arrow_rain"
+display_name = "Град стрел"
+description = "250% урона всем врагам в большой области вокруг цели."
+icon = ExtResource("3")
+color = Color(0.95, 0.8, 0.5, 1)
+cooldown = 15.0
+unlock_level = 60
+effect = SubResource("Resource_effect")

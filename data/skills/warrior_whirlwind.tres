@@ -18,6 +18,6 @@ description = "Удар по всем врагам вокруг на 150% уро
 icon = ExtResource("3")
 color = Color(0.7, 0.85, 1, 1)
 cooldown = 10.0
-unlock_level = 5
+unlock_level = 10
 effect = SubResource("Resource_effect")
 animation = &"whirlwind"

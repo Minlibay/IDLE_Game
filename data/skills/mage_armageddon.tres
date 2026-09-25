@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/skills/area_effect.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/armageddon.png" id="3"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("2")
+damage_multiplier = 6.0
+radius = 6.0
+center_on_target = true
+color = Color(1.0, 0.35, 0.1, 1)
+dot_multiplier = 3.0
+dot_duration = 6.0
+dot_color = Color(1.0, 0.45, 0.15, 1)
+
+[resource]
+script = ExtResource("1")
+id = "armageddon"
+display_name = "Армагеддон"
+description = "600% урона всем врагам в огромной области вокруг цели и поджог: ещё 300% за 6 с."
+icon = ExtResource("3")
+color = Color(1.0, 0.35, 0.1, 1)
+cooldown = 30.0
+unlock_level = 80
+effect = SubResource("Resource_effect")

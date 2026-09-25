@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/skills/strike_effect.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/shield_bash.png" id="3"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("2")
+damage_multiplier = 1.5
+stun_duration = 2.5
+stun_color = Color(0.75, 0.75, 0.8, 1)
+
+[resource]
+script = ExtResource("1")
+id = "shield_bash"
+display_name = "Удар щитом"
+description = "150% урона и оглушение цели на 2,5 с (боссы — вдвое короче)."
+icon = ExtResource("3")
+color = Color(0.7, 0.75, 0.9, 1)
+cooldown = 12.0
+unlock_level = 40
+effect = SubResource("Resource_effect")
+animation = &"power_strike"

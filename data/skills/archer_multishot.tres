@@ -17,5 +17,5 @@ description = "5 стрел по ближайшим врагам, по 80% ур�
 icon = ExtResource("3")
 color = Color(0.6, 1, 0.6, 1)
 cooldown = 9.0
-unlock_level = 5
+unlock_level = 10
 effect = SubResource("Resource_effect")

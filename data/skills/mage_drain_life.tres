@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="SkillData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/skill_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/skills/strike_effect.gd" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/skills/drain_life.png" id="3"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("2")
+damage_multiplier = 2.5
+heal_ratio = 0.5
+projectile_scale = 1.3
+tint = Color(0.9, 0.3, 0.55, 1)
+
+[resource]
+script = ExtResource("1")
+id = "drain_life"
+display_name = "Вытягивание жизни"
+description = "250% урона цели, герой лечится на половину нанесённого урона."
+icon = ExtResource("3")
+color = Color(0.8, 0.25, 0.5, 1)
+cooldown = 12.0
+unlock_level = 70
+effect = SubResource("Resource_effect")

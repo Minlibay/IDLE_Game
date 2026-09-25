@@ -14,6 +14,10 @@ var _enabled := false
 var _mode := Mode.FULL
 var _modal_count := 0
 var _map_mode := false
+## Прямоугольники над боевой полосой (высокие боссы с полоской здоровья и именем).
+## В Windows зона «сквозных» кликов задаётся регионом окна, а вне региона окно не рисуется,
+## поэтому без этих выступов верх крупных фигур обрезается.
+var _overlays: Array[Rect2] = []
 
 
 func _ready() -> void:
@@ -75,6 +79,15 @@ func pop_modal() -> void:
 	_apply()
 
 
+## Battle сообщает, где фигуры выступают над полосой; регион меняется, только если выступы сдвинулись.
+func set_battle_overlays(rects: Array[Rect2]) -> void:
+	if rects == _overlays:
+		return
+	_overlays = rects
+	if _mode == Mode.BATTLE and _modal_count == 0:
+		_apply()
+
+
 func _apply() -> void:
 	if not _enabled:
 		return
@@ -83,9 +96,25 @@ func _apply() -> void:
 		return
 	var size := Vector2(get_window().size)
 	var top := maxf(0.0, size.y - BATTLE_INTERACTIVE_HEIGHT)
-	DisplayServer.window_set_mouse_passthrough(PackedVector2Array([
-		Vector2(0, top), Vector2(size.x, top), size, Vector2(0, size.y),
-	]))
+	# Контур «полоса + выступы» обходим слева направо; пересекающиеся выступы сливаем.
+	var bumps := _overlays.duplicate()
+	bumps.sort_custom(func(a: Rect2, b: Rect2) -> bool: return a.position.x < b.position.x)
+	var merged: Array[Rect2] = []
+	for rect: Rect2 in bumps:
+		if not merged.is_empty() and rect.position.x <= merged[-1].end.x:
+			merged[-1] = merged[-1].merge(rect)
+		else:
+			merged.append(rect)
+	var points := PackedVector2Array([Vector2(0, size.y), Vector2(0, top)])
+	for rect in merged:
+		var x0 := clampf(rect.position.x, 0.0, size.x)
+		var x1 := clampf(rect.end.x, 0.0, size.x)
+		var y := maxf(0.0, rect.position.y)
+		if y >= top or x1 <= x0:
+			continue
+		points.append_array([Vector2(x0, top), Vector2(x0, y), Vector2(x1, y), Vector2(x1, top)])
+	points.append_array([Vector2(size.x, top), size])
+	DisplayServer.window_set_mouse_passthrough(points)
 
 
 ## Полоска во всю ширину экрана над панелью задач.

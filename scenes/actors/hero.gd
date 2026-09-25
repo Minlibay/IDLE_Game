@@ -202,6 +202,7 @@ func _recalculate_stats(full_heal := false) -> void:
 	var damage_bonus := 0.0
 	var speed_bonus := 0.0
 	var armor_bonus := 0.0
+	var crit_bonus := 0.0
 	for buff in _buffs:
 		match buff.stat:
 			BuffEffect.Stat.DAMAGE:
@@ -210,13 +211,15 @@ func _recalculate_stats(full_heal := false) -> void:
 				speed_bonus += buff.value
 			BuffEffect.Stat.ARMOR:
 				armor_bonus += buff.value
+			BuffEffect.Stat.CRIT_CHANCE:
+				crit_bonus += buff.value
 	var ratio := hp / max_hp if max_hp > 0.0 else 1.0
 	max_hp = _base_stats.max_hp
 	damage = _base_stats.damage * (1.0 + damage_bonus)
 	armor = _base_stats.armor + armor_bonus
 	attack_interval = _base_stats.attack_interval / (1.0 + speed_bonus)
 	attack_range = _base_stats.attack_range
-	crit_chance = _base_stats.crit_chance
+	crit_chance = minf(GameState.MAX_CRIT_CHANCE, _base_stats.crit_chance + crit_bonus)
 	crit_multiplier = _base_stats.crit_multiplier
 	regen_multiplier = _base_stats.get("regen_multiplier", 1.0)
 	click_power = _base_stats.get("click_power", 1.0)

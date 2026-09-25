@@ -77,6 +77,25 @@ func _initialize() -> void:
 	_save(_skill_fireball(), "skills/fireball.png")
 	_save(_skill_meteor(), "skills/meteor.png")
 	_save(_skill_arcane_shield(), "skills/arcane_shield.png")
+	# Умения 30–80 уровней (временные иконки: фон цвета умения + простой символ).
+	_save(_glyph(Color(0.85, 0.4, 0.25), "slash"), "skills/cleave.png")
+	_save(_glyph(Color(0.55, 0.6, 0.75), "shield"), "skills/shield_bash.png")
+	_save(_glyph(Color(0.75, 0.15, 0.2), "drop"), "skills/rend.png")
+	_save(_glyph(Color(0.6, 0.45, 0.3), "quake"), "skills/earthquake.png")
+	_save(_glyph(Color(0.85, 0.7, 0.3), "shield"), "skills/last_stand.png")
+	_save(_glyph(Color(0.5, 0.1, 0.1), "skull"), "skills/execute.png")
+	_save(_glyph(Color(0.35, 0.7, 0.3), "arrow"), "skills/poison_arrow.png")
+	_save(_glyph(Color(0.55, 0.45, 0.3), "net"), "skills/snare.png")
+	_save(_glyph(Color(0.75, 0.75, 0.85), "line"), "skills/piercing_shot.png")
+	_save(_glyph(Color(0.6, 0.5, 0.35), "rain"), "skills/arrow_rain.png")
+	_save(_glyph(Color(0.95, 0.8, 0.3), "eye"), "skills/eagle_eye.png")
+	_save(_glyph(Color(0.8, 0.3, 0.3), "rain"), "skills/deadly_volley.png")
+	_save(_glyph(Color(0.4, 0.6, 1.0), "bolt"), "skills/chain_lightning.png")
+	_save(_glyph(Color(0.55, 0.85, 1.0), "star"), "skills/frost_nova.png")
+	_save(_glyph(Color(1.0, 0.45, 0.15), "drop"), "skills/ignite.png")
+	_save(_glyph(Color(0.65, 0.4, 1.0), "star"), "skills/arcane_power.png")
+	_save(_glyph(Color(0.6, 0.15, 0.4), "drop"), "skills/drain_life.png")
+	_save(_glyph(Color(1.0, 0.3, 0.1), "quake"), "skills/armageddon.png")
 
 	# Иконки талантов по типу стата (имена = StatModifier.ICON_NAMES).
 	_save(_talent_damage(), "talents/damage.png")
@@ -553,6 +572,65 @@ func _skill_bg(color: Color) -> Image:
 	var img := _new(16, 16)
 	_rect(img, 1, 1, 14, 14, color.darkened(0.45))
 	_rect(img, 2, 2, 12, 12, color.darkened(0.2))
+	return img
+
+
+## Временная иконка умения: фон цвета умения + белый символ.
+func _glyph(color: Color, shape: String) -> Image:
+	var img := _skill_bg(color)
+	var w := Color.WHITE
+	match shape:
+		"slash":
+			for i in 10:
+				_rect(img, 3 + i, 12 - i, 2, 1, w)
+		"shield":
+			_rect(img, 5, 3, 6, 6, w)
+			_ellipse(img, 8.0, 9.0, 3.2, 3.5, w)
+			_rect(img, 7, 4, 2, 7, color.darkened(0.3))
+		"drop":
+			_ellipse(img, 8.0, 10.0, 3.0, 3.0, w)
+			for i in 5:
+				_rect(img, 8 - i / 2, 3 + i, 1 + i, 1, w)
+		"quake":
+			for x in range(2, 14):
+				_px(img, x, 10 + (x % 3) - 1, w)
+			_rect(img, 5, 4, 1, 4, w)
+			_rect(img, 8, 3, 1, 5, w)
+			_rect(img, 11, 4, 1, 4, w)
+		"skull":
+			_ellipse(img, 8.0, 7.0, 4.0, 3.8, w)
+			_rect(img, 6, 10, 4, 3, w)
+			_rect(img, 6, 6, 1, 2, color.darkened(0.5))
+			_rect(img, 9, 6, 1, 2, color.darkened(0.5))
+		"arrow":
+			for i in 10:
+				_px(img, 3 + i, 12 - i, w)
+			_rect(img, 10, 3, 3, 1, w)
+			_rect(img, 12, 3, 1, 3, w)
+		"net":
+			for i in range(3, 14, 3):
+				_rect(img, i, 3, 1, 10, w)
+				_rect(img, 3, i, 10, 1, w)
+		"line":
+			_rect(img, 2, 7, 12, 2, w)
+			_rect(img, 11, 5, 2, 6, w)
+		"rain":
+			for i in 4:
+				for j in 3:
+					_rect(img, 3 + i * 3, 3 + j * 4 + (i % 2) * 2, 1, 3, w)
+		"eye":
+			_ellipse(img, 8.0, 8.0, 5.5, 3.0, w)
+			_ellipse(img, 8.0, 8.0, 1.8, 1.8, color.darkened(0.5))
+		"bolt":
+			_rect(img, 8, 2, 3, 5, w)
+			_rect(img, 5, 7, 6, 2, w)
+			_rect(img, 5, 9, 3, 5, w)
+		"star":
+			_rect(img, 7, 2, 2, 12, w)
+			_rect(img, 2, 7, 12, 2, w)
+			for i in 8:
+				_px(img, 4 + i, 4 + i, w)
+				_px(img, 11 - i, 4 + i, w)
 	return img
 
 
