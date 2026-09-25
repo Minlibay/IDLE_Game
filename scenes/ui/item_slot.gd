@@ -23,6 +23,10 @@ func _ready() -> void:
 func set_item(p_item: Item) -> void:
 	item = p_item
 	icon = item.get_base().icon if item else null
+	# Сокровище без своей картинки — иконка слота в цвете сета/качества.
+	var tint := item.get_base().icon_tint if item else Color.WHITE
+	for color_name: String in ["icon_normal_color", "icon_hover_color", "icon_pressed_color", "icon_focus_color", "icon_disabled_color"]:
+		add_theme_color_override(color_name, tint)
 	upgrade_label.text = "+%d" % item.upgrade_level if item and item.upgrade_level > 0 else ""
 	tooltip_text = "%s\n%s" % [item.get_display_name(), item.get_tier_name()] if item else empty_tooltip
 	_apply_style()
@@ -39,4 +43,4 @@ func _on_pressed() -> void:
 
 
 func _apply_style() -> void:
-	UiStyles.apply_slot_frame(self, UiStyles.tier_frame(item.tier) if item else empty_frame, _selected)
+	UiStyles.apply_slot_frame(self, UiStyles.item_frame(item) if item else empty_frame, _selected)

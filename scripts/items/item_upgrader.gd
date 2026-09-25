@@ -20,7 +20,7 @@ static func get_success_chance(item: Item) -> float:
 
 
 static func try_upgrade(item: Item) -> Result:
-	if item.upgrade_level >= Item.MAX_UPGRADE_LEVEL:
+	if item.is_treasure() or item.upgrade_level >= Item.MAX_UPGRADE_LEVEL:
 		return Result.MAX_LEVEL
 	if not GameState.try_spend_gold(get_upgrade_cost(item)):
 		return Result.NOT_ENOUGH_GOLD
@@ -46,7 +46,7 @@ static func find_fusion_partners(item: Item) -> Array[Item]:
 
 
 static func can_fuse(item: Item) -> bool:
-	return GameState.inventory.has(item) and find_fusion_partners(item).size() == FUSION_COUNT - 1
+	return not item.is_treasure() and GameState.inventory.has(item) and find_fusion_partners(item).size() == FUSION_COUNT - 1
 
 
 ## Сливает предмет с двумя подходящими. Возвращает новый предмет или null.

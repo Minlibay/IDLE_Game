@@ -237,13 +237,30 @@ theme_override_colors/font_color = Color(0.62, 0.6, 0.72, 1)
 theme_override_font_sizes/font_size = 10
 autowrap_mode = 3
 
-[node name="ItemStats" type="GridContainer" parent="VBox/Body/DetailsSection/VBox"]
-unique_name_in_owner = true
+[node name="DetailsScroll" type="ScrollContainer" parent="VBox/Body/DetailsSection/VBox"]
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="DetailsBody" type="VBoxContainer" parent="VBox/Body/DetailsSection/VBox/DetailsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="ItemStats" type="GridContainer" parent="VBox/Body/DetailsSection/VBox/DetailsScroll/DetailsBody"]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 2
 columns = 3
+
+[node name="SetInfo" type="RichTextLabel" parent="VBox/Body/DetailsSection/VBox/DetailsScroll/DetailsBody"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
 
 [node name="ActionRow1" type="HBoxContainer" parent="VBox/Body/DetailsSection/VBox"]
 layout_mode = 2

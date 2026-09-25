@@ -88,6 +88,8 @@ func _initialize() -> void:
 	_save(_talent_lifesteal(), "talents/lifesteal.png")
 	_save(_need_energy(), "talents/rest_speed.png")
 	_save(_talent_need_decay(), "talents/need_decay.png")
+	_save(_talent_double_strike(), "talents/double_strike.png")
+	_save(_talent_kill_heal(), "talents/kill_heal.png")
 
 	# Ресурсы королевства (имена = id ресурса).
 	_save(_res_food(), "resources/food.png")
@@ -747,6 +749,28 @@ func _talent_lifesteal() -> Image:
 	for i in 5:
 		_rect(img, 8 - i / 2, 3 + i, 1 + i, 1, RED.lightened(0.1))
 	_px(img, 7, 9, Color(1, 0.7, 0.7))
+	return img
+
+
+func _talent_double_strike() -> Image:
+	var img := _new(16, 16)
+	for i in 9:
+		_rect(img, 2 + i, 11 - i, 2, 2, SILVER)
+		_rect(img, 5 + i, 13 - i, 2, 2, STEEL)
+	_rect(img, 1, 11, 3, 3, GOLD)
+	_rect(img, 4, 13, 3, 3, GOLD)
+	return img
+
+
+func _talent_kill_heal() -> Image:
+	var img := _new(16, 16)
+	_ellipse(img, 5.5, 6.0, 3.5, 3.5, RED)
+	_ellipse(img, 10.5, 6.0, 3.5, 3.5, RED)
+	for y in range(7, 14):
+		var half := 7 - (y - 7)
+		_rect(img, 8 - half, y, half * 2, 1, RED)
+	_rect(img, 7, 4, 2, 7, Color.WHITE)
+	_rect(img, 5, 6, 6, 2, Color.WHITE)
 	return img
 
 

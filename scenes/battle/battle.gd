@@ -63,6 +63,7 @@ func _ready() -> void:
 	_layout()
 	_hero_enter()
 	hud.set_hero_health(hero.hp, hero.max_hp)
+	hero.set_aura(GameState.get_aura_color())
 	wave_manager.start_wave(GameState.wave)
 	_show_offline_report()
 	GameState.offline_report_ready.connect(_show_offline_report)
@@ -198,6 +199,8 @@ func _on_monster_died(actor: Actor) -> void:
 	var xp_bonus := 1.0 + GameState.get_bonus(StatModifier.Stat.XP_GAIN) / 100.0
 	var gold_bonus := 1.0 + GameState.get_bonus(StatModifier.Stat.GOLD_FIND) / 100.0
 	GameState.add_xp(roundi(data.xp_reward * pow(XP_GROWTH_PER_WAVE, level) * xp_bonus))
+	if hero.kill_heal > 0.0:
+		hero.heal(hero.max_hp * hero.kill_heal, false)
 	var gold := roundi(data.gold_reward * pow(GOLD_GROWTH_PER_WAVE, level) * gold_bonus)
 	GameState.add_gold(gold)
 	_float_text(monster.global_position + Vector3(0.0, monster.visual_height * 0.5, 0.3), "+%d з" % gold, COLOR_GOLD, 0.8)
@@ -251,6 +254,7 @@ func _on_wave_cleared(wave: int) -> void:
 
 func _on_stats_changed() -> void:
 	hero.apply_stats(GameState.get_hero_stats())
+	hero.set_aura(GameState.get_aura_color())
 
 
 func _on_leveled_up(new_level: int) -> void:

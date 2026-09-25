@@ -15,6 +15,9 @@ var items: Array[ItemBase] = []
 var buildings: Array[BuildingData] = []
 var needs: Array[NeedData] = []
 var units: Array[UnitData] = []
+## Сокровища (именные, уникальные, сетовые) из data/treasures/*.json — в пул дропа с монстров не входят.
+var treasures: Array[ItemBase] = []
+var item_sets: Dictionary[String, ItemSetData] = {}
 
 var _classes_by_id: Dictionary[String, CharacterClass] = {}
 var _items_by_id: Dictionary[String, ItemBase] = {}
@@ -61,6 +64,13 @@ func _ready() -> void:
 			_units_by_id[unit.id] = unit
 	units.sort_custom(func(a: UnitData, b: UnitData) -> bool: return a.order < b.order)
 
+	var catalog := TreasureCatalog.new()
+	catalog.load_all(items)
+	treasures = catalog.items
+	item_sets = catalog.sets
+	for treasure in treasures:
+		_items_by_id[treasure.id] = treasure
+
 
 func get_class_data(id: String) -> CharacterClass:
 	return _classes_by_id.get(id)
@@ -68,6 +78,17 @@ func get_class_data(id: String) -> CharacterClass:
 
 func get_item_base(id: String) -> ItemBase:
 	return _items_by_id.get(id)
+
+
+func get_item_set(id: String) -> ItemSetData:
+	return item_sets.get(id)
+
+
+## Сокровища класса (для каталога и тестов).
+func get_treasures_for_class(class_id: String) -> Array[ItemBase]:
+	var result: Array[ItemBase] = []
+	result.assign(treasures.filter(func(item: ItemBase) -> bool: return item.can_be_used_by(class_id)))
+	return result
 
 
 func get_building(id: String) -> BuildingData:

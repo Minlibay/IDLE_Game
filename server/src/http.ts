@@ -62,6 +62,7 @@ export function createHttpServer(game: Game, gameData: GameData, settings: HttpS
       auth: true,
       handle: ({ player, body, now }) => {
         if (body.level !== undefined) game.setHeroLevel(player, body.level, now);
+        if (body.classId !== undefined) game.setHeroClass(player, body.classId);
         if (body.armyGear !== undefined) game.setArmyGear(player, body.armyGear, now);
         return game.playerView(player, now);
       },

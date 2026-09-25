@@ -15,6 +15,7 @@
 import { randomUUID } from "node:crypto";
 import type { Cost, GameData } from "../gameData.ts";
 import type { Storage, StoredReport } from "../storage.ts";
+import type { TreasureQuality } from "../treasures.ts";
 import { addArmies, armyTotal, compact, hasUnits, isEmpty, subtractArmies, type Army } from "./army.ts";
 import { applyLosses, resolveBattle, type BattleResult, type BattleSettings } from "./battle.ts";
 import { generateZones, type GeneratorSettings, type Zone } from "./generator.ts";
@@ -49,12 +50,27 @@ export type Player = {
   depositUpdatedAt: number;
   /** Бонусы реликвий армии героя (ARMY_POWER, ARMY_ATTACK…), уже урезанные до armyGearCaps. */
   armyGear: Record<string, number>;
+  /** Класс героя (сокровища выпадают только своего класса). null — ещё не сообщён. */
+  classId: string | null;
+  /** Сокровища игрока (именные, уникальные, сетовые). Позже — предметы Steam Inventory. */
+  treasures: OwnedTreasure[];
+  /** Засчитанное игровое время (мс) и момент последнего запроса игрока. */
+  treasurePlaytimeMs: number;
+  treasureLastSeen: number;
+  /** При каком игровом времени следующая находка. */
+  treasureNextMs: number;
+  /** Номер недели и сколько сокровищ уже найдено за неё (недельный лимит). */
+  treasureWeek: number;
+  treasureWeekCount: number;
+  treasureSavedPlaytimeMs: number;
 };
+
+export type OwnedTreasure = { uid: string; itemId: string; at: number };
 
 export type ReportSide = { name: string; army: Army; lost: Army; power: number; heroLevel: number };
 
 export type ReportData = {
-  kind: "battle" | "capture" | "zone_lost" | "info" | "raid";
+  kind: "battle" | "capture" | "zone_lost" | "info" | "raid" | "treasure";
   zoneId: number;
   tier: number;
   won: boolean;
@@ -80,6 +96,10 @@ export type GameSettings = GeneratorSettings & BattleSettings & KingdomSettings 
   depositPerLevelPerMinute: number;
   depositBankMinutes: number;
   armyGearCaps: Readonly<Record<string, number>>;
+  treasureDropMinutes: number;
+  treasureWeeklyCap: number;
+  treasureMaxGapSeconds: number;
+  treasureWeights: Readonly<Record<TreasureQuality, number>>;
 };
 
 export class GameError extends Error {
@@ -97,6 +117,12 @@ const PLAYER_COLORS = [
 ];
 
 const HOUR_MS = 3_600_000;
+const DAY_MS = 86_400_000;
+
+/** Номер недели (с понедельника, UTC): 1 января 1970 — четверг, поэтому +3 дня. */
+export function weekIndex(now: number): number {
+  return Math.floor((now / DAY_MS + 3) / 7);
+}
 
 export class Game {
   readonly zones: Zone[];
@@ -194,6 +220,7 @@ export class Game {
   /** Всё о самом игроке, включая замок. Состояние замка перед этим догоняется до now. */
   playerView(player: Player, now: number) {
     this.sync(player, now);
+    this.accrueTreasureTime(player, now);
     const owned = this.zones.filter((zone) => zone.ownerId === player.id);
     const bonuses = this.territoryBonuses(player);
     return {
@@ -210,6 +237,11 @@ export class Game {
       garrisons: owned.filter((zone) => !isEmpty(zone.garrison)).map((zone) => ({ zoneId: zone.id, army: zone.garrison })),
       kingdom: kingdomView(player.kingdom, this.data, this.settings, this.fieldArmies(player), this.armyBonuses(player)),
       armyGear: player.armyGear,
+      classId: player.classId,
+      treasures: player.treasures.map((treasure) => ({ uid: treasure.uid, itemId: treasure.itemId })),
+      treasureNextMs: Math.max(0, player.treasureNextMs - player.treasurePlaytimeMs),
+      treasureWeekCount: player.treasureWeek === weekIndex(now) ? player.treasureWeekCount : 0,
+      treasureWeekCap: this.settings.treasureWeeklyCap,
       protectionUntil: player.protectionUntil,
       shieldUntil: player.shieldUntil,
       depositAvailable: Math.floor(this.depositBank(player, now)),
@@ -248,6 +280,14 @@ export class Game {
       depositBank: 0,
       depositUpdatedAt: now,
       armyGear: {},
+      classId: null,
+      treasures: [],
+      treasurePlaytimeMs: 0,
+      treasureLastSeen: now,
+      treasureNextMs: this.treasureIntervalMs(),
+      treasureWeek: weekIndex(now),
+      treasureWeekCount: 0,
+      treasureSavedPlaytimeMs: 0,
     };
     castle.ownerId = id;
     castle.isCastle = true;
@@ -258,6 +298,14 @@ export class Game {
     this.touch(castle);
     this.savePlayer(player);
     return player;
+  }
+
+  /** Класс героя: сокровища выпадают только для него. Новый персонаж другого класса — новый класс. */
+  setHeroClass(player: Player, classId: unknown): void {
+    if (typeof classId !== "string" || !this.data.treasures.byClass[classId]) throw new GameError("Неизвестный класс героя");
+    if (player.classId === classId) return;
+    player.classId = classId;
+    this.savePlayer(player);
   }
 
   setHeroLevel(player: Player, level: unknown, now: number): void {
@@ -433,6 +481,72 @@ export class Game {
       bonuses[zone.bonus.stat] = Math.round(((bonuses[zone.bonus.stat] ?? 0) + zone.bonus.value) * 10) / 10;
     }
     return bonuses;
+  }
+
+  // --- Внутреннее: сокровища по игровому времени -----------------------------------
+
+  private treasureIntervalMs(): number {
+    return this.settings.treasureDropMinutes * 60_000;
+  }
+
+  /**
+   * Засчитывает игровое время: пока игра запущена, клиент регулярно спрашивает сервер, и промежутки
+   * между запросами (не длиннее treasureMaxGapSeconds) складываются. Закрытая игра время не копит.
+   */
+  private accrueTreasureTime(player: Player, now: number): void {
+    const gap = now - player.treasureLastSeen;
+    player.treasureLastSeen = Math.max(player.treasureLastSeen, now);
+    if (gap > 0 && gap <= this.settings.treasureMaxGapSeconds * 1000) player.treasurePlaytimeMs += gap;
+    const found = this.rollTreasures(player, now);
+    if (found || player.treasurePlaytimeMs - player.treasureSavedPlaytimeMs >= 60_000) {
+      player.treasureSavedPlaytimeMs = player.treasurePlaytimeMs;
+      this.savePlayer(player);
+    }
+  }
+
+  /** Выдаёт сокровища, время которых пришло (с недельным лимитом). true — что-то выпало. */
+  private rollTreasures(player: Player, now: number): boolean {
+    const week = weekIndex(now);
+    if (player.treasureWeek !== week) {
+      player.treasureWeek = week;
+      player.treasureWeekCount = 0;
+    }
+    const pool = player.classId ? this.data.treasures.byClass[player.classId] : undefined;
+    let found = false;
+    while (player.treasurePlaytimeMs >= player.treasureNextMs) {
+      if (!pool || player.treasureWeekCount >= this.settings.treasureWeeklyCap) {
+        // Лимит недели исчерпан (или класс неизвестен): время копится дальше, находка — позже.
+        player.treasureNextMs = player.treasurePlaytimeMs + this.treasureIntervalMs();
+        break;
+      }
+      const info = this.pickTreasure(pool);
+      player.treasureNextMs += this.treasureIntervalMs();
+      if (!info) break;
+      player.treasures.push({ uid: randomUUID(), itemId: info.id, at: now });
+      player.treasureWeekCount += 1;
+      found = true;
+      const quality = { named: "Именной", unique: "Уникальный", legendary: "Легендарный" }[info.quality];
+      this.report(player.id, now, { kind: "treasure", zoneId: player.castleZone, tier: 0, won: true, text: `Найдено сокровище: ${info.name} (${quality})` });
+    }
+    return found;
+  }
+
+  private pickTreasure(pool: Record<TreasureQuality, { id: string; name: string; quality: TreasureQuality }[]>) {
+    const weights = this.settings.treasureWeights;
+    const qualities = (Object.keys(weights) as TreasureQuality[]).filter((quality) => pool[quality]?.length > 0);
+    const total = qualities.reduce((sum, quality) => sum + weights[quality], 0);
+    if (total <= 0) return undefined;
+    let roll = this.random() * total;
+    let quality = qualities[qualities.length - 1];
+    for (const candidate of qualities) {
+      roll -= weights[candidate];
+      if (roll < 0) {
+        quality = candidate;
+        break;
+      }
+    }
+    const list = pool[quality];
+    return list[Math.floor(this.random() * list.length)];
   }
 
   /** Армии игрока вне замка: главная армия и гарнизоны (они тоже едят). */
@@ -694,6 +808,14 @@ export class Game {
     player.depositBank ??= 0;
     player.depositUpdatedAt ??= now;
     player.armyGear ??= {};
+    player.classId ??= null;
+    player.treasures ??= [];
+    player.treasurePlaytimeMs ??= 0;
+    player.treasureLastSeen ??= now;
+    player.treasureNextMs ??= this.treasureIntervalMs();
+    player.treasureWeek ??= weekIndex(now);
+    player.treasureWeekCount ??= 0;
+    player.treasureSavedPlaytimeMs ??= player.treasurePlaytimeMs;
   }
 
   /** После пересоздания мира: каждому игроку — новый замок; армия и замок сохраняются. */

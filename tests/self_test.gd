@@ -12,6 +12,7 @@ func _ready() -> void:
 	_test_loot()
 	_test_equip()
 	_test_new_slots_and_relics()
+	_test_treasures()
 	_test_upgrade()
 	_test_fusion()
 	_test_save_load()
@@ -117,6 +118,85 @@ func _test_new_slots_and_relics() -> void:
 	var loaded: Item = GameState.army_relics[0]
 	_check(GameState.unequip_item(loaded), "cannot unequip relic")
 	_check(GameState.army_relics[0] == null and GameState.inventory.has(loaded), "unequipped relic not in the bag")
+
+
+## Сокровища: каталог, сеты и их бонусы, аура, синхронизация с сервером, потолки.
+func _test_treasures() -> void:
+	_check(Database.item_sets.size() >= 24, "treasure sets not loaded: %d" % Database.item_sets.size())
+	_check(Database.treasures.size() >= 170, "treasures not loaded: %d" % Database.treasures.size())
+	for class_data in Database.classes:
+		_check(Database.get_treasures_for_class(class_data.id).size() >= 50, "too few treasures for " + class_data.id)
+	_check(not Database.items.any(func(item: ItemBase) -> bool: return item.is_treasure()), "treasures must not drop from monsters")
+	var class_id := GameState.class_id
+	var item_set: ItemSetData = null
+	for candidate: ItemSetData in Database.item_sets.values():
+		if candidate.class_id == class_id:
+			item_set = candidate
+			break
+	_check(item_set != null and item_set.get_piece_count() == 5, "no 5-piece set for " + class_id)
+	if item_set == null:
+		return
+	_check(Database.get_item_base(item_set.piece_ids[0]).display_name.length() > 5, "set piece has no name")
+
+	# Сервер прислал 5 частей сета и одно сокровище чужого класса.
+	var other: ItemBase = null
+	for treasure in Database.treasures:
+		if not treasure.can_be_used_by(class_id):
+			other = treasure
+			break
+	var list := []
+	for i in item_set.piece_ids.size():
+		list.append({"uid": "t%d" % i, "itemId": item_set.piece_ids[i]})
+	list.append({"uid": "other", "itemId": other.id})
+	var found := GameState.apply_server_treasures(list)
+	_check(found.is_empty(), "first sync must not announce old treasures")
+	_check(GameState.treasures.size() == 6, "treasures not received: %d" % GameState.treasures.size())
+
+	var damage_before := GameState.get_bonus(StatModifier.Stat.DAMAGE)
+	var foreign: Item = GameState.treasures.filter(func(item: Item) -> bool: return item.uid == "other")[0]
+	_check(not GameState.equip(foreign), "treasure of another class equipped")
+	for item: Item in GameState.treasures.duplicate():
+		if item.get_base().set_id == item_set.id:
+			_check(GameState.equip(item), "cannot equip set piece " + item.base_id)
+	_check(GameState.get_set_piece_count(item_set.id) == 5, "set pieces not counted")
+	_check(GameState.get_aura_color() == item_set.color, "full set must give the aura")
+	var focus_stat: int = item_set.bonuses[0].modifiers[0].stat
+	_check(GameState.get_bonus(focus_stat) > 0.0, "set bonus not applied")
+	for key: String in GameState._treasure_bonuses:
+		var stat := int(key.get_slice("|", 0))
+		_check(float(GameState._treasure_bonuses[key]) <= GameState.TREASURE_BONUS_CAPS.get(stat, GameState.TREASURE_DEFAULT_CAP) + 0.001,
+			"treasure bonus above the cap: " + key)
+	_check(GameState.get_hero_stats().max_hp > 0.0 and GameState.get_bonus(StatModifier.Stat.DAMAGE) >= damage_before, "hero stats broken")
+
+	# Статы основы растут с рекордом волны.
+	var piece: Item = GameState.equipment.get(ItemBase.Slot.HELMET)
+	var armor_low: float = piece.get_stats().get("armor", 0.0)
+	var best := GameState.best_wave
+	GameState.best_wave = best + 50
+	_check(float(piece.get_stats().get("armor", 0.0)) > armor_low, "treasure stats do not grow with the best wave")
+	GameState.best_wave = best
+
+	# Сервер больше не подтверждает шлем — он снимается; новая находка объявляется.
+	list.remove_at(0)
+	list.append({"uid": "new1", "itemId": item_set.piece_ids[0]})
+	var announced := []
+	var capture := func(item: Item) -> void: announced.append(item.base_id)
+	GameState.treasure_found.connect(capture)
+	GameState.apply_server_treasures(list)
+	GameState.treasure_found.disconnect(capture)
+	_check(GameState.get_set_piece_count(item_set.id) == 4, "unconfirmed treasure still equipped")
+	_check(GameState.get_aura_color().a == 0.0, "aura must disappear without the full set")
+	_check(announced == [item_set.piece_ids[0]], "new treasure not announced: %s" % str(announced))
+
+	# Сохранение: надетые сокровища остаются.
+	GameState.save_game()
+	GameState.load_game()
+	_check(GameState.get_set_piece_count(item_set.id) == 4, "equipped treasures lost after load")
+	for slot: int in GameState.equipment.keys():
+		if GameState.equipment[slot].is_treasure():
+			GameState.equipment.erase(slot)
+	GameState.apply_server_treasures([])
+	GameState.stats_changed.emit()
 
 
 func _test_upgrade() -> void:

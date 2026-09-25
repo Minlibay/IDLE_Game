@@ -60,6 +60,7 @@ var _gear_report_timer := -1.0
 ## Уже показанные угрозы и отчёты (чтобы не сообщать дважды).
 var _known_attacks: Dictionary = {}
 var _last_report_id := -1
+var _class_reported := false
 ## Как на сервере (config.ts maxNameLength).
 const MAX_NAME_LENGTH := 20
 
@@ -332,10 +333,28 @@ func deposit_gold(amount: int) -> Dictionary:
 	return result
 
 
-## Уровень героя и бонусы реликвий армии (сервер урежет их до своих потолков).
+## Класс и уровень героя, бонусы реликвий армии (сервер урежет их до своих потолков).
 func report_hero_level() -> void:
 	if enabled and is_logged_in():
-		_action("/api/hero", {"level": GameState.level, "armyGear": GameState.get_army_gear_bonuses()}, false)
+		var body := {"level": GameState.level, "armyGear": GameState.get_army_gear_bonuses()}
+		if GameState.has_character():
+			body.classId = GameState.class_id
+		_action("/api/hero", body, false)
+
+
+# --- Сокровища ---------------------------------------------------------------------
+
+## Сколько секунд игрового времени до следующей находки (приблизительно — считает сервер).
+func treasure_seconds_left() -> float:
+	return float(me.get("treasureNextMs", 0.0)) / 1000.0
+
+
+func treasure_week_count() -> int:
+	return int(me.get("treasureWeekCount", 0))
+
+
+func treasure_week_cap() -> int:
+	return int(me.get("treasureWeekCap", 0))
 
 
 # --- Внутреннее -------------------------------------------------------------------
@@ -356,6 +375,13 @@ func _apply_me(data: Dictionary) -> void:
 	var kingdom: Variant = data.get("kingdom")
 	if kingdom is Dictionary:
 		GameState.kingdom.apply_server(kingdom)
+	var treasures: Variant = data.get("treasures")
+	if treasures is Array:
+		GameState.apply_server_treasures(treasures)
+	# Сервер ещё не знает класс героя (или герой новый) — сообщим, чтобы сокровища были своего класса.
+	if GameState.has_character() and str(data.get("classId", "")) != GameState.class_id and not _class_reported:
+		_class_reported = true
+		report_hero_level()
 	_detect_news()
 	me_updated.emit()
 

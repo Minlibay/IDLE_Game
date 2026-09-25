@@ -6,9 +6,14 @@ extends RefCounted
 const SLOT_DIR := "res://assets/ui/slots/"
 ## Рамки предметов по редкости (индекс = Item.Tier).
 const TIER_FRAMES := ["tier_common", "tier_uncommon", "tier_rare", "tier_epic", "tier_legendary"]
+## Рамки сокровищ по качеству (ItemBase.Quality).
+const TREASURE_FRAMES := {
+	ItemBase.Quality.NAMED: "treasure_named", ItemBase.Quality.UNIQUE: "treasure_unique", ItemBase.Quality.LEGENDARY: "treasure_legendary",
+}
 ## Отступы 9-slice для растягиваемых рамок (углы и украшения не растягиваются).
 const FRAME_MARGINS := {
 	"tier_common": 10, "tier_uncommon": 10, "tier_rare": 10, "tier_epic": 10, "tier_legendary": 13,
+	"treasure_named": 10, "treasure_unique": 10, "treasure_legendary": 10,
 	"slot_empty": 9, "slot_locked": 9, "slot_skill": 14,
 }
 const SELECTION_FRAME := "slot_selected"
@@ -25,6 +30,13 @@ static var _style_cache: Dictionary = {}
 
 static func tier_frame(tier: int) -> String:
 	return TIER_FRAMES[clampi(tier, 0, TIER_FRAMES.size() - 1)]
+
+
+## Рамка предмета: у сокровища — по качеству, у обычного — по тиру.
+static func item_frame(item: Item) -> String:
+	if item.is_treasure():
+		return TREASURE_FRAMES.get(item.get_base().quality, "tier_epic")
+	return tier_frame(item.tier)
 
 
 ## frame — имя рамки из assets/ui/slots/ или полный путь res://… к картинке.

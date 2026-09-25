@@ -17,6 +17,10 @@ signal talents_changed
 signal offline_report_ready
 ## Изменились реликвии армии (их бонусы уходят на сервер — см. WorldService).
 signal army_gear_changed
+## Изменилась сокровищница (найдено новое сокровище или список пришёл с сервера).
+signal treasures_changed
+## Найдено новое сокровище (дроп по игровому времени с сервера).
+signal treasure_found(item: Item)
 
 const SAVE_VERSION := 1
 const INVENTORY_SIZE := 60
@@ -25,6 +29,16 @@ const ARMY_RELIC_SLOTS := 6
 const AUTOSAVE_INTERVAL := 30.0
 const CRIT_MULTIPLIER := 2.0
 const MAX_CRIT_CHANCE := 0.75
+const MAX_DOUBLE_STRIKE := 0.5
+## Потолок суммарного бонуса сокровищ (предметы + бонусы сетов) к стату, в процентах.
+## Сокровища продаются за деньги — поэтому их сила заметная, но ограниченная.
+const TREASURE_BONUS_CAPS := {
+	StatModifier.Stat.DAMAGE: 30.0, StatModifier.Stat.MAX_HP: 30.0, StatModifier.Stat.ARMOR: 40.0,
+	StatModifier.Stat.ATTACK_SPEED: 20.0, StatModifier.Stat.CRIT_CHANCE: 10.0, StatModifier.Stat.CRIT_DAMAGE: 50.0,
+	StatModifier.Stat.SKILL_DAMAGE: 50.0, StatModifier.Stat.SKILL_COOLDOWN: 20.0, StatModifier.Stat.LIFESTEAL: 5.0,
+	StatModifier.Stat.REGEN: 60.0, StatModifier.Stat.DOUBLE_STRIKE: 25.0, StatModifier.Stat.KILL_HEAL: 5.0,
+}
+const TREASURE_DEFAULT_CAP := 30.0
 ## Очки талантов: 1 за каждый уровень после первого.
 const TALENT_POINTS_PER_LEVEL := 1
 const TALENT_RESET_COST_PER_LEVEL := 50
@@ -50,6 +64,12 @@ var inventory: Array[Item] = []
 var equipment: Dictionary[int, Item] = {}
 ## Реликвии армии: ARMY_RELIC_SLOTS ячеек, null — пусто. Усиливают армию замка (на сервере).
 var army_relics: Array[Item] = []
+## Сокровищница: сокровища игрока, которые сейчас не надеты. Владение — на сервере (WorldService).
+var treasures: Array[Item] = []
+## Кэш бонусов надетых сокровищ и их сетов (уже с потолками): "стат|skill_id" -> значение.
+var _treasure_bonuses: Dictionary = {}
+## Сокровища, про которые уже известно (чтобы сообщать только о новых находках).
+var _known_treasure_uids: Dictionary = {}
 ## id таланта -> вложенный ранг.
 var talent_ranks: Dictionary[String, int] = {}
 ## Кэш суммарных бонусов талантов: "стат|skill_id" -> значение.
@@ -109,6 +129,9 @@ func create_character(p_name: String, p_class_id: String) -> void:
 	inventory.clear()
 	equipment.clear()
 	_clear_relics()
+	treasures.clear()
+	_known_treasure_uids.clear()
+	_rebuild_treasure_bonuses()
 	talent_ranks.clear()
 	_rebuild_talent_bonuses()
 	kingdom.reset()
@@ -149,6 +172,8 @@ func get_hero_stats() -> Dictionary:
 		"regen_multiplier": 1.0 + get_bonus(stat.REGEN) / 100.0,
 		"click_power": 1.0 + get_bonus(stat.CLICK_POWER) / 100.0,
 		"lifesteal": get_bonus(stat.LIFESTEAL) / 100.0,
+		"double_strike": clampf(get_bonus(stat.DOUBLE_STRIKE) / 100.0, 0.0, MAX_DOUBLE_STRIKE),
+		"kill_heal": get_bonus(stat.KILL_HEAL) / 100.0,
 	}
 
 
@@ -229,7 +254,7 @@ func reset_talents() -> bool:
 ## С skill_id — плюс бонусы, действующие только на это умение.
 func get_bonus(stat: int, skill_id := "") -> float:
 	return get_talent_bonus(stat, skill_id) + kingdom.get_bonus(stat, skill_id) + needs.get_bonus(stat, skill_id) \
-		+ float(territory_bonuses.get(stat, 0.0))
+		+ float(territory_bonuses.get(stat, 0.0)) + StatModifier.read_bonus(_treasure_bonuses, stat, skill_id)
 
 
 ## Бонусы территорий с сервера: {"GOLD_FIND": 1.5, ...} (имена = StatModifier.Stat).
@@ -342,19 +367,137 @@ func can_equip(item: Item) -> bool:
 
 
 func equip(item: Item) -> bool:
-	if not can_equip(item) or not inventory.has(item):
+	if not can_equip(item) or not (inventory.has(item) or treasures.has(item)):
 		return false
 	if item.get_base().is_army_relic():
 		return _equip_relic(item)
 	var slot := item.get_base().slot
 	var previous: Item = equipment.get(slot)
 	inventory.erase(item)
+	treasures.erase(item)
 	if previous:
-		inventory.append(previous)
+		_stash(previous)
 	equipment[slot] = item
-	inventory_changed.emit()
-	stats_changed.emit()
+	_after_equipment_change()
 	return true
+
+
+## Снятый предмет: сокровище — в сокровищницу, обычный — в сумку.
+func _stash(item: Item) -> void:
+	if item.is_treasure():
+		treasures.append(item)
+	else:
+		inventory.append(item)
+
+
+func _after_equipment_change() -> void:
+	_rebuild_treasure_bonuses()
+	inventory_changed.emit()
+	treasures_changed.emit()
+	stats_changed.emit()
+
+
+# --- Сокровища ---------------------------------------------------------------------
+
+## Сколько частей сета надето.
+func get_set_piece_count(set_id: String) -> int:
+	var count := 0
+	for item: Item in equipment.values():
+		if item.get_base().set_id == set_id:
+			count += 1
+	return count
+
+
+## Цвет ауры героя: полный сет (все части) — цвет сета; нет — прозрачный.
+func get_aura_color() -> Color:
+	for set_id: String in _equipped_set_ids():
+		var item_set := Database.get_item_set(set_id)
+		if item_set and get_set_piece_count(set_id) >= item_set.get_piece_count():
+			return item_set.color
+	return Color(0, 0, 0, 0)
+
+
+## Список сокровищ с сервера: [{uid, itemId}]. Сервер — владелец: надетое, чего у игрока нет, снимается.
+## Возвращает новые находки.
+func apply_server_treasures(list: Array) -> Array[Item]:
+	var owned := {}
+	for entry: Variant in list:
+		if entry is Dictionary and Database.get_item_base(str(entry.get("itemId", ""))):
+			owned[str(entry.uid)] = str(entry.itemId)
+	var changed := false
+	for slot: int in equipment.keys():
+		var item: Item = equipment[slot]
+		if item.is_treasure() and not owned.has(item.uid):
+			equipment.erase(slot)
+			changed = true
+	var equipped_uids := {}
+	for item: Item in equipment.values():
+		equipped_uids[item.uid] = true
+	var first_sync := _known_treasure_uids.is_empty()
+	var found: Array[Item] = []
+	var result: Array[Item] = []
+	for uid: String in owned:
+		if equipped_uids.has(uid):
+			continue
+		var existing: Item = null
+		for item in treasures:
+			if item.uid == uid:
+				existing = item
+				break
+		if existing == null:
+			existing = _make_treasure(uid, owned[uid])
+			if not first_sync and not _known_treasure_uids.has(uid):
+				found.append(existing)
+		result.append(existing)
+	if result.size() != treasures.size() or changed:
+		changed = true
+	treasures = result
+	for uid: String in owned:
+		_known_treasure_uids[uid] = true
+	if changed or not found.is_empty():
+		_rebuild_treasure_bonuses()
+		treasures_changed.emit()
+		stats_changed.emit()
+	for item in found:
+		treasure_found.emit(item)
+	return found
+
+
+func _make_treasure(uid: String, item_id: String) -> Item:
+	var item := Item.new()
+	item.uid = uid
+	item.base_id = item_id
+	item.tier = Item.Tier.LEGENDARY
+	return item
+
+
+func _equipped_set_ids() -> Array[String]:
+	var result: Array[String] = []
+	for item: Item in equipment.values():
+		var set_id := item.get_base().set_id
+		if set_id != "" and not result.has(set_id):
+			result.append(set_id)
+	return result
+
+
+## Бонусы надетых сокровищ и сетов, урезанные до TREASURE_BONUS_CAPS.
+func _rebuild_treasure_bonuses() -> void:
+	var raw := {}
+	for item: Item in equipment.values():
+		if item.is_treasure():
+			StatModifier.accumulate(raw, item.get_base().modifiers, 1.0)
+	for set_id in _equipped_set_ids():
+		var item_set := Database.get_item_set(set_id)
+		if item_set == null:
+			continue
+		var count := get_set_piece_count(set_id)
+		for bonus in item_set.bonuses:
+			if count >= bonus.pieces:
+				StatModifier.accumulate(raw, bonus.modifiers, 1.0)
+	_treasure_bonuses.clear()
+	for key: String in raw:
+		var stat := int(key.get_slice("|", 0))
+		_treasure_bonuses[key] = minf(float(raw[key]), TREASURE_BONUS_CAPS.get(stat, TREASURE_DEFAULT_CAP))
 
 
 ## Снимает надетый предмет (экипировку героя или реликвию) в сумку.
@@ -414,12 +557,11 @@ func _clear_relics() -> void:
 
 func unequip(slot: int) -> bool:
 	var item: Item = equipment.get(slot)
-	if item == null or inventory.size() >= INVENTORY_SIZE:
+	if item == null or (not item.is_treasure() and inventory.size() >= INVENTORY_SIZE):
 		return false
 	equipment.erase(slot)
-	inventory.append(item)
-	inventory_changed.emit()
-	stats_changed.emit()
+	_stash(item)
+	_after_equipment_change()
 	return true
 
 
@@ -511,6 +653,10 @@ func load_game() -> void:
 					army_relics[i] = relic
 	army_gear_changed.emit()
 	_rebuild_talent_bonuses()
+	# Сокровищница приходит с сервера; надетые сокровища — из сохранения (сервер их проверит).
+	treasures.clear()
+	_known_treasure_uids.clear()
+	_rebuild_treasure_bonuses()
 	var saved_kingdom: Variant = data.get("kingdom", {})
 	kingdom.from_dict(saved_kingdom if saved_kingdom is Dictionary else {})
 	var saved_needs: Variant = data.get("needs", {})

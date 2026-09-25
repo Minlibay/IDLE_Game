@@ -1,8 +1,8 @@
 class_name InventoryPanel
 extends PanelContainer
 ## Инвентарь (оформление — assets/ui/inventory/, по макету assets/ui/source/ui_inventory_mockup.webp):
-## экипировка героя вокруг его фигуры, реликвии армии, характеристики, сумка и карточка предмета
-## с действиями (надеть/снять, продать, заточить, слить 3 в 1).
+## экипировка героя вокруг его фигуры, реликвии армии, характеристики, сумка и сокровищница
+## (именные, уникальные, сетовые предметы с сервера) и карточка предмета с действиями.
 
 const ITEM_SLOT_SCENE := preload("res://scenes/ui/item_slot.tscn")
 const UI_DIR := "res://assets/ui/inventory/"
@@ -28,7 +28,19 @@ const STAT_ICONS := {
 	"upkeep_reduction": "food",
 }
 
+const KINGDOM_UI := "res://assets/ui/kingdom/"
+const COLOR_SET_ACTIVE := Color(0.55, 0.95, 0.55)
+const COLOR_SET_INACTIVE := Color(0.5, 0.5, 0.58)
+## Минимум ячеек сокровищницы (пустые — тоже видны).
+const TREASURE_MIN_CELLS := 32
+
 var _selected: Item
+## Окно собрано (_ready закончился) — до этого обновлять нечего.
+var _built := false
+var _show_treasures := false
+var _bag_tab: Button
+var _treasure_tab: Button
+var _treasure_info: Label
 var _equip_slots: Dictionary[int, ItemSlot] = {}
 var _relic_slots: Array[ItemSlot] = []
 var _bag_slots: Array[ItemSlot] = []
@@ -48,6 +60,7 @@ var _big_slot: ItemSlot
 @onready var item_tier_label: Label = %ItemTierLabel
 @onready var description_label: Label = %DescriptionLabel
 @onready var item_stats: GridContainer = %ItemStats
+@onready var set_info: RichTextLabel = %SetInfo
 @onready var equip_button: Button = %EquipButton
 @onready var sell_button: Button = %SellButton
 @onready var upgrade_button: Button = %UpgradeButton
@@ -80,9 +93,12 @@ func _ready() -> void:
 	GameState.inventory_changed.connect(_refresh)
 	GameState.stats_changed.connect(_refresh)
 	GameState.army_gear_changed.connect(_refresh)
+	GameState.treasures_changed.connect(_refresh)
+	WorldService.me_updated.connect(func() -> void: if visible: _update_treasure_info())
 	GameState.character_changed.connect(_update_hero_sprite)
 	_update_hero_sprite()
 	GameState.currency_changed.connect(_on_currency_changed)
+	_built = true
 
 
 func toggle() -> void:
@@ -115,9 +131,9 @@ func _build_titles() -> void:
 	var sections := {
 		"VBox/Body/EquipSection/VBox": "Экипировка",
 		"VBox/Body/StatsSection/VBox": "Герой",
-		"VBox/Body/BagSection/VBox": "Предметы",
 		"VBox/Body/DetailsSection/VBox": "Описание предмета",
 	}
+	_build_bag_tabs()
 	for path: String in sections:
 		var box := get_node(path) as VBoxContainer
 		var title := _make_title(sections[path])
@@ -130,6 +146,56 @@ func _build_titles() -> void:
 	var army_title := _make_title("Армия")
 	army_stats.get_parent().add_child(army_title)
 	army_stats.get_parent().move_child(army_title, army_stats.get_index())
+
+
+## Над сеткой: вкладки «Сумка» / «Сокровищница» и строка про следующую находку.
+func _build_bag_tabs() -> void:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 4)
+	var group := ButtonGroup.new()
+	_bag_tab = _make_tab("Сумка", group, false)
+	_treasure_tab = _make_tab("Сокровищница", group, true)
+	_bag_tab.button_pressed = true
+	row.add_child(_bag_tab)
+	row.add_child(_treasure_tab)
+	_treasure_info = Label.new()
+	_treasure_info.add_theme_font_size_override("font_size", 10)
+	_treasure_info.add_theme_color_override("font_color", COLOR_HINT)
+	_treasure_info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_treasure_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	_treasure_info.clip_text = true
+	_treasure_info.mouse_filter = Control.MOUSE_FILTER_PASS
+	_treasure_info.tooltip_text = "Сокровища (именные, уникальные, сетовые) находятся раз в несколько часов игры,\nне чаще недельного лимита. Позже их можно будет продавать на торговой площадке Steam."
+	row.add_child(_treasure_info)
+	var box := get_node("VBox/Body/BagSection/VBox") as VBoxContainer
+	box.add_child(row)
+	box.move_child(row, 0)
+
+
+func _make_tab(text: String, group: ButtonGroup, treasures: bool) -> Button:
+	var tab := Button.new()
+	tab.text = text
+	tab.toggle_mode = true
+	tab.button_group = group
+	tab.add_theme_font_size_override("font_size", 11)
+	UiStyles.style_button(tab, KINGDOM_UI + "tab.png", KINGDOM_UI + "tab_selected.png", 8, Vector4(8, 2, 8, 2))
+	tab.toggled.connect(func(on: bool) -> void:
+		if on:
+			_show_treasures = treasures
+			_refresh())
+	return tab
+
+
+func _update_treasure_info() -> void:
+	var cap := WorldService.treasure_week_cap()
+	if not WorldService.is_logged_in() or cap <= 0:
+		_treasure_info.text = "Нужна связь с сервером"
+		return
+	var count := WorldService.treasure_week_count()
+	if count >= cap:
+		_treasure_info.text = "Неделя %d/%d — дальше со след. недели" % [count, cap]
+	else:
+		_treasure_info.text = "Находка ~%s · неделя %d/%d" % [UiFormat.duration(WorldService.treasure_seconds_left()), count, cap]
 
 
 func _make_title(text: String) -> HBoxContainer:
@@ -166,14 +232,18 @@ func _update_hero_sprite() -> void:
 # --- Обновление ---------------------------------------------------------------------
 
 func _refresh() -> void:
-	if not visible:
+	# До конца _ready (например, при включении вкладки «Сумка») обновлять нечего.
+	if not visible or not _built:
 		return
-	if _selected and not (GameState.inventory.has(_selected) or GameState.is_equipped(_selected)):
+	if _selected and not (GameState.inventory.has(_selected) or GameState.treasures.has(_selected) or GameState.is_equipped(_selected)):
 		_selected = null
+	var shown := _sorted_treasures() if _show_treasures else GameState.inventory
+	_ensure_bag_cells(maxi(TREASURE_MIN_CELLS, ceili(shown.size() / 8.0) * 8) if _show_treasures else GameState.INVENTORY_SIZE)
 	for i in _bag_slots.size():
-		var item: Item = GameState.inventory[i] if i < GameState.inventory.size() else null
+		var item: Item = shown[i] if i < shown.size() else null
 		_bag_slots[i].set_item(item)
 		_bag_slots[i].set_selected(item != null and item == _selected)
+		_bag_slots[i].empty_tooltip = "Пусто: сокровища находятся за время игры" if _show_treasures else ""
 	for slot: int in _equip_slots:
 		var equipped: Item = GameState.equipment.get(slot)
 		_equip_slots[slot].set_item(equipped)
@@ -183,8 +253,32 @@ func _refresh() -> void:
 		_relic_slots[i].set_item(relic)
 		_relic_slots[i].set_selected(relic != null and relic == _selected)
 	count_label.text = "Сумка: %d / %d" % [GameState.inventory.size(), GameState.INVENTORY_SIZE]
+	_treasure_tab.text = "Сокровищница (%d)" % GameState.treasures.size() if not GameState.treasures.is_empty() else "Сокровищница"
+	_update_treasure_info()
 	_update_stats()
 	_update_details()
+
+
+## Сокровища: сначала легендарные, затем уникальные и именные; части одного сета рядом.
+func _sorted_treasures() -> Array[Item]:
+	var list: Array[Item] = GameState.treasures.duplicate()
+	list.sort_custom(func(a: Item, b: Item) -> bool:
+		var qa := a.get_base().quality
+		var qb := b.get_base().quality
+		if qa != qb:
+			return qa > qb
+		return a.base_id < b.base_id)
+	return list
+
+
+## Ячеек в сетке столько, сколько нужно (сумка — 60, сокровищница — по числу сокровищ).
+func _ensure_bag_cells(count: int) -> void:
+	while _bag_slots.size() < count:
+		_bag_slots.append(_make_slot(bag_grid, SLOT_SIZE))
+	while _bag_slots.size() > count:
+		var slot: ItemSlot = _bag_slots.pop_back()
+		bag_grid.remove_child(slot)
+		slot.queue_free()
 
 
 func _on_currency_changed() -> void:
@@ -233,7 +327,8 @@ func _update_details() -> void:
 	var base := _selected.get_base()
 	item_name_label.text = _selected.get_display_name()
 	item_name_label.modulate = _selected.get_tier_color()
-	item_tier_label.text = "%s · %s · ур. %d" % [_selected.get_tier_name(), ItemBase.slot_name(base.slot), _selected.item_level]
+	var level := _selected.get_treasure_level() if _selected.is_treasure() else _selected.item_level
+	item_tier_label.text = "%s · %s · ур. %d" % [_selected.get_tier_name(), ItemBase.slot_name(base.slot), level]
 	item_tier_label.modulate = _selected.get_tier_color().lerp(COLOR_HINT, 0.4)
 	var description := base.description
 	if not base.allowed_classes.is_empty():
@@ -248,13 +343,26 @@ func _update_details() -> void:
 	for key: String in stats:
 		var is_percent: bool = key in ["attack_speed", "crit_chance"] or Item.ARMY_STAT_KEYS.has(key)
 		rows.append([STAT_ICONS.get(key, "level_up"), _short_stat_name(key), "+%s%s" % [str(stats[key]), "%" if is_percent else ""]])
+	for modifier in base.modifiers:
+		rows.append([StatModifier.get_icon(modifier.stat), modifier.describe(), ""])
 	_fill_rows(item_stats, rows)
+	set_info.text = _set_text(base)
+	set_info.visible = set_info.text != ""
 
 	var equipped := GameState.is_equipped(_selected)
 	equip_button.text = "Снять" if equipped else "Надеть"
 	equip_button.disabled = not equipped and not GameState.can_equip(_selected)
 	sell_button.text = "Продать (%d з)" % _selected.get_sell_price()
 	sell_button.disabled = equipped
+	if _selected.is_treasure():
+		sell_button.text = "Площадка Steam"
+		sell_button.disabled = true
+		sell_button.tooltip_text = "Сокровища будут продаваться на торговой площадке Steam (после выхода игры)."
+		upgrade_button.text = "Без заточки"
+		upgrade_button.disabled = true
+		upgrade_button.tooltip_text = "Сокровища не затачиваются: их сила растёт вместе с рекордом волны героя."
+		fuse_button.disabled = true
+		return
 	if _selected.upgrade_level >= Item.MAX_UPGRADE_LEVEL:
 		upgrade_button.text = "Заточка: макс."
 		upgrade_button.disabled = true
@@ -267,14 +375,45 @@ func _update_details() -> void:
 		_selected.get_tier_name(), ItemBase.slot_name(base.slot)]
 
 
+## Блок сета: название, сколько частей надето, бонусы (действующие — зелёные).
+func _set_text(base: ItemBase) -> String:
+	var item_set := Database.get_item_set(base.set_id)
+	if item_set == null:
+		return ""
+	var count := GameState.get_set_piece_count(item_set.id)
+	var lines := PackedStringArray()
+	lines.append("[color=#%s]Сет «%s» (%d/%d)[/color]" % [item_set.color.to_html(false), item_set.display_name, count, item_set.get_piece_count()])
+	for bonus in item_set.bonuses:
+		var color := COLOR_SET_ACTIVE if count >= bonus.pieces else COLOR_SET_INACTIVE
+		var text := ItemSetData.describe_bonus(bonus)
+		# Урон умения — с названием умения.
+		for modifier in bonus.modifiers:
+			if modifier.skill_id != "":
+				var skill := _find_skill(modifier.skill_id)
+				if skill:
+					text = text.replace("урона умений", "урона «%s»" % skill.display_name)
+		lines.append("[color=#%s]%s[/color]" % [color.to_html(false), text])
+	return "\n".join(lines)
+
+
+func _find_skill(skill_id: String) -> SkillData:
+	var class_data := GameState.get_class_data()
+	if class_data:
+		for skill in class_data.skills:
+			if skill.id == skill_id:
+				return skill
+	return null
+
+
 ## Строки «иконка · название · значение» в сетке из 3 колонок (пересоздаются целиком — их мало).
+## Иконка — имя файла в assets/ui/icons/ или готовая текстура.
 func _fill_rows(grid: GridContainer, rows: Array) -> void:
 	for child in grid.get_children():
 		grid.remove_child(child)
 		child.queue_free()
 	for row: Array in rows:
 		var icon := TextureRect.new()
-		icon.texture = load(ICON_DIR + str(row[0]) + ".png")
+		icon.texture = row[0] if row[0] is Texture2D else load(ICON_DIR + str(row[0]) + ".png")
 		icon.custom_minimum_size = Vector2(14, 14)
 		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED

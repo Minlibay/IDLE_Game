@@ -95,6 +95,15 @@ Godot.exe --headless --path .. --script res://tools/export_server_data.gd
   Поражение: армия атакующего гибнет, герой — в замок. Если к прибытию замок под щитом — поход срывается.
 - Защита новичка `newbieProtectionHours`; снимается, когда игрок сам нападает на игрока.
 
+### Сокровища (именные, уникальные, сетовые)
+
+Каталог — `../data/treasures/*.json` (тот же, что у игры; путь — `TREASURES_DIR`). Сервер хранит, какие
+сокровища у игрока (`treasures`), и выдаёт новые по игровому времени: промежутки между запросами игрока
+не длиннее `treasureMaxGapSeconds` складываются; раз в `treasureDropMinutes` игры — находка своего класса
+(`classId` из `POST /api/hero`), качество по весам `treasureWeights`, не больше `treasureWeeklyCap` в неделю.
+В `/api/me`: `treasures`, `treasureNextMs`, `treasureWeekCount`, `treasureWeekCap`. Для тестов —
+`TREASURE_DROP_MINUTES=0.05`. На этапе 2 выдачу заменит генератор Steam Inventory (playtime generator).
+
 ### Реликвии армии
 
 Герой носит до 6 реликвий; их сумму клиент присылает в `armyGear`. Сервер принимает только
@@ -111,7 +120,7 @@ ARMY_POWER, ARMY_ATTACK, ARMY_DEFENSE, TRAINING_SPEED, UPKEEP_REDUCTION и ур�
 | POST | `/api/auth/register` `{name}` | регистрация, возвращает `token` |
 | GET | `/api/world?since=N` | карта (0 — целиком, N — только изменения после версии N) |
 | GET | `/api/me` | мой герой, армия, поход, бонусы, гарнизоны, замок (`kingdom`), защита, `incoming`, отчёты |
-| POST | `/api/hero` `{level?, armyGear?}` | уровень героя; бонусы реликвий армии (урезаются до `armyGearCaps`) |
+| POST | `/api/hero` `{level?, armyGear?, classId?}` | уровень и класс героя; бонусы реликвий армии (урезаются до `armyGearCaps`) |
 | POST | `/api/army/deploy` `{units}` | солдаты из армии замка на карту (герой в замке) |
 | POST | `/api/army/recall` `{units}` | солдаты с карты в армию замка |
 | POST | `/api/kingdom/build` `{building}` | начать стройку следующего уровня |

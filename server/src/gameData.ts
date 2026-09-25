@@ -2,6 +2,7 @@
 // server/data/game_data.json генерируется инструментом tools/export_server_data.gd.
 
 import { readFileSync } from "node:fs";
+import { emptyTreasureCatalog, loadTreasureCatalog, type TreasureCatalog } from "./treasures.ts";
 
 export type Cost = Record<string, number>;
 
@@ -43,12 +44,15 @@ export type GameData = {
   units: Record<string, UnitStats>;
   buildings: Record<string, BuildingStats>;
   kingdom: KingdomConfig;
+  /** Сокровища из data/treasures/*.json (тот же каталог, что у игры). */
+  treasures: TreasureCatalog;
 };
 
-export function loadGameData(path: string): GameData {
+export function loadGameData(path: string, treasuresDir?: string): GameData {
   const raw = JSON.parse(readFileSync(path, "utf8")) as Partial<GameData>;
   if (!raw.units || Object.keys(raw.units).length === 0 || !raw.buildings || !raw.kingdom) {
     throw new Error(`Incomplete ${path}. Run tools/export_server_data.gd in Godot.`);
   }
-  return { units: raw.units, buildings: raw.buildings, kingdom: raw.kingdom };
+  const treasures = treasuresDir ? loadTreasureCatalog(treasuresDir) : emptyTreasureCatalog();
+  return { units: raw.units, buildings: raw.buildings, kingdom: raw.kingdom, treasures };
 }

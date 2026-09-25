@@ -50,6 +50,7 @@ func _ready() -> void:
 	WorldService.incoming_attack.connect(_on_incoming_attack)
 	WorldService.new_reports.connect(_on_new_reports)
 	WorldService.me_updated.connect(_update_map_button)
+	GameState.treasure_found.connect(_on_treasure_found)
 	inventory_button.pressed.connect(toggle_inventory)
 	talents_button.pressed.connect(toggle_talents)
 	kingdom_button.pressed.connect(toggle_kingdom)
@@ -161,6 +162,10 @@ func _on_incoming_attack(attack: Dictionary) -> void:
 	var target := "ваш замок" if attack.castle else "вашу зону #%d" % int(attack.toZone)
 	show_message("⚔ %s идёт на %s (%d солдат), прибудет через %s" % [attack.attacker, target, int(attack.units),
 		UiFormat.duration(WorldService.time_until(float(attack.arrivesAt)))], ALERT_DURATION)
+
+
+func _on_treasure_found(item: Item) -> void:
+	show_message("✦ Сокровище: %s (%s) — загляните в Сокровищницу [I]" % [item.get_display_name(), item.get_tier_name()], ALERT_DURATION)
 
 
 func _on_new_reports(reports: Array) -> void:

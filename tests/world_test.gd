@@ -1,6 +1,6 @@
 extends Node
 ## Проверка связи клиента с сервером (сервер должен быть запущен в ускоренном режиме):
-##   cd server && set MARCH_SECONDS=2 && set DEV_SPEED=100 && set DB_PATH=data/test_world.db && npm start
+##   cd server && set MARCH_SECONDS=2 && set DEV_SPEED=100 && set TREASURE_DROP_MINUTES=0.05 && set DB_PATH=data/test_world.db && npm start
 ##   Godot.exe --headless --path . -- --autotest --world-test --quit-after-seconds=90
 ## В консоли должно появиться «WORLDTEST OK».
 ## Сценарий: замок с сервера → стройка казарм → найм ополченцев → армия на карту → захват зоны →
@@ -121,6 +121,12 @@ func _run() -> void:
 	_check(recall.ok, "recall failed: %s" % recall.get("error", ""))
 	_check(army.get_count(militia) == survivors, "recalled militia not in the castle")
 	print("  world flow ok: barracks built, %d militia trained, zone #%d captured, %d came home" % [count, target, survivors])
+
+	# Сокровище по игровому времени (сервер запущен с TREASURE_DROP_MINUTES=0.05 — раз в 3 с игры).
+	if await _wait_until(func() -> bool: return not GameState.treasures.is_empty(), "no treasure dropped by playtime"):
+		var treasure: Item = GameState.treasures[0]
+		_check(treasure.is_treasure() and treasure.get_base().can_be_used_by(GameState.class_id), "treasure of a wrong class")
+		print("  treasure found: %s (%s)" % [treasure.get_display_name(), treasure.get_tier_name()])
 
 
 func _wait_until(condition: Callable, message: String) -> bool:

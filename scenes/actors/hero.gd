@@ -31,6 +31,14 @@ var effects_parent: Node
 var regen_multiplier := 1.0
 var click_power := 1.0
 var lifesteal := 0.0
+## Шанс ударить дважды (0..1) и лечение за убийство (доля макс. здоровья) — от реликвий.
+var double_strike := 0.0
+var kill_heal := 0.0
+## Аура полного сета сокровищ: светящееся кольцо под ногами цвета сета.
+const AURA_TEXTURE := preload("res://assets/sprites/fx/ring.png")
+const AURA_SIZE := 1.6
+var _aura: Sprite3D
+var _aura_tween: Tween
 ## Отдыхает (не атакует, быстрее лечится). Управляет Battle.
 var is_resting := false
 var _base_stats: Dictionary = {}
@@ -206,6 +214,8 @@ func _recalculate_stats(full_heal := false) -> void:
 	regen_multiplier = _base_stats.get("regen_multiplier", 1.0)
 	click_power = _base_stats.get("click_power", 1.0)
 	lifesteal = _base_stats.get("lifesteal", 0.0)
+	double_strike = _base_stats.get("double_strike", 0.0)
+	kill_heal = _base_stats.get("kill_heal", 0.0)
 	if is_alive() or full_heal:
 		hp = max_hp if full_heal else max_hp * ratio
 	_update_health()
@@ -237,6 +247,37 @@ func _attack(target: Monster) -> void:
 	var hit := roll_hit()
 	if not play_action(&"attack"):
 		lunge(signf(target.global_position.x - global_position.x))
+	_deliver_hit(target, hit)
+	# Двойной удар: второй удар сразу следом (реликвии).
+	if double_strike > 0.0 and randf() < double_strike:
+		get_tree().create_timer(0.12, false).timeout.connect(func() -> void:
+			if is_alive() and is_instance_valid(target) and target.is_alive():
+				_deliver_hit(target, roll_hit()))
+
+
+## color.a == 0 — ауры нет.
+func set_aura(color: Color) -> void:
+	if color.a <= 0.0:
+		if _aura:
+			_aura.hide()
+		return
+	if _aura == null:
+		_aura = Sprite3D.new()
+		_aura.texture = AURA_TEXTURE
+		_aura.rotation_degrees = Vector3(-90.0, 0.0, 0.0)
+		_aura.pixel_size = AURA_SIZE / float(AURA_TEXTURE.get_width())
+		_aura.shaded = false
+		_aura.position = Vector3(0.0, 0.02, 0.0)
+		add_child(_aura)
+	_aura.modulate = Color(color, 0.85)
+	_aura.show()
+	if _aura_tween == null or not _aura_tween.is_valid():
+		_aura_tween = create_tween().set_loops()
+		_aura_tween.tween_property(_aura, "scale", Vector3.ONE * 1.15, 0.9).set_trans(Tween.TRANS_SINE)
+		_aura_tween.tween_property(_aura, "scale", Vector3.ONE * 0.9, 0.9).set_trans(Tween.TRANS_SINE)
+
+
+func _deliver_hit(target: Monster, hit: Hit) -> void:
 	if class_data.is_ranged():
 		launch_projectile(target, hit)
 	else:

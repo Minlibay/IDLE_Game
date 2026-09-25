@@ -63,6 +63,15 @@ export const CONFIG = {
   // сервер не даёт больше этих значений, сколько бы ни прислали.
   armyGearCaps: { ARMY_POWER: 60, ARMY_ATTACK: 60, ARMY_DEFENSE: 60, TRAINING_SPEED: 100, UPKEEP_REDUCTION: 50 },
 
+  // Сокровища (именные, уникальные, сетовые): выпадают по игровому времени — пока игра запущена
+  // (клиент опрашивает сервер; пауза между запросами больше treasureMaxGapSeconds не засчитывается).
+  treasuresDir: env.TREASURES_DIR ?? "../data/treasures",
+  treasureDropMinutes: Number(env.TREASURE_DROP_MINUTES ?? 120),
+  treasureWeeklyCap: 5,
+  treasureMaxGapSeconds: 90,
+  // Шансы качества находки (веса).
+  treasureWeights: { named: 65, unique: 25, legendary: 10 },
+
   maxUnitsPerType: 1_000_000,
   maxNameLength: 20,
   reportsKept: 30,
