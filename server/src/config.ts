@@ -66,6 +66,8 @@ export const CONFIG = {
   // Сокровища (именные, уникальные, сетовые): выпадают по игровому времени — пока игра запущена
   // (клиент опрашивает сервер; пауза между запросами больше treasureMaxGapSeconds не засчитывается).
   treasuresDir: env.TREASURES_DIR ?? "../data/treasures",
+  // Дерево бонусов гильдий и названия регионов — общий с игрой файл.
+  guildDataPath: env.GUILD_DATA ?? "../data/guild/guild.json",
   treasureDropMinutes: Number(env.TREASURE_DROP_MINUTES ?? 120),
   treasureWeeklyCap: 5,
   treasureMaxGapSeconds: 90,
@@ -97,6 +99,29 @@ export const CONFIG = {
   guildChatKept: 100,
   guildChatMaxLength: 200,
   guildChatCooldownMs: 1000,
+  // Сброс бонусов гильдии — не чаще раза в столько часов.
+  guildPerkResetHours: 24,
+  // Босс гильдии (раз в неделю): здоровье = base × growth^(уровень−1) × max(minMembers, участников).
+  guildBossBaseHp: 3000,
+  guildBossHpGrowth: 1.5,
+  guildBossMinMembers: 3,
+  guildBossAttacksPerDay: 3,
+  guildBossLuck: 0.1,
+  // Награда за победу: золото каждому, кто бил босса, и опыт гильдии — × уровень босса.
+  guildBossGoldPerLevel: 400,
+  guildBossXpPerLevel: 1000,
+  // Сезон войны гильдий: очки в час = сумма уровней зон участников (в своём регионе × regionControlMultiplier).
+  seasonDays: Number(env.SEASON_DAYS ?? 14),
+  seasonTickMinutes: 1,
+  // Карта делится на regionGrid × regionGrid регионов; контроль — у гильдии с большинством зон (не меньше regionMinZones).
+  regionGrid: 5,
+  regionMinZones: 10,
+  regionControlMultiplier: 1.5,
+  // Награды тройке лидеров сезона: золото каждому участнику и опыт гильдии.
+  seasonRewards: [{ gold: 3000, xp: 5000 }, { gold: 2000, xp: 3000 }, { gold: 1000, xp: 1500 }],
+  seasonStandingsShown: 10,
+  // Подкрепления союзнику: всего не больше этой доли мест в армии его замка; в пути — как набег (castleMarchSeconds).
+  reinforcementShare: 0.5,
   guildColors: ["#e05a4f", "#f0a038", "#e8d44d", "#6cc75a", "#3fbfb0", "#4a90e2", "#8f6ae0", "#d65fb5", "#c8c8d0", "#8b6a4a"],
 
   maxUnitsPerType: 1_000_000,

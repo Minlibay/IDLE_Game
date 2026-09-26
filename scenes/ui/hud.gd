@@ -28,6 +28,7 @@ var _kingdom_hint_timer := 0.0
 @onready var kingdom_button: Button = %KingdomButton
 @onready var map_button: Button = %MapButton
 @onready var guild_button: Button = %GuildButton
+@onready var journal_button: Button = %JournalButton
 @onready var quit_button: Button = %QuitButton
 @onready var tray_button: Button = %TrayButton
 @onready var settings_button: Button = %SettingsButton
@@ -41,6 +42,7 @@ var _kingdom_hint_timer := 0.0
 @onready var world_map: WorldMap = %WorldMap
 @onready var settings_panel: SettingsPanel = %SettingsPanel
 @onready var guild_panel: GuildPanel = %GuildPanel
+@onready var journal_panel: JournalPanel = %JournalPanel
 
 
 func _ready() -> void:
@@ -61,6 +63,10 @@ func _ready() -> void:
 	kingdom_button.pressed.connect(toggle_kingdom)
 	map_button.pressed.connect(toggle_map)
 	guild_button.pressed.connect(toggle_guild)
+	journal_button.pressed.connect(toggle_journal)
+	GameState.progress.changed.connect(_update_journal_button)
+	GameState.progress.claimable_added.connect(func(text: String) -> void: show_message(text))
+	GameState.progress_changed.connect(_update_journal_button)
 	WorldService.me_updated.connect(_update_guild_button)
 	WorldService.guild_invited.connect(_on_guild_invited)
 	quit_button.pressed.connect(_on_quit_pressed)
@@ -119,6 +125,10 @@ func toggle_guild() -> void:
 	_toggle_panel(guild_panel)
 
 
+func toggle_journal() -> void:
+	_toggle_panel(journal_panel)
+
+
 func show_message(text: String, duration := MESSAGE_DURATION) -> void:
 	message_label.text = text
 	if _message_tween:
@@ -131,7 +141,7 @@ func show_message(text: String, duration := MESSAGE_DURATION) -> void:
 
 ## Одновременно открыто только одно окно.
 func _toggle_panel(panel: Control) -> void:
-	for other: Control in [inventory_panel, talent_grid, kingdom_panel, world_map, guild_panel]:
+	for other: Control in [inventory_panel, talent_grid, kingdom_panel, world_map, guild_panel, journal_panel]:
 		if other != panel:
 			other.close()
 	panel.toggle()
@@ -172,6 +182,13 @@ func _update_map_button() -> void:
 	var danger := not WorldService.get_incoming().is_empty()
 	map_button.modulate = COLOR_DANGER if danger else Color.WHITE
 	map_button.text = tr("Карта (!)") if danger else tr("Карта")
+
+
+## Кнопка «Путь»: сколько наград можно забрать (задания и достижения).
+func _update_journal_button() -> void:
+	var claimable := GameState.progress.claimable_total()
+	journal_button.text = tr("Путь (%d)") % claimable if claimable > 0 else tr("Путь")
+	journal_button.modulate = COLOR_HIGHLIGHT if claimable > 0 else Color.WHITE
 
 
 ## Кнопка гильдии: число новых сообщений чата или «!», если есть приглашения.

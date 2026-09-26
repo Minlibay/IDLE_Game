@@ -7,6 +7,7 @@
   * .gd (scenes/, scripts/) — строковые литералы с кириллицей (вне комментариев);
   * .tscn / .tres — тексты узлов и данные (имена, описания);
   * data/treasures/*.json — каталог сокровищ, включая составные имена частей сетов («<слот> <of>»);
+  * data/guild/*.json — бонусы гильдий и названия регионов;
   * server/src — ошибки и шаблоны отчётов, которые сервер присылает клиенту.
 
 Результат: locale/messages.pot (все ключи) и locale/<язык>.po для каждого языка из LANGUAGES:
@@ -69,6 +70,8 @@ def collect():
         for entry in data.get("sets", []):
             for slot in ["helmet", "shoulders", "armor", "legs", "boots"]:
                 add("%s %s" % (slot_names.get(slot, slot), entry["of"]), rel(path))
+    for path in glob.glob(os.path.join(ROOT, "data", "guild", "*.json")):
+        walk_json(json.load(io.open(path, encoding="utf8")), lambda text: add(text, rel(path)))
     for path in glob.glob(os.path.join(ROOT, "server", "src", "**", "*.ts"), recursive=True):
         if path.endswith(".test.ts"):
             continue

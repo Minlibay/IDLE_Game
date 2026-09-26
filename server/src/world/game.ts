@@ -12,18 +12,19 @@
 // Проигравший на карте теряет всю армию, его герой возвращается в замок.
 // Замок захватить нельзя; защитник замка при поражении теряет только часть армии.
 // Союзники по гильдии (guilds.ts) друг на друга не нападают; победы на карте дают опыт гильдии.
+// Подкрепления: солдаты из замка идут защищать замок союзника (остаются своими: едят у хозяина, отзываются).
 
 import { randomUUID } from "node:crypto";
 import type { Cost, GameData } from "../gameData.ts";
 import type { Storage, StoredReport } from "../storage.ts";
 import type { TreasureQuality } from "../treasures.ts";
-import { addArmies, armyTotal, compact, hasUnits, isEmpty, subtractArmies, type Army } from "./army.ts";
+import { addArmies, armyTotal, attackOf, compact, hasUnits, isEmpty, subtractArmies, type Army } from "./army.ts";
 import { applyLosses, resolveBattle, type BattleResult, type BattleSettings } from "./battle.ts";
 import { generateZones, type GeneratorSettings, type Zone } from "./generator.ts";
 import { hexDistance, isAdjacent } from "./grid.ts";
 import { Guilds, type GuildSettings } from "./guilds.ts";
 import {
-  advanceKingdom, armyMultiplier, cancelOrder, consume, createKingdom, kingdomView, pay, recruit, refund,
+  advanceKingdom, armyCapacity, armyMultiplier, cancelOrder, consume, createKingdom, kingdomView, pay, recruit, refund,
   startBuilding, storageCapacity, type ExtraBonuses, type Kingdom, type KingdomSettings,
 } from "./kingdom.ts";
 
@@ -68,7 +69,11 @@ export type Player = {
   /** Гильдия игрока (null — без гильдии) и когда он из неё вышел (null — не выходил; для ожидания перед вступлением в новую). */
   guildId: number | null;
   guildLeftAt: number | null;
+  /** Подкрепления, отправленные в замки союзников (солдаты остаются этого игрока). */
+  reinforcementsSent: Reinforcement[];
 };
+
+export type Reinforcement = { toPlayerId: number; army: Army; sentAt: number; arrivesAt: number };
 
 export type OwnedTreasure = { uid: string; itemId: string; at: number };
 
@@ -173,12 +178,20 @@ export class Game {
     }
     this.nextPlayerId = maxId + 1;
     if (regenerate) this.relocatePlayers();
-    this.guilds = new Guilds(storage, settings, {
+    this.guilds = new Guilds(storage, settings, data.guild, {
       getPlayer: (id) => this.players.get(id),
+      allPlayers: () => this.players.values(),
       findPlayerByName: (name) => [...this.players.values()].find((other) => other.name.toLowerCase() === name.toLowerCase()),
       savePlayer: (player) => this.savePlayer(player),
       syncKingdom: (player, time) => this.sync(player, time),
-    });
+      attackPower: (player, time) => this.bossAttackPower(player, time),
+      rewardGold: (player, gold, time) => {
+        this.sync(player, time);
+        refund(player.kingdom, { gold });
+        this.savePlayer(player);
+      },
+      membershipChanged: (player, time) => this.settleAllReinforcements(player, time),
+    }, random, now);
   }
 
   get worldVersion(): number {
@@ -216,7 +229,9 @@ export class Game {
         guildId: player.guildId,
         guildTag: this.guilds.tagOf(player),
         guildColor: this.guilds.colorOf(player),
+        guildBadge: this.guilds.badgeOf(player),
       })),
+      regions: this.guilds.regionsView(),
     };
   }
 
@@ -237,10 +252,13 @@ export class Game {
 
   /** Всё о самом игроке, включая замок. Состояние замка перед этим догоняется до now. */
   playerView(player: Player, now: number) {
+    this.settleReinforcements(player, now);
     this.sync(player, now);
     this.accrueTreasureTime(player, now);
     const owned = this.zones.filter((zone) => zone.ownerId === player.id);
+    // Бонусы для героя в клиенте: захваченные зоны + дерево гильдии.
     const bonuses = this.territoryBonuses(player);
+    for (const [stat, value] of Object.entries(this.guilds.perkBonuses(player))) bonuses[stat] = (bonuses[stat] ?? 0) + value;
     return {
       id: player.id,
       name: player.name,
@@ -266,6 +284,20 @@ export class Game {
       incoming: this.incomingAttacks(player),
       guild: this.guilds.summary(player, now),
       guildInvites: this.guilds.invitesFor(player, now),
+      reinforcementsSent: player.reinforcementsSent.map((entry, index) => ({
+        index,
+        toPlayerId: entry.toPlayerId,
+        toName: this.players.get(entry.toPlayerId)?.name ?? "?",
+        army: entry.army,
+        arrivesAt: entry.arrivesAt,
+      })),
+      reinforcementsIn: this.reinforcementsTo(player, now, false).map(({ owner, entry }) => ({
+        fromPlayerId: owner.id,
+        fromName: owner.name,
+        army: entry.army,
+        arrivesAt: entry.arrivesAt,
+      })),
+      reinforcementCapacity: this.reinforcementCapacity(player),
       reports: this.storage.loadReports(player.id, this.settings.reportsKept) satisfies StoredReport[],
       serverTime: now,
     };
@@ -310,6 +342,7 @@ export class Game {
       treasureSavedPlaytimeMs: 0,
       guildId: null,
       guildLeftAt: null,
+      reinforcementsSent: [],
     };
     castle.ownerId = id;
     castle.isCastle = true;
@@ -474,12 +507,101 @@ export class Game {
     return accepted;
   }
 
-  /** Завершает походы, время которых пришло. Вызывается сервером раз в секунду. */
+  /** Завершает походы, время которых пришло, и считает сезон гильдий. Вызывается сервером раз в секунду. */
   tick(now: number): void {
     const arrived = [...this.players.values()]
       .filter((player) => player.march && player.march.arrivesAt <= now)
       .sort((a, b) => a.march!.arrivesAt - b.march!.arrivesAt);
     for (const player of arrived) this.arrive(player, player.march!.arrivesAt);
+    this.guilds.tick(now, this.zones);
+  }
+
+  // --- Подкрепления союзникам ------------------------------------------------------
+
+  /** Отправить солдат из своего замка защищать замок союзника по гильдии. */
+  reinforce(player: Player, targetId: unknown, army: Army, now: number): void {
+    const target = typeof targetId === "number" ? this.players.get(targetId) : undefined;
+    if (!target || target.id === player.id) throw new GameError("Нет такого игрока", 404);
+    if (!this.guilds.areAllies(player, target)) throw new GameError("Подкрепления можно отправлять только союзникам по гильдии");
+    if (isEmpty(army)) throw new GameError("Выберите отряды");
+    this.sync(player, now);
+    if (!hasUnits(player.kingdom.army, army)) throw new GameError("В замке нет столько солдат");
+    const used = this.reinforcementsTo(target, now, false).reduce((sum, { entry }) => sum + this.housingOf(entry.army), 0);
+    if (used + this.housingOf(army) > this.reinforcementCapacity(target)) {
+      throw new GameError("В замке союзника нет места для стольких подкреплений");
+    }
+    player.kingdom.army = subtractArmies(player.kingdom.army, army);
+    player.reinforcementsSent.push({ toPlayerId: target.id, army, sentAt: now, arrivesAt: now + this.settings.castleMarchSeconds * 1000 });
+    this.savePlayer(player);
+  }
+
+  /** Вернуть подкрепление домой (сразу). */
+  recallReinforcement(player: Player, index: unknown, now: number): Army {
+    if (typeof index !== "number" || !Number.isInteger(index) || !player.reinforcementsSent[index]) {
+      throw new GameError("Нет такого подкрепления", 404);
+    }
+    this.sync(player, now);
+    const [entry] = player.reinforcementsSent.splice(index, 1);
+    player.kingdom.army = addArmies(player.kingdom.army, entry.army);
+    this.savePlayer(player);
+    return entry.army;
+  }
+
+  /** Сколько мест (по housing) можно занять подкреплениями в замке игрока. */
+  private reinforcementCapacity(player: Player): number {
+    return Math.floor(armyCapacity(player.kingdom, this.data) * this.settings.reinforcementShare);
+  }
+
+  private housingOf(army: Army): number {
+    let total = 0;
+    for (const [id, count] of Object.entries(army)) total += (this.data.units[id]?.housing ?? 1) * count;
+    return total;
+  }
+
+  /** Подкрепления союзников в замке игрока (arrivedOnly — только уже дошедшие). */
+  private reinforcementsTo(target: Player, now: number, arrivedOnly: boolean): { owner: Player; entry: Reinforcement }[] {
+    const result = [];
+    for (const owner of this.players.values()) {
+      if (owner.id === target.id || !this.guilds.areAllies(owner, target)) continue;
+      for (const entry of owner.reinforcementsSent) {
+        if (entry.toPlayerId === target.id && (!arrivedOnly || entry.arrivesAt <= now)) result.push({ owner, entry });
+      }
+    }
+    return result;
+  }
+
+  /** Подкрепления к бывшим союзникам (или к удалённым игрокам) возвращаются домой. */
+  private settleReinforcements(player: Player, now: number): void {
+    const keep: Reinforcement[] = [];
+    let changed = false;
+    for (const entry of player.reinforcementsSent) {
+      const target = this.players.get(entry.toPlayerId);
+      if (target && this.guilds.areAllies(player, target)) {
+        keep.push(entry);
+        continue;
+      }
+      if (!changed) this.sync(player, now);
+      changed = true;
+      player.kingdom.army = addArmies(player.kingdom.army, entry.army);
+    }
+    if (!changed) return;
+    player.reinforcementsSent = keep;
+    this.savePlayer(player);
+  }
+
+  /** Игрок сменил гильдию: вернуть и его подкрепления, и чужие из его замка. */
+  private settleAllReinforcements(player: Player, now: number): void {
+    this.settleReinforcements(player, now);
+    for (const owner of this.players.values()) {
+      if (owner.id !== player.id && owner.reinforcementsSent.some((entry) => entry.toPlayerId === player.id)) this.settleReinforcements(owner, now);
+    }
+  }
+
+  /** Удар по боссу гильдии: атака солдат (замок + армия героя) с бонусами и сила героя, без потерь. */
+  private bossAttackPower(player: Player, now: number): number {
+    this.sync(player, now);
+    const army = addArmies(player.kingdom.army, player.army);
+    return attackOf(army, this.data.units) * this.attackMultiplier(player) + player.heroLevel * this.settings.heroPowerPerLevel;
   }
 
   // --- Внутреннее: замок ------------------------------------------------------------
@@ -495,6 +617,7 @@ export class Game {
     for (const [stat, value] of Object.entries(player.armyGear)) bonuses[stat] = (bonuses[stat] ?? 0) + value;
     const guildBonus = this.guilds.bonusPercent(player);
     if (guildBonus > 0) bonuses.ARMY_POWER = (bonuses.ARMY_POWER ?? 0) + guildBonus;
+    for (const [stat, value] of Object.entries(this.guilds.perkBonuses(player))) bonuses[stat] = (bonuses[stat] ?? 0) + value;
     return bonuses;
   }
 
@@ -574,10 +697,11 @@ export class Game {
     return list[Math.floor(this.random() * list.length)];
   }
 
-  /** Армии игрока вне замка: главная армия и гарнизоны (они тоже едят). */
+  /** Армии игрока вне замка: главная армия, гарнизоны и подкрепления у союзников (они тоже едят). */
   private fieldArmies(player: Player): Army[] {
     const armies = [player.army];
     for (const zone of this.zones) if (zone.ownerId === player.id && !isEmpty(zone.garrison)) armies.push(zone.garrison);
+    for (const entry of player.reinforcementsSent ?? []) armies.push(entry.army);
     return armies;
   }
 
@@ -740,14 +864,17 @@ export class Game {
     const kingdom = defender.kingdom;
     const heroHome = defender.heroZone === zone.id && defender.march === null;
     const heroArmy = heroHome ? defender.army : {};
-    const defenderArmy = addArmies(kingdom.army, heroArmy);
+    const helpers = this.reinforcementsTo(defender, now, true);
+    for (const { owner } of helpers) this.sync(owner, now);
+    const defenderArmy = helpers.reduce((sum, { entry }) => addArmies(sum, entry.army), addArmies(kingdom.army, heroArmy));
     const defenderHero = heroHome ? defender.heroLevel : 0;
     const result = this.battle(attacker.army, attacker.heroLevel, this.attackMultiplier(attacker), defenderArmy, defenderHero, this.defenseMultiplier(defender));
 
     if (result.attackerWins) {
       this.guilds.addWinXp(attacker, this.settings.guildXpPerPvpWin, now);
       const losses = applyLosses(defenderArmy, this.settings.raidDefenderLoss);
-      this.splitCastleDefenders(defender, heroHome, losses.remaining);
+      this.splitCastleDefenders(defender, heroHome, helpers, losses.remaining);
+      this.reportHelpers(helpers, defender, zone, now, false);
       const loot = this.plunder(kingdom);
       pay(kingdom, loot);
       refund(attacker.kingdom, loot);
@@ -766,17 +893,39 @@ export class Game {
       const sides = this.reportSides(attacker, attacker.army, attacker.heroLevel, defender, defenderArmy, defenderHero, result);
       attacker.army = {};
       this.sendHome(attacker);
-      this.splitCastleDefenders(defender, heroHome, result.defenderArmy);
+      this.splitCastleDefenders(defender, heroHome, helpers, result.defenderArmy);
+      this.reportHelpers(helpers, defender, zone, now, true);
       this.savePlayer(defender);
       this.report(attacker.id, now, { kind: "raid", zoneId: zone.id, tier: zone.tier, won: false, ...say("Набег на замок {name} отбит: армия погибла, герой вернулся в замок", { name: defender.name }), ...sides });
       this.report(defender.id, now, { kind: "raid", zoneId: zone.id, tier: zone.tier, won: true, ...say("Набег {name} на ваш замок отбит", { name: attacker.name }), ...sides });
     }
   }
 
-  /** Выжившие защитники замка: армия замка + армия героя, если он был дома (иначе она в бою не участвовала). */
-  private splitCastleDefenders(defender: Player, heroHome: boolean, survivors: Army): void {
-    if (heroHome) [defender.kingdom.army, defender.army] = splitSurvivors(survivors, [defender.kingdom.army, defender.army]);
-    else defender.kingdom.army = survivors;
+  /**
+   * Выжившие защитники замка делятся пропорционально: армия замка, армия героя (если он был дома)
+   * и подкрепления союзников. Опустевшие подкрепления исчезают.
+   */
+  private splitCastleDefenders(defender: Player, heroHome: boolean, helpers: { owner: Player; entry: Reinforcement }[], survivors: Army): void {
+    const groups: Army[] = [defender.kingdom.army, heroHome ? defender.army : {}, ...helpers.map(({ entry }) => entry.army)];
+    const split = splitSurvivors(survivors, groups);
+    defender.kingdom.army = split[0];
+    if (heroHome) defender.army = split[1];
+    helpers.forEach(({ owner, entry }, index) => {
+      entry.army = split[index + 2];
+      if (isEmpty(entry.army)) owner.reinforcementsSent = owner.reinforcementsSent.filter((other) => other !== entry);
+      this.savePlayer(owner);
+    });
+  }
+
+  /** Отчёт союзникам, чьи подкрепления защищали замок. */
+  private reportHelpers(helpers: { owner: Player }[], defender: Player, zone: Zone, now: number, won: boolean): void {
+    const owners = new Set(helpers.map(({ owner }) => owner));
+    for (const owner of owners) {
+      this.report(owner.id, now, {
+        kind: "raid", zoneId: zone.id, tier: zone.tier, won,
+        ...say(won ? "Ваши подкрепления помогли отбить набег на замок {name}" : "Набег на замок {name} не отбит — ваши подкрепления понесли потери", { name: defender.name }),
+      });
+    }
   }
 
   /** Добыча: доля каждого ресурса сверх неприкосновенного запаса. */
@@ -861,6 +1010,7 @@ export class Game {
     player.treasureSavedPlaytimeMs ??= player.treasurePlaytimeMs;
     player.guildId ??= null;
     player.guildLeftAt ??= null;
+    player.reinforcementsSent ??= [];
   }
 
   /** После пересоздания мира: каждому игроку — новый замок; армия и замок сохраняются. */

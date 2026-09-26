@@ -347,6 +347,8 @@ func _slam() -> void:
 func take_hit(amount: float, is_crit := false) -> void:
 	if not is_alive():
 		return
+	# Бестиарий: чем больше герой убил таких монстров, тем больнее он их бьёт.
+	amount *= GameState.progress.damage_multiplier_vs(data.id)
 	if _shield > 0.0:
 		var absorbed := minf(_shield, amount)
 		_shield -= absorbed

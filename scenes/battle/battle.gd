@@ -118,6 +118,7 @@ func _end_rest() -> void:
 	hero.set_resting(false)
 	hud.set_resting(false)
 	hud.show_message(tr("Герой отдохнул и снова в бою!"))
+	GameState.progress.record("rest")
 	wave_manager.start_wave(GameState.wave)
 
 
@@ -161,6 +162,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		hud.toggle_map()
 	elif key.keycode == KEY_G:
 		hud.toggle_guild()
+	elif key.keycode == KEY_J:
+		hud.toggle_journal()
 	elif key.keycode >= KEY_1 and key.keycode <= KEY_9:
 		hero.skill_caster.try_cast_index(key.keycode - KEY_1)
 
@@ -225,6 +228,8 @@ func _on_monster_died(actor: Actor) -> void:
 		hero.heal(hero.max_hp * hero.kill_heal, false)
 	var gold := roundi(data.gold_reward * pow(GOLD_GROWTH_PER_WAVE, level) * gold_bonus)
 	GameState.add_gold(gold)
+	GameState.progress.record_kill(data.id, monster.is_elite(), data.is_boss)
+	GameState.progress.record("gold", gold)
 	_float_text(monster.global_position + Vector3(0.0, monster.visual_height * 0.5, 0.3), tr("+%d з") % gold, COLOR_GOLD, 0.8)
 
 	var item := LootGenerator.roll_drop(data, monster.wave_level,
@@ -309,6 +314,7 @@ func _on_wave_started(wave: int) -> void:
 
 func _on_wave_cleared(wave: int) -> void:
 	GameState.set_wave(wave + 1)
+	GameState.progress.record("wave")
 	if wave_manager.is_boss_wave(wave):
 		GameState.save_game()
 	await get_tree().create_timer(NEXT_WAVE_DELAY).timeout
@@ -333,6 +339,7 @@ func _on_leveled_up(new_level: int) -> void:
 
 
 func _on_skill_cast(skill: SkillData) -> void:
+	GameState.progress.record("skill")
 	_float_text(hero.global_position + Vector3(0.0, hero.visual_height + 0.5, 0.3),
 		skill.display_name, skill.color, 1.2, 0.7, 1.2)
 

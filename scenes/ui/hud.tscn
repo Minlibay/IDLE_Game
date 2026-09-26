@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/settings_panel.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://scenes/ui/guild_panel.tscn" id="13"]
 [ext_resource type="Texture2D" path="res://assets/ui/icons/banner.png" id="14"]
+[ext_resource type="PackedScene" path="res://scenes/ui/journal_panel.tscn" id="15"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/level_up.png" id="16"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1")
@@ -182,6 +184,15 @@ tooltip_text = "Гильдия [G]"
 text = "Гильдия"
 icon = ExtResource("14")
 
+[node name="JournalButton" type="Button" parent="Root/BottomBar/StatsPanel/VBox/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/icon_max_width = 18
+tooltip_text = "Путь героя: задания, достижения, бестиарий, перерождение [J]"
+text = "Путь"
+icon = ExtResource("16")
+
 [node name="SkillPanel" type="PanelContainer" parent="Root/BottomBar"]
 layout_mode = 2
 size_flags_vertical = 8
@@ -253,6 +264,11 @@ visible = false
 layout_mode = 1
 
 [node name="GuildPanel" parent="Root" instance=ExtResource("13")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="JournalPanel" parent="Root" instance=ExtResource("15")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1

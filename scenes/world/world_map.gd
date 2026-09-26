@@ -184,6 +184,10 @@ func _update_zone_panel() -> void:
 	zone_title.text = tr("Зона #%d · уровень %d") % [_selected, int(zone.tier)]
 
 	var lines := PackedStringArray()
+	var region := WorldService.region_of(_selected)
+	if not region.is_empty():
+		var control := tr("контроль: [%s]") % region.tag if region.guildId != null else tr("никто не контролирует")
+		lines.append(tr("Регион: %s (%s)") % [GuildCatalog.region_name(int(region.index)), control])
 	if zone.owner == null:
 		lines.append(tr("Ничья"))
 	elif mine:

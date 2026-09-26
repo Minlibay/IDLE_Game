@@ -174,6 +174,23 @@ func _guild_flow() -> void:
 	_check(str(WorldService.get_player(WorldService.my_id()).get("guildTag", "")) == tag.to_upper(), "guild tag not on the map")
 	print("  guild flow ok: [%s] created, %s joined, chat and donation work" % [tag.to_upper(), friend_name])
 
+	# Бонус гильдии, удар по боссу, подкрепление союзнику, сезон и регионы.
+	var perk := await WorldService.guild_learn_perk("treasury")
+	_check(perk.ok and int(WorldService.guild.perks.get("treasury", 0)) == 1, "perk not learned: %s" % perk.get("error", ""))
+	_check(float(GameState.territory_bonuses.get(StatModifier.Stat.GOLD_FIND, 0.0)) > 0.0, "guild perk bonus not applied to the hero")
+	var hit := await WorldService.guild_attack_boss()
+	_check(hit.ok and int(hit.data.attack.damage) > 0, "boss attack failed: %s" % hit.get("error", ""))
+	_check(int(WorldService.guild.boss.attacksLeft) == int(WorldService.guild.boss.attacksPerDay) - 1, "boss attacks not counted")
+	var castle_militia := GameState.kingdom.army.get_count(Database.get_unit("militia"))
+	if _check(castle_militia > 0, "no militia in the castle for reinforcements"):
+		var sent_help := await WorldService.guild_reinforce(friend_id, {"militia": 1})
+		_check(sent_help.ok and (WorldService.me.reinforcementsSent as Array).size() == 1, "reinforcement failed: %s" % sent_help.get("error", ""))
+		var back_help := await WorldService.guild_recall_reinforcement(0)
+		_check(back_help.ok and (WorldService.me.reinforcementsSent as Array).is_empty(), "reinforcement recall failed")
+	_check(int(WorldService.guild.season.id) >= 1 and not (WorldService.guild.season.standings as Array).is_empty(), "season view missing")
+	_check(int(WorldService.regions.get("grid", 0)) > 0, "regions missing in the world view")
+	print("  guild depth ok: perk, boss hit %d, reinforcement sent and recalled, season %d" % [int(hit.data.attack.damage), int(WorldService.guild.season.id)])
+
 
 ## Запрос к серверу от имени другого игрока (у WorldService — только свой токен).
 func _raw(method: int, path: String, body: Variant, auth_token := "") -> Dictionary:

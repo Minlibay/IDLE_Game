@@ -28,6 +28,9 @@ func _ready() -> void:
 	_test_translation()
 	await _test_hero_chase()
 	await _test_skill_casting()
+	_test_progress()
+	# Перерождение пересоздаёт сцену боя — поэтому последним.
+	_test_prestige()
 	if _errors.is_empty():
 		print("SELFTEST OK")
 	else:
@@ -672,6 +675,69 @@ func _test_translation() -> void:
 	Database.retranslate()
 	_check(goblin.display_name == "Гоблин", "monster name not restored: %s" % goblin.display_name)
 	_check(set_piece.display_name == "Шлем Закалённого горна", "set piece not restored: %s" % set_piece.display_name)
+
+
+## Бестиарий, задания дня, достижения и улучшения за души.
+func _test_progress() -> void:
+	var progress := GameState.progress
+	var saved := progress.to_dict()
+	progress.from_dict({}, 1)
+	# Бестиарий: 100 убийств вида — +5% урона по нему.
+	for i in 100:
+		progress.record_kill("goblin", false, false)
+	_check(progress.bestiary_tier("goblin") == 1, "bestiary tier 1 after 100 kills")
+	_check(is_equal_approx(progress.damage_multiplier_vs("goblin"), 1.05), "bestiary damage bonus: %f" % progress.damage_multiplier_vs("goblin"))
+	_check(is_equal_approx(progress.damage_multiplier_vs("slime"), 1.0), "bestiary bonus must be per species")
+	progress.bestiary["slime"] = 10000
+	_check(progress.mastered_count() == 1 and is_equal_approx(progress.damage_multiplier_vs("goblin"), 1.06), "mastery bonus applies to all")
+
+	# Задания дня: 5 штук, выполненное можно забрать один раз (золото + душа).
+	progress.ensure_daily()
+	_check(progress.daily.quests.size() == HeroProgress.DAILY_COUNT, "expected %d daily quests" % HeroProgress.DAILY_COUNT)
+	var quest: Dictionary = progress.daily.quests[0]
+	_check(not progress.claim_quest(0), "unfinished quest claimed")
+	progress.record(str(quest.type), int(quest.target))
+	var gold_before := GameState.gold
+	var souls_before := progress.souls
+	_check(progress.claim_quest(0), "finished quest not claimable")
+	_check(GameState.gold == gold_before + int(quest.gold) and progress.souls == souls_before + int(quest.souls), "quest reward not given")
+	_check(not progress.claim_quest(0), "quest claimed twice")
+
+	# Достижения: уровень по счётчику, награда — души, по одному уровню за раз.
+	progress.stats["kill_boss"] = 150
+	var hunter: Dictionary = HeroProgress.ACHIEVEMENTS.filter(func(a: Dictionary) -> bool: return a.id == "boss_hunter")[0]
+	_check(progress.achievement_tier(hunter) == 2, "boss hunter must be tier 2 at 150 bosses")
+	var first := progress.claim_achievement("boss_hunter")
+	var second := progress.claim_achievement("boss_hunter")
+	_check(first == int(hunter.souls[0]) and second == int(hunter.souls[1]), "achievement rewards wrong")
+	_check(progress.claim_achievement("boss_hunter") == 0, "achievement tier claimed beyond progress")
+
+	# Улучшение за души сразу меняет бонус героя.
+	progress.souls = 100
+	var damage_before := GameState.get_bonus(StatModifier.Stat.DAMAGE)
+	_check(GameState.buy_soul_upgrade("ancestral_might"), "soul upgrade not bought")
+	_check(is_equal_approx(GameState.get_bonus(StatModifier.Stat.DAMAGE), damage_before + 10.0), "soul upgrade bonus not applied")
+	_check(progress.souls == 100 - HeroProgress.upgrade_cost(HeroProgress.SOUL_UPGRADES[0], 0), "soul upgrade cost not paid")
+	progress.from_dict(saved, GameState.best_wave)
+
+
+## Перерождение: волна и уровень сбрасываются, таланты возвращаются, снаряжение и золото остаются, души начисляются.
+func _test_prestige() -> void:
+	var progress := GameState.progress
+	progress.run_best_wave = 20
+	_check(GameState.prestige() == 0, "prestige must be locked before wave %d" % HeroProgress.PRESTIGE_MIN_WAVE)
+	progress.run_best_wave = 50
+	progress.soul_upgrades["head_start"] = 1
+	GameState.level = 25
+	var equipped := GameState.equipment.size()
+	var gold := GameState.gold
+	var souls := progress.souls
+	var gained := GameState.prestige()
+	_check(gained == HeroProgress.souls_for(50) and progress.souls == souls + gained, "prestige souls wrong: %d" % gained)
+	_check(GameState.level == 1 and GameState.xp == 0 and GameState.talent_ranks.is_empty(), "level/talents not reset")
+	_check(GameState.wave == 1 + HeroProgress.HEAD_START_WAVES, "head start wave not applied: %d" % GameState.wave)
+	_check(GameState.equipment.size() == equipped and GameState.gold == gold, "equipment or gold lost on prestige")
+	_check(progress.prestige_count >= 1 and int(progress.stats.get("prestige", 0)) >= 1, "prestige not counted")
 
 
 ## Оглушение останавливает монстра, урон со временем тикает, добивание усиливает удар по раненой цели.

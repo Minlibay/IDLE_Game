@@ -46,6 +46,8 @@ var players: Dictionary = {}
 var cols := 0
 var rows := 0
 var tiers := 10
+## Регионы карты (сезон войны гильдий): grid, список {index, name, guildId, tag, color}.
+var regions: Dictionary = {}
 var world_version := 0
 var connected := false
 ## В автотесте сеть выключена, если не запрошен --world-test.
@@ -291,6 +293,7 @@ func refresh_world(full := false) -> void:
 	players.clear()
 	for player: Dictionary in data.players:
 		players[int(player.id)] = player
+	regions = data.get("regions", {})
 	world_version = int(data.version)
 	world_updated.emit()
 
@@ -388,14 +391,55 @@ func is_ally(player_id: Variant) -> bool:
 	return other.get("guildId") != null and int(other.guildId) == int(summary.id)
 
 
-## Имя игрока с тегом гильдии: «[ТЕГ] Имя».
-func tagged_name(name: String, tag: Variant) -> String:
-	return "[%s] %s" % [tag, name] if tag is String and tag != "" else name
+## Имя игрока с тегом гильдии: «[ТЕГ] Имя»; у призёров прошлого сезона — знак: ★ за 1-е место, ✦ за 2–3-е.
+func tagged_name(name: String, tag: Variant, badge := 0) -> String:
+	if not (tag is String and tag != ""):
+		return name
+	var mark := "★" if badge == 1 else ("✦" if badge in [2, 3] else "")
+	return "%s[%s] %s" % [mark, tag, name]
 
 
 func player_display_name(player_id: Variant) -> String:
 	var other := get_player(player_id)
-	return tagged_name(str(other.get("name", "?")), other.get("guildTag"))
+	return tagged_name(str(other.get("name", "?")), other.get("guildTag"), int(other.get("guildBadge", 0)))
+
+
+## Регион карты, в котором лежит зона (как regionOf на сервере).
+func region_of(zone_id: int) -> Dictionary:
+	var list: Array = regions.get("list", [])
+	var grid := int(regions.get("grid", 0))
+	var zone := get_zone(zone_id)
+	if grid <= 0 or list.is_empty() or zone.is_empty() or cols <= 0 or rows <= 0:
+		return {}
+	var col := mini(grid - 1, int(zone.col) * grid / cols)
+	var row := mini(grid - 1, int(zone.row) * grid / rows)
+	return list[row * grid + col]
+
+
+func guild_learn_perk(perk_id: String) -> Dictionary:
+	return await _guild_action("/api/guild/perk", {"perkId": perk_id})
+
+
+func guild_reset_perks() -> Dictionary:
+	return await _guild_action("/api/guild/perks/reset", {})
+
+
+## Удар по боссу гильдии; в ответе attack = {damage, killed}.
+func guild_attack_boss() -> Dictionary:
+	var result := await _request(HTTPClient.METHOD_POST, "/api/guild/boss/attack", {})
+	if result.ok:
+		_apply_guild(result.data.guild)
+		_apply_me(result.data.me)
+		GameState.progress.record("guild_boss")
+	return result
+
+
+func guild_reinforce(player_id: int, units: Dictionary) -> Dictionary:
+	return await _guild_action("/api/guild/reinforce", {"playerId": player_id, "units": units})
+
+
+func guild_recall_reinforcement(index: int) -> Dictionary:
+	return await _guild_action("/api/guild/reinforce/recall", {"index": index})
 
 
 func unread_guild_messages() -> int:
@@ -462,7 +506,10 @@ func guild_disband() -> Dictionary:
 
 ## Взнос золота из казны замка: 1 золото = 1 опыт гильдии.
 func guild_donate(gold: int) -> Dictionary:
-	return await _guild_action("/api/guild/donate", {"gold": gold})
+	var result := await _guild_action("/api/guild/donate", {"gold": gold})
+	if result.ok:
+		GameState.progress.record("guild_donate")
+	return result
 
 
 func guild_send_message(text: String) -> Dictionary:

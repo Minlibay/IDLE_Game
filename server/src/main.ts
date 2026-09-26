@@ -6,7 +6,7 @@ import { createHttpServer } from "./http.ts";
 import { Storage } from "./storage.ts";
 import { Game } from "./world/game.ts";
 
-const gameData = loadGameData(CONFIG.gameDataPath, CONFIG.treasuresDir);
+const gameData = loadGameData(CONFIG.gameDataPath, CONFIG.treasuresDir, CONFIG.guildDataPath);
 const storage = new Storage(CONFIG.dbPath);
 const game = new Game(storage, gameData, CONFIG);
 const server = createHttpServer(game, gameData, CONFIG);

@@ -479,6 +479,7 @@ func _on_upgrade_pressed() -> void:
 	match ItemUpgrader.try_upgrade(_selected):
 		ItemUpgrader.Result.SUCCESS:
 			_show_result(tr("Успех! Теперь +%d") % _selected.upgrade_level, COLOR_OK)
+			GameState.progress.record("upgrade")
 		ItemUpgrader.Result.FAILED:
 			_show_result(tr("Неудача… золото потрачено"), COLOR_BAD)
 		ItemUpgrader.Result.NOT_ENOUGH_GOLD:

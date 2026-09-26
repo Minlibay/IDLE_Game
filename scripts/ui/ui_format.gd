@@ -16,6 +16,26 @@ static func duration(seconds: float) -> String:
 	return TranslationServer.translate("%d с") % secs
 
 
+## «1 душа», «3 души», «5 душ» (по-английски — «1 soul», «5 souls»).
+static func souls(count: int) -> String:
+	if TranslationServer.get_locale().begins_with("ru"):
+		return "%d %s" % [count, plural_ru(count, "душа", "души", "душ")]
+	return "%d %s" % [count, "soul" if count == 1 else "souls"]
+
+
+## Русская форма слова по числу: 1 — one, 2–4 — few, 5–20 и остальные — many.
+static func plural_ru(count: int, one: String, few: String, many: String) -> String:
+	var n := absi(count) % 100
+	if n >= 11 and n <= 19:
+		return many
+	match n % 10:
+		1:
+			return one
+		2, 3, 4:
+			return few
+	return many
+
+
 ## Стоимость в виде «60 Дерево, 30 Камень, 100 Золото».
 static func cost(cost_dict: Dictionary) -> String:
 	var parts := PackedStringArray()

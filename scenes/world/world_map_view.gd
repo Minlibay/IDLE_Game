@@ -8,6 +8,8 @@ signal zone_selected(zone_id: int)
 const HEX_SIZE := 14.0
 ## С какого масштаба показывать номер уровня зоны.
 const TIER_LABEL_ZOOM := 2.4
+## Размер подписей регионов (не зависит от приближения).
+const REGION_LABEL_SIZE := 13
 ## С какого приближения над замками видны теги гильдий.
 const GUILD_TAG_ZOOM := 1.2
 ## Центрировать можно, только когда окно уже раскрыто (в режиме полоски карта слишком низкая).
@@ -152,12 +154,46 @@ func _draw() -> void:
 			draw_string(font, center + Vector2(-4, 5) * zoom, str(int(zone.tier)),
 				HORIZONTAL_ALIGNMENT_LEFT, -1, int(9 * zoom), Color(1, 1, 1, 0.7))
 
+	_draw_regions(font)
 	_draw_move_targets(radius)
 	if selected_zone >= 0:
 		_draw_outline(selected_zone, radius, OUTLINE_SELECTED)
 	_draw_march()
 	_draw_incoming()
 	_draw_heroes(radius, my_id)
+
+
+## Регионы сезона войны гильдий: тонкие границы и название; у контролируемого — тег и цвет гильдии.
+func _draw_regions(font: Font) -> void:
+	var grid := int(WorldService.regions.get("grid", 0))
+	var list: Array = WorldService.regions.get("list", [])
+	var cols := WorldService.cols
+	var rows := WorldService.rows
+	if grid <= 0 or list.size() < grid * grid or cols <= 0:
+		return
+	var half := Vector2(HEX_SIZE * sqrt(3.0) * 0.5, HEX_SIZE)
+	for region: Dictionary in list:
+		var index := int(region.index)
+		var col0 := (index % grid) * cols / grid
+		var row0 := (index / grid) * rows / grid
+		var col1 := ((index % grid) + 1) * cols / grid - 1
+		var row1 := ((index / grid) + 1) * rows / grid - 1
+		var top_left := (HexGrid.center(col0, row0, HEX_SIZE) - half) * zoom + pan
+		var bottom_right := (HexGrid.center(col1, row1, HEX_SIZE) + half) * zoom + pan
+		var rect := Rect2(top_left, bottom_right - top_left)
+		if not rect.intersects(Rect2(Vector2.ZERO, size)):
+			continue
+		var controlled: bool = region.guildId != null
+		var color := Color(str(region.color)) if controlled else Color(1, 1, 1, 0.25)
+		draw_rect(rect, Color(color, 0.55 if controlled else 0.25), false, 2.0 if controlled else 1.0)
+		var title := GuildCatalog.region_name(index)
+		if controlled:
+			title += "  [%s]" % region.tag
+		var font_size := REGION_LABEL_SIZE
+		var width := font.get_string_size(title, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
+		var point := Vector2(rect.get_center().x - width * 0.5, rect.position.y + font_size + 4)
+		draw_string_outline(font, point, title, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, 4, Color(0, 0, 0, 0.75))
+		draw_string(font, point, title, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, color if controlled else Color(1, 1, 1, 0.6))
 
 
 ## Заливка цветом владельца поверх местности; рамка — цветом его гильдии (если он в гильдии).

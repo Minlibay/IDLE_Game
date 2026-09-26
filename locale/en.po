@@ -19,6 +19,10 @@ msgstr "  losses: %s"
 msgid " · замок под защитой ещё %s"
 msgstr " · castle protected for another %s"
 
+#: scenes/ui/guild/guild_perks_page.gd
+msgid " · распределяет глава"
+msgstr " · the leader spends them"
+
 #: scenes/talents/talent_grid.gd
 msgid " · сектор «%s»"
 msgstr " · sector «%s»"
@@ -34,6 +38,14 @@ msgstr " ago"
 #: scenes/ui/inventory_panel.gd
 msgid "%.2f с"
 msgstr "%.2f s"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "%d · %s · изучен"
+msgstr "%d · %s · studied"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "%d место: %d золота каждому и %d опыта гильдии"
+msgstr "Place %d: %d gold to each member and %d guild XP"
 
 #: scripts/ui/ui_format.gd
 msgid "%d мин"
@@ -63,9 +75,21 @@ msgstr "%s (in castle: %d)"
 msgid "%s (есть %d)"
 msgstr "%s (available %d)"
 
+#: scripts/data/guild_catalog.gd
+msgid "%s (макс.)"
+msgstr "%s (max)"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "%s (ур. %d)"
+msgstr "%s (lv. %d)"
+
 #: scenes/ui/skill_button.gd
 msgid "%s [%s]\n%s\nПерезарядка: %d с · открывается на ур. %d"
 msgstr "%s [%s]\n%s\nCooldown: %d s · unlocks at lv. %d"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "%s · %d уровень"
+msgstr "%s · level %d"
 
 #: scenes/ui/hud.gd scenes/ui/inventory_panel.gd
 msgid "%s · %s · ур. %d"
@@ -115,9 +139,17 @@ msgstr "+%d g"
 msgid "+%d%% к силе армии за каждого участника, но не больше %d%% (потолок растёт с уровнем гильдии)."
 msgstr "+%d%% army power per member, up to %d%% (the cap grows with the guild level)."
 
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "+%d%% урона"
+msgstr "+%d%% damage"
+
 #: scenes/ui/kingdom_panel.gd
 msgid "+%s %s/мин"
 msgstr "+%s %s/min"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "+%s%% (сейчас +%s%%)"
+msgstr "+%s%% (now +%s%%)"
 
 #: scenes/ui/kingdom_panel.gd
 msgid "+%s/м"
@@ -303,7 +335,7 @@ msgstr "Armageddon"
 msgid "Армию из замка →"
 msgstr "Army from castle →"
 
-#: scenes/ui/inventory_panel.gd scenes/ui/kingdom_panel.tscn
+#: data/guild/guild.json scenes/ui/inventory_panel.gd scenes/ui/kingdom_panel.tscn
 msgid "Армия"
 msgstr "Army"
 
@@ -355,9 +387,29 @@ msgstr "Attacks every"
 msgid "Атака солдата"
 msgstr "Soldier attack"
 
+#: server/src/world/guilds.ts
+msgid "Атаки на сегодня закончились — приходите завтра"
+msgstr "No attacks left today — come back tomorrow"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Атаковать"
+msgstr "Attack"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Атаковать (%d/%d)"
+msgstr "Attack (%d/%d)"
+
 #: scenes/world/world_map.gd
 msgid "Атаковать нейтралов"
 msgstr "Attack the neutrals"
+
+#: scripts/progress/hero_progress.gd
+msgid "Атакуйте босса гильдии %d раза"
+msgstr "Attack the guild boss %d times"
+
+#: data/guild/guild.json
+msgid "Багровый каньон"
+msgstr "Crimson Canyon"
 
 #: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
 msgid "Бастион"
@@ -395,13 +447,29 @@ msgstr "The abyss stared into him — and looked away first."
 msgid "Бессмертный"
 msgstr "Immortal"
 
+#: scenes/ui/journal/journal_bestiary_page.gd scenes/ui/journal_panel.gd
+msgid "Бестиарий"
+msgstr "Bestiary"
+
+#: scripts/progress/hero_progress.gd
+msgid "Бестиарий: %s изучен до %d уровня"
+msgstr "Bestiary: %s studied to level %d"
+
 #: scenes/actors/monster.gd
 msgid "Бешеный"
 msgstr "Frenzied"
 
+#: scripts/progress/hero_progress.gd
+msgid "Благосклонность судьбы"
+msgstr "Fate's Favor"
+
 #: scenes/creation/class_card.gd
 msgid "Ближний бой"
 msgstr "Melee"
+
+#: scripts/progress/hero_progress.gd
+msgid "Богач"
+msgstr "Tycoon"
 
 #: data/needs/energy.tres
 msgid "Бодрость"
@@ -418,6 +486,10 @@ msgstr "Battle Madness"
 #: data/items/war_banner.tres
 msgid "Боевое знамя"
 msgstr "War Banner"
+
+#: data/guild/guild.json
+msgid "Боевой дух"
+msgstr "Morale"
 
 #: data/skills/warrior_war_cry.tres
 msgid "Боевой клич"
@@ -447,13 +519,65 @@ msgstr "Battle"
 msgid "Больше (Shift — по 10)"
 msgstr "More (Shift — by 10)"
 
+#: server/src/world/guilds.ts
+msgid "Бонус «{perk}» повышен до {rank} ранга"
+msgstr "Perk «{perk}» raised to rank {rank}"
+
 #: scenes/world/world_map.gd
 msgid "Бонус владельцу: "
 msgstr "Owner bonus: "
 
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Бонус повышен"
+msgstr "Perk raised"
+
+#: server/src/world/guilds.ts
+msgid "Бонус уже на максимальном ранге"
+msgstr "The perk is already at max rank"
+
+#: scenes/ui/guild_panel.gd
+msgid "Бонусы"
+msgstr "Perks"
+
+#: server/src/world/guilds.ts
+msgid "Бонусы гильдии сброшены — очки можно распределить заново"
+msgstr "Guild perks reset — the points can be spent again"
+
+#: server/src/world/guilds.ts
+msgid "Бонусы ещё не выбраны"
+msgstr "No perks chosen yet"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Бонусы сброшены — распределите очки заново"
+msgstr "Perks reset — spend the points again"
+
+#: scenes/ui/guild/guild_boss_page.gd scenes/ui/guild_panel.gd
+msgid "Босс"
+msgstr "Boss"
+
+#: server/src/world/guilds.ts
+msgid "Босс гильдии {level} уровня повержен! Каждый, кто сражался, получил {gold} золота"
+msgstr "The level {level} guild boss is defeated! Everyone who fought received {gold} gold"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Босс недели"
+msgstr "Boss of the week"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Босс повержен! Награда уже в казне."
+msgstr "The boss is defeated! The reward is already in your treasury."
+
+#: server/src/world/guilds.ts
+msgid "Босс этой недели уже повержен"
+msgstr "This week's boss is already defeated"
+
 #: scripts/data/item_base.gd
 msgid "Ботинки"
 msgstr "Boots"
+
+#: scripts/progress/hero_progress.gd
+msgid "Братство"
+msgstr "Brotherhood"
 
 #: scenes/ui/inventory_panel.gd scripts/data/item_base.gd scripts/items/item.gd
 msgid "Броня"
@@ -491,13 +615,25 @@ msgstr "The guild has no free slots"
 msgid "В замке армия стоит без гарнизона"
 msgstr "In the castle the army stands without a garrison"
 
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "В замке нет солдат — обучите их в «Замке» [K]."
+msgstr "No soldiers in the castle — train them in «Castle» [K]."
+
 #: server/src/world/game.ts
 msgid "В замке нет столько солдат"
 msgstr "There aren't that many soldiers in the castle"
 
+#: server/src/world/game.ts
+msgid "В замке союзника нет места для стольких подкреплений"
+msgstr "The ally's castle has no room for that many reinforcements"
+
 #: scenes/ui/guild_panel.gd
 msgid "В казне замка: %d · 1 золото = 1 опыт"
 msgstr "Castle treasury: %d · 1 gold = 1 XP"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "В моём замке"
+msgstr "In my castle"
 
 #: data/treasures/archer.json
 msgid "В них не хрустнет ни одна ветка."
@@ -515,6 +651,14 @@ msgstr "Your castle"
 msgid "Ваша зона"
 msgstr "Your zone"
 
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Ваши награды: "
+msgstr "Your awards: "
+
+#: server/src/world/game.ts
+msgid "Ваши подкрепления помогли отбить набег на замок {name}"
+msgstr "Your reinforcements helped repel the raid on {name}'s castle"
+
 #: scenes/creation/character_creation.tscn
 msgid "Введите имя"
 msgstr "Enter a name"
@@ -526,6 +670,10 @@ msgstr "Fortune"
 #: data/treasures/mage.json
 msgid "Венец Тысячи Глаз"
 msgstr "Circlet of a Thousand Eyes"
+
+#: data/guild/guild.json
+msgid "Вересковые пустоши"
+msgstr "Heather Moors"
 
 #: scenes/world/world_map.gd
 msgid "Вернуть армию в замок"
@@ -571,6 +719,14 @@ msgstr "Desert Wind"
 msgid "Вечная Клятва"
 msgstr "Eternal Oath"
 
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Вечные улучшения за души"
+msgstr "Permanent upgrades for souls"
+
+#: scripts/progress/hero_progress.gd
+msgid "Вечный герой"
+msgstr "Eternal Hero"
+
 #: data/treasures/archer.json
 msgid "Видит в темноте не хуже совы."
 msgstr "Sees in the dark as well as an owl."
@@ -599,9 +755,17 @@ msgstr "Contribution to guild XP: %d\nMember since: %s"
 msgid "Владение"
 msgstr "Domain"
 
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Вложено очков: %d"
+msgstr "Points invested: %d"
+
 #: scenes/ui/guild_panel.gd
 msgid "Внесено в гильдию: %d золота"
 msgstr "Donated to the guild: %d gold"
+
+#: scripts/progress/hero_progress.gd
+msgid "Внесите золото в гильдию %d раз"
+msgstr "Donate gold to the guild %d times"
 
 #: scenes/ui/guild_panel.gd
 msgid "Внести"
@@ -655,6 +819,14 @@ msgstr "War Council"
 msgid "Воин"
 msgstr "Warrior"
 
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Война гильдий"
+msgstr "Guild war"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Войска идут до замка союзника, как в набег, и защищают его, пока вы их не отзовёте."
+msgstr "The troops march to the ally's castle like a raid and defend it until you recall them."
+
 #: scenes/world/world_map.tscn
 msgid "Войти"
 msgstr "Sign in"
@@ -678,6 +850,10 @@ msgstr "Wave 1"
 #: data/treasures/mage.json
 msgid "Волосы встают дыбом, стоит лишь прикоснуться."
 msgstr "Your hair stands on end the moment you touch it."
+
+#: data/guild/guild.json
+msgid "Волчьи холмы"
+msgstr "Wolf Hills"
 
 #: data/talents/warrior_talents.tres
 msgid "Воля воина"
@@ -703,6 +879,10 @@ msgstr "Time flows a little slower around it."
 msgid "Время стройки: "
 msgstr "Build time: "
 
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Все очки вернутся, распределить их можно заново. Не чаще раза в сутки."
+msgstr "All points are refunded and can be spent again. At most once a day."
+
 #: data/talents/archer_talents.tres
 msgid "Все умения: −{value}% перезарядки, залп +{value2}% урона."
 msgstr "All skills: −{value}% cooldown, Multishot +{value2}% damage."
@@ -710,6 +890,10 @@ msgstr "All skills: −{value}% cooldown, Multishot +{value2}% damage."
 #: scenes/ui/guild_panel.gd
 msgid "Все участники покинут гильдию. Чтобы уйти самому, сначала передайте главенство."
 msgstr "All members will leave the guild. To leave yourself, transfer leadership first."
+
+#: scripts/progress/hero_progress.gd
+msgid "Вступите в гильдию"
+msgstr "Join a guild"
 
 #: scenes/ui/guild_panel.gd
 msgid "Вступить"
@@ -739,6 +923,10 @@ msgstr "You joined the guild"
 msgid "Вы не состоите в гильдии"
 msgstr "You are not in a guild"
 
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Вы никому не отправляли подкрепления."
+msgstr "You haven't sent reinforcements to anyone."
+
 #: scenes/ui/guild_panel.gd
 msgid "Вы покинули гильдию"
 msgstr "You left the guild"
@@ -762,6 +950,10 @@ msgstr "Select an item"
 #: server/src/world/guilds.ts
 msgid "Выберите цвет гильдии"
 msgstr "Choose a guild color"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Выберите, сколько солдат отправить"
+msgstr "Choose how many soldiers to send"
 
 #: data/treasures/warrior.json
 msgid "Выжили в пожаре, спалившем целый легион."
@@ -871,7 +1063,11 @@ msgstr "The hero is tired and resting…"
 msgid "Гигантский паук"
 msgstr "Giant Spider"
 
-#: scenes/ui/guild_panel.gd scenes/ui/guild_panel.tscn scenes/ui/hud.gd scenes/ui/hud.tscn
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Гильдии ещё не набрали очков в этом сезоне."
+msgstr "No guild has scored points this season yet."
+
+#: scenes/ui/guild/guild_season_page.gd scenes/ui/guild_panel.gd scenes/ui/guild_panel.tscn scenes/ui/hud.gd scenes/ui/hud.tscn
 msgid "Гильдия"
 msgstr "Guild"
 
@@ -963,6 +1159,14 @@ msgstr "Arrow Rain"
 msgid "Град ударов"
 msgstr "Hail of Blows"
 
+#: data/guild/guild.json
+msgid "Гремящие утёсы"
+msgstr "Thundering Cliffs"
+
+#: scripts/progress/hero_progress.gd
+msgid "Гроза боссов"
+msgstr "Bane of Bosses"
+
 #: data/treasures/archer.json
 msgid "Грозовая стрела"
 msgstr "Thunder Arrow"
@@ -975,9 +1179,17 @@ msgstr "Thunder Arrow"
 msgid "Громила"
 msgstr "Brute"
 
+#: data/guild/guild.json
+msgid "Громкая слава"
+msgstr "Renown"
+
 #: data/treasures/warrior.json
 msgid "Громовая Ярость"
 msgstr "Thunder Fury"
+
+#: scripts/progress/hero_progress.gd
+msgid "Дайте герою отдохнуть %d раз"
+msgstr "Let the hero rest %d times"
 
 #: scenes/creation/class_card.gd
 msgid "Дальний бой"
@@ -1007,6 +1219,14 @@ msgstr "Talent tree [T]"
 msgid "Для набега нужна армия"
 msgstr "A raid requires an army"
 
+#: scripts/progress/hero_progress.gd
+msgid "Добудьте %d золота с монстров"
+msgstr "Earn %d gold from monsters"
+
+#: scripts/progress/hero_progress.gd
+msgid "Добудьте %s золота с монстров"
+msgstr "Earn %s gold from monsters"
+
 #: data/buildings/quarry.tres
 msgid "Добывает камень для построек."
 msgstr "Mines stone for construction."
@@ -1015,9 +1235,25 @@ msgstr "Mines stone for construction."
 msgid "Добыча: "
 msgstr "Loot: "
 
+#: scripts/progress/hero_progress.gd
+msgid "Дойдите до %s волны"
+msgstr "Reach wave %s"
+
 #: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
 msgid "Дорога побед"
 msgstr "Road of Victories"
+
+#: scenes/ui/journal/journal_achievements_page.gd scenes/ui/journal_panel.gd
+msgid "Достижения"
+msgstr "Achievements"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Доступно с %d-й волны. Души растут с рекордом волны: на 30-й — %d, на 50-й — %d."
+msgstr "Available from wave %d. Souls grow with your best wave: at wave 30 — %d, at wave 50 — %d."
+
+#: data/guild/guild.json
+msgid "Драконий хребет"
+msgstr "Dragon's Spine"
 
 #: data/talents/mage_talents.tres
 msgid "Древние руны"
@@ -1030,6 +1266,14 @@ msgstr "Oak Staff"
 #: data/items/oak_staff.tres
 msgid "Дубовый посох с кристаллом, в котором копится магия."
 msgstr "An oak staff with a crystal that gathers magic."
+
+#: scenes/ui/journal_panel.tscn
+msgid "Души — валюта перерождения: за перерождение, задания и достижения. Тратятся на вечные улучшения."
+msgstr "Souls are the rebirth currency: earned from rebirths, quests and achievements. Spent on permanent upgrades."
+
+#: scenes/ui/journal/journal_prestige_page.gd scenes/ui/journal_panel.gd
+msgid "Души: %d"
+msgstr "Souls: %d"
 
 #: data/items/war_horn.tres
 msgid "Его зов бросает армию в атаку."
@@ -1091,6 +1335,10 @@ msgstr "Sun Priest"
 msgid "Жреца солнца"
 msgstr "Sun Priest"
 
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Забрать"
+msgstr "Claim"
+
 #: scenes/world/world_map.tscn
 msgid "Забрать из гарнизона"
 msgstr "Take from garrison"
@@ -1111,6 +1359,22 @@ msgstr "Loading the castle from the server…"
 msgid "Загрузка карты…"
 msgstr "Loading the map…"
 
+#: scripts/progress/hero_progress.gd
+msgid "Задание выполнено: %s"
+msgstr "Quest complete: %s"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Задание ещё не выполнено"
+msgstr "The quest isn't complete yet"
+
+#: scenes/ui/journal_panel.gd
+msgid "Задания"
+msgstr "Quests"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Задания дня"
+msgstr "Daily quests"
+
 #: scripts/data/stat_modifier.gd
 msgid "Закалка"
 msgstr "Toughening"
@@ -1122,6 +1386,10 @@ msgstr "Emberforge"
 #: data/treasures/warrior.json
 msgid "Закалённые в горне"
 msgstr "Emberforged"
+
+#: data/guild/guild.json
+msgid "Закатный берег"
+msgstr "Sunset Shore"
 
 #: scenes/world/battle_replay.tscn
 msgid "Закрыть"
@@ -1138,6 +1406,10 @@ msgstr "Close [G]"
 #: scenes/ui/inventory_panel.tscn
 msgid "Закрыть [I]"
 msgstr "Close [I]"
+
+#: scenes/ui/journal_panel.tscn
+msgid "Закрыть [J]"
+msgstr "Close [J]"
 
 #: scenes/ui/kingdom_panel.tscn
 msgid "Закрыть [K]"
@@ -1186,6 +1458,14 @@ msgstr "Take the zone"
 #: scenes/ui/needs_panel.gd
 msgid "Запас: %d %s — герой берёт сам"
 msgstr "Stock: %d %s — the hero uses it automatically"
+
+#: scripts/progress/hero_progress.gd
+msgid "Заточите предмет до +%s"
+msgstr "Upgrade an item to +%s"
+
+#: scripts/progress/hero_progress.gd
+msgid "Заточите снаряжение %d раза"
+msgstr "Upgrade equipment %d times"
 
 #: scenes/ui/inventory_panel.gd scenes/ui/inventory_panel.tscn
 msgid "Заточить"
@@ -1263,9 +1543,21 @@ msgstr "Health"
 msgid "Землетрясение"
 msgstr "Earthquake"
 
+#: data/guild/guild.json
+msgid "Змеиная топь"
+msgstr "Serpent Mire"
+
+#: data/guild/guild.json
+msgid "Знамя гильдии"
+msgstr "Guild Banner"
+
 #: data/talents/mage_talents.tres
 msgid "Знание стихий"
 msgstr "Elemental Lore"
+
+#: scripts/progress/hero_progress.gd
+msgid "Знаток монстров"
+msgstr "Monster Expert"
 
 #: scenes/talents/talent_grid.gd
 msgid "Значимый узел"
@@ -1274,6 +1566,14 @@ msgstr "Notable node"
 #: data/treasures/archer.json
 msgid "Золотая Пряжка Колчана"
 msgstr "Golden Quiver Buckle"
+
+#: scripts/progress/hero_progress.gd
+msgid "Золотая жила"
+msgstr "Gold Vein"
+
+#: data/guild/guild.json
+msgid "Золотая степь"
+msgstr "Golden Steppe"
 
 #: scenes/ui/hud.gd
 msgid "Золото"
@@ -1339,6 +1639,10 @@ msgstr "Made of ash that grew on the grave of the first archer."
 msgid "Изнутри похож на ночное небо."
 msgstr "From the inside it looks like the night sky."
 
+#: data/guild/guild.json
+msgid "Изумрудный дол"
+msgstr "Emerald Dale"
+
 #: scenes/talents/talent_grid.tscn
 msgid "Изучать можно узлы рядом с уже изученными. Колесо — масштаб, перетаскивание — сдвиг. Малые узлы дальше от центра сильнее, значимые дают два бонуса, золотые ключевые — самые мощные."
 msgstr "You can learn nodes next to already learned ones. Wheel — zoom, drag — pan. Minor nodes are stronger farther from the center, notable ones give two bonuses, golden keystones are the most powerful."
@@ -1350,6 +1654,10 @@ msgstr "Learned"
 #: scenes/talents/talent_grid.gd
 msgid "Изучено: %s"
 msgstr "Learned: %s"
+
+#: scripts/progress/hero_progress.gd
+msgid "Изучите %s видов монстров (1000 убийств)"
+msgstr "Study %s monster species (1000 kills)"
 
 #: scenes/talents/talent_grid.tscn
 msgid "Изучить"
@@ -1403,6 +1711,10 @@ msgstr "Kick"
 msgid "Искра гения"
 msgstr "Spark of Genius"
 
+#: scripts/progress/hero_progress.gd
+msgid "Истребитель"
+msgstr "Slayer"
+
 #: scenes/world/world_map.tscn
 msgid "К герою"
 msgstr "To the hero"
@@ -1443,6 +1755,10 @@ msgstr "The treasury is full"
 msgid "Казначей"
 msgstr "Treasurer"
 
+#: data/guild/guild.json
+msgid "Казначейство"
+msgstr "Treasury"
+
 #: data/skills/warrior_execute.tres
 msgid "Казнь"
 msgstr "Execute"
@@ -1458,6 +1774,10 @@ msgstr "Stonewall"
 #: scenes/actors/monster.gd
 msgid "Каменнокожий"
 msgstr "Stoneskin"
+
+#: data/guild/guild.json
+msgid "Каменные врата"
+msgstr "Stone Gates"
 
 #: data/monsters/stone_golem.tres
 msgid "Каменный голем"
@@ -1603,6 +1923,10 @@ msgstr "Leather Boots"
 msgid "Колесо — масштаб, перетаскивание — сдвиг карты.\nЖёлтая рамка — куда может пойти герой."
 msgstr "Wheel — zoom, drag — pan the map.\nYellow frame — where the hero can go."
 
+#: scripts/progress/hero_progress.gd
+msgid "Коллекционер"
+msgstr "Collector"
+
 #: data/buildings/well.tres
 msgid "Колодец"
 msgstr "Well"
@@ -1714,6 +2038,10 @@ msgstr "Crit"
 #: data/treasures/warrior.json
 msgid "Кровавая клятва"
 msgstr "Blood Oath"
+
+#: data/guild/guild.json
+msgid "Кровавая река"
+msgstr "Blood River"
 
 #: data/treasures/warrior.json
 msgid "Кровавой клятвы"
@@ -1863,6 +2191,10 @@ msgstr "Frostgrip"
 msgid "Ледяной Шпиль"
 msgstr "Ice Spire"
 
+#: data/guild/guild.json
+msgid "Ледяной кряж"
+msgstr "Frost Ridge"
+
 #: data/treasures/warrior.json
 msgid "Ледяной хватки"
 msgstr "Frostgrip"
@@ -1902,6 +2234,10 @@ msgstr "Deposit limit reached, please wait"
 #: data/treasures/archer.json
 msgid "Лисий Капюшон"
 msgstr "Fox Hood"
+
+#: data/guild/guild.json
+msgid "Лисьи овраги"
+msgstr "Fox Ravines"
 
 #: data/monsters/lich.tres
 msgid "Лич"
@@ -1955,7 +2291,7 @@ msgstr "Maximum level"
 msgid "Максимальный уровень гильдии"
 msgstr "Maximum guild level"
 
-#: scenes/ui/kingdom_panel.gd
+#: scenes/ui/journal/journal_prestige_page.gd scenes/ui/kingdom_panel.gd
 msgid "Максимум"
 msgstr "Maximum"
 
@@ -2007,6 +2343,10 @@ msgstr "Frostweaver Robe"
 msgid "Мантия Хранителя библиотеки"
 msgstr "Library Keeper Robe"
 
+#: scripts/progress/hero_progress.gd
+msgid "Мастер заточки"
+msgstr "Master Upgrader"
+
 #: data/talents/warrior_talents.tres
 msgid "Мастер клинка"
 msgstr "Blade Master"
@@ -2014,6 +2354,10 @@ msgstr "Blade Master"
 #: data/treasures/mage.json
 msgid "Мастер носит её, чтобы помнить: учиться никогда не поздно."
 msgstr "The master wears it to remember: it's never too late to learn."
+
+#: scripts/progress/hero_progress.gd
+msgid "Мастер умений"
+msgstr "Skill Master"
 
 #: scripts/data/stat_modifier.gd
 msgid "Мастерство"
@@ -2035,9 +2379,17 @@ msgstr "Less army food, %"
 msgid "Мест в армии"
 msgstr "Army slots"
 
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Мест для подкреплений: %d / %d (половина мест армии замка)"
+msgstr "Reinforcement slots: %d / %d (half of the castle army slots)"
+
 #: scenes/ui/army_view.gd
 msgid "Места: %d / %d"
 msgstr "Slots: %d / %d"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Место"
+msgstr "Place"
 
 #: data/skills/mage_meteor.tres
 msgid "Метеор"
@@ -2071,6 +2423,10 @@ msgstr "Lots of health and armor. Fights in melee."
 msgid "Могучий"
 msgstr "Mighty"
 
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Мои подкрепления"
+msgstr "My reinforcements"
+
 #: data/skills/mage_chain_lightning.tres
 msgid "Молния бьёт цель на 180% и перескакивает ещё на 4 врагов, каждый раз на 15% слабее."
 msgstr "Lightning hits the target for 180% and jumps to 4 more enemies, 15% weaker each time."
@@ -2091,6 +2447,10 @@ msgstr "Power Strike: +{value}% damage and −{value2}% cooldown."
 msgid "Мудрость"
 msgstr "Wisdom"
 
+#: scripts/progress/hero_progress.gd
+msgid "Мудрость веков"
+msgstr "Wisdom of Ages"
+
 #: scripts/data/stat_modifier.gd
 msgid "Муштра"
 msgstr "Drill"
@@ -2102,6 +2462,10 @@ msgstr "Moss Giant"
 #: data/treasures/archer.json
 msgid "Мягкие и бесшумные, как лесной мох."
 msgstr "Soft and silent, like forest moss."
+
+#: data/guild/guild.json
+msgid "Мёртвые болота"
+msgstr "Dead Marshes"
 
 #: server/src/world/game.ts
 msgid "На карте не осталось места для нового замка"
@@ -2120,6 +2484,10 @@ msgid "Набег на замок"
 msgstr "Raid the castle"
 
 #: server/src/world/game.ts
+msgid "Набег на замок {name} не отбит — ваши подкрепления понесли потери"
+msgstr "The raid on {name}'s castle was not repelled — your reinforcements suffered losses"
+
+#: server/src/world/game.ts
 msgid "Набег на замок {name} отбит: армия погибла, герой вернулся в замок"
 msgstr "The raid on {name}'s castle was repelled: the army died, the hero returned to the castle"
 
@@ -2134,6 +2502,18 @@ msgstr "Raid: victory yields part of the castle's resources, the march takes lon
 #: data/treasures/mage.json
 msgid "Навершие тлеет уже триста лет."
 msgstr "The pommel has been smoldering for three hundred years."
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Награда за победу: %d золота в казну каждому, кто сражался, и опыт гильдии."
+msgstr "Victory reward: %d gold to the treasury of everyone who fought, plus guild XP."
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Награда получена"
+msgstr "Reward claimed"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Награды:\n"
+msgstr "Rewards:\n"
 
 #: data/treasures/warrior.json
 msgid "Надевший их командует не голосом, а одним взглядом."
@@ -2255,6 +2635,10 @@ msgstr "Stormbreaker Pauldrons"
 msgid "Наплечники Терновой чащи"
 msgstr "Thornwood Mantle"
 
+#: data/guild/guild.json
+msgid "Наставники"
+msgstr "Mentors"
+
 #: scenes/ui/hud.tscn scenes/ui/settings_panel.tscn
 msgid "Настройки"
 msgstr "Settings"
@@ -2294,6 +2678,10 @@ msgstr "Not so fast"
 #: scripts/autoload/world_service.gd
 msgid "Не удалось отправить запрос"
 msgstr "Failed to send the request"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Не хватает душ"
+msgstr "Not enough souls"
 
 #: scenes/ui/inventory_panel.gd
 msgid "Не хватает золота"
@@ -2431,6 +2819,10 @@ msgstr "No free points"
 msgid "Нет свободных очков — они даются за уровень"
 msgstr "No free points — you get them for leveling up"
 
+#: server/src/world/guilds.ts
+msgid "Нет свободных очков — повысьте уровень гильдии"
+msgstr "No free points — raise the guild level"
+
 #: scripts/kingdom/army_state.gd scripts/kingdom/kingdom_state.gd
 msgid "Нет связи с сервером"
 msgstr "No server connection"
@@ -2447,6 +2839,10 @@ msgstr "No connection to the map server — guilds work only online."
 msgid "Нет связи с сервером — замок только для просмотра"
 msgstr "No server connection — the castle is view-only"
 
+#: server/src/world/guilds.ts
+msgid "Нет такого бонуса"
+msgstr "No such perk"
+
 #: server/src/world/game.ts server/src/world/kingdom.ts
 msgid "Нет такого заказа"
 msgstr "No such order"
@@ -2455,9 +2851,17 @@ msgstr "No such order"
 msgid "Нет такого здания"
 msgstr "No such building"
 
+#: server/src/world/game.ts
+msgid "Нет такого игрока"
+msgstr "No such player"
+
 #: server/src/world/kingdom.ts
 msgid "Нет такого отряда"
 msgstr "No such unit"
+
+#: server/src/world/game.ts
+msgid "Нет такого подкрепления"
+msgstr "No such reinforcement"
 
 #: server/src/world/game.ts
 msgid "Нет такой зоны"
@@ -2471,6 +2875,14 @@ msgstr "Failed… gold spent"
 msgid "Неутомимость"
 msgstr "Tirelessness"
 
+#: scripts/progress/hero_progress.gd
+msgid "Неутомимый"
+msgstr "Tireless"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "Нечего забирать"
+msgstr "Nothing to claim"
+
 #: scenes/ui/inventory_panel.gd
 msgid "Нечего сливать"
 msgstr "Nothing to fuse"
@@ -2479,13 +2891,33 @@ msgstr "Nothing to fuse"
 msgid "Ниже %d: %s"
 msgstr "Below %d: %s"
 
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Никто ещё не сражался с боссом на этой неделе."
+msgstr "Nobody has fought the boss this week yet."
+
 #: scenes/world/world_map.gd
 msgid "Ничья"
 msgstr "Unclaimed"
 
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Новая жизнь начнётся с %d-й волны («Стартовый рывок»)."
+msgstr "The new life starts at wave %d («Head Start»)."
+
+#: scenes/main.gd
+msgid "Новая жизнь! Получено душ: %d"
+msgstr "A new life! Souls received: %d"
+
 #: scenes/battle/battle.gd
 msgid "Новое умение: %s!"
 msgstr "New skill: %s!"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Новые атаки через %s"
+msgstr "New attacks in %s"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Новые задания через %s. Награда за каждое: золото и 1 душа (души — валюта перерождения)."
+msgstr "New quests in %s. Reward for each: gold and 1 soul (souls are the rebirth currency)."
 
 #: scripts/data/item_base.gd
 msgid "Ноги"
@@ -2539,6 +2971,10 @@ msgstr "Archmage's Vestments"
 msgid "Облачение главы Совета магов. Рун на нём больше, чем ниток."
 msgstr "Vestments of the head of the Council of Mages. More runes than threads."
 
+#: data/guild/guild.json
+msgid "Обозы"
+msgstr "Supply Trains"
+
 #: data/monsters/werewolf.tres
 msgid "Оборотень"
 msgstr "Werewolf"
@@ -2554,6 +2990,10 @@ msgstr "Training: %s"
 #: scenes/ui/hud.gd
 msgid "Обучено: %s ×%d"
 msgstr "Trained: %s ×%d"
+
+#: data/guild/guild.json
+msgid "Общая муштра"
+msgstr "Common Drill"
 
 #: scripts/items/item.gd
 msgid "Обычный"
@@ -2695,6 +3135,10 @@ msgstr "Rest"
 msgid "Отказаться"
 msgstr "Decline"
 
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Откроется, когда в ветку вложено %d очков"
+msgstr "Unlocks when %d points are invested in the branch"
+
 #: scenes/world/world_map.tscn
 msgid "Отмена"
 msgstr "Cancel"
@@ -2707,7 +3151,11 @@ msgstr "Cancel (resources will be refunded)"
 msgid "Отменить приглашение"
 msgstr "Cancel invitation"
 
-#: scenes/ui/guild_panel.gd
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Отозвать"
+msgstr "Recall"
+
+#: scenes/ui/guild/guild_reinforce_page.gd scenes/ui/guild_panel.gd
 msgid "Отправить"
 msgstr "Send"
 
@@ -2722,6 +3170,10 @@ msgstr "Send the hero to rest (restores energy).\nThe wave is paused."
 #: scenes/world/world_map.tscn
 msgid "Отправить солдат из армии замка к герою на карту (герой должен быть в замке)"
 msgstr "Send soldiers from the castle army to the hero on the map (the hero must be in the castle)"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Отправить союзнику"
+msgstr "Send to an ally"
 
 #: scenes/ui/unit_slot.tscn
 msgid "Отряд"
@@ -2738,6 +3190,10 @@ msgstr "The talent grid grows from here. Learn nodes next to already learned one
 #: scenes/ui/guild_panel.gd
 msgid "Офицер"
 msgstr "Officer"
+
+#: scripts/progress/hero_progress.gd
+msgid "Охотник на элиту"
+msgstr "Elite Hunter"
 
 #: data/talents/archer_talents.tres
 msgid "Охотничий инстинкт"
@@ -2759,6 +3215,14 @@ msgstr "The training queue is full"
 msgid "Очередь пуста — выберите отряд и нажмите «Нанять»"
 msgstr "The queue is empty — pick a unit and press «Recruit»"
 
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Очки"
+msgstr "Points"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Очки: каждый час — сумма уровней зон участников (центр карты ценнее). В регионе, который контролирует гильдия (больше всех зон, не меньше 10), очки ×1,5."
+msgstr "Points: every hour — the sum of the levels of members' zones (the map center is worth more). In a region the guild controls (most zones, at least 10), points ×1.5."
+
 #: scripts/autoload/world_service.gd
 msgid "Ошибка сервера (%d)"
 msgstr "Server error (%d)"
@@ -2775,6 +3239,10 @@ msgstr "Ceremonial armor of the king's personal guard — and not just for parad
 msgid "Пахнут старым пергаментом и чернилами из сажи драконов."
 msgstr "They smell of old parchment and ink made from dragon soot."
 
+#: data/guild/guild.json
+msgid "Пепельная долина"
+msgstr "Ashen Vale"
+
 #: data/treasures/warrior.json
 msgid "Пепельного стража"
 msgstr "Ash Warden"
@@ -2790,6 +3258,34 @@ msgstr "Transfer leadership"
 #: scenes/world/world_map.gd
 msgid "Перейти сюда"
 msgstr "Move here"
+
+#: scripts/progress/hero_progress.gd
+msgid "Переродитесь %s раз"
+msgstr "Be reborn %s times"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Переродиться"
+msgstr "Be reborn"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Переродиться (+%s)"
+msgstr "Be reborn (+%s)"
+
+#: scenes/ui/journal/journal_prestige_page.gd scenes/ui/journal_panel.gd
+msgid "Перерождение"
+msgstr "Rebirth"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Перерождение пока недоступно"
+msgstr "Rebirth is not available yet"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Перерождение сейчас даст %s. Чем дальше зайти, тем больше: на 50-й волне — %d, на 100-й — %d."
+msgstr "Rebirth now gives %s. The farther you go, the more: at wave 50 — %d, at wave 100 — %d."
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Перерождений: %d · рекорд волны в этой жизни: %d"
+msgstr "Rebirths: %d · best wave in this life: %d"
 
 #: data/treasures/mage.json
 msgid "Перо Феникса"
@@ -2823,6 +3319,14 @@ msgstr "Victory over {name}, zone captured"
 msgid "Победа!"
 msgstr "Victory!"
 
+#: scripts/progress/hero_progress.gd
+msgid "Победите %d боссов"
+msgstr "Defeat %d bosses"
+
+#: scripts/progress/hero_progress.gd
+msgid "Победите %s боссов"
+msgstr "Defeat %s bosses"
+
 #: data/treasures/mage.json
 msgid "Повелитель гроз"
 msgstr "Stormlord"
@@ -2838,6 +3342,18 @@ msgstr "Stormlord"
 #: data/treasures/archer.json
 msgid "Повелителя зверей"
 msgstr "Beastmaster"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Повержен! Следующий босс (сильнее) придёт через %s."
+msgstr "Defeated! The next (stronger) boss arrives in %s."
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Повысить ранг (1 очко)"
+msgstr "Raise rank (1 point)"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Под контролем: %s"
+msgstr "Controlled: %s"
 
 #: data/items/war_banner.tres
 msgid "Под этим знаменем войска сражаются яростнее."
@@ -2855,6 +3371,22 @@ msgstr "Sets enemies around the target on fire: 350% damage over 6 s."
 msgid "Поджог"
 msgstr "Ignite"
 
+#: scenes/ui/guild_panel.gd
+msgid "Подкрепления"
+msgstr "Reinforcements"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Подкрепления в пути"
+msgstr "Reinforcements are on the way"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Подкрепления вернулись в замок"
+msgstr "Reinforcements returned to the castle"
+
+#: server/src/world/game.ts
+msgid "Подкрепления можно отправлять только союзникам по гильдии"
+msgstr "Reinforcements can only be sent to guild allies"
+
 #: scenes/world/world_map.tscn
 msgid "Подтвердить"
 msgstr "Confirm"
@@ -2871,6 +3403,10 @@ msgstr "No events yet"
 msgid "Покинуть гильдию"
 msgstr "Leave the guild"
 
+#: scripts/progress/hero_progress.gd
+msgid "Покоритель волн"
+msgstr "Wave Conqueror"
+
 #: data/treasures/archer.json
 msgid "Покров Лесного Духа"
 msgstr "Shroud of the Forest Spirit"
@@ -2886,6 +3422,10 @@ msgstr "Field Camp"
 #: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
 msgid "Полководец"
 msgstr "Warlord"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "Получено душ: %d"
+msgstr "Souls received: %d"
 
 #: scenes/ui/inventory_panel.gd
 msgid "Получено: %s (%s)"
@@ -3067,6 +3607,14 @@ msgstr "Flamecaller"
 msgid "Призывателя пламени"
 msgstr "Flamecaller"
 
+#: scripts/progress/hero_progress.gd
+msgid "Примените умения %d раз"
+msgstr "Use skills %d times"
+
+#: scripts/progress/hero_progress.gd
+msgid "Примените умения %s раз"
+msgstr "Use skills %s times"
+
 #: scenes/ui/hud.tscn
 msgid "Применять умения автоматически.\nВручную — клик по умению или клавиши 1–9."
 msgstr "Use skills automatically.\nManually — click a skill or press keys 1–9."
@@ -3103,6 +3651,14 @@ msgstr "Sell"
 msgid "Продать (%d з)"
 msgstr "Sell (%d g)"
 
+#: scripts/progress/hero_progress.gd
+msgid "Пройдите %d волн"
+msgstr "Clear %d waves"
+
+#: scripts/progress/hero_progress.gd
+msgid "Пройдите %s волн"
+msgstr "Clear %s waves"
+
 #: data/biomes/cursed.tres
 msgid "Проклятая чаща"
 msgstr "Cursed Thicket"
@@ -3127,6 +3683,22 @@ msgstr "They crossed three kingdoms and never wore out."
 msgid "Пусто: сокровища находятся за время игры"
 msgstr "Empty: treasures are found over playtime"
 
+#: scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Путь"
+msgstr "Journey"
+
+#: scenes/ui/hud.gd
+msgid "Путь (%d)"
+msgstr "Journey (%d)"
+
+#: scenes/ui/journal_panel.tscn
+msgid "Путь героя"
+msgstr "Hero's Journey"
+
+#: scenes/ui/hud.tscn
+msgid "Путь героя: задания, достижения, бестиарий, перерождение [J]"
+msgstr "Hero's journey: quests, achievements, bestiary, rebirth [J]"
+
 #: data/talents/warrior_talents.tres
 msgid "Путь меча"
 msgstr "Way of the Sword"
@@ -3146,6 +3718,14 @@ msgstr "Cleave"
 #: data/buildings/town_hall.tres
 msgid "Ратуша"
 msgstr "Town Hall"
+
+#: scenes/world/world_map.gd
+msgid "Регион: %s (%s)"
+msgstr "Region: %s (%s)"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Регионы"
+msgstr "Regions"
 
 #: scripts/items/item.gd
 msgid "Редкий"
@@ -3291,6 +3871,14 @@ msgstr "Thornwood Boots"
 msgid "Сбор налогов"
 msgstr "Tax Collection"
 
+#: server/src/world/guilds.ts
+msgid "Сбрасывать бонусы можно раз в сутки"
+msgstr "Perks can be reset once a day"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Сбрасываются волна, уровень и таланты (очки возвращаются). Остаются снаряжение, сокровища, золото, замок, армия и гильдия."
+msgstr "The wave, level and talents are reset (points are refunded). Equipment, treasures, gold, castle, army and guild stay."
+
 #: scenes/talents/talent_grid.tscn
 msgid "Сброс"
 msgstr "Reset"
@@ -3298,6 +3886,14 @@ msgstr "Reset"
 #: scenes/talents/talent_grid.gd
 msgid "Сброс (%d з)"
 msgstr "Reset (%d g)"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Сброс через %s"
+msgstr "Reset in %s"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Сбросить бонусы"
+msgstr "Reset perks"
 
 #: scenes/ui/hud.tscn
 msgid "Свернуть в трей (игра продолжится)"
@@ -3307,9 +3903,29 @@ msgstr "Minimize to tray (the game keeps running)"
 msgid "Свободных очков: %d · изучено %d из %d"
 msgstr "Free points: %d · learned %d of %d"
 
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Свободных очков: %d из %d · каждый уровень гильдии даёт %d"
+msgstr "Free points: %d of %d · each guild level gives %d"
+
 #: scenes/ui/guild_panel.gd
 msgid "Сделать офицером"
 msgstr "Make officer"
+
+#: data/guild/guild.json
+msgid "Северные пустоши"
+msgstr "Northern Wastes"
+
+#: scenes/ui/guild_panel.gd
+msgid "Сезон"
+msgstr "Season"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Сезон %d · закончится через %s\nВаша гильдия: %d место, %d очков"
+msgstr "Season %d · ends in %s\nYour guild: place %d, %d points"
+
+#: server/src/world/guilds.ts
+msgid "Сезон {season} завершён: {place} место! Каждый участник получил {gold} золота"
+msgstr "Season {season} is over: place {place}! Every member received {gold} gold"
 
 #: scenes/ui/kingdom_panel.gd
 msgid "Сейчас: "
@@ -3327,9 +3943,17 @@ msgstr "Heart of the Mountain"
 msgid "Сердце королевства. Уровень Ратуши ограничивает уровень остальных зданий и расширяет склад."
 msgstr "The heart of the kingdom. The Town Hall level caps all other buildings and expands storage."
 
+#: data/guild/guild.json
+msgid "Сердце мира"
+msgstr "Heart of the World"
+
 #: data/talents/mage_talents.tres
 msgid "Сердце огня"
 msgstr "Heart of Fire"
+
+#: data/guild/guild.json
+msgid "Серебряная гавань"
+msgstr "Silver Harbor"
 
 #: data/treasures/archer.json
 msgid "Серебряного листа"
@@ -3363,6 +3987,10 @@ msgstr "Army power: %d"
 msgid "Сила армии: 0"
 msgstr "Army power: 0"
 
+#: scripts/progress/hero_progress.gd
+msgid "Сила предков"
+msgstr "Ancestral Might"
+
 #: scripts/data/stat_modifier.gd
 msgid "Сила удара"
 msgstr "Striking Power"
@@ -3386,6 +4014,10 @@ msgstr "Training speed, %"
 #: scenes/world/battle_replay.tscn
 msgid "Скорость повтора"
 msgstr "Replay speed"
+
+#: data/guild/guild.json
+msgid "Слава"
+msgstr "Glory"
 
 #: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
 msgid "Слава правителя"
@@ -3423,6 +4055,10 @@ msgstr "Deadly Volley"
 msgid "Снайпер"
 msgstr "Sniper"
 
+#: server/src/world/guilds.ts
+msgid "Сначала вложите больше очков в эту ветку"
+msgstr "Invest more points in this branch first"
+
 #: scenes/talents/talent_grid.gd
 msgid "Сначала изучите соседний узел"
 msgstr "Learn a neighboring node first"
@@ -3438,6 +4074,10 @@ msgstr "Unequip"
 #: scenes/ui/guild_panel.gd
 msgid "Снять офицера"
 msgstr "Demote officer"
+
+#: scripts/progress/hero_progress.gd
+msgid "Соберите %s сокровищ"
+msgstr "Collect %s treasures"
 
 #: scenes/world/world_map.tscn
 msgid "События"
@@ -3499,6 +4139,10 @@ msgstr "Stormbreaker"
 msgid "Солдат в замке: %d"
 msgstr "Soldiers in castle: %d"
 
+#: data/guild/guild.json
+msgid "Солнечные поля"
+msgstr "Sunlit Fields"
+
 #: scripts/data/stat_modifier.gd
 msgid "Сон воина"
 msgstr "Warrior's Sleep"
@@ -3515,6 +4159,10 @@ msgstr "The message is too long"
 msgid "Сообщение…"
 msgstr "Message…"
 
+#: scenes/ui/guild_panel.gd
+msgid "Состав"
+msgstr "Roster"
+
 #: data/treasures/mage.json
 msgid "Сотканы из утреннего света над храмом Зари."
 msgstr "Woven from the morning light above the Temple of Dawn."
@@ -3526,6 +4174,10 @@ msgstr "Save and quit"
 #: scenes/world/world_map.gd
 msgid "Союзник по гильдии — нападать нельзя"
 msgstr "Guild ally — you can't attack"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Союзники пока не присылали войска."
+msgstr "No allies have sent troops yet."
 
 #: scenes/ui/needs_panel.gd
 msgid "Спит…"
@@ -3543,6 +4195,14 @@ msgstr "Cut from the tree under which the first mage taught."
 msgid "Стальная кожа"
 msgstr "Steel Skin"
 
+#: scripts/progress/hero_progress.gd
+msgid "Стартовый рывок"
+msgstr "Head Start"
+
+#: data/guild/guild.json
+msgid "Старые курганы"
+msgstr "Old Barrows"
+
 #: data/items/rusty_sword.tres
 msgid "Старый, но всё ещё острый клинок."
 msgstr "An old but still sharp blade."
@@ -3554,6 +4214,10 @@ msgstr "A wall of shields and spears: sturdy defense."
 #: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
 msgid "Стойкость ветерана"
 msgstr "Veteran's Resilience"
+
+#: scripts/progress/hero_progress.gd
+msgid "Стойкость предков"
+msgstr "Ancestral Vigor"
 
 #: server/src/world/game.ts
 msgid "Столько солдат в армии нет"
@@ -3578,6 +4242,10 @@ msgstr "Shooter"
 #: data/treasures/archer.json
 msgid "Стрелы в этом наряде летят быстрее мысли."
 msgstr "In this outfit, arrows fly faster than thought."
+
+#: scripts/progress/hero_progress.gd
+msgid "Стремительность"
+msgstr "Swiftness"
 
 #: data/items/drill_manual.tres
 msgid "Строевой устав"
@@ -3619,6 +4287,10 @@ msgstr "Bag: %d / %d"
 msgid "Сумка: 0 / 60"
 msgstr "Bag: 0 / 60"
 
+#: data/guild/guild.json
+msgid "Сумрачный лес"
+msgstr "Twilight Woods"
+
 #: data/treasures/mage.json
 msgid "Сфера Чистой Маны"
 msgstr "Orb of Pure Mana"
@@ -3626,6 +4298,10 @@ msgstr "Orb of Pure Mana"
 #: data/needs/hunger.tres
 msgid "Сытость"
 msgstr "Satiety"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Таблица сезона"
+msgstr "Season standings"
 
 #: data/buildings/tavern.tres
 msgid "Таверна"
@@ -3719,6 +4395,10 @@ msgstr "Sure?"
 msgid "Точно? %d з"
 msgstr "Sure? %d g"
 
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Точно? Получить %s"
+msgstr "Sure? Get %s"
+
 #: data/talents/archer_talents.tres
 msgid "Точность снайпера"
 msgstr "Sniper's Precision"
@@ -3730,6 +4410,10 @@ msgstr "Trains the castle army and the hero. Unlocks new units, adds army capaci
 #: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
 msgid "Трофеи"
 msgstr "Trophies"
+
+#: data/guild/guild.json
+msgid "Туманный перевал"
+msgstr "Misty Pass"
 
 #: data/treasures/mage.json
 msgid "Туфли"
@@ -3795,9 +4479,33 @@ msgstr "Warm to the touch — even in winter."
 msgid "Тёплый, тяжёлый и пахнет лесом."
 msgstr "Warm, heavy and smells of the forest."
 
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %d монстров"
+msgstr "Kill %d monsters"
+
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %d элитных монстров"
+msgstr "Kill %d elite monsters"
+
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %s монстров"
+msgstr "Kill %s monsters"
+
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %s элитных монстров"
+msgstr "Kill %s elite monsters"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "Убито: %d"
+msgstr "Killed: %d"
+
 #: data/talents/warrior_talents.tres
 msgid "Удар молота"
 msgstr "Hammer Blow"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Удар на %d урона"
+msgstr "Hit for %d damage"
 
 #: data/skills/warrior_whirlwind.tres
 msgid "Удар по всем врагам вокруг на 150% урона."
@@ -3811,6 +4519,10 @@ msgstr "Strikes the target for 250% damage."
 msgid "Удар щитом"
 msgstr "Shield Bash"
 
+#: data/guild/guild.json
+msgid "Удача гильдии"
+msgstr "Guild Fortune"
+
 #: scripts/data/stat_modifier.gd
 msgid "Удача торговца"
 msgstr "Merchant's Luck"
@@ -3823,6 +4535,10 @@ msgstr "Comfortable boots: a lighter step, a faster strike."
 msgid "Уже изучено"
 msgstr "Already learned"
 
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Уйдёт через %s. Здоровье общее — бейте всей гильдией."
+msgstr "Leaves in %s. Health is shared — fight as a guild."
+
 #: scripts/kingdom/army_state.gd server/src/world/kingdom.ts
 msgid "Укажите количество"
 msgstr "Enter an amount"
@@ -3830,6 +4546,10 @@ msgstr "Enter an amount"
 #: server/src/world/game.ts server/src/world/guilds.ts
 msgid "Укажите сумму"
 msgstr "Enter an amount"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Улучшение куплено"
+msgstr "Upgrade bought"
 
 #: scenes/ui/kingdom_panel.gd
 msgid "Улучшить до ур. %d"
@@ -3871,6 +4591,18 @@ msgstr "Level %d!"
 msgid "Урон"
 msgstr "Damage"
 
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "Урон против вида: %s за 100 / 1 000 / 10 000 убийств. Полностью изучено видов: %d — +%d%% урона против всех."
+msgstr "Damage against a species: %s for 100 / 1,000 / 10,000 kills. Species fully studied: %d — +%d%% damage against all."
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Урон участников"
+msgstr "Members' damage"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Урон — сила армии замка и героя; солдаты не гибнут."
+msgstr "Damage is the power of your castle army and hero; soldiers don't die."
+
 #: scenes/ui/inventory_panel.gd
 msgid "Успех! Теперь +%d"
 msgstr "Success! Now +%d"
@@ -3891,7 +4623,7 @@ msgstr "Member"
 msgid "Участник исключён"
 msgstr "Member kicked"
 
-#: scenes/ui/guild_panel.gd
+#: scenes/ui/guild/guild_season_page.gd scenes/ui/guild_panel.gd
 msgid "Участники"
 msgstr "Members"
 
@@ -4015,6 +4747,10 @@ msgstr "Library Keeper Trousers"
 msgid "Шаровары Шёлкового Пути"
 msgstr "Silk Road Trousers"
 
+#: data/guild/guild.json
+msgid "Шепчущие рощи"
+msgstr "Whispering Groves"
+
 #: data/treasures/archer.json
 msgid "Шепчущий Ветер"
 msgstr "Whispering Wind"
@@ -4127,6 +4863,10 @@ msgstr "Silverleaf Breeches"
 msgid "Штаны Терновой чащи"
 msgstr "Thornwood Breeches"
 
+#: data/guild/guild.json
+msgid "Щит братства"
+msgstr "Shield of Brotherhood"
+
 #: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
 msgid "Щит веры"
 msgstr "Shield of Faith"
@@ -4142,6 +4882,10 @@ msgstr "The ancestral shield guards those who hold the line."
 #: scenes/ui/inventory_panel.gd
 msgid "Экипировка"
 msgstr "Equipment"
+
+#: data/guild/guild.json
+msgid "Экономика"
+msgstr "Economy"
 
 #: scenes/battle/battle.gd
 msgid "Элита: %s!"
@@ -4179,6 +4923,10 @@ msgstr "This player has already been invited"
 msgid "Эфирный щит"
 msgstr "Ethereal Shield"
 
+#: data/guild/guild.json
+msgid "Южный предел"
+msgstr "Southern Reach"
+
 #: data/skills/archer_poison_arrow.tres
 msgid "Ядовитая стрела"
 msgstr "Poison Arrow"
@@ -4190,6 +4938,10 @@ msgstr "Language / Язык"
 #: scenes/ui/settings_panel.tscn
 msgid "Язык меняется сразу."
 msgstr "The language changes immediately."
+
+#: data/guild/guild.json
+msgid "Янтарный берег"
+msgstr "Amber Coast"
 
 #: data/talents/warrior_talents.tres
 msgid "Ярость битвы"
@@ -4211,6 +4963,10 @@ msgstr "army %d slots"
 msgid "брони"
 msgstr "armor"
 
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "в пути %s"
+msgstr "on the way %s"
+
 #: scenes/ui/guild_panel.gd
 msgid "в сети"
 msgstr "online"
@@ -4227,6 +4983,18 @@ msgstr "your castle"
 msgid "вашу зону #%d"
 msgstr "your zone #%d"
 
+#: scripts/ui/ui_format.gd
+msgid "душ"
+msgstr "souls"
+
+#: scripts/ui/ui_format.gd
+msgid "душа"
+msgstr "soul"
+
+#: scripts/ui/ui_format.gd
+msgid "души"
+msgstr "souls"
+
 #: scripts/data/stat_modifier.gd
 msgid "замедления голода и жажды"
 msgstr "slower hunger and thirst"
@@ -4235,21 +5003,37 @@ msgstr "slower hunger and thirst"
 msgid "здания до ур. %d"
 msgstr "buildings up to lv. %d"
 
-#: scripts/data/stat_modifier.gd
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
 msgid "здоровья"
 msgstr "health"
+
+#: data/guild/guild.json
+msgid "здоровья героя"
+msgstr "hero health"
 
 #: scripts/data/stat_modifier.gd
 msgid "здоровья за убийство"
 msgstr "health per kill"
 
-#: scripts/data/stat_modifier.gd
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
 msgid "золота"
 msgstr "gold"
+
+#: data/guild/guild.json
+msgid "золота с монстров"
+msgstr "gold from monsters"
 
 #: scenes/world/world_map.gd
 msgid "зону #%d"
 msgstr "zone #%d"
+
+#: scripts/data/guild_catalog.gd
+msgid "изучите: %s"
+msgstr "learn: %s"
+
+#: scenes/world/world_map.gd
+msgid "контроль: [%s]"
+msgstr "controlled by [%s]"
 
 #: scripts/data/stat_modifier.gd
 msgid "крит. урона"
@@ -4259,13 +5043,37 @@ msgstr "crit damage"
 msgid "мало"
 msgstr "low"
 
-#: scenes/world/battle_replay.gd scenes/world/world_map.gd
+#: data/guild/guild.json
+msgid "меньше еды армии"
+msgstr "less army food"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "на месте"
+msgstr "arrived"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "награда: %s"
+msgstr "reward: %s"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "начало с %d-й волны"
+msgstr "start at wave %d"
+
+#: scenes/world/battle_replay.gd scenes/world/world_map.gd scripts/ui/panel_ui.gd
 msgid "нет"
 msgstr "none"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "нет бонуса"
+msgstr "no bonus"
 
 #: scenes/world/world_map.gd
 msgid "нет — зону займут без боя!"
 msgstr "none — the zone will be taken without a fight!"
+
+#: scenes/world/world_map.gd
+msgid "никто не контролирует"
+msgstr "uncontrolled"
 
 #: scenes/ui/needs_panel.gd
 msgid "норма"
@@ -4275,13 +5083,25 @@ msgstr "normal"
 msgid "обучено: %s ×%d"
 msgstr "trained: %s ×%d"
 
-#: scripts/data/stat_modifier.gd
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
 msgid "опыта"
 msgstr "experience"
+
+#: data/guild/guild.json
+msgid "опыта героя"
+msgstr "hero XP"
+
+#: data/guild/guild.json
+msgid "опыта гильдии за победы и босса"
+msgstr "guild XP from victories and the boss"
 
 #: scenes/ui/guild_panel.gd
 msgid "от 3 до 24 символов"
 msgstr "3 to 24 characters"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "пока ни одного региона"
+msgstr "no regions yet"
 
 #: scenes/battle/battle.gd
 msgid "построено: "
@@ -4291,11 +5111,15 @@ msgstr "built: "
 msgid "регенерации"
 msgstr "regeneration"
 
+#: scenes/ui/guild/guild_season_page.gd
+msgid "сезон %d — %d место"
+msgstr "season %d — place %d"
+
 #: scenes/world/battle_replay.gd
 msgid "сила %d · %s"
 msgstr "power %d · %s"
 
-#: scripts/data/stat_modifier.gd
+#: data/guild/guild.json scripts/data/stat_modifier.gd
 msgid "силы армии"
 msgstr "army power"
 
@@ -4307,11 +5131,11 @@ msgstr "click power"
 msgid "склад %d, казна %d"
 msgstr "storage %d, treasury %d"
 
-#: scripts/data/stat_modifier.gd
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
 msgid "скорости атаки"
 msgstr "attack speed"
 
-#: scripts/data/stat_modifier.gd
+#: data/guild/guild.json scripts/data/stat_modifier.gd
 msgid "скорости обучения"
 msgstr "training speed"
 
@@ -4335,13 +5159,17 @@ msgstr "lv. %d"
 msgid "ур.%d"
 msgstr "lv.%d"
 
-#: scripts/data/stat_modifier.gd
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
 msgid "урона"
 msgstr "damage"
 
 #: scenes/ui/inventory_panel.gd
 msgid "урона «%s»"
 msgstr "«%s» damage"
+
+#: data/guild/guild.json
+msgid "урона героя"
+msgstr "hero damage"
 
 #: scenes/ui/inventory_panel.gd scripts/data/stat_modifier.gd
 msgid "урона умений"
@@ -4355,7 +5183,11 @@ msgstr "good"
 msgid "шанса двойного удара"
 msgstr "double strike chance"
 
-#: scripts/data/stat_modifier.gd
+#: data/guild/guild.json
+msgid "шанса добычи"
+msgstr "loot chance"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
 msgid "шанса дропа"
 msgstr "drop chance"
 
@@ -4382,6 +5214,14 @@ msgstr "⚠ The army is starving — power −50%"
 #: scenes/ui/hud.gd
 msgid "✉ %s приглашает вас в гильдию %s — откройте «Гильдию» [G]"
 msgstr "✉ %s invites you to the guild %s — open «Guild» [G]"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "✔ Получено"
+msgstr "✔ Claimed"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "✔ всё"
+msgstr "✔ done"
 
 #: scenes/ui/hud.gd
 msgid "✦ Сокровище: %s (%s) — загляните в Сокровищницу [I]"

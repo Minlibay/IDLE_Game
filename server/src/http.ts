@@ -168,8 +168,16 @@ export function createHttpServer(game: Game, gameData: GameData, settings: HttpS
     "POST /api/guild/kick": guildAction(({ player, body, now }) => game.guilds.kick(player, body.playerId, now)),
     "POST /api/guild/role": guildAction(({ player, body, now }) => game.guilds.setRole(player, body.playerId, body.role, now)),
     "POST /api/guild/transfer": guildAction(({ player, body, now }) => game.guilds.transfer(player, body.playerId, now)),
-    "POST /api/guild/disband": guildAction(({ player }) => game.guilds.disband(player)),
+    "POST /api/guild/disband": guildAction(({ player, now }) => game.guilds.disband(player, now)),
     "POST /api/guild/donate": guildAction(({ player, body, now }) => game.guilds.donate(player, body.gold, now)),
+    "POST /api/guild/perk": guildAction(({ player, body, now }) => game.guilds.learnPerk(player, body.perkId, now)),
+    "POST /api/guild/perks/reset": guildAction(({ player, now }) => game.guilds.resetPerks(player, now)),
+    "POST /api/guild/boss/attack": {
+      auth: true,
+      handle: ({ player, now }) => ({ attack: game.guilds.attackBoss(player, now), ...guildReply(player, now) }),
+    },
+    "POST /api/guild/reinforce": guildAction(({ player, body, now }) => game.reinforce(player, body.playerId, units(body.units), now)),
+    "POST /api/guild/reinforce/recall": guildAction(({ player, body, now }) => game.recallReinforcement(player, body.index, now)),
     "POST /api/guild/chat": guildAction(({ player, body, now }) => game.guilds.postMessage(player, body.text, now), (body) => Number(body.since) || 0),
 
     "POST /api/kingdom/deposit": {

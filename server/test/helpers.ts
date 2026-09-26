@@ -5,7 +5,7 @@ import { Game, type GameSettings, type Player } from "../src/world/game.ts";
 import { seededRandom } from "../src/world/generator.ts";
 
 const localPath = (relative: string) => new URL(relative, import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
-export const gameData = loadGameData(localPath("../data/game_data.json"), localPath("../../data/treasures"));
+export const gameData = loadGameData(localPath("../data/game_data.json"), localPath("../../data/treasures"), localPath("../../data/guild/guild.json"));
 
 export const settings: GameSettings = { ...CONFIG, marchSeconds: 10, castleMarchSeconds: 30, luck: 0, devSpeed: 1 };
 

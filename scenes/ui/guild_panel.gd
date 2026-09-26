@@ -1,7 +1,7 @@
 class_name GuildPanel
 extends PanelContainer
 ## Окно гильдии [G]. Без гильдии — создание гильдии и полученные приглашения;
-## в гильдии — участники, чат и управление (приглашения, взносы, выход).
+## в гильдии — вкладки: состав (участники, чат, управление), бонусы, босс, сезон, подкрепления.
 ## Всё решает сервер (server/src/world/guilds.ts): окно показывает состояние и отправляет запросы.
 
 const REFRESH_INTERVAL := 3.0
@@ -40,6 +40,11 @@ var _armed := ""
 var _armed_timer := 0.0
 var _color: String = GUILD_COLORS[0]
 var _built := false
+var _tab := 0
+var _tabs_row: HBoxContainer
+var _tab_buttons: Array[Button] = []
+## Страницы вкладок (0 — «Состав» = _in_guild).
+var _pages: Array[Control] = []
 
 # Без гильдии.
 var _no_guild: HBoxContainer
@@ -71,8 +76,15 @@ var _offline_label: Label
 func _ready() -> void:
 	hide()
 	close_button.pressed.connect(close)
+	_build_tabs()
 	_build_no_guild()
 	_build_in_guild()
+	_pages.append(_in_guild)
+	for page: Control in [GuildPerksPage.new(), GuildBossPage.new(), GuildSeasonPage.new(), GuildReinforcePage.new()]:
+		page.visible = false
+		body.add_child(page)
+		page.result.connect(func(text: String, ok: bool) -> void: _show_result(text, COLOR_OK if ok else COLOR_BAD))
+		_pages.append(page)
 	_offline_label = Label.new()
 	_offline_label.text = "Нет связи с сервером карты — гильдии работают только онлайн."
 	_offline_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -146,16 +158,23 @@ func _refresh() -> void:
 	var in_guild := online and not summary.is_empty()
 	_offline_label.visible = not online
 	_no_guild.visible = online and summary.is_empty()
-	_in_guild.visible = in_guild
+	for index in _pages.size():
+		_pages[index].visible = in_guild and index == _tab
+	for button in _tab_buttons:
+		button.visible = in_guild
 	level_label.visible = in_guild
 	xp_bar.visible = in_guild
 	if in_guild:
 		_refresh_header(summary)
-		_refresh_members()
-		_refresh_chat()
-		_refresh_manage()
-		if not WorldService.guild.is_empty():
-			WorldService.mark_guild_chat_read()
+		_refresh_tab_titles()
+		if _tab == 0:
+			_refresh_members()
+			_refresh_chat()
+			_refresh_manage()
+			if not WorldService.guild.is_empty():
+				WorldService.mark_guild_chat_read()
+		elif not WorldService.guild.is_empty():
+			_pages[_tab].call(&"refresh")
 	else:
 		title_label.text = tr("Гильдия")
 		title_label.remove_theme_color_override("font_color")
@@ -419,6 +438,63 @@ func _on_color_pressed(color: String) -> void:
 	_color = color
 	for button in _color_buttons:
 		button.button_pressed = button.get_meta(&"color") == color
+
+
+# --- Вкладки ------------------------------------------------------------------------------
+
+const TAB_TITLES := ["Состав", "Бонусы", "Босс", "Сезон", "Подкрепления"]
+
+
+## Ряд вкладок под заголовком; справа — строка с итогом последнего действия.
+func _build_tabs() -> void:
+	_tabs_row = HBoxContainer.new()
+	_tabs_row.add_theme_constant_override("separation", 4)
+	var group := ButtonGroup.new()
+	for index in TAB_TITLES.size():
+		var tab := Button.new()
+		tab.toggle_mode = true
+		tab.button_group = group
+		tab.button_pressed = index == _tab
+		tab.custom_minimum_size = Vector2(110, 24)
+		tab.text = tr(TAB_TITLES[index])
+		tab.pressed.connect(_on_tab_pressed.bind(index))
+		_tabs_row.add_child(tab)
+		_tab_buttons.append(tab)
+	result_label.reparent(_tabs_row)
+	result_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	# Строка итога ушла из заголовка — растягиваем подпись участников, чтобы крестик остался у правого края.
+	info_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var vbox := body.get_parent()
+	vbox.add_child(_tabs_row)
+	vbox.move_child(_tabs_row, 1)
+
+
+## Подписи вкладок со счётчиками: свободные очки бонусов (у главы), оставшиеся атаки по боссу.
+func _refresh_tab_titles() -> void:
+	var view := WorldService.guild
+	var titles := TAB_TITLES.map(func(title: String) -> String: return tr(title))
+	var free := int(view.get("perkPointsFree", 0))
+	if free > 0 and WorldService.guild_role() == "leader":
+		titles[1] = "%s (%d)" % [titles[1], free]
+	var boss: Dictionary = view.get("boss", {})
+	if not boss.is_empty() and boss.killedAt == null and int(boss.attacksLeft) > 0:
+		titles[2] = "%s (%d)" % [titles[2], int(boss.attacksLeft)]
+	for index in _tab_buttons.size():
+		_tab_buttons[index].text = titles[index]
+
+
+## Открыть окно на вкладке (0 — состав … 4 — подкрепления).
+func show_tab(index: int) -> void:
+	open()
+	_tab = clampi(index, 0, TAB_TITLES.size() - 1)
+	_tab_buttons[_tab].button_pressed = true
+	_refresh()
+
+
+func _on_tab_pressed(index: int) -> void:
+	_tab = index
+	_armed = ""
+	_refresh()
 
 
 # --- Построение ------------------------------------------------------------------------

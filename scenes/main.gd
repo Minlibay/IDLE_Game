@@ -37,6 +37,7 @@ func _ready() -> void:
 		if args.has("wave"):
 			GameState.wave = maxi(1, int(args.wave))
 			GameState.best_wave = GameState.wave
+			GameState.progress.run_best_wave = GameState.wave
 	if args.has("tired"):
 		for need in Database.needs:
 			if need.restored_by_rest:
@@ -49,6 +50,7 @@ func _ready() -> void:
 	else:
 		_show_creation()
 	Settings.language_changed.connect(_on_language_changed)
+	GameState.prestiged.connect(_on_prestiged)
 
 	if args.has("open-inventory") and _current.has_node("HUD"):
 		(_current.get_node("HUD") as Hud).inventory_panel.open.call_deferred()
@@ -61,7 +63,9 @@ func _ready() -> void:
 		hud.kingdom_panel.tabs.current_tab = 1
 		hud.kingdom_panel.open.call_deferred()
 	if args.has("open-guild") and _current.has_node("HUD"):
-		(_current.get_node("HUD") as Hud).guild_panel.open.call_deferred()
+		(_current.get_node("HUD") as Hud).guild_panel.show_tab.call_deferred(int(args.get("guild-tab", 0)))
+	if args.has("open-journal") and _current.has_node("HUD"):
+		(_current.get_node("HUD") as Hud).journal_panel.show_tab.call_deferred(int(args.get("journal-tab", 0)))
 	if args.has("open-settings") and _current.has_node("HUD"):
 		(_current.get_node("HUD") as Hud).settings_panel.open.call_deferred()
 	if args.has("open-map") and _current.has_node("HUD"):
@@ -90,6 +94,16 @@ func _on_language_changed() -> void:
 	_show_battle()
 	if _current.has_node("HUD"):
 		(_current.get_node("HUD") as Hud).settings_panel.open.call_deferred()
+
+
+## После перерождения бой начинается заново с новой волны; окно пути открывается на перерождении.
+func _on_prestiged(gained: int) -> void:
+	_show_battle()
+	WorldService.report_hero_level()
+	if _current.has_node("HUD"):
+		var hud := _current.get_node("HUD") as Hud
+		hud.journal_panel.show_tab.call_deferred(3)
+		hud.show_message.call_deferred(tr("Новая жизнь! Получено душ: %d") % gained)
 
 
 func _show_creation() -> void:

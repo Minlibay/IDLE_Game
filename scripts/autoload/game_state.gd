@@ -21,6 +21,8 @@ signal army_gear_changed
 signal treasures_changed
 ## Найдено новое сокровище (дроп по игровому времени с сервера).
 signal treasure_found(item: Item)
+## Герой переродился: gained — сколько душ получено. Сцена боя пересоздаётся (main.gd).
+signal prestiged(gained: int)
 
 const SAVE_VERSION := 1
 const INVENTORY_SIZE := 60
@@ -78,6 +80,8 @@ var _talent_bonuses: Dictionary = {}
 var kingdom := KingdomState.new()
 ## Потребности героя: сытость, жажда, бодрость.
 var needs := NeedsState.new()
+## Перерождение и души, бестиарий, достижения, ежедневные задания.
+var progress := HeroProgress.new()
 ## Отчёт об оффлайн-прогрессе после загрузки (пусто — не было). Показывает и очищает бой.
 var offline_report: Dictionary = {}
 ## Сколько секунд игра была закрыта (для отчёта; 0 — отчёт не нужен).
@@ -136,6 +140,7 @@ func create_character(p_name: String, p_class_id: String) -> void:
 	_rebuild_talent_bonuses()
 	kingdom.reset()
 	needs.reset()
+	progress = HeroProgress.new()
 	var starter := LootGenerator.create_starter_weapon(class_id)
 	if starter:
 		equipment[starter.get_base().slot] = starter
@@ -250,11 +255,12 @@ func reset_talents() -> bool:
 	return true
 
 
-## Суммарный бонус к стату от всех источников: таланты + здания + потребности + территории.
-## С skill_id — плюс бонусы, действующие только на это умение.
+## Суммарный бонус к стату от всех источников: таланты + здания + потребности + территории и гильдия
+## + сокровища + улучшения за души. С skill_id — плюс бонусы, действующие только на это умение.
 func get_bonus(stat: int, skill_id := "") -> float:
 	return get_talent_bonus(stat, skill_id) + kingdom.get_bonus(stat, skill_id) + needs.get_bonus(stat, skill_id) \
-		+ float(territory_bonuses.get(stat, 0.0)) + StatModifier.read_bonus(_treasure_bonuses, stat, skill_id)
+		+ float(territory_bonuses.get(stat, 0.0)) + StatModifier.read_bonus(_treasure_bonuses, stat, skill_id) \
+		+ progress.get_bonus(stat)
 
 
 ## Бонусы территорий с сервера: {"GOLD_FIND": 1.5, ...} (имена = StatModifier.Stat).
@@ -325,7 +331,44 @@ func add_xp(amount: int) -> void:
 func set_wave(value: int) -> void:
 	wave = maxi(1, value)
 	best_wave = maxi(best_wave, wave)
+	progress.run_best_wave = maxi(progress.run_best_wave, wave)
 	progress_changed.emit()
+
+
+# --- Перерождение -----------------------------------------------------------------
+
+## Новая жизнь героя: волна (с учётом «Стартового рывка»), уровень 1, таланты возвращаются.
+## Снаряжение, сокровища, золото, замок и гильдия остаются. Возвращает полученные души (0 — рано).
+func prestige() -> int:
+	if not progress.can_prestige():
+		return 0
+	var gained := HeroProgress.souls_for(progress.run_best_wave)
+	progress.souls += gained
+	progress.prestige_count += 1
+	progress.record("prestige")
+	level = 1
+	xp = 0
+	talent_ranks.clear()
+	_rebuild_talent_bonuses()
+	wave = progress.start_wave()
+	best_wave = maxi(best_wave, wave)
+	progress.run_best_wave = wave
+	save_game()
+	talents_changed.emit()
+	stats_changed.emit()
+	progress_changed.emit()
+	character_changed.emit()
+	prestiged.emit(gained)
+	return gained
+
+
+## Купить улучшение за души (сразу меняет характеристики героя).
+func buy_soul_upgrade(upgrade_id: String) -> bool:
+	if not progress.buy_upgrade(upgrade_id):
+		return false
+	stats_changed.emit()
+	save_game()
+	return true
 
 
 func add_gold(amount: int) -> void:
@@ -599,6 +642,7 @@ func save_game() -> void:
 		"talents": talent_ranks,
 		"kingdom": kingdom.to_dict(),
 		"needs": needs.to_dict(),
+		"progress": progress.to_dict(),
 		"saved_at": Time.get_unix_time_from_system(),
 		"inventory": inventory.map(func(item: Item) -> Dictionary: return item.to_dict()),
 		"equipment": equipment.values().map(func(item: Item) -> Dictionary: return item.to_dict()),
@@ -661,6 +705,8 @@ func load_game() -> void:
 	kingdom.from_dict(saved_kingdom if saved_kingdom is Dictionary else {})
 	var saved_needs: Variant = data.get("needs", {})
 	needs.from_dict(saved_needs if saved_needs is Dictionary else {})
+	var saved_progress: Variant = data.get("progress", {})
+	progress.from_dict(saved_progress if saved_progress is Dictionary else {}, best_wave)
 	_apply_offline_progress(float(data.get("saved_at", 0.0)))
 
 
