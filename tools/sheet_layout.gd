@@ -1,7 +1,8 @@
 extends RefCounted
 ## Раскладка нарезанного листа (результат tools/slice_ui_sheet.gd) по сетке «ряды × колонки».
 ## Общая логика для tools/place_set_icons.gd и tools/place_sheet_sprites.gd:
-##   - мелкие обрезки (искры, частицы) отбрасываются;
+##   - мелкие обрезки (искры, частицы) отбрасываются — или, с keep_details, приклеиваются к ближайшему
+##     предмету, если лежат рядом с ним (искры вокруг шара, линии скорости у меча, «zZ» у луны);
 ##   - ряды — по самым большим разрывам по вертикали;
 ##   - в ряду куски распределяются по колонкам (к ближайшему центру, центры уточняются по площади),
 ##     поэтому половинки одного предмета (пара наплечников, сапог) склеиваются в одну картинку.
@@ -10,13 +11,17 @@ extends RefCounted
 const MIN_AREA_SHARE := 0.04
 
 
+## Мелкий кусок приклеивается к предмету, если он не дальше этой доли размера предмета от его рамки.
+const DETAIL_MAX_DISTANCE := 0.5
+
+
 ## Возвращает ряды → колонки → группы кусков (элементы манифеста). Ошибка — пустой массив и push_error.
-static func layout(manifest: Dictionary, rows: int, columns: int) -> Array:
-	var elements: Array = manifest.get("elements", [])
+static func layout(manifest: Dictionary, rows: int, columns: int, keep_details := false) -> Array:
+	var all: Array = manifest.get("elements", [])
 	var max_area := 0.0
-	for element: Dictionary in elements:
+	for element: Dictionary in all:
 		max_area = maxf(max_area, _area(element))
-	elements = elements.filter(func(element: Dictionary) -> bool: return _area(element) >= max_area * MIN_AREA_SHARE)
+	var elements := all.filter(func(element: Dictionary) -> bool: return _area(element) >= max_area * MIN_AREA_SHARE)
 	var result := []
 	for row: Array in _split_rows(elements, rows):
 		var groups := _cluster_columns(row, columns)
@@ -24,7 +29,33 @@ static func layout(manifest: Dictionary, rows: int, columns: int) -> Array:
 			push_error("Row %d: found %d items instead of %d" % [result.size() + 1, groups.size(), columns])
 			return []
 		result.append(groups)
+	if keep_details:
+		_attach_details(result, all.filter(func(element: Dictionary) -> bool: return _area(element) < max_area * MIN_AREA_SHARE))
 	return result
+
+
+## Мелкие куски — к ближайшему предмету (по расстоянию до рамки его главных кусков), если он рядом.
+static func _attach_details(rows: Array, details: Array) -> void:
+	var targets := []
+	for row: Array in rows:
+		for group: Array in row:
+			var bounds := _rect(group[0])
+			for element: Dictionary in group:
+				bounds = bounds.merge(_rect(element))
+			targets.append([group, bounds])
+	for detail: Dictionary in details:
+		var point := Vector2(_center_x(detail), _center_y(detail))
+		var best: Array = []
+		var best_distance := INF
+		for target: Array in targets:
+			var bounds: Rect2 = target[1]
+			var nearest := point.clamp(bounds.position, bounds.end)
+			var distance := point.distance_to(nearest)
+			if distance < best_distance:
+				best_distance = distance
+				best = target
+		if not best.is_empty() and best_distance <= maxf(best[1].size.x, best[1].size.y) * DETAIL_MAX_DISTANCE:
+			(best[0] as Array).append(detail)
 
 
 ## Собирает группу кусков в одну картинку (по их положению на листе).

@@ -14,6 +14,8 @@ const CLICK_HOLE_SIZE := 96.0
 const CLICK_HOLE_MARGIN := 30.0
 ## Значок игры в трее (области уведомлений Windows).
 const TRAY_ICON := "res://icon.svg"
+## В трее окно не видно: отрисовка выключается, а логика (бой, таймеры) идёт с такой частотой кадров.
+const TRAY_FPS := 10
 
 var _enabled := false
 var _mode := Mode.FULL
@@ -25,6 +27,7 @@ var _hole_applied := false
 ## Значок в трее, пока игра свёрнута (-1 — значка нет), и его меню по правой кнопке.
 var _tray_id := -1
 var _tray_menu := RID()
+var _tray_mute_index := -1
 
 
 func _ready() -> void:
@@ -32,6 +35,9 @@ func _ready() -> void:
 	if Engine.is_embedded_in_editor():
 		return
 	_enabled = true
+	Settings.sound_changed.connect(func() -> void:
+		if _tray_menu.is_valid() and _tray_mute_index >= 0:
+			NativeMenu.set_item_checked(_tray_menu, _tray_mute_index, Settings.muted))
 	var window := get_window()
 	window.borderless = true
 	window.always_on_top = true
@@ -72,20 +78,42 @@ func minimize_to_tray() -> void:
 	if NativeMenu.has_feature(NativeMenu.FEATURE_POPUP_MENU):
 		_tray_menu = NativeMenu.create_menu()
 		NativeMenu.add_item(_tray_menu, tr("Развернуть"), func(_tag: Variant) -> void: restore_from_tray.call_deferred())
+		_tray_mute_index = NativeMenu.add_check_item(_tray_menu, tr("Без звука"), func(_tag: Variant) -> void:
+			Settings.toggle_muted.call_deferred())
+		NativeMenu.set_item_checked(_tray_menu, _tray_mute_index, Settings.muted)
 		NativeMenu.add_separator(_tray_menu)
 		NativeMenu.add_item(_tray_menu, tr("Сохранить и выйти"), func(_tag: Variant) -> void: _quit_from_tray.call_deferred())
 		DisplayServer.status_indicator_set_menu(_tray_id, _tray_menu)
 	get_window().mode = Window.MODE_MINIMIZED
+	# Окно свёрнуто — рисовать нечего: видеокарта отдыхает, игра идёт дальше на малой частоте.
+	RenderingServer.render_loop_enabled = false
+	Engine.max_fps = TRAY_FPS
 
 
 func is_in_tray() -> bool:
 	return _tray_id >= 0
 
 
+## Смотрит ли игрок на игру: курсор над полосой боя, открыто окно или карта (по этому звучат звуки боя).
+func is_attentive() -> bool:
+	if is_in_tray():
+		return false
+	if not _enabled or _mode == Mode.FULL or _modal_count > 0 or _map_mode:
+		return true
+	var window := get_window()
+	if window.mode == Window.MODE_MINIMIZED:
+		return false
+	var local := Vector2(DisplayServer.mouse_get_position() - window.position)
+	var size := Vector2(window.size)
+	return Rect2(0.0, size.y - BATTLE_INTERACTIVE_HEIGHT, size.x, BATTLE_INTERACTIVE_HEIGHT).has_point(local)
+
+
 func restore_from_tray() -> void:
 	if not is_in_tray():
 		return
 	_remove_tray_icon()
+	RenderingServer.render_loop_enabled = true
+	Settings.apply_frame_limit()
 	var window := get_window()
 	window.mode = Window.MODE_WINDOWED
 	window.always_on_top = true
@@ -99,7 +127,7 @@ func restore_from_tray() -> void:
 func _quit_from_tray() -> void:
 	_remove_tray_icon()
 	GameState.save_game()
-	get_tree().quit()
+	Sound.quit_game()
 
 
 func _remove_tray_icon() -> void:
@@ -109,6 +137,7 @@ func _remove_tray_icon() -> void:
 	if _tray_menu.is_valid():
 		NativeMenu.free_menu(_tray_menu)
 		_tray_menu = RID()
+		_tray_mute_index = -1
 
 
 ## Режим карты: окно раскрывается на большую часть экрана и целиком принимает клики.
@@ -172,6 +201,9 @@ func _apply() -> void:
 		return
 	var window := get_window()
 	var size := Vector2(window.size)
+	# Пока окно настраивается (или свёрнуто), размер бывает нулевым — регион не трогаем.
+	if size.x < 8.0 or size.y < 8.0:
+		return
 	var local := Vector2(DisplayServer.mouse_get_position() - window.position)
 	# Перетаскивание, начатое в окне, не прерываем.
 	var dragging := Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)

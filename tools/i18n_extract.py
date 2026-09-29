@@ -21,7 +21,7 @@ import os
 import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LANGUAGES = ["en"]
+LANGUAGES = ["en", "de", "fr", "es", "pt_BR", "it", "pl", "tr", "uk", "zh_CN", "ja", "ko"]
 CYR = re.compile(r"[А-Яа-яЁё]")
 CODE_LITERAL = re.compile(r'(?<![&^\w])"((?:[^"\\\n]|\\.)*)"')
 RESOURCE_LITERAL = re.compile(r'"((?:[^"\\]|\\.)*)"', re.S)

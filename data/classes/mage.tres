@@ -14,6 +14,7 @@
 [ext_resource type="Resource" path="res://data/skills/mage_drain_life.tres" id="25"]
 [ext_resource type="Resource" path="res://data/skills/mage_armageddon.tres" id="26"]
 [ext_resource type="Resource" path="res://data/talents/mage_talents.tres" id="20"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/heroes/mage/mage_frames.tres" id="40"]
 
 [resource]
 script = ExtResource("1")
@@ -22,6 +23,7 @@ display_name = "Маг"
 description = "Медленные, но мощные магические снаряды."
 order = 2
 sprite = ExtResource("2")
+sprite_frames = ExtResource("40")
 sprite_height = 1.6
 projectile_texture = ExtResource("3")
 base_max_hp = 80.0

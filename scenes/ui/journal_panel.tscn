@@ -1,7 +1,8 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/journal_panel.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/ui/icons/level_up.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/progress/journey.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/progress/souls.png" id="3"]
 
 [node name="JournalPanel" type="PanelContainer"]
 anchors_preset = 8
@@ -39,6 +40,14 @@ stretch_mode = 5
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Путь героя"
+
+[node name="SoulsIcon" type="TextureRect" parent="VBox/Header"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="SoulsLabel" type="Label" parent="VBox/Header"]
 unique_name_in_owner = true

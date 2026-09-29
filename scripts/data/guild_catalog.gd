@@ -12,7 +12,8 @@ const ICONS := {
 	"DROP_CHANCE": "res://assets/sprites/talents/drop_chance.png",
 	"ARMY_POWER": "res://assets/sprites/talents/army_power.png",
 	"TRAINING_SPEED": "res://assets/sprites/talents/training_speed.png",
-	"UPKEEP_REDUCTION": "res://assets/sprites/talents/need_decay.png",
+	"UPKEEP_REDUCTION": "res://assets/sprites/talents/upkeep.png",
+	"GUILD_XP": "res://assets/sprites/talents/guild_xp.png",
 	"DAMAGE": "res://assets/sprites/talents/damage.png",
 	"MAX_HP": "res://assets/sprites/talents/max_hp.png",
 }

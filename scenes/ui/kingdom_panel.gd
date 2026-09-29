@@ -86,6 +86,12 @@ func open() -> void:
 	_refresh()
 
 
+## Окно уничтожают открытым (пересоздание сцены при смене языка, перерождении) — вернуть окну игры обычный режим.
+func _exit_tree() -> void:
+	if visible:
+		close()
+
+
 func close() -> void:
 	if not visible:
 		return
@@ -302,10 +308,11 @@ func _rebuild_cost(cost: Dictionary) -> void:
 
 func _on_upgrade_pressed() -> void:
 	if _selected:
-		GameState.kingdom.start_upgrade(_selected)
+		Sound.play(&"build" if GameState.kingdom.start_upgrade(_selected) else &"error")
 
 
 func _on_deposit_pressed() -> void:
 	deposit_button.disabled = true
-	await WorldService.deposit_gold(mini(GameState.gold, WorldService.deposit_available()))
+	var result: Dictionary = await WorldService.deposit_gold(mini(GameState.gold, WorldService.deposit_available()))
+	Sound.play(&"donate" if result.get("ok", false) else &"error")
 	_refresh()

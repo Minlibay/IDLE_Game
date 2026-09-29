@@ -349,10 +349,12 @@ func _refresh_manage() -> void:
 # --- Действия ------------------------------------------------------------------------
 
 ## Выполняет запрос к серверу и показывает итог.
-func _run(request: Callable, success_text: String) -> void:
+func _run(request: Callable, success_text: String, success_sound := &"") -> void:
 	var result: Dictionary = await request.call()
 	_armed = ""
 	if result.ok:
+		if success_sound != &"":
+			Sound.play(success_sound)
 		_show_result(success_text, COLOR_OK)
 	else:
 		_show_result(str(result.error), COLOR_BAD)
@@ -370,7 +372,7 @@ func _confirmed(key: String) -> bool:
 
 
 func _on_create_pressed() -> void:
-	_run(WorldService.guild_create.bind(_name_edit.text.strip_edges(), _tag_edit.text.strip_edges(), _color), tr("Гильдия основана!"))
+	_run(WorldService.guild_create.bind(_name_edit.text.strip_edges(), _tag_edit.text.strip_edges(), _color), tr("Гильдия основана!"), &"claim")
 
 
 func _on_invite_pressed(_text := "") -> void:
@@ -394,7 +396,7 @@ func _on_send_pressed(_text := "") -> void:
 
 func _on_donate_pressed() -> void:
 	var amount := int(_donate_spin.value)
-	_run(WorldService.guild_donate.bind(amount), tr("Внесено в гильдию: %d золота") % amount)
+	_run(WorldService.guild_donate.bind(amount), tr("Внесено в гильдию: %d золота") % amount, &"donate")
 
 
 func _on_role_pressed() -> void:
@@ -724,6 +726,8 @@ func _member(player_id: int) -> Dictionary:
 
 
 func _show_result(text: String, color: Color) -> void:
+	if color == COLOR_BAD:
+		Sound.play(&"error")
 	result_label.text = text
 	result_label.add_theme_color_override("font_color", color)
 

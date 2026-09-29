@@ -20,6 +20,10 @@ const SETTINGS := {
 	"hurt": [12.0, false],
 	"death": [8.0, false],
 	"victory": [8.0, false],
+	# Маг: большое заклинание (все умения мага).
+	"cast": [10.0, false],
+	# Лучник: мощный выстрел с колена (все умения лучника).
+	"power_shot": [10.0, false],
 }
 const DEFAULT_SETTINGS := [10.0, false]
 

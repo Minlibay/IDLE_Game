@@ -3,6 +3,8 @@ extends Node3D
 
 ## Где стоит герой и откуда выходят монстры (доля ширины экрана).
 const HERO_SCREEN_X := 0.2
+## Герой стоит правее панели героя (слева внизу) хотя бы на столько пикселей — иначе панель его закрывает.
+const HERO_PANEL_MARGIN := 70.0
 const SPAWN_SCREEN_X := 1.03
 ## Герой выходит из-за левого края экрана к своей позиции.
 const HERO_ENTER_SCREEN_X := -0.03
@@ -71,11 +73,15 @@ func _ready() -> void:
 	wave_manager.wave_started.connect(_on_wave_started)
 	wave_manager.wave_cleared.connect(_on_wave_cleared)
 
+	# Панель героя меняет ширину (кнопки, язык) — герой встаёт правее неё.
+	hud.stats_panel.resized.connect(_layout)
 	_layout()
 	_hero_enter()
 	hud.set_hero_health(hero.hp, hero.max_hp)
 	hero.set_aura(GameState.get_aura_color())
 	_set_ground_for_wave(GameState.wave, false)
+	Sound.set_music_ducked(false)
+	Sound.play_music(Sound.music_for_wave(GameState.wave, wave_manager.is_boss_wave(GameState.wave)))
 	wave_manager.start_wave(GameState.wave)
 	_show_offline_report()
 	GameState.offline_report_ready.connect(_show_offline_report)
@@ -111,6 +117,8 @@ func start_rest() -> void:
 	hero.set_resting(true)
 	hud.set_resting(true)
 	hud.show_message(tr("Герой устал и отдыхает…"))
+	Sound.play(&"rest_start")
+	Sound.set_music_ducked(true)
 
 
 func _end_rest() -> void:
@@ -118,6 +126,8 @@ func _end_rest() -> void:
 	hero.set_resting(false)
 	hud.set_resting(false)
 	hud.show_message(tr("Герой отдохнул и снова в бою!"))
+	Sound.play(&"rest_end")
+	Sound.set_music_ducked(false)
 	GameState.progress.record("rest")
 	wave_manager.start_wave(GameState.wave)
 
@@ -164,18 +174,27 @@ func _unhandled_input(event: InputEvent) -> void:
 		hud.toggle_guild()
 	elif key.keycode == KEY_J:
 		hud.toggle_journal()
+	elif key.keycode == KEY_S:
+		hud.toggle_sound()
 	elif key.keycode >= KEY_1 and key.keycode <= KEY_9:
 		hero.skill_caster.try_cast_index(key.keycode - KEY_1)
 
 
 func _hero_enter() -> void:
-	hero.home_x = _lane_point(HERO_SCREEN_X).x
-	hero.walk_in(_lane_point(HERO_ENTER_SCREEN_X), _lane_point(HERO_SCREEN_X), HERO_ENTER_TIME)
+	hero.home_x = _lane_point(_hero_screen_x()).x
+	hero.walk_in(_lane_point(HERO_ENTER_SCREEN_X), _lane_point(_hero_screen_x()), HERO_ENTER_TIME)
 
 
 func _layout() -> void:
-	hero.home_x = _lane_point(HERO_SCREEN_X).x
-	hero.position = _lane_point(HERO_SCREEN_X)
+	hero.home_x = _lane_point(_hero_screen_x()).x
+	hero.position = _lane_point(_hero_screen_x())
+
+
+## Место героя (доля ширины экрана): HERO_SCREEN_X, но не левее правого края панели героя.
+func _hero_screen_x() -> float:
+	var width := get_viewport().get_visible_rect().size.x
+	var panel_right := hud.stats_panel.get_global_rect().end.x + HERO_PANEL_MARGIN
+	return maxf(HERO_SCREEN_X, panel_right / maxf(1.0, width))
 
 
 ## Точка на линии боя (z = 0) под заданной долей ширины экрана.
@@ -203,6 +222,7 @@ func _spawn_monster(data: MonsterData, wave: int, elite_id := "", at: Variant = 
 		_spawn_monster(minion, wave, "", point))
 	if monster.is_elite():
 		hud.show_message(tr("Элита: %s!") % monster.get_display_name())
+		Sound.play(&"elite")
 	monster.damaged.connect(_on_actor_damaged.bind(monster))
 	monster.died.connect(_on_monster_died)
 	monster.damaged.connect(_on_monster_damaged)
@@ -210,6 +230,10 @@ func _spawn_monster(data: MonsterData, wave: int, elite_id := "", at: Variant = 
 
 
 func _on_actor_damaged(amount: float, is_crit: bool, actor: Actor) -> void:
+	if actor == hero:
+		Sound.play(&"hero_hurt")
+	else:
+		Sound.play(&"hit_crit" if is_crit else &"hit")
 	var color := COLOR_HERO_DAMAGE if actor == hero else (COLOR_CRIT if is_crit else COLOR_DAMAGE)
 	var text := str(maxi(1, roundi(amount))) + ("!" if is_crit else "")
 	# Разброс по X и Y, чтобы цифры частых ударов не слипались в одно число.
@@ -229,6 +253,11 @@ func _on_monster_died(actor: Actor) -> void:
 	var gold := roundi(data.gold_reward * pow(GOLD_GROWTH_PER_WAVE, level) * gold_bonus)
 	GameState.add_gold(gold)
 	GameState.progress.record_kill(data.id, monster.is_elite(), data.is_boss)
+	if data.is_boss:
+		Sound.play(&"boss_defeated")
+	else:
+		Sound.play(&"monster_die")
+		Sound.play(&"gold")
 	GameState.progress.record("gold", gold)
 	_float_text(monster.global_position + Vector3(0.0, monster.visual_height * 0.5, 0.3), tr("+%d з") % gold, COLOR_GOLD, 0.8)
 
@@ -237,6 +266,7 @@ func _on_monster_died(actor: Actor) -> void:
 	if item == null:
 		return
 	GameState.add_item(item)
+	Sound.play_loot(item.tier)
 	var drop: LootDrop = LOOT_DROP_SCENE.instantiate()
 	effects_root.add_child(drop)
 	drop.fly(monster.global_position, hero.global_position, item.get_base().icon, item.get_tier_color())
@@ -252,6 +282,7 @@ func _on_monster_damaged(amount: float, _is_crit: bool) -> void:
 
 func _on_hero_died(_actor: Actor) -> void:
 	wave_manager.stop()
+	Sound.play(&"hero_died")
 	GameState.set_wave(GameState.wave - 1)
 	hud.show_message(tr("Герой пал! Отступаем на волну %d") % GameState.wave)
 	await get_tree().create_timer(RESPAWN_DELAY).timeout
@@ -305,7 +336,9 @@ func _apply_ground_texture(material: StandardMaterial3D, texture: Texture2D) -> 
 func _on_wave_started(wave: int) -> void:
 	_set_ground_for_wave(wave, true)
 	var biome := Database.get_biome_for_wave(wave)
+	Sound.play_music(Sound.music_for_wave(wave, wave_manager.is_boss_wave(wave)))
 	if wave_manager.is_boss_wave(wave):
+		Sound.play(&"boss_appear")
 		var bosses := Database.get_monsters_for_wave(wave, true)
 		hud.show_message(tr("Волна %d — БОСС: %s!") % [wave, bosses[0].display_name if not bosses.is_empty() else "?"])
 	elif biome and Database.get_wave_in_biome(wave) == 1:
@@ -317,6 +350,8 @@ func _on_wave_cleared(wave: int) -> void:
 	GameState.progress.record("wave")
 	if wave_manager.is_boss_wave(wave):
 		GameState.save_game()
+	else:
+		Sound.play(&"wave_clear")
 	await get_tree().create_timer(NEXT_WAVE_DELAY).timeout
 	if not is_inside_tree() or not hero.is_alive() or _resting:
 		return
@@ -331,6 +366,7 @@ func _on_stats_changed() -> void:
 func _on_leveled_up(new_level: int) -> void:
 	hero.apply_stats(GameState.get_hero_stats(), true)
 	hero.play_action(&"victory")
+	Sound.play(&"level_up")
 	_float_text(hero.global_position + Vector3(0.0, hero.visual_height + 0.3, 0.3),
 		tr("Уровень %d!") % new_level, COLOR_GOLD, 1.5, 1.0, 1.5)
 	for skill in hero.skill_caster.skills:
@@ -340,6 +376,7 @@ func _on_leveled_up(new_level: int) -> void:
 
 func _on_skill_cast(skill: SkillData) -> void:
 	GameState.progress.record("skill")
+	Sound.play_skill(skill.id)
 	_float_text(hero.global_position + Vector3(0.0, hero.visual_height + 0.5, 0.3),
 		skill.display_name, skill.color, 1.2, 0.7, 1.2)
 

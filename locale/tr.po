@@ -1,0 +1,5324 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: tr\n"
+
+#: scenes/creation/class_card.gd
+msgid "\nУмения: "
+msgstr "\nBeceriler: "
+
+#: scenes/world/world_map.gd
+msgid "  армия: %s"
+msgstr "  ordu: %s"
+
+#: scenes/world/world_map.gd
+msgid "  потери: %s"
+msgstr "  kayıplar: %s"
+
+#: scenes/world/world_map.gd
+msgid " · замок под защитой ещё %s"
+msgstr " · kale %s daha korumalı"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid " · распределяет глава"
+msgstr " · lider harcar"
+
+#: scenes/talents/talent_grid.gd
+msgid " · сектор «%s»"
+msgstr " · «%s» bölümü"
+
+#: scenes/world/world_map.gd
+msgid " · ⚔ %s идёт на %s — %s"
+msgstr " · ⚔ %s, %s üzerine yürüyor — %s"
+
+#: scenes/ui/guild_panel.gd scenes/world/world_map.gd
+msgid " назад"
+msgstr " önce"
+
+#: scenes/ui/inventory_panel.gd
+msgid "%.2f с"
+msgstr "%.2f sn"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "%d · %s · изучен"
+msgstr "%d · %s · incelendi"
+
+#: scenes/ui/settings_panel.gd
+msgid "%d кадров/с"
+msgstr "%d FPS"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "%d место: %d золота каждому и %d опыта гильдии"
+msgstr "%d. sıra: her üyeye %d altın ve %d lonca XP'si"
+
+#: scripts/ui/ui_format.gd
+msgid "%d мин"
+msgstr "%d dk"
+
+#: scripts/ui/ui_format.gd
+msgid "%d мин %d с"
+msgstr "%d dk %d sn"
+
+#: scripts/ui/ui_format.gd
+msgid "%d с"
+msgstr "%d sn"
+
+#: scripts/ui/ui_format.gd
+msgid "%d ч %d мин"
+msgstr "%d sa %d dk"
+
+#: scenes/world/world_map.gd
+msgid "%s %s · зона #%d · %s"
+msgstr "%s %s · bölge #%d · %s"
+
+#: scenes/ui/army_view.gd
+msgid "%s (в замке: %d)"
+msgstr "%s (kalede: %d)"
+
+#: scenes/world/world_map.gd
+msgid "%s (есть %d)"
+msgstr "%s (mevcut: %d)"
+
+#: scripts/data/guild_catalog.gd
+msgid "%s (макс.)"
+msgstr "%s (maks.)"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "%s (ур. %d)"
+msgstr "%s (sv. %d)"
+
+#: scenes/ui/skill_button.gd
+msgid "%s [%s]\n%s\nПерезарядка: %d с · открывается на ур. %d"
+msgstr "%s [%s]\n%s\nBekleme: %d sn · açılma: sv. %d"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "%s · %d уровень"
+msgstr "%s · seviye %d"
+
+#: scenes/ui/hud.gd scenes/ui/inventory_panel.gd
+msgid "%s · %s · ур. %d"
+msgstr "%s · %s · sv. %d"
+
+#: scenes/world/battle_replay.gd
+msgid "%s · сила %d"
+msgstr "%s · güç %d"
+
+#: scenes/ui/guild_panel.gd
+msgid "%s · ур. %d · %d/%d · пригласил %s"
+msgstr "%s · sv. %d · %d/%d · davet eden: %s"
+
+#: scenes/world/world_map.gd
+msgid "%s игрока %s"
+msgstr "%s (oyuncu: %s)"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "%s идёт на замок (%d солдат) — %s"
+msgstr "%s kaleye yürüyor (%d asker) — %s"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "%s ур. %d"
+msgstr "%s sv. %d"
+
+#: scenes/battle/battle.gd
+msgid "%s — волны %d–%d"
+msgstr "%s — dalga %d–%d"
+
+#: scenes/ui/guild_panel.gd
+msgid "%s — ждём ответа (%s)"
+msgstr "%s — yanıt bekleniyor (%s)"
+
+#: scenes/world/world_map.gd
+msgid "%s: %s (сила %d, герой ур. %d)"
+msgstr "%s: %s (güç %d, kahraman sv. %d)"
+
+#: scenes/ui/inventory_panel.gd
+msgid "%s: пусто"
+msgstr "%s: boş"
+
+#: scenes/battle/battle.gd
+msgid "+%d з"
+msgstr "+%d a"
+
+#: scenes/ui/guild_panel.gd
+msgid "+%d%% к силе армии за каждого участника, но не больше %d%% (потолок растёт с уровнем гильдии)."
+msgstr "Üye başına +%d%% ordu gücü, en fazla %d%% (sınır lonca seviyesiyle artar)."
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "+%d%% урона"
+msgstr "+%d%% hasar"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "+%s %s/мин"
+msgstr "+%s %s/dk"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "+%s%% (сейчас +%s%%)"
+msgstr "+%s%% (şu an +%s%%)"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "+%s/м"
+msgstr "+%s/dk"
+
+#: data/skills/archer_eagle_eye.tres
+msgid "+30% шанса крита на 8 с."
+msgstr "8 sn boyunca +30% kritik şansı."
+
+#: data/skills/warrior_war_cry.tres
+msgid "+50% урона на 6 секунд."
+msgstr "6 saniye boyunca +50% hasar."
+
+#: data/skills/archer_hunter_fury.tres
+msgid "+60% скорости атаки на 6 секунд."
+msgstr "6 saniye boyunca +60% saldırı hızı."
+
+#: data/skills/mage_arcane_power.tres
+msgid "+80% урона на 8 с."
+msgstr "8 sn boyunca +80% hasar."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "+{value}% здоровья и +{value2} брони."
+msgstr "+{value}% can ve +{value2} zırh."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "+{value}% золота и +{value2}% шанса дропа."
+msgstr "+{value}% altın ve +{value2}% ganimet şansı."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "+{value}% регенерации и {value2}% вампиризма."
+msgstr "+{value}% yenilenme ve {value2}% can çalma."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "+{value}% силы армии и +{value2}% скорости обучения."
+msgstr "+{value}% ordu gücü ve +{value2}% eğitim hızı."
+
+#: scripts/data/item_set_data.gd
+msgid ", аура героя"
+msgstr ", kahraman aurası"
+
+#: scenes/ui/army_view.gd
+msgid ", голод"
+msgstr ", aç"
+
+#: data/skills/archer_deadly_volley.tres
+msgid "10 стрел по ближайшим врагам, каждая — гарантированный крит на 120% урона."
+msgstr "En yakın düşmanlara 10 ok; her biri kesin kritik, 120% hasar."
+
+#: data/skills/mage_frost_nova.tres
+msgid "100% урона всем врагам вокруг и заморозка на 3 с."
+msgstr "Çevredeki tüm düşmanlara 100% hasar ve onları 3 sn dondurur."
+
+#: data/skills/warrior_rend.tres
+msgid "120% урона и кровотечение: ещё 400% урона за 6 с."
+msgstr "120% hasar ve kanama: 6 sn'de 400% ek hasar."
+
+#: data/skills/warrior_shield_bash.tres
+msgid "150% урона и оглушение цели на 2,5 с (боссы — вдвое короче)."
+msgstr "150% hasar ve hedefi 2,5 sn sersemletir (bosslarda yarısı kadar)."
+
+#: data/skills/archer_poison_arrow.tres
+msgid "150% урона и яд: ещё 300% урона за 6 с."
+msgstr "150% hasar ve zehir: 6 sn'de 300% ek hasar."
+
+#: data/skills/warrior_cleave.tres
+msgid "180% урона цели и 100% врагам вокруг неё."
+msgstr "Hedefe 180%, çevresindeki düşmanlara 100% hasar."
+
+#: data/skills/warrior_earthquake.tres
+msgid "220% урона всем врагам вокруг, оглушение на 1,5 с и отбрасывание."
+msgstr "Çevredeki tüm düşmanlara 220% hasar, 1,5 sn sersemletme ve geri itme."
+
+#: data/skills/archer_arrow_rain.tres
+msgid "250% урона всем врагам в большой области вокруг цели."
+msgstr "Hedefin çevresinde geniş alandaki tüm düşmanlara 250% hasar."
+
+#: data/skills/mage_fireball.tres
+msgid "250% урона цели и 100% врагам вокруг неё."
+msgstr "Hedefe 250%, çevresindeki düşmanlara 100% hasar."
+
+#: data/skills/mage_drain_life.tres
+msgid "250% урона цели, герой лечится на половину нанесённого урона."
+msgstr "Hedefe 250% hasar; kahraman verdiği hasarın yarısı kadar iyileşir."
+
+#: scenes/ui/guild_panel.gd
+msgid "2–4 буквы или цифры"
+msgstr "2–4 harf veya rakam"
+
+#: data/skills/warrior_execute.tres
+msgid "300% урона; по врагу с запасом здоровья меньше 30% — втрое больше."
+msgstr "300% hasar; canı 30%'un altındaki düşmana üç kat."
+
+#: data/skills/mage_meteor.tres
+msgid "350% урона по всем врагам в большой области вокруг цели."
+msgstr "Hedefin çevresinde geniş alandaki tüm düşmanlara 350% hasar."
+
+#: data/skills/archer_multishot.tres
+msgid "5 стрел по ближайшим врагам, по 80% урона."
+msgstr "En yakın düşmanlara 5 ok, her biri 80% hasar."
+
+#: data/skills/mage_armageddon.tres
+msgid "600% урона всем врагам в огромной области вокруг цели и поджог: ещё 300% за 6 с."
+msgstr "Hedefin çevresinde çok geniş alandaki tüm düşmanlara 600% hasar ve onları tutuşturur: 6 sn'de 300% ek hasar."
+
+#: scenes/creation/class_card.gd
+msgid "HP %d · Урон %d · %s"
+msgstr "Can %d · Hasar %d · %s"
+
+#: scenes/ui/inventory_panel.gd
+msgid "[color=#%s]Сет «%s» (%d/%d)[/color]"
+msgstr "[color=#%s]«%s» seti (%d/%d)[/color]"
+
+#: server/src/world/guilds.ts
+msgid "{name} больше не офицер"
+msgstr "{name} artık subay değil"
+
+#: server/src/world/guilds.ts
+msgid "{name} вступил в гильдию"
+msgstr "{name} loncaya katıldı"
+
+#: server/src/world/game.ts
+msgid "{name} занял вашу зону без боя (гарнизона не было)"
+msgstr "{name} bölgeni savaşmadan aldı (garnizon yoktu)"
+
+#: server/src/world/guilds.ts
+msgid "{name} исключён из гильдии"
+msgstr "{name} loncadan atıldı"
+
+#: server/src/world/guilds.ts
+msgid "{name} назначен офицером"
+msgstr "{name} artık subay"
+
+#: server/src/world/guilds.ts
+msgid "{name} основал гильдию"
+msgstr "{name} loncayı kurdu"
+
+#: server/src/world/guilds.ts
+msgid "{name} покинул гильдию"
+msgstr "{name} loncadan ayrıldı"
+
+#: server/src/world/game.ts
+msgid "{name} разбил вашу армию, герой вернулся в замок"
+msgstr "{name} ordunu yendi, kahraman kaleye döndü"
+
+#: server/src/world/game.ts
+msgid "{name} разбил гарнизон и захватил зону"
+msgstr "{name} garnizonu yendi ve bölgeyi ele geçirdi"
+
+#: server/src/world/game.ts
+msgid "{name} разграбил ваш замок. Замок под щитом {hours} ч"
+msgstr "{name} kaleni yağmaladı. Kale {hours} sa boyunca kalkanlı"
+
+#: server/src/world/guilds.ts
+msgid "{name} теперь глава гильдии"
+msgstr "{name} artık lonca lideri"
+
+#: scenes/ui/hud.tscn
+msgid "Авто"
+msgstr "Oto"
+
+#: scenes/world/world_map.tscn
+msgid "Автоматически войти не получилось (например, имя занято). Укажите другое имя. Позже вход будет через Steam."
+msgstr "Otomatik giriş başarısız oldu (örneğin isim alınmış). Başka bir isim seç. İleride giriş Steam üzerinden olacak."
+
+#: scenes/world/world_map.tscn
+msgid "Адрес сервера"
+msgstr "Sunucu adresi"
+
+#: scripts/data/item_base.gd
+msgid "Аксессуар"
+msgstr "Tılsım"
+
+#: data/treasures/warrior.json
+msgid "Амулет Львиного Сердца"
+msgstr "Aslan Yürek Muskası"
+
+#: data/skills/mage_armageddon.tres
+msgid "Армагеддон"
+msgstr "Kıyamet"
+
+#: scenes/world/world_map.tscn
+msgid "Армию из замка →"
+msgstr "Kaleden ordu →"
+
+#: data/guild/guild.json scenes/ui/inventory_panel.gd scenes/ui/kingdom_panel.tscn
+msgid "Армия"
+msgstr "Ordu"
+
+#: scenes/ui/army_view.gd
+msgid "Армия замка"
+msgstr "Kale ordusu"
+
+#: scenes/world/world_map.gd
+msgid "Армия замка: "
+msgstr "Kale ordusu: "
+
+#: server/src/world/game.ts
+msgid "Армия погибла в бою с нейтралами, герой вернулся в замок"
+msgstr "Ordu tarafsızlarla savaşırken öldü, kahraman kaleye döndü"
+
+#: scenes/world/world_map.gd
+msgid "Армия с героем: %d · атака %d · зон: %d"
+msgstr "Kahramanla ordu: %d · saldırı %d · bölge: %d"
+
+#: data/talents/mage_talents.tres
+msgid "Архимагия"
+msgstr "Yüce Büyü"
+
+#: scenes/world/battle_replay.tscn scenes/world/world_map.gd
+msgid "Атака"
+msgstr "Saldırı"
+
+#: scenes/ui/army_view.gd
+msgid "Атака %d · Защита %d"
+msgstr "Saldırı %d · Savunma %d"
+
+#: server/src/world/game.ts
+msgid "Атака {name} отбита"
+msgstr "{name} saldırısı püskürtüldü"
+
+#: scenes/ui/army_view.gd
+msgid "Атака ×%.2f · Защита ×%.2f\nЗдания, захваченные зоны, реликвии армии%s"
+msgstr "Saldırı ×%.2f · Savunma ×%.2f\nBinalar, ele geçirilen bölgeler, ordu kalıntıları%s"
+
+#: scripts/items/item.gd
+msgid "Атака армии, %"
+msgstr "Ordu saldırısı, %"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Атака раз в"
+msgstr "Saldırı aralığı"
+
+#: scenes/ui/army_view.gd
+msgid "Атака солдата"
+msgstr "Asker saldırısı"
+
+#: server/src/world/guilds.ts
+msgid "Атаки на сегодня закончились — приходите завтра"
+msgstr "Bugün saldırı hakkın kalmadı — yarın gel"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Атаковать"
+msgstr "Saldır"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Атаковать (%d/%d)"
+msgstr "Saldır (%d/%d)"
+
+#: scenes/world/world_map.gd
+msgid "Атаковать нейтралов"
+msgstr "Tarafsızlara saldır"
+
+#: scripts/progress/hero_progress.gd
+msgid "Атакуйте босса гильдии %d раза"
+msgstr "Lonca bossuna %d kez saldır"
+
+#: data/guild/guild.json
+msgid "Багровый каньон"
+msgstr "Kızıl Kanyon"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Бастион"
+msgstr "Burç"
+
+#: data/treasures/warrior.json
+msgid "Бастион Северных Врат"
+msgstr "Kuzey Kapısı Burcu"
+
+#: data/treasures/archer.json
+msgid "Бегущая с ветром"
+msgstr "Rüzgâr Koşucusu"
+
+#: data/treasures/archer.json
+msgid "Бегущей с ветром"
+msgstr "Rüzgâr Koşucusu"
+
+#: server/src/world/game.ts
+msgid "Без армии зону не занять — возьмите солдат из замка"
+msgstr "Ordusuz bölge alınamaz — kaleden asker al"
+
+#: scenes/world/world_map.gd
+msgid "Без армии зону не занять: в замке нажмите «Армию из замка →»"
+msgstr "Ordusuz bölge alınamaz: kalede «Kaleden ordu →» düğmesine bas"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Без заточки"
+msgstr "Geliştirme yok"
+
+#: scenes/ui/settings_panel.tscn scripts/autoload/desktop_window.gd
+msgid "Без звука"
+msgstr "Sessiz"
+
+#: data/treasures/mage.json
+msgid "Бездна смотрела в него — и отвела взгляд первой."
+msgstr "Uçurum ona baktı — ve önce o gözünü kaçırdı."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Бессмертный"
+msgstr "Ölümsüz"
+
+#: scenes/ui/journal/journal_bestiary_page.gd scenes/ui/journal_panel.gd
+msgid "Бестиарий"
+msgstr "Canavarlar"
+
+#: scripts/progress/hero_progress.gd
+msgid "Бестиарий: %s изучен до %d уровня"
+msgstr "Canavarlar: %s, %d. seviyeye kadar incelendi"
+
+#: scenes/actors/monster.gd
+msgid "Бешеный"
+msgstr "Çılgın"
+
+#: scripts/progress/hero_progress.gd
+msgid "Благосклонность судьбы"
+msgstr "Kaderin Lütfu"
+
+#: scenes/creation/class_card.gd
+msgid "Ближний бой"
+msgstr "Yakın dövüş"
+
+#: scripts/progress/hero_progress.gd
+msgid "Богач"
+msgstr "Zengin"
+
+#: data/needs/energy.tres
+msgid "Бодрость"
+msgstr "Enerji"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Боевая выучка"
+msgstr "Savaş Eğitimi"
+
+#: data/talents/warrior_talents.tres
+msgid "Боевое безумие"
+msgstr "Savaş Deliliği"
+
+#: data/items/war_banner.tres
+msgid "Боевое знамя"
+msgstr "Savaş Sancağı"
+
+#: data/guild/guild.json
+msgid "Боевой дух"
+msgstr "Moral"
+
+#: data/skills/warrior_war_cry.tres
+msgid "Боевой клич"
+msgstr "Savaş Narası"
+
+#: data/talents/warrior_talents.tres
+msgid "Боевой раж"
+msgstr "Savaş Öfkesi"
+
+#: data/items/war_horn.tres
+msgid "Боевой рог"
+msgstr "Savaş Borusu"
+
+#: data/buildings/stable.tres
+msgid "Боевые кони для рыцарей. Открывает найм рыцарей и усиливает армию."
+msgstr "Şövalyeler için savaş atları. Şövalye alımını açar ve orduyu güçlendirir."
+
+#: scripts/data/monster_data.gd
+msgid "Боец"
+msgstr "Dövüşçü"
+
+#: scenes/ui/settings_panel.gd scenes/world/battle_replay.gd scenes/world/battle_replay.tscn
+msgid "Бой"
+msgstr "Savaş"
+
+#: scenes/ui/settings_panel.gd
+msgid "Бой без звука; интерфейс и уведомления остаются."
+msgstr "Savaş sessiz; arayüz ve bildirimler çalmaya devam eder."
+
+#: scenes/ui/settings_panel.gd
+msgid "Бой и музыка в трее молчат всегда; уведомления (уровень, редкая добыча, нападение) — по этой настройке."
+msgstr "Tepsideyken savaş ve müzik her zaman sessizdir; bildirimler (seviye atlama, ender ganimet, saldırı) bu ayara göre çalar."
+
+#: scenes/ui/army_view.tscn
+msgid "Больше (Shift — по 10)"
+msgstr "Artır (Shift — 10'ar)"
+
+#: server/src/world/guilds.ts
+msgid "Бонус «{perk}» повышен до {rank} ранга"
+msgstr "«{perk}» ayrıcalığı {rank}. kademeye yükseldi"
+
+#: scenes/world/world_map.gd
+msgid "Бонус владельцу: "
+msgstr "Sahip bonusu: "
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Бонус повышен"
+msgstr "Ayrıcalık yükseltildi"
+
+#: server/src/world/guilds.ts
+msgid "Бонус уже на максимальном ранге"
+msgstr "Ayrıcalık zaten en yüksek kademede"
+
+#: scenes/ui/guild_panel.gd
+msgid "Бонусы"
+msgstr "Ayrıcalıklar"
+
+#: server/src/world/guilds.ts
+msgid "Бонусы гильдии сброшены — очки можно распределить заново"
+msgstr "Lonca ayrıcalıkları sıfırlandı — puanlar yeniden harcanabilir"
+
+#: server/src/world/guilds.ts
+msgid "Бонусы ещё не выбраны"
+msgstr "Henüz ayrıcalık seçilmedi"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Бонусы сброшены — распределите очки заново"
+msgstr "Ayrıcalıklar sıfırlandı — puanları yeniden harca"
+
+#: scenes/ui/guild/guild_boss_page.gd scenes/ui/guild_panel.gd
+msgid "Босс"
+msgstr "Boss"
+
+#: server/src/world/guilds.ts
+msgid "Босс гильдии {level} уровня повержен! Каждый, кто сражался, получил {gold} золота"
+msgstr "{level}. seviye lonca bossu yenildi! Savaşan herkes {gold} altın aldı"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Босс недели"
+msgstr "Haftanın bossu"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Босс повержен! Награда уже в казне."
+msgstr "Boss yenildi! Ödül zaten hazinende."
+
+#: server/src/world/guilds.ts
+msgid "Босс этой недели уже повержен"
+msgstr "Bu haftanın bossu zaten yenildi"
+
+#: scripts/data/item_base.gd
+msgid "Ботинки"
+msgstr "Çizme"
+
+#: scripts/progress/hero_progress.gd
+msgid "Братство"
+msgstr "Kardeşlik"
+
+#: scenes/ui/inventory_panel.gd scripts/data/item_base.gd scripts/items/item.gd
+msgid "Броня"
+msgstr "Zırh"
+
+#: data/talents/mage_talents.tres
+msgid "Буря заклятий"
+msgstr "Büyü Fırtınası"
+
+#: data/talents/archer_talents.tres
+msgid "Быстрая перезарядка"
+msgstr "Hızlı Dolum"
+
+#: scripts/data/stat_modifier.gd
+msgid "Быстрота умений"
+msgstr "Hızlı Büyü"
+
+#: data/classes/archer.tres
+msgid "Быстрые выстрелы издалека и частые криты."
+msgstr "Uzaktan hızlı atışlar ve sık kritikler."
+
+#: data/units/archer.tres
+msgid "Бьёт издалека: сильная атака, слабая защита."
+msgstr "Uzaktan vurur: güçlü saldırı, zayıf savunma."
+
+#: data/treasures/archer.json
+msgid "Бьёт точнее всего в полнолуние."
+msgstr "Dolunayda en isabetli atışı yapar."
+
+#: server/src/world/guilds.ts
+msgid "В гильдии нет свободных мест"
+msgstr "Loncada boş yer yok"
+
+#: server/src/world/game.ts
+msgid "В замке армия стоит без гарнизона"
+msgstr "Kalede ordu garnizonsuz duruyor"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "В замке нет солдат — обучите их в «Замке» [K]."
+msgstr "Kalede asker yok — «Kale» [K] bölümünde eğit."
+
+#: server/src/world/game.ts
+msgid "В замке нет столько солдат"
+msgstr "Kalede o kadar asker yok"
+
+#: server/src/world/game.ts
+msgid "В замке союзника нет места для стольких подкреплений"
+msgstr "Müttefik kalesinde bu kadar takviyeye yer yok"
+
+#: scenes/ui/guild_panel.gd
+msgid "В казне замка: %d · 1 золото = 1 опыт"
+msgstr "Kale hazinesi: %d · 1 altın = 1 XP"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "В моём замке"
+msgstr "Kalemde"
+
+#: data/treasures/archer.json
+msgid "В них не хрустнет ни одна ветка."
+msgstr "Altlarında tek bir dal bile çıtırdamaz."
+
+#: scenes/actors/monster.gd
+msgid "Вампир"
+msgstr "Vampirik"
+
+#: scenes/world/world_map.gd
+msgid "Ваш замок"
+msgstr "Kalen"
+
+#: scenes/world/world_map.gd
+msgid "Ваша зона"
+msgstr "Bölgen"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Ваши награды: "
+msgstr "Ödüllerin: "
+
+#: server/src/world/game.ts
+msgid "Ваши подкрепления помогли отбить набег на замок {name}"
+msgstr "Takviyelerin, {name} kalesine yapılan baskının püskürtülmesine yardım etti"
+
+#: scenes/creation/character_creation.tscn
+msgid "Введите имя"
+msgstr "Bir isim gir"
+
+#: scripts/data/stat_modifier.gd
+msgid "Везение"
+msgstr "Talih"
+
+#: data/treasures/mage.json
+msgid "Венец Тысячи Глаз"
+msgstr "Bin Göz Tacı"
+
+#: data/guild/guild.json
+msgid "Вересковые пустоши"
+msgstr "Funda Bozkırları"
+
+#: scenes/world/world_map.gd
+msgid "Вернуть армию в замок"
+msgstr "Orduyu kaleye döndür"
+
+#: scenes/talents/talent_grid.tscn
+msgid "Вернуть все очки талантов за золото"
+msgstr "Tüm yetenek puanlarını altın karşılığı iade et"
+
+#: scenes/world/world_map.tscn
+msgid "Вернуть солдат с карты в армию замка (герой должен быть в замке)"
+msgstr "Haritadaki askerleri kale ordusuna döndür (kahraman kalede olmalı)"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Верные знамёна"
+msgstr "Sadık Sancaklar"
+
+#: data/treasures/mage.json
+msgid "Верховного арканиста"
+msgstr "Yüce Arkanist"
+
+#: data/treasures/mage.json
+msgid "Верховный арканист"
+msgstr "Yüce Arkanist"
+
+#: data/treasures/mage.json
+msgid "Ветвь Мудреца"
+msgstr "Bilgenin Asası"
+
+#: data/talents/archer_talents.tres
+msgid "Ветер в оперении"
+msgstr "Tüylerde Rüzgâr"
+
+#: data/treasures/archer.json
+msgid "Ветер пустыни"
+msgstr "Çöl Rüzgârı"
+
+#: data/treasures/archer.json
+msgid "Ветра пустыни"
+msgstr "Çöl Rüzgârı"
+
+#: data/treasures/warrior.json
+msgid "Вечная Клятва"
+msgstr "Ebedî Yemin"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Вечные улучшения за души"
+msgstr "Ruhlarla kalıcı geliştirmeler"
+
+#: scripts/progress/hero_progress.gd
+msgid "Вечный герой"
+msgstr "Ebedî Kahraman"
+
+#: data/treasures/archer.json
+msgid "Видит в темноте не хуже совы."
+msgstr "Karanlıkta baykuş kadar iyi görür."
+
+#: data/treasures/mage.json
+msgid "Видит всё. Иногда — слишком много."
+msgstr "Her şeyi görür. Bazen — fazlasını."
+
+#: data/skills/warrior_whirlwind.tres
+msgid "Вихрь"
+msgstr "Kasırga"
+
+#: data/talents/warrior_talents.tres
+msgid "Вихрь и Боевой клич: −{value}% перезарядки."
+msgstr "Kasırga ve Savaş Narası: −{value}% bekleme süresi."
+
+#: scenes/ui/guild_panel.gd
+msgid "Вклад"
+msgstr "Katkı"
+
+#: scenes/ui/guild_panel.gd
+msgid "Вклад в опыт гильдии: %d\nВ гильдии с: %s"
+msgstr "Lonca XP'sine katkı: %d\nÜyelik başlangıcı: %s"
+
+#: scenes/ui/hud.gd
+msgid "Включить звук [S]"
+msgstr "Sesi aç [S]"
+
+#: scenes/world/world_map.gd
+msgid "Владение"
+msgstr "Hâkimiyet"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Вложено очков: %d"
+msgstr "Harcanan puan: %d"
+
+#: scenes/ui/guild_panel.gd
+msgid "Внесено в гильдию: %d золота"
+msgstr "Loncaya bağışlanan: %d altın"
+
+#: scripts/progress/hero_progress.gd
+msgid "Внесите золото в гильдию %d раз"
+msgstr "Loncaya %d kez altın bağışla"
+
+#: scenes/ui/guild_panel.gd
+msgid "Внести"
+msgstr "Bağışla"
+
+#: scenes/ui/kingdom_panel.gd scenes/ui/kingdom_panel.tscn
+msgid "Внести в казну"
+msgstr "Hazineye yatır"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Внести в казну %d"
+msgstr "Hazineye %d yatır"
+
+#: server/src/http.ts
+msgid "Внутренняя ошибка сервера"
+msgstr "Sunucu iç hatası"
+
+#: data/treasures/mage.json
+msgid "Внутри кольца — крошечная чёрная дыра. Не заглядывайте."
+msgstr "Yüzüğün içinde minik bir kara delik var. İçine bakma."
+
+#: data/treasures/mage.json
+msgid "Внутри медленно кружатся искры."
+msgstr "İçinde kıvılcımlar yavaşça döner."
+
+#: data/treasures/warrior.json
+msgid "Внутри — прядь гривы белого льва."
+msgstr "İçinde beyaz bir aslanın yelesinden bir tutam var."
+
+#: data/treasures/archer.json
+msgid "Во внутренних карманах — сотня мелочей для охоты."
+msgstr "İç cepleri av için yüzlerce ufak şey saklar."
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Вода"
+msgstr "Su"
+
+#: data/treasures/warrior.json
+msgid "Военачальник"
+msgstr "Savaş Beyi"
+
+#: data/treasures/warrior.json
+msgid "Военачальника"
+msgstr "Savaş Beyi"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Военный совет"
+msgstr "Savaş Konseyi"
+
+#: data/classes/warrior.tres
+msgid "Воин"
+msgstr "Savaşçı"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Война гильдий"
+msgstr "Lonca savaşı"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Войска идут до замка союзника, как в набег, и защищают его, пока вы их не отзовёте."
+msgstr "Birlikler müttefik kalesine baskın gibi yürür ve sen geri çağırana dek orayı savunur."
+
+#: scenes/world/world_map.tscn
+msgid "Войти"
+msgstr "Giriş yap"
+
+#: data/treasures/warrior.json
+msgid "Волки не нападают на того, кто его носит."
+msgstr "Kurtlar onu takana asla saldırmaz."
+
+#: scenes/ui/hud.gd
+msgid "Волна %d · %s (рекорд %d)"
+msgstr "Dalga %d · %s (en iyi %d)"
+
+#: scenes/battle/battle.gd
+msgid "Волна %d — БОСС: %s!"
+msgstr "Dalga %d — BOSS: %s!"
+
+#: scenes/ui/hud.tscn
+msgid "Волна 1"
+msgstr "Dalga 1"
+
+#: data/treasures/mage.json
+msgid "Волосы встают дыбом, стоит лишь прикоснуться."
+msgstr "Dokunduğun an tüylerin diken diken olur."
+
+#: data/guild/guild.json
+msgid "Волчьи холмы"
+msgstr "Kurt Tepeleri"
+
+#: data/talents/warrior_talents.tres
+msgid "Воля воина"
+msgstr "Savaşçının İradesi"
+
+#: data/treasures/archer.json
+msgid "Вороны приносят вести — и удачу."
+msgstr "Kuzgunlar haber getirir — ve şans."
+
+#: data/treasures/archer.json
+msgid "Вороньи Перья"
+msgstr "Kuzgun Tüyleri"
+
+#: scripts/data/stat_modifier.gd
+msgid "Восстановление"
+msgstr "Yenilenme"
+
+#: data/treasures/mage.json
+msgid "Время вокруг него течёт чуть медленнее."
+msgstr "Etrafında zaman biraz daha yavaş akar."
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Время стройки: "
+msgstr "İnşa süresi: "
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Все очки вернутся, распределить их можно заново. Не чаще раза в сутки."
+msgstr "Tüm puanlar iade edilir ve yeniden harcanabilir. Günde en fazla bir kez."
+
+#: data/talents/archer_talents.tres
+msgid "Все умения: −{value}% перезарядки, залп +{value2}% урона."
+msgstr "Tüm beceriler: −{value}% bekleme süresi, Çoklu Atış +{value2}% hasar."
+
+#: scenes/ui/guild_panel.gd
+msgid "Все участники покинут гильдию. Чтобы уйти самому, сначала передайте главенство."
+msgstr "Tüm üyeler loncadan ayrılacak. Kendin ayrılmak için önce liderliği devret."
+
+#: scenes/ui/settings_panel.gd
+msgid "Всегда"
+msgstr "Her zaman"
+
+#: scripts/progress/hero_progress.gd
+msgid "Вступите в гильдию"
+msgstr "Bir loncaya katıl"
+
+#: scenes/ui/guild_panel.gd
+msgid "Вступить"
+msgstr "Katıl"
+
+#: scenes/ui/guild_panel.gd
+msgid "Вступить в другую гильдию можно будет через сутки."
+msgstr "Başka bir loncaya 24 saat sonra katılabilirsin."
+
+#: data/treasures/warrior.json
+msgid "Всё, что осталось от знамени первой армии."
+msgstr "İlk ordunun sancağından geriye kalan tek şey."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Второе дыхание"
+msgstr "İkinci Nefes"
+
+#: scenes/world/world_map.tscn
+msgid "Вход на сервер карты"
+msgstr "Harita sunucusuna giriş"
+
+#: scenes/ui/guild_panel.gd
+msgid "Вы вступили в гильдию"
+msgstr "Loncaya katıldın"
+
+#: server/src/world/guilds.ts
+msgid "Вы не состоите в гильдии"
+msgstr "Bir loncada değilsin"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Вы никому не отправляли подкрепления."
+msgstr "Kimseye takviye göndermedin."
+
+#: scenes/ui/guild_panel.gd
+msgid "Вы покинули гильдию"
+msgstr "Loncadan ayrıldın"
+
+#: server/src/world/guilds.ts
+msgid "Вы уже состоите в гильдии"
+msgstr "Zaten bir loncadasın"
+
+#: scenes/world/world_map.gd scenes/world/world_map.tscn
+msgid "Выберите зону на карте"
+msgstr "Haritada bir bölge seç"
+
+#: server/src/world/game.ts
+msgid "Выберите отряды"
+msgstr "Birlik seç"
+
+#: scenes/ui/inventory_panel.gd scenes/ui/inventory_panel.tscn
+msgid "Выберите предмет"
+msgstr "Bir eşya seç"
+
+#: server/src/world/guilds.ts
+msgid "Выберите цвет гильдии"
+msgstr "Bir lonca rengi seç"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Выберите, сколько солдат отправить"
+msgstr "Kaç asker gönderileceğini seç"
+
+#: data/treasures/warrior.json
+msgid "Выжили в пожаре, спалившем целый легион."
+msgstr "Koca bir lejyonu yakan ateşten sağ çıktılar."
+
+#: scenes/ui/settings_panel.gd
+msgid "Выкл."
+msgstr "Kapalı"
+
+#: scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Выключить звук [S]"
+msgstr "Sesi kapat [S]"
+
+#: data/treasures/warrior.json
+msgid "Выкованы в горне, что не гаснет со дня основания королевства."
+msgstr "Krallık kurulduğundan beri sönmeyen bir ocakta dövüldü."
+
+#: data/treasures/warrior.json
+msgid "Выкованы по ту сторону разлома. По ночам они шепчут хозяину."
+msgstr "Yarığın öte yanında dövüldü. Geceleri sahibine fısıldarlar."
+
+#: scripts/data/stat_modifier.gd
+msgid "Выносливость"
+msgstr "Dayanıklılık"
+
+#: data/treasures/archer.json
+msgid "Выпущенные стрелы падают с неба, как звёзды."
+msgstr "Atılan oklar gökten yıldızlar gibi düşer."
+
+#: data/buildings/farm.tres
+msgid "Выращивает еду. Герой ест сам, когда проголодается."
+msgstr "Yiyecek üretir. Kahraman acıkınca otomatik olarak yer."
+
+#: data/talents/archer_talents.tres
+msgid "Выстрел в сердце"
+msgstr "Kalbe Atış"
+
+#: data/treasures/warrior.json
+msgid "Выточен из клыка зверя, что жил в горах."
+msgstr "Dağlarda yaşamış bir canavarın dişinden oyuldu."
+
+#: data/skills/mage_drain_life.tres
+msgid "Вытягивание жизни"
+msgstr "Can Emme"
+
+#: scenes/creation/character_creation.tscn
+msgid "Выход"
+msgstr "Çıkış"
+
+#: data/treasures/mage.json
+msgid "Вышиты картой звёзд, которых уже нет на небе."
+msgstr "Artık gökte olmayan yıldızların haritasıyla işlenmiş."
+
+#: data/skills/archer_aimed_shot.tres
+msgid "Гарантированный крит на 300% урона."
+msgstr "Kesin kritik, 300% hasar."
+
+#: scenes/world/world_map.gd
+msgid "Гарнизон: "
+msgstr "Garnizon: "
+
+#: scenes/world/world_map.gd
+msgid "Гарнизон: %d солдат"
+msgstr "Garnizon: %d asker"
+
+#: data/treasures/warrior.json
+msgid "Где прошёл их хозяин, ещё неделю не утихает ветер."
+msgstr "Sahibinin geçtiği yerde rüzgâr bir hafta dinmez."
+
+#: scenes/ui/guild_panel.gd scenes/ui/inventory_panel.gd scripts/autoload/world_service.gd
+msgid "Герой"
+msgstr "Kahraman"
+
+#: scenes/ui/hud.tscn
+msgid "Герой · Воин · ур. 1"
+msgstr "Kahraman · Savaşçı · sv. 1"
+
+#: scenes/world/world_map.gd
+msgid "Герой в замке"
+msgstr "Kahraman kalede"
+
+#: scenes/world/world_map.gd
+msgid "Герой в зоне #%d"
+msgstr "Kahraman #%d bölgesinde"
+
+#: server/src/world/game.ts
+msgid "Герой в походе"
+msgstr "Kahraman seferde"
+
+#: server/src/world/game.ts
+msgid "Герой должен стоять в своём замке"
+msgstr "Kahraman kendi kalende olmalı"
+
+#: scenes/battle/battle.gd
+msgid "Герой отдохнул и снова в бою!"
+msgstr "Kahraman dinlendi ve savaşa döndü!"
+
+#: scenes/battle/battle.gd
+msgid "Герой пал! Отступаем на волну %d"
+msgstr "Kahraman düştü! %d. dalgaya geri çekiliyor"
+
+#: server/src/world/game.ts
+msgid "Герой уже в походе"
+msgstr "Kahraman zaten seferde"
+
+#: server/src/world/game.ts
+msgid "Герой уже здесь"
+msgstr "Kahraman zaten burada"
+
+#: scenes/battle/battle.gd
+msgid "Герой устал и отдыхает…"
+msgstr "Kahraman yorgun, dinleniyor…"
+
+#: data/monsters/giant_spider.tres
+msgid "Гигантский паук"
+msgstr "Dev Örümcek"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Гильдии ещё не набрали очков в этом сезоне."
+msgstr "Bu sezon henüz hiçbir lonca puan kazanmadı."
+
+#: scenes/ui/guild/guild_season_page.gd scenes/ui/guild_panel.gd scenes/ui/guild_panel.tscn scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Гильдия"
+msgstr "Lonca"
+
+#: scenes/ui/hud.gd
+msgid "Гильдия (!)"
+msgstr "Lonca (!)"
+
+#: scenes/ui/hud.gd
+msgid "Гильдия (%d)"
+msgstr "Lonca (%d)"
+
+#: scenes/ui/hud.tscn
+msgid "Гильдия [G]"
+msgstr "Lonca [G]"
+
+#: server/src/world/guilds.ts
+msgid "Гильдия достигла {level} уровня: мест {slots}"
+msgstr "Lonca {level}. seviyeye ulaştı: {slots} yer"
+
+#: server/src/world/guilds.ts
+msgid "Гильдия не найдена"
+msgstr "Lonca bulunamadı"
+
+#: scenes/ui/guild_panel.gd
+msgid "Гильдия основана!"
+msgstr "Lonca kuruldu!"
+
+#: scenes/ui/guild_panel.gd
+msgid "Гильдия распущена"
+msgstr "Lonca dağıtıldı"
+
+#: server/src/world/guilds.ts
+msgid "Гильдия с таким названием уже есть"
+msgstr "Bu isimde bir lonca zaten var"
+
+#: scenes/ui/guild_panel.gd
+msgid "Глава"
+msgstr "Lider"
+
+#: server/src/world/guilds.ts
+msgid "Глава давно не заходил — главенство перешло к {name}"
+msgstr "Lider uzun süredir yok — liderlik {name} oyuncusuna geçti"
+
+#: scenes/ui/guild_panel.gd
+msgid "Главенство передано"
+msgstr "Liderlik devredildi"
+
+#: data/monsters/goblin.tres
+msgid "Гоблин"
+msgstr "Goblin"
+
+#: data/monsters/goblin_archer.tres
+msgid "Гоблин-лучник"
+msgstr "Goblin Okçu"
+
+#: data/monsters/goblin_axeman.tres
+msgid "Гоблин-рубака"
+msgstr "Goblin Baltacı"
+
+#: data/monsters/goblin_shaman.tres
+msgid "Гоблин-шаман"
+msgstr "Goblin Şaman"
+
+#: data/treasures/warrior.json
+msgid "Говорят, в них слышно, как гремит далёкая гроза."
+msgstr "İçlerinde uzak gök gürültüsünün yankılandığı söylenir."
+
+#: data/items/lucky_ring.tres
+msgid "Говорят, его владельцу везёт в бою."
+msgstr "Sahibinin savaşta şanslı olduğu söylenir."
+
+#: data/biomes/mountains.tres
+msgid "Горы"
+msgstr "Dağlar"
+
+#: data/items/field_kitchen.tres
+msgid "Горячая похлёбка: армия сыта и ест меньше."
+msgstr "Sıcak yahni: ordu doyar ve daha az yer."
+
+#: scenes/ui/guild_panel.gd
+msgid "Готово"
+msgstr "Hazır"
+
+#: data/skills/archer_arrow_rain.tres
+msgid "Град стрел"
+msgstr "Ok Yağmuru"
+
+#: data/talents/warrior_talents.tres
+msgid "Град ударов"
+msgstr "Darbe Sağanağı"
+
+#: data/guild/guild.json
+msgid "Гремящие утёсы"
+msgstr "Gürleyen Kayalıklar"
+
+#: scripts/progress/hero_progress.gd
+msgid "Гроза боссов"
+msgstr "Boss Belası"
+
+#: data/treasures/archer.json
+msgid "Грозовая стрела"
+msgstr "Yıldırım Oku"
+
+#: data/treasures/archer.json
+msgid "Грозовой стрелы"
+msgstr "Yıldırım Oku"
+
+#: scripts/data/monster_data.gd
+msgid "Громила"
+msgstr "Kaba Kuvvet"
+
+#: data/guild/guild.json
+msgid "Громкая слава"
+msgstr "Şöhret"
+
+#: data/treasures/warrior.json
+msgid "Громовая Ярость"
+msgstr "Gök Gürültüsü Öfkesi"
+
+#: scripts/progress/hero_progress.gd
+msgid "Дайте герою отдохнуть %d раз"
+msgstr "Kahramanı %d kez dinlendir"
+
+#: scenes/creation/class_card.gd
+msgid "Дальний бой"
+msgstr "Uzak menzil"
+
+#: data/buildings/well.tres
+msgid "Даёт воду: герой пьёт сам, когда хочет пить."
+msgstr "Su sağlar: kahraman susayınca otomatik olarak içer."
+
+#: scripts/data/stat_modifier.gd
+msgid "Двойной удар"
+msgstr "Çifte Vuruş"
+
+#: data/monsters/demon.tres
+msgid "Демон"
+msgstr "İblis"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Дерево"
+msgstr "Odun"
+
+#: scenes/ui/hud.tscn
+msgid "Дерево талантов [T]"
+msgstr "Yetenek ağacı [T]"
+
+#: server/src/world/game.ts
+msgid "Для набега нужна армия"
+msgstr "Baskın için ordu gerekir"
+
+#: scripts/progress/hero_progress.gd
+msgid "Добудьте %d золота с монстров"
+msgstr "Canavarlardan %d altın kazan"
+
+#: scripts/progress/hero_progress.gd
+msgid "Добудьте %s золота с монстров"
+msgstr "Canavarlardan %s altın kazan"
+
+#: data/buildings/quarry.tres
+msgid "Добывает камень для построек."
+msgstr "İnşaat için taş çıkarır."
+
+#: scenes/world/battle_replay.gd scenes/world/world_map.gd
+msgid "Добыча: "
+msgstr "Ganimet: "
+
+#: scripts/progress/hero_progress.gd
+msgid "Дойдите до %s волны"
+msgstr "%s. dalgaya ulaş"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Дорога побед"
+msgstr "Zafer Yolu"
+
+#: scenes/ui/journal/journal_achievements_page.gd scenes/ui/journal_panel.gd
+msgid "Достижения"
+msgstr "Başarımlar"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Доступно с %d-й волны. Души растут с рекордом волны: на 30-й — %d, на 50-й — %d."
+msgstr "%d. dalgadan itibaren. Ruhlar en iyi dalganla artar: 30. dalgada — %d, 50. dalgada — %d."
+
+#: data/guild/guild.json
+msgid "Драконий хребет"
+msgstr "Ejder Sırtı"
+
+#: data/talents/mage_talents.tres
+msgid "Древние руны"
+msgstr "Kadim Rünler"
+
+#: data/items/oak_staff.tres
+msgid "Дубовый посох"
+msgstr "Meşe Asa"
+
+#: data/items/oak_staff.tres
+msgid "Дубовый посох с кристаллом, в котором копится магия."
+msgstr "Büyüyü toplayan kristalli meşe asa."
+
+#: scenes/ui/journal_panel.tscn
+msgid "Души — валюта перерождения: за перерождение, задания и достижения. Тратятся на вечные улучшения."
+msgstr "Ruhlar yeniden doğuş parasıdır: yeniden doğuşlardan, görevlerden ve başarımlardan kazanılır. Kalıcı geliştirmelere harcanır."
+
+#: scenes/ui/journal/journal_prestige_page.gd scenes/ui/journal_panel.gd
+msgid "Души: %d"
+msgstr "Ruhlar: %d"
+
+#: data/items/war_horn.tres
+msgid "Его зов бросает армию в атаку."
+msgstr "Sesi orduyu hücuma kaldırır."
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Еда"
+msgstr "Yiyecek"
+
+#: scenes/ui/army_view.gd
+msgid "Еды в минуту"
+msgstr "Dakikada yiyecek"
+
+#: data/treasures/archer.json
+msgid "Её носитель видит мир глазами ястреба."
+msgstr "Takan, dünyayı bir şahinin gözünden görür."
+
+#: data/needs/thirst.tres
+msgid "Жажда"
+msgstr "Susuzluk"
+
+#: scripts/data/stat_modifier.gd
+msgid "Жатва"
+msgstr "Hasat"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Железная воля"
+msgstr "Demir İrade"
+
+#: data/items/iron_pauldrons.tres
+msgid "Железные наплечники"
+msgstr "Demir Omuzluklar"
+
+#: data/treasures/warrior.json
+msgid "Железный Венец"
+msgstr "Demir Taç"
+
+#: data/items/iron_helmet.tres
+msgid "Железный шлем"
+msgstr "Demir Miğfer"
+
+#: scripts/data/stat_modifier.gd
+msgid "Жестокость"
+msgstr "Vahşet"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Живая крепость"
+msgstr "Yaşayan Kale"
+
+#: scripts/data/stat_modifier.gd
+msgid "Живучесть"
+msgstr "Canlılık"
+
+#: data/treasures/mage.json
+msgid "Жрец солнца"
+msgstr "Güneş Rahibi"
+
+#: data/treasures/mage.json
+msgid "Жреца солнца"
+msgstr "Güneş Rahibi"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Забрать"
+msgstr "Al"
+
+#: scenes/world/world_map.tscn
+msgid "Забрать из гарнизона"
+msgstr "Garnizondan al"
+
+#: scenes/world/world_map.gd
+msgid "Забрать солдат из гарнизона"
+msgstr "Garnizondan asker al"
+
+#: data/buildings/sawmill.tres
+msgid "Заготавливает дерево для построек."
+msgstr "İnşaat için odun keser."
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Загрузка замка с сервера…"
+msgstr "Kale sunucudan yükleniyor…"
+
+#: scenes/world/world_map_view.gd
+msgid "Загрузка карты…"
+msgstr "Harita yükleniyor…"
+
+#: scripts/progress/hero_progress.gd
+msgid "Задание выполнено: %s"
+msgstr "Görev tamamlandı: %s"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Задание ещё не выполнено"
+msgstr "Görev henüz tamamlanmadı"
+
+#: scenes/ui/journal_panel.gd
+msgid "Задания"
+msgstr "Görevler"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Задания дня"
+msgstr "Günlük görevler"
+
+#: scripts/data/stat_modifier.gd
+msgid "Закалка"
+msgstr "Sertleşme"
+
+#: data/treasures/warrior.json
+msgid "Закалённого горна"
+msgstr "Kor Ocağı"
+
+#: data/treasures/warrior.json
+msgid "Закалённые в горне"
+msgstr "Kor Ocağı"
+
+#: data/guild/guild.json
+msgid "Закатный берег"
+msgstr "Gün Batımı Kıyısı"
+
+#: scenes/world/battle_replay.tscn
+msgid "Закрыть"
+msgstr "Kapat"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Закрыть [Esc]"
+msgstr "Kapat [Esc]"
+
+#: scenes/ui/guild_panel.tscn
+msgid "Закрыть [G]"
+msgstr "Kapat [G]"
+
+#: scenes/ui/inventory_panel.tscn
+msgid "Закрыть [I]"
+msgstr "Kapat [I]"
+
+#: scenes/ui/journal_panel.tscn
+msgid "Закрыть [J]"
+msgstr "Kapat [J]"
+
+#: scenes/ui/kingdom_panel.tscn
+msgid "Закрыть [K]"
+msgstr "Kapat [K]"
+
+#: scenes/world/world_map.tscn
+msgid "Закрыть [M]"
+msgstr "Kapat [M]"
+
+#: scenes/talents/talent_grid.tscn
+msgid "Закрыть [T]"
+msgstr "Kapat [T]"
+
+#: data/skills/archer_multishot.tres
+msgid "Залп"
+msgstr "Çoklu Atış"
+
+#: scenes/ui/hud.gd scenes/ui/hud.tscn scenes/world/world_map.gd
+msgid "Замок"
+msgstr "Kale"
+
+#: scenes/ui/hud.gd
+msgid "Замок (!)"
+msgstr "Kale (!)"
+
+#: server/src/world/game.ts
+msgid "Замок {name} под щитом — набег сорван"
+msgstr "{name} kalesi kalkanlı — baskın başarısız"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Замок без защиты — армия в замке отражает набеги"
+msgstr "Kale korumasız — baskınları kale ordusu püskürtür"
+
+#: scenes/ui/kingdom_panel.gd scenes/world/world_map.gd
+msgid "Замок под защитой ещё %s"
+msgstr "Kale %s daha korumalı"
+
+#: server/src/world/game.ts
+msgid "Замок под защитой — напасть пока нельзя"
+msgstr "Kale korumalı — ona henüz saldıramazsın"
+
+#: scenes/world/world_map.gd
+msgid "Занять зону"
+msgstr "Bölgeyi al"
+
+#: scenes/ui/needs_panel.gd
+msgid "Запас: %d %s — герой берёт сам"
+msgstr "Stok: %d %s — kahraman otomatik kullanır"
+
+#: scripts/progress/hero_progress.gd
+msgid "Заточите предмет до +%s"
+msgstr "Bir eşyayı +%s seviyesine geliştir"
+
+#: scripts/progress/hero_progress.gd
+msgid "Заточите снаряжение %d раза"
+msgstr "Ekipmanı %d kez geliştir"
+
+#: scenes/ui/inventory_panel.gd scenes/ui/inventory_panel.tscn
+msgid "Заточить"
+msgstr "Geliştir"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Заточить: %d з (%d%%)"
+msgstr "Geliştir: %d a (%d%%)"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Заточка: макс."
+msgstr "Geliştirme: maks."
+
+#: scenes/ui/guild_panel.gd
+msgid "Заходил"
+msgstr "Son görülme"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres scenes/world/battle_replay.tscn scenes/world/world_map.gd
+msgid "Защита"
+msgstr "Savunma"
+
+#: scripts/items/item.gd
+msgid "Защита армии, %"
+msgstr "Ordu savunması, %"
+
+#: scenes/ui/army_view.gd
+msgid "Защита солдата"
+msgstr "Asker savunması"
+
+#: data/talents/mage_talents.tres data/treasures/archer.json data/treasures/mage.json
+msgid "Звездопад"
+msgstr "Yıldız Yağmuru"
+
+#: data/treasures/mage.json
+msgid "Звездопада"
+msgstr "Yıldız Yağmuru"
+
+#: data/treasures/archer.json
+msgid "Звенит, если ветер меняет направление."
+msgstr "Rüzgâr yön değiştirdiğinde çınlar."
+
+#: data/items/chain_leggings.tres
+msgid "Звенят при ходьбе, зато берегут ноги."
+msgstr "Yürürken şıngırdarlar ama bacakları korurlar."
+
+#: data/treasures/archer.json
+msgid "Звери идут за ним, как за вожаком стаи."
+msgstr "Hayvanlar, takanın peşinden sürünün lideri gibi gider."
+
+#: scenes/ui/settings_panel.tscn
+msgid "Звук"
+msgstr "Ses"
+
+#: scenes/ui/hud.gd
+msgid "Звук включён"
+msgstr "Ses açık"
+
+#: scenes/ui/hud.gd
+msgid "Звук выключен"
+msgstr "Ses kapalı"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Звуки боя"
+msgstr "Savaş sesleri"
+
+#: scenes/ui/settings_panel.gd
+msgid "Звуки боя слышны всегда."
+msgstr "Savaş sesleri her zaman duyulur."
+
+#: scenes/ui/settings_panel.gd
+msgid "Звуки боя слышны, пока курсор над полосой боя или открыто окно, — не мешают работать."
+msgstr "Savaş sesleri yalnızca imleç savaş şeridinin üzerindeyken ya da bir pencere açıkken duyulur; böylece çalışmanızı bölmez."
+
+#: data/treasures/mage.json
+msgid "Звёздный Капюшон"
+msgstr "Yıldızlı Kukuleta"
+
+#: data/talents/mage_talents.tres
+msgid "Звёздный огонь"
+msgstr "Yıldız Ateşi"
+
+#: scenes/ui/building_slot.tscn
+msgid "Здание"
+msgstr "Bina"
+
+#: scenes/ui/kingdom_panel.gd scenes/ui/kingdom_panel.tscn
+msgid "Здания"
+msgstr "Binalar"
+
+#: scenes/world/world_map.gd
+msgid "Здесь герой: %s (ур. %d)"
+msgstr "Kahraman burada: %s (sv. %d)"
+
+#: scenes/ui/inventory_panel.gd scripts/items/item.gd
+msgid "Здоровье"
+msgstr "Can"
+
+#: data/skills/warrior_earthquake.tres
+msgid "Землетрясение"
+msgstr "Deprem"
+
+#: data/guild/guild.json
+msgid "Змеиная топь"
+msgstr "Yılan Bataklığı"
+
+#: data/guild/guild.json
+msgid "Знамя гильдии"
+msgstr "Lonca Sancağı"
+
+#: data/talents/mage_talents.tres
+msgid "Знание стихий"
+msgstr "Element Bilgisi"
+
+#: scripts/progress/hero_progress.gd
+msgid "Знаток монстров"
+msgstr "Canavar Uzmanı"
+
+#: scenes/talents/talent_grid.gd
+msgid "Значимый узел"
+msgstr "Önemli düğüm"
+
+#: data/treasures/archer.json
+msgid "Золотая Пряжка Колчана"
+msgstr "Altın Sadak Tokası"
+
+#: scripts/progress/hero_progress.gd
+msgid "Золотая жила"
+msgstr "Altın Damarı"
+
+#: data/guild/guild.json
+msgid "Золотая степь"
+msgstr "Altın Bozkır"
+
+#: scenes/ui/hud.gd
+msgid "Золото"
+msgstr "Altın"
+
+#: scenes/ui/inventory_panel.tscn
+msgid "Золото героя"
+msgstr "Kahramanın altını"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Золото героя → казна замка. Лимит копится со временем и растёт с уровнем героя (сейчас %d)."
+msgstr "Kahramanın altını → kale hazinesi. Sınır zamanla birikir ve kahraman seviyesiyle artar (şu an %d)."
+
+#: scenes/ui/guild_panel.gd
+msgid "Золото из казны замка становится опытом гильдии; ваш вклад виден в списке участников."
+msgstr "Kale hazinesindeki altın lonca XP'sine dönüşür; katkın üye listesinde görünür."
+
+#: scenes/ui/hud.tscn
+msgid "Золото: 0"
+msgstr "Altın: 0"
+
+#: data/monsters/zombie.tres
+msgid "Зомби"
+msgstr "Zombi"
+
+#: scenes/world/world_map.gd
+msgid "Зона #%d · уровень %d"
+msgstr "Bölge #%d · seviye %d"
+
+#: server/src/world/game.ts
+msgid "Зона занята без боя"
+msgstr "Bölge savaşmadan alındı"
+
+#: server/src/world/game.ts
+msgid "Зона игрока {name} была без защиты — захвачена"
+msgstr "{name} bölgesi savunmasızdı — ele geçirildi"
+
+#: server/src/world/guilds.ts
+msgid "Игрок с таким именем не найден"
+msgstr "Bu isimde oyuncu yok"
+
+#: server/src/world/guilds.ts
+msgid "Игрок уже в вашей гильдии"
+msgstr "Oyuncu zaten loncanda"
+
+#: server/src/world/guilds.ts
+msgid "Игрок уже состоит в другой гильдии"
+msgstr "Oyuncu zaten başka bir loncada"
+
+#: server/src/world/game.ts
+msgid "Идти можно только в соседнюю зону"
+msgstr "Yalnızca komşu bölgeye geçebilirsin"
+
+#: scenes/world/world_map.gd
+msgid "Идти можно только в соседнюю с героем зону"
+msgstr "Yalnızca kahramanın yanındaki bölgeye geçebilirsin"
+
+#: data/treasures/archer.json
+msgid "Из ясеня, что рос на могиле первого лучника."
+msgstr "İlk okçunun mezarında büyüyen dişbudaktan yapıldı."
+
+#: data/treasures/mage.json
+msgid "Изнутри похож на ночное небо."
+msgstr "İçeriden gece göğü gibi görünür."
+
+#: data/guild/guild.json
+msgid "Изумрудный дол"
+msgstr "Zümrüt Vadi"
+
+#: scenes/talents/talent_grid.tscn
+msgid "Изучать можно узлы рядом с уже изученными. Колесо — масштаб, перетаскивание — сдвиг. Малые узлы дальше от центра сильнее, значимые дают два бонуса, золотые ключевые — самые мощные."
+msgstr "Yalnızca öğrenilmiş düğümlerin yanındakileri öğrenebilirsin. Tekerlek — yakınlaştır, sürükle — kaydır. Küçük düğümler merkezden uzaklaştıkça güçlenir, önemli düğümler iki bonus verir, altın kilit taşları en güçlüleridir."
+
+#: scenes/talents/talent_grid.gd
+msgid "Изучено"
+msgstr "Öğrenildi"
+
+#: scenes/talents/talent_grid.gd
+msgid "Изучено: %s"
+msgstr "Öğrenildi: %s"
+
+#: scripts/progress/hero_progress.gd
+msgid "Изучите %s видов монстров (1000 убийств)"
+msgstr "%s canavar türünü incele (1000 öldürme)"
+
+#: scenes/talents/talent_grid.tscn
+msgid "Изучить"
+msgstr "Öğren"
+
+#: scenes/talents/talent_grid.gd
+msgid "Изучить (или двойной клик)"
+msgstr "Öğren (veya çift tıkla)"
+
+#: data/treasures/mage.json
+msgid "Им скрепляли указы Совета магов."
+msgstr "Büyücüler Konseyi'nin fermanlarını mühürledi."
+
+#: scripts/data/item_base.gd server/src/world/game.ts
+msgid "Именной"
+msgstr "Özel"
+
+#: scenes/ui/guild_panel.gd
+msgid "Имя"
+msgstr "İsim"
+
+#: scenes/creation/character_creation.tscn
+msgid "Имя героя:"
+msgstr "Kahraman adı:"
+
+#: scenes/ui/guild_panel.gd
+msgid "Имя игрока"
+msgstr "Oyuncu adı"
+
+#: scenes/world/world_map.tscn
+msgid "Имя правителя"
+msgstr "Hükümdar adı"
+
+#: scenes/ui/inventory_panel.tscn
+msgid "Инвентарь"
+msgstr "Envanter"
+
+#: scenes/ui/hud.tscn
+msgid "Инвентарь [I]"
+msgstr "Envanter [I]"
+
+#: scenes/ui/settings_panel.gd
+msgid "Интерфейс"
+msgstr "Arayüz"
+
+#: data/talents/mage_talents.tres
+msgid "Инферно"
+msgstr "Cehennem"
+
+#: scenes/ui/guild_panel.gd
+msgid "Исключить"
+msgstr "Çıkar"
+
+#: data/talents/mage_talents.tres
+msgid "Искра гения"
+msgstr "Deha Kıvılcımı"
+
+#: scripts/progress/hero_progress.gd
+msgid "Истребитель"
+msgstr "Katil"
+
+#: scenes/world/world_map.tscn
+msgid "К герою"
+msgstr "Kahramana"
+
+#: scenes/talents/talent_grid.tscn
+msgid "К центру"
+msgstr "Merkeze"
+
+#: data/treasures/archer.json
+msgid "Каждая стрела несёт в наконечнике искру молнии."
+msgstr "Her okun ucunda bir şimşek kıvılcımı taşır."
+
+#: data/treasures/archer.json
+msgid "Каждый охотник хранит клык своей первой добычи."
+msgstr "Her avcı ilk avının dişini saklar."
+
+#: data/treasures/warrior.json
+msgid "Каждый удар отдаётся раскатом грома."
+msgstr "Her darbe bir gök gürültüsüyle yankılanır."
+
+#: data/buildings/barracks.tres
+msgid "Казармы"
+msgstr "Kışla"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Казна"
+msgstr "Hazine"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Казна королевства"
+msgstr "Kraliyet Hazinesi"
+
+#: server/src/world/game.ts
+msgid "Казна полна"
+msgstr "Hazine dolu"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Казначей"
+msgstr "Hazinedar"
+
+#: data/guild/guild.json
+msgid "Казначейство"
+msgstr "Hazine"
+
+#: data/skills/warrior_execute.tres
+msgid "Казнь"
+msgstr "İnfaz"
+
+#: data/treasures/warrior.json
+msgid "Каменная стена"
+msgstr "Taş Duvar"
+
+#: data/treasures/warrior.json
+msgid "Каменной стены"
+msgstr "Taş Duvar"
+
+#: scenes/actors/monster.gd
+msgid "Каменнокожий"
+msgstr "Taş Deri"
+
+#: data/guild/guild.json
+msgid "Каменные врата"
+msgstr "Taş Kapılar"
+
+#: data/monsters/stone_golem.tres
+msgid "Каменный голем"
+msgstr "Taş Golem"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Каменный щит"
+msgstr "Taş Kalkan"
+
+#: data/buildings/quarry.tres
+msgid "Каменоломня"
+msgstr "Taş Ocağı"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Камень"
+msgstr "Taş"
+
+#: data/treasures/archer.json data/treasures/mage.json
+msgid "Капюшон"
+msgstr "Kukuleta"
+
+#: data/treasures/archer.json
+msgid "Капюшон Бегущей с ветром"
+msgstr "Rüzgâr Koşucusu Kukuletası"
+
+#: data/treasures/mage.json
+msgid "Капюшон Верховного арканиста"
+msgstr "Yüce Arkanist Kukuletası"
+
+#: data/treasures/archer.json
+msgid "Капюшон Ветра пустыни"
+msgstr "Çöl Rüzgârı Kukuletası"
+
+#: data/treasures/archer.json
+msgid "Капюшон Грозовой стрелы"
+msgstr "Yıldırım Oku Kukuletası"
+
+#: data/treasures/mage.json
+msgid "Капюшон Жреца солнца"
+msgstr "Güneş Rahibi Kukuletası"
+
+#: data/treasures/mage.json
+msgid "Капюшон Звездопада"
+msgstr "Yıldız Yağmuru Kukuletası"
+
+#: data/treasures/mage.json
+msgid "Капюшон Коснувшегося бездны"
+msgstr "Uçurum Dokunuşu Kukuletası"
+
+#: data/treasures/archer.json
+msgid "Капюшон Ночного охотника"
+msgstr "Gece Avcısı Kukuletası"
+
+#: data/treasures/archer.json
+msgid "Капюшон Орлиного глаза"
+msgstr "Kartal Gözü Kukuletası"
+
+#: data/treasures/mage.json
+msgid "Капюшон Повелителя гроз"
+msgstr "Fırtına Efendisi Kukuletası"
+
+#: data/treasures/archer.json
+msgid "Капюшон Повелителя зверей"
+msgstr "Hayvan Efendisi Kukuletası"
+
+#: data/treasures/mage.json
+msgid "Капюшон Призывателя пламени"
+msgstr "Alev Çağıran Kukuletası"
+
+#: data/treasures/archer.json
+msgid "Капюшон Серебряного листа"
+msgstr "Gümüş Yaprak Kukuletası"
+
+#: data/treasures/archer.json
+msgid "Капюшон Терновой чащи"
+msgstr "Dikenli Koru Kukuletası"
+
+#: data/treasures/mage.json
+msgid "Капюшон Ткача льда"
+msgstr "Buz Dokuyucu Kukuletası"
+
+#: data/treasures/mage.json
+msgid "Капюшон Хранителя библиотеки"
+msgstr "Kütüphane Bekçisi Kukuletası"
+
+#: scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Карта"
+msgstr "Harita"
+
+#: scenes/ui/hud.gd
+msgid "Карта (!)"
+msgstr "Harita (!)"
+
+#: scenes/world/world_map.tscn
+msgid "Карта мира"
+msgstr "Dünya haritası"
+
+#: data/treasures/warrior.json
+msgid "Кираса коменданта крепости, которую так и не взяли."
+msgstr "Hiç düşmemiş bir kalenin komutanının zırhı."
+
+#: data/treasures/warrior.json
+msgid "Кираса, внутри которой бьётся каменное сердце."
+msgstr "İçinde taştan bir kalp atan zırh."
+
+#: data/biomes/graveyard.tres
+msgid "Кладбище"
+msgstr "Mezarlık"
+
+#: scenes/creation/class_card.tscn
+msgid "Класс"
+msgstr "Sınıf"
+
+#: data/treasures/warrior.json
+msgid "Клинок Последнего Рассвета"
+msgstr "Son Şafağın Kılıcı"
+
+#: data/treasures/archer.json
+msgid "Клык Первой Добычи"
+msgstr "İlk Avın Dişi"
+
+#: scenes/talents/talent_grid.gd
+msgid "Ключевой талант"
+msgstr "Kilit taşı"
+
+#: data/treasures/warrior.json
+msgid "Клятва скреплена кровью. Нарушивший её — платит своей."
+msgstr "Yemin kanla mühürlendi. Bozan, kendi kanıyla öder."
+
+#: data/monsters/kobold.tres
+msgid "Кобольд"
+msgstr "Kobold"
+
+#: data/items/leather_armor.tres
+msgid "Кожаная броня"
+msgstr "Deri Zırh"
+
+#: data/items/leather_boots.tres
+msgid "Кожаные сапоги"
+msgstr "Deri Çizme"
+
+#: scenes/world/world_map.gd
+msgid "Колесо — масштаб, перетаскивание — сдвиг карты.\nЖёлтая рамка — куда может пойти герой."
+msgstr "Tekerlek — yakınlaştır, sürükle — haritayı kaydır.\nSarı çerçeve — kahramanın gidebileceği yer."
+
+#: scripts/progress/hero_progress.gd
+msgid "Коллекционер"
+msgstr "Koleksiyoncu"
+
+#: data/buildings/well.tres
+msgid "Колодец"
+msgstr "Kuyu"
+
+#: data/treasures/mage.json
+msgid "Кольцо Бездны"
+msgstr "Uçurum Yüzüğü"
+
+#: data/treasures/archer.json
+msgid "Кольцо Быстрой Руки"
+msgstr "Çevik El Yüzüğü"
+
+#: data/treasures/warrior.json
+msgid "Кольцо Наковальни"
+msgstr "Örs Yüzüğü"
+
+#: data/treasures/mage.json
+msgid "Кольцо Чернильной Печати"
+msgstr "Mürekkep Mührü Yüzüğü"
+
+#: data/skills/mage_frost_nova.tres
+msgid "Кольцо льда"
+msgstr "Buz Patlaması"
+
+#: data/items/lucky_ring.tres
+msgid "Кольцо удачи"
+msgstr "Şans Yüzüğü"
+
+#: data/treasures/warrior.json
+msgid "Кольцо, данное богам. Снять его нельзя — только разбить."
+msgstr "Tanrılara sunulmuş bir yüzük. Çıkarılamaz — ancak kırılabilir."
+
+#: data/items/chain_leggings.tres
+msgid "Кольчужные поножи"
+msgstr "Zincir Tozluk"
+
+#: scripts/data/stat_modifier.gd
+msgid "Командование"
+msgstr "Komuta"
+
+#: data/treasures/mage.json
+msgid "Конец Света"
+msgstr "Dünyanın Sonu"
+
+#: data/talents/mage_talents.tres
+msgid "Концентрация"
+msgstr "Odaklanma"
+
+#: data/buildings/stable.tres
+msgid "Конюшня"
+msgstr "Ahır"
+
+#: data/units/spearman.tres
+msgid "Копейщик"
+msgstr "Mızrakçı"
+
+#: data/treasures/warrior.json
+msgid "Королевская гвардия"
+msgstr "Kraliyet Muhafızı"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Королевская милость"
+msgstr "Kraliyet Lütfu"
+
+#: data/treasures/warrior.json
+msgid "Королевской гвардии"
+msgstr "Kraliyet Muhafızı"
+
+#: scenes/ui/kingdom_panel.tscn
+msgid "Королевство"
+msgstr "Krallık"
+
+#: scenes/ui/hud.tscn
+msgid "Королевство: здания и армия [K]"
+msgstr "Krallık: binalar ve ordu [K]"
+
+#: data/treasures/archer.json
+msgid "Корона Ястреба"
+msgstr "Şahin Tacı"
+
+#: data/treasures/warrior.json
+msgid "Корона без камней — для короля, который сражается сам."
+msgstr "Mücevhersiz bir taç — kendisi savaşan bir kral için."
+
+#: data/treasures/mage.json
+msgid "Коснувшегося бездны"
+msgstr "Uçurum Dokunuşu"
+
+#: data/treasures/mage.json
+msgid "Коснувшийся бездны"
+msgstr "Uçurum Dokunuşu"
+
+#: data/treasures/archer.json
+msgid "Кочевники говорят: песок сам уводит стрелу в цель."
+msgstr "Göçebeler, oku hedefe kumun kendisinin götürdüğünü söyler."
+
+#: data/units/militia.tres
+msgid "Крестьяне с вилами. Дёшево и быстро, но слабо."
+msgstr "Yabalı köylüler. Ucuz ve hızlı ama zayıf."
+
+#: data/treasures/mage.json
+msgid "Кристалл на вершине никогда не тает."
+msgstr "Tepesindeki kristal hiç erimez."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Крит"
+msgstr "Kritik"
+
+#: data/treasures/warrior.json
+msgid "Кровавая клятва"
+msgstr "Kan Yemini"
+
+#: data/guild/guild.json
+msgid "Кровавая река"
+msgstr "Kan Nehri"
+
+#: data/treasures/warrior.json
+msgid "Кровавой клятвы"
+msgstr "Kan Yemini"
+
+#: data/treasures/warrior.json
+msgid "Кровавый Венец"
+msgstr "Kan Tacı"
+
+#: data/talents/warrior_talents.tres
+msgid "Кровавый клинок"
+msgstr "Kanlı Kılıç"
+
+#: scripts/data/stat_modifier.gd
+msgid "Кровожадность"
+msgstr "Kana Susamışlık"
+
+#: data/skills/warrior_rend.tres
+msgid "Кровопускание"
+msgstr "Parçala"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Кровь героя"
+msgstr "Kahraman Kanı"
+
+#: data/talents/mage_talents.tres
+msgid "Круг силы"
+msgstr "Güç Çemberi"
+
+#: data/treasures/warrior.json
+msgid "Крылья на шлеме — дар ангела последнему защитнику павшего храма."
+msgstr "Miğferdeki kanatlar, yıkılmış bir tapınağın son savunucusuna bir meleğin armağanı."
+
+#: data/treasures/warrior.json
+msgid "Кто носил эти латы, не отступал ни на шаг."
+msgstr "Bu zırhı giyen hiç geri adım atmadı."
+
+#: data/treasures/archer.json
+msgid "Кто услышал её тетиву — уже не услышит ничего."
+msgstr "Kirişinin sesini duyan bir daha hiçbir şey duymaz."
+
+#: data/treasures/warrior.json
+msgid "Кузнец выковал его из обломка своей наковальни."
+msgstr "Demirci onu kendi örsünün bir parçasından dövdü."
+
+#: data/buildings/forge.tres
+msgid "Кузнецы точат оружие героя и куют снаряжение для армии."
+msgstr "Demirciler kahramanın silahlarını biler ve ordu için teçhizat döver."
+
+#: data/buildings/forge.tres
+msgid "Кузница"
+msgstr "Demirhane"
+
+#: data/treasures/archer.json
+msgid "Куртка"
+msgstr "Ceket"
+
+#: data/treasures/archer.json
+msgid "Куртка Бегущей с ветром"
+msgstr "Rüzgâr Koşucusu Ceketi"
+
+#: data/treasures/archer.json
+msgid "Куртка Ветра пустыни"
+msgstr "Çöl Rüzgârı Ceketi"
+
+#: data/treasures/archer.json
+msgid "Куртка Грозовой стрелы"
+msgstr "Yıldırım Oku Ceketi"
+
+#: data/treasures/archer.json
+msgid "Куртка Ночного охотника"
+msgstr "Gece Avcısı Ceketi"
+
+#: data/treasures/archer.json
+msgid "Куртка Орлиного глаза"
+msgstr "Kartal Gözü Ceketi"
+
+#: data/treasures/archer.json
+msgid "Куртка Повелителя зверей"
+msgstr "Hayvan Efendisi Ceketi"
+
+#: data/treasures/archer.json
+msgid "Куртка Серебряного листа"
+msgstr "Gümüş Yaprak Ceketi"
+
+#: data/treasures/archer.json
+msgid "Куртка Следопыта"
+msgstr "İzcinin Ceketi"
+
+#: data/treasures/archer.json
+msgid "Куртка Терновой чащи"
+msgstr "Dikenli Koru Ceketi"
+
+#: data/treasures/warrior.json
+msgid "Латы"
+msgstr "Göğüslük"
+
+#: data/treasures/warrior.json
+msgid "Латы Военачальника"
+msgstr "Savaş Beyi Göğüslüğü"
+
+#: data/treasures/warrior.json
+msgid "Латы Закалённого горна"
+msgstr "Kor Ocağı Göğüslüğü"
+
+#: data/treasures/warrior.json
+msgid "Латы Каменной стены"
+msgstr "Taş Duvar Göğüslüğü"
+
+#: data/treasures/warrior.json
+msgid "Латы Королевской гвардии"
+msgstr "Kraliyet Muhafızı Göğüslüğü"
+
+#: data/treasures/warrior.json
+msgid "Латы Кровавой клятвы"
+msgstr "Kan Yemini Göğüslüğü"
+
+#: data/treasures/warrior.json
+msgid "Латы Ледяной хватки"
+msgstr "Buz Pençe Göğüslüğü"
+
+#: data/treasures/warrior.json
+msgid "Латы Небесного стража"
+msgstr "Gök Bekçisi Göğüslüğü"
+
+#: data/treasures/warrior.json
+msgid "Латы Пепельного стража"
+msgstr "Kül Bekçisi Göğüslüğü"
+
+#: data/treasures/warrior.json
+msgid "Латы Порождения бездны"
+msgstr "Uçurum Yavrusu Göğüslüğü"
+
+#: data/treasures/warrior.json
+msgid "Латы Сокрушителя бурь"
+msgstr "Fırtına Kıran Göğüslüğü"
+
+#: scripts/data/item_base.gd scripts/items/item.gd server/src/world/game.ts
+msgid "Легендарный"
+msgstr "Efsanevi"
+
+#: data/treasures/warrior.json
+msgid "Ледяная хватка"
+msgstr "Buz Pençe"
+
+#: data/treasures/mage.json
+msgid "Ледяной Шпиль"
+msgstr "Buz Kulesi"
+
+#: data/guild/guild.json
+msgid "Ледяной кряж"
+msgstr "Ayaz Sırtı"
+
+#: data/treasures/warrior.json
+msgid "Ледяной хватки"
+msgstr "Buz Pençe"
+
+#: data/biomes/forest.tres
+msgid "Лес"
+msgstr "Orman"
+
+#: data/treasures/archer.json
+msgid "Лес сам бережёт тех, кто бережёт лес."
+msgstr "Orman, ormanı koruyanları korur."
+
+#: data/monsters/forest_troll.tres
+msgid "Лесной тролль"
+msgstr "Orman Trolü"
+
+#: data/buildings/sawmill.tres
+msgid "Лесопилка"
+msgstr "Kereste Atölyesi"
+
+#: data/skills/warrior_last_stand.tres
+msgid "Лечит 25% здоровья и даёт +80 брони на 8 с. Сама срабатывает, когда здоровья меньше половины."
+msgstr "Canın 25%'ini iyileştirir ve 8 sn boyunca +80 zırh verir. Can yarının altına düşünce kendiliğinden tetiklenir."
+
+#: data/skills/mage_arcane_shield.tres
+msgid "Лечит 30% здоровья и даёт +40 брони на 6 секунд. Сам срабатывает, когда здоровья меньше 70%."
+msgstr "Canın 30%'unu iyileştirir ve 6 saniye boyunca +40 zırh verir. Can 70%'in altındayken kendiliğinden tetiklenir."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Лидерство"
+msgstr "Liderlik"
+
+#: server/src/world/game.ts
+msgid "Лимит взносов исчерпан, подождите"
+msgstr "Yatırma sınırına ulaşıldı, lütfen bekle"
+
+#: data/treasures/archer.json
+msgid "Лисий Капюшон"
+msgstr "Tilki Kukuletası"
+
+#: data/guild/guild.json
+msgid "Лисьи овраги"
+msgstr "Tilki Vadileri"
+
+#: data/monsters/lich.tres
+msgid "Лич"
+msgstr "Lich"
+
+#: data/skills/archer_snare.tres
+msgid "Ловчая сеть"
+msgstr "Tuzak"
+
+#: data/treasures/warrior.json
+msgid "Лоскут Первого Знамени"
+msgstr "İlk Sancağın Parçası"
+
+#: data/treasures/archer.json
+msgid "Лунный Лук"
+msgstr "Ay Yayı"
+
+#: data/classes/archer.tres data/units/archer.tres
+msgid "Лучник"
+msgstr "Okçu"
+
+#: data/talents/archer_talents.tres
+msgid "Лёгкая рука"
+msgstr "Hafif El"
+
+#: data/treasures/warrior.json
+msgid "Лёгкие — чтобы перейти реку и сразу вступить в бой."
+msgstr "Hafif — bir nehri geçip hemen savaşa katılmak için."
+
+#: data/items/hunting_bow.tres
+msgid "Лёгкий лук охотника — бьёт метко и далеко."
+msgstr "Hafif bir av yayı — isabetli ve uzun menzilli."
+
+#: data/classes/mage.tres
+msgid "Маг"
+msgstr "Büyücü"
+
+#: data/skills/mage_arcane_shield.tres
+msgid "Магический щит"
+msgstr "Gizem Kalkanı"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Максимальная заточка"
+msgstr "En yüksek geliştirme"
+
+#: scripts/kingdom/kingdom_state.gd server/src/world/kingdom.ts
+msgid "Максимальный уровень"
+msgstr "En yüksek seviye"
+
+#: scenes/ui/guild_panel.gd
+msgid "Максимальный уровень гильдии"
+msgstr "En yüksek lonca seviyesi"
+
+#: scenes/ui/journal/journal_prestige_page.gd scenes/ui/kingdom_panel.gd
+msgid "Максимум"
+msgstr "Maksimum"
+
+#: scenes/ui/army_view.tscn
+msgid "Максимум (по месту и ресурсам)"
+msgstr "Maksimum (yer ve kaynaklara göre)"
+
+#: scenes/talents/talent_grid.gd
+msgid "Малый узел"
+msgstr "Küçük düğüm"
+
+#: data/treasures/mage.json
+msgid "Мантия"
+msgstr "Cüppe"
+
+#: data/treasures/mage.json
+msgid "Мантия Верховного арканиста"
+msgstr "Yüce Arkanist Cüppesi"
+
+#: data/treasures/mage.json
+msgid "Мантия Вечного Ученика"
+msgstr "Ebedî Öğrencinin Cüppesi"
+
+#: data/treasures/mage.json
+msgid "Мантия Жреца солнца"
+msgstr "Güneş Rahibi Cüppesi"
+
+#: data/treasures/mage.json
+msgid "Мантия Звездопада"
+msgstr "Yıldız Yağmuru Cüppesi"
+
+#: data/treasures/mage.json
+msgid "Мантия Коснувшегося бездны"
+msgstr "Uçurum Dokunuşu Cüppesi"
+
+#: data/treasures/mage.json
+msgid "Мантия Повелителя гроз"
+msgstr "Fırtına Efendisi Cüppesi"
+
+#: data/treasures/mage.json
+msgid "Мантия Призывателя пламени"
+msgstr "Alev Çağıran Cüppesi"
+
+#: data/treasures/mage.json
+msgid "Мантия Ткача льда"
+msgstr "Buz Dokuyucu Cüppesi"
+
+#: data/treasures/mage.json
+msgid "Мантия Хранителя библиотеки"
+msgstr "Kütüphane Bekçisi Cüppesi"
+
+#: scripts/progress/hero_progress.gd
+msgid "Мастер заточки"
+msgstr "Geliştirme Ustası"
+
+#: data/talents/warrior_talents.tres
+msgid "Мастер клинка"
+msgstr "Kılıç Ustası"
+
+#: data/treasures/mage.json
+msgid "Мастер носит её, чтобы помнить: учиться никогда не поздно."
+msgstr "Usta onu hatırlamak için giyer: öğrenmek için asla geç değildir."
+
+#: scripts/progress/hero_progress.gd
+msgid "Мастер умений"
+msgstr "Beceri Ustası"
+
+#: scripts/data/stat_modifier.gd
+msgid "Мастерство"
+msgstr "Ustalık"
+
+#: data/classes/mage.tres
+msgid "Медленные, но мощные магические снаряды."
+msgstr "Yavaş ama güçlü büyü mermileri."
+
+#: scenes/ui/army_view.tscn
+msgid "Меньше (Shift — по 10)"
+msgstr "Azalt (Shift — 10'ar)"
+
+#: scripts/items/item.gd
+msgid "Меньше еды армии, %"
+msgstr "Daha az ordu yiyeceği, %"
+
+#: scenes/ui/settings_panel.gd
+msgid "Меньше нагрузка на видеокарту и батарею ноутбука."
+msgstr "Ekran kartı ve dizüstü pili üzerinde daha az yük."
+
+#: scenes/ui/army_view.gd
+msgid "Мест в армии"
+msgstr "Ordu yerleri"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Мест для подкреплений: %d / %d (половина мест армии замка)"
+msgstr "Takviye yerleri: %d / %d (kale ordusu yerlerinin yarısı)"
+
+#: scenes/ui/army_view.gd
+msgid "Места: %d / %d"
+msgstr "Yer: %d / %d"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Место"
+msgstr "Sıra"
+
+#: data/skills/mage_meteor.tres
+msgid "Метеор"
+msgstr "Meteor"
+
+#: data/talents/mage_talents.tres
+msgid "Метеор: +{value}% урона и −{value2}% перезарядки."
+msgstr "Meteor: +{value}% hasar ve −{value2}% bekleme süresi."
+
+#: data/talents/archer_talents.tres
+msgid "Меткий глаз"
+msgstr "Keskin Göz"
+
+#: data/talents/archer_talents.tres scripts/data/stat_modifier.gd
+msgid "Меткость"
+msgstr "İsabet"
+
+#: data/treasures/warrior.json
+msgid "Меч рыцаря, не нарушившего ни одной клятвы."
+msgstr "Tek bir yeminini bile bozmamış bir şövalyenin kılıcı."
+
+#: scenes/ui/hud.tscn
+msgid "Мировая карта [M]"
+msgstr "Dünya haritası [M]"
+
+#: data/classes/warrior.tres
+msgid "Много здоровья и брони. Бьёт в ближнем бою."
+msgstr "Bol can ve zırh. Yakın dövüşte savaşır."
+
+#: scenes/actors/monster.gd
+msgid "Могучий"
+msgstr "Kudretli"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Мои подкрепления"
+msgstr "Takviyelerim"
+
+#: data/skills/mage_chain_lightning.tres
+msgid "Молния бьёт цель на 180% и перескакивает ещё на 4 врагов, каждый раз на 15% слабее."
+msgstr "Şimşek hedefe 180% vurur ve 4 düşmana daha sıçrar, her seferinde 15% zayıflar."
+
+#: data/treasures/archer.json
+msgid "Моховые Штаны"
+msgstr "Yosun Pantolon"
+
+#: data/skills/warrior_power_strike.tres
+msgid "Мощный удар"
+msgstr "Güçlü Darbe"
+
+#: data/talents/warrior_talents.tres
+msgid "Мощный удар: +{value}% урона и −{value2}% перезарядки."
+msgstr "Güçlü Darbe: +{value}% hasar ve −{value2}% bekleme süresi."
+
+#: scripts/data/stat_modifier.gd
+msgid "Мудрость"
+msgstr "Bilgelik"
+
+#: scripts/progress/hero_progress.gd
+msgid "Мудрость веков"
+msgstr "Çağların Bilgeliği"
+
+#: scenes/ui/settings_panel.gd
+msgid "Музыка"
+msgstr "Müzik"
+
+#: scripts/data/stat_modifier.gd
+msgid "Муштра"
+msgstr "Talim"
+
+#: data/monsters/moss_giant.tres
+msgid "Мшистый великан"
+msgstr "Yosun Devi"
+
+#: data/treasures/archer.json
+msgid "Мягкие и бесшумные, как лесной мох."
+msgstr "Orman yosunu gibi yumuşak ve sessiz."
+
+#: data/guild/guild.json
+msgid "Мёртвые болота"
+msgstr "Ölü Bataklıklar"
+
+#: server/src/world/game.ts
+msgid "На карте не осталось места для нового замка"
+msgstr "Haritada yeni bir kale için yer kalmadı"
+
+#: scenes/ui/needs_panel.gd
+msgid "На нуле герой уходит отдыхать"
+msgstr "Sıfıra inince kahraman dinlenmeye gider"
+
+#: server/src/world/game.ts
+msgid "Набег {name} на ваш замок отбит"
+msgstr "{name} oyuncusunun kalene baskını püskürtüldü"
+
+#: scenes/world/world_map.gd
+msgid "Набег на замок"
+msgstr "Kaleye baskın yap"
+
+#: server/src/world/game.ts
+msgid "Набег на замок {name} не отбит — ваши подкрепления понесли потери"
+msgstr "{name} kalesine baskın püskürtülemedi — takviyelerin kayıp verdi"
+
+#: server/src/world/game.ts
+msgid "Набег на замок {name} отбит: армия погибла, герой вернулся в замок"
+msgstr "{name} kalesine baskın püskürtüldü: ordu öldü, kahraman kaleye döndü"
+
+#: server/src/world/game.ts
+msgid "Набег на замок {name} удался"
+msgstr "{name} kalesine baskın başarılı"
+
+#: scenes/world/world_map.gd
+msgid "Набег: победа даёт часть ресурсов замка, поход дольше обычного"
+msgstr "Baskın: zafer kalenin kaynaklarının bir kısmını getirir, sefer normalden uzun sürer"
+
+#: data/treasures/mage.json
+msgid "Навершие тлеет уже триста лет."
+msgstr "Kabzası üç yüz yıldır için için yanıyor."
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Награда за победу: %d золота в казну каждому, кто сражался, и опыт гильдии."
+msgstr "Zafer ödülü: savaşan herkesin hazinesine %d altın, artı lonca XP'si."
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Награда получена"
+msgstr "Ödül alındı"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Награды:\n"
+msgstr "Ödüller:\n"
+
+#: data/treasures/warrior.json
+msgid "Надевший их командует не голосом, а одним взглядом."
+msgstr "Bunları giyen sesiyle değil, tek bir bakışla komuta eder."
+
+#: scenes/ui/inventory_panel.gd scenes/ui/inventory_panel.tscn
+msgid "Надеть"
+msgstr "Kuşan"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Нажмите на предмет в сумке или экипировке"
+msgstr "Çantadaki veya ekipmandaki bir eşyaya tıkla"
+
+#: scenes/ui/guild_panel.gd
+msgid "Название"
+msgstr "İsim"
+
+#: server/src/world/guilds.ts
+msgid "Название гильдии: от 3 до 24 символов"
+msgstr "Lonca adı: 3 ila 24 karakter"
+
+#: server/src/world/game.ts
+msgid "Найдено сокровище: {item} ({quality})"
+msgstr "Hazine bulundu: {item} ({quality})"
+
+#: scenes/ui/army_view.gd
+msgid "Найм"
+msgstr "Asker al"
+
+#: scenes/ui/army_view.tscn
+msgid "Нанять"
+msgstr "Asker al"
+
+#: scenes/ui/army_view.gd
+msgid "Нанять ×%d"
+msgstr "Asker al ×%d"
+
+#: scenes/world/world_map.gd
+msgid "Нападение на игрока снимет защиту вашего замка"
+msgstr "Bir oyuncuya saldırmak kalenin korumasını kaldırır"
+
+#: scenes/world/world_map.gd
+msgid "Напасть на игрока"
+msgstr "Oyuncuya saldır"
+
+#: data/treasures/archer.json data/treasures/warrior.json
+msgid "Наплечники"
+msgstr "Omuzluk"
+
+#: data/treasures/archer.json
+msgid "Наплечники Бегущей с ветром"
+msgstr "Rüzgâr Koşucusu Pelerini"
+
+#: data/treasures/archer.json
+msgid "Наплечники Ветра пустыни"
+msgstr "Çöl Rüzgârı Pelerini"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Военачальника"
+msgstr "Savaş Beyi Omuzlukları"
+
+#: data/treasures/archer.json
+msgid "Наплечники Грозовой стрелы"
+msgstr "Yıldırım Oku Pelerini"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Закалённого горна"
+msgstr "Kor Ocağı Omuzlukları"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Каменной стены"
+msgstr "Taş Duvar Omuzlukları"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Королевской гвардии"
+msgstr "Kraliyet Muhafızı Omuzlukları"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Кровавой клятвы"
+msgstr "Kan Yemini Omuzlukları"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Ледяной хватки"
+msgstr "Buz Pençe Omuzlukları"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Небесного стража"
+msgstr "Gök Bekçisi Omuzlukları"
+
+#: data/treasures/archer.json
+msgid "Наплечники Ночного охотника"
+msgstr "Gece Avcısı Pelerini"
+
+#: data/treasures/archer.json
+msgid "Наплечники Орлиного глаза"
+msgstr "Kartal Gözü Pelerini"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Пепельного стража"
+msgstr "Kül Bekçisi Omuzlukları"
+
+#: data/treasures/archer.json
+msgid "Наплечники Повелителя зверей"
+msgstr "Hayvan Efendisi Pelerini"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Порождения бездны"
+msgstr "Uçurum Yavrusu Omuzlukları"
+
+#: data/treasures/archer.json
+msgid "Наплечники Серебряного листа"
+msgstr "Gümüş Yaprak Pelerini"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Сокрушителя бурь"
+msgstr "Fırtına Kıran Omuzlukları"
+
+#: data/treasures/archer.json
+msgid "Наплечники Терновой чащи"
+msgstr "Dikenli Koru Pelerini"
+
+#: data/guild/guild.json
+msgid "Наставники"
+msgstr "Akıl Hocaları"
+
+#: scenes/ui/hud.tscn scenes/ui/settings_panel.tscn
+msgid "Настройки"
+msgstr "Ayarlar"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Настройки применяются сразу. Свёрнутая в трей игра не рисует кадры и почти не нагружает ПК."
+msgstr "Ayarlar hemen uygulanır. Tepsiye küçültüldüğünde oyun çizimi durdurur ve bilgisayarı neredeyse hiç yormaz."
+
+#: data/talents/warrior_talents.tres
+msgid "Натиск"
+msgstr "Hücum"
+
+#: data/talents/archer_talents.tres
+msgid "Натянутая тетива"
+msgstr "Gergin Kiriş"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Наука войны"
+msgstr "Savaş Bilimi"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Находка ~%s · неделя %d/%d"
+msgstr "Sonraki buluntu ~%s · hafta %d/%d"
+
+#: scenes/talents/talent_grid.gd scripts/data/talent_tree.gd
+msgid "Начало пути"
+msgstr "Başlangıç noktası"
+
+#: scenes/creation/character_creation.tscn
+msgid "Начать приключение"
+msgstr "Maceraya başla"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Не построено"
+msgstr "İnşa edilmedi"
+
+#: server/src/world/guilds.ts
+msgid "Не так быстро"
+msgstr "O kadar hızlı değil"
+
+#: scripts/autoload/world_service.gd
+msgid "Не удалось отправить запрос"
+msgstr "İstek gönderilemedi"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Не хватает душ"
+msgstr "Yeterli ruh yok"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Не хватает золота"
+msgstr "Yeterli altın yok"
+
+#: server/src/world/guilds.ts
+msgid "Не хватает золота в казне замка"
+msgstr "Kale hazinesinde yeterli altın yok"
+
+#: scenes/talents/talent_grid.gd
+msgid "Не хватает золота на сброс"
+msgstr "Sıfırlamak için yeterli altın yok"
+
+#: scripts/kingdom/army_state.gd
+msgid "Не хватает места в армии (свободно %d)"
+msgstr "Yeterli ordu yeri yok (%d boş)"
+
+#: scripts/kingdom/army_state.gd scripts/kingdom/kingdom_state.gd server/src/world/kingdom.ts
+msgid "Не хватает ресурсов"
+msgstr "Yeterli kaynak yok"
+
+#: data/treasures/warrior.json
+msgid "Небесного стража"
+msgstr "Gök Bekçisi"
+
+#: data/treasures/warrior.json
+msgid "Небесный страж"
+msgstr "Gök Bekçisi"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Неделя %d/%d — дальше со след. недели"
+msgstr "Hafta %d/%d — devamı gelecek hafta"
+
+#: server/src/world/guilds.ts
+msgid "Недостаточно прав"
+msgstr "Yetkin yok"
+
+#: scenes/talents/talent_grid.gd
+msgid "Недоступно: изучайте узлы по цепочке от центра"
+msgstr "Kullanılamaz: düğümleri merkezden zincir hâlinde öğren"
+
+#: server/src/world/guilds.ts
+msgid "Неизвестная роль"
+msgstr "Bilinmeyen rol"
+
+#: server/src/world/game.ts
+msgid "Неизвестный бонус армии: "
+msgstr "Bilinmeyen ordu bonusu: "
+
+#: server/src/world/game.ts
+msgid "Неизвестный класс героя"
+msgstr "Bilinmeyen kahraman sınıfı"
+
+#: scenes/world/battle_replay.gd server/src/world/game.ts
+msgid "Нейтралы"
+msgstr "Tarafsızlar"
+
+#: server/src/world/game.ts
+msgid "Нейтралы разбиты, зона захвачена"
+msgstr "Tarafsızlar yenildi, bölge ele geçirildi"
+
+#: scenes/world/world_map.gd
+msgid "Нейтралы: %s\nЗащита ≈ %d"
+msgstr "Tarafsızlar: %s\nSavunma ≈ %d"
+
+#: server/src/world/game.ts
+msgid "Некорректное значение "
+msgstr "Geçersiz değer "
+
+#: server/src/world/game.ts
+msgid "Некорректные бонусы армии"
+msgstr "Geçersiz ordu bonusları"
+
+#: server/src/http.ts
+msgid "Некорректный JSON"
+msgstr "Geçersiz JSON"
+
+#: server/src/world/game.ts
+msgid "Некорректный запрос"
+msgstr "Geçersiz istek"
+
+#: server/src/world/game.ts
+msgid "Некорректный уровень героя"
+msgstr "Geçersiz kahraman seviyesi"
+
+#: data/monsters/necromancer.tres
+msgid "Некромант"
+msgstr "Ölü Çağıran"
+
+#: server/src/world/game.ts
+msgid "Нельзя нападать на союзника по гильдии"
+msgstr "Lonca müttefikine saldıramazsın"
+
+#: server/src/world/guilds.ts
+msgid "Нельзя пригласить самого себя"
+msgstr "Kendini davet edemezsin"
+
+#: scripts/items/item.gd
+msgid "Необычный"
+msgstr "Nadir"
+
+#: data/skills/warrior_last_stand.tres
+msgid "Непоколебимость"
+msgstr "Son Direniş"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Несгибаемость"
+msgstr "Eğilmez"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Несокрушимый"
+msgstr "Yıkılmaz"
+
+#: scenes/world/world_map.gd
+msgid "Нет входа на сервер карты"
+msgstr "Harita sunucusuna giriş yapılmadı"
+
+#: scripts/autoload/world_service.gd
+msgid "Нет золота"
+msgstr "Altın yok"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Нет реликвий"
+msgstr "Kalıntı yok"
+
+#: server/src/world/guilds.ts
+msgid "Нет свободных мест — повысьте уровень гильдии"
+msgstr "Boş yer yok — lonca seviyesini yükselt"
+
+#: scenes/talents/talent_grid.gd
+msgid "Нет свободных очков"
+msgstr "Boş puan yok"
+
+#: scenes/talents/talent_grid.gd
+msgid "Нет свободных очков — они даются за уровень"
+msgstr "Boş puan yok — seviye atladıkça kazanılır"
+
+#: server/src/world/guilds.ts
+msgid "Нет свободных очков — повысьте уровень гильдии"
+msgstr "Boş puan yok — lonca seviyesini yükselt"
+
+#: scripts/kingdom/army_state.gd scripts/kingdom/kingdom_state.gd
+msgid "Нет связи с сервером"
+msgstr "Sunucu bağlantısı yok"
+
+#: scripts/autoload/world_service.gd
+msgid "Нет связи с сервером (%s)"
+msgstr "Sunucu bağlantısı yok (%s)"
+
+#: scenes/ui/guild_panel.gd
+msgid "Нет связи с сервером карты — гильдии работают только онлайн."
+msgstr "Harita sunucusuna bağlantı yok — loncalar yalnızca çevrim içi çalışır."
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Нет связи с сервером — замок только для просмотра"
+msgstr "Sunucu bağlantısı yok — kale yalnızca görüntülenebilir"
+
+#: server/src/world/guilds.ts
+msgid "Нет такого бонуса"
+msgstr "Böyle bir ayrıcalık yok"
+
+#: server/src/world/game.ts server/src/world/kingdom.ts
+msgid "Нет такого заказа"
+msgstr "Böyle bir emir yok"
+
+#: server/src/world/kingdom.ts
+msgid "Нет такого здания"
+msgstr "Böyle bir bina yok"
+
+#: server/src/world/game.ts
+msgid "Нет такого игрока"
+msgstr "Böyle bir oyuncu yok"
+
+#: server/src/world/kingdom.ts
+msgid "Нет такого отряда"
+msgstr "Böyle bir birlik yok"
+
+#: server/src/world/game.ts
+msgid "Нет такого подкрепления"
+msgstr "Böyle bir takviye yok"
+
+#: server/src/world/game.ts
+msgid "Нет такой зоны"
+msgstr "Böyle bir bölge yok"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Неудача… золото потрачено"
+msgstr "Başarısız… altın harcandı"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Неутомимость"
+msgstr "Yorulmazlık"
+
+#: scripts/progress/hero_progress.gd
+msgid "Неутомимый"
+msgstr "Yorulmaz"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "Нечего забирать"
+msgstr "Alınacak bir şey yok"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Нечего сливать"
+msgstr "Birleştirilecek bir şey yok"
+
+#: scenes/ui/needs_panel.gd
+msgid "Ниже %d: %s"
+msgstr "%d altında: %s"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Никто ещё не сражался с боссом на этой неделе."
+msgstr "Bu hafta henüz kimse bossla savaşmadı."
+
+#: scenes/world/world_map.gd
+msgid "Ничья"
+msgstr "Sahipsiz"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Новая жизнь начнётся с %d-й волны («Стартовый рывок»)."
+msgstr "Yeni hayat %d. dalgada başlar («Önde Başla»)."
+
+#: scenes/main.gd
+msgid "Новая жизнь! Получено душ: %d"
+msgstr "Yeni bir hayat! Alınan ruh: %d"
+
+#: scenes/battle/battle.gd
+msgid "Новое умение: %s!"
+msgstr "Yeni beceri: %s!"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Новые атаки через %s"
+msgstr "%s sonra yeni saldırılar"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Новые задания через %s. Награда за каждое: золото и 1 душа (души — валюта перерождения)."
+msgstr "%s sonra yeni görevler. Her birinin ödülü: altın ve 1 ruh (ruhlar yeniden doğuş parasıdır)."
+
+#: scripts/data/item_base.gd
+msgid "Ноги"
+msgstr "Bacak"
+
+#: data/treasures/mage.json
+msgid "Носитель ступает, почти не касаясь земли."
+msgstr "Takan, yere neredeyse hiç değmeden yürür."
+
+#: data/treasures/archer.json
+msgid "Ночного охотника"
+msgstr "Gece Avcısı"
+
+#: data/treasures/archer.json
+msgid "Ночной охотник"
+msgstr "Gece Avcısı"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Нужна Ратуша %d-го уровня"
+msgstr "Belediye Binası seviye %d gerekir"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Нужна связь с сервером"
+msgstr "Sunucu bağlantısı gerekir"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Нужно 3 предмета тира «%s» в слот «%s» в сумке"
+msgstr "Çantada «%s» kademesinden «%s» yuvası için 3 eşya gerekir"
+
+#: server/src/http.ts
+msgid "Нужно войти заново"
+msgstr "Lütfen yeniden giriş yap"
+
+#: server/src/world/kingdom.ts
+msgid "Нужно здание более высокого уровня"
+msgstr "Daha yüksek seviyeli bir bina gerekir"
+
+#: scripts/kingdom/army_state.gd
+msgid "Нужно: %s %d-го уровня"
+msgstr "Gerekli: %s seviye %d"
+
+#: data/treasures/archer.json
+msgid "Оберег Ветров"
+msgstr "Rüzgârların Tılsımı"
+
+#: data/treasures/mage.json
+msgid "Облачение Архимага"
+msgstr "Başbüyücünün Giysisi"
+
+#: data/treasures/mage.json
+msgid "Облачение главы Совета магов. Рун на нём больше, чем ниток."
+msgstr "Büyücüler Konseyi başkanının giysisi. İplikten çok rün var."
+
+#: data/guild/guild.json
+msgid "Обозы"
+msgstr "İkmal Kervanları"
+
+#: data/monsters/werewolf.tres
+msgid "Оборотень"
+msgstr "Kurt Adam"
+
+#: data/treasures/mage.json
+msgid "Обруч Совиной Мудрости"
+msgstr "Baykuş Bilgeliği Tacı"
+
+#: scenes/ui/army_view.gd
+msgid "Обучение: %s"
+msgstr "Eğitim: %s"
+
+#: scenes/ui/hud.gd
+msgid "Обучено: %s ×%d"
+msgstr "Eğitildi: %s ×%d"
+
+#: scenes/ui/settings_panel.gd
+msgid "Общая громкость"
+msgstr "Genel ses"
+
+#: data/guild/guild.json
+msgid "Общая муштра"
+msgstr "Ortak Talim"
+
+#: scripts/items/item.gd
+msgid "Обычный"
+msgstr "Sıradan"
+
+#: data/skills/mage_fireball.tres
+msgid "Огненный шар"
+msgstr "Ateş Topu"
+
+#: data/talents/mage_talents.tres
+msgid "Огненный шар: +{value}% урона. +{value2}% скорости атаки."
+msgstr "Ateş Topu: +{value}% hasar. +{value2}% saldırı hızı."
+
+#: data/monsters/ogre_boss.tres
+msgid "Огр-вожак"
+msgstr "Ogre Reisi"
+
+#: server/src/http.ts
+msgid "Ожидался JSON-объект"
+msgstr "JSON nesnesi bekleniyordu"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Описание здания"
+msgstr "Bina açıklaması"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Описание предмета"
+msgstr "Eşya açıklaması"
+
+#: data/treasures/mage.json
+msgid "Оплечье"
+msgstr "Manto"
+
+#: data/treasures/mage.json
+msgid "Оплечье Верховного арканиста"
+msgstr "Yüce Arkanist Mantosu"
+
+#: data/treasures/mage.json
+msgid "Оплечье Жреца солнца"
+msgstr "Güneş Rahibi Mantosu"
+
+#: data/treasures/mage.json
+msgid "Оплечье Звездопада"
+msgstr "Yıldız Yağmuru Mantosu"
+
+#: data/treasures/mage.json
+msgid "Оплечье Коснувшегося бездны"
+msgstr "Uçurum Dokunuşu Mantosu"
+
+#: data/treasures/mage.json
+msgid "Оплечье Повелителя гроз"
+msgstr "Fırtına Efendisi Mantosu"
+
+#: data/treasures/mage.json
+msgid "Оплечье Призывателя пламени"
+msgstr "Alev Çağıran Mantosu"
+
+#: data/treasures/mage.json
+msgid "Оплечье Ткача льда"
+msgstr "Buz Dokuyucu Mantosu"
+
+#: data/treasures/mage.json
+msgid "Оплечье Хранителя библиотеки"
+msgstr "Kütüphane Bekçisi Mantosu"
+
+#: data/units/militia.tres
+msgid "Ополченец"
+msgstr "Milis"
+
+#: scenes/ui/guild_panel.gd
+msgid "Опыт гильдии: %d / %d\nОпыт дают взносы золотом (1 золото = 1 опыт) и победы участников на карте."
+msgstr "Lonca XP'si: %d / %d\nXP, altın bağışlarından (1 altın = 1 XP) ve üyelerin haritadaki zaferlerinden gelir."
+
+#: scenes/ui/hud.gd
+msgid "Опыт: %d / %d"
+msgstr "XP: %d / %d"
+
+#: data/monsters/orc_warrior.tres
+msgid "Орк-воин"
+msgstr "Ork Savaşçı"
+
+#: data/monsters/orc_brute.tres
+msgid "Орк-громила"
+msgstr "Ork Kaba Kuvvet"
+
+#: data/monsters/orc_thrower.tres
+msgid "Орк-метатель"
+msgstr "Ork Fırlatıcı"
+
+#: data/monsters/orc_shaman.tres
+msgid "Орк-шаман"
+msgstr "Ork Şaman"
+
+#: data/treasures/archer.json
+msgid "Орлиного глаза"
+msgstr "Kartal Gözü"
+
+#: data/skills/archer_eagle_eye.tres data/talents/archer_talents.tres data/treasures/archer.json
+msgid "Орлиный глаз"
+msgstr "Kartal Gözü"
+
+#: data/talents/warrior_talents.tres scripts/data/item_base.gd
+msgid "Оружие"
+msgstr "Silah"
+
+#: scenes/ui/guild_panel.gd
+msgid "Основать"
+msgstr "Kur"
+
+#: scenes/ui/guild_panel.gd
+msgid "Основать гильдию"
+msgstr "Lonca kur"
+
+#: scenes/world/world_map.tscn
+msgid "Оставить гарнизон"
+msgstr "Garnizon bırak"
+
+#: scenes/world/world_map.gd
+msgid "Оставить гарнизон в зоне"
+msgstr "Bölgeye garnizon bırak"
+
+#: scenes/world/world_map.tscn
+msgid "Оставить часть армии защищать эту зону"
+msgstr "Bu bölgeyi savunmak için ordunun bir kısmını bırak"
+
+#: scenes/ui/needs_panel.gd
+msgid "От %d: %s"
+msgstr "%d üstünde: %s"
+
+#: data/treasures/mage.json
+msgid "От этой мантии в комнате всегда идёт пар изо рта."
+msgstr "Bu cüppe odadayken nefesin hep buğulanır."
+
+#: scenes/ui/needs_panel.gd scenes/ui/needs_panel.tscn
+msgid "Отдых"
+msgstr "Dinlen"
+
+#: scenes/ui/guild_panel.gd
+msgid "Отказаться"
+msgstr "Reddet"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Откроется, когда в ветку вложено %d очков"
+msgstr "Dala %d puan harcandığında açılır"
+
+#: scenes/world/world_map.tscn
+msgid "Отмена"
+msgstr "İptal"
+
+#: scenes/ui/army_view.gd
+msgid "Отменить (ресурсы вернутся)"
+msgstr "İptal (kaynaklar iade edilir)"
+
+#: scenes/ui/guild_panel.gd
+msgid "Отменить приглашение"
+msgstr "Daveti iptal et"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Отозвать"
+msgstr "Geri çağır"
+
+#: scenes/ui/guild/guild_reinforce_page.gd scenes/ui/guild_panel.gd
+msgid "Отправить"
+msgstr "Gönder"
+
+#: scenes/world/world_map.gd
+msgid "Отправить армию из замка на карту"
+msgstr "Orduyu kaleden haritaya gönder"
+
+#: scenes/ui/needs_panel.tscn
+msgid "Отправить героя отдыхать (восстанавливает бодрость).\nВолна встаёт на паузу."
+msgstr "Kahramanı dinlenmeye gönder (enerji yeniler).\nDalga duraklatılır."
+
+#: scenes/world/world_map.tscn
+msgid "Отправить солдат из армии замка к герою на карту (герой должен быть в замке)"
+msgstr "Kale ordusundan haritadaki kahramana asker gönder (kahraman kalede olmalı)"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Отправить союзнику"
+msgstr "Müttefike gönder"
+
+#: scenes/ui/unit_slot.tscn
+msgid "Отряд"
+msgstr "Birlik"
+
+#: scenes/ui/army_view.gd
+msgid "Отряды"
+msgstr "Birlikler"
+
+#: scripts/data/talent_tree.gd
+msgid "Отсюда растёт сетка талантов. Изучайте узлы рядом с уже изученными."
+msgstr "Yetenek ağı buradan büyür. Öğrenilmiş düğümlerin yanındakileri öğren."
+
+#: scenes/ui/guild_panel.gd
+msgid "Офицер"
+msgstr "Subay"
+
+#: scripts/progress/hero_progress.gd
+msgid "Охотник на элиту"
+msgstr "Seçkin Avcı"
+
+#: data/talents/archer_talents.tres
+msgid "Охотничий инстинкт"
+msgstr "Avcı İçgüdüsü"
+
+#: data/items/hunting_bow.tres
+msgid "Охотничий лук"
+msgstr "Av Yayı"
+
+#: scenes/ui/army_view.gd
+msgid "Очередь обучения"
+msgstr "Eğitim sırası"
+
+#: scripts/kingdom/army_state.gd server/src/world/kingdom.ts
+msgid "Очередь обучения заполнена"
+msgstr "Eğitim sırası dolu"
+
+#: scenes/ui/army_view.gd
+msgid "Очередь пуста — выберите отряд и нажмите «Нанять»"
+msgstr "Sıra boş — bir birlik seç ve «Asker al» düğmesine bas"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Очки"
+msgstr "Puan"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Очки: каждый час — сумма уровней зон участников (центр карты ценнее). В регионе, который контролирует гильдия (больше всех зон, не меньше 10), очки ×1,5."
+msgstr "Puan: her saat — üyelerin bölge seviyelerinin toplamı (harita merkezi daha değerli). Loncanın kontrol ettiği bölgede (en çok bölge, en az 10) puan ×1,5."
+
+#: scripts/autoload/world_service.gd
+msgid "Ошибка сервера (%d)"
+msgstr "Sunucu hatası (%d)"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Панцирь"
+msgstr "Kabuk"
+
+#: data/treasures/warrior.json
+msgid "Парадные доспехи личной стражи короля — и не только для парадов."
+msgstr "Kralın özel muhafızlarının tören zırhı — ve yalnızca geçit törenleri için değil."
+
+#: data/treasures/mage.json
+msgid "Пахнут старым пергаментом и чернилами из сажи драконов."
+msgstr "Eski parşömen ve ejderha isinden yapılmış mürekkep kokarlar."
+
+#: data/guild/guild.json
+msgid "Пепельная долина"
+msgstr "Küllü Vadi"
+
+#: data/treasures/warrior.json
+msgid "Пепельного стража"
+msgstr "Kül Bekçisi"
+
+#: data/treasures/warrior.json
+msgid "Пепельный страж"
+msgstr "Kül Bekçisi"
+
+#: scenes/ui/guild_panel.gd
+msgid "Передать главенство"
+msgstr "Liderliği devret"
+
+#: scenes/world/world_map.gd
+msgid "Перейти сюда"
+msgstr "Buraya geç"
+
+#: scripts/progress/hero_progress.gd
+msgid "Переродитесь %s раз"
+msgstr "%s kez yeniden doğ"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Переродиться"
+msgstr "Yeniden doğ"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Переродиться (+%s)"
+msgstr "Yeniden doğ (+%s)"
+
+#: scenes/ui/journal/journal_prestige_page.gd scenes/ui/journal_panel.gd
+msgid "Перерождение"
+msgstr "Yeniden Doğuş"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Перерождение пока недоступно"
+msgstr "Yeniden doğuş henüz kullanılamıyor"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Перерождение сейчас даст %s. Чем дальше зайти, тем больше: на 50-й волне — %d, на 100-й — %d."
+msgstr "Yeniden doğuş şu an %s verir. İlerledikçe artar: 50. dalgada — %d, 100. dalgada — %d."
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Перерождений: %d · рекорд волны в этой жизни: %d"
+msgstr "Yeniden doğuş: %d · bu hayattaki en iyi dalga: %d"
+
+#: data/treasures/mage.json
+msgid "Перо Феникса"
+msgstr "Anka Tüyü"
+
+#: data/treasures/archer.json
+msgid "Песнь Смерти"
+msgstr "Ölüm Şarkısı"
+
+#: scenes/ui/settings_panel.gd
+msgid "Плавнее, но нагрузка выше."
+msgstr "Daha akıcı ama daha fazla yük."
+
+#: data/talents/mage_talents.tres
+msgid "Пламя души"
+msgstr "Ruh Alevi"
+
+#: data/treasures/warrior.json
+msgid "Плащ Медвежьей Шкуры"
+msgstr "Ayı Postu Pelerin"
+
+#: scripts/data/item_base.gd
+msgid "Плечи"
+msgstr "Omuz"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Площадка Steam"
+msgstr "Steam Pazarı"
+
+#: server/src/world/game.ts
+msgid "Победа над {name}, зона захвачена"
+msgstr "{name} yenildi, bölge ele geçirildi"
+
+#: scenes/world/battle_replay.gd
+msgid "Победа!"
+msgstr "Zafer!"
+
+#: scripts/progress/hero_progress.gd
+msgid "Победите %d боссов"
+msgstr "%d boss yen"
+
+#: scripts/progress/hero_progress.gd
+msgid "Победите %s боссов"
+msgstr "%s boss yen"
+
+#: data/treasures/mage.json
+msgid "Повелитель гроз"
+msgstr "Fırtına Efendisi"
+
+#: data/treasures/archer.json
+msgid "Повелитель зверей"
+msgstr "Hayvan Efendisi"
+
+#: data/treasures/mage.json
+msgid "Повелителя гроз"
+msgstr "Fırtına Efendisi"
+
+#: data/treasures/archer.json
+msgid "Повелителя зверей"
+msgstr "Hayvan Efendisi"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Повержен! Следующий босс (сильнее) придёт через %s."
+msgstr "Yenildi! Sonraki (daha güçlü) boss %s içinde gelir."
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Повысить ранг (1 очко)"
+msgstr "Kademe yükselt (1 puan)"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Под контролем: %s"
+msgstr "Kontrol edilen: %s"
+
+#: data/items/war_banner.tres
+msgid "Под этим знаменем войска сражаются яростнее."
+msgstr "Bu sancak altında birlikler daha azimli savaşır."
+
+#: data/treasures/archer.json
+msgid "Подарок короля лучшему стрелку турнира."
+msgstr "Kralın turnuvanın en iyi okçusuna armağanı."
+
+#: data/skills/mage_ignite.tres
+msgid "Поджигает врагов вокруг цели: 350% урона за 6 с."
+msgstr "Hedefin çevresindeki düşmanları tutuşturur: 6 sn'de 350% hasar."
+
+#: data/skills/mage_ignite.tres
+msgid "Поджог"
+msgstr "Tutuştur"
+
+#: scenes/ui/guild_panel.gd
+msgid "Подкрепления"
+msgstr "Takviyeler"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Подкрепления в пути"
+msgstr "Takviyeler yolda"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Подкрепления вернулись в замок"
+msgstr "Takviyeler kaleye döndü"
+
+#: server/src/world/game.ts
+msgid "Подкрепления можно отправлять только союзникам по гильдии"
+msgstr "Takviye yalnızca lonca müttefiklerine gönderilebilir"
+
+#: scenes/world/world_map.tscn
+msgid "Подтвердить"
+msgstr "Onayla"
+
+#: scenes/battle/battle.gd
+msgid "Пока вас не было (%s): %s"
+msgstr "Sen yokken (%s): %s"
+
+#: scenes/world/world_map.gd
+msgid "Пока нет событий"
+msgstr "Henüz olay yok"
+
+#: scenes/ui/guild_panel.gd
+msgid "Покинуть гильдию"
+msgstr "Loncadan ayrıl"
+
+#: scripts/progress/hero_progress.gd
+msgid "Покоритель волн"
+msgstr "Dalga Fatihi"
+
+#: data/treasures/archer.json
+msgid "Покров Лесного Духа"
+msgstr "Orman Ruhunun Örtüsü"
+
+#: data/items/field_kitchen.tres
+msgid "Полевой котёл"
+msgstr "Seyyar Mutfak"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Полевой лагерь"
+msgstr "Sahra Kampı"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Полководец"
+msgstr "Savaş Beyi"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "Получено душ: %d"
+msgstr "Alınan ruh: %d"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Получено: %s (%s)"
+msgstr "Alındı: %s (%s)"
+
+#: data/treasures/warrior.json
+msgid "Поножи"
+msgstr "Bacaklık"
+
+#: data/treasures/warrior.json
+msgid "Поножи Военачальника"
+msgstr "Savaş Beyi Bacaklıkları"
+
+#: data/treasures/warrior.json
+msgid "Поножи Закалённого горна"
+msgstr "Kor Ocağı Bacaklıkları"
+
+#: data/treasures/warrior.json
+msgid "Поножи Каменной стены"
+msgstr "Taş Duvar Bacaklıkları"
+
+#: data/treasures/warrior.json
+msgid "Поножи Королевской гвардии"
+msgstr "Kraliyet Muhafızı Bacaklıkları"
+
+#: data/treasures/warrior.json
+msgid "Поножи Кровавой клятвы"
+msgstr "Kan Yemini Bacaklıkları"
+
+#: data/treasures/warrior.json
+msgid "Поножи Ледяной хватки"
+msgstr "Buz Pençe Bacaklıkları"
+
+#: data/treasures/warrior.json
+msgid "Поножи Небесного стража"
+msgstr "Gök Bekçisi Bacaklıkları"
+
+#: data/treasures/warrior.json
+msgid "Поножи Пепельного стража"
+msgstr "Kül Bekçisi Bacaklıkları"
+
+#: data/treasures/warrior.json
+msgid "Поножи Порождения бездны"
+msgstr "Uçurum Yavrusu Bacaklıkları"
+
+#: data/treasures/warrior.json
+msgid "Поножи Речного Брода"
+msgstr "Nehir Geçidi Bacaklıkları"
+
+#: data/treasures/warrior.json
+msgid "Поножи Сокрушителя бурь"
+msgstr "Fırtına Kıran Bacaklıkları"
+
+#: scenes/world/battle_replay.gd
+msgid "Поражение"
+msgstr "Yenilgi"
+
+#: server/src/world/game.ts
+msgid "Поражение от {name}: армия погибла, герой вернулся в замок"
+msgstr "{name} karşısında yenilgi: ordu öldü, kahraman kaleye döndü"
+
+#: data/treasures/warrior.json
+msgid "Порождение бездны"
+msgstr "Uçurum Yavrusu"
+
+#: data/treasures/warrior.json
+msgid "Порождения бездны"
+msgstr "Uçurum Yavrusu"
+
+#: server/src/world/guilds.ts
+msgid "После выхода из гильдии вступить в новую можно только через сутки"
+msgstr "Loncadan ayrıldıktan sonra yenisine ancak 24 saat sonra katılabilirsin"
+
+#: scenes/world/world_map.gd
+msgid "Посмотреть бой"
+msgstr "Savaşı izle"
+
+#: data/treasures/mage.json
+msgid "Посох Тлеющих Углей"
+msgstr "Için Için Yanan Kor Asası"
+
+#: data/treasures/mage.json
+msgid "Посох, запертый в подвале академии. Теперь — у вас."
+msgstr "Akademinin mahzenine kilitlenmiş bir asa. Artık senin."
+
+#: scenes/ui/hud.gd
+msgid "Построено: %s, ур. %d"
+msgstr "İnşa edildi: %s, sv. %d"
+
+#: scenes/ui/kingdom_panel.gd scenes/ui/kingdom_panel.tscn
+msgid "Построить"
+msgstr "İnşa et"
+
+#: scenes/world/battle_replay.gd
+msgid "Потери: %s — %s · %s — %s"
+msgstr "Kayıplar: %s — %s · %s — %s"
+
+#: data/talents/mage_talents.tres
+msgid "Поток маны"
+msgstr "Mana Akışı"
+
+#: scenes/world/world_map.tscn
+msgid "Поход"
+msgstr "Sefer"
+
+#: scenes/world/world_map.gd
+msgid "Поход в зону #%d — %s"
+msgstr "#%d bölgesine sefer — %s"
+
+#: server/src/world/game.ts
+msgid "Поход сорван: {name} — ваш союзник по гильдии"
+msgstr "Sefer iptal: {name} lonca müttefikin"
+
+#: server/src/world/game.ts
+msgid "Поход сорван: без армии зону не занять"
+msgstr "Sefer iptal: ordusuz bölge alınamaz"
+
+#: server/src/world/game.ts
+msgid "Поход сорван: зону нельзя захватить"
+msgstr "Sefer iptal: bölge ele geçirilemez"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Походный марш"
+msgstr "Zorunlu Yürüyüş"
+
+#: scenes/ui/settings_panel.gd
+msgid "При наведении"
+msgstr "Üzerine gelince"
+
+#: data/treasures/mage.json
+msgid "Привезены караваном из-за Пяти пустынь."
+msgstr "Beş Çöl'ün ötesinden kervanla getirildi."
+
+#: scenes/ui/guild_panel.gd
+msgid "Пригласить"
+msgstr "Davet et"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашают глава и офицеры"
+msgstr "Lider ve subaylar davet eder"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашение действует ещё %s"
+msgstr "Davetin süresi %s içinde dolar"
+
+#: server/src/world/guilds.ts
+msgid "Приглашение не найдено"
+msgstr "Davet bulunamadı"
+
+#: server/src/world/guilds.ts
+msgid "Приглашение не найдено или истекло"
+msgstr "Davet bulunamadı veya süresi doldu"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашение отклонено"
+msgstr "Davet reddedildi"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашение отменено"
+msgstr "Davet iptal edildi"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашение отправлено: %s"
+msgstr "Davet gönderildi: %s"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашений пока нет. Глава или офицер гильдии может пригласить вас по имени: %s"
+msgstr "Henüz davet yok. Bir lonca lideri veya subayı seni isminle davet edebilir: %s"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашения"
+msgstr "Davetler"
+
+#: data/treasures/archer.json
+msgid "Призрачный Шаг"
+msgstr "Hayalet Adım"
+
+#: data/treasures/mage.json
+msgid "Призыватель пламени"
+msgstr "Alev Çağıran"
+
+#: data/treasures/mage.json
+msgid "Призывателя пламени"
+msgstr "Alev Çağıran"
+
+#: scripts/progress/hero_progress.gd
+msgid "Примените умения %d раз"
+msgstr "Becerileri %d kez kullan"
+
+#: scripts/progress/hero_progress.gd
+msgid "Примените умения %s раз"
+msgstr "Becerileri %s kez kullan"
+
+#: scenes/ui/hud.tscn
+msgid "Применять умения автоматически.\nВручную — клик по умению или клавиши 1–9."
+msgstr "Becerileri otomatik kullan.\nElle — bir beceriye tıkla veya 1–9 tuşlarına bas."
+
+#: data/items/iron_pauldrons.tres
+msgid "Принимают на себя удары, летящие в плечо."
+msgstr "Omuzlarına yönelen darbeleri karşılarlar."
+
+#: data/skills/archer_aimed_shot.tres
+msgid "Прицельный выстрел"
+msgstr "Nişanlı Atış"
+
+#: data/talents/archer_talents.tres
+msgid "Прицельный выстрел: −{value}% перезарядки. +{value2}% урона."
+msgstr "Nişanlı Atış: −{value}% bekleme süresi. +{value2}% hasar."
+
+#: data/skills/archer_piercing_shot.tres
+msgid "Пробивающий выстрел"
+msgstr "Delici Atış"
+
+#: scripts/data/stat_modifier.gd
+msgid "Проворство"
+msgstr "Çeviklik"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Продано за %d з"
+msgstr "%d a karşılığında satıldı"
+
+#: scenes/ui/inventory_panel.gd scenes/ui/inventory_panel.tscn
+msgid "Продать"
+msgstr "Sat"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Продать (%d з)"
+msgstr "Sat (%d a)"
+
+#: scripts/progress/hero_progress.gd
+msgid "Пройдите %d волн"
+msgstr "%d dalga temizle"
+
+#: scripts/progress/hero_progress.gd
+msgid "Пройдите %s волн"
+msgstr "%s dalga temizle"
+
+#: data/biomes/cursed.tres
+msgid "Проклятая чаща"
+msgstr "Lanetli Çalılık"
+
+#: data/treasures/warrior.json
+msgid "Проклятый меч. Им нельзя победить — только казнить."
+msgstr "Lanetli bir kılıç. Kazanamaz — yalnızca infaz eder."
+
+#: scenes/world/battle_replay.tscn
+msgid "Пропустить"
+msgstr "Atla"
+
+#: data/items/leather_armor.tres
+msgid "Прочная кожа защищает, не сковывая движений."
+msgstr "Sağlam deri, hareketi kısıtlamadan korur."
+
+#: data/treasures/warrior.json
+msgid "Прошли через три королевства и не стёрлись."
+msgstr "Üç krallığı aştılar ve hiç eskimediler."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Пусто: сокровища находятся за время игры"
+msgstr "Boş: hazineler oyun süresince bulunur"
+
+#: scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Путь"
+msgstr "Yolculuk"
+
+#: scenes/ui/hud.gd
+msgid "Путь (%d)"
+msgstr "Yolculuk (%d)"
+
+#: scenes/ui/journal_panel.tscn
+msgid "Путь героя"
+msgstr "Kahramanın Yolculuğu"
+
+#: scenes/ui/hud.tscn
+msgid "Путь героя: задания, достижения, бестиарий, перерождение [J]"
+msgstr "Kahramanın yolculuğu: görevler, başarımlar, canavarlar, yeniden doğuş [J]"
+
+#: data/talents/warrior_talents.tres
+msgid "Путь меча"
+msgstr "Kılıç Yolu"
+
+#: scripts/autoload/desktop_window.gd
+msgid "Развернуть"
+msgstr "Geri yükle"
+
+#: scenes/ui/guild_panel.gd
+msgid "Распустить гильдию"
+msgstr "Loncayı dağıt"
+
+#: data/skills/warrior_cleave.tres
+msgid "Рассекающий удар"
+msgstr "Yarma"
+
+#: data/buildings/town_hall.tres
+msgid "Ратуша"
+msgstr "Belediye Binası"
+
+#: scenes/world/world_map.gd
+msgid "Регион: %s (%s)"
+msgstr "Bölge: %s (%s)"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Регионы"
+msgstr "Bölgeler"
+
+#: scripts/items/item.gd
+msgid "Редкий"
+msgstr "Ender"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Реликвии армии"
+msgstr "Ordu kalıntıları"
+
+#: scripts/data/item_base.gd
+msgid "Реликвия армии"
+msgstr "Ordu kalıntısı"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Реликвия армии: пусто.\nРеликвии выпадают с монстров и усиливают армию замка."
+msgstr "Ordu kalıntısı: boş.\nKalıntılar canavarlardan düşer ve kale ordusunu güçlendirir."
+
+#: data/items/rusty_sword.tres
+msgid "Ржавый меч"
+msgstr "Paslı Kılıç"
+
+#: scenes/ui/guild_panel.gd
+msgid "Роль"
+msgstr "Rol"
+
+#: data/talents/warrior_talents.tres
+msgid "Рубака"
+msgstr "Doğrayıcı"
+
+#: data/treasures/mage.json
+msgid "Рунное Оплечье"
+msgstr "Rünlü Manto"
+
+#: data/treasures/mage.json
+msgid "Руны на нём светятся, когда рядом магия."
+msgstr "Yakında büyü olduğunda rünleri parlar."
+
+#: scripts/autoload/settings.gd
+msgid "Русский"
+msgstr "Русский"
+
+#: data/buildings/market.tres
+msgid "Рынок"
+msgstr "Pazar"
+
+#: data/units/knight.tres
+msgid "Рыцарь"
+msgstr "Şövalye"
+
+#: data/treasures/archer.json
+msgid "С высоты орлиного полёта не укроется ни одна цель."
+msgstr "Kartal yüksekliğinden hiçbir hedef saklanamaz."
+
+#: data/treasures/warrior.json
+msgid "Сабатоны"
+msgstr "Postal"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Военачальника"
+msgstr "Savaş Beyi Postalları"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Закалённого горна"
+msgstr "Kor Ocağı Postalları"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Каменной стены"
+msgstr "Taş Duvar Postalları"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Королевской гвардии"
+msgstr "Kraliyet Muhafızı Postalları"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Кровавой клятвы"
+msgstr "Kan Yemini Postalları"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Ледяной хватки"
+msgstr "Buz Pençe Postalları"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Небесного стража"
+msgstr "Gök Bekçisi Postalları"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Пепельного стража"
+msgstr "Kül Bekçisi Postalları"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Порождения бездны"
+msgstr "Uçurum Yavrusu Postalları"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Сокрушителя бурь"
+msgstr "Fırtına Kıran Postalları"
+
+#: data/treasures/archer.json
+msgid "Сапоги"
+msgstr "Çizme"
+
+#: data/treasures/archer.json
+msgid "Сапоги Бегущей с ветром"
+msgstr "Rüzgâr Koşucusu Çizmeleri"
+
+#: data/treasures/archer.json
+msgid "Сапоги Ветра пустыни"
+msgstr "Çöl Rüzgârı Çizmeleri"
+
+#: data/treasures/archer.json
+msgid "Сапоги Грозовой стрелы"
+msgstr "Yıldırım Oku Çizmeleri"
+
+#: data/treasures/warrior.json
+msgid "Сапоги Долгого Марша"
+msgstr "Uzun Yürüyüş Çizmeleri"
+
+#: data/treasures/archer.json
+msgid "Сапоги Ночного охотника"
+msgstr "Gece Avcısı Çizmeleri"
+
+#: data/treasures/archer.json
+msgid "Сапоги Оленьего Шага"
+msgstr "Geyik Adımı Çizmeleri"
+
+#: data/treasures/archer.json
+msgid "Сапоги Орлиного глаза"
+msgstr "Kartal Gözü Çizmeleri"
+
+#: data/treasures/archer.json
+msgid "Сапоги Повелителя зверей"
+msgstr "Hayvan Efendisi Çizmeleri"
+
+#: data/treasures/archer.json
+msgid "Сапоги Серебряного листа"
+msgstr "Gümüş Yaprak Çizmeleri"
+
+#: data/treasures/archer.json
+msgid "Сапоги Терновой чащи"
+msgstr "Dikenli Koru Çizmeleri"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Сбор налогов"
+msgstr "Vergi Toplama"
+
+#: server/src/world/guilds.ts
+msgid "Сбрасывать бонусы можно раз в сутки"
+msgstr "Ayrıcalıklar günde bir kez sıfırlanabilir"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Сбрасываются волна, уровень и таланты (очки возвращаются). Остаются снаряжение, сокровища, золото, замок, армия и гильдия."
+msgstr "Dalga, seviye ve yetenekler sıfırlanır (puanlar iade edilir). Ekipman, hazineler, altın, kale, ordu ve lonca kalır."
+
+#: scenes/talents/talent_grid.tscn
+msgid "Сброс"
+msgstr "Sıfırla"
+
+#: scenes/talents/talent_grid.gd
+msgid "Сброс (%d з)"
+msgstr "Sıfırla (%d a)"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Сброс через %s"
+msgstr "Sıfırlama: %s"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Сбросить бонусы"
+msgstr "Ayrıcalıkları sıfırla"
+
+#: scenes/ui/hud.tscn
+msgid "Свернуть в трей (игра продолжится)"
+msgstr "Tepsiye küçült (oyun çalışmaya devam eder)"
+
+#: scenes/talents/talent_grid.gd
+msgid "Свободных очков: %d · изучено %d из %d"
+msgstr "Boş puan: %d · öğrenilen %d / %d"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Свободных очков: %d из %d · каждый уровень гильдии даёт %d"
+msgstr "Boş puan: %d / %d · her lonca seviyesi %d verir"
+
+#: scenes/ui/guild_panel.gd
+msgid "Сделать офицером"
+msgstr "Subay yap"
+
+#: data/guild/guild.json
+msgid "Северные пустоши"
+msgstr "Kuzey Çorakları"
+
+#: scenes/ui/guild_panel.gd
+msgid "Сезон"
+msgstr "Sezon"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Сезон %d · закончится через %s\nВаша гильдия: %d место, %d очков"
+msgstr "Sezon %d · bitişe %s\nLoncan: %d. sıra, %d puan"
+
+#: server/src/world/guilds.ts
+msgid "Сезон {season} завершён: {place} место! Каждый участник получил {gold} золота"
+msgstr "{season}. sezon bitti: {place}. sıra! Her üye {gold} altın aldı"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Сейчас: "
+msgstr "Şu an: "
+
+#: scenes/talents/talent_grid.tscn
+msgid "Секторы"
+msgstr "Bölümler"
+
+#: data/treasures/warrior.json
+msgid "Сердце Горы"
+msgstr "Dağın Kalbi"
+
+#: data/buildings/town_hall.tres
+msgid "Сердце королевства. Уровень Ратуши ограничивает уровень остальных зданий и расширяет склад."
+msgstr "Krallığın kalbi. Belediye Binası seviyesi diğer tüm binaların sınırını belirler ve depoyu genişletir."
+
+#: data/guild/guild.json
+msgid "Сердце мира"
+msgstr "Dünyanın Kalbi"
+
+#: data/talents/mage_talents.tres
+msgid "Сердце огня"
+msgstr "Ateşin Kalbi"
+
+#: data/guild/guild.json
+msgid "Серебряная гавань"
+msgstr "Gümüş Liman"
+
+#: data/treasures/archer.json
+msgid "Серебряного листа"
+msgstr "Gümüş Yaprak"
+
+#: data/treasures/archer.json
+msgid "Серебряный лист"
+msgstr "Gümüş Yaprak"
+
+#: data/treasures/warrior.json
+msgid "Серый Клык"
+msgstr "Boz Diş"
+
+#: data/skills/archer_snare.tres
+msgid "Сеть вокруг цели: 60% урона и обездвиживание врагов на 2 с."
+msgstr "Hedefin etrafına ağ: 60% hasar ve düşmanları 2 sn hareketsiz bırakır."
+
+#: scripts/autoload/world_service.gd
+msgid "Сеть отключена"
+msgstr "Ağ devre dışı"
+
+#: scripts/items/item.gd
+msgid "Сила армии, %"
+msgstr "Ordu gücü, %"
+
+#: scenes/ui/army_view.gd
+msgid "Сила армии: %d"
+msgstr "Ordu gücü: %d"
+
+#: scenes/ui/army_view.tscn
+msgid "Сила армии: 0"
+msgstr "Ordu gücü: 0"
+
+#: scripts/progress/hero_progress.gd
+msgid "Сила предков"
+msgstr "Ataların Kudreti"
+
+#: scripts/data/stat_modifier.gd
+msgid "Сила удара"
+msgstr "Vuruş Gücü"
+
+#: data/monsters/skeleton.tres
+msgid "Скелет"
+msgstr "İskelet"
+
+#: data/monsters/skeleton_archer.tres
+msgid "Скелет-лучник"
+msgstr "İskelet Okçu"
+
+#: scripts/items/item.gd
+msgid "Скорость атаки, %"
+msgstr "Saldırı hızı, %"
+
+#: scripts/items/item.gd
+msgid "Скорость обучения, %"
+msgstr "Eğitim hızı, %"
+
+#: scenes/world/battle_replay.tscn
+msgid "Скорость повтора"
+msgstr "Tekrar hızı"
+
+#: data/guild/guild.json
+msgid "Слава"
+msgstr "Zafer"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Слава правителя"
+msgstr "Hükümdarın Şanı"
+
+#: data/treasures/archer.json
+msgid "Следов не оставляет — даже на снегу."
+msgstr "İz bırakmaz — karda bile."
+
+#: data/talents/archer_talents.tres
+msgid "Следопыт"
+msgstr "İzci"
+
+#: data/monsters/slime.tres
+msgid "Слизень"
+msgstr "Balçık"
+
+#: scenes/ui/inventory_panel.tscn
+msgid "Слить 3→1"
+msgstr "Birleştir 3→1"
+
+#: server/src/http.ts
+msgid "Слишком большой запрос"
+msgstr "İstek çok büyük"
+
+#: data/talents/archer_talents.tres
+msgid "Смертельная стрела"
+msgstr "Ölümcül Ok"
+
+#: data/skills/archer_deadly_volley.tres
+msgid "Смертельный залп"
+msgstr "Ölümcül Yaylım"
+
+#: data/talents/archer_talents.tres
+msgid "Снайпер"
+msgstr "Keskin Nişancı"
+
+#: server/src/world/guilds.ts
+msgid "Сначала вложите больше очков в эту ветку"
+msgstr "Önce bu dala daha fazla puan harca"
+
+#: scenes/talents/talent_grid.gd
+msgid "Сначала изучите соседний узел"
+msgstr "Önce komşu bir düğümü öğren"
+
+#: server/src/world/guilds.ts
+msgid "Сначала передайте главенство другому участнику"
+msgstr "Önce liderliği başka bir üyeye devret"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Снять"
+msgstr "Çıkar"
+
+#: scenes/ui/guild_panel.gd
+msgid "Снять офицера"
+msgstr "Subaylıktan al"
+
+#: scripts/progress/hero_progress.gd
+msgid "Соберите %s сокровищ"
+msgstr "%s hazine topla"
+
+#: scenes/world/world_map.tscn
+msgid "События"
+msgstr "Olaylar"
+
+#: data/treasures/archer.json
+msgid "Совиная Маска"
+msgstr "Baykuş Maskesi"
+
+#: data/treasures/mage.json
+msgid "Совы в академии садятся только на него."
+msgstr "Akademinin baykuşları yalnızca onun üstüne konar."
+
+#: scenes/ui/army_view.gd
+msgid "Содержание: %s еды/мин"
+msgstr "Bakım: %s yiyecek/dk"
+
+#: scenes/creation/character_creation.tscn
+msgid "Создание героя"
+msgstr "Kahraman oluştur"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сокровища (именные, уникальные, сетовые) находятся раз в несколько часов игры,\nне чаще недельного лимита. Позже их можно будет продавать на торговой площадке Steam."
+msgstr "Hazineler (özel, eşsiz, set eşyaları) her birkaç saatlik oyunda bulunur,\nhaftalık sınıra kadar. Daha sonra Steam Topluluk Pazarı'nda satılabilir."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сокровища будут продаваться на торговой площадке Steam (после выхода игры)."
+msgstr "Hazineler Steam Topluluk Pazarı'nda satılabilecek (çıkıştan sonra)."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сокровища не затачиваются: их сила растёт вместе с рекордом волны героя."
+msgstr "Hazineler geliştirilemez: güçleri kahramanın en iyi dalgasıyla artar."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сокровищница"
+msgstr "Hazineler"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сокровищница (%d)"
+msgstr "Hazineler (%d)"
+
+#: data/talents/warrior_talents.tres
+msgid "Сокрушающий замах"
+msgstr "Ezici Savuruş"
+
+#: data/talents/warrior_talents.tres
+msgid "Сокрушение"
+msgstr "Yıkım"
+
+#: data/treasures/warrior.json
+msgid "Сокрушитель бурь"
+msgstr "Fırtına Kıran"
+
+#: data/treasures/warrior.json
+msgid "Сокрушителя бурь"
+msgstr "Fırtına Kıran"
+
+#: scenes/ui/army_view.gd
+msgid "Солдат в замке: %d"
+msgstr "Kaledeki asker: %d"
+
+#: data/guild/guild.json
+msgid "Солнечные поля"
+msgstr "Güneşli Tarlalar"
+
+#: scripts/data/stat_modifier.gd
+msgid "Сон воина"
+msgstr "Savaşçı Uykusu"
+
+#: server/src/world/guilds.ts
+msgid "Сообщение пустое"
+msgstr "Mesaj boş"
+
+#: server/src/world/guilds.ts
+msgid "Сообщение слишком длинное"
+msgstr "Mesaj çok uzun"
+
+#: scenes/ui/guild_panel.gd
+msgid "Сообщение…"
+msgstr "Mesaj…"
+
+#: scenes/ui/guild_panel.gd
+msgid "Состав"
+msgstr "Üyeler"
+
+#: data/treasures/mage.json
+msgid "Сотканы из утреннего света над храмом Зари."
+msgstr "Şafak Tapınağı üzerindeki sabah ışığından dokundu."
+
+#: scenes/ui/hud.tscn scripts/autoload/desktop_window.gd
+msgid "Сохранить и выйти"
+msgstr "Kaydet ve çık"
+
+#: scenes/world/world_map.gd
+msgid "Союзник по гильдии — нападать нельзя"
+msgstr "Lonca müttefiki — saldıramazsın"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Союзники пока не присылали войска."
+msgstr "Henüz hiçbir müttefik birlik göndermedi."
+
+#: scenes/ui/needs_panel.gd
+msgid "Спит…"
+msgstr "Uyuyor…"
+
+#: data/treasures/archer.json
+msgid "Сплетён из листьев, которые никогда не вянут."
+msgstr "Hiç solmayan yapraklardan dokundu."
+
+#: data/treasures/mage.json
+msgid "Срезана с древа, под которым учил первый маг."
+msgstr "İlk büyücünün altında ders verdiği ağaçtan kesildi."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Стальная кожа"
+msgstr "Çelik Deri"
+
+#: scripts/progress/hero_progress.gd
+msgid "Стартовый рывок"
+msgstr "Önde Başla"
+
+#: data/guild/guild.json
+msgid "Старые курганы"
+msgstr "Eski Höyükler"
+
+#: data/items/rusty_sword.tres
+msgid "Старый, но всё ещё острый клинок."
+msgstr "Eski ama hâlâ keskin bir kılıç."
+
+#: data/units/spearman.tres
+msgid "Стена щитов и копий: крепкая защита."
+msgstr "Kalkan ve mızraktan bir duvar: sağlam savunma."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Стойкость ветерана"
+msgstr "Gazi Dayanıklılığı"
+
+#: scripts/progress/hero_progress.gd
+msgid "Стойкость предков"
+msgstr "Ataların Dinçliği"
+
+#: server/src/world/game.ts
+msgid "Столько солдат в армии нет"
+msgstr "Orduda o kadar asker yok"
+
+#: server/src/world/game.ts
+msgid "Столько солдат в гарнизоне нет"
+msgstr "Garnizonda o kadar asker yok"
+
+#: data/skills/archer_piercing_shot.tres
+msgid "Стрела пробивает насквозь: 220% урона всем врагам в линию."
+msgstr "Ok delip geçer: bir hat üzerindeki tüm düşmanlara 220% hasar."
+
+#: data/treasures/archer.json
+msgid "Стрела уже летит — а рука ещё не шевельнулась."
+msgstr "Ok çoktan uçuyor — el ise henüz kıpırdamadı."
+
+#: scripts/data/monster_data.gd
+msgid "Стрелок"
+msgstr "Nişancı"
+
+#: data/treasures/archer.json
+msgid "Стрелы в этом наряде летят быстрее мысли."
+msgstr "Bu kıyafetle oklar düşünceden hızlı uçar."
+
+#: scripts/progress/hero_progress.gd
+msgid "Стремительность"
+msgstr "Süratlilik"
+
+#: data/items/drill_manual.tres
+msgid "Строевой устав"
+msgstr "Talim Kılavuzu"
+
+#: server/src/world/kingdom.ts
+msgid "Строители заняты"
+msgstr "İnşaatçılar meşgul"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Строители заняты: %s"
+msgstr "İnşaatçılar meşgul: %s"
+
+#: scenes/ui/kingdom_panel.tscn
+msgid "Строители свободны"
+msgstr "İnşaatçılar boşta"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Строители свободны — выберите здание"
+msgstr "İnşaatçılar boşta — bir bina seç"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Стройка: %s ур. %d — %s"
+msgstr "İnşaat: %s sv. %d — %s"
+
+#: scenes/ui/hud.tscn scenes/ui/inventory_panel.gd
+msgid "Сумка"
+msgstr "Çanta"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сумка полна"
+msgstr "Çanta dolu"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сумка: %d / %d"
+msgstr "Çanta: %d / %d"
+
+#: scenes/ui/inventory_panel.tscn
+msgid "Сумка: 0 / 60"
+msgstr "Çanta: 0 / 60"
+
+#: data/guild/guild.json
+msgid "Сумрачный лес"
+msgstr "Alacakaranlık Ormanı"
+
+#: data/treasures/mage.json
+msgid "Сфера Чистой Маны"
+msgstr "Saf Mana Küresi"
+
+#: data/needs/hunger.tres
+msgid "Сытость"
+msgstr "Tokluk"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Таблица сезона"
+msgstr "Sezon sıralaması"
+
+#: data/buildings/tavern.tres
+msgid "Таверна"
+msgstr "Meyhane"
+
+#: data/talents/mage_talents.tres
+msgid "Тайная магия"
+msgstr "Gizem Büyüsü"
+
+#: server/src/world/guilds.ts
+msgid "Такого участника нет"
+msgstr "Böyle bir üye yok"
+
+#: server/src/world/guilds.ts
+msgid "Такой тег уже занят"
+msgstr "Bu etiket zaten alınmış"
+
+#: scenes/talents/talent_grid.tscn scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Таланты"
+msgstr "Yetenekler"
+
+#: scenes/ui/hud.gd
+msgid "Таланты (%d)"
+msgstr "Yetenekler (%d)"
+
+#: scenes/talents/talent_grid.gd
+msgid "Таланты сброшены, очки возвращены"
+msgstr "Yetenekler sıfırlandı, puanlar iade edildi"
+
+#: scenes/ui/guild_panel.gd
+msgid "Тег"
+msgstr "Etiket"
+
+#: scenes/ui/guild_panel.gd
+msgid "Тег и цвет видны на карте: [ТЕГ] Имя. Союзники не нападают друг на друга."
+msgstr "Etiket ve renk haritada görünür: [TAG] İsim. Müttefikler birbirine saldıramaz."
+
+#: server/src/world/guilds.ts
+msgid "Тег: от 2 до 4 букв или цифр"
+msgstr "Etiket: 2 ila 4 harf veya rakam"
+
+#: data/treasures/archer.json
+msgid "Тень среди теней. Выстрел — и снова тишина."
+msgstr "Gölgeler arasında bir gölge. Bir atış — ve yine sessizlik."
+
+#: data/treasures/archer.json
+msgid "Терновая чаща"
+msgstr "Dikenli Koru"
+
+#: data/treasures/archer.json
+msgid "Терновой чащи"
+msgstr "Dikenli Koru"
+
+#: scenes/main.gd
+msgid "Тест"
+msgstr "Test"
+
+#: data/treasures/archer.json
+msgid "Тетива поёт, как ветер в ковыле."
+msgstr "Kiriş, sorguçotunda esen rüzgâr gibi şarkı söyler."
+
+#: data/treasures/mage.json
+msgid "Ткань не горит — она сама горит желанием сжечь."
+msgstr "Kumaş yanmaz — yanma arzusuyla yanıp tutuşur."
+
+#: data/treasures/mage.json
+msgid "Ткач Времени"
+msgstr "Zaman Dokuyucu"
+
+#: data/treasures/mage.json
+msgid "Ткач льда"
+msgstr "Buz Dokuyucu"
+
+#: data/treasures/mage.json
+msgid "Ткача льда"
+msgstr "Buz Dokuyucu"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Только: "
+msgstr "Yalnızca: "
+
+#: data/buildings/market.tres
+msgid "Торговля пополняет казну замка и повышает награду золотом за монстров."
+msgstr "Ticaret kale hazinesini doldurur ve canavarlardan gelen altın ödülünü artırır."
+
+#: scenes/ui/guild_panel.gd
+msgid "Точно?"
+msgstr "Emin misin?"
+
+#: scenes/talents/talent_grid.gd
+msgid "Точно? %d з"
+msgstr "Emin misin? %d a"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Точно? Получить %s"
+msgstr "Emin misin? Kazanç: %s"
+
+#: data/talents/archer_talents.tres
+msgid "Точность снайпера"
+msgstr "Keskin Nişancı İsabeti"
+
+#: data/buildings/barracks.tres
+msgid "Тренирует армию замка и самого героя. Открывает новые отряды, даёт место в армии и ускоряет обучение."
+msgstr "Kale ordusunu ve kahramanı eğitir. Yeni birlikler açar, ordu kapasitesini artırır ve eğitimi hızlandırır."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Трофеи"
+msgstr "Ganimetler"
+
+#: data/guild/guild.json
+msgid "Туманный перевал"
+msgstr "Sisli Geçit"
+
+#: data/treasures/mage.json
+msgid "Туфли"
+msgstr "Pabuç"
+
+#: data/treasures/mage.json
+msgid "Туфли Верховного арканиста"
+msgstr "Yüce Arkanist Pabuçları"
+
+#: data/treasures/mage.json
+msgid "Туфли Жреца солнца"
+msgstr "Güneş Rahibi Pabuçları"
+
+#: data/treasures/mage.json
+msgid "Туфли Звездопада"
+msgstr "Yıldız Yağmuru Pabuçları"
+
+#: data/treasures/mage.json
+msgid "Туфли Коснувшегося бездны"
+msgstr "Uçurum Dokunuşu Pabuçları"
+
+#: data/treasures/mage.json
+msgid "Туфли Мгновенного Шага"
+msgstr "Anlık Adım Pabuçları"
+
+#: data/treasures/mage.json
+msgid "Туфли Облачного Шага"
+msgstr "Bulut Adımı Pabuçları"
+
+#: data/treasures/mage.json
+msgid "Туфли Повелителя гроз"
+msgstr "Fırtına Efendisi Pabuçları"
+
+#: data/treasures/mage.json
+msgid "Туфли Призывателя пламени"
+msgstr "Alev Çağıran Pabuçları"
+
+#: data/treasures/mage.json
+msgid "Туфли Ткача льда"
+msgstr "Buz Dokuyucu Pabuçları"
+
+#: data/treasures/mage.json
+msgid "Туфли Хранителя библиотеки"
+msgstr "Kütüphane Bekçisi Pabuçları"
+
+#: data/units/knight.tres
+msgid "Тяжёлая конница. Дорого, но очень сильно. Занимает 3 места."
+msgstr "Ağır süvari. Pahalı ama çok güçlü. 3 yer kaplar."
+
+#: data/talents/warrior_talents.tres
+msgid "Тяжёлая рука"
+msgstr "Ağır El"
+
+#: data/monsters/dark_wizard.tres
+msgid "Тёмный маг"
+msgstr "Karanlık Büyücü"
+
+#: data/treasures/mage.json
+msgid "Тёплое на ощупь — даже зимой."
+msgstr "Dokununca sıcak — kışın bile."
+
+#: data/treasures/warrior.json
+msgid "Тёплый, тяжёлый и пахнет лесом."
+msgstr "Sıcak, ağır ve orman kokulu."
+
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %d монстров"
+msgstr "%d canavar öldür"
+
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %d элитных монстров"
+msgstr "%d seçkin canavar öldür"
+
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %s монстров"
+msgstr "%s canavar öldür"
+
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %s элитных монстров"
+msgstr "%s seçkin canavar öldür"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "Убито: %d"
+msgstr "Öldürülen: %d"
+
+#: scenes/ui/settings_panel.gd
+msgid "Уведомления"
+msgstr "Bildirimler"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Уведомления, пока игра в трее"
+msgstr "Oyun tepsideyken bildirimler"
+
+#: data/talents/warrior_talents.tres
+msgid "Удар молота"
+msgstr "Çekiç Darbesi"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Удар на %d урона"
+msgstr "%d hasarla vur"
+
+#: data/skills/warrior_whirlwind.tres
+msgid "Удар по всем врагам вокруг на 150% урона."
+msgstr "Çevredeki tüm düşmanlara 150% hasarla vurur."
+
+#: data/skills/warrior_power_strike.tres
+msgid "Удар по цели на 250% урона."
+msgstr "Hedefe 250% hasarla vurur."
+
+#: data/skills/warrior_shield_bash.tres
+msgid "Удар щитом"
+msgstr "Kalkan Darbesi"
+
+#: data/guild/guild.json
+msgid "Удача гильдии"
+msgstr "Lonca Talihi"
+
+#: scripts/data/stat_modifier.gd
+msgid "Удача торговца"
+msgstr "Tüccar Şansı"
+
+#: data/items/leather_boots.tres
+msgid "Удобные сапоги: шаг легче, удар быстрее."
+msgstr "Rahat çizmeler: daha hafif adım, daha hızlı vuruş."
+
+#: scenes/talents/talent_grid.gd
+msgid "Уже изучено"
+msgstr "Zaten öğrenildi"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Уйдёт через %s. Здоровье общее — бейте всей гильдией."
+msgstr "%s sonra gider. Can ortak — lonca olarak savaşın."
+
+#: scripts/kingdom/army_state.gd server/src/world/kingdom.ts
+msgid "Укажите количество"
+msgstr "Bir miktar gir"
+
+#: server/src/world/game.ts server/src/world/guilds.ts
+msgid "Укажите сумму"
+msgstr "Bir miktar gir"
+
+#: scripts/autoload/settings.gd
+msgid "Українська"
+msgstr ""
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Улучшение куплено"
+msgstr "Geliştirme satın alındı"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Улучшить до ур. %d"
+msgstr "Yükselt: sv. %d"
+
+#: scripts/data/item_base.gd server/src/world/game.ts
+msgid "Уникальный"
+msgstr "Eşsiz"
+
+#: scenes/ui/guild_panel.gd
+msgid "Управление"
+msgstr "Yönetim"
+
+#: scenes/ui/guild_panel.gd
+msgid "Ур. %d"
+msgstr "Sv. %d"
+
+#: scenes/ui/guild_panel.gd
+msgid "Ур. %d · максимум"
+msgstr "Sv. %d · maksimum"
+
+#: scenes/ui/guild_panel.gd
+msgid "Ур. %d · опыт %d / %d"
+msgstr "Sv. %d · XP %d / %d"
+
+#: data/talents/archer_talents.tres
+msgid "Ураган"
+msgstr "Kasırga Oku"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Уровень %d / %d"
+msgstr "Seviye %d / %d"
+
+#: scenes/battle/battle.gd
+msgid "Уровень %d!"
+msgstr "Seviye %d!"
+
+#: scenes/ui/inventory_panel.gd scripts/items/item.gd
+msgid "Урон"
+msgstr "Hasar"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "Урон против вида: %s за 100 / 1 000 / 10 000 убийств. Полностью изучено видов: %d — +%d%% урона против всех."
+msgstr "Tür karşısı hasar: 100 / 1.000 / 10.000 öldürmede %s. Tamamen incelenen tür: %d — tümüne karşı +%d%% hasar."
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Урон участников"
+msgstr "Üyelerin hasarı"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Урон — сила армии замка и героя; солдаты не гибнут."
+msgstr "Hasar, kale ordunun ve kahramanının gücüdür; askerler ölmez."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Успех! Теперь +%d"
+msgstr "Başarılı! Şimdi +%d"
+
+#: data/items/drill_manual.tres
+msgid "Устав строевой подготовки: новобранцы учатся быстрее."
+msgstr "Talim kılavuzu: acemiler daha hızlı öğrenir."
+
+#: scripts/autoload/world_service.gd
+msgid "Устаревший ответ"
+msgstr "Eski yanıt"
+
+#: scenes/ui/guild_panel.gd
+msgid "Участник"
+msgstr "Üye"
+
+#: scenes/ui/guild_panel.gd
+msgid "Участник исключён"
+msgstr "Üye atıldı"
+
+#: scenes/ui/guild/guild_season_page.gd scenes/ui/guild_panel.gd
+msgid "Участники"
+msgstr "Üyeler"
+
+#: scenes/ui/guild_panel.gd
+msgid "Участники: %d / %d · бонус: +%d%% к силе армии"
+msgstr "Üye: %d / %d · bonus: +%d%% ordu gücü"
+
+#: data/buildings/tavern.tres
+msgid "Уютные комнаты: герой быстрее отдыхает, голод и жажда приходят медленнее."
+msgstr "Rahat odalar: kahraman daha hızlı dinlenir, açlık ve susuzluk daha geç gelir."
+
+#: data/buildings/farm.tres
+msgid "Ферма"
+msgstr "Çiftlik"
+
+#: scripts/data/stat_modifier.gd
+msgid "Хватка"
+msgstr "Kavrayış"
+
+#: data/treasures/archer.json
+msgid "Хитрость лисы — в каждом стежке."
+msgstr "Her dikişte bir tilki kurnazlığı."
+
+#: data/treasures/mage.json
+msgid "Хозяин всегда оказывается там, где нужно, — чуть раньше."
+msgstr "Sahibi hep gereken yerde olur — biraz erkenden."
+
+#: data/treasures/warrior.json
+msgid "Холодные, как северный ветер, и такие же беспощадные."
+msgstr "Kuzey rüzgârı kadar soğuk ve bir o kadar acımasız."
+
+#: data/treasures/warrior.json
+msgid "Хранитель Клятвы"
+msgstr "Yemin Bekçisi"
+
+#: data/treasures/mage.json
+msgid "Хранитель библиотеки"
+msgstr "Kütüphane Bekçisi"
+
+#: data/treasures/mage.json
+msgid "Хранителя библиотеки"
+msgstr "Kütüphane Bekçisi"
+
+#: data/treasures/warrior.json
+msgid "Цареубийца"
+msgstr "Kral Katili"
+
+#: scenes/ui/guild_panel.gd
+msgid "Цвет"
+msgstr "Renk"
+
+#: scenes/ui/guild_panel.gd
+msgid "Цена: 1000 золота из казны замка (в казне: %d)"
+msgstr "Bedel: kale hazinesinden 1000 altın (hazine: %d)"
+
+#: data/skills/mage_chain_lightning.tres
+msgid "Цепная молния"
+msgstr "Zincirleme Şimşek"
+
+#: data/skills/mage_arcane_power.tres
+msgid "Чародейская мощь"
+msgstr "Gizem Gücü"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Частота кадров"
+msgstr "Kare hızı"
+
+#: scenes/ui/guild_panel.gd
+msgid "Чат гильдии"
+msgstr "Lonca sohbeti"
+
+#: server/src/world/guilds.ts
+msgid "Чтобы уйти, нажмите «Покинуть гильдию»"
+msgstr "Ayrılmak için «Loncadan ayrıl» düğmesine bas"
+
+#: data/treasures/warrior.json
+msgid "Шаг Бури"
+msgstr "Fırtına Adımı"
+
+#: scripts/data/monster_data.gd
+msgid "Шаман"
+msgstr "Şaman"
+
+#: scripts/items/item.gd
+msgid "Шанс крита, %"
+msgstr "Kritik şansı, %"
+
+#: data/treasures/mage.json
+msgid "Шаровары"
+msgstr "Şalvar"
+
+#: data/treasures/mage.json
+msgid "Шаровары Верховного арканиста"
+msgstr "Yüce Arkanist Şalvarı"
+
+#: data/treasures/mage.json
+msgid "Шаровары Жреца солнца"
+msgstr "Güneş Rahibi Şalvarı"
+
+#: data/treasures/mage.json
+msgid "Шаровары Звездопада"
+msgstr "Yıldız Yağmuru Şalvarı"
+
+#: data/treasures/mage.json
+msgid "Шаровары Коснувшегося бездны"
+msgstr "Uçurum Dokunuşu Şalvarı"
+
+#: data/treasures/mage.json
+msgid "Шаровары Повелителя гроз"
+msgstr "Fırtına Efendisi Şalvarı"
+
+#: data/treasures/mage.json
+msgid "Шаровары Призывателя пламени"
+msgstr "Alev Çağıran Şalvarı"
+
+#: data/treasures/mage.json
+msgid "Шаровары Ткача льда"
+msgstr "Buz Dokuyucu Şalvarı"
+
+#: data/treasures/mage.json
+msgid "Шаровары Хранителя библиотеки"
+msgstr "Kütüphane Bekçisi Şalvarı"
+
+#: data/treasures/mage.json
+msgid "Шаровары Шёлкового Пути"
+msgstr "İpek Yolu Şalvarı"
+
+#: data/guild/guild.json
+msgid "Шепчущие рощи"
+msgstr "Fısıldayan Korular"
+
+#: data/treasures/archer.json
+msgid "Шепчущий Ветер"
+msgstr "Fısıldayan Rüzgâr"
+
+#: data/treasures/mage.json
+msgid "Шили его семь лет. Каждая нить — отдельное заклинание."
+msgstr "Dikilmesi yedi yıl sürdü. Her iplik ayrı bir büyü."
+
+#: data/treasures/warrior.json
+msgid "Шипы венца пьют кровь врагов — и немного хозяина."
+msgstr "Tacın dikenleri düşmanların kanını içer — ve biraz da sahibininkini."
+
+#: data/talents/archer_talents.tres
+msgid "Шквал стрел"
+msgstr "Ok Sağanağı"
+
+#: data/treasures/warrior.json scripts/data/item_base.gd
+msgid "Шлем"
+msgstr "Miğfer"
+
+#: data/treasures/warrior.json
+msgid "Шлем Военачальника"
+msgstr "Savaş Beyi Miğferi"
+
+#: data/treasures/warrior.json
+msgid "Шлем Волчьей Стаи"
+msgstr "Kurt Sürüsü Miğferi"
+
+#: data/treasures/warrior.json
+msgid "Шлем Закалённого горна"
+msgstr "Kor Ocağı Miğferi"
+
+#: data/treasures/warrior.json
+msgid "Шлем Каменной стены"
+msgstr "Taş Duvar Miğferi"
+
+#: data/treasures/warrior.json
+msgid "Шлем Королевской гвардии"
+msgstr "Kraliyet Muhafızı Miğferi"
+
+#: data/treasures/warrior.json
+msgid "Шлем Кровавой клятвы"
+msgstr "Kan Yemini Miğferi"
+
+#: data/treasures/warrior.json
+msgid "Шлем Ледяной хватки"
+msgstr "Buz Pençe Miğferi"
+
+#: data/treasures/warrior.json
+msgid "Шлем Небесного стража"
+msgstr "Gök Bekçisi Miğferi"
+
+#: data/treasures/warrior.json
+msgid "Шлем Пепельного стража"
+msgstr "Kül Bekçisi Miğferi"
+
+#: data/treasures/warrior.json
+msgid "Шлем Порождения бездны"
+msgstr "Uçurum Yavrusu Miğferi"
+
+#: data/treasures/warrior.json
+msgid "Шлем Сокрушителя бурь"
+msgstr "Fırtına Kıran Miğferi"
+
+#: data/items/iron_helmet.tres
+msgid "Шлем с гребнем: и защита, и повод для гордости."
+msgstr "Sorguçlu miğfer: hem koruma hem gurur kaynağı."
+
+#: data/items/commander_standard.tres
+msgid "Штандарт полководца"
+msgstr "Komutan Sancağı"
+
+#: data/items/commander_standard.tres
+msgid "Штандарт полководца ведёт армию к победе."
+msgstr "Komutan sancağı orduyu zafere taşır."
+
+#: data/treasures/archer.json
+msgid "Штаны"
+msgstr "Pantolon"
+
+#: data/treasures/archer.json
+msgid "Штаны Бегущей с ветром"
+msgstr "Rüzgâr Koşucusu Pantolonu"
+
+#: data/treasures/archer.json
+msgid "Штаны Ветра пустыни"
+msgstr "Çöl Rüzgârı Pantolonu"
+
+#: data/treasures/archer.json
+msgid "Штаны Грозовой стрелы"
+msgstr "Yıldırım Oku Pantolonu"
+
+#: data/treasures/archer.json
+msgid "Штаны Ночного охотника"
+msgstr "Gece Avcısı Pantolonu"
+
+#: data/treasures/archer.json
+msgid "Штаны Орлиного глаза"
+msgstr "Kartal Gözü Pantolonu"
+
+#: data/treasures/archer.json
+msgid "Штаны Повелителя зверей"
+msgstr "Hayvan Efendisi Pantolonu"
+
+#: data/treasures/archer.json
+msgid "Штаны Серебряного листа"
+msgstr "Gümüş Yaprak Pantolonu"
+
+#: data/treasures/archer.json
+msgid "Штаны Терновой чащи"
+msgstr "Dikenli Koru Pantolonu"
+
+#: data/guild/guild.json
+msgid "Щит братства"
+msgstr "Kardeşlik Kalkanı"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Щит веры"
+msgstr "İnanç Kalkanı"
+
+#: data/items/ancestral_shield.tres
+msgid "Щит предков"
+msgstr "Ata Kalkanı"
+
+#: data/items/ancestral_shield.tres
+msgid "Щит предков хранит тех, кто держит строй."
+msgstr "Ata kalkanı, hattı tutanları korur."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Экипировка"
+msgstr "Ekipman"
+
+#: data/guild/guild.json
+msgid "Экономика"
+msgstr "Ekonomi"
+
+#: scenes/battle/battle.gd
+msgid "Элита: %s!"
+msgstr "Seçkin: %s!"
+
+#: data/treasures/archer.json
+msgid "Эльфийская работа: листья на плаще шелестят, даже когда нет ветра."
+msgstr "Elf işi: pelerindeki yapraklar rüzgâr olmadan da hışırdar."
+
+#: scripts/items/item.gd
+msgid "Эпический"
+msgstr "Destansı"
+
+#: data/treasures/warrior.json
+msgid "Этим мечом закончили Долгую ночь."
+msgstr "Bu kılıç Uzun Gece'ye son verdi."
+
+#: server/src/world/game.ts
+msgid "Это имя уже занято"
+msgstr "Bu isim zaten alınmış"
+
+#: server/src/world/game.ts
+msgid "Это не ваша зона"
+msgstr "Bu senin bölgen değil"
+
+#: server/src/world/game.ts
+msgid "Этот замок нельзя атаковать"
+msgstr "Bu kaleye saldırılamaz"
+
+#: server/src/world/guilds.ts
+msgid "Этот игрок уже приглашён"
+msgstr "Bu oyuncu zaten davet edildi"
+
+#: data/talents/mage_talents.tres
+msgid "Эфирный щит"
+msgstr "Eterik Kalkan"
+
+#: data/guild/guild.json
+msgid "Южный предел"
+msgstr "Güney Diyarı"
+
+#: data/skills/archer_poison_arrow.tres
+msgid "Ядовитая стрела"
+msgstr "Zehirli Ok"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Язык / Language"
+msgstr "Dil / Language"
+
+#: data/guild/guild.json
+msgid "Янтарный берег"
+msgstr "Kehribar Kıyısı"
+
+#: data/talents/warrior_talents.tres
+msgid "Ярость битвы"
+msgstr "Savaş Hiddeti"
+
+#: data/skills/archer_hunter_fury.tres
+msgid "Ярость охотника"
+msgstr "Avcı Öfkesi"
+
+#: data/treasures/archer.json
+msgid "Ясеневый Длинный Лук"
+msgstr "Dişbudak Uzun Yay"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "армия %d мест"
+msgstr "ordu %d yer"
+
+#: scripts/data/stat_modifier.gd
+msgid "брони"
+msgstr "zırh"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "в пути %s"
+msgstr "yolda %s"
+
+#: scenes/ui/guild_panel.gd
+msgid "в сети"
+msgstr "çevrim içi"
+
+#: scripts/data/stat_modifier.gd
+msgid "вампиризма"
+msgstr "can çalma"
+
+#: scenes/ui/hud.gd scenes/world/world_map.gd
+msgid "ваш замок"
+msgstr "kalen"
+
+#: scenes/ui/hud.gd
+msgid "вашу зону #%d"
+msgstr "bölgen #%d"
+
+#: scripts/ui/ui_format.gd
+msgid "душ"
+msgstr "ruh"
+
+#: scripts/ui/ui_format.gd
+msgid "душа"
+msgstr "ruh"
+
+#: scripts/ui/ui_format.gd
+msgid "души"
+msgstr "ruh"
+
+#: scripts/data/stat_modifier.gd
+msgid "замедления голода и жажды"
+msgstr "daha yavaş açlık ve susuzluk"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "здания до ур. %d"
+msgstr "binalar en fazla sv. %d"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "здоровья"
+msgstr "can"
+
+#: data/guild/guild.json
+msgid "здоровья героя"
+msgstr "kahraman canı"
+
+#: scripts/data/stat_modifier.gd
+msgid "здоровья за убийство"
+msgstr "öldürme başına can"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "золота"
+msgstr "altın"
+
+#: data/guild/guild.json
+msgid "золота с монстров"
+msgstr "canavarlardan altın"
+
+#: scenes/world/world_map.gd
+msgid "зону #%d"
+msgstr "bölge #%d"
+
+#: scripts/data/guild_catalog.gd
+msgid "изучите: %s"
+msgstr "öğren: %s"
+
+#: scenes/world/world_map.gd
+msgid "контроль: [%s]"
+msgstr "[%s] kontrolünde"
+
+#: scripts/data/stat_modifier.gd
+msgid "крит. урона"
+msgstr "kritik hasar"
+
+#: scenes/ui/needs_panel.gd
+msgid "мало"
+msgstr "düşük"
+
+#: data/guild/guild.json
+msgid "меньше еды армии"
+msgstr "daha az ordu yiyeceği"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "на месте"
+msgstr "vardı"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "награда: %s"
+msgstr "ödül: %s"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "начало с %d-й волны"
+msgstr "%d. dalgadan başla"
+
+#: scenes/world/battle_replay.gd scenes/world/world_map.gd scripts/ui/panel_ui.gd
+msgid "нет"
+msgstr "yok"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "нет бонуса"
+msgstr "bonus yok"
+
+#: scenes/world/world_map.gd
+msgid "нет — зону займут без боя!"
+msgstr "yok — bölge savaşmadan alınacak!"
+
+#: scenes/world/world_map.gd
+msgid "никто не контролирует"
+msgstr "kontrolsüz"
+
+#: scenes/ui/needs_panel.gd
+msgid "норма"
+msgstr "normal"
+
+#: scenes/battle/battle.gd
+msgid "обучено: %s ×%d"
+msgstr "eğitildi: %s ×%d"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "опыта"
+msgstr "tecrübe"
+
+#: data/guild/guild.json
+msgid "опыта героя"
+msgstr "kahraman XP'si"
+
+#: data/guild/guild.json
+msgid "опыта гильдии за победы и босса"
+msgstr "zaferlerden ve bosstan lonca XP'si"
+
+#: scenes/ui/guild_panel.gd
+msgid "от 3 до 24 символов"
+msgstr "3 ila 24 karakter"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "пока ни одного региона"
+msgstr "henüz bölge yok"
+
+#: scenes/battle/battle.gd
+msgid "построено: "
+msgstr "inşa edildi: "
+
+#: scripts/data/stat_modifier.gd
+msgid "регенерации"
+msgstr "yenilenme"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "сезон %d — %d место"
+msgstr "sezon %d — %d. sıra"
+
+#: scenes/world/battle_replay.gd
+msgid "сила %d · %s"
+msgstr "güç %d · %s"
+
+#: data/guild/guild.json scripts/data/stat_modifier.gd
+msgid "силы армии"
+msgstr "ordu gücü"
+
+#: scripts/data/stat_modifier.gd
+msgid "силы клика"
+msgstr "tıklama gücü"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "склад %d, казна %d"
+msgstr "depo %d, hazine %d"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "скорости атаки"
+msgstr "saldırı hızı"
+
+#: data/guild/guild.json scripts/data/stat_modifier.gd
+msgid "скорости обучения"
+msgstr "eğitim hızı"
+
+#: scripts/data/stat_modifier.gd
+msgid "скорости отдыха"
+msgstr "dinlenme hızı"
+
+#: scripts/data/stat_modifier.gd
+msgid "сокращения перезарядки"
+msgstr "bekleme süresi azaltma"
+
+#: scenes/world/world_map.gd
+msgid "только что"
+msgstr "az önce"
+
+#: scenes/ui/guild_panel.gd
+msgid "ур. %d"
+msgstr "sv. %d"
+
+#: scenes/ui/skill_button.gd
+msgid "ур.%d"
+msgstr "sv.%d"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "урона"
+msgstr "hasar"
+
+#: scenes/ui/inventory_panel.gd
+msgid "урона «%s»"
+msgstr "«%s» hasarı"
+
+#: data/guild/guild.json
+msgid "урона героя"
+msgstr "kahraman hasarı"
+
+#: scenes/ui/inventory_panel.gd scripts/data/stat_modifier.gd
+msgid "урона умений"
+msgstr "beceri hasarı"
+
+#: scenes/ui/needs_panel.gd
+msgid "хорошо"
+msgstr "iyi"
+
+#: scripts/data/stat_modifier.gd
+msgid "шанса двойного удара"
+msgstr "çifte vuruş şansı"
+
+#: data/guild/guild.json
+msgid "шанса добычи"
+msgstr "ganimet şansı"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "шанса дропа"
+msgstr "düşme şansı"
+
+#: scripts/data/stat_modifier.gd
+msgid "шанса крита"
+msgstr "kritik şansı"
+
+#: scenes/world/world_map.tscn
+msgid "← В замок"
+msgstr "← Kaleye"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "→ Ур. %d: %s"
+msgstr "→ Sv. %d: %s"
+
+#: scenes/ui/hud.gd
+msgid "⚔ %s идёт на %s (%d солдат), прибудет через %s"
+msgstr "⚔ %s, %s üzerine yürüyor (%d asker), varış: %s"
+
+#: scenes/ui/army_view.tscn
+msgid "⚠ Армия голодает — сила −50%"
+msgstr "⚠ Ordu açlık çekiyor — güç −50%"
+
+#: scenes/ui/hud.gd
+msgid "✉ %s приглашает вас в гильдию %s — откройте «Гильдию» [G]"
+msgstr "✉ %s seni %s loncasına davet ediyor — «Lonca» [G] bölümünü aç"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "✔ Получено"
+msgstr "✔ Alındı"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "✔ всё"
+msgstr "✔ tamam"
+
+#: scenes/ui/hud.gd
+msgid "✦ Сокровище: %s (%s) — загляните в Сокровищницу [I]"
+msgstr "✦ Hazine: %s (%s) — Hazineler bölümüne bak [I]"

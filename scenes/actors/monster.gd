@@ -337,6 +337,7 @@ func _slam() -> void:
 	tween.tween_callback(func() -> void:
 		ring.queue_free()
 		if is_alive() and target and target.is_alive():
+			Sound.play(&"boss_slam")
 			if not play_action(&"attack"):
 				lunge(signf(target.global_position.x - global_position.x))
 			var hit := roll_hit(SLAM_DAMAGE * _buff_multiplier)
@@ -363,6 +364,7 @@ func take_hit(amount: float, is_crit := false) -> void:
 	if data and data.is_boss and data.boss_abilities.has("shield") and not _shield_used and is_alive() and hp <= max_hp * SHIELD_AT:
 		_shield_used = true
 		_shield = max_hp * SHIELD_SHARE
+		Sound.play(&"boss_shield")
 		_shield_sprite = _spawn_ring(global_position + Vector3(0, visual_height * 0.5, 0.1), Color(0.45, 0.75, 1.0, 0.7), visual_height * 1.3, false)
 		_shield_sprite.reparent(self)
 

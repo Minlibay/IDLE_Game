@@ -16,6 +16,7 @@ var _selected_class: CharacterClass
 
 func _ready() -> void:
 	DesktopWindow.set_full_mode()
+	Sound.play_music(&"menu")
 	var group := ButtonGroup.new()
 	for class_data in Database.classes:
 		var card: ClassCard = CLASS_CARD_SCENE.instantiate()
@@ -26,7 +27,7 @@ func _ready() -> void:
 	name_edit.text_changed.connect(func(_text: String) -> void: _update_start_button())
 	name_edit.text_submitted.connect(func(_text: String) -> void: _on_start_pressed())
 	start_button.pressed.connect(_on_start_pressed)
-	quit_button.pressed.connect(get_tree().quit)
+	quit_button.pressed.connect(Sound.quit_game)
 	_update_start_button()
 	name_edit.grab_focus()
 

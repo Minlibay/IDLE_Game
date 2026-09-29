@@ -21,3 +21,4 @@ color = Color(1.0, 0.4, 0.35, 1)
 cooldown = 18.0
 unlock_level = 80
 effect = SubResource("Resource_effect")
+animation = &"power_shot"

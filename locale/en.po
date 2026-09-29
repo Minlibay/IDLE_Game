@@ -43,6 +43,10 @@ msgstr "%.2f s"
 msgid "%d · %s · изучен"
 msgstr "%d · %s · studied"
 
+#: scenes/ui/settings_panel.gd
+msgid "%d кадров/с"
+msgstr "%d FPS"
+
 #: scenes/ui/guild/guild_season_page.gd
 msgid "%d место: %d золота каждому и %d опыта гильдии"
 msgstr "Place %d: %d gold to each member and %d guild XP"
@@ -439,6 +443,10 @@ msgstr "You can't take a zone without an army: in the castle press «Army from c
 msgid "Без заточки"
 msgstr "No upgrades"
 
+#: scenes/ui/settings_panel.tscn scripts/autoload/desktop_window.gd
+msgid "Без звука"
+msgstr "Mute"
+
 #: data/treasures/mage.json
 msgid "Бездна смотрела в него — и отвела взгляд первой."
 msgstr "The abyss stared into him — and looked away first."
@@ -511,9 +519,17 @@ msgstr "Warhorses for knights. Unlocks knight recruitment and strengthens the ar
 msgid "Боец"
 msgstr "Fighter"
 
-#: scenes/world/battle_replay.gd scenes/world/battle_replay.tscn
+#: scenes/ui/settings_panel.gd scenes/world/battle_replay.gd scenes/world/battle_replay.tscn
 msgid "Бой"
 msgstr "Battle"
+
+#: scenes/ui/settings_panel.gd
+msgid "Бой без звука; интерфейс и уведомления остаются."
+msgstr "Combat is silent; interface and notifications stay on."
+
+#: scenes/ui/settings_panel.gd
+msgid "Бой и музыка в трее молчат всегда; уведомления (уровень, редкая добыча, нападение) — по этой настройке."
+msgstr "Combat and music are always silent in the tray; notifications (level up, rare loot, attacks) follow this setting."
 
 #: scenes/ui/army_view.tscn
 msgid "Больше (Shift — по 10)"
@@ -751,6 +767,10 @@ msgstr "Contribution"
 msgid "Вклад в опыт гильдии: %d\nВ гильдии с: %s"
 msgstr "Contribution to guild XP: %d\nMember since: %s"
 
+#: scenes/ui/hud.gd
+msgid "Включить звук [S]"
+msgstr "Unmute [S]"
+
 #: scenes/world/world_map.gd
 msgid "Владение"
 msgstr "Domain"
@@ -891,6 +911,10 @@ msgstr "All skills: −{value}% cooldown, Multishot +{value2}% damage."
 msgid "Все участники покинут гильдию. Чтобы уйти самому, сначала передайте главенство."
 msgstr "All members will leave the guild. To leave yourself, transfer leadership first."
 
+#: scenes/ui/settings_panel.gd
+msgid "Всегда"
+msgstr "Always"
+
 #: scripts/progress/hero_progress.gd
 msgid "Вступите в гильдию"
 msgstr "Join a guild"
@@ -958,6 +982,14 @@ msgstr "Choose how many soldiers to send"
 #: data/treasures/warrior.json
 msgid "Выжили в пожаре, спалившем целый легион."
 msgstr "They survived the fire that burned an entire legion."
+
+#: scenes/ui/settings_panel.gd
+msgid "Выкл."
+msgstr "Off"
+
+#: scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Выключить звук [S]"
+msgstr "Mute [S]"
 
 #: data/treasures/warrior.json
 msgid "Выкованы в горне, что не гаснет со дня основания королевства."
@@ -1515,6 +1547,30 @@ msgstr "They jingle when you walk, but they protect your legs."
 msgid "Звери идут за ним, как за вожаком стаи."
 msgstr "Beasts follow the wearer like the leader of the pack."
 
+#: scenes/ui/settings_panel.tscn
+msgid "Звук"
+msgstr "Sound"
+
+#: scenes/ui/hud.gd
+msgid "Звук включён"
+msgstr "Sound on"
+
+#: scenes/ui/hud.gd
+msgid "Звук выключен"
+msgstr "Sound off"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Звуки боя"
+msgstr "Combat sounds"
+
+#: scenes/ui/settings_panel.gd
+msgid "Звуки боя слышны всегда."
+msgstr "Combat sounds are always audible."
+
+#: scenes/ui/settings_panel.gd
+msgid "Звуки боя слышны, пока курсор над полосой боя или открыто окно, — не мешают работать."
+msgstr "Combat sounds play only while the cursor is over the battle strip or a window is open, so they don't distract you from work."
+
 #: data/treasures/mage.json
 msgid "Звёздный Капюшон"
 msgstr "Starry Hood"
@@ -1698,6 +1754,10 @@ msgstr "Inventory"
 #: scenes/ui/hud.tscn
 msgid "Инвентарь [I]"
 msgstr "Inventory [I]"
+
+#: scenes/ui/settings_panel.gd
+msgid "Интерфейс"
+msgstr "Interface"
 
 #: data/talents/mage_talents.tres
 msgid "Инферно"
@@ -2375,6 +2435,10 @@ msgstr "Fewer (Shift — by 10)"
 msgid "Меньше еды армии, %"
 msgstr "Less army food, %"
 
+#: scenes/ui/settings_panel.gd
+msgid "Меньше нагрузка на видеокарту и батарею ноутбука."
+msgstr "Less load on the graphics card and laptop battery."
+
 #: scenes/ui/army_view.gd
 msgid "Мест в армии"
 msgstr "Army slots"
@@ -2450,6 +2514,10 @@ msgstr "Wisdom"
 #: scripts/progress/hero_progress.gd
 msgid "Мудрость веков"
 msgstr "Wisdom of Ages"
+
+#: scenes/ui/settings_panel.gd
+msgid "Музыка"
+msgstr "Music"
 
 #: scripts/data/stat_modifier.gd
 msgid "Муштра"
@@ -2642,6 +2710,10 @@ msgstr "Mentors"
 #: scenes/ui/hud.tscn scenes/ui/settings_panel.tscn
 msgid "Настройки"
 msgstr "Settings"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Настройки применяются сразу. Свёрнутая в трей игра не рисует кадры и почти не нагружает ПК."
+msgstr "Settings apply immediately. When minimized to the tray, the game stops drawing and barely loads the PC."
 
 #: data/talents/warrior_talents.tres
 msgid "Натиск"
@@ -2991,6 +3063,10 @@ msgstr "Training: %s"
 msgid "Обучено: %s ×%d"
 msgstr "Trained: %s ×%d"
 
+#: scenes/ui/settings_panel.gd
+msgid "Общая громкость"
+msgstr "Master volume"
+
 #: data/guild/guild.json
 msgid "Общая муштра"
 msgstr "Common Drill"
@@ -3295,6 +3371,10 @@ msgstr "Phoenix Feather"
 msgid "Песнь Смерти"
 msgstr "Death Song"
 
+#: scenes/ui/settings_panel.gd
+msgid "Плавнее, но нагрузка выше."
+msgstr "Smoother, but higher load."
+
 #: data/talents/mage_talents.tres
 msgid "Пламя души"
 msgstr "Soul Flame"
@@ -3550,6 +3630,10 @@ msgstr "March aborted: the zone can't be captured"
 #: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
 msgid "Походный марш"
 msgstr "Forced March"
+
+#: scenes/ui/settings_panel.gd
+msgid "При наведении"
+msgstr "On hover"
 
 #: data/treasures/mage.json
 msgid "Привезены караваном из-за Пяти пустынь."
@@ -4499,6 +4583,14 @@ msgstr "Kill %s elite monsters"
 msgid "Убито: %d"
 msgstr "Killed: %d"
 
+#: scenes/ui/settings_panel.gd
+msgid "Уведомления"
+msgstr "Notifications"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Уведомления, пока игра в трее"
+msgstr "Notifications while in the tray"
+
 #: data/talents/warrior_talents.tres
 msgid "Удар молота"
 msgstr "Hammer Blow"
@@ -4546,6 +4638,10 @@ msgstr "Enter an amount"
 #: server/src/world/game.ts server/src/world/guilds.ts
 msgid "Укажите сумму"
 msgstr "Enter an amount"
+
+#: scripts/autoload/settings.gd
+msgid "Українська"
+msgstr ""
 
 #: scenes/ui/journal/journal_prestige_page.gd
 msgid "Улучшение куплено"
@@ -4686,6 +4782,10 @@ msgstr "Chain Lightning"
 #: data/skills/mage_arcane_power.tres
 msgid "Чародейская мощь"
 msgstr "Arcane Power"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Частота кадров"
+msgstr "Frame rate"
 
 #: scenes/ui/guild_panel.gd
 msgid "Чат гильдии"
@@ -4934,10 +5034,6 @@ msgstr "Poison Arrow"
 #: scenes/ui/settings_panel.tscn
 msgid "Язык / Language"
 msgstr "Language / Язык"
-
-#: scenes/ui/settings_panel.tscn
-msgid "Язык меняется сразу."
-msgstr "The language changes immediately."
 
 #: data/guild/guild.json
 msgid "Янтарный берег"

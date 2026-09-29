@@ -42,6 +42,13 @@
 [ext_resource type="Texture2D" path="res://assets/ui/buttons/settings_small.png" id="72"]
 [ext_resource type="Texture2D" path="res://assets/ui/buttons/settings_small_hover.png" id="73"]
 
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/sound_small.png" id="80"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/sound_small_hover.png" id="81"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/sound_muted_small.png" id="82"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/sound_muted_small_hover.png" id="83"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/slider_grabber.png" id="84"]
+[ext_resource type="Texture2D" path="res://assets/ui/buttons/slider_grabber_hover.png" id="85"]
+
 [sub_resource type="StyleBoxTexture" id="Tex_panel_window"]
 content_margin_left = 12.0
 content_margin_top = 10.0
@@ -462,6 +469,62 @@ texture_margin_top = 11.0
 texture_margin_right = 11.0
 texture_margin_bottom = 11.0
 
+[sub_resource type="StyleBoxTexture" id="Tex_sound"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("80")
+
+[sub_resource type="StyleBoxTexture" id="Tex_sound_hover"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("81")
+
+[sub_resource type="StyleBoxTexture" id="Tex_sound_muted"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("82")
+
+[sub_resource type="StyleBoxTexture" id="Tex_sound_muted_hover"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("83")
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_slider"]
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.06, 0.05, 0.1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.45, 0.33, 0.7, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_slider_fill"]
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.56, 0.42, 0.9, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.45, 0.33, 0.7, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_slider_fill_hover"]
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.66, 0.52, 1.0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.45, 0.33, 0.7, 1)
+
 [resource]
 default_font_size = 13
 Button/colors/font_disabled_color = Color(0.5, 0.5, 0.55, 1)
@@ -491,6 +554,24 @@ SettingsButton/styles/hover = SubResource("Tex_settings_hover")
 SettingsButton/styles/hover_pressed = SubResource("Tex_settings_hover")
 SettingsButton/styles/normal = SubResource("Tex_settings")
 SettingsButton/styles/pressed = SubResource("Tex_settings_hover")
+HSlider/icons/grabber = ExtResource("84")
+HSlider/icons/grabber_highlight = ExtResource("85")
+HSlider/icons/grabber_disabled = ExtResource("84")
+HSlider/styles/slider = SubResource("StyleBox_slider")
+HSlider/styles/grabber_area = SubResource("StyleBox_slider_fill")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBox_slider_fill_hover")
+SoundButton/base_type = &"Button"
+SoundButton/styles/disabled = SubResource("Tex_sound")
+SoundButton/styles/hover = SubResource("Tex_sound_hover")
+SoundButton/styles/hover_pressed = SubResource("Tex_sound_hover")
+SoundButton/styles/normal = SubResource("Tex_sound")
+SoundButton/styles/pressed = SubResource("Tex_sound_hover")
+SoundMutedButton/base_type = &"Button"
+SoundMutedButton/styles/disabled = SubResource("Tex_sound_muted")
+SoundMutedButton/styles/hover = SubResource("Tex_sound_muted_hover")
+SoundMutedButton/styles/hover_pressed = SubResource("Tex_sound_muted_hover")
+SoundMutedButton/styles/normal = SubResource("Tex_sound_muted")
+SoundMutedButton/styles/pressed = SubResource("Tex_sound_muted_hover")
 TrayButton/base_type = &"Button"
 TrayButton/styles/disabled = SubResource("Tex_tray")
 TrayButton/styles/hover = SubResource("Tex_tray_hover")

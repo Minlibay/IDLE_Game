@@ -99,6 +99,12 @@ func open() -> void:
 		_focus_hero()
 
 
+## Окно уничтожают открытым (пересоздание сцены при смене языка, перерождении) — вернуть окну игры обычный режим.
+func _exit_tree() -> void:
+	if visible:
+		close()
+
+
 func close() -> void:
 	if not visible:
 		return

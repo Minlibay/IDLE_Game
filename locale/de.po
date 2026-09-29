@@ -1,0 +1,5324 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: de\n"
+
+#: scenes/creation/class_card.gd
+msgid "\nУмения: "
+msgstr "\nFähigkeiten: "
+
+#: scenes/world/world_map.gd
+msgid "  армия: %s"
+msgstr "  Armee: %s"
+
+#: scenes/world/world_map.gd
+msgid "  потери: %s"
+msgstr "  Verluste: %s"
+
+#: scenes/world/world_map.gd
+msgid " · замок под защитой ещё %s"
+msgstr " · Burg noch %s geschützt"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid " · распределяет глава"
+msgstr " · verteilt der Anführer"
+
+#: scenes/talents/talent_grid.gd
+msgid " · сектор «%s»"
+msgstr " · Sektor „%s“"
+
+#: scenes/world/world_map.gd
+msgid " · ⚔ %s идёт на %s — %s"
+msgstr " · ⚔ %s marschiert auf %s — %s"
+
+#: scenes/ui/guild_panel.gd scenes/world/world_map.gd
+msgid " назад"
+msgstr " her"
+
+#: scenes/ui/inventory_panel.gd
+msgid "%.2f с"
+msgstr "%.2f s"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "%d · %s · изучен"
+msgstr "%d · %s · erforscht"
+
+#: scenes/ui/settings_panel.gd
+msgid "%d кадров/с"
+msgstr "%d FPS"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "%d место: %d золота каждому и %d опыта гильдии"
+msgstr "Platz %d: %d Gold für jedes Mitglied und %d Gilden-EP"
+
+#: scripts/ui/ui_format.gd
+msgid "%d мин"
+msgstr "%d Min."
+
+#: scripts/ui/ui_format.gd
+msgid "%d мин %d с"
+msgstr "%d Min. %d s"
+
+#: scripts/ui/ui_format.gd
+msgid "%d с"
+msgstr "%d s"
+
+#: scripts/ui/ui_format.gd
+msgid "%d ч %d мин"
+msgstr "%d Std. %d Min."
+
+#: scenes/world/world_map.gd
+msgid "%s %s · зона #%d · %s"
+msgstr "%s %s · Zone #%d · %s"
+
+#: scenes/ui/army_view.gd
+msgid "%s (в замке: %d)"
+msgstr "%s (in der Burg: %d)"
+
+#: scenes/world/world_map.gd
+msgid "%s (есть %d)"
+msgstr "%s (verfügbar: %d)"
+
+#: scripts/data/guild_catalog.gd
+msgid "%s (макс.)"
+msgstr "%s (max.)"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "%s (ур. %d)"
+msgstr "%s (St. %d)"
+
+#: scenes/ui/skill_button.gd
+msgid "%s [%s]\n%s\nПерезарядка: %d с · открывается на ур. %d"
+msgstr "%s [%s]\n%s\nAbklingzeit: %d s · ab St. %d"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "%s · %d уровень"
+msgstr "%s · Stufe %d"
+
+#: scenes/ui/hud.gd scenes/ui/inventory_panel.gd
+msgid "%s · %s · ур. %d"
+msgstr "%s · %s · St. %d"
+
+#: scenes/world/battle_replay.gd
+msgid "%s · сила %d"
+msgstr "%s · Stärke %d"
+
+#: scenes/ui/guild_panel.gd
+msgid "%s · ур. %d · %d/%d · пригласил %s"
+msgstr "%s · St. %d · %d/%d · eingeladen von %s"
+
+#: scenes/world/world_map.gd
+msgid "%s игрока %s"
+msgstr "%s von Spieler %s"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "%s идёт на замок (%d солдат) — %s"
+msgstr "%s marschiert auf die Burg (%d Soldaten) — %s"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "%s ур. %d"
+msgstr "%s St. %d"
+
+#: scenes/battle/battle.gd
+msgid "%s — волны %d–%d"
+msgstr "%s — Wellen %d–%d"
+
+#: scenes/ui/guild_panel.gd
+msgid "%s — ждём ответа (%s)"
+msgstr "%s — wartet auf Antwort (%s)"
+
+#: scenes/world/world_map.gd
+msgid "%s: %s (сила %d, герой ур. %d)"
+msgstr "%s: %s (Stärke %d, Held St. %d)"
+
+#: scenes/ui/inventory_panel.gd
+msgid "%s: пусто"
+msgstr "%s: leer"
+
+#: scenes/battle/battle.gd
+msgid "+%d з"
+msgstr "+%d G"
+
+#: scenes/ui/guild_panel.gd
+msgid "+%d%% к силе армии за каждого участника, но не больше %d%% (потолок растёт с уровнем гильдии)."
+msgstr "+%d%% Armeestärke pro Mitglied, bis zu %d%% (die Grenze steigt mit der Gildenstufe)."
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "+%d%% урона"
+msgstr "+%d%% Schaden"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "+%s %s/мин"
+msgstr "+%s %s/Min."
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "+%s%% (сейчас +%s%%)"
+msgstr "+%s%% (jetzt +%s%%)"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "+%s/м"
+msgstr "+%s/Min."
+
+#: data/skills/archer_eagle_eye.tres
+msgid "+30% шанса крита на 8 с."
+msgstr "+30% Kritchance für 8 s."
+
+#: data/skills/warrior_war_cry.tres
+msgid "+50% урона на 6 секунд."
+msgstr "+50% Schaden für 6 Sekunden."
+
+#: data/skills/archer_hunter_fury.tres
+msgid "+60% скорости атаки на 6 секунд."
+msgstr "+60% Angriffstempo für 6 Sekunden."
+
+#: data/skills/mage_arcane_power.tres
+msgid "+80% урона на 8 с."
+msgstr "+80% Schaden für 8 s."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "+{value}% здоровья и +{value2} брони."
+msgstr "+{value}% Leben und +{value2} Rüstung."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "+{value}% золота и +{value2}% шанса дропа."
+msgstr "+{value}% Gold und +{value2}% Beutechance."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "+{value}% регенерации и {value2}% вампиризма."
+msgstr "+{value}% Regeneration und {value2}% Lebensraub."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "+{value}% силы армии и +{value2}% скорости обучения."
+msgstr "+{value}% Armeestärke und +{value2}% Ausbildungstempo."
+
+#: scripts/data/item_set_data.gd
+msgid ", аура героя"
+msgstr ", Heldenaura"
+
+#: scenes/ui/army_view.gd
+msgid ", голод"
+msgstr ", hungernd"
+
+#: data/skills/archer_deadly_volley.tres
+msgid "10 стрел по ближайшим врагам, каждая — гарантированный крит на 120% урона."
+msgstr "10 Pfeile auf die nächsten Feinde, jeder ein garantierter Krit mit 120% Schaden."
+
+#: data/skills/mage_frost_nova.tres
+msgid "100% урона всем врагам вокруг и заморозка на 3 с."
+msgstr "100% Schaden an allen Feinden ringsum und friert sie 3 s lang ein."
+
+#: data/skills/warrior_rend.tres
+msgid "120% урона и кровотечение: ещё 400% урона за 6 с."
+msgstr "120% Schaden und Blutung: weitere 400% Schaden über 6 s."
+
+#: data/skills/warrior_shield_bash.tres
+msgid "150% урона и оглушение цели на 2,5 с (боссы — вдвое короче)."
+msgstr "150% Schaden und betäubt das Ziel 2,5 s lang (bei Bossen halb so lang)."
+
+#: data/skills/archer_poison_arrow.tres
+msgid "150% урона и яд: ещё 300% урона за 6 с."
+msgstr "150% Schaden und Gift: weitere 300% Schaden über 6 s."
+
+#: data/skills/warrior_cleave.tres
+msgid "180% урона цели и 100% врагам вокруг неё."
+msgstr "180% Schaden am Ziel und 100% an Feinden in seiner Nähe."
+
+#: data/skills/warrior_earthquake.tres
+msgid "220% урона всем врагам вокруг, оглушение на 1,5 с и отбрасывание."
+msgstr "220% Schaden an allen Feinden ringsum, 1,5 s Betäubung und Rückstoß."
+
+#: data/skills/archer_arrow_rain.tres
+msgid "250% урона всем врагам в большой области вокруг цели."
+msgstr "250% Schaden an allen Feinden in einem großen Bereich um das Ziel."
+
+#: data/skills/mage_fireball.tres
+msgid "250% урона цели и 100% врагам вокруг неё."
+msgstr "250% Schaden am Ziel und 100% an Feinden in seiner Nähe."
+
+#: data/skills/mage_drain_life.tres
+msgid "250% урона цели, герой лечится на половину нанесённого урона."
+msgstr "250% Schaden am Ziel; der Held heilt sich um die Hälfte des Schadens."
+
+#: scenes/ui/guild_panel.gd
+msgid "2–4 буквы или цифры"
+msgstr "2–4 Buchstaben oder Ziffern"
+
+#: data/skills/warrior_execute.tres
+msgid "300% урона; по врагу с запасом здоровья меньше 30% — втрое больше."
+msgstr "300% Schaden; dreifach gegen Feinde unter 30% Leben."
+
+#: data/skills/mage_meteor.tres
+msgid "350% урона по всем врагам в большой области вокруг цели."
+msgstr "350% Schaden an allen Feinden in einem großen Bereich um das Ziel."
+
+#: data/skills/archer_multishot.tres
+msgid "5 стрел по ближайшим врагам, по 80% урона."
+msgstr "5 Pfeile auf die nächsten Feinde, je 80% Schaden."
+
+#: data/skills/mage_armageddon.tres
+msgid "600% урона всем врагам в огромной области вокруг цели и поджог: ещё 300% за 6 с."
+msgstr "600% Schaden an allen Feinden in einem riesigen Bereich um das Ziel, setzt sie in Brand: weitere 300% über 6 s."
+
+#: scenes/creation/class_card.gd
+msgid "HP %d · Урон %d · %s"
+msgstr "LP %d · Schaden %d · %s"
+
+#: scenes/ui/inventory_panel.gd
+msgid "[color=#%s]Сет «%s» (%d/%d)[/color]"
+msgstr "[color=#%s]Set „%s“ (%d/%d)[/color]"
+
+#: server/src/world/guilds.ts
+msgid "{name} больше не офицер"
+msgstr "{name} ist kein Offizier mehr"
+
+#: server/src/world/guilds.ts
+msgid "{name} вступил в гильдию"
+msgstr "{name} ist der Gilde beigetreten"
+
+#: server/src/world/game.ts
+msgid "{name} занял вашу зону без боя (гарнизона не было)"
+msgstr "{name} hat deine Zone kampflos besetzt (es gab keine Garnison)"
+
+#: server/src/world/guilds.ts
+msgid "{name} исключён из гильдии"
+msgstr "{name} wurde aus der Gilde geworfen"
+
+#: server/src/world/guilds.ts
+msgid "{name} назначен офицером"
+msgstr "{name} ist jetzt Offizier"
+
+#: server/src/world/guilds.ts
+msgid "{name} основал гильдию"
+msgstr "{name} hat die Gilde gegründet"
+
+#: server/src/world/guilds.ts
+msgid "{name} покинул гильдию"
+msgstr "{name} hat die Gilde verlassen"
+
+#: server/src/world/game.ts
+msgid "{name} разбил вашу армию, герой вернулся в замок"
+msgstr "{name} hat deine Armee besiegt, der Held ist in die Burg zurückgekehrt"
+
+#: server/src/world/game.ts
+msgid "{name} разбил гарнизон и захватил зону"
+msgstr "{name} hat die Garnison besiegt und die Zone erobert"
+
+#: server/src/world/game.ts
+msgid "{name} разграбил ваш замок. Замок под щитом {hours} ч"
+msgstr "{name} hat deine Burg geplündert. Die Burg ist {hours} Std. geschützt"
+
+#: server/src/world/guilds.ts
+msgid "{name} теперь глава гильдии"
+msgstr "{name} ist jetzt Gildenanführer"
+
+#: scenes/ui/hud.tscn
+msgid "Авто"
+msgstr "Auto"
+
+#: scenes/world/world_map.tscn
+msgid "Автоматически войти не получилось (например, имя занято). Укажите другое имя. Позже вход будет через Steam."
+msgstr "Automatische Anmeldung fehlgeschlagen (z. B. ist der Name vergeben). Wähle einen anderen Namen. Später erfolgt die Anmeldung über Steam."
+
+#: scenes/world/world_map.tscn
+msgid "Адрес сервера"
+msgstr "Serveradresse"
+
+#: scripts/data/item_base.gd
+msgid "Аксессуар"
+msgstr "Schmuck"
+
+#: data/treasures/warrior.json
+msgid "Амулет Львиного Сердца"
+msgstr "Amulett des Löwenherzens"
+
+#: data/skills/mage_armageddon.tres
+msgid "Армагеддон"
+msgstr "Armageddon"
+
+#: scenes/world/world_map.tscn
+msgid "Армию из замка →"
+msgstr "Armee aus der Burg →"
+
+#: data/guild/guild.json scenes/ui/inventory_panel.gd scenes/ui/kingdom_panel.tscn
+msgid "Армия"
+msgstr "Armee"
+
+#: scenes/ui/army_view.gd
+msgid "Армия замка"
+msgstr "Burgarmee"
+
+#: scenes/world/world_map.gd
+msgid "Армия замка: "
+msgstr "Burgarmee: "
+
+#: server/src/world/game.ts
+msgid "Армия погибла в бою с нейтралами, герой вернулся в замок"
+msgstr "Die Armee fiel im Kampf gegen die Neutralen, der Held ist in die Burg zurückgekehrt"
+
+#: scenes/world/world_map.gd
+msgid "Армия с героем: %d · атака %d · зон: %d"
+msgstr "Armee beim Helden: %d · Angriff %d · Zonen: %d"
+
+#: data/talents/mage_talents.tres
+msgid "Архимагия"
+msgstr "Erzmagie"
+
+#: scenes/world/battle_replay.tscn scenes/world/world_map.gd
+msgid "Атака"
+msgstr "Angriff"
+
+#: scenes/ui/army_view.gd
+msgid "Атака %d · Защита %d"
+msgstr "Angriff %d · Verteidigung %d"
+
+#: server/src/world/game.ts
+msgid "Атака {name} отбита"
+msgstr "Der Angriff von {name} wurde abgewehrt"
+
+#: scenes/ui/army_view.gd
+msgid "Атака ×%.2f · Защита ×%.2f\nЗдания, захваченные зоны, реликвии армии%s"
+msgstr "Angriff ×%.2f · Verteidigung ×%.2f\nGebäude, eroberte Zonen, Armee-Relikte%s"
+
+#: scripts/items/item.gd
+msgid "Атака армии, %"
+msgstr "Armeeangriff, %"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Атака раз в"
+msgstr "Angriff alle"
+
+#: scenes/ui/army_view.gd
+msgid "Атака солдата"
+msgstr "Soldatenangriff"
+
+#: server/src/world/guilds.ts
+msgid "Атаки на сегодня закончились — приходите завтра"
+msgstr "Keine Angriffe mehr für heute — komm morgen wieder"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Атаковать"
+msgstr "Angreifen"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Атаковать (%d/%d)"
+msgstr "Angreifen (%d/%d)"
+
+#: scenes/world/world_map.gd
+msgid "Атаковать нейтралов"
+msgstr "Neutrale angreifen"
+
+#: scripts/progress/hero_progress.gd
+msgid "Атакуйте босса гильдии %d раза"
+msgstr "Greife den Gildenboss %d-mal an"
+
+#: data/guild/guild.json
+msgid "Багровый каньон"
+msgstr "Purpurschlucht"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Бастион"
+msgstr "Bastion"
+
+#: data/treasures/warrior.json
+msgid "Бастион Северных Врат"
+msgstr "Bastion des Nordtors"
+
+#: data/treasures/archer.json
+msgid "Бегущая с ветром"
+msgstr "Windläuferin"
+
+#: data/treasures/archer.json
+msgid "Бегущей с ветром"
+msgstr "der Windläuferin"
+
+#: server/src/world/game.ts
+msgid "Без армии зону не занять — возьмите солдат из замка"
+msgstr "Ohne Armee keine Zone — hol Soldaten aus der Burg"
+
+#: scenes/world/world_map.gd
+msgid "Без армии зону не занять: в замке нажмите «Армию из замка →»"
+msgstr "Ohne Armee keine Zone: Drücke in der Burg „Armee aus der Burg →“"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Без заточки"
+msgstr "Nicht aufgewertet"
+
+#: scenes/ui/settings_panel.tscn scripts/autoload/desktop_window.gd
+msgid "Без звука"
+msgstr "Stumm"
+
+#: data/treasures/mage.json
+msgid "Бездна смотрела в него — и отвела взгляд первой."
+msgstr "Der Abgrund blickte in ihn — und wandte den Blick als Erster ab."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Бессмертный"
+msgstr "Unsterblich"
+
+#: scenes/ui/journal/journal_bestiary_page.gd scenes/ui/journal_panel.gd
+msgid "Бестиарий"
+msgstr "Bestiarium"
+
+#: scripts/progress/hero_progress.gd
+msgid "Бестиарий: %s изучен до %d уровня"
+msgstr "Bestiarium: %s bis Stufe %d erforscht"
+
+#: scenes/actors/monster.gd
+msgid "Бешеный"
+msgstr "Rasend"
+
+#: scripts/progress/hero_progress.gd
+msgid "Благосклонность судьбы"
+msgstr "Gunst des Schicksals"
+
+#: scenes/creation/class_card.gd
+msgid "Ближний бой"
+msgstr "Nahkampf"
+
+#: scripts/progress/hero_progress.gd
+msgid "Богач"
+msgstr "Krösus"
+
+#: data/needs/energy.tres
+msgid "Бодрость"
+msgstr "Energie"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Боевая выучка"
+msgstr "Kampfausbildung"
+
+#: data/talents/warrior_talents.tres
+msgid "Боевое безумие"
+msgstr "Kampfeswahn"
+
+#: data/items/war_banner.tres
+msgid "Боевое знамя"
+msgstr "Kriegsbanner"
+
+#: data/guild/guild.json
+msgid "Боевой дух"
+msgstr "Kampfgeist"
+
+#: data/skills/warrior_war_cry.tres
+msgid "Боевой клич"
+msgstr "Kriegsschrei"
+
+#: data/talents/warrior_talents.tres
+msgid "Боевой раж"
+msgstr "Kampfrausch"
+
+#: data/items/war_horn.tres
+msgid "Боевой рог"
+msgstr "Kriegshorn"
+
+#: data/buildings/stable.tres
+msgid "Боевые кони для рыцарей. Открывает найм рыцарей и усиливает армию."
+msgstr "Schlachtrösser für Ritter. Schaltet die Ritter-Rekrutierung frei und stärkt die Armee."
+
+#: scripts/data/monster_data.gd
+msgid "Боец"
+msgstr "Kämpfer"
+
+#: scenes/ui/settings_panel.gd scenes/world/battle_replay.gd scenes/world/battle_replay.tscn
+msgid "Бой"
+msgstr "Kampf"
+
+#: scenes/ui/settings_panel.gd
+msgid "Бой без звука; интерфейс и уведомления остаются."
+msgstr "Kampf ohne Ton; Oberfläche und Benachrichtigungen bleiben."
+
+#: scenes/ui/settings_panel.gd
+msgid "Бой и музыка в трее молчат всегда; уведомления (уровень, редкая добыча, нападение) — по этой настройке."
+msgstr "Kampf und Musik sind im Infobereich immer stumm; Benachrichtigungen (Stufenaufstieg, seltene Beute, Angriffe) richten sich nach dieser Einstellung."
+
+#: scenes/ui/army_view.tscn
+msgid "Больше (Shift — по 10)"
+msgstr "Mehr (Shift — um 10)"
+
+#: server/src/world/guilds.ts
+msgid "Бонус «{perk}» повышен до {rank} ранга"
+msgstr "Bonus „{perk}“ auf Rang {rank} erhöht"
+
+#: scenes/world/world_map.gd
+msgid "Бонус владельцу: "
+msgstr "Besitzerbonus: "
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Бонус повышен"
+msgstr "Bonus erhöht"
+
+#: server/src/world/guilds.ts
+msgid "Бонус уже на максимальном ранге"
+msgstr "Der Bonus hat bereits den Höchstrang"
+
+#: scenes/ui/guild_panel.gd
+msgid "Бонусы"
+msgstr "Boni"
+
+#: server/src/world/guilds.ts
+msgid "Бонусы гильдии сброшены — очки можно распределить заново"
+msgstr "Gildenboni zurückgesetzt — die Punkte können neu verteilt werden"
+
+#: server/src/world/guilds.ts
+msgid "Бонусы ещё не выбраны"
+msgstr "Noch keine Boni gewählt"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Бонусы сброшены — распределите очки заново"
+msgstr "Boni zurückgesetzt — verteile die Punkte neu"
+
+#: scenes/ui/guild/guild_boss_page.gd scenes/ui/guild_panel.gd
+msgid "Босс"
+msgstr "Boss"
+
+#: server/src/world/guilds.ts
+msgid "Босс гильдии {level} уровня повержен! Каждый, кто сражался, получил {gold} золота"
+msgstr "Der Gildenboss der Stufe {level} ist besiegt! Alle Kämpfer erhielten {gold} Gold"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Босс недели"
+msgstr "Boss der Woche"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Босс повержен! Награда уже в казне."
+msgstr "Der Boss ist besiegt! Die Belohnung liegt bereits in deiner Kasse."
+
+#: server/src/world/guilds.ts
+msgid "Босс этой недели уже повержен"
+msgstr "Der Boss dieser Woche ist bereits besiegt"
+
+#: scripts/data/item_base.gd
+msgid "Ботинки"
+msgstr "Stiefel"
+
+#: scripts/progress/hero_progress.gd
+msgid "Братство"
+msgstr "Bruderschaft"
+
+#: scenes/ui/inventory_panel.gd scripts/data/item_base.gd scripts/items/item.gd
+msgid "Броня"
+msgstr "Rüstung"
+
+#: data/talents/mage_talents.tres
+msgid "Буря заклятий"
+msgstr "Zaubersturm"
+
+#: data/talents/archer_talents.tres
+msgid "Быстрая перезарядка"
+msgstr "Schnelles Nachladen"
+
+#: scripts/data/stat_modifier.gd
+msgid "Быстрота умений"
+msgstr "Schnellzauber"
+
+#: data/classes/archer.tres
+msgid "Быстрые выстрелы издалека и частые криты."
+msgstr "Schnelle Schüsse aus der Ferne und häufige Krits."
+
+#: data/units/archer.tres
+msgid "Бьёт издалека: сильная атака, слабая защита."
+msgstr "Greift aus der Ferne an: starker Angriff, schwache Verteidigung."
+
+#: data/treasures/archer.json
+msgid "Бьёт точнее всего в полнолуние."
+msgstr "Trifft bei Vollmond am genauesten."
+
+#: server/src/world/guilds.ts
+msgid "В гильдии нет свободных мест"
+msgstr "Die Gilde hat keine freien Plätze"
+
+#: server/src/world/game.ts
+msgid "В замке армия стоит без гарнизона"
+msgstr "In der Burg steht die Armee ohne Garnison"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "В замке нет солдат — обучите их в «Замке» [K]."
+msgstr "Keine Soldaten in der Burg — bilde sie in der „Burg“ [K] aus."
+
+#: server/src/world/game.ts
+msgid "В замке нет столько солдат"
+msgstr "So viele Soldaten sind nicht in der Burg"
+
+#: server/src/world/game.ts
+msgid "В замке союзника нет места для стольких подкреплений"
+msgstr "In der Burg des Verbündeten ist kein Platz für so viel Verstärkung"
+
+#: scenes/ui/guild_panel.gd
+msgid "В казне замка: %d · 1 золото = 1 опыт"
+msgstr "Burgkasse: %d · 1 Gold = 1 EP"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "В моём замке"
+msgstr "In meiner Burg"
+
+#: data/treasures/archer.json
+msgid "В них не хрустнет ни одна ветка."
+msgstr "Unter ihnen knackt kein einziger Zweig."
+
+#: scenes/actors/monster.gd
+msgid "Вампир"
+msgstr "Vampirisch"
+
+#: scenes/world/world_map.gd
+msgid "Ваш замок"
+msgstr "Deine Burg"
+
+#: scenes/world/world_map.gd
+msgid "Ваша зона"
+msgstr "Deine Zone"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Ваши награды: "
+msgstr "Deine Auszeichnungen: "
+
+#: server/src/world/game.ts
+msgid "Ваши подкрепления помогли отбить набег на замок {name}"
+msgstr "Deine Verstärkung half, den Überfall auf die Burg von {name} abzuwehren"
+
+#: scenes/creation/character_creation.tscn
+msgid "Введите имя"
+msgstr "Gib einen Namen ein"
+
+#: scripts/data/stat_modifier.gd
+msgid "Везение"
+msgstr "Glück"
+
+#: data/treasures/mage.json
+msgid "Венец Тысячи Глаз"
+msgstr "Reif der Tausend Augen"
+
+#: data/guild/guild.json
+msgid "Вересковые пустоши"
+msgstr "Heidemoore"
+
+#: scenes/world/world_map.gd
+msgid "Вернуть армию в замок"
+msgstr "Armee in die Burg zurückholen"
+
+#: scenes/talents/talent_grid.tscn
+msgid "Вернуть все очки талантов за золото"
+msgstr "Alle Talentpunkte gegen Gold zurückerhalten"
+
+#: scenes/world/world_map.tscn
+msgid "Вернуть солдат с карты в армию замка (герой должен быть в замке)"
+msgstr "Soldaten von der Karte zur Burgarmee zurückholen (der Held muss in der Burg sein)"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Верные знамёна"
+msgstr "Treue Banner"
+
+#: data/treasures/mage.json
+msgid "Верховного арканиста"
+msgstr "des Hocharkanisten"
+
+#: data/treasures/mage.json
+msgid "Верховный арканист"
+msgstr "Hocharkanist"
+
+#: data/treasures/mage.json
+msgid "Ветвь Мудреца"
+msgstr "Zweig des Weisen"
+
+#: data/talents/archer_talents.tres
+msgid "Ветер в оперении"
+msgstr "Wind im Gefieder"
+
+#: data/treasures/archer.json
+msgid "Ветер пустыни"
+msgstr "Wüstenwind"
+
+#: data/treasures/archer.json
+msgid "Ветра пустыни"
+msgstr "des Wüstenwinds"
+
+#: data/treasures/warrior.json
+msgid "Вечная Клятва"
+msgstr "Ewiger Eid"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Вечные улучшения за души"
+msgstr "Dauerhafte Verbesserungen für Seelen"
+
+#: scripts/progress/hero_progress.gd
+msgid "Вечный герой"
+msgstr "Ewiger Held"
+
+#: data/treasures/archer.json
+msgid "Видит в темноте не хуже совы."
+msgstr "Sieht im Dunkeln so gut wie eine Eule."
+
+#: data/treasures/mage.json
+msgid "Видит всё. Иногда — слишком много."
+msgstr "Sieht alles. Manchmal — zu viel."
+
+#: data/skills/warrior_whirlwind.tres
+msgid "Вихрь"
+msgstr "Wirbelwind"
+
+#: data/talents/warrior_talents.tres
+msgid "Вихрь и Боевой клич: −{value}% перезарядки."
+msgstr "Wirbelwind und Kriegsschrei: −{value}% Abklingzeit."
+
+#: scenes/ui/guild_panel.gd
+msgid "Вклад"
+msgstr "Beitrag"
+
+#: scenes/ui/guild_panel.gd
+msgid "Вклад в опыт гильдии: %d\nВ гильдии с: %s"
+msgstr "Beitrag zu Gilden-EP: %d\nMitglied seit: %s"
+
+#: scenes/ui/hud.gd
+msgid "Включить звук [S]"
+msgstr "Ton an [S]"
+
+#: scenes/world/world_map.gd
+msgid "Владение"
+msgstr "Besitz"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Вложено очков: %d"
+msgstr "Investierte Punkte: %d"
+
+#: scenes/ui/guild_panel.gd
+msgid "Внесено в гильдию: %d золота"
+msgstr "An die Gilde gespendet: %d Gold"
+
+#: scripts/progress/hero_progress.gd
+msgid "Внесите золото в гильдию %d раз"
+msgstr "Spende %d-mal Gold an die Gilde"
+
+#: scenes/ui/guild_panel.gd
+msgid "Внести"
+msgstr "Spenden"
+
+#: scenes/ui/kingdom_panel.gd scenes/ui/kingdom_panel.tscn
+msgid "Внести в казну"
+msgstr "In die Kasse einzahlen"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Внести в казну %d"
+msgstr "%d in die Kasse einzahlen"
+
+#: server/src/http.ts
+msgid "Внутренняя ошибка сервера"
+msgstr "Interner Serverfehler"
+
+#: data/treasures/mage.json
+msgid "Внутри кольца — крошечная чёрная дыра. Не заглядывайте."
+msgstr "Im Ring steckt ein winziges Schwarzes Loch. Nicht hineinschauen."
+
+#: data/treasures/mage.json
+msgid "Внутри медленно кружатся искры."
+msgstr "Innen wirbeln langsam Funken."
+
+#: data/treasures/warrior.json
+msgid "Внутри — прядь гривы белого льва."
+msgstr "Innen liegt eine Strähne aus der Mähne eines weißen Löwen."
+
+#: data/treasures/archer.json
+msgid "Во внутренних карманах — сотня мелочей для охоты."
+msgstr "In den Innentaschen stecken hundert Kleinigkeiten für die Jagd."
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Вода"
+msgstr "Wasser"
+
+#: data/treasures/warrior.json
+msgid "Военачальник"
+msgstr "Kriegsherr"
+
+#: data/treasures/warrior.json
+msgid "Военачальника"
+msgstr "des Kriegsherrn"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Военный совет"
+msgstr "Kriegsrat"
+
+#: data/classes/warrior.tres
+msgid "Воин"
+msgstr "Krieger"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Война гильдий"
+msgstr "Gildenkrieg"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Войска идут до замка союзника, как в набег, и защищают его, пока вы их не отзовёте."
+msgstr "Die Truppen ziehen wie bei einem Überfall zur Burg des Verbündeten und verteidigen sie, bis du sie zurückrufst."
+
+#: scenes/world/world_map.tscn
+msgid "Войти"
+msgstr "Anmelden"
+
+#: data/treasures/warrior.json
+msgid "Волки не нападают на того, кто его носит."
+msgstr "Wölfe greifen nie an, wer ihn trägt."
+
+#: scenes/ui/hud.gd
+msgid "Волна %d · %s (рекорд %d)"
+msgstr "Welle %d · %s (Rekord %d)"
+
+#: scenes/battle/battle.gd
+msgid "Волна %d — БОСС: %s!"
+msgstr "Welle %d — BOSS: %s!"
+
+#: scenes/ui/hud.tscn
+msgid "Волна 1"
+msgstr "Welle 1"
+
+#: data/treasures/mage.json
+msgid "Волосы встают дыбом, стоит лишь прикоснуться."
+msgstr "Kaum berührt man es, stehen einem die Haare zu Berge."
+
+#: data/guild/guild.json
+msgid "Волчьи холмы"
+msgstr "Wolfshügel"
+
+#: data/talents/warrior_talents.tres
+msgid "Воля воина"
+msgstr "Wille des Kriegers"
+
+#: data/treasures/archer.json
+msgid "Вороны приносят вести — и удачу."
+msgstr "Raben bringen Kunde — und Glück."
+
+#: data/treasures/archer.json
+msgid "Вороньи Перья"
+msgstr "Rabenfedern"
+
+#: scripts/data/stat_modifier.gd
+msgid "Восстановление"
+msgstr "Erholung"
+
+#: data/treasures/mage.json
+msgid "Время вокруг него течёт чуть медленнее."
+msgstr "Um ihn herum fließt die Zeit etwas langsamer."
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Время стройки: "
+msgstr "Bauzeit: "
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Все очки вернутся, распределить их можно заново. Не чаще раза в сутки."
+msgstr "Alle Punkte werden erstattet und können neu verteilt werden. Höchstens einmal am Tag."
+
+#: data/talents/archer_talents.tres
+msgid "Все умения: −{value}% перезарядки, залп +{value2}% урона."
+msgstr "Alle Fähigkeiten: −{value}% Abklingzeit, Salve +{value2}% Schaden."
+
+#: scenes/ui/guild_panel.gd
+msgid "Все участники покинут гильдию. Чтобы уйти самому, сначала передайте главенство."
+msgstr "Alle Mitglieder verlassen die Gilde. Um selbst zu gehen, übergib zuerst die Führung."
+
+#: scenes/ui/settings_panel.gd
+msgid "Всегда"
+msgstr "Immer"
+
+#: scripts/progress/hero_progress.gd
+msgid "Вступите в гильдию"
+msgstr "Tritt einer Gilde bei"
+
+#: scenes/ui/guild_panel.gd
+msgid "Вступить"
+msgstr "Beitreten"
+
+#: scenes/ui/guild_panel.gd
+msgid "Вступить в другую гильдию можно будет через сутки."
+msgstr "Einer anderen Gilde kannst du erst nach 24 Stunden beitreten."
+
+#: data/treasures/warrior.json
+msgid "Всё, что осталось от знамени первой армии."
+msgstr "Alles, was vom Banner der ersten Armee übrig ist."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Второе дыхание"
+msgstr "Zweiter Atem"
+
+#: scenes/world/world_map.tscn
+msgid "Вход на сервер карты"
+msgstr "Anmeldung am Kartenserver"
+
+#: scenes/ui/guild_panel.gd
+msgid "Вы вступили в гильдию"
+msgstr "Du bist der Gilde beigetreten"
+
+#: server/src/world/guilds.ts
+msgid "Вы не состоите в гильдии"
+msgstr "Du bist in keiner Gilde"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Вы никому не отправляли подкрепления."
+msgstr "Du hast niemandem Verstärkung geschickt."
+
+#: scenes/ui/guild_panel.gd
+msgid "Вы покинули гильдию"
+msgstr "Du hast die Gilde verlassen"
+
+#: server/src/world/guilds.ts
+msgid "Вы уже состоите в гильдии"
+msgstr "Du bist bereits in einer Gilde"
+
+#: scenes/world/world_map.gd scenes/world/world_map.tscn
+msgid "Выберите зону на карте"
+msgstr "Wähle eine Zone auf der Karte"
+
+#: server/src/world/game.ts
+msgid "Выберите отряды"
+msgstr "Wähle Einheiten"
+
+#: scenes/ui/inventory_panel.gd scenes/ui/inventory_panel.tscn
+msgid "Выберите предмет"
+msgstr "Wähle einen Gegenstand"
+
+#: server/src/world/guilds.ts
+msgid "Выберите цвет гильдии"
+msgstr "Wähle eine Gildenfarbe"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Выберите, сколько солдат отправить"
+msgstr "Wähle, wie viele Soldaten du schickst"
+
+#: data/treasures/warrior.json
+msgid "Выжили в пожаре, спалившем целый легион."
+msgstr "Sie überlebten das Feuer, das eine ganze Legion verbrannte."
+
+#: scenes/ui/settings_panel.gd
+msgid "Выкл."
+msgstr "Aus"
+
+#: scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Выключить звук [S]"
+msgstr "Ton aus [S]"
+
+#: data/treasures/warrior.json
+msgid "Выкованы в горне, что не гаснет со дня основания королевства."
+msgstr "Geschmiedet in einer Esse, die seit der Gründung des Königreichs nie erloschen ist."
+
+#: data/treasures/warrior.json
+msgid "Выкованы по ту сторону разлома. По ночам они шепчут хозяину."
+msgstr "Geschmiedet jenseits des Risses. Nachts flüstern sie ihrem Besitzer zu."
+
+#: scripts/data/stat_modifier.gd
+msgid "Выносливость"
+msgstr "Ausdauer"
+
+#: data/treasures/archer.json
+msgid "Выпущенные стрелы падают с неба, как звёзды."
+msgstr "Abgeschossene Pfeile fallen wie Sterne vom Himmel."
+
+#: data/buildings/farm.tres
+msgid "Выращивает еду. Герой ест сам, когда проголодается."
+msgstr "Baut Nahrung an. Der Held isst selbst, wenn er hungrig ist."
+
+#: data/talents/archer_talents.tres
+msgid "Выстрел в сердце"
+msgstr "Herzschuss"
+
+#: data/treasures/warrior.json
+msgid "Выточен из клыка зверя, что жил в горах."
+msgstr "Geschnitzt aus dem Reißzahn eines Bergungeheuers."
+
+#: data/skills/mage_drain_life.tres
+msgid "Вытягивание жизни"
+msgstr "Lebensentzug"
+
+#: scenes/creation/character_creation.tscn
+msgid "Выход"
+msgstr "Beenden"
+
+#: data/treasures/mage.json
+msgid "Вышиты картой звёзд, которых уже нет на небе."
+msgstr "Bestickt mit einer Karte von Sternen, die es am Himmel nicht mehr gibt."
+
+#: data/skills/archer_aimed_shot.tres
+msgid "Гарантированный крит на 300% урона."
+msgstr "Ein garantierter Krit mit 300% Schaden."
+
+#: scenes/world/world_map.gd
+msgid "Гарнизон: "
+msgstr "Garnison: "
+
+#: scenes/world/world_map.gd
+msgid "Гарнизон: %d солдат"
+msgstr "Garnison: %d Soldaten"
+
+#: data/treasures/warrior.json
+msgid "Где прошёл их хозяин, ещё неделю не утихает ветер."
+msgstr "Wo ihr Besitzer vorbeikam, legt sich der Wind eine Woche lang nicht."
+
+#: scenes/ui/guild_panel.gd scenes/ui/inventory_panel.gd scripts/autoload/world_service.gd
+msgid "Герой"
+msgstr "Held"
+
+#: scenes/ui/hud.tscn
+msgid "Герой · Воин · ур. 1"
+msgstr "Held · Krieger · St. 1"
+
+#: scenes/world/world_map.gd
+msgid "Герой в замке"
+msgstr "Der Held ist in der Burg"
+
+#: scenes/world/world_map.gd
+msgid "Герой в зоне #%d"
+msgstr "Der Held ist in Zone #%d"
+
+#: server/src/world/game.ts
+msgid "Герой в походе"
+msgstr "Der Held ist auf dem Marsch"
+
+#: server/src/world/game.ts
+msgid "Герой должен стоять в своём замке"
+msgstr "Der Held muss in der eigenen Burg sein"
+
+#: scenes/battle/battle.gd
+msgid "Герой отдохнул и снова в бою!"
+msgstr "Der Held hat sich erholt und kämpft wieder!"
+
+#: scenes/battle/battle.gd
+msgid "Герой пал! Отступаем на волну %d"
+msgstr "Der Held ist gefallen! Rückzug auf Welle %d"
+
+#: server/src/world/game.ts
+msgid "Герой уже в походе"
+msgstr "Der Held ist bereits auf dem Marsch"
+
+#: server/src/world/game.ts
+msgid "Герой уже здесь"
+msgstr "Der Held ist bereits hier"
+
+#: scenes/battle/battle.gd
+msgid "Герой устал и отдыхает…"
+msgstr "Der Held ist müde und ruht sich aus…"
+
+#: data/monsters/giant_spider.tres
+msgid "Гигантский паук"
+msgstr "Riesenspinne"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Гильдии ещё не набрали очков в этом сезоне."
+msgstr "In dieser Saison hat noch keine Gilde Punkte erzielt."
+
+#: scenes/ui/guild/guild_season_page.gd scenes/ui/guild_panel.gd scenes/ui/guild_panel.tscn scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Гильдия"
+msgstr "Gilde"
+
+#: scenes/ui/hud.gd
+msgid "Гильдия (!)"
+msgstr "Gilde (!)"
+
+#: scenes/ui/hud.gd
+msgid "Гильдия (%d)"
+msgstr "Gilde (%d)"
+
+#: scenes/ui/hud.tscn
+msgid "Гильдия [G]"
+msgstr "Gilde [G]"
+
+#: server/src/world/guilds.ts
+msgid "Гильдия достигла {level} уровня: мест {slots}"
+msgstr "Die Gilde hat Stufe {level} erreicht: {slots} Plätze"
+
+#: server/src/world/guilds.ts
+msgid "Гильдия не найдена"
+msgstr "Gilde nicht gefunden"
+
+#: scenes/ui/guild_panel.gd
+msgid "Гильдия основана!"
+msgstr "Gilde gegründet!"
+
+#: scenes/ui/guild_panel.gd
+msgid "Гильдия распущена"
+msgstr "Gilde aufgelöst"
+
+#: server/src/world/guilds.ts
+msgid "Гильдия с таким названием уже есть"
+msgstr "Eine Gilde mit diesem Namen gibt es bereits"
+
+#: scenes/ui/guild_panel.gd
+msgid "Глава"
+msgstr "Anführer"
+
+#: server/src/world/guilds.ts
+msgid "Глава давно не заходил — главенство перешло к {name}"
+msgstr "Der Anführer war lange nicht da — die Führung ging an {name}"
+
+#: scenes/ui/guild_panel.gd
+msgid "Главенство передано"
+msgstr "Führung übergeben"
+
+#: data/monsters/goblin.tres
+msgid "Гоблин"
+msgstr "Goblin"
+
+#: data/monsters/goblin_archer.tres
+msgid "Гоблин-лучник"
+msgstr "Goblin-Bogenschütze"
+
+#: data/monsters/goblin_axeman.tres
+msgid "Гоблин-рубака"
+msgstr "Goblin-Axtkämpfer"
+
+#: data/monsters/goblin_shaman.tres
+msgid "Гоблин-шаман"
+msgstr "Goblin-Schamane"
+
+#: data/treasures/warrior.json
+msgid "Говорят, в них слышно, как гремит далёкая гроза."
+msgstr "Man sagt, in ihnen hört man fernen Donner grollen."
+
+#: data/items/lucky_ring.tres
+msgid "Говорят, его владельцу везёт в бою."
+msgstr "Man sagt, sein Besitzer hat Glück im Kampf."
+
+#: data/biomes/mountains.tres
+msgid "Горы"
+msgstr "Berge"
+
+#: data/items/field_kitchen.tres
+msgid "Горячая похлёбка: армия сыта и ест меньше."
+msgstr "Heißer Eintopf: Die Armee ist satt und isst weniger."
+
+#: scenes/ui/guild_panel.gd
+msgid "Готово"
+msgstr "Fertig"
+
+#: data/skills/archer_arrow_rain.tres
+msgid "Град стрел"
+msgstr "Pfeilregen"
+
+#: data/talents/warrior_talents.tres
+msgid "Град ударов"
+msgstr "Hagel der Hiebe"
+
+#: data/guild/guild.json
+msgid "Гремящие утёсы"
+msgstr "Donnernde Klippen"
+
+#: scripts/progress/hero_progress.gd
+msgid "Гроза боссов"
+msgstr "Bossbezwinger"
+
+#: data/treasures/archer.json
+msgid "Грозовая стрела"
+msgstr "Donnerpfeil"
+
+#: data/treasures/archer.json
+msgid "Грозовой стрелы"
+msgstr "des Donnerpfeils"
+
+#: scripts/data/monster_data.gd
+msgid "Громила"
+msgstr "Schläger"
+
+#: data/guild/guild.json
+msgid "Громкая слава"
+msgstr "Ruhm und Ehre"
+
+#: data/treasures/warrior.json
+msgid "Громовая Ярость"
+msgstr "Donnerzorn"
+
+#: scripts/progress/hero_progress.gd
+msgid "Дайте герою отдохнуть %d раз"
+msgstr "Lass den Helden %d-mal rasten"
+
+#: scenes/creation/class_card.gd
+msgid "Дальний бой"
+msgstr "Fernkampf"
+
+#: data/buildings/well.tres
+msgid "Даёт воду: герой пьёт сам, когда хочет пить."
+msgstr "Liefert Wasser: Der Held trinkt selbst, wenn er durstig ist."
+
+#: scripts/data/stat_modifier.gd
+msgid "Двойной удар"
+msgstr "Doppelschlag"
+
+#: data/monsters/demon.tres
+msgid "Демон"
+msgstr "Dämon"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Дерево"
+msgstr "Holz"
+
+#: scenes/ui/hud.tscn
+msgid "Дерево талантов [T]"
+msgstr "Talentbaum [T]"
+
+#: server/src/world/game.ts
+msgid "Для набега нужна армия"
+msgstr "Für einen Überfall braucht man eine Armee"
+
+#: scripts/progress/hero_progress.gd
+msgid "Добудьте %d золота с монстров"
+msgstr "Erbeute %d Gold von Monstern"
+
+#: scripts/progress/hero_progress.gd
+msgid "Добудьте %s золота с монстров"
+msgstr "Erbeute %s Gold von Monstern"
+
+#: data/buildings/quarry.tres
+msgid "Добывает камень для построек."
+msgstr "Bricht Stein für Bauwerke."
+
+#: scenes/world/battle_replay.gd scenes/world/world_map.gd
+msgid "Добыча: "
+msgstr "Beute: "
+
+#: scripts/progress/hero_progress.gd
+msgid "Дойдите до %s волны"
+msgstr "Erreiche Welle %s"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Дорога побед"
+msgstr "Straße der Siege"
+
+#: scenes/ui/journal/journal_achievements_page.gd scenes/ui/journal_panel.gd
+msgid "Достижения"
+msgstr "Erfolge"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Доступно с %d-й волны. Души растут с рекордом волны: на 30-й — %d, на 50-й — %d."
+msgstr "Ab Welle %d verfügbar. Seelen wachsen mit deiner besten Welle: bei Welle 30 — %d, bei Welle 50 — %d."
+
+#: data/guild/guild.json
+msgid "Драконий хребет"
+msgstr "Drachenrücken"
+
+#: data/talents/mage_talents.tres
+msgid "Древние руны"
+msgstr "Uralte Runen"
+
+#: data/items/oak_staff.tres
+msgid "Дубовый посох"
+msgstr "Eichenstab"
+
+#: data/items/oak_staff.tres
+msgid "Дубовый посох с кристаллом, в котором копится магия."
+msgstr "Ein Eichenstab mit einem Kristall, der Magie sammelt."
+
+#: scenes/ui/journal_panel.tscn
+msgid "Души — валюта перерождения: за перерождение, задания и достижения. Тратятся на вечные улучшения."
+msgstr "Seelen sind die Währung der Wiedergeburt: Man erhält sie für Wiedergeburten, Aufträge und Erfolge. Man gibt sie für dauerhafte Verbesserungen aus."
+
+#: scenes/ui/journal/journal_prestige_page.gd scenes/ui/journal_panel.gd
+msgid "Души: %d"
+msgstr "Seelen: %d"
+
+#: data/items/war_horn.tres
+msgid "Его зов бросает армию в атаку."
+msgstr "Sein Ruf treibt die Armee zum Angriff."
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Еда"
+msgstr "Nahrung"
+
+#: scenes/ui/army_view.gd
+msgid "Еды в минуту"
+msgstr "Nahrung pro Minute"
+
+#: data/treasures/archer.json
+msgid "Её носитель видит мир глазами ястреба."
+msgstr "Ihr Träger sieht die Welt mit den Augen eines Falken."
+
+#: data/needs/thirst.tres
+msgid "Жажда"
+msgstr "Durst"
+
+#: scripts/data/stat_modifier.gd
+msgid "Жатва"
+msgstr "Ernte"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Железная воля"
+msgstr "Eiserner Wille"
+
+#: data/items/iron_pauldrons.tres
+msgid "Железные наплечники"
+msgstr "Eiserne Schulterstücke"
+
+#: data/treasures/warrior.json
+msgid "Железный Венец"
+msgstr "Eiserne Krone"
+
+#: data/items/iron_helmet.tres
+msgid "Железный шлем"
+msgstr "Eisenhelm"
+
+#: scripts/data/stat_modifier.gd
+msgid "Жестокость"
+msgstr "Grausamkeit"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Живая крепость"
+msgstr "Lebende Festung"
+
+#: scripts/data/stat_modifier.gd
+msgid "Живучесть"
+msgstr "Vitalität"
+
+#: data/treasures/mage.json
+msgid "Жрец солнца"
+msgstr "Sonnenpriester"
+
+#: data/treasures/mage.json
+msgid "Жреца солнца"
+msgstr "des Sonnenpriesters"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Забрать"
+msgstr "Abholen"
+
+#: scenes/world/world_map.tscn
+msgid "Забрать из гарнизона"
+msgstr "Aus Garnison holen"
+
+#: scenes/world/world_map.gd
+msgid "Забрать солдат из гарнизона"
+msgstr "Soldaten aus der Garnison holen"
+
+#: data/buildings/sawmill.tres
+msgid "Заготавливает дерево для построек."
+msgstr "Schlägt Holz für Bauwerke."
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Загрузка замка с сервера…"
+msgstr "Burg wird vom Server geladen…"
+
+#: scenes/world/world_map_view.gd
+msgid "Загрузка карты…"
+msgstr "Karte wird geladen…"
+
+#: scripts/progress/hero_progress.gd
+msgid "Задание выполнено: %s"
+msgstr "Auftrag erfüllt: %s"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Задание ещё не выполнено"
+msgstr "Der Auftrag ist noch nicht erfüllt"
+
+#: scenes/ui/journal_panel.gd
+msgid "Задания"
+msgstr "Aufträge"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Задания дня"
+msgstr "Tagesaufträge"
+
+#: scripts/data/stat_modifier.gd
+msgid "Закалка"
+msgstr "Abhärtung"
+
+#: data/treasures/warrior.json
+msgid "Закалённого горна"
+msgstr "der Glutschmiede"
+
+#: data/treasures/warrior.json
+msgid "Закалённые в горне"
+msgstr "Glutgeschmiedet"
+
+#: data/guild/guild.json
+msgid "Закатный берег"
+msgstr "Abendküste"
+
+#: scenes/world/battle_replay.tscn
+msgid "Закрыть"
+msgstr "Schließen"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Закрыть [Esc]"
+msgstr "Schließen [Esc]"
+
+#: scenes/ui/guild_panel.tscn
+msgid "Закрыть [G]"
+msgstr "Schließen [G]"
+
+#: scenes/ui/inventory_panel.tscn
+msgid "Закрыть [I]"
+msgstr "Schließen [I]"
+
+#: scenes/ui/journal_panel.tscn
+msgid "Закрыть [J]"
+msgstr "Schließen [J]"
+
+#: scenes/ui/kingdom_panel.tscn
+msgid "Закрыть [K]"
+msgstr "Schließen [K]"
+
+#: scenes/world/world_map.tscn
+msgid "Закрыть [M]"
+msgstr "Schließen [M]"
+
+#: scenes/talents/talent_grid.tscn
+msgid "Закрыть [T]"
+msgstr "Schließen [T]"
+
+#: data/skills/archer_multishot.tres
+msgid "Залп"
+msgstr "Salve"
+
+#: scenes/ui/hud.gd scenes/ui/hud.tscn scenes/world/world_map.gd
+msgid "Замок"
+msgstr "Burg"
+
+#: scenes/ui/hud.gd
+msgid "Замок (!)"
+msgstr "Burg (!)"
+
+#: server/src/world/game.ts
+msgid "Замок {name} под щитом — набег сорван"
+msgstr "Die Burg von {name} ist geschützt — Überfall gescheitert"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Замок без защиты — армия в замке отражает набеги"
+msgstr "Die Burg ist ungeschützt — die Burgarmee wehrt Überfälle ab"
+
+#: scenes/ui/kingdom_panel.gd scenes/world/world_map.gd
+msgid "Замок под защитой ещё %s"
+msgstr "Die Burg ist noch %s geschützt"
+
+#: server/src/world/game.ts
+msgid "Замок под защитой — напасть пока нельзя"
+msgstr "Die Burg ist geschützt — ein Angriff ist noch nicht möglich"
+
+#: scenes/world/world_map.gd
+msgid "Занять зону"
+msgstr "Zone besetzen"
+
+#: scenes/ui/needs_panel.gd
+msgid "Запас: %d %s — герой берёт сам"
+msgstr "Vorrat: %d %s — der Held nimmt selbst"
+
+#: scripts/progress/hero_progress.gd
+msgid "Заточите предмет до +%s"
+msgstr "Werte einen Gegenstand auf +%s auf"
+
+#: scripts/progress/hero_progress.gd
+msgid "Заточите снаряжение %d раза"
+msgstr "Werte %d-mal Ausrüstung auf"
+
+#: scenes/ui/inventory_panel.gd scenes/ui/inventory_panel.tscn
+msgid "Заточить"
+msgstr "Aufwerten"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Заточить: %d з (%d%%)"
+msgstr "Aufwerten: %d G (%d%%)"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Заточка: макс."
+msgstr "Aufwertung: max."
+
+#: scenes/ui/guild_panel.gd
+msgid "Заходил"
+msgstr "Zuletzt da"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres scenes/world/battle_replay.tscn scenes/world/world_map.gd
+msgid "Защита"
+msgstr "Verteidigung"
+
+#: scripts/items/item.gd
+msgid "Защита армии, %"
+msgstr "Armeeverteidigung, %"
+
+#: scenes/ui/army_view.gd
+msgid "Защита солдата"
+msgstr "Soldatenverteidigung"
+
+#: data/talents/mage_talents.tres data/treasures/archer.json data/treasures/mage.json
+msgid "Звездопад"
+msgstr "Sternenfall"
+
+#: data/treasures/mage.json
+msgid "Звездопада"
+msgstr "des Sternenfalls"
+
+#: data/treasures/archer.json
+msgid "Звенит, если ветер меняет направление."
+msgstr "Klingt, wenn der Wind die Richtung wechselt."
+
+#: data/items/chain_leggings.tres
+msgid "Звенят при ходьбе, зато берегут ноги."
+msgstr "Sie klirren beim Gehen, schützen aber die Beine."
+
+#: data/treasures/archer.json
+msgid "Звери идут за ним, как за вожаком стаи."
+msgstr "Tiere folgen dem Träger wie einem Leitwolf."
+
+#: scenes/ui/settings_panel.tscn
+msgid "Звук"
+msgstr "Ton"
+
+#: scenes/ui/hud.gd
+msgid "Звук включён"
+msgstr "Ton an"
+
+#: scenes/ui/hud.gd
+msgid "Звук выключен"
+msgstr "Ton aus"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Звуки боя"
+msgstr "Kampfgeräusche"
+
+#: scenes/ui/settings_panel.gd
+msgid "Звуки боя слышны всегда."
+msgstr "Kampfgeräusche sind immer zu hören."
+
+#: scenes/ui/settings_panel.gd
+msgid "Звуки боя слышны, пока курсор над полосой боя или открыто окно, — не мешают работать."
+msgstr "Kampfgeräusche sind nur zu hören, solange der Mauszeiger über der Kampfleiste ist oder ein Fenster offen ist – so stören sie nicht bei der Arbeit."
+
+#: data/treasures/mage.json
+msgid "Звёздный Капюшон"
+msgstr "Sternenkapuze"
+
+#: data/talents/mage_talents.tres
+msgid "Звёздный огонь"
+msgstr "Sternenfeuer"
+
+#: scenes/ui/building_slot.tscn
+msgid "Здание"
+msgstr "Gebäude"
+
+#: scenes/ui/kingdom_panel.gd scenes/ui/kingdom_panel.tscn
+msgid "Здания"
+msgstr "Gebäude"
+
+#: scenes/world/world_map.gd
+msgid "Здесь герой: %s (ур. %d)"
+msgstr "Held hier: %s (St. %d)"
+
+#: scenes/ui/inventory_panel.gd scripts/items/item.gd
+msgid "Здоровье"
+msgstr "Leben"
+
+#: data/skills/warrior_earthquake.tres
+msgid "Землетрясение"
+msgstr "Erdbeben"
+
+#: data/guild/guild.json
+msgid "Змеиная топь"
+msgstr "Schlangensumpf"
+
+#: data/guild/guild.json
+msgid "Знамя гильдии"
+msgstr "Gildenbanner"
+
+#: data/talents/mage_talents.tres
+msgid "Знание стихий"
+msgstr "Elementarkunde"
+
+#: scripts/progress/hero_progress.gd
+msgid "Знаток монстров"
+msgstr "Monsterkenner"
+
+#: scenes/talents/talent_grid.gd
+msgid "Значимый узел"
+msgstr "Bedeutender Knoten"
+
+#: data/treasures/archer.json
+msgid "Золотая Пряжка Колчана"
+msgstr "Goldene Köcherschnalle"
+
+#: scripts/progress/hero_progress.gd
+msgid "Золотая жила"
+msgstr "Goldader"
+
+#: data/guild/guild.json
+msgid "Золотая степь"
+msgstr "Goldene Steppe"
+
+#: scenes/ui/hud.gd
+msgid "Золото"
+msgstr "Gold"
+
+#: scenes/ui/inventory_panel.tscn
+msgid "Золото героя"
+msgstr "Gold des Helden"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Золото героя → казна замка. Лимит копится со временем и растёт с уровнем героя (сейчас %d)."
+msgstr "Gold des Helden → Burgkasse. Das Limit sammelt sich mit der Zeit an und wächst mit der Heldenstufe (jetzt %d)."
+
+#: scenes/ui/guild_panel.gd
+msgid "Золото из казны замка становится опытом гильдии; ваш вклад виден в списке участников."
+msgstr "Gold aus der Burgkasse wird zu Gilden-EP; dein Beitrag steht in der Mitgliederliste."
+
+#: scenes/ui/hud.tscn
+msgid "Золото: 0"
+msgstr "Gold: 0"
+
+#: data/monsters/zombie.tres
+msgid "Зомби"
+msgstr "Zombie"
+
+#: scenes/world/world_map.gd
+msgid "Зона #%d · уровень %d"
+msgstr "Zone #%d · Stufe %d"
+
+#: server/src/world/game.ts
+msgid "Зона занята без боя"
+msgstr "Zone kampflos besetzt"
+
+#: server/src/world/game.ts
+msgid "Зона игрока {name} была без защиты — захвачена"
+msgstr "Die Zone von {name} war unverteidigt — erobert"
+
+#: server/src/world/guilds.ts
+msgid "Игрок с таким именем не найден"
+msgstr "Kein Spieler mit diesem Namen"
+
+#: server/src/world/guilds.ts
+msgid "Игрок уже в вашей гильдии"
+msgstr "Der Spieler ist bereits in deiner Gilde"
+
+#: server/src/world/guilds.ts
+msgid "Игрок уже состоит в другой гильдии"
+msgstr "Der Spieler ist bereits in einer anderen Gilde"
+
+#: server/src/world/game.ts
+msgid "Идти можно только в соседнюю зону"
+msgstr "Du kannst nur in eine benachbarte Zone ziehen"
+
+#: scenes/world/world_map.gd
+msgid "Идти можно только в соседнюю с героем зону"
+msgstr "Du kannst nur in eine Zone neben dem Helden ziehen"
+
+#: data/treasures/archer.json
+msgid "Из ясеня, что рос на могиле первого лучника."
+msgstr "Aus einer Esche, die auf dem Grab des ersten Bogenschützen wuchs."
+
+#: data/treasures/mage.json
+msgid "Изнутри похож на ночное небо."
+msgstr "Von innen gleicht es dem Nachthimmel."
+
+#: data/guild/guild.json
+msgid "Изумрудный дол"
+msgstr "Smaragdtal"
+
+#: scenes/talents/talent_grid.tscn
+msgid "Изучать можно узлы рядом с уже изученными. Колесо — масштаб, перетаскивание — сдвиг. Малые узлы дальше от центра сильнее, значимые дают два бонуса, золотые ключевые — самые мощные."
+msgstr "Erlernbar sind Knoten neben bereits erlernten. Mausrad — Zoom, Ziehen — Verschieben. Kleine Knoten sind weiter vom Zentrum entfernt stärker, bedeutende geben zwei Boni, goldene Schlüsseltalente sind am mächtigsten."
+
+#: scenes/talents/talent_grid.gd
+msgid "Изучено"
+msgstr "Erlernt"
+
+#: scenes/talents/talent_grid.gd
+msgid "Изучено: %s"
+msgstr "Erlernt: %s"
+
+#: scripts/progress/hero_progress.gd
+msgid "Изучите %s видов монстров (1000 убийств)"
+msgstr "Erforsche %s Monsterarten (1000 Kills)"
+
+#: scenes/talents/talent_grid.tscn
+msgid "Изучить"
+msgstr "Erlernen"
+
+#: scenes/talents/talent_grid.gd
+msgid "Изучить (или двойной клик)"
+msgstr "Erlernen (oder Doppelklick)"
+
+#: data/treasures/mage.json
+msgid "Им скрепляли указы Совета магов."
+msgstr "Damit wurden die Erlasse des Magierrats besiegelt."
+
+#: scripts/data/item_base.gd server/src/world/game.ts
+msgid "Именной"
+msgstr "Benannt"
+
+#: scenes/ui/guild_panel.gd
+msgid "Имя"
+msgstr "Name"
+
+#: scenes/creation/character_creation.tscn
+msgid "Имя героя:"
+msgstr "Name des Helden:"
+
+#: scenes/ui/guild_panel.gd
+msgid "Имя игрока"
+msgstr "Spielername"
+
+#: scenes/world/world_map.tscn
+msgid "Имя правителя"
+msgstr "Name des Herrschers"
+
+#: scenes/ui/inventory_panel.tscn
+msgid "Инвентарь"
+msgstr "Inventar"
+
+#: scenes/ui/hud.tscn
+msgid "Инвентарь [I]"
+msgstr "Inventar [I]"
+
+#: scenes/ui/settings_panel.gd
+msgid "Интерфейс"
+msgstr "Oberfläche"
+
+#: data/talents/mage_talents.tres
+msgid "Инферно"
+msgstr "Inferno"
+
+#: scenes/ui/guild_panel.gd
+msgid "Исключить"
+msgstr "Rauswerfen"
+
+#: data/talents/mage_talents.tres
+msgid "Искра гения"
+msgstr "Geistesblitz"
+
+#: scripts/progress/hero_progress.gd
+msgid "Истребитель"
+msgstr "Vernichter"
+
+#: scenes/world/world_map.tscn
+msgid "К герою"
+msgstr "Zum Helden"
+
+#: scenes/talents/talent_grid.tscn
+msgid "К центру"
+msgstr "Zur Mitte"
+
+#: data/treasures/archer.json
+msgid "Каждая стрела несёт в наконечнике искру молнии."
+msgstr "Jeder Pfeil trägt einen Blitzfunken in seiner Spitze."
+
+#: data/treasures/archer.json
+msgid "Каждый охотник хранит клык своей первой добычи."
+msgstr "Jeder Jäger bewahrt einen Reißzahn seiner ersten Beute auf."
+
+#: data/treasures/warrior.json
+msgid "Каждый удар отдаётся раскатом грома."
+msgstr "Jeder Schlag hallt wie ein Donnerschlag."
+
+#: data/buildings/barracks.tres
+msgid "Казармы"
+msgstr "Kaserne"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Казна"
+msgstr "Kasse"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Казна королевства"
+msgstr "Königliche Kasse"
+
+#: server/src/world/game.ts
+msgid "Казна полна"
+msgstr "Die Kasse ist voll"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Казначей"
+msgstr "Schatzmeister"
+
+#: data/guild/guild.json
+msgid "Казначейство"
+msgstr "Schatzmeisterei"
+
+#: data/skills/warrior_execute.tres
+msgid "Казнь"
+msgstr "Hinrichtung"
+
+#: data/treasures/warrior.json
+msgid "Каменная стена"
+msgstr "Steinwall"
+
+#: data/treasures/warrior.json
+msgid "Каменной стены"
+msgstr "des Steinwalls"
+
+#: scenes/actors/monster.gd
+msgid "Каменнокожий"
+msgstr "Steinhaut"
+
+#: data/guild/guild.json
+msgid "Каменные врата"
+msgstr "Steintore"
+
+#: data/monsters/stone_golem.tres
+msgid "Каменный голем"
+msgstr "Steingolem"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Каменный щит"
+msgstr "Steinschild"
+
+#: data/buildings/quarry.tres
+msgid "Каменоломня"
+msgstr "Steinbruch"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Камень"
+msgstr "Stein"
+
+#: data/treasures/archer.json data/treasures/mage.json
+msgid "Капюшон"
+msgstr "Kapuze"
+
+#: data/treasures/archer.json
+msgid "Капюшон Бегущей с ветром"
+msgstr "Kapuze der Windläuferin"
+
+#: data/treasures/mage.json
+msgid "Капюшон Верховного арканиста"
+msgstr "Kapuze des Hocharkanisten"
+
+#: data/treasures/archer.json
+msgid "Капюшон Ветра пустыни"
+msgstr "Kapuze des Wüstenwinds"
+
+#: data/treasures/archer.json
+msgid "Капюшон Грозовой стрелы"
+msgstr "Kapuze des Donnerpfeils"
+
+#: data/treasures/mage.json
+msgid "Капюшон Жреца солнца"
+msgstr "Kapuze des Sonnenpriesters"
+
+#: data/treasures/mage.json
+msgid "Капюшон Звездопада"
+msgstr "Kapuze des Sternenfalls"
+
+#: data/treasures/mage.json
+msgid "Капюшон Коснувшегося бездны"
+msgstr "Kapuze des Abgrundberührten"
+
+#: data/treasures/archer.json
+msgid "Капюшон Ночного охотника"
+msgstr "Kapuze des Nachtjägers"
+
+#: data/treasures/archer.json
+msgid "Капюшон Орлиного глаза"
+msgstr "Kapuze des Adlerauges"
+
+#: data/treasures/mage.json
+msgid "Капюшон Повелителя гроз"
+msgstr "Kapuze des Sturmfürsten"
+
+#: data/treasures/archer.json
+msgid "Капюшон Повелителя зверей"
+msgstr "Kapuze des Bestienmeisters"
+
+#: data/treasures/mage.json
+msgid "Капюшон Призывателя пламени"
+msgstr "Kapuze des Flammenrufers"
+
+#: data/treasures/archer.json
+msgid "Капюшон Серебряного листа"
+msgstr "Kapuze des Silberblatts"
+
+#: data/treasures/archer.json
+msgid "Капюшон Терновой чащи"
+msgstr "Kapuze des Dornendickichts"
+
+#: data/treasures/mage.json
+msgid "Капюшон Ткача льда"
+msgstr "Kapuze des Frostwebers"
+
+#: data/treasures/mage.json
+msgid "Капюшон Хранителя библиотеки"
+msgstr "Kapuze des Bibliothekshüters"
+
+#: scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Карта"
+msgstr "Karte"
+
+#: scenes/ui/hud.gd
+msgid "Карта (!)"
+msgstr "Karte (!)"
+
+#: scenes/world/world_map.tscn
+msgid "Карта мира"
+msgstr "Weltkarte"
+
+#: data/treasures/warrior.json
+msgid "Кираса коменданта крепости, которую так и не взяли."
+msgstr "Der Kürass des Kommandanten einer Festung, die nie eingenommen wurde."
+
+#: data/treasures/warrior.json
+msgid "Кираса, внутри которой бьётся каменное сердце."
+msgstr "Ein Kürass, in dem ein steinernes Herz schlägt."
+
+#: data/biomes/graveyard.tres
+msgid "Кладбище"
+msgstr "Friedhof"
+
+#: scenes/creation/class_card.tscn
+msgid "Класс"
+msgstr "Klasse"
+
+#: data/treasures/warrior.json
+msgid "Клинок Последнего Рассвета"
+msgstr "Klinge der Letzten Morgenröte"
+
+#: data/treasures/archer.json
+msgid "Клык Первой Добычи"
+msgstr "Reißzahn der Ersten Beute"
+
+#: scenes/talents/talent_grid.gd
+msgid "Ключевой талант"
+msgstr "Schlüsseltalent"
+
+#: data/treasures/warrior.json
+msgid "Клятва скреплена кровью. Нарушивший её — платит своей."
+msgstr "Der Eid ist mit Blut besiegelt. Wer ihn bricht, zahlt mit seinem eigenen."
+
+#: data/monsters/kobold.tres
+msgid "Кобольд"
+msgstr "Kobold"
+
+#: data/items/leather_armor.tres
+msgid "Кожаная броня"
+msgstr "Lederrüstung"
+
+#: data/items/leather_boots.tres
+msgid "Кожаные сапоги"
+msgstr "Lederstiefel"
+
+#: scenes/world/world_map.gd
+msgid "Колесо — масштаб, перетаскивание — сдвиг карты.\nЖёлтая рамка — куда может пойти герой."
+msgstr "Mausrad — Zoom, Ziehen — Karte verschieben.\nGelber Rahmen — wohin der Held ziehen kann."
+
+#: scripts/progress/hero_progress.gd
+msgid "Коллекционер"
+msgstr "Sammler"
+
+#: data/buildings/well.tres
+msgid "Колодец"
+msgstr "Brunnen"
+
+#: data/treasures/mage.json
+msgid "Кольцо Бездны"
+msgstr "Ring des Abgrunds"
+
+#: data/treasures/archer.json
+msgid "Кольцо Быстрой Руки"
+msgstr "Ring der Flinken Hand"
+
+#: data/treasures/warrior.json
+msgid "Кольцо Наковальни"
+msgstr "Ambossring"
+
+#: data/treasures/mage.json
+msgid "Кольцо Чернильной Печати"
+msgstr "Ring des Tintensiegels"
+
+#: data/skills/mage_frost_nova.tres
+msgid "Кольцо льда"
+msgstr "Frostnova"
+
+#: data/items/lucky_ring.tres
+msgid "Кольцо удачи"
+msgstr "Glücksring"
+
+#: data/treasures/warrior.json
+msgid "Кольцо, данное богам. Снять его нельзя — только разбить."
+msgstr "Ein den Göttern gegebener Ring. Man kann ihn nicht abnehmen — nur zerbrechen."
+
+#: data/items/chain_leggings.tres
+msgid "Кольчужные поножи"
+msgstr "Kettenbeinlinge"
+
+#: scripts/data/stat_modifier.gd
+msgid "Командование"
+msgstr "Befehlsgewalt"
+
+#: data/treasures/mage.json
+msgid "Конец Света"
+msgstr "Weltenende"
+
+#: data/talents/mage_talents.tres
+msgid "Концентрация"
+msgstr "Konzentration"
+
+#: data/buildings/stable.tres
+msgid "Конюшня"
+msgstr "Stall"
+
+#: data/units/spearman.tres
+msgid "Копейщик"
+msgstr "Speerträger"
+
+#: data/treasures/warrior.json
+msgid "Королевская гвардия"
+msgstr "Königsgarde"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Королевская милость"
+msgstr "Königliche Gunst"
+
+#: data/treasures/warrior.json
+msgid "Королевской гвардии"
+msgstr "der Königsgarde"
+
+#: scenes/ui/kingdom_panel.tscn
+msgid "Королевство"
+msgstr "Königreich"
+
+#: scenes/ui/hud.tscn
+msgid "Королевство: здания и армия [K]"
+msgstr "Königreich: Gebäude und Armee [K]"
+
+#: data/treasures/archer.json
+msgid "Корона Ястреба"
+msgstr "Falkenkrone"
+
+#: data/treasures/warrior.json
+msgid "Корона без камней — для короля, который сражается сам."
+msgstr "Eine Krone ohne Edelsteine — für einen König, der selbst kämpft."
+
+#: data/treasures/mage.json
+msgid "Коснувшегося бездны"
+msgstr "des Abgrundberührten"
+
+#: data/treasures/mage.json
+msgid "Коснувшийся бездны"
+msgstr "Abgrundberührter"
+
+#: data/treasures/archer.json
+msgid "Кочевники говорят: песок сам уводит стрелу в цель."
+msgstr "Nomaden sagen, der Sand selbst lenkt den Pfeil ins Ziel."
+
+#: data/units/militia.tres
+msgid "Крестьяне с вилами. Дёшево и быстро, но слабо."
+msgstr "Bauern mit Mistgabeln. Billig und schnell, aber schwach."
+
+#: data/treasures/mage.json
+msgid "Кристалл на вершине никогда не тает."
+msgstr "Der Kristall an der Spitze schmilzt niemals."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Крит"
+msgstr "Krit"
+
+#: data/treasures/warrior.json
+msgid "Кровавая клятва"
+msgstr "Blutschwur"
+
+#: data/guild/guild.json
+msgid "Кровавая река"
+msgstr "Blutfluss"
+
+#: data/treasures/warrior.json
+msgid "Кровавой клятвы"
+msgstr "des Blutschwurs"
+
+#: data/treasures/warrior.json
+msgid "Кровавый Венец"
+msgstr "Blutkrone"
+
+#: data/talents/warrior_talents.tres
+msgid "Кровавый клинок"
+msgstr "Blutige Klinge"
+
+#: scripts/data/stat_modifier.gd
+msgid "Кровожадность"
+msgstr "Blutdurst"
+
+#: data/skills/warrior_rend.tres
+msgid "Кровопускание"
+msgstr "Aufschlitzen"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Кровь героя"
+msgstr "Heldenblut"
+
+#: data/talents/mage_talents.tres
+msgid "Круг силы"
+msgstr "Kreis der Macht"
+
+#: data/treasures/warrior.json
+msgid "Крылья на шлеме — дар ангела последнему защитнику павшего храма."
+msgstr "Die Flügel am Helm sind das Geschenk eines Engels an den letzten Verteidiger eines gefallenen Tempels."
+
+#: data/treasures/warrior.json
+msgid "Кто носил эти латы, не отступал ни на шаг."
+msgstr "Wer diesen Harnisch trug, wich nie einen Schritt zurück."
+
+#: data/treasures/archer.json
+msgid "Кто услышал её тетиву — уже не услышит ничего."
+msgstr "Wer ihre Sehne hörte, hört nie wieder etwas."
+
+#: data/treasures/warrior.json
+msgid "Кузнец выковал его из обломка своей наковальни."
+msgstr "Der Schmied fertigte ihn aus einem Stück seines eigenen Ambosses."
+
+#: data/buildings/forge.tres
+msgid "Кузнецы точат оружие героя и куют снаряжение для армии."
+msgstr "Schmiede schärfen die Waffen des Helden und fertigen Ausrüstung für die Armee."
+
+#: data/buildings/forge.tres
+msgid "Кузница"
+msgstr "Schmiede"
+
+#: data/treasures/archer.json
+msgid "Куртка"
+msgstr "Jacke"
+
+#: data/treasures/archer.json
+msgid "Куртка Бегущей с ветром"
+msgstr "Jacke der Windläuferin"
+
+#: data/treasures/archer.json
+msgid "Куртка Ветра пустыни"
+msgstr "Jacke des Wüstenwinds"
+
+#: data/treasures/archer.json
+msgid "Куртка Грозовой стрелы"
+msgstr "Jacke des Donnerpfeils"
+
+#: data/treasures/archer.json
+msgid "Куртка Ночного охотника"
+msgstr "Jacke des Nachtjägers"
+
+#: data/treasures/archer.json
+msgid "Куртка Орлиного глаза"
+msgstr "Jacke des Adlerauges"
+
+#: data/treasures/archer.json
+msgid "Куртка Повелителя зверей"
+msgstr "Jacke des Bestienmeisters"
+
+#: data/treasures/archer.json
+msgid "Куртка Серебряного листа"
+msgstr "Jacke des Silberblatts"
+
+#: data/treasures/archer.json
+msgid "Куртка Следопыта"
+msgstr "Jacke des Pfadfinders"
+
+#: data/treasures/archer.json
+msgid "Куртка Терновой чащи"
+msgstr "Jacke des Dornendickichts"
+
+#: data/treasures/warrior.json
+msgid "Латы"
+msgstr "Brustpanzer"
+
+#: data/treasures/warrior.json
+msgid "Латы Военачальника"
+msgstr "Brustpanzer des Kriegsherrn"
+
+#: data/treasures/warrior.json
+msgid "Латы Закалённого горна"
+msgstr "Brustpanzer der Glutschmiede"
+
+#: data/treasures/warrior.json
+msgid "Латы Каменной стены"
+msgstr "Brustpanzer des Steinwalls"
+
+#: data/treasures/warrior.json
+msgid "Латы Королевской гвардии"
+msgstr "Brustpanzer der Königsgarde"
+
+#: data/treasures/warrior.json
+msgid "Латы Кровавой клятвы"
+msgstr "Brustpanzer des Blutschwurs"
+
+#: data/treasures/warrior.json
+msgid "Латы Ледяной хватки"
+msgstr "Brustpanzer des Frostgriffs"
+
+#: data/treasures/warrior.json
+msgid "Латы Небесного стража"
+msgstr "Brustpanzer des Himmelswächters"
+
+#: data/treasures/warrior.json
+msgid "Латы Пепельного стража"
+msgstr "Brustpanzer des Aschewächters"
+
+#: data/treasures/warrior.json
+msgid "Латы Порождения бездны"
+msgstr "Brustpanzer der Abgrundbrut"
+
+#: data/treasures/warrior.json
+msgid "Латы Сокрушителя бурь"
+msgstr "Brustpanzer des Sturmbrechers"
+
+#: scripts/data/item_base.gd scripts/items/item.gd server/src/world/game.ts
+msgid "Легендарный"
+msgstr "Legendär"
+
+#: data/treasures/warrior.json
+msgid "Ледяная хватка"
+msgstr "Frostgriff"
+
+#: data/treasures/mage.json
+msgid "Ледяной Шпиль"
+msgstr "Eisturm"
+
+#: data/guild/guild.json
+msgid "Ледяной кряж"
+msgstr "Frostkamm"
+
+#: data/treasures/warrior.json
+msgid "Ледяной хватки"
+msgstr "des Frostgriffs"
+
+#: data/biomes/forest.tres
+msgid "Лес"
+msgstr "Wald"
+
+#: data/treasures/archer.json
+msgid "Лес сам бережёт тех, кто бережёт лес."
+msgstr "Der Wald schützt jene, die den Wald schützen."
+
+#: data/monsters/forest_troll.tres
+msgid "Лесной тролль"
+msgstr "Waldtroll"
+
+#: data/buildings/sawmill.tres
+msgid "Лесопилка"
+msgstr "Sägewerk"
+
+#: data/skills/warrior_last_stand.tres
+msgid "Лечит 25% здоровья и даёт +80 брони на 8 с. Сама срабатывает, когда здоровья меньше половины."
+msgstr "Heilt 25% Leben und gibt 8 s lang +80 Rüstung. Löst von selbst aus, wenn das Leben unter die Hälfte fällt."
+
+#: data/skills/mage_arcane_shield.tres
+msgid "Лечит 30% здоровья и даёт +40 брони на 6 секунд. Сам срабатывает, когда здоровья меньше 70%."
+msgstr "Heilt 30% Leben und gibt 6 Sekunden lang +40 Rüstung. Löst von selbst aus, wenn das Leben unter 70% liegt."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Лидерство"
+msgstr "Führungskraft"
+
+#: server/src/world/game.ts
+msgid "Лимит взносов исчерпан, подождите"
+msgstr "Einzahlungslimit erreicht, bitte warten"
+
+#: data/treasures/archer.json
+msgid "Лисий Капюшон"
+msgstr "Fuchskapuze"
+
+#: data/guild/guild.json
+msgid "Лисьи овраги"
+msgstr "Fuchsschluchten"
+
+#: data/monsters/lich.tres
+msgid "Лич"
+msgstr "Lich"
+
+#: data/skills/archer_snare.tres
+msgid "Ловчая сеть"
+msgstr "Fangnetz"
+
+#: data/treasures/warrior.json
+msgid "Лоскут Первого Знамени"
+msgstr "Fetzen des Ersten Banners"
+
+#: data/treasures/archer.json
+msgid "Лунный Лук"
+msgstr "Mondbogen"
+
+#: data/classes/archer.tres data/units/archer.tres
+msgid "Лучник"
+msgstr "Bogenschütze"
+
+#: data/talents/archer_talents.tres
+msgid "Лёгкая рука"
+msgstr "Leichte Hand"
+
+#: data/treasures/warrior.json
+msgid "Лёгкие — чтобы перейти реку и сразу вступить в бой."
+msgstr "Leicht — um einen Fluss zu durchqueren und sofort in den Kampf zu ziehen."
+
+#: data/items/hunting_bow.tres
+msgid "Лёгкий лук охотника — бьёт метко и далеко."
+msgstr "Ein leichter Jagdbogen — trifft genau und weit."
+
+#: data/classes/mage.tres
+msgid "Маг"
+msgstr "Magier"
+
+#: data/skills/mage_arcane_shield.tres
+msgid "Магический щит"
+msgstr "Arkaner Schild"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Максимальная заточка"
+msgstr "Maximale Aufwertung"
+
+#: scripts/kingdom/kingdom_state.gd server/src/world/kingdom.ts
+msgid "Максимальный уровень"
+msgstr "Maximale Stufe"
+
+#: scenes/ui/guild_panel.gd
+msgid "Максимальный уровень гильдии"
+msgstr "Maximale Gildenstufe"
+
+#: scenes/ui/journal/journal_prestige_page.gd scenes/ui/kingdom_panel.gd
+msgid "Максимум"
+msgstr "Maximum"
+
+#: scenes/ui/army_view.tscn
+msgid "Максимум (по месту и ресурсам)"
+msgstr "Maximum (nach Plätzen und Ressourcen)"
+
+#: scenes/talents/talent_grid.gd
+msgid "Малый узел"
+msgstr "Kleiner Knoten"
+
+#: data/treasures/mage.json
+msgid "Мантия"
+msgstr "Robe"
+
+#: data/treasures/mage.json
+msgid "Мантия Верховного арканиста"
+msgstr "Robe des Hocharkanisten"
+
+#: data/treasures/mage.json
+msgid "Мантия Вечного Ученика"
+msgstr "Robe des Ewigen Schülers"
+
+#: data/treasures/mage.json
+msgid "Мантия Жреца солнца"
+msgstr "Robe des Sonnenpriesters"
+
+#: data/treasures/mage.json
+msgid "Мантия Звездопада"
+msgstr "Robe des Sternenfalls"
+
+#: data/treasures/mage.json
+msgid "Мантия Коснувшегося бездны"
+msgstr "Robe des Abgrundberührten"
+
+#: data/treasures/mage.json
+msgid "Мантия Повелителя гроз"
+msgstr "Robe des Sturmfürsten"
+
+#: data/treasures/mage.json
+msgid "Мантия Призывателя пламени"
+msgstr "Robe des Flammenrufers"
+
+#: data/treasures/mage.json
+msgid "Мантия Ткача льда"
+msgstr "Robe des Frostwebers"
+
+#: data/treasures/mage.json
+msgid "Мантия Хранителя библиотеки"
+msgstr "Robe des Bibliothekshüters"
+
+#: scripts/progress/hero_progress.gd
+msgid "Мастер заточки"
+msgstr "Meister der Aufwertung"
+
+#: data/talents/warrior_talents.tres
+msgid "Мастер клинка"
+msgstr "Klingenmeister"
+
+#: data/treasures/mage.json
+msgid "Мастер носит её, чтобы помнить: учиться никогда не поздно."
+msgstr "Der Meister trägt sie, um sich zu erinnern: Für das Lernen ist es nie zu spät."
+
+#: scripts/progress/hero_progress.gd
+msgid "Мастер умений"
+msgstr "Meister der Fähigkeiten"
+
+#: scripts/data/stat_modifier.gd
+msgid "Мастерство"
+msgstr "Meisterschaft"
+
+#: data/classes/mage.tres
+msgid "Медленные, но мощные магические снаряды."
+msgstr "Langsame, aber mächtige magische Geschosse."
+
+#: scenes/ui/army_view.tscn
+msgid "Меньше (Shift — по 10)"
+msgstr "Weniger (Shift — um 10)"
+
+#: scripts/items/item.gd
+msgid "Меньше еды армии, %"
+msgstr "Weniger Armeenahrung, %"
+
+#: scenes/ui/settings_panel.gd
+msgid "Меньше нагрузка на видеокарту и батарею ноутбука."
+msgstr "Weniger Last für Grafikkarte und Laptop-Akku."
+
+#: scenes/ui/army_view.gd
+msgid "Мест в армии"
+msgstr "Armeeplätze"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Мест для подкреплений: %d / %d (половина мест армии замка)"
+msgstr "Verstärkungsplätze: %d / %d (die Hälfte der Burgarmee-Plätze)"
+
+#: scenes/ui/army_view.gd
+msgid "Места: %d / %d"
+msgstr "Plätze: %d / %d"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Место"
+msgstr "Platz"
+
+#: data/skills/mage_meteor.tres
+msgid "Метеор"
+msgstr "Meteor"
+
+#: data/talents/mage_talents.tres
+msgid "Метеор: +{value}% урона и −{value2}% перезарядки."
+msgstr "Meteor: +{value}% Schaden und −{value2}% Abklingzeit."
+
+#: data/talents/archer_talents.tres
+msgid "Меткий глаз"
+msgstr "Scharfes Auge"
+
+#: data/talents/archer_talents.tres scripts/data/stat_modifier.gd
+msgid "Меткость"
+msgstr "Treffsicherheit"
+
+#: data/treasures/warrior.json
+msgid "Меч рыцаря, не нарушившего ни одной клятвы."
+msgstr "Das Schwert eines Ritters, der nie einen Eid brach."
+
+#: scenes/ui/hud.tscn
+msgid "Мировая карта [M]"
+msgstr "Weltkarte [M]"
+
+#: data/classes/warrior.tres
+msgid "Много здоровья и брони. Бьёт в ближнем бою."
+msgstr "Viel Leben und Rüstung. Kämpft im Nahkampf."
+
+#: scenes/actors/monster.gd
+msgid "Могучий"
+msgstr "Mächtig"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Мои подкрепления"
+msgstr "Meine Verstärkung"
+
+#: data/skills/mage_chain_lightning.tres
+msgid "Молния бьёт цель на 180% и перескакивает ещё на 4 врагов, каждый раз на 15% слабее."
+msgstr "Ein Blitz trifft das Ziel mit 180% und springt auf 4 weitere Feinde über, jedes Mal 15% schwächer."
+
+#: data/treasures/archer.json
+msgid "Моховые Штаны"
+msgstr "Moosbeinlinge"
+
+#: data/skills/warrior_power_strike.tres
+msgid "Мощный удар"
+msgstr "Wuchtschlag"
+
+#: data/talents/warrior_talents.tres
+msgid "Мощный удар: +{value}% урона и −{value2}% перезарядки."
+msgstr "Wuchtschlag: +{value}% Schaden und −{value2}% Abklingzeit."
+
+#: scripts/data/stat_modifier.gd
+msgid "Мудрость"
+msgstr "Weisheit"
+
+#: scripts/progress/hero_progress.gd
+msgid "Мудрость веков"
+msgstr "Weisheit der Zeitalter"
+
+#: scenes/ui/settings_panel.gd
+msgid "Музыка"
+msgstr "Musik"
+
+#: scripts/data/stat_modifier.gd
+msgid "Муштра"
+msgstr "Drill"
+
+#: data/monsters/moss_giant.tres
+msgid "Мшистый великан"
+msgstr "Moosriese"
+
+#: data/treasures/archer.json
+msgid "Мягкие и бесшумные, как лесной мох."
+msgstr "Weich und lautlos wie Waldmoos."
+
+#: data/guild/guild.json
+msgid "Мёртвые болота"
+msgstr "Tote Sümpfe"
+
+#: server/src/world/game.ts
+msgid "На карте не осталось места для нового замка"
+msgstr "Auf der Karte ist kein Platz mehr für eine neue Burg"
+
+#: scenes/ui/needs_panel.gd
+msgid "На нуле герой уходит отдыхать"
+msgstr "Bei null geht der Held rasten"
+
+#: server/src/world/game.ts
+msgid "Набег {name} на ваш замок отбит"
+msgstr "Der Überfall von {name} auf deine Burg wurde abgewehrt"
+
+#: scenes/world/world_map.gd
+msgid "Набег на замок"
+msgstr "Burg überfallen"
+
+#: server/src/world/game.ts
+msgid "Набег на замок {name} не отбит — ваши подкрепления понесли потери"
+msgstr "Der Überfall auf die Burg von {name} wurde nicht abgewehrt — deine Verstärkung erlitt Verluste"
+
+#: server/src/world/game.ts
+msgid "Набег на замок {name} отбит: армия погибла, герой вернулся в замок"
+msgstr "Der Überfall auf die Burg von {name} wurde abgewehrt: Die Armee fiel, der Held ist in die Burg zurückgekehrt"
+
+#: server/src/world/game.ts
+msgid "Набег на замок {name} удался"
+msgstr "Der Überfall auf die Burg von {name} war erfolgreich"
+
+#: scenes/world/world_map.gd
+msgid "Набег: победа даёт часть ресурсов замка, поход дольше обычного"
+msgstr "Überfall: Ein Sieg bringt einen Teil der Burgressourcen, der Marsch dauert länger als sonst"
+
+#: data/treasures/mage.json
+msgid "Навершие тлеет уже триста лет."
+msgstr "Der Knauf glimmt schon seit dreihundert Jahren."
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Награда за победу: %d золота в казну каждому, кто сражался, и опыт гильдии."
+msgstr "Siegesbelohnung: %d Gold in die Kasse jedes Kämpfers, dazu Gilden-EP."
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Награда получена"
+msgstr "Belohnung erhalten"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Награды:\n"
+msgstr "Belohnungen:\n"
+
+#: data/treasures/warrior.json
+msgid "Надевший их командует не голосом, а одним взглядом."
+msgstr "Wer sie trägt, befehligt nicht mit der Stimme, sondern mit einem einzigen Blick."
+
+#: scenes/ui/inventory_panel.gd scenes/ui/inventory_panel.tscn
+msgid "Надеть"
+msgstr "Anlegen"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Нажмите на предмет в сумке или экипировке"
+msgstr "Klicke auf einen Gegenstand in der Tasche oder Ausrüstung"
+
+#: scenes/ui/guild_panel.gd
+msgid "Название"
+msgstr "Name"
+
+#: server/src/world/guilds.ts
+msgid "Название гильдии: от 3 до 24 символов"
+msgstr "Gildenname: 3 bis 24 Zeichen"
+
+#: server/src/world/game.ts
+msgid "Найдено сокровище: {item} ({quality})"
+msgstr "Schatz gefunden: {item} ({quality})"
+
+#: scenes/ui/army_view.gd
+msgid "Найм"
+msgstr "Rekrutierung"
+
+#: scenes/ui/army_view.tscn
+msgid "Нанять"
+msgstr "Rekrutieren"
+
+#: scenes/ui/army_view.gd
+msgid "Нанять ×%d"
+msgstr "Rekrutieren ×%d"
+
+#: scenes/world/world_map.gd
+msgid "Нападение на игрока снимет защиту вашего замка"
+msgstr "Ein Angriff auf einen Spieler hebt den Schutz deiner Burg auf"
+
+#: scenes/world/world_map.gd
+msgid "Напасть на игрока"
+msgstr "Spieler angreifen"
+
+#: data/treasures/archer.json data/treasures/warrior.json
+msgid "Наплечники"
+msgstr "Schulterstücke"
+
+#: data/treasures/archer.json
+msgid "Наплечники Бегущей с ветром"
+msgstr "Schulterumhang der Windläuferin"
+
+#: data/treasures/archer.json
+msgid "Наплечники Ветра пустыни"
+msgstr "Schulterumhang des Wüstenwinds"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Военачальника"
+msgstr "Schulterstücke des Kriegsherrn"
+
+#: data/treasures/archer.json
+msgid "Наплечники Грозовой стрелы"
+msgstr "Schulterumhang des Donnerpfeils"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Закалённого горна"
+msgstr "Schulterstücke der Glutschmiede"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Каменной стены"
+msgstr "Schulterstücke des Steinwalls"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Королевской гвардии"
+msgstr "Schulterstücke der Königsgarde"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Кровавой клятвы"
+msgstr "Schulterstücke des Blutschwurs"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Ледяной хватки"
+msgstr "Schulterstücke des Frostgriffs"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Небесного стража"
+msgstr "Schulterstücke des Himmelswächters"
+
+#: data/treasures/archer.json
+msgid "Наплечники Ночного охотника"
+msgstr "Schulterumhang des Nachtjägers"
+
+#: data/treasures/archer.json
+msgid "Наплечники Орлиного глаза"
+msgstr "Schulterumhang des Adlerauges"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Пепельного стража"
+msgstr "Schulterstücke des Aschewächters"
+
+#: data/treasures/archer.json
+msgid "Наплечники Повелителя зверей"
+msgstr "Schulterumhang des Bestienmeisters"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Порождения бездны"
+msgstr "Schulterstücke der Abgrundbrut"
+
+#: data/treasures/archer.json
+msgid "Наплечники Серебряного листа"
+msgstr "Schulterumhang des Silberblatts"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Сокрушителя бурь"
+msgstr "Schulterstücke des Sturmbrechers"
+
+#: data/treasures/archer.json
+msgid "Наплечники Терновой чащи"
+msgstr "Schulterumhang des Dornendickichts"
+
+#: data/guild/guild.json
+msgid "Наставники"
+msgstr "Mentoren"
+
+#: scenes/ui/hud.tscn scenes/ui/settings_panel.tscn
+msgid "Настройки"
+msgstr "Einstellungen"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Настройки применяются сразу. Свёрнутая в трей игра не рисует кадры и почти не нагружает ПК."
+msgstr "Einstellungen gelten sofort. In den Infobereich minimiert, zeichnet das Spiel nichts und belastet den PC kaum."
+
+#: data/talents/warrior_talents.tres
+msgid "Натиск"
+msgstr "Ansturm"
+
+#: data/talents/archer_talents.tres
+msgid "Натянутая тетива"
+msgstr "Gespannte Sehne"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Наука войны"
+msgstr "Kriegskunst"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Находка ~%s · неделя %d/%d"
+msgstr "Nächster Fund ~%s · Woche %d/%d"
+
+#: scenes/talents/talent_grid.gd scripts/data/talent_tree.gd
+msgid "Начало пути"
+msgstr "Startpunkt"
+
+#: scenes/creation/character_creation.tscn
+msgid "Начать приключение"
+msgstr "Abenteuer beginnen"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Не построено"
+msgstr "Nicht gebaut"
+
+#: server/src/world/guilds.ts
+msgid "Не так быстро"
+msgstr "Nicht so schnell"
+
+#: scripts/autoload/world_service.gd
+msgid "Не удалось отправить запрос"
+msgstr "Anfrage konnte nicht gesendet werden"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Не хватает душ"
+msgstr "Nicht genug Seelen"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Не хватает золота"
+msgstr "Nicht genug Gold"
+
+#: server/src/world/guilds.ts
+msgid "Не хватает золота в казне замка"
+msgstr "Nicht genug Gold in der Burgkasse"
+
+#: scenes/talents/talent_grid.gd
+msgid "Не хватает золота на сброс"
+msgstr "Nicht genug Gold zum Zurücksetzen"
+
+#: scripts/kingdom/army_state.gd
+msgid "Не хватает места в армии (свободно %d)"
+msgstr "Nicht genug Armeeplätze (%d frei)"
+
+#: scripts/kingdom/army_state.gd scripts/kingdom/kingdom_state.gd server/src/world/kingdom.ts
+msgid "Не хватает ресурсов"
+msgstr "Nicht genug Ressourcen"
+
+#: data/treasures/warrior.json
+msgid "Небесного стража"
+msgstr "des Himmelswächters"
+
+#: data/treasures/warrior.json
+msgid "Небесный страж"
+msgstr "Himmelswächter"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Неделя %d/%d — дальше со след. недели"
+msgstr "Woche %d/%d — mehr ab nächster Woche"
+
+#: server/src/world/guilds.ts
+msgid "Недостаточно прав"
+msgstr "Keine Berechtigung"
+
+#: scenes/talents/talent_grid.gd
+msgid "Недоступно: изучайте узлы по цепочке от центра"
+msgstr "Nicht verfügbar: Erlerne Knoten in einer Kette ab dem Zentrum"
+
+#: server/src/world/guilds.ts
+msgid "Неизвестная роль"
+msgstr "Unbekannte Rolle"
+
+#: server/src/world/game.ts
+msgid "Неизвестный бонус армии: "
+msgstr "Unbekannter Armeebonus: "
+
+#: server/src/world/game.ts
+msgid "Неизвестный класс героя"
+msgstr "Unbekannte Heldenklasse"
+
+#: scenes/world/battle_replay.gd server/src/world/game.ts
+msgid "Нейтралы"
+msgstr "Neutrale"
+
+#: server/src/world/game.ts
+msgid "Нейтралы разбиты, зона захвачена"
+msgstr "Neutrale besiegt, Zone erobert"
+
+#: scenes/world/world_map.gd
+msgid "Нейтралы: %s\nЗащита ≈ %d"
+msgstr "Neutrale: %s\nVerteidigung ≈ %d"
+
+#: server/src/world/game.ts
+msgid "Некорректное значение "
+msgstr "Ungültiger Wert "
+
+#: server/src/world/game.ts
+msgid "Некорректные бонусы армии"
+msgstr "Ungültige Armeeboni"
+
+#: server/src/http.ts
+msgid "Некорректный JSON"
+msgstr "Ungültiges JSON"
+
+#: server/src/world/game.ts
+msgid "Некорректный запрос"
+msgstr "Ungültige Anfrage"
+
+#: server/src/world/game.ts
+msgid "Некорректный уровень героя"
+msgstr "Ungültige Heldenstufe"
+
+#: data/monsters/necromancer.tres
+msgid "Некромант"
+msgstr "Nekromant"
+
+#: server/src/world/game.ts
+msgid "Нельзя нападать на союзника по гильдии"
+msgstr "Du kannst keinen Gildenverbündeten angreifen"
+
+#: server/src/world/guilds.ts
+msgid "Нельзя пригласить самого себя"
+msgstr "Du kannst dich nicht selbst einladen"
+
+#: scripts/items/item.gd
+msgid "Необычный"
+msgstr "Ungewöhnlich"
+
+#: data/skills/warrior_last_stand.tres
+msgid "Непоколебимость"
+msgstr "Letztes Gefecht"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Несгибаемость"
+msgstr "Unbeugsam"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Несокрушимый"
+msgstr "Unzerstörbar"
+
+#: scenes/world/world_map.gd
+msgid "Нет входа на сервер карты"
+msgstr "Nicht am Kartenserver angemeldet"
+
+#: scripts/autoload/world_service.gd
+msgid "Нет золота"
+msgstr "Kein Gold"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Нет реликвий"
+msgstr "Keine Relikte"
+
+#: server/src/world/guilds.ts
+msgid "Нет свободных мест — повысьте уровень гильдии"
+msgstr "Keine freien Plätze — erhöhe die Gildenstufe"
+
+#: scenes/talents/talent_grid.gd
+msgid "Нет свободных очков"
+msgstr "Keine freien Punkte"
+
+#: scenes/talents/talent_grid.gd
+msgid "Нет свободных очков — они даются за уровень"
+msgstr "Keine freien Punkte — du erhältst sie bei Stufenaufstiegen"
+
+#: server/src/world/guilds.ts
+msgid "Нет свободных очков — повысьте уровень гильдии"
+msgstr "Keine freien Punkte — erhöhe die Gildenstufe"
+
+#: scripts/kingdom/army_state.gd scripts/kingdom/kingdom_state.gd
+msgid "Нет связи с сервером"
+msgstr "Keine Serververbindung"
+
+#: scripts/autoload/world_service.gd
+msgid "Нет связи с сервером (%s)"
+msgstr "Keine Serververbindung (%s)"
+
+#: scenes/ui/guild_panel.gd
+msgid "Нет связи с сервером карты — гильдии работают только онлайн."
+msgstr "Keine Verbindung zum Kartenserver — Gilden funktionieren nur online."
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Нет связи с сервером — замок только для просмотра"
+msgstr "Keine Serververbindung — die Burg ist nur ansehbar"
+
+#: server/src/world/guilds.ts
+msgid "Нет такого бонуса"
+msgstr "Diesen Bonus gibt es nicht"
+
+#: server/src/world/game.ts server/src/world/kingdom.ts
+msgid "Нет такого заказа"
+msgstr "Diesen Auftrag gibt es nicht"
+
+#: server/src/world/kingdom.ts
+msgid "Нет такого здания"
+msgstr "Dieses Gebäude gibt es nicht"
+
+#: server/src/world/game.ts
+msgid "Нет такого игрока"
+msgstr "Diesen Spieler gibt es nicht"
+
+#: server/src/world/kingdom.ts
+msgid "Нет такого отряда"
+msgstr "Diese Einheit gibt es nicht"
+
+#: server/src/world/game.ts
+msgid "Нет такого подкрепления"
+msgstr "Diese Verstärkung gibt es nicht"
+
+#: server/src/world/game.ts
+msgid "Нет такой зоны"
+msgstr "Diese Zone gibt es nicht"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Неудача… золото потрачено"
+msgstr "Fehlschlag… Gold verbraucht"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Неутомимость"
+msgstr "Unermüdlichkeit"
+
+#: scripts/progress/hero_progress.gd
+msgid "Неутомимый"
+msgstr "Unermüdlich"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "Нечего забирать"
+msgstr "Nichts abzuholen"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Нечего сливать"
+msgstr "Nichts zu verschmelzen"
+
+#: scenes/ui/needs_panel.gd
+msgid "Ниже %d: %s"
+msgstr "Unter %d: %s"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Никто ещё не сражался с боссом на этой неделе."
+msgstr "Diese Woche hat noch niemand gegen den Boss gekämpft."
+
+#: scenes/world/world_map.gd
+msgid "Ничья"
+msgstr "Herrenlos"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Новая жизнь начнётся с %d-й волны («Стартовый рывок»)."
+msgstr "Das neue Leben beginnt bei Welle %d („Blitzstart“)."
+
+#: scenes/main.gd
+msgid "Новая жизнь! Получено душ: %d"
+msgstr "Ein neues Leben! Erhaltene Seelen: %d"
+
+#: scenes/battle/battle.gd
+msgid "Новое умение: %s!"
+msgstr "Neue Fähigkeit: %s!"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Новые атаки через %s"
+msgstr "Neue Angriffe in %s"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Новые задания через %s. Награда за каждое: золото и 1 душа (души — валюта перерождения)."
+msgstr "Neue Aufträge in %s. Belohnung je Auftrag: Gold und 1 Seele (Seelen sind die Währung der Wiedergeburt)."
+
+#: scripts/data/item_base.gd
+msgid "Ноги"
+msgstr "Beine"
+
+#: data/treasures/mage.json
+msgid "Носитель ступает, почти не касаясь земли."
+msgstr "Der Träger schreitet, fast ohne den Boden zu berühren."
+
+#: data/treasures/archer.json
+msgid "Ночного охотника"
+msgstr "des Nachtjägers"
+
+#: data/treasures/archer.json
+msgid "Ночной охотник"
+msgstr "Nachtjäger"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Нужна Ратуша %d-го уровня"
+msgstr "Erfordert Rathaus Stufe %d"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Нужна связь с сервером"
+msgstr "Erfordert eine Serververbindung"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Нужно 3 предмета тира «%s» в слот «%s» в сумке"
+msgstr "Benötigt 3 Gegenstände der Stufe „%s“ für den Platz „%s“ in der Tasche"
+
+#: server/src/http.ts
+msgid "Нужно войти заново"
+msgstr "Bitte erneut anmelden"
+
+#: server/src/world/kingdom.ts
+msgid "Нужно здание более высокого уровня"
+msgstr "Erfordert ein Gebäude höherer Stufe"
+
+#: scripts/kingdom/army_state.gd
+msgid "Нужно: %s %d-го уровня"
+msgstr "Erfordert: %s Stufe %d"
+
+#: data/treasures/archer.json
+msgid "Оберег Ветров"
+msgstr "Amulett der Winde"
+
+#: data/treasures/mage.json
+msgid "Облачение Архимага"
+msgstr "Gewänder des Erzmagiers"
+
+#: data/treasures/mage.json
+msgid "Облачение главы Совета магов. Рун на нём больше, чем ниток."
+msgstr "Gewänder des Oberhaupts des Magierrats. Mehr Runen als Fäden."
+
+#: data/guild/guild.json
+msgid "Обозы"
+msgstr "Trosse"
+
+#: data/monsters/werewolf.tres
+msgid "Оборотень"
+msgstr "Werwolf"
+
+#: data/treasures/mage.json
+msgid "Обруч Совиной Мудрости"
+msgstr "Reif der Eulenweisheit"
+
+#: scenes/ui/army_view.gd
+msgid "Обучение: %s"
+msgstr "Ausbildung: %s"
+
+#: scenes/ui/hud.gd
+msgid "Обучено: %s ×%d"
+msgstr "Ausgebildet: %s ×%d"
+
+#: scenes/ui/settings_panel.gd
+msgid "Общая громкость"
+msgstr "Gesamtlautstärke"
+
+#: data/guild/guild.json
+msgid "Общая муштра"
+msgstr "Gemeinsamer Drill"
+
+#: scripts/items/item.gd
+msgid "Обычный"
+msgstr "Gewöhnlich"
+
+#: data/skills/mage_fireball.tres
+msgid "Огненный шар"
+msgstr "Feuerball"
+
+#: data/talents/mage_talents.tres
+msgid "Огненный шар: +{value}% урона. +{value2}% скорости атаки."
+msgstr "Feuerball: +{value}% Schaden. +{value2}% Angriffstempo."
+
+#: data/monsters/ogre_boss.tres
+msgid "Огр-вожак"
+msgstr "Oger-Häuptling"
+
+#: server/src/http.ts
+msgid "Ожидался JSON-объект"
+msgstr "JSON-Objekt erwartet"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Описание здания"
+msgstr "Gebäudebeschreibung"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Описание предмета"
+msgstr "Gegenstandsbeschreibung"
+
+#: data/treasures/mage.json
+msgid "Оплечье"
+msgstr "Schulterumhang"
+
+#: data/treasures/mage.json
+msgid "Оплечье Верховного арканиста"
+msgstr "Schulterumhang des Hocharkanisten"
+
+#: data/treasures/mage.json
+msgid "Оплечье Жреца солнца"
+msgstr "Schulterumhang des Sonnenpriesters"
+
+#: data/treasures/mage.json
+msgid "Оплечье Звездопада"
+msgstr "Schulterumhang des Sternenfalls"
+
+#: data/treasures/mage.json
+msgid "Оплечье Коснувшегося бездны"
+msgstr "Schulterumhang des Abgrundberührten"
+
+#: data/treasures/mage.json
+msgid "Оплечье Повелителя гроз"
+msgstr "Schulterumhang des Sturmfürsten"
+
+#: data/treasures/mage.json
+msgid "Оплечье Призывателя пламени"
+msgstr "Schulterumhang des Flammenrufers"
+
+#: data/treasures/mage.json
+msgid "Оплечье Ткача льда"
+msgstr "Schulterumhang des Frostwebers"
+
+#: data/treasures/mage.json
+msgid "Оплечье Хранителя библиотеки"
+msgstr "Schulterumhang des Bibliothekshüters"
+
+#: data/units/militia.tres
+msgid "Ополченец"
+msgstr "Miliz"
+
+#: scenes/ui/guild_panel.gd
+msgid "Опыт гильдии: %d / %d\nОпыт дают взносы золотом (1 золото = 1 опыт) и победы участников на карте."
+msgstr "Gilden-EP: %d / %d\nEP gibt es für Goldspenden (1 Gold = 1 EP) und Siege der Mitglieder auf der Karte."
+
+#: scenes/ui/hud.gd
+msgid "Опыт: %d / %d"
+msgstr "EP: %d / %d"
+
+#: data/monsters/orc_warrior.tres
+msgid "Орк-воин"
+msgstr "Ork-Krieger"
+
+#: data/monsters/orc_brute.tres
+msgid "Орк-громила"
+msgstr "Ork-Schläger"
+
+#: data/monsters/orc_thrower.tres
+msgid "Орк-метатель"
+msgstr "Ork-Werfer"
+
+#: data/monsters/orc_shaman.tres
+msgid "Орк-шаман"
+msgstr "Ork-Schamane"
+
+#: data/treasures/archer.json
+msgid "Орлиного глаза"
+msgstr "des Adlerauges"
+
+#: data/skills/archer_eagle_eye.tres data/talents/archer_talents.tres data/treasures/archer.json
+msgid "Орлиный глаз"
+msgstr "Adlerauge"
+
+#: data/talents/warrior_talents.tres scripts/data/item_base.gd
+msgid "Оружие"
+msgstr "Waffe"
+
+#: scenes/ui/guild_panel.gd
+msgid "Основать"
+msgstr "Gründen"
+
+#: scenes/ui/guild_panel.gd
+msgid "Основать гильдию"
+msgstr "Gilde gründen"
+
+#: scenes/world/world_map.tscn
+msgid "Оставить гарнизон"
+msgstr "Garnison zurücklassen"
+
+#: scenes/world/world_map.gd
+msgid "Оставить гарнизон в зоне"
+msgstr "Garnison in der Zone zurücklassen"
+
+#: scenes/world/world_map.tscn
+msgid "Оставить часть армии защищать эту зону"
+msgstr "Einen Teil der Armee zur Verteidigung dieser Zone zurücklassen"
+
+#: scenes/ui/needs_panel.gd
+msgid "От %d: %s"
+msgstr "Ab %d: %s"
+
+#: data/treasures/mage.json
+msgid "От этой мантии в комнате всегда идёт пар изо рта."
+msgstr "Mit dieser Robe im Raum wird der Atem immer zu Nebel."
+
+#: scenes/ui/needs_panel.gd scenes/ui/needs_panel.tscn
+msgid "Отдых"
+msgstr "Rasten"
+
+#: scenes/ui/guild_panel.gd
+msgid "Отказаться"
+msgstr "Ablehnen"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Откроется, когда в ветку вложено %d очков"
+msgstr "Wird frei, wenn %d Punkte in den Zweig investiert sind"
+
+#: scenes/world/world_map.tscn
+msgid "Отмена"
+msgstr "Abbrechen"
+
+#: scenes/ui/army_view.gd
+msgid "Отменить (ресурсы вернутся)"
+msgstr "Abbrechen (Ressourcen werden erstattet)"
+
+#: scenes/ui/guild_panel.gd
+msgid "Отменить приглашение"
+msgstr "Einladung zurückziehen"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Отозвать"
+msgstr "Zurückrufen"
+
+#: scenes/ui/guild/guild_reinforce_page.gd scenes/ui/guild_panel.gd
+msgid "Отправить"
+msgstr "Senden"
+
+#: scenes/world/world_map.gd
+msgid "Отправить армию из замка на карту"
+msgstr "Armee aus der Burg auf die Karte schicken"
+
+#: scenes/ui/needs_panel.tscn
+msgid "Отправить героя отдыхать (восстанавливает бодрость).\nВолна встаёт на паузу."
+msgstr "Held zum Rasten schicken (stellt Energie wieder her).\nDie Welle wird pausiert."
+
+#: scenes/world/world_map.tscn
+msgid "Отправить солдат из армии замка к герою на карту (герой должен быть в замке)"
+msgstr "Soldaten aus der Burgarmee zum Helden auf der Karte schicken (der Held muss in der Burg sein)"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Отправить союзнику"
+msgstr "An Verbündeten senden"
+
+#: scenes/ui/unit_slot.tscn
+msgid "Отряд"
+msgstr "Einheit"
+
+#: scenes/ui/army_view.gd
+msgid "Отряды"
+msgstr "Einheiten"
+
+#: scripts/data/talent_tree.gd
+msgid "Отсюда растёт сетка талантов. Изучайте узлы рядом с уже изученными."
+msgstr "Hier wächst das Talentnetz. Erlerne Knoten neben bereits erlernten."
+
+#: scenes/ui/guild_panel.gd
+msgid "Офицер"
+msgstr "Offizier"
+
+#: scripts/progress/hero_progress.gd
+msgid "Охотник на элиту"
+msgstr "Elitejäger"
+
+#: data/talents/archer_talents.tres
+msgid "Охотничий инстинкт"
+msgstr "Jagdinstinkt"
+
+#: data/items/hunting_bow.tres
+msgid "Охотничий лук"
+msgstr "Jagdbogen"
+
+#: scenes/ui/army_view.gd
+msgid "Очередь обучения"
+msgstr "Ausbildungsschlange"
+
+#: scripts/kingdom/army_state.gd server/src/world/kingdom.ts
+msgid "Очередь обучения заполнена"
+msgstr "Die Ausbildungsschlange ist voll"
+
+#: scenes/ui/army_view.gd
+msgid "Очередь пуста — выберите отряд и нажмите «Нанять»"
+msgstr "Die Schlange ist leer — wähle eine Einheit und drücke „Rekrutieren“"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Очки"
+msgstr "Punkte"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Очки: каждый час — сумма уровней зон участников (центр карты ценнее). В регионе, который контролирует гильдия (больше всех зон, не меньше 10), очки ×1,5."
+msgstr "Punkte: stündlich die Summe der Zonenstufen der Mitglieder (die Kartenmitte zählt mehr). In einer von der Gilde kontrollierten Region (die meisten Zonen, mindestens 10) Punkte ×1,5."
+
+#: scripts/autoload/world_service.gd
+msgid "Ошибка сервера (%d)"
+msgstr "Serverfehler (%d)"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Панцирь"
+msgstr "Panzer"
+
+#: data/treasures/warrior.json
+msgid "Парадные доспехи личной стражи короля — и не только для парадов."
+msgstr "Die Paraderüstung der königlichen Leibgarde — und nicht nur für Paraden."
+
+#: data/treasures/mage.json
+msgid "Пахнут старым пергаментом и чернилами из сажи драконов."
+msgstr "Sie riechen nach altem Pergament und Tinte aus Drachenruß."
+
+#: data/guild/guild.json
+msgid "Пепельная долина"
+msgstr "Aschental"
+
+#: data/treasures/warrior.json
+msgid "Пепельного стража"
+msgstr "des Aschewächters"
+
+#: data/treasures/warrior.json
+msgid "Пепельный страж"
+msgstr "Aschewächter"
+
+#: scenes/ui/guild_panel.gd
+msgid "Передать главенство"
+msgstr "Führung übergeben"
+
+#: scenes/world/world_map.gd
+msgid "Перейти сюда"
+msgstr "Hierher ziehen"
+
+#: scripts/progress/hero_progress.gd
+msgid "Переродитесь %s раз"
+msgstr "Werde %s-mal wiedergeboren"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Переродиться"
+msgstr "Wiedergeburt"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Переродиться (+%s)"
+msgstr "Wiedergeburt (+%s)"
+
+#: scenes/ui/journal/journal_prestige_page.gd scenes/ui/journal_panel.gd
+msgid "Перерождение"
+msgstr "Wiedergeburt"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Перерождение пока недоступно"
+msgstr "Wiedergeburt noch nicht verfügbar"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Перерождение сейчас даст %s. Чем дальше зайти, тем больше: на 50-й волне — %d, на 100-й — %d."
+msgstr "Eine Wiedergeburt bringt jetzt %s. Je weiter, desto mehr: bei Welle 50 — %d, bei Welle 100 — %d."
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Перерождений: %d · рекорд волны в этой жизни: %d"
+msgstr "Wiedergeburten: %d · beste Welle in diesem Leben: %d"
+
+#: data/treasures/mage.json
+msgid "Перо Феникса"
+msgstr "Phönixfeder"
+
+#: data/treasures/archer.json
+msgid "Песнь Смерти"
+msgstr "Todeslied"
+
+#: scenes/ui/settings_panel.gd
+msgid "Плавнее, но нагрузка выше."
+msgstr "Flüssiger, aber höhere Last."
+
+#: data/talents/mage_talents.tres
+msgid "Пламя души"
+msgstr "Seelenflamme"
+
+#: data/treasures/warrior.json
+msgid "Плащ Медвежьей Шкуры"
+msgstr "Bärenfellmantel"
+
+#: scripts/data/item_base.gd
+msgid "Плечи"
+msgstr "Schultern"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Площадка Steam"
+msgstr "Steam-Markt"
+
+#: server/src/world/game.ts
+msgid "Победа над {name}, зона захвачена"
+msgstr "Sieg über {name}, Zone erobert"
+
+#: scenes/world/battle_replay.gd
+msgid "Победа!"
+msgstr "Sieg!"
+
+#: scripts/progress/hero_progress.gd
+msgid "Победите %d боссов"
+msgstr "Besiege %d Bosse"
+
+#: scripts/progress/hero_progress.gd
+msgid "Победите %s боссов"
+msgstr "Besiege %s Bosse"
+
+#: data/treasures/mage.json
+msgid "Повелитель гроз"
+msgstr "Sturmfürst"
+
+#: data/treasures/archer.json
+msgid "Повелитель зверей"
+msgstr "Bestienmeister"
+
+#: data/treasures/mage.json
+msgid "Повелителя гроз"
+msgstr "des Sturmfürsten"
+
+#: data/treasures/archer.json
+msgid "Повелителя зверей"
+msgstr "des Bestienmeisters"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Повержен! Следующий босс (сильнее) придёт через %s."
+msgstr "Besiegt! Der nächste (stärkere) Boss kommt in %s."
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Повысить ранг (1 очко)"
+msgstr "Rang erhöhen (1 Punkt)"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Под контролем: %s"
+msgstr "Kontrolliert: %s"
+
+#: data/items/war_banner.tres
+msgid "Под этим знаменем войска сражаются яростнее."
+msgstr "Unter diesem Banner kämpfen die Truppen erbitterter."
+
+#: data/treasures/archer.json
+msgid "Подарок короля лучшему стрелку турнира."
+msgstr "Das Geschenk des Königs an den besten Schützen des Turniers."
+
+#: data/skills/mage_ignite.tres
+msgid "Поджигает врагов вокруг цели: 350% урона за 6 с."
+msgstr "Setzt Feinde um das Ziel in Brand: 350% Schaden über 6 s."
+
+#: data/skills/mage_ignite.tres
+msgid "Поджог"
+msgstr "Entzünden"
+
+#: scenes/ui/guild_panel.gd
+msgid "Подкрепления"
+msgstr "Verstärkung"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Подкрепления в пути"
+msgstr "Verstärkung ist unterwegs"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Подкрепления вернулись в замок"
+msgstr "Verstärkung ist in die Burg zurückgekehrt"
+
+#: server/src/world/game.ts
+msgid "Подкрепления можно отправлять только союзникам по гильдии"
+msgstr "Verstärkung kann nur an Gildenverbündete geschickt werden"
+
+#: scenes/world/world_map.tscn
+msgid "Подтвердить"
+msgstr "Bestätigen"
+
+#: scenes/battle/battle.gd
+msgid "Пока вас не было (%s): %s"
+msgstr "Während du weg warst (%s): %s"
+
+#: scenes/world/world_map.gd
+msgid "Пока нет событий"
+msgstr "Noch keine Ereignisse"
+
+#: scenes/ui/guild_panel.gd
+msgid "Покинуть гильдию"
+msgstr "Gilde verlassen"
+
+#: scripts/progress/hero_progress.gd
+msgid "Покоритель волн"
+msgstr "Wellenbezwinger"
+
+#: data/treasures/archer.json
+msgid "Покров Лесного Духа"
+msgstr "Hülle des Waldgeistes"
+
+#: data/items/field_kitchen.tres
+msgid "Полевой котёл"
+msgstr "Feldküche"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Полевой лагерь"
+msgstr "Feldlager"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Полководец"
+msgstr "Feldherr"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "Получено душ: %d"
+msgstr "Erhaltene Seelen: %d"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Получено: %s (%s)"
+msgstr "Erhalten: %s (%s)"
+
+#: data/treasures/warrior.json
+msgid "Поножи"
+msgstr "Beinschienen"
+
+#: data/treasures/warrior.json
+msgid "Поножи Военачальника"
+msgstr "Beinschienen des Kriegsherrn"
+
+#: data/treasures/warrior.json
+msgid "Поножи Закалённого горна"
+msgstr "Beinschienen der Glutschmiede"
+
+#: data/treasures/warrior.json
+msgid "Поножи Каменной стены"
+msgstr "Beinschienen des Steinwalls"
+
+#: data/treasures/warrior.json
+msgid "Поножи Королевской гвардии"
+msgstr "Beinschienen der Königsgarde"
+
+#: data/treasures/warrior.json
+msgid "Поножи Кровавой клятвы"
+msgstr "Beinschienen des Blutschwurs"
+
+#: data/treasures/warrior.json
+msgid "Поножи Ледяной хватки"
+msgstr "Beinschienen des Frostgriffs"
+
+#: data/treasures/warrior.json
+msgid "Поножи Небесного стража"
+msgstr "Beinschienen des Himmelswächters"
+
+#: data/treasures/warrior.json
+msgid "Поножи Пепельного стража"
+msgstr "Beinschienen des Aschewächters"
+
+#: data/treasures/warrior.json
+msgid "Поножи Порождения бездны"
+msgstr "Beinschienen der Abgrundbrut"
+
+#: data/treasures/warrior.json
+msgid "Поножи Речного Брода"
+msgstr "Beinschienen der Flussfurt"
+
+#: data/treasures/warrior.json
+msgid "Поножи Сокрушителя бурь"
+msgstr "Beinschienen des Sturmbrechers"
+
+#: scenes/world/battle_replay.gd
+msgid "Поражение"
+msgstr "Niederlage"
+
+#: server/src/world/game.ts
+msgid "Поражение от {name}: армия погибла, герой вернулся в замок"
+msgstr "Niederlage gegen {name}: Die Armee fiel, der Held ist in die Burg zurückgekehrt"
+
+#: data/treasures/warrior.json
+msgid "Порождение бездны"
+msgstr "Abgrundbrut"
+
+#: data/treasures/warrior.json
+msgid "Порождения бездны"
+msgstr "der Abgrundbrut"
+
+#: server/src/world/guilds.ts
+msgid "После выхода из гильдии вступить в новую можно только через сутки"
+msgstr "Nach dem Verlassen einer Gilde kannst du erst nach 24 Stunden einer neuen beitreten"
+
+#: scenes/world/world_map.gd
+msgid "Посмотреть бой"
+msgstr "Kampf ansehen"
+
+#: data/treasures/mage.json
+msgid "Посох Тлеющих Углей"
+msgstr "Stab der Glimmenden Glut"
+
+#: data/treasures/mage.json
+msgid "Посох, запертый в подвале академии. Теперь — у вас."
+msgstr "Ein Stab, der im Keller der Akademie weggesperrt war. Jetzt gehört er dir."
+
+#: scenes/ui/hud.gd
+msgid "Построено: %s, ур. %d"
+msgstr "Gebaut: %s, St. %d"
+
+#: scenes/ui/kingdom_panel.gd scenes/ui/kingdom_panel.tscn
+msgid "Построить"
+msgstr "Bauen"
+
+#: scenes/world/battle_replay.gd
+msgid "Потери: %s — %s · %s — %s"
+msgstr "Verluste: %s — %s · %s — %s"
+
+#: data/talents/mage_talents.tres
+msgid "Поток маны"
+msgstr "Manafluss"
+
+#: scenes/world/world_map.tscn
+msgid "Поход"
+msgstr "Marsch"
+
+#: scenes/world/world_map.gd
+msgid "Поход в зону #%d — %s"
+msgstr "Marsch zu Zone #%d — %s"
+
+#: server/src/world/game.ts
+msgid "Поход сорван: {name} — ваш союзник по гильдии"
+msgstr "Marsch abgebrochen: {name} ist dein Gildenverbündeter"
+
+#: server/src/world/game.ts
+msgid "Поход сорван: без армии зону не занять"
+msgstr "Marsch abgebrochen: Ohne Armee keine Zone"
+
+#: server/src/world/game.ts
+msgid "Поход сорван: зону нельзя захватить"
+msgstr "Marsch abgebrochen: Die Zone kann nicht erobert werden"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Походный марш"
+msgstr "Gewaltmarsch"
+
+#: scenes/ui/settings_panel.gd
+msgid "При наведении"
+msgstr "Beim Überfahren"
+
+#: data/treasures/mage.json
+msgid "Привезены караваном из-за Пяти пустынь."
+msgstr "Per Karawane von jenseits der Fünf Wüsten gebracht."
+
+#: scenes/ui/guild_panel.gd
+msgid "Пригласить"
+msgstr "Einladen"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашают глава и офицеры"
+msgstr "Anführer und Offiziere laden ein"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашение действует ещё %s"
+msgstr "Die Einladung gilt noch %s"
+
+#: server/src/world/guilds.ts
+msgid "Приглашение не найдено"
+msgstr "Einladung nicht gefunden"
+
+#: server/src/world/guilds.ts
+msgid "Приглашение не найдено или истекло"
+msgstr "Die Einladung wurde nicht gefunden oder ist abgelaufen"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашение отклонено"
+msgstr "Einladung abgelehnt"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашение отменено"
+msgstr "Einladung zurückgezogen"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашение отправлено: %s"
+msgstr "Einladung gesendet: %s"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашений пока нет. Глава или офицер гильдии может пригласить вас по имени: %s"
+msgstr "Noch keine Einladungen. Ein Gildenanführer oder Offizier kann dich per Name einladen: %s"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашения"
+msgstr "Einladungen"
+
+#: data/treasures/archer.json
+msgid "Призрачный Шаг"
+msgstr "Geisterschritt"
+
+#: data/treasures/mage.json
+msgid "Призыватель пламени"
+msgstr "Flammenrufer"
+
+#: data/treasures/mage.json
+msgid "Призывателя пламени"
+msgstr "des Flammenrufers"
+
+#: scripts/progress/hero_progress.gd
+msgid "Примените умения %d раз"
+msgstr "Setze %d-mal Fähigkeiten ein"
+
+#: scripts/progress/hero_progress.gd
+msgid "Примените умения %s раз"
+msgstr "Setze %s-mal Fähigkeiten ein"
+
+#: scenes/ui/hud.tscn
+msgid "Применять умения автоматически.\nВручную — клик по умению или клавиши 1–9."
+msgstr "Fähigkeiten automatisch einsetzen.\nManuell — Fähigkeit anklicken oder Tasten 1–9 drücken."
+
+#: data/items/iron_pauldrons.tres
+msgid "Принимают на себя удары, летящие в плечо."
+msgstr "Sie fangen die Hiebe ab, die auf deine Schultern zielen."
+
+#: data/skills/archer_aimed_shot.tres
+msgid "Прицельный выстрел"
+msgstr "Gezielter Schuss"
+
+#: data/talents/archer_talents.tres
+msgid "Прицельный выстрел: −{value}% перезарядки. +{value2}% урона."
+msgstr "Gezielter Schuss: −{value}% Abklingzeit. +{value2}% Schaden."
+
+#: data/skills/archer_piercing_shot.tres
+msgid "Пробивающий выстрел"
+msgstr "Durchbohrender Schuss"
+
+#: scripts/data/stat_modifier.gd
+msgid "Проворство"
+msgstr "Gewandtheit"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Продано за %d з"
+msgstr "Verkauft für %d G"
+
+#: scenes/ui/inventory_panel.gd scenes/ui/inventory_panel.tscn
+msgid "Продать"
+msgstr "Verkaufen"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Продать (%d з)"
+msgstr "Verkaufen (%d G)"
+
+#: scripts/progress/hero_progress.gd
+msgid "Пройдите %d волн"
+msgstr "Schaffe %d Wellen"
+
+#: scripts/progress/hero_progress.gd
+msgid "Пройдите %s волн"
+msgstr "Schaffe %s Wellen"
+
+#: data/biomes/cursed.tres
+msgid "Проклятая чаща"
+msgstr "Verfluchtes Dickicht"
+
+#: data/treasures/warrior.json
+msgid "Проклятый меч. Им нельзя победить — только казнить."
+msgstr "Ein verfluchtes Schwert. Mit ihm kann man nicht siegen — nur hinrichten."
+
+#: scenes/world/battle_replay.tscn
+msgid "Пропустить"
+msgstr "Überspringen"
+
+#: data/items/leather_armor.tres
+msgid "Прочная кожа защищает, не сковывая движений."
+msgstr "Festes Leder schützt, ohne die Bewegung einzuschränken."
+
+#: data/treasures/warrior.json
+msgid "Прошли через три королевства и не стёрлись."
+msgstr "Sie durchquerten drei Königreiche und nutzten sich nie ab."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Пусто: сокровища находятся за время игры"
+msgstr "Leer: Schätze werden im Laufe der Spielzeit gefunden"
+
+#: scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Путь"
+msgstr "Weg"
+
+#: scenes/ui/hud.gd
+msgid "Путь (%d)"
+msgstr "Weg (%d)"
+
+#: scenes/ui/journal_panel.tscn
+msgid "Путь героя"
+msgstr "Weg des Helden"
+
+#: scenes/ui/hud.tscn
+msgid "Путь героя: задания, достижения, бестиарий, перерождение [J]"
+msgstr "Weg des Helden: Aufträge, Erfolge, Bestiarium, Wiedergeburt [J]"
+
+#: data/talents/warrior_talents.tres
+msgid "Путь меча"
+msgstr "Weg des Schwertes"
+
+#: scripts/autoload/desktop_window.gd
+msgid "Развернуть"
+msgstr "Wiederherstellen"
+
+#: scenes/ui/guild_panel.gd
+msgid "Распустить гильдию"
+msgstr "Gilde auflösen"
+
+#: data/skills/warrior_cleave.tres
+msgid "Рассекающий удар"
+msgstr "Spaltender Hieb"
+
+#: data/buildings/town_hall.tres
+msgid "Ратуша"
+msgstr "Rathaus"
+
+#: scenes/world/world_map.gd
+msgid "Регион: %s (%s)"
+msgstr "Region: %s (%s)"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Регионы"
+msgstr "Regionen"
+
+#: scripts/items/item.gd
+msgid "Редкий"
+msgstr "Selten"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Реликвии армии"
+msgstr "Armee-Relikte"
+
+#: scripts/data/item_base.gd
+msgid "Реликвия армии"
+msgstr "Armee-Relikt"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Реликвия армии: пусто.\nРеликвии выпадают с монстров и усиливают армию замка."
+msgstr "Armee-Relikt: leer.\nRelikte fallen von Monstern und stärken die Burgarmee."
+
+#: data/items/rusty_sword.tres
+msgid "Ржавый меч"
+msgstr "Rostiges Schwert"
+
+#: scenes/ui/guild_panel.gd
+msgid "Роль"
+msgstr "Rolle"
+
+#: data/talents/warrior_talents.tres
+msgid "Рубака"
+msgstr "Haudegen"
+
+#: data/treasures/mage.json
+msgid "Рунное Оплечье"
+msgstr "Runen-Schulterumhang"
+
+#: data/treasures/mage.json
+msgid "Руны на нём светятся, когда рядом магия."
+msgstr "Seine Runen leuchten, wenn Magie in der Nähe ist."
+
+#: scripts/autoload/settings.gd
+msgid "Русский"
+msgstr "Русский"
+
+#: data/buildings/market.tres
+msgid "Рынок"
+msgstr "Markt"
+
+#: data/units/knight.tres
+msgid "Рыцарь"
+msgstr "Ritter"
+
+#: data/treasures/archer.json
+msgid "С высоты орлиного полёта не укроется ни одна цель."
+msgstr "Aus der Höhe eines Adlers bleibt kein Ziel verborgen."
+
+#: data/treasures/warrior.json
+msgid "Сабатоны"
+msgstr "Panzerschuhe"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Военачальника"
+msgstr "Panzerschuhe des Kriegsherrn"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Закалённого горна"
+msgstr "Panzerschuhe der Glutschmiede"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Каменной стены"
+msgstr "Panzerschuhe des Steinwalls"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Королевской гвардии"
+msgstr "Panzerschuhe der Königsgarde"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Кровавой клятвы"
+msgstr "Panzerschuhe des Blutschwurs"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Ледяной хватки"
+msgstr "Panzerschuhe des Frostgriffs"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Небесного стража"
+msgstr "Panzerschuhe des Himmelswächters"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Пепельного стража"
+msgstr "Panzerschuhe des Aschewächters"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Порождения бездны"
+msgstr "Panzerschuhe der Abgrundbrut"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Сокрушителя бурь"
+msgstr "Panzerschuhe des Sturmbrechers"
+
+#: data/treasures/archer.json
+msgid "Сапоги"
+msgstr "Stiefel"
+
+#: data/treasures/archer.json
+msgid "Сапоги Бегущей с ветром"
+msgstr "Stiefel der Windläuferin"
+
+#: data/treasures/archer.json
+msgid "Сапоги Ветра пустыни"
+msgstr "Stiefel des Wüstenwinds"
+
+#: data/treasures/archer.json
+msgid "Сапоги Грозовой стрелы"
+msgstr "Stiefel des Donnerpfeils"
+
+#: data/treasures/warrior.json
+msgid "Сапоги Долгого Марша"
+msgstr "Stiefel des Langen Marsches"
+
+#: data/treasures/archer.json
+msgid "Сапоги Ночного охотника"
+msgstr "Stiefel des Nachtjägers"
+
+#: data/treasures/archer.json
+msgid "Сапоги Оленьего Шага"
+msgstr "Stiefel des Hirschschritts"
+
+#: data/treasures/archer.json
+msgid "Сапоги Орлиного глаза"
+msgstr "Stiefel des Adlerauges"
+
+#: data/treasures/archer.json
+msgid "Сапоги Повелителя зверей"
+msgstr "Stiefel des Bestienmeisters"
+
+#: data/treasures/archer.json
+msgid "Сапоги Серебряного листа"
+msgstr "Stiefel des Silberblatts"
+
+#: data/treasures/archer.json
+msgid "Сапоги Терновой чащи"
+msgstr "Stiefel des Dornendickichts"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Сбор налогов"
+msgstr "Steuereintreibung"
+
+#: server/src/world/guilds.ts
+msgid "Сбрасывать бонусы можно раз в сутки"
+msgstr "Boni können einmal am Tag zurückgesetzt werden"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Сбрасываются волна, уровень и таланты (очки возвращаются). Остаются снаряжение, сокровища, золото, замок, армия и гильдия."
+msgstr "Welle, Stufe und Talente werden zurückgesetzt (Punkte werden erstattet). Ausrüstung, Schätze, Gold, Burg, Armee und Gilde bleiben."
+
+#: scenes/talents/talent_grid.tscn
+msgid "Сброс"
+msgstr "Zurücksetzen"
+
+#: scenes/talents/talent_grid.gd
+msgid "Сброс (%d з)"
+msgstr "Zurücksetzen (%d G)"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Сброс через %s"
+msgstr "Zurücksetzen in %s"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Сбросить бонусы"
+msgstr "Boni zurücksetzen"
+
+#: scenes/ui/hud.tscn
+msgid "Свернуть в трей (игра продолжится)"
+msgstr "In den Infobereich minimieren (das Spiel läuft weiter)"
+
+#: scenes/talents/talent_grid.gd
+msgid "Свободных очков: %d · изучено %d из %d"
+msgstr "Freie Punkte: %d · erlernt %d von %d"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Свободных очков: %d из %d · каждый уровень гильдии даёт %d"
+msgstr "Freie Punkte: %d von %d · jede Gildenstufe gibt %d"
+
+#: scenes/ui/guild_panel.gd
+msgid "Сделать офицером"
+msgstr "Zum Offizier machen"
+
+#: data/guild/guild.json
+msgid "Северные пустоши"
+msgstr "Nördliche Öde"
+
+#: scenes/ui/guild_panel.gd
+msgid "Сезон"
+msgstr "Saison"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Сезон %d · закончится через %s\nВаша гильдия: %d место, %d очков"
+msgstr "Saison %d · endet in %s\nDeine Gilde: Platz %d, %d Punkte"
+
+#: server/src/world/guilds.ts
+msgid "Сезон {season} завершён: {place} место! Каждый участник получил {gold} золота"
+msgstr "Saison {season} ist vorbei: Platz {place}! Jedes Mitglied erhielt {gold} Gold"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Сейчас: "
+msgstr "Jetzt: "
+
+#: scenes/talents/talent_grid.tscn
+msgid "Секторы"
+msgstr "Sektoren"
+
+#: data/treasures/warrior.json
+msgid "Сердце Горы"
+msgstr "Herz des Berges"
+
+#: data/buildings/town_hall.tres
+msgid "Сердце королевства. Уровень Ратуши ограничивает уровень остальных зданий и расширяет склад."
+msgstr "Das Herz des Königreichs. Die Rathausstufe begrenzt alle anderen Gebäude und erweitert das Lager."
+
+#: data/guild/guild.json
+msgid "Сердце мира"
+msgstr "Herz der Welt"
+
+#: data/talents/mage_talents.tres
+msgid "Сердце огня"
+msgstr "Herz des Feuers"
+
+#: data/guild/guild.json
+msgid "Серебряная гавань"
+msgstr "Silberhafen"
+
+#: data/treasures/archer.json
+msgid "Серебряного листа"
+msgstr "des Silberblatts"
+
+#: data/treasures/archer.json
+msgid "Серебряный лист"
+msgstr "Silberblatt"
+
+#: data/treasures/warrior.json
+msgid "Серый Клык"
+msgstr "Graufang"
+
+#: data/skills/archer_snare.tres
+msgid "Сеть вокруг цели: 60% урона и обездвиживание врагов на 2 с."
+msgstr "Ein Netz um das Ziel: 60% Schaden und macht Feinde 2 s lang bewegungsunfähig."
+
+#: scripts/autoload/world_service.gd
+msgid "Сеть отключена"
+msgstr "Netzwerk deaktiviert"
+
+#: scripts/items/item.gd
+msgid "Сила армии, %"
+msgstr "Armeestärke, %"
+
+#: scenes/ui/army_view.gd
+msgid "Сила армии: %d"
+msgstr "Armeestärke: %d"
+
+#: scenes/ui/army_view.tscn
+msgid "Сила армии: 0"
+msgstr "Armeestärke: 0"
+
+#: scripts/progress/hero_progress.gd
+msgid "Сила предков"
+msgstr "Macht der Ahnen"
+
+#: scripts/data/stat_modifier.gd
+msgid "Сила удара"
+msgstr "Schlagkraft"
+
+#: data/monsters/skeleton.tres
+msgid "Скелет"
+msgstr "Skelett"
+
+#: data/monsters/skeleton_archer.tres
+msgid "Скелет-лучник"
+msgstr "Skelett-Bogenschütze"
+
+#: scripts/items/item.gd
+msgid "Скорость атаки, %"
+msgstr "Angriffstempo, %"
+
+#: scripts/items/item.gd
+msgid "Скорость обучения, %"
+msgstr "Ausbildungstempo, %"
+
+#: scenes/world/battle_replay.tscn
+msgid "Скорость повтора"
+msgstr "Wiedergabetempo"
+
+#: data/guild/guild.json
+msgid "Слава"
+msgstr "Ruhm"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Слава правителя"
+msgstr "Ruhm des Herrschers"
+
+#: data/treasures/archer.json
+msgid "Следов не оставляет — даже на снегу."
+msgstr "Hinterlässt keine Spuren — nicht einmal im Schnee."
+
+#: data/talents/archer_talents.tres
+msgid "Следопыт"
+msgstr "Pfadfinder"
+
+#: data/monsters/slime.tres
+msgid "Слизень"
+msgstr "Schleim"
+
+#: scenes/ui/inventory_panel.tscn
+msgid "Слить 3→1"
+msgstr "Verschmelzen 3→1"
+
+#: server/src/http.ts
+msgid "Слишком большой запрос"
+msgstr "Anfrage zu groß"
+
+#: data/talents/archer_talents.tres
+msgid "Смертельная стрела"
+msgstr "Tödlicher Pfeil"
+
+#: data/skills/archer_deadly_volley.tres
+msgid "Смертельный залп"
+msgstr "Tödliche Salve"
+
+#: data/talents/archer_talents.tres
+msgid "Снайпер"
+msgstr "Scharfschütze"
+
+#: server/src/world/guilds.ts
+msgid "Сначала вложите больше очков в эту ветку"
+msgstr "Investiere zuerst mehr Punkte in diesen Zweig"
+
+#: scenes/talents/talent_grid.gd
+msgid "Сначала изучите соседний узел"
+msgstr "Erlerne zuerst einen benachbarten Knoten"
+
+#: server/src/world/guilds.ts
+msgid "Сначала передайте главенство другому участнику"
+msgstr "Übergib zuerst die Führung an ein anderes Mitglied"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Снять"
+msgstr "Ablegen"
+
+#: scenes/ui/guild_panel.gd
+msgid "Снять офицера"
+msgstr "Offizier absetzen"
+
+#: scripts/progress/hero_progress.gd
+msgid "Соберите %s сокровищ"
+msgstr "Sammle %s Schätze"
+
+#: scenes/world/world_map.tscn
+msgid "События"
+msgstr "Ereignisse"
+
+#: data/treasures/archer.json
+msgid "Совиная Маска"
+msgstr "Eulenmaske"
+
+#: data/treasures/mage.json
+msgid "Совы в академии садятся только на него."
+msgstr "Die Eulen der Akademie setzen sich nur auf ihn."
+
+#: scenes/ui/army_view.gd
+msgid "Содержание: %s еды/мин"
+msgstr "Unterhalt: %s Nahrung/Min."
+
+#: scenes/creation/character_creation.tscn
+msgid "Создание героя"
+msgstr "Held erstellen"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сокровища (именные, уникальные, сетовые) находятся раз в несколько часов игры,\nне чаще недельного лимита. Позже их можно будет продавать на торговой площадке Steam."
+msgstr "Schätze (benannte, einzigartige, Set-Gegenstände) werden alle paar Spielstunden gefunden,\nbis zu einem Wochenlimit. Später kann man sie auf dem Steam-Community-Markt verkaufen."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сокровища будут продаваться на торговой площадке Steam (после выхода игры)."
+msgstr "Schätze werden auf dem Steam-Community-Markt verkauft (nach dem Release)."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сокровища не затачиваются: их сила растёт вместе с рекордом волны героя."
+msgstr "Schätze können nicht aufgewertet werden: Ihre Stärke wächst mit der besten Welle des Helden."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сокровищница"
+msgstr "Schatzkammer"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сокровищница (%d)"
+msgstr "Schatzkammer (%d)"
+
+#: data/talents/warrior_talents.tres
+msgid "Сокрушающий замах"
+msgstr "Zerschmetternder Hieb"
+
+#: data/talents/warrior_talents.tres
+msgid "Сокрушение"
+msgstr "Verwüstung"
+
+#: data/treasures/warrior.json
+msgid "Сокрушитель бурь"
+msgstr "Sturmbrecher"
+
+#: data/treasures/warrior.json
+msgid "Сокрушителя бурь"
+msgstr "des Sturmbrechers"
+
+#: scenes/ui/army_view.gd
+msgid "Солдат в замке: %d"
+msgstr "Soldaten in der Burg: %d"
+
+#: data/guild/guild.json
+msgid "Солнечные поля"
+msgstr "Sonnenfelder"
+
+#: scripts/data/stat_modifier.gd
+msgid "Сон воина"
+msgstr "Kriegerschlaf"
+
+#: server/src/world/guilds.ts
+msgid "Сообщение пустое"
+msgstr "Die Nachricht ist leer"
+
+#: server/src/world/guilds.ts
+msgid "Сообщение слишком длинное"
+msgstr "Die Nachricht ist zu lang"
+
+#: scenes/ui/guild_panel.gd
+msgid "Сообщение…"
+msgstr "Nachricht…"
+
+#: scenes/ui/guild_panel.gd
+msgid "Состав"
+msgstr "Mitglieder"
+
+#: data/treasures/mage.json
+msgid "Сотканы из утреннего света над храмом Зари."
+msgstr "Gewoben aus dem Morgenlicht über dem Tempel der Morgenröte."
+
+#: scenes/ui/hud.tscn scripts/autoload/desktop_window.gd
+msgid "Сохранить и выйти"
+msgstr "Speichern und beenden"
+
+#: scenes/world/world_map.gd
+msgid "Союзник по гильдии — нападать нельзя"
+msgstr "Gildenverbündeter — Angriff nicht möglich"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Союзники пока не присылали войска."
+msgstr "Noch haben keine Verbündeten Truppen geschickt."
+
+#: scenes/ui/needs_panel.gd
+msgid "Спит…"
+msgstr "Schläft…"
+
+#: data/treasures/archer.json
+msgid "Сплетён из листьев, которые никогда не вянут."
+msgstr "Geflochten aus Blättern, die niemals welken."
+
+#: data/treasures/mage.json
+msgid "Срезана с древа, под которым учил первый маг."
+msgstr "Geschnitten vom Baum, unter dem der erste Magier lehrte."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Стальная кожа"
+msgstr "Stahlhaut"
+
+#: scripts/progress/hero_progress.gd
+msgid "Стартовый рывок"
+msgstr "Blitzstart"
+
+#: data/guild/guild.json
+msgid "Старые курганы"
+msgstr "Alte Hügelgräber"
+
+#: data/items/rusty_sword.tres
+msgid "Старый, но всё ещё острый клинок."
+msgstr "Eine alte, aber noch scharfe Klinge."
+
+#: data/units/spearman.tres
+msgid "Стена щитов и копий: крепкая защита."
+msgstr "Eine Wand aus Schilden und Speeren: solide Verteidigung."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Стойкость ветерана"
+msgstr "Zähigkeit des Veteranen"
+
+#: scripts/progress/hero_progress.gd
+msgid "Стойкость предков"
+msgstr "Zähigkeit der Ahnen"
+
+#: server/src/world/game.ts
+msgid "Столько солдат в армии нет"
+msgstr "So viele Soldaten sind nicht in der Armee"
+
+#: server/src/world/game.ts
+msgid "Столько солдат в гарнизоне нет"
+msgstr "So viele Soldaten sind nicht in der Garnison"
+
+#: data/skills/archer_piercing_shot.tres
+msgid "Стрела пробивает насквозь: 220% урона всем врагам в линию."
+msgstr "Der Pfeil durchschlägt alles: 220% Schaden an allen Feinden in einer Linie."
+
+#: data/treasures/archer.json
+msgid "Стрела уже летит — а рука ещё не шевельнулась."
+msgstr "Der Pfeil fliegt schon — und die Hand hat sich noch nicht bewegt."
+
+#: scripts/data/monster_data.gd
+msgid "Стрелок"
+msgstr "Schütze"
+
+#: data/treasures/archer.json
+msgid "Стрелы в этом наряде летят быстрее мысли."
+msgstr "In dieser Kleidung fliegen Pfeile schneller als ein Gedanke."
+
+#: scripts/progress/hero_progress.gd
+msgid "Стремительность"
+msgstr "Schnelligkeit"
+
+#: data/items/drill_manual.tres
+msgid "Строевой устав"
+msgstr "Exerzierhandbuch"
+
+#: server/src/world/kingdom.ts
+msgid "Строители заняты"
+msgstr "Die Baumeister sind beschäftigt"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Строители заняты: %s"
+msgstr "Die Baumeister sind beschäftigt: %s"
+
+#: scenes/ui/kingdom_panel.tscn
+msgid "Строители свободны"
+msgstr "Die Baumeister sind frei"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Строители свободны — выберите здание"
+msgstr "Die Baumeister sind frei — wähle ein Gebäude"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Стройка: %s ур. %d — %s"
+msgstr "Bau: %s St. %d — %s"
+
+#: scenes/ui/hud.tscn scenes/ui/inventory_panel.gd
+msgid "Сумка"
+msgstr "Tasche"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сумка полна"
+msgstr "Die Tasche ist voll"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сумка: %d / %d"
+msgstr "Tasche: %d / %d"
+
+#: scenes/ui/inventory_panel.tscn
+msgid "Сумка: 0 / 60"
+msgstr "Tasche: 0 / 60"
+
+#: data/guild/guild.json
+msgid "Сумрачный лес"
+msgstr "Dämmerwald"
+
+#: data/treasures/mage.json
+msgid "Сфера Чистой Маны"
+msgstr "Kugel des Reinen Manas"
+
+#: data/needs/hunger.tres
+msgid "Сытость"
+msgstr "Sättigung"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Таблица сезона"
+msgstr "Saisontabelle"
+
+#: data/buildings/tavern.tres
+msgid "Таверна"
+msgstr "Taverne"
+
+#: data/talents/mage_talents.tres
+msgid "Тайная магия"
+msgstr "Arkane Magie"
+
+#: server/src/world/guilds.ts
+msgid "Такого участника нет"
+msgstr "Dieses Mitglied gibt es nicht"
+
+#: server/src/world/guilds.ts
+msgid "Такой тег уже занят"
+msgstr "Dieses Kürzel ist bereits vergeben"
+
+#: scenes/talents/talent_grid.tscn scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Таланты"
+msgstr "Talente"
+
+#: scenes/ui/hud.gd
+msgid "Таланты (%d)"
+msgstr "Talente (%d)"
+
+#: scenes/talents/talent_grid.gd
+msgid "Таланты сброшены, очки возвращены"
+msgstr "Talente zurückgesetzt, Punkte erstattet"
+
+#: scenes/ui/guild_panel.gd
+msgid "Тег"
+msgstr "Kürzel"
+
+#: scenes/ui/guild_panel.gd
+msgid "Тег и цвет видны на карте: [ТЕГ] Имя. Союзники не нападают друг на друга."
+msgstr "Kürzel und Farbe sind auf der Karte sichtbar: [KÜRZEL] Name. Verbündete können sich nicht angreifen."
+
+#: server/src/world/guilds.ts
+msgid "Тег: от 2 до 4 букв или цифр"
+msgstr "Kürzel: 2 bis 4 Buchstaben oder Ziffern"
+
+#: data/treasures/archer.json
+msgid "Тень среди теней. Выстрел — и снова тишина."
+msgstr "Ein Schatten unter Schatten. Ein Schuss — und wieder Stille."
+
+#: data/treasures/archer.json
+msgid "Терновая чаща"
+msgstr "Dornendickicht"
+
+#: data/treasures/archer.json
+msgid "Терновой чащи"
+msgstr "des Dornendickichts"
+
+#: scenes/main.gd
+msgid "Тест"
+msgstr "Test"
+
+#: data/treasures/archer.json
+msgid "Тетива поёт, как ветер в ковыле."
+msgstr "Die Sehne singt wie der Wind im Federgras."
+
+#: data/treasures/mage.json
+msgid "Ткань не горит — она сама горит желанием сжечь."
+msgstr "Der Stoff brennt nicht — er brennt vor Verlangen zu brennen."
+
+#: data/treasures/mage.json
+msgid "Ткач Времени"
+msgstr "Weber der Zeit"
+
+#: data/treasures/mage.json
+msgid "Ткач льда"
+msgstr "Frostweber"
+
+#: data/treasures/mage.json
+msgid "Ткача льда"
+msgstr "des Frostwebers"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Только: "
+msgstr "Nur: "
+
+#: data/buildings/market.tres
+msgid "Торговля пополняет казну замка и повышает награду золотом за монстров."
+msgstr "Handel füllt die Burgkasse und erhöht die Goldbelohnung für Monster."
+
+#: scenes/ui/guild_panel.gd
+msgid "Точно?"
+msgstr "Sicher?"
+
+#: scenes/talents/talent_grid.gd
+msgid "Точно? %d з"
+msgstr "Sicher? %d G"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Точно? Получить %s"
+msgstr "Sicher? %s erhalten"
+
+#: data/talents/archer_talents.tres
+msgid "Точность снайпера"
+msgstr "Präzision des Scharfschützen"
+
+#: data/buildings/barracks.tres
+msgid "Тренирует армию замка и самого героя. Открывает новые отряды, даёт место в армии и ускоряет обучение."
+msgstr "Bildet die Burgarmee und den Helden aus. Schaltet neue Einheiten frei, erhöht die Armeekapazität und beschleunigt die Ausbildung."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Трофеи"
+msgstr "Trophäen"
+
+#: data/guild/guild.json
+msgid "Туманный перевал"
+msgstr "Nebelpass"
+
+#: data/treasures/mage.json
+msgid "Туфли"
+msgstr "Slipper"
+
+#: data/treasures/mage.json
+msgid "Туфли Верховного арканиста"
+msgstr "Slipper des Hocharkanisten"
+
+#: data/treasures/mage.json
+msgid "Туфли Жреца солнца"
+msgstr "Slipper des Sonnenpriesters"
+
+#: data/treasures/mage.json
+msgid "Туфли Звездопада"
+msgstr "Slipper des Sternenfalls"
+
+#: data/treasures/mage.json
+msgid "Туфли Коснувшегося бездны"
+msgstr "Slipper des Abgrundberührten"
+
+#: data/treasures/mage.json
+msgid "Туфли Мгновенного Шага"
+msgstr "Slipper des Augenblicksschritts"
+
+#: data/treasures/mage.json
+msgid "Туфли Облачного Шага"
+msgstr "Slipper des Wolkenschritts"
+
+#: data/treasures/mage.json
+msgid "Туфли Повелителя гроз"
+msgstr "Slipper des Sturmfürsten"
+
+#: data/treasures/mage.json
+msgid "Туфли Призывателя пламени"
+msgstr "Slipper des Flammenrufers"
+
+#: data/treasures/mage.json
+msgid "Туфли Ткача льда"
+msgstr "Slipper des Frostwebers"
+
+#: data/treasures/mage.json
+msgid "Туфли Хранителя библиотеки"
+msgstr "Slipper des Bibliothekshüters"
+
+#: data/units/knight.tres
+msgid "Тяжёлая конница. Дорого, но очень сильно. Занимает 3 места."
+msgstr "Schwere Reiterei. Teuer, aber sehr stark. Belegt 3 Plätze."
+
+#: data/talents/warrior_talents.tres
+msgid "Тяжёлая рука"
+msgstr "Schwere Hand"
+
+#: data/monsters/dark_wizard.tres
+msgid "Тёмный маг"
+msgstr "Dunkler Magier"
+
+#: data/treasures/mage.json
+msgid "Тёплое на ощупь — даже зимой."
+msgstr "Warm bei Berührung — sogar im Winter."
+
+#: data/treasures/warrior.json
+msgid "Тёплый, тяжёлый и пахнет лесом."
+msgstr "Warm, schwer und riecht nach Wald."
+
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %d монстров"
+msgstr "Töte %d Monster"
+
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %d элитных монстров"
+msgstr "Töte %d Elitemonster"
+
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %s монстров"
+msgstr "Töte %s Monster"
+
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %s элитных монстров"
+msgstr "Töte %s Elitemonster"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "Убито: %d"
+msgstr "Getötet: %d"
+
+#: scenes/ui/settings_panel.gd
+msgid "Уведомления"
+msgstr "Benachrichtigungen"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Уведомления, пока игра в трее"
+msgstr "Benachrichtigungen im Infobereich"
+
+#: data/talents/warrior_talents.tres
+msgid "Удар молота"
+msgstr "Hammerschlag"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Удар на %d урона"
+msgstr "Schlag für %d Schaden"
+
+#: data/skills/warrior_whirlwind.tres
+msgid "Удар по всем врагам вокруг на 150% урона."
+msgstr "Trifft alle Feinde ringsum mit 150% Schaden."
+
+#: data/skills/warrior_power_strike.tres
+msgid "Удар по цели на 250% урона."
+msgstr "Trifft das Ziel mit 250% Schaden."
+
+#: data/skills/warrior_shield_bash.tres
+msgid "Удар щитом"
+msgstr "Schildschlag"
+
+#: data/guild/guild.json
+msgid "Удача гильдии"
+msgstr "Gildenglück"
+
+#: scripts/data/stat_modifier.gd
+msgid "Удача торговца"
+msgstr "Händlerglück"
+
+#: data/items/leather_boots.tres
+msgid "Удобные сапоги: шаг легче, удар быстрее."
+msgstr "Bequeme Stiefel: leichterer Schritt, schnellerer Schlag."
+
+#: scenes/talents/talent_grid.gd
+msgid "Уже изучено"
+msgstr "Bereits erlernt"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Уйдёт через %s. Здоровье общее — бейте всей гильдией."
+msgstr "Verschwindet in %s. Das Leben ist geteilt — kämpft als Gilde."
+
+#: scripts/kingdom/army_state.gd server/src/world/kingdom.ts
+msgid "Укажите количество"
+msgstr "Gib eine Anzahl ein"
+
+#: server/src/world/game.ts server/src/world/guilds.ts
+msgid "Укажите сумму"
+msgstr "Gib einen Betrag ein"
+
+#: scripts/autoload/settings.gd
+msgid "Українська"
+msgstr ""
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Улучшение куплено"
+msgstr "Verbesserung gekauft"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Улучшить до ур. %d"
+msgstr "Ausbauen auf St. %d"
+
+#: scripts/data/item_base.gd server/src/world/game.ts
+msgid "Уникальный"
+msgstr "Einzigartig"
+
+#: scenes/ui/guild_panel.gd
+msgid "Управление"
+msgstr "Verwaltung"
+
+#: scenes/ui/guild_panel.gd
+msgid "Ур. %d"
+msgstr "St. %d"
+
+#: scenes/ui/guild_panel.gd
+msgid "Ур. %d · максимум"
+msgstr "St. %d · Maximum"
+
+#: scenes/ui/guild_panel.gd
+msgid "Ур. %d · опыт %d / %d"
+msgstr "St. %d · EP %d / %d"
+
+#: data/talents/archer_talents.tres
+msgid "Ураган"
+msgstr "Orkan"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Уровень %d / %d"
+msgstr "Stufe %d / %d"
+
+#: scenes/battle/battle.gd
+msgid "Уровень %d!"
+msgstr "Stufe %d!"
+
+#: scenes/ui/inventory_panel.gd scripts/items/item.gd
+msgid "Урон"
+msgstr "Schaden"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "Урон против вида: %s за 100 / 1 000 / 10 000 убийств. Полностью изучено видов: %d — +%d%% урона против всех."
+msgstr "Schaden gegen eine Art: %s für 100 / 1.000 / 10.000 Kills. Vollständig erforschte Arten: %d — +%d%% Schaden gegen alle."
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Урон участников"
+msgstr "Schaden der Mitglieder"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Урон — сила армии замка и героя; солдаты не гибнут."
+msgstr "Schaden ist die Stärke deiner Burgarmee und deines Helden; Soldaten sterben nicht."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Успех! Теперь +%d"
+msgstr "Erfolg! Jetzt +%d"
+
+#: data/items/drill_manual.tres
+msgid "Устав строевой подготовки: новобранцы учатся быстрее."
+msgstr "Ein Exerzierhandbuch: Rekruten lernen schneller."
+
+#: scripts/autoload/world_service.gd
+msgid "Устаревший ответ"
+msgstr "Veraltete Antwort"
+
+#: scenes/ui/guild_panel.gd
+msgid "Участник"
+msgstr "Mitglied"
+
+#: scenes/ui/guild_panel.gd
+msgid "Участник исключён"
+msgstr "Mitglied rausgeworfen"
+
+#: scenes/ui/guild/guild_season_page.gd scenes/ui/guild_panel.gd
+msgid "Участники"
+msgstr "Mitglieder"
+
+#: scenes/ui/guild_panel.gd
+msgid "Участники: %d / %d · бонус: +%d%% к силе армии"
+msgstr "Mitglieder: %d / %d · Bonus: +%d%% Armeestärke"
+
+#: data/buildings/tavern.tres
+msgid "Уютные комнаты: герой быстрее отдыхает, голод и жажда приходят медленнее."
+msgstr "Gemütliche Zimmer: Der Held rastet schneller, Hunger und Durst kommen langsamer."
+
+#: data/buildings/farm.tres
+msgid "Ферма"
+msgstr "Bauernhof"
+
+#: scripts/data/stat_modifier.gd
+msgid "Хватка"
+msgstr "Griff"
+
+#: data/treasures/archer.json
+msgid "Хитрость лисы — в каждом стежке."
+msgstr "Fuchslist in jedem Stich."
+
+#: data/treasures/mage.json
+msgid "Хозяин всегда оказывается там, где нужно, — чуть раньше."
+msgstr "Sein Besitzer ist immer dort, wo er gebraucht wird — ein wenig zu früh."
+
+#: data/treasures/warrior.json
+msgid "Холодные, как северный ветер, и такие же беспощадные."
+msgstr "Kalt wie der Nordwind und genauso gnadenlos."
+
+#: data/treasures/warrior.json
+msgid "Хранитель Клятвы"
+msgstr "Eidwahrer"
+
+#: data/treasures/mage.json
+msgid "Хранитель библиотеки"
+msgstr "Bibliothekshüter"
+
+#: data/treasures/mage.json
+msgid "Хранителя библиотеки"
+msgstr "des Bibliothekshüters"
+
+#: data/treasures/warrior.json
+msgid "Цареубийца"
+msgstr "Königsmörder"
+
+#: scenes/ui/guild_panel.gd
+msgid "Цвет"
+msgstr "Farbe"
+
+#: scenes/ui/guild_panel.gd
+msgid "Цена: 1000 золота из казны замка (в казне: %d)"
+msgstr "Kosten: 1000 Gold aus der Burgkasse (Kasse: %d)"
+
+#: data/skills/mage_chain_lightning.tres
+msgid "Цепная молния"
+msgstr "Kettenblitz"
+
+#: data/skills/mage_arcane_power.tres
+msgid "Чародейская мощь"
+msgstr "Arkane Macht"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Частота кадров"
+msgstr "Bildrate"
+
+#: scenes/ui/guild_panel.gd
+msgid "Чат гильдии"
+msgstr "Gildenchat"
+
+#: server/src/world/guilds.ts
+msgid "Чтобы уйти, нажмите «Покинуть гильдию»"
+msgstr "Um zu gehen, drücke „Gilde verlassen“"
+
+#: data/treasures/warrior.json
+msgid "Шаг Бури"
+msgstr "Sturmschritt"
+
+#: scripts/data/monster_data.gd
+msgid "Шаман"
+msgstr "Schamane"
+
+#: scripts/items/item.gd
+msgid "Шанс крита, %"
+msgstr "Kritchance, %"
+
+#: data/treasures/mage.json
+msgid "Шаровары"
+msgstr "Pluderhose"
+
+#: data/treasures/mage.json
+msgid "Шаровары Верховного арканиста"
+msgstr "Pluderhose des Hocharkanisten"
+
+#: data/treasures/mage.json
+msgid "Шаровары Жреца солнца"
+msgstr "Pluderhose des Sonnenpriesters"
+
+#: data/treasures/mage.json
+msgid "Шаровары Звездопада"
+msgstr "Pluderhose des Sternenfalls"
+
+#: data/treasures/mage.json
+msgid "Шаровары Коснувшегося бездны"
+msgstr "Pluderhose des Abgrundberührten"
+
+#: data/treasures/mage.json
+msgid "Шаровары Повелителя гроз"
+msgstr "Pluderhose des Sturmfürsten"
+
+#: data/treasures/mage.json
+msgid "Шаровары Призывателя пламени"
+msgstr "Pluderhose des Flammenrufers"
+
+#: data/treasures/mage.json
+msgid "Шаровары Ткача льда"
+msgstr "Pluderhose des Frostwebers"
+
+#: data/treasures/mage.json
+msgid "Шаровары Хранителя библиотеки"
+msgstr "Pluderhose des Bibliothekshüters"
+
+#: data/treasures/mage.json
+msgid "Шаровары Шёлкового Пути"
+msgstr "Pluderhose der Seidenstraße"
+
+#: data/guild/guild.json
+msgid "Шепчущие рощи"
+msgstr "Flüsterhaine"
+
+#: data/treasures/archer.json
+msgid "Шепчущий Ветер"
+msgstr "Flüsternder Wind"
+
+#: data/treasures/mage.json
+msgid "Шили его семь лет. Каждая нить — отдельное заклинание."
+msgstr "Man nähte ihn sieben Jahre lang. Jeder Faden ist ein eigener Zauber."
+
+#: data/treasures/warrior.json
+msgid "Шипы венца пьют кровь врагов — и немного хозяина."
+msgstr "Die Dornen der Krone trinken das Blut der Feinde — und ein wenig das ihres Trägers."
+
+#: data/talents/archer_talents.tres
+msgid "Шквал стрел"
+msgstr "Pfeilhagel"
+
+#: data/treasures/warrior.json scripts/data/item_base.gd
+msgid "Шлем"
+msgstr "Helm"
+
+#: data/treasures/warrior.json
+msgid "Шлем Военачальника"
+msgstr "Helm des Kriegsherrn"
+
+#: data/treasures/warrior.json
+msgid "Шлем Волчьей Стаи"
+msgstr "Helm des Wolfsrudels"
+
+#: data/treasures/warrior.json
+msgid "Шлем Закалённого горна"
+msgstr "Helm der Glutschmiede"
+
+#: data/treasures/warrior.json
+msgid "Шлем Каменной стены"
+msgstr "Helm des Steinwalls"
+
+#: data/treasures/warrior.json
+msgid "Шлем Королевской гвардии"
+msgstr "Helm der Königsgarde"
+
+#: data/treasures/warrior.json
+msgid "Шлем Кровавой клятвы"
+msgstr "Helm des Blutschwurs"
+
+#: data/treasures/warrior.json
+msgid "Шлем Ледяной хватки"
+msgstr "Helm des Frostgriffs"
+
+#: data/treasures/warrior.json
+msgid "Шлем Небесного стража"
+msgstr "Helm des Himmelswächters"
+
+#: data/treasures/warrior.json
+msgid "Шлем Пепельного стража"
+msgstr "Helm des Aschewächters"
+
+#: data/treasures/warrior.json
+msgid "Шлем Порождения бездны"
+msgstr "Helm der Abgrundbrut"
+
+#: data/treasures/warrior.json
+msgid "Шлем Сокрушителя бурь"
+msgstr "Helm des Sturmbrechers"
+
+#: data/items/iron_helmet.tres
+msgid "Шлем с гребнем: и защита, и повод для гордости."
+msgstr "Ein Helm mit Kamm: Schutz und Grund zum Stolz zugleich."
+
+#: data/items/commander_standard.tres
+msgid "Штандарт полководца"
+msgstr "Standarte des Feldherrn"
+
+#: data/items/commander_standard.tres
+msgid "Штандарт полководца ведёт армию к победе."
+msgstr "Die Standarte des Feldherrn führt die Armee zum Sieg."
+
+#: data/treasures/archer.json
+msgid "Штаны"
+msgstr "Beinlinge"
+
+#: data/treasures/archer.json
+msgid "Штаны Бегущей с ветром"
+msgstr "Beinlinge der Windläuferin"
+
+#: data/treasures/archer.json
+msgid "Штаны Ветра пустыни"
+msgstr "Beinlinge des Wüstenwinds"
+
+#: data/treasures/archer.json
+msgid "Штаны Грозовой стрелы"
+msgstr "Beinlinge des Donnerpfeils"
+
+#: data/treasures/archer.json
+msgid "Штаны Ночного охотника"
+msgstr "Beinlinge des Nachtjägers"
+
+#: data/treasures/archer.json
+msgid "Штаны Орлиного глаза"
+msgstr "Beinlinge des Adlerauges"
+
+#: data/treasures/archer.json
+msgid "Штаны Повелителя зверей"
+msgstr "Beinlinge des Bestienmeisters"
+
+#: data/treasures/archer.json
+msgid "Штаны Серебряного листа"
+msgstr "Beinlinge des Silberblatts"
+
+#: data/treasures/archer.json
+msgid "Штаны Терновой чащи"
+msgstr "Beinlinge des Dornendickichts"
+
+#: data/guild/guild.json
+msgid "Щит братства"
+msgstr "Schild der Bruderschaft"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Щит веры"
+msgstr "Schild des Glaubens"
+
+#: data/items/ancestral_shield.tres
+msgid "Щит предков"
+msgstr "Schild der Ahnen"
+
+#: data/items/ancestral_shield.tres
+msgid "Щит предков хранит тех, кто держит строй."
+msgstr "Der Schild der Ahnen beschützt jene, die die Linie halten."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Экипировка"
+msgstr "Ausrüstung"
+
+#: data/guild/guild.json
+msgid "Экономика"
+msgstr "Wirtschaft"
+
+#: scenes/battle/battle.gd
+msgid "Элита: %s!"
+msgstr "Elite: %s!"
+
+#: data/treasures/archer.json
+msgid "Эльфийская работа: листья на плаще шелестят, даже когда нет ветра."
+msgstr "Elfenarbeit: Die Blätter am Umhang rascheln sogar ohne Wind."
+
+#: scripts/items/item.gd
+msgid "Эпический"
+msgstr "Episch"
+
+#: data/treasures/warrior.json
+msgid "Этим мечом закончили Долгую ночь."
+msgstr "Dieses Schwert beendete die Lange Nacht."
+
+#: server/src/world/game.ts
+msgid "Это имя уже занято"
+msgstr "Dieser Name ist bereits vergeben"
+
+#: server/src/world/game.ts
+msgid "Это не ваша зона"
+msgstr "Das ist nicht deine Zone"
+
+#: server/src/world/game.ts
+msgid "Этот замок нельзя атаковать"
+msgstr "Diese Burg kann nicht angegriffen werden"
+
+#: server/src/world/guilds.ts
+msgid "Этот игрок уже приглашён"
+msgstr "Dieser Spieler wurde bereits eingeladen"
+
+#: data/talents/mage_talents.tres
+msgid "Эфирный щит"
+msgstr "Ätherschild"
+
+#: data/guild/guild.json
+msgid "Южный предел"
+msgstr "Südliche Mark"
+
+#: data/skills/archer_poison_arrow.tres
+msgid "Ядовитая стрела"
+msgstr "Giftpfeil"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Язык / Language"
+msgstr "Sprache / Language"
+
+#: data/guild/guild.json
+msgid "Янтарный берег"
+msgstr "Bernsteinküste"
+
+#: data/talents/warrior_talents.tres
+msgid "Ярость битвы"
+msgstr "Schlachtenzorn"
+
+#: data/skills/archer_hunter_fury.tres
+msgid "Ярость охотника"
+msgstr "Zorn des Jägers"
+
+#: data/treasures/archer.json
+msgid "Ясеневый Длинный Лук"
+msgstr "Eschen-Langbogen"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "армия %d мест"
+msgstr "Armee %d Plätze"
+
+#: scripts/data/stat_modifier.gd
+msgid "брони"
+msgstr "Rüstung"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "в пути %s"
+msgstr "unterwegs %s"
+
+#: scenes/ui/guild_panel.gd
+msgid "в сети"
+msgstr "online"
+
+#: scripts/data/stat_modifier.gd
+msgid "вампиризма"
+msgstr "Lebensraub"
+
+#: scenes/ui/hud.gd scenes/world/world_map.gd
+msgid "ваш замок"
+msgstr "deine Burg"
+
+#: scenes/ui/hud.gd
+msgid "вашу зону #%d"
+msgstr "deine Zone #%d"
+
+#: scripts/ui/ui_format.gd
+msgid "душ"
+msgstr "Seelen"
+
+#: scripts/ui/ui_format.gd
+msgid "душа"
+msgstr "Seele"
+
+#: scripts/ui/ui_format.gd
+msgid "души"
+msgstr "Seelen"
+
+#: scripts/data/stat_modifier.gd
+msgid "замедления голода и жажды"
+msgstr "langsamerer Hunger und Durst"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "здания до ур. %d"
+msgstr "Gebäude bis St. %d"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "здоровья"
+msgstr "Leben"
+
+#: data/guild/guild.json
+msgid "здоровья героя"
+msgstr "Heldenleben"
+
+#: scripts/data/stat_modifier.gd
+msgid "здоровья за убийство"
+msgstr "Leben pro Kill"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "золота"
+msgstr "Gold"
+
+#: data/guild/guild.json
+msgid "золота с монстров"
+msgstr "Gold von Monstern"
+
+#: scenes/world/world_map.gd
+msgid "зону #%d"
+msgstr "Zone #%d"
+
+#: scripts/data/guild_catalog.gd
+msgid "изучите: %s"
+msgstr "erlerne: %s"
+
+#: scenes/world/world_map.gd
+msgid "контроль: [%s]"
+msgstr "kontrolliert von [%s]"
+
+#: scripts/data/stat_modifier.gd
+msgid "крит. урона"
+msgstr "Kritschaden"
+
+#: scenes/ui/needs_panel.gd
+msgid "мало"
+msgstr "niedrig"
+
+#: data/guild/guild.json
+msgid "меньше еды армии"
+msgstr "weniger Armeenahrung"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "на месте"
+msgstr "angekommen"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "награда: %s"
+msgstr "Belohnung: %s"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "начало с %d-й волны"
+msgstr "Start bei Welle %d"
+
+#: scenes/world/battle_replay.gd scenes/world/world_map.gd scripts/ui/panel_ui.gd
+msgid "нет"
+msgstr "keine"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "нет бонуса"
+msgstr "kein Bonus"
+
+#: scenes/world/world_map.gd
+msgid "нет — зону займут без боя!"
+msgstr "keine — die Zone wird kampflos eingenommen!"
+
+#: scenes/world/world_map.gd
+msgid "никто не контролирует"
+msgstr "unkontrolliert"
+
+#: scenes/ui/needs_panel.gd
+msgid "норма"
+msgstr "normal"
+
+#: scenes/battle/battle.gd
+msgid "обучено: %s ×%d"
+msgstr "ausgebildet: %s ×%d"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "опыта"
+msgstr "Erfahrung"
+
+#: data/guild/guild.json
+msgid "опыта героя"
+msgstr "Helden-EP"
+
+#: data/guild/guild.json
+msgid "опыта гильдии за победы и босса"
+msgstr "Gilden-EP für Siege und den Boss"
+
+#: scenes/ui/guild_panel.gd
+msgid "от 3 до 24 символов"
+msgstr "3 bis 24 Zeichen"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "пока ни одного региона"
+msgstr "noch keine Regionen"
+
+#: scenes/battle/battle.gd
+msgid "построено: "
+msgstr "gebaut: "
+
+#: scripts/data/stat_modifier.gd
+msgid "регенерации"
+msgstr "Regeneration"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "сезон %d — %d место"
+msgstr "Saison %d — Platz %d"
+
+#: scenes/world/battle_replay.gd
+msgid "сила %d · %s"
+msgstr "Stärke %d · %s"
+
+#: data/guild/guild.json scripts/data/stat_modifier.gd
+msgid "силы армии"
+msgstr "Armeestärke"
+
+#: scripts/data/stat_modifier.gd
+msgid "силы клика"
+msgstr "Klickkraft"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "склад %d, казна %d"
+msgstr "Lager %d, Kasse %d"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "скорости атаки"
+msgstr "Angriffstempo"
+
+#: data/guild/guild.json scripts/data/stat_modifier.gd
+msgid "скорости обучения"
+msgstr "Ausbildungstempo"
+
+#: scripts/data/stat_modifier.gd
+msgid "скорости отдыха"
+msgstr "Rasttempo"
+
+#: scripts/data/stat_modifier.gd
+msgid "сокращения перезарядки"
+msgstr "Abklingzeitverkürzung"
+
+#: scenes/world/world_map.gd
+msgid "только что"
+msgstr "gerade eben"
+
+#: scenes/ui/guild_panel.gd
+msgid "ур. %d"
+msgstr "St. %d"
+
+#: scenes/ui/skill_button.gd
+msgid "ур.%d"
+msgstr "St.%d"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "урона"
+msgstr "Schaden"
+
+#: scenes/ui/inventory_panel.gd
+msgid "урона «%s»"
+msgstr "Schaden von „%s“"
+
+#: data/guild/guild.json
+msgid "урона героя"
+msgstr "Heldenschaden"
+
+#: scenes/ui/inventory_panel.gd scripts/data/stat_modifier.gd
+msgid "урона умений"
+msgstr "Fähigkeitsschaden"
+
+#: scenes/ui/needs_panel.gd
+msgid "хорошо"
+msgstr "gut"
+
+#: scripts/data/stat_modifier.gd
+msgid "шанса двойного удара"
+msgstr "Doppelschlagchance"
+
+#: data/guild/guild.json
+msgid "шанса добычи"
+msgstr "Beutechance"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "шанса дропа"
+msgstr "Dropchance"
+
+#: scripts/data/stat_modifier.gd
+msgid "шанса крита"
+msgstr "Kritchance"
+
+#: scenes/world/world_map.tscn
+msgid "← В замок"
+msgstr "← Zur Burg"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "→ Ур. %d: %s"
+msgstr "→ St. %d: %s"
+
+#: scenes/ui/hud.gd
+msgid "⚔ %s идёт на %s (%d солдат), прибудет через %s"
+msgstr "⚔ %s marschiert auf %s (%d Soldaten), Ankunft in %s"
+
+#: scenes/ui/army_view.tscn
+msgid "⚠ Армия голодает — сила −50%"
+msgstr "⚠ Die Armee hungert — Stärke −50%"
+
+#: scenes/ui/hud.gd
+msgid "✉ %s приглашает вас в гильдию %s — откройте «Гильдию» [G]"
+msgstr "✉ %s lädt dich in die Gilde %s ein — öffne „Gilde“ [G]"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "✔ Получено"
+msgstr "✔ Erhalten"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "✔ всё"
+msgstr "✔ fertig"
+
+#: scenes/ui/hud.gd
+msgid "✦ Сокровище: %s (%s) — загляните в Сокровищницу [I]"
+msgstr "✦ Schatz: %s (%s) — sieh in der Schatzkammer nach [I]"

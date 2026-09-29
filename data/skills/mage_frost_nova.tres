@@ -22,3 +22,4 @@ color = Color(0.6, 0.9, 1.0, 1)
 cooldown = 15.0
 unlock_level = 40
 effect = SubResource("Resource_effect")
+animation = &"cast"

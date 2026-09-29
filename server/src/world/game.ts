@@ -99,6 +99,7 @@ export type GameSettings = GeneratorSettings & BattleSettings & KingdomSettings 
   marchSeconds: number;
   castleMarchSeconds: number;
   castleMinDistance: number;
+  castleMaxTier: number;
   maxNameLength: number;
   reportsKept: number;
   raidLootShare: number;
@@ -1029,13 +1030,16 @@ export class Game {
     }
   }
 
+  /** Место для нового замка: самая окраина, где ещё есть свободная зона вдали от других замков. */
   private pickCastleZone(): Zone {
     const castles = this.zones.filter((zone) => zone.isCastle);
-    const candidates = this.zones.filter((zone) =>
-      zone.tier === 1 && zone.ownerId === null &&
-      castles.every((castle) => hexDistance(castle, zone) >= this.settings.castleMinDistance));
-    if (candidates.length === 0) throw new GameError("На карте не осталось места для нового замка", 503);
-    return candidates[Math.floor(this.random() * candidates.length)];
+    const free = (zone: Zone) => zone.ownerId === null &&
+      castles.every((castle) => hexDistance(castle, zone) >= this.settings.castleMinDistance);
+    for (let maxTier = 1; maxTier <= this.settings.castleMaxTier; maxTier++) {
+      const candidates = this.zones.filter((zone) => zone.tier <= maxTier && free(zone));
+      if (candidates.length > 0) return candidates[Math.floor(this.random() * candidates.length)];
+    }
+    throw new GameError("На карте не осталось места для нового замка", 503);
   }
 
   private requireZone(zoneId: unknown): Zone {

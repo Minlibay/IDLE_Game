@@ -23,6 +23,7 @@ Database="*res://scripts/autoload/database.gd"
 GameState="*res://scripts/autoload/game_state.gd"
 DesktopWindow="*res://scripts/autoload/desktop_window.gd"
 WorldService="*res://scripts/autoload/world_service.gd"
+Sound="*res://scripts/autoload/sound.gd"
 
 [display]
 
@@ -39,7 +40,7 @@ theme/custom="res://assets/ui/theme.tres"
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://locale/en.po")
+locale/translations=PackedStringArray("res://locale/en.po", "res://locale/de.po", "res://locale/fr.po", "res://locale/es.po", "res://locale/pt_BR.po", "res://locale/it.po", "res://locale/pl.po", "res://locale/tr.po", "res://locale/uk.po", "res://locale/zh_CN.po", "res://locale/ja.po", "res://locale/ko.po")
 locale/fallback="ru"
 
 [physics]

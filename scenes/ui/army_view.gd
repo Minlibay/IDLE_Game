@@ -231,5 +231,6 @@ func _on_max_pressed() -> void:
 
 func _on_recruit_pressed() -> void:
 	if _selected and GameState.kingdom.army.recruit(_selected, _amount):
+		Sound.play(&"recruit")
 		_amount = 1
 		refresh()

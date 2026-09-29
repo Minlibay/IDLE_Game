@@ -48,6 +48,18 @@ func _ready() -> void:
 
 func set_tree(p_tree: TalentTree) -> void:
 	tree = p_tree
+	_warm_icons()
+	queue_redraw()
+
+
+## Текстура, впервые загруженная прямо во время отрисовки, в этом кадре выходит белым квадратом,
+## а сетка перерисовывается только по событиям. Поэтому иконки подгружаются заранее и через кадр — перерисовка.
+func _warm_icons() -> void:
+	if tree == null:
+		return
+	for talent in tree.get_talents():
+		talent.get_icon()
+	await get_tree().process_frame
 	queue_redraw()
 
 

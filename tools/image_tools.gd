@@ -42,6 +42,56 @@ static func remove_background(image: Image, min_brightness := DEFAULT_MIN_BRIGHT
 		if y < h - 1: stack.append(index + w)
 
 
+## Замкнутые «дырки» цвета фона (например, между луком и тетивой — заливка от краёв туда не доходит):
+## связные области фонового цвета не меньше min_area пикселей становятся прозрачными, а области поменьше
+## (от min_area / 8) — если они почти идеально белые, как сам фон (узкие щели между луком и тетивой).
+## Светлые детали с тенью (перья, блики, белки глаз) остаются.
+## «Почти идеально белый» — так выглядит фон, а не светлая деталь персонажа с тенью.
+const PURE_WHITE_MIN_BRIGHTNESS := 0.965
+const PURE_WHITE_MAX_SATURATION := 0.04
+
+
+static func remove_background_holes(image: Image, min_area: int, min_brightness := DEFAULT_MIN_BRIGHTNESS, max_saturation := DEFAULT_MAX_SATURATION) -> int:
+	var w := image.get_width()
+	var h := image.get_height()
+	var visited := PackedByteArray()
+	visited.resize(w * h)
+	var removed := 0
+	for start in w * h:
+		if visited[start]:
+			continue
+		visited[start] = 1
+		var color := image.get_pixel(start % w, start / w)
+		if color.a < 0.5 or not is_background(color, min_brightness, max_saturation):
+			continue
+		var region := PackedInt32Array([start])
+		var stack := PackedInt32Array([start])
+		var sum_v := color.v
+		var sum_s := color.s
+		while not stack.is_empty():
+			var index := stack[stack.size() - 1]
+			stack.resize(stack.size() - 1)
+			var x := index % w
+			var y := index / w
+			for next: int in [index - 1 if x > 0 else -1, index + 1 if x < w - 1 else -1, index - w if y > 0 else -1, index + w if y < h - 1 else -1]:
+				if next < 0 or visited[next]:
+					continue
+				var c := image.get_pixel(next % w, next / w)
+				if c.a < 0.5 or not is_background(c, min_brightness, max_saturation):
+					continue
+				visited[next] = 1
+				region.append(next)
+				stack.append(next)
+				sum_v += c.v
+				sum_s += c.s
+		var pure_white := sum_v / region.size() >= PURE_WHITE_MIN_BRIGHTNESS and sum_s / region.size() <= PURE_WHITE_MAX_SATURATION
+		if region.size() >= min_area or (pure_white and region.size() >= min_area / 8):
+			for index in region:
+				image.set_pixel(index % w, index / w, Color(0, 0, 0, 0))
+			removed += region.size()
+	return removed
+
+
 ## Связные области непрозрачных пикселей → прямоугольники (сверху вниз, слева направо).
 static func find_elements(image: Image, min_area := 200) -> Array[Rect2i]:
 	var w := image.get_width()

@@ -5,6 +5,9 @@ extends HBoxContainer
 signal result(text: String, ok: bool)
 
 const CONFIRM_TIME := 3.0
+const PROGRESS_ICONS := "res://assets/sprites/progress/"
+const SOULS_ICON := preload("res://assets/sprites/progress/souls.png")
+const REBIRTH_ICON := preload("res://assets/sprites/progress/rebirth.png")
 
 var _souls_label: Label
 var _info_label: Label
@@ -17,10 +20,14 @@ func _ready() -> void:
 	size_flags_vertical = Control.SIZE_EXPAND_FILL
 	add_theme_constant_override("separation", 8)
 	var left := PanelUi.section(self, tr("Перерождение"), 440)
+	var souls_row := HBoxContainer.new()
+	souls_row.add_theme_constant_override("separation", 6)
+	souls_row.add_child(UiStyles.make_icon(SOULS_ICON, 28))
 	_souls_label = Label.new()
 	_souls_label.add_theme_font_size_override("font_size", 18)
 	_souls_label.add_theme_color_override("font_color", Color(0.75, 0.6, 1.0))
-	left.add_child(_souls_label)
+	souls_row.add_child(_souls_label)
+	left.add_child(souls_row)
 	_info_label = Label.new()
 	_info_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_info_label.add_theme_font_size_override("font_size", 12)
@@ -31,6 +38,8 @@ func _ready() -> void:
 	left.add_child(PanelUi.hint(tr("Сбрасываются волна, уровень и таланты (очки возвращаются). Остаются снаряжение, сокровища, золото, замок, армия и гильдия.")))
 	_prestige_button = PanelUi.button(tr("Переродиться"), &"ButtonRed")
 	_prestige_button.custom_minimum_size = Vector2(0, 34)
+	_prestige_button.icon = REBIRTH_ICON
+	_prestige_button.add_theme_constant_override("icon_max_width", 26)
 	_prestige_button.pressed.connect(_on_prestige_pressed)
 	left.add_child(_prestige_button)
 
@@ -70,10 +79,7 @@ func _make_upgrade_row(upgrade: Dictionary, progress: HeroProgress) -> Control:
 	var max_rank := int(upgrade.max_rank)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 8)
-	var icon_path: String = GuildCatalog.ICONS.get(str(upgrade.stat), "res://assets/ui/icons/battle.png")
-	if upgrade.stat == "ATTACK_SPEED":
-		icon_path = "res://assets/sprites/talents/attack_speed.png"
-	row.add_child(UiStyles.make_icon(load(icon_path), 24))
+	row.add_child(UiStyles.make_icon(load(PROGRESS_ICONS + str(upgrade.id) + ".png"), 26))
 	row.add_child(PanelUi.cell("%s · %d/%d" % [tr(str(upgrade.name)), rank, max_rank], 230, Color.WHITE, false, 12))
 	var effect: String
 	if upgrade.id == "head_start":

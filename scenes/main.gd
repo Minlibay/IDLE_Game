@@ -15,6 +15,9 @@ extends Node
 ##   --preview-anim=имя:кадр  показать кадр анимации героя (проверка артов; с --timescale=0.01 мир почти замирает)
 ##   --tired                 бодрость на нуле — герой сразу уходит отдыхать
 ##   --selftest              прогнать проверку логики предметов (tests/self_test.gd)
+##   --soaktest              стресс-тест на утечки и производительность (tests/soak_test.gd)
+##   --sound                 включить звук в автотесте (по умолчанию автотесты без звука)
+##   --dev-script=путь.gd    добавить узел с этим скриптом (разовые проверки в живой игре)
 ##   --timescale=4           ускорить время
 ##   --screenshot=путь.png   сохранить скриншот через 6 секунд и выйти
 ##   --quit-after-seconds=N  выйти через N секунд
@@ -23,6 +26,7 @@ const CREATION_SCENE := preload("res://scenes/creation/character_creation.tscn")
 const BATTLE_SCENE := preload("res://scenes/battle/battle.tscn")
 const SELF_TEST_SCRIPT := preload("res://tests/self_test.gd")
 const WORLD_TEST_SCRIPT := preload("res://tests/world_test.gd")
+const SOAK_TEST_SCRIPT := preload("res://tests/soak_test.gd")
 const SCREENSHOT_DELAY := 6.0
 
 var _current: Node
@@ -76,6 +80,14 @@ func _ready() -> void:
 		add_child(world_test)
 	if args.has("preview-anim") and _current.has_node("Hero"):
 		_preview_animation.call_deferred(_current.get_node("Hero") as Hero, str(args["preview-anim"]))
+	if args.has("dev-script"):
+		var probe := Node.new()
+		probe.set_script(load(str(args["dev-script"])))
+		add_child(probe)
+	if args.has("soaktest"):
+		var soak_test := Node.new()
+		soak_test.set_script(SOAK_TEST_SCRIPT)
+		add_child(soak_test)
 	if args.has("selftest"):
 		var self_test := Node.new()
 		self_test.set_script(SELF_TEST_SCRIPT)
@@ -83,7 +95,7 @@ func _ready() -> void:
 	if args.has("screenshot"):
 		_take_screenshot_later(str(args.screenshot))
 	if args.has("quit-after-seconds"):
-		get_tree().create_timer(float(args["quit-after-seconds"]), true, false, true).timeout.connect(get_tree().quit)
+		get_tree().create_timer(float(args["quit-after-seconds"]), true, false, true).timeout.connect(Sound.quit_game)
 
 
 ## Тексты, собранные кодом, проще всего обновить, пересоздав текущий экран (прогресс хранится в GameState).
@@ -98,6 +110,7 @@ func _on_language_changed() -> void:
 
 ## После перерождения бой начинается заново с новой волны; окно пути открывается на перерождении.
 func _on_prestiged(gained: int) -> void:
+	Sound.play(&"prestige")
 	_show_battle()
 	WorldService.report_hero_level()
 	if _current.has_node("HUD"):
@@ -140,7 +153,7 @@ func _take_screenshot_later(path: String) -> void:
 	var image := get_viewport().get_texture().get_image()
 	image.save_png(path)
 	print("Screenshot saved: ", path)
-	get_tree().quit()
+	Sound.quit_game()
 
 
 func _parse_user_args() -> Dictionary:

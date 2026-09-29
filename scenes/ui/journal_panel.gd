@@ -38,6 +38,7 @@ func _ready() -> void:
 		page.visible = false
 		body.add_child(page)
 		page.result.connect(func(text: String, ok: bool) -> void:
+			Sound.play(&"claim" if ok else &"error")
 			result_label.text = text
 			result_label.add_theme_color_override("font_color", COLOR_OK if ok else COLOR_BAD)
 			_refresh())

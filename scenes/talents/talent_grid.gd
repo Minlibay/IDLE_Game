@@ -69,6 +69,12 @@ func open() -> void:
 	grid_view.request_fit()
 
 
+## Окно уничтожают открытым (пересоздание сцены при смене языка, перерождении) — вернуть окну игры обычный режим.
+func _exit_tree() -> void:
+	if visible:
+		close()
+
+
 func close() -> void:
 	if not visible:
 		return
@@ -87,12 +93,15 @@ func _learn(talent: TalentData) -> void:
 		return
 	if GameState.learn_talent(talent):
 		_show_result(tr("Изучено: %s") % talent.display_name, COLOR_OK)
+		Sound.play(&"keystone" if talent.kind == TalentData.Kind.KEYSTONE else &"talent")
 	elif GameState.get_talent_rank(talent) >= talent.max_rank:
 		_show_result(tr("Уже изучено"), COLOR_HINT)
 	elif not GameState.is_talent_reachable(talent):
 		_show_result(tr("Сначала изучите соседний узел"), COLOR_BAD)
+		Sound.play(&"error")
 	else:
 		_show_result(tr("Нет свободных очков"), COLOR_BAD)
+		Sound.play(&"error")
 
 
 func _refresh() -> void:
@@ -152,8 +161,10 @@ func _on_reset_pressed() -> void:
 	_reset_armed = false
 	if GameState.reset_talents():
 		_show_result(tr("Таланты сброшены, очки возвращены"), COLOR_OK)
+		Sound.play(&"merge")
 	else:
 		_show_result(tr("Не хватает золота на сброс"), COLOR_BAD)
+		Sound.play(&"error")
 	_refresh()
 
 

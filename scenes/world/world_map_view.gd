@@ -9,9 +9,9 @@ const HEX_SIZE := 14.0
 ## С какого масштаба показывать номер уровня зоны.
 const TIER_LABEL_ZOOM := 2.4
 ## Размер подписей регионов (не зависит от приближения).
-const REGION_LABEL_SIZE := 13
-## С какого приближения над замками видны теги гильдий.
-const GUILD_TAG_ZOOM := 1.2
+const REGION_LABEL_SIZE := 15
+## С какого приближения над замками видны теги гильдий (карта открывается с приближением 1).
+const GUILD_TAG_ZOOM := 0.6
 ## Центрировать можно, только когда окно уже раскрыто (в режиме полоски карта слишком низкая).
 const MIN_FOCUS_HEIGHT := 400.0
 
@@ -128,6 +128,7 @@ func _draw() -> void:
 	var radius := HEX_SIZE * zoom
 	var tile_scale := sqrt(3.0) * radius / BASE_TILE_WIDTH
 	var my_id := WorldService.my_id()
+	var castle_tags: Array[Dictionary] = []
 
 	# Зоны идут по рядам сверху вниз — нижние тайлы перекрывают выступы верхних.
 	for zone: Variant in WorldService.zones:
@@ -146,6 +147,9 @@ func _draw() -> void:
 			_draw_owner(center, radius, zone, my_id)
 		if zone.castle:
 			_draw_marker(MARKER_CASTLE, center, radius * 1.3)
+			var owner := WorldService.get_player(zone.owner)
+			if owner.get("guildTag") is String and zoom >= GUILD_TAG_ZOOM:
+				castle_tags.append({"point": center + Vector2(0, -radius * 1.35), "tag": owner.guildTag, "color": owner.get("guildColor")})
 			if WorldService.is_castle_protected(zone.owner):
 				draw_arc(center, radius * 0.8, 0.0, TAU, 24, COLOR_SHIELD, maxf(1.5, 2.0 * zoom))
 		elif int(zone.garrison) > 0:
@@ -154,23 +158,67 @@ func _draw() -> void:
 			draw_string(font, center + Vector2(-4, 5) * zoom, str(int(zone.tier)),
 				HORIZONTAL_ALIGNMENT_LEFT, -1, int(9 * zoom), Color(1, 1, 1, 0.7))
 
-	_draw_regions(font)
+	_draw_regions()
 	_draw_move_targets(radius)
 	if selected_zone >= 0:
 		_draw_outline(selected_zone, radius, OUTLINE_SELECTED)
 	_draw_march()
 	_draw_incoming()
 	_draw_heroes(radius, my_id)
+	# Подписи — последним слоем, чтобы их не перекрывали тайлы, маркеры и герои.
+	_draw_region_labels(font)
+	for entry: Dictionary in castle_tags:
+		var font_size := clampi(roundi(13 * zoom), 13, 20)
+		_draw_plate_label(font, entry.point, "[%s]" % entry.tag, font_size, entry.color)
 
 
-## Регионы сезона войны гильдий: тонкие границы и название; у контролируемого — тег и цвет гильдии.
-func _draw_regions(font: Font) -> void:
+## Регионы сезона войны гильдий: границы (у контролируемого — цветом гильдии).
+func _draw_regions() -> void:
+	for entry: Dictionary in _visible_regions():
+		var controlled: bool = entry.region.guildId != null
+		var color := Color(str(entry.region.color)) if controlled else Color(1, 1, 1, 0.3)
+		draw_rect(entry.rect, Color(color, 0.8 if controlled else 0.3), false, 2.5 if controlled else 1.0)
+
+
+## Названия регионов на плашках; у контролируемого — тег гильдии её цветом.
+func _draw_region_labels(font: Font) -> void:
+	for entry: Dictionary in _visible_regions():
+		var region: Dictionary = entry.region
+		var rect: Rect2 = entry.rect
+		var controlled: bool = region.guildId != null
+		var title := GuildCatalog.region_name(int(region.index))
+		if controlled:
+			title += "  [%s]" % region.tag
+		var top := maxf(rect.position.y, 0.0) + REGION_LABEL_SIZE + 6
+		_draw_plate_label(font, Vector2(rect.get_center().x, top), title, REGION_LABEL_SIZE, region.color if controlled else null)
+
+
+## Подпись на плашке: белый текст с обводкой читается на любой местности. point — центр текста.
+## guild_color — цвет гильдии (плашка залита им, затемнённым, рамка — ярким), null — нейтральная тёмная плашка.
+func _draw_plate_label(font: Font, point: Vector2, text: String, font_size: int, guild_color: Variant) -> void:
+	var text_size := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
+	var plate := Rect2(point - Vector2(text_size.x * 0.5 + 7, font_size * 0.5 + 4), Vector2(text_size.x + 14, font_size + 8))
+	if guild_color is String:
+		var color := Color(guild_color)
+		draw_rect(plate, Color(color.darkened(0.55), 0.92))
+		draw_rect(plate, color.lightened(0.25), false, 2.0)
+	else:
+		draw_rect(plate, Color(0.06, 0.05, 0.1, 0.85))
+		draw_rect(plate, Color(1, 1, 1, 0.35), false, 1.0)
+	var baseline := Vector2(point.x - text_size.x * 0.5, point.y + font.get_ascent(font_size) * 0.5 - 1)
+	draw_string_outline(font, baseline, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, 4, Color(0, 0, 0, 0.9))
+	draw_string(font, baseline, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.WHITE)
+
+
+## Регионы, попадающие на экран, с их прямоугольниками на экране.
+func _visible_regions() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
 	var grid := int(WorldService.regions.get("grid", 0))
 	var list: Array = WorldService.regions.get("list", [])
 	var cols := WorldService.cols
 	var rows := WorldService.rows
 	if grid <= 0 or list.size() < grid * grid or cols <= 0:
-		return
+		return result
 	var half := Vector2(HEX_SIZE * sqrt(3.0) * 0.5, HEX_SIZE)
 	for region: Dictionary in list:
 		var index := int(region.index)
@@ -181,19 +229,9 @@ func _draw_regions(font: Font) -> void:
 		var top_left := (HexGrid.center(col0, row0, HEX_SIZE) - half) * zoom + pan
 		var bottom_right := (HexGrid.center(col1, row1, HEX_SIZE) + half) * zoom + pan
 		var rect := Rect2(top_left, bottom_right - top_left)
-		if not rect.intersects(Rect2(Vector2.ZERO, size)):
-			continue
-		var controlled: bool = region.guildId != null
-		var color := Color(str(region.color)) if controlled else Color(1, 1, 1, 0.25)
-		draw_rect(rect, Color(color, 0.55 if controlled else 0.25), false, 2.0 if controlled else 1.0)
-		var title := GuildCatalog.region_name(index)
-		if controlled:
-			title += "  [%s]" % region.tag
-		var font_size := REGION_LABEL_SIZE
-		var width := font.get_string_size(title, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
-		var point := Vector2(rect.get_center().x - width * 0.5, rect.position.y + font_size + 4)
-		draw_string_outline(font, point, title, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, 4, Color(0, 0, 0, 0.75))
-		draw_string(font, point, title, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, color if controlled else Color(1, 1, 1, 0.6))
+		if rect.intersects(Rect2(Vector2.ZERO, size)):
+			result.append({"region": region, "rect": rect})
+	return result
 
 
 ## Заливка цветом владельца поверх местности; рамка — цветом его гильдии (если он в гильдии).
@@ -209,16 +247,6 @@ func _draw_owner(center: Vector2, radius: float, zone: Dictionary, my_id: int) -
 		draw_polyline(corners, Color(guild_color), maxf(2.0, 2.5 * zoom))
 	else:
 		draw_polyline(corners, color if mine else color.darkened(0.25), 2.0 if mine else 1.2)
-	# Тег гильдии над замком, когда карта достаточно приближена.
-	var tag: Variant = owner.get("guildTag")
-	if zone.castle and tag is String and zoom >= GUILD_TAG_ZOOM:
-		var font := get_theme_default_font()
-		var font_size := int(10 * zoom)
-		var text := "[%s]" % tag
-		var width := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
-		draw_string_outline(font, center + Vector2(-width * 0.5, -radius * 0.75), text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, 3, Color(0, 0, 0, 0.8))
-		draw_string(font, center + Vector2(-width * 0.5, -radius * 0.75), text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size,
-			Color(guild_color) if guild_color is String else Color.WHITE)
 
 
 ## Маркер (замок, знамя, герой) по центру точки; size — высота маркера.

@@ -16,8 +16,11 @@ const KINGDOM_HINT_INTERVAL := 0.5
 
 var _message_tween: Tween
 var _kingdom_hint_timer := 0.0
+## Сколько непрочитанных сообщений гильдии было при прошлой проверке (новое — короткий звук).
+var _last_unread := 0
 
 @onready var name_label: Label = %NameLabel
+@onready var stats_panel: Control = $Root/BottomBar/StatsPanel
 @onready var hp_bar: ProgressBar = %HpBar
 @onready var hp_text: Label = %HpText
 @onready var xp_bar: ProgressBar = %XpBar
@@ -32,6 +35,7 @@ var _kingdom_hint_timer := 0.0
 @onready var quit_button: Button = %QuitButton
 @onready var tray_button: Button = %TrayButton
 @onready var settings_button: Button = %SettingsButton
+@onready var sound_button: Button = %SoundButton
 @onready var message_label: Label = %MessageLabel
 @onready var skill_list: HBoxContainer = %SkillList
 @onready var auto_cast_button: Button = %AutoCastButton
@@ -65,13 +69,22 @@ func _ready() -> void:
 	guild_button.pressed.connect(toggle_guild)
 	journal_button.pressed.connect(toggle_journal)
 	GameState.progress.changed.connect(_update_journal_button)
-	GameState.progress.claimable_added.connect(func(text: String) -> void: show_message(text))
+	GameState.progress.claimable_added.connect(func(text: String) -> void:
+		show_message(text)
+		Sound.play(&"quest_done"))
 	GameState.progress_changed.connect(_update_journal_button)
 	WorldService.me_updated.connect(_update_guild_button)
 	WorldService.guild_invited.connect(_on_guild_invited)
 	quit_button.pressed.connect(_on_quit_pressed)
 	tray_button.pressed.connect(DesktopWindow.minimize_to_tray)
-	settings_button.pressed.connect(settings_panel.toggle)
+	settings_button.pressed.connect(_toggle_settings)
+	sound_button.pressed.connect(toggle_sound)
+	Settings.sound_changed.connect(_update_sound_button)
+	_update_sound_button()
+	# У кнопок окон свой звук — открытие/закрытие, щелчок им не нужен.
+	for button: Button in [inventory_button, talents_button, kingdom_button, map_button, guild_button, journal_button, settings_button]:
+		button.set_meta(&"silent", true)
+	_last_unread = WorldService.unread_guild_messages()
 	needs_panel.rest_requested.connect(rest_requested.emit)
 	message_label.modulate.a = 0.0
 	_refresh()
@@ -129,6 +142,22 @@ func toggle_journal() -> void:
 	_toggle_panel(journal_panel)
 
 
+## Звук вкл/выкл (кнопка с динамиком, клавиша S, меню в трее).
+func toggle_sound() -> void:
+	Settings.toggle_muted()
+	show_message(tr("Звук выключен") if Settings.muted else tr("Звук включён"))
+
+
+func _update_sound_button() -> void:
+	sound_button.theme_type_variation = &"SoundMutedButton" if Settings.muted else &"SoundButton"
+	sound_button.tooltip_text = tr("Включить звук [S]") if Settings.muted else tr("Выключить звук [S]")
+
+
+func _toggle_settings() -> void:
+	Sound.play(&"panel_close" if settings_panel.visible else &"panel_open")
+	settings_panel.toggle()
+
+
 func show_message(text: String, duration := MESSAGE_DURATION) -> void:
 	message_label.text = text
 	if _message_tween:
@@ -144,6 +173,7 @@ func _toggle_panel(panel: Control) -> void:
 	for other: Control in [inventory_panel, talent_grid, kingdom_panel, world_map, guild_panel, journal_panel]:
 		if other != panel:
 			other.close()
+	Sound.play(&"panel_close" if panel.visible else &"panel_open")
 	panel.toggle()
 
 
@@ -194,6 +224,9 @@ func _update_journal_button() -> void:
 ## Кнопка гильдии: число новых сообщений чата или «!», если есть приглашения.
 func _update_guild_button() -> void:
 	var unread := WorldService.unread_guild_messages()
+	if unread > _last_unread and not guild_panel.visible:
+		Sound.play(&"chat")
+	_last_unread = unread
 	var invited := WorldService.my_guild().is_empty() and not WorldService.guild_invites().is_empty()
 	if unread > 0 and not guild_panel.visible:
 		guild_button.text = tr("Гильдия (%d)") % unread
@@ -205,11 +238,13 @@ func _update_guild_button() -> void:
 
 
 func _on_guild_invited(invite: Dictionary) -> void:
+	Sound.play(&"guild_invite")
 	show_message(tr("✉ %s приглашает вас в гильдию %s — откройте «Гильдию» [G]") % [
 		str(invite.invitedBy), WorldService.tagged_name(str(invite.name), invite.tag)], ALERT_DURATION)
 
 
 func _on_incoming_attack(attack: Dictionary) -> void:
+	Sound.play(&"attack_alarm")
 	var target := tr("ваш замок") if attack.castle else tr("вашу зону #%d") % int(attack.toZone)
 	show_message(tr("⚔ %s идёт на %s (%d солдат), прибудет через %s") % [
 		WorldService.tagged_name(str(attack.attacker), attack.get("attackerTag")), target, int(attack.units),
@@ -217,10 +252,13 @@ func _on_incoming_attack(attack: Dictionary) -> void:
 
 
 func _on_treasure_found(item: Item) -> void:
+	Sound.play(&"treasure")
 	show_message(tr("✦ Сокровище: %s (%s) — загляните в Сокровищницу [I]") % [item.get_display_name(), item.get_tier_name()], ALERT_DURATION)
 
 
 func _on_new_reports(reports: Array) -> void:
+	if not reports.is_empty():
+		Sound.play(&"report")
 	# Показываем самое свежее важное событие: набег или потерю зоны.
 	for report: Dictionary in reports:
 		var data: Dictionary = report.data
@@ -230,13 +268,15 @@ func _on_new_reports(reports: Array) -> void:
 
 
 func _on_construction_finished(building: BuildingData, level: int) -> void:
+	Sound.play(&"construction_done")
 	show_message(tr("Построено: %s, ур. %d") % [building.display_name, level])
 
 
 func _on_order_completed(unit: UnitData, count: int) -> void:
+	Sound.play(&"units_ready")
 	show_message(tr("Обучено: %s ×%d") % [unit.display_name, count])
 
 
 func _on_quit_pressed() -> void:
 	GameState.save_game()
-	get_tree().quit()
+	Sound.quit_game()

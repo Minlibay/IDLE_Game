@@ -117,6 +117,12 @@ func open() -> void:
 	_refresh()
 
 
+## Окно уничтожают открытым (пересоздание сцены при смене языка, перерождении) — вернуть окну игры обычный режим.
+func _exit_tree() -> void:
+	if visible:
+		close()
+
+
 func close() -> void:
 	if not visible:
 		return
@@ -457,10 +463,12 @@ func _on_equip_pressed() -> void:
 	if _selected == null:
 		return
 	if GameState.is_equipped(_selected):
-		if not GameState.unequip_item(_selected):
+		if GameState.unequip_item(_selected):
+			Sound.play(&"equip")
+		else:
 			_show_result(tr("Сумка полна"), COLOR_BAD)
-	else:
-		GameState.equip(_selected)
+	elif GameState.equip(_selected):
+		Sound.play(&"equip")
 
 
 func _on_sell_pressed() -> void:
@@ -468,6 +476,7 @@ func _on_sell_pressed() -> void:
 		return
 	var price := _selected.get_sell_price()
 	GameState.sell_item(_selected)
+	Sound.play(&"sell")
 	_selected = null
 	_show_result(tr("Продано за %d з") % price, COLOR_OK)
 	_refresh()
@@ -479,13 +488,17 @@ func _on_upgrade_pressed() -> void:
 	match ItemUpgrader.try_upgrade(_selected):
 		ItemUpgrader.Result.SUCCESS:
 			_show_result(tr("Успех! Теперь +%d") % _selected.upgrade_level, COLOR_OK)
+			Sound.play(&"upgrade_ok")
 			GameState.progress.record("upgrade")
 		ItemUpgrader.Result.FAILED:
 			_show_result(tr("Неудача… золото потрачено"), COLOR_BAD)
+			Sound.play(&"upgrade_fail")
 		ItemUpgrader.Result.NOT_ENOUGH_GOLD:
 			_show_result(tr("Не хватает золота"), COLOR_BAD)
+			Sound.play(&"error")
 		ItemUpgrader.Result.MAX_LEVEL:
 			_show_result(tr("Максимальная заточка"), COLOR_BAD)
+			Sound.play(&"error")
 	_refresh()
 
 
@@ -495,7 +508,9 @@ func _on_fuse_pressed() -> void:
 	var result := ItemUpgrader.fuse(_selected)
 	if result == null:
 		_show_result(tr("Нечего сливать"), COLOR_BAD)
+		Sound.play(&"error")
 		return
+	Sound.play(&"merge")
 	_selected = result
 	_show_result(tr("Получено: %s (%s)") % [result.get_display_name(), result.get_tier_name()], result.get_tier_color())
 	_refresh()

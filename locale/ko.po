@@ -1,0 +1,5324 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: ko\n"
+
+#: scenes/creation/class_card.gd
+msgid "\nУмения: "
+msgstr "\n스킬: "
+
+#: scenes/world/world_map.gd
+msgid "  армия: %s"
+msgstr "  군대: %s"
+
+#: scenes/world/world_map.gd
+msgid "  потери: %s"
+msgstr "  손실: %s"
+
+#: scenes/world/world_map.gd
+msgid " · замок под защитой ещё %s"
+msgstr " · 성 보호 %s 남음"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid " · распределяет глава"
+msgstr " · 길드장이 분배"
+
+#: scenes/talents/talent_grid.gd
+msgid " · сектор «%s»"
+msgstr " · 구역 «%s»"
+
+#: scenes/world/world_map.gd
+msgid " · ⚔ %s идёт на %s — %s"
+msgstr " · ⚔ %s → %s 진군 중 — %s"
+
+#: scenes/ui/guild_panel.gd scenes/world/world_map.gd
+msgid " назад"
+msgstr " 전"
+
+#: scenes/ui/inventory_panel.gd
+msgid "%.2f с"
+msgstr "%.2f초"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "%d · %s · изучен"
+msgstr "%d · %s · 연구 완료"
+
+#: scenes/ui/settings_panel.gd
+msgid "%d кадров/с"
+msgstr "%d FPS"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "%d место: %d золота каждому и %d опыта гильдии"
+msgstr "%d위: 멤버당 %d 골드, 길드 경험치 %d"
+
+#: scripts/ui/ui_format.gd
+msgid "%d мин"
+msgstr "%d분"
+
+#: scripts/ui/ui_format.gd
+msgid "%d мин %d с"
+msgstr "%d분 %d초"
+
+#: scripts/ui/ui_format.gd
+msgid "%d с"
+msgstr "%d초"
+
+#: scripts/ui/ui_format.gd
+msgid "%d ч %d мин"
+msgstr "%d시간 %d분"
+
+#: scenes/world/world_map.gd
+msgid "%s %s · зона #%d · %s"
+msgstr "%s %s · 구역 #%d · %s"
+
+#: scenes/ui/army_view.gd
+msgid "%s (в замке: %d)"
+msgstr "%s (성 보유: %d)"
+
+#: scenes/world/world_map.gd
+msgid "%s (есть %d)"
+msgstr "%s (보유 %d)"
+
+#: scripts/data/guild_catalog.gd
+msgid "%s (макс.)"
+msgstr "%s (최대)"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "%s (ур. %d)"
+msgstr "%s (Lv. %d)"
+
+#: scenes/ui/skill_button.gd
+msgid "%s [%s]\n%s\nПерезарядка: %d с · открывается на ур. %d"
+msgstr "%s [%s]\n%s\n재사용 대기시간: %d초 · Lv. %d에 해금"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "%s · %d уровень"
+msgstr "%s · Lv. %d"
+
+#: scenes/ui/hud.gd scenes/ui/inventory_panel.gd
+msgid "%s · %s · ур. %d"
+msgstr "%s · %s · Lv. %d"
+
+#: scenes/world/battle_replay.gd
+msgid "%s · сила %d"
+msgstr "%s · 전투력 %d"
+
+#: scenes/ui/guild_panel.gd
+msgid "%s · ур. %d · %d/%d · пригласил %s"
+msgstr "%s · Lv. %d · %d/%d · 초대한 사람: %s"
+
+#: scenes/world/world_map.gd
+msgid "%s игрока %s"
+msgstr "%s (플레이어 %s)"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "%s идёт на замок (%d солдат) — %s"
+msgstr "%s이(가) 성으로 진군 중 (병사 %d명) — %s"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "%s ур. %d"
+msgstr "%s Lv. %d"
+
+#: scenes/battle/battle.gd
+msgid "%s — волны %d–%d"
+msgstr "%s — 웨이브 %d–%d"
+
+#: scenes/ui/guild_panel.gd
+msgid "%s — ждём ответа (%s)"
+msgstr "%s — 답변 대기 중 (%s)"
+
+#: scenes/world/world_map.gd
+msgid "%s: %s (сила %d, герой ур. %d)"
+msgstr "%s: %s (전투력 %d, 영웅 Lv. %d)"
+
+#: scenes/ui/inventory_panel.gd
+msgid "%s: пусто"
+msgstr "%s: 비어 있음"
+
+#: scenes/battle/battle.gd
+msgid "+%d з"
+msgstr "+%d G"
+
+#: scenes/ui/guild_panel.gd
+msgid "+%d%% к силе армии за каждого участника, но не больше %d%% (потолок растёт с уровнем гильдии)."
+msgstr "멤버 1명당 군대 전투력 +%d%%, 최대 %d%% (상한은 길드 레벨에 따라 증가)"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "+%d%% урона"
+msgstr "+%d%% 피해"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "+%s %s/мин"
+msgstr "+%s %s/분"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "+%s%% (сейчас +%s%%)"
+msgstr "+%s%% (현재 +%s%%)"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "+%s/м"
+msgstr "+%s/분"
+
+#: data/skills/archer_eagle_eye.tres
+msgid "+30% шанса крита на 8 с."
+msgstr "8초 동안 치명타 확률 +30%."
+
+#: data/skills/warrior_war_cry.tres
+msgid "+50% урона на 6 секунд."
+msgstr "6초 동안 피해 +50%."
+
+#: data/skills/archer_hunter_fury.tres
+msgid "+60% скорости атаки на 6 секунд."
+msgstr "6초 동안 공격 속도 +60%."
+
+#: data/skills/mage_arcane_power.tres
+msgid "+80% урона на 8 с."
+msgstr "8초 동안 피해 +80%."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "+{value}% здоровья и +{value2} брони."
+msgstr "생명력 +{value}%, 방어력 +{value2}."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "+{value}% золота и +{value2}% шанса дропа."
+msgstr "골드 +{value}%, 드롭 확률 +{value2}%."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "+{value}% регенерации и {value2}% вампиризма."
+msgstr "재생 +{value}%, 흡혈 {value2}%."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "+{value}% силы армии и +{value2}% скорости обучения."
+msgstr "군대 전투력 +{value}%, 훈련 속도 +{value2}%."
+
+#: scripts/data/item_set_data.gd
+msgid ", аура героя"
+msgstr ", 영웅 오라"
+
+#: scenes/ui/army_view.gd
+msgid ", голод"
+msgstr ", 굶주림"
+
+#: data/skills/archer_deadly_volley.tres
+msgid "10 стрел по ближайшим врагам, каждая — гарантированный крит на 120% урона."
+msgstr "가장 가까운 적에게 화살 10발, 각각 확정 치명타로 120% 피해."
+
+#: data/skills/mage_frost_nova.tres
+msgid "100% урона всем врагам вокруг и заморозка на 3 с."
+msgstr "주변 모든 적에게 100% 피해를 주고 3초간 빙결."
+
+#: data/skills/warrior_rend.tres
+msgid "120% урона и кровотечение: ещё 400% урона за 6 с."
+msgstr "120% 피해와 출혈: 6초에 걸쳐 추가 400% 피해."
+
+#: data/skills/warrior_shield_bash.tres
+msgid "150% урона и оглушение цели на 2,5 с (боссы — вдвое короче)."
+msgstr "150% 피해를 주고 대상을 2.5초간 기절 (보스는 절반)."
+
+#: data/skills/archer_poison_arrow.tres
+msgid "150% урона и яд: ещё 300% урона за 6 с."
+msgstr "150% 피해와 독: 6초에 걸쳐 추가 300% 피해."
+
+#: data/skills/warrior_cleave.tres
+msgid "180% урона цели и 100% врагам вокруг неё."
+msgstr "대상에게 180% 피해, 주변 적에게 100% 피해."
+
+#: data/skills/warrior_earthquake.tres
+msgid "220% урона всем врагам вокруг, оглушение на 1,5 с и отбрасывание."
+msgstr "주변 모든 적에게 220% 피해, 1.5초 기절 및 넉백."
+
+#: data/skills/archer_arrow_rain.tres
+msgid "250% урона всем врагам в большой области вокруг цели."
+msgstr "대상 주변 넓은 범위의 모든 적에게 250% 피해."
+
+#: data/skills/mage_fireball.tres
+msgid "250% урона цели и 100% врагам вокруг неё."
+msgstr "대상에게 250% 피해, 주변 적에게 100% 피해."
+
+#: data/skills/mage_drain_life.tres
+msgid "250% урона цели, герой лечится на половину нанесённого урона."
+msgstr "대상에게 250% 피해, 영웅은 입힌 피해의 절반만큼 회복."
+
+#: scenes/ui/guild_panel.gd
+msgid "2–4 буквы или цифры"
+msgstr "문자 또는 숫자 2–4자"
+
+#: data/skills/warrior_execute.tres
+msgid "300% урона; по врагу с запасом здоровья меньше 30% — втрое больше."
+msgstr "300% 피해, 생명력 30% 미만의 적에게는 3배."
+
+#: data/skills/mage_meteor.tres
+msgid "350% урона по всем врагам в большой области вокруг цели."
+msgstr "대상 주변 넓은 범위의 모든 적에게 350% 피해."
+
+#: data/skills/archer_multishot.tres
+msgid "5 стрел по ближайшим врагам, по 80% урона."
+msgstr "가장 가까운 적에게 화살 5발, 각각 80% 피해."
+
+#: data/skills/mage_armageddon.tres
+msgid "600% урона всем врагам в огромной области вокруг цели и поджог: ещё 300% за 6 с."
+msgstr "대상 주변 매우 넓은 범위의 모든 적에게 600% 피해를 주고 불태움: 6초에 걸쳐 추가 300% 피해."
+
+#: scenes/creation/class_card.gd
+msgid "HP %d · Урон %d · %s"
+msgstr "HP %d · 피해 %d · %s"
+
+#: scenes/ui/inventory_panel.gd
+msgid "[color=#%s]Сет «%s» (%d/%d)[/color]"
+msgstr "[color=#%s]세트 «%s» (%d/%d)[/color]"
+
+#: server/src/world/guilds.ts
+msgid "{name} больше не офицер"
+msgstr "{name}님은 더 이상 간부가 아닙니다"
+
+#: server/src/world/guilds.ts
+msgid "{name} вступил в гильдию"
+msgstr "{name}님이 길드에 가입했습니다"
+
+#: server/src/world/game.ts
+msgid "{name} занял вашу зону без боя (гарнизона не было)"
+msgstr "{name}님이 전투 없이 구역을 점령했습니다 (수비대가 없었습니다)"
+
+#: server/src/world/guilds.ts
+msgid "{name} исключён из гильдии"
+msgstr "{name}님이 길드에서 추방되었습니다"
+
+#: server/src/world/guilds.ts
+msgid "{name} назначен офицером"
+msgstr "{name}님이 간부로 임명되었습니다"
+
+#: server/src/world/guilds.ts
+msgid "{name} основал гильдию"
+msgstr "{name}님이 길드를 창설했습니다"
+
+#: server/src/world/guilds.ts
+msgid "{name} покинул гильдию"
+msgstr "{name}님이 길드를 떠났습니다"
+
+#: server/src/world/game.ts
+msgid "{name} разбил вашу армию, герой вернулся в замок"
+msgstr "{name}님이 당신의 군대를 격파했습니다. 영웅은 성으로 귀환했습니다"
+
+#: server/src/world/game.ts
+msgid "{name} разбил гарнизон и захватил зону"
+msgstr "{name}님이 수비대를 격파하고 구역을 점령했습니다"
+
+#: server/src/world/game.ts
+msgid "{name} разграбил ваш замок. Замок под щитом {hours} ч"
+msgstr "{name}님이 당신의 성을 약탈했습니다. 성은 {hours}시간 동안 보호막에 보호됩니다"
+
+#: server/src/world/guilds.ts
+msgid "{name} теперь глава гильдии"
+msgstr "{name}님이 이제 길드장입니다"
+
+#: scenes/ui/hud.tscn
+msgid "Авто"
+msgstr "자동"
+
+#: scenes/world/world_map.tscn
+msgid "Автоматически войти не получилось (например, имя занято). Укажите другое имя. Позже вход будет через Steam."
+msgstr "자동 로그인에 실패했습니다 (예: 이미 사용 중인 이름). 다른 이름을 입력하세요. 추후 Steam으로 로그인하게 됩니다."
+
+#: scenes/world/world_map.tscn
+msgid "Адрес сервера"
+msgstr "서버 주소"
+
+#: scripts/data/item_base.gd
+msgid "Аксессуар"
+msgstr "장신구"
+
+#: data/treasures/warrior.json
+msgid "Амулет Львиного Сердца"
+msgstr "사자심장 부적"
+
+#: data/skills/mage_armageddon.tres
+msgid "Армагеддон"
+msgstr "아마겟돈"
+
+#: scenes/world/world_map.tscn
+msgid "Армию из замка →"
+msgstr "성에서 군대 출병 →"
+
+#: data/guild/guild.json scenes/ui/inventory_panel.gd scenes/ui/kingdom_panel.tscn
+msgid "Армия"
+msgstr "군대"
+
+#: scenes/ui/army_view.gd
+msgid "Армия замка"
+msgstr "성 군대"
+
+#: scenes/world/world_map.gd
+msgid "Армия замка: "
+msgstr "성 군대: "
+
+#: server/src/world/game.ts
+msgid "Армия погибла в бою с нейтралами, герой вернулся в замок"
+msgstr "중립 몬스터와의 전투에서 군대가 전멸했습니다. 영웅은 성으로 귀환했습니다"
+
+#: scenes/world/world_map.gd
+msgid "Армия с героем: %d · атака %d · зон: %d"
+msgstr "영웅과 함께하는 군대: %d · 공격력 %d · 구역: %d"
+
+#: data/talents/mage_talents.tres
+msgid "Архимагия"
+msgstr "대마법"
+
+#: scenes/world/battle_replay.tscn scenes/world/world_map.gd
+msgid "Атака"
+msgstr "공격"
+
+#: scenes/ui/army_view.gd
+msgid "Атака %d · Защита %d"
+msgstr "공격력 %d · 방어력 %d"
+
+#: server/src/world/game.ts
+msgid "Атака {name} отбита"
+msgstr "{name}님의 공격을 막아냈습니다"
+
+#: scenes/ui/army_view.gd
+msgid "Атака ×%.2f · Защита ×%.2f\nЗдания, захваченные зоны, реликвии армии%s"
+msgstr "공격력 ×%.2f · 방어력 ×%.2f\n건물, 점령한 구역, 군대 유물%s"
+
+#: scripts/items/item.gd
+msgid "Атака армии, %"
+msgstr "군대 공격력, %"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Атака раз в"
+msgstr "공격 간격"
+
+#: scenes/ui/army_view.gd
+msgid "Атака солдата"
+msgstr "병사 공격력"
+
+#: server/src/world/guilds.ts
+msgid "Атаки на сегодня закончились — приходите завтра"
+msgstr "오늘 공격 횟수를 모두 사용했습니다 — 내일 다시 오세요"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Атаковать"
+msgstr "공격"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Атаковать (%d/%d)"
+msgstr "공격 (%d/%d)"
+
+#: scenes/world/world_map.gd
+msgid "Атаковать нейтралов"
+msgstr "중립 몬스터 공격"
+
+#: scripts/progress/hero_progress.gd
+msgid "Атакуйте босса гильдии %d раза"
+msgstr "길드 보스를 %d회 공격하세요"
+
+#: data/guild/guild.json
+msgid "Багровый каньон"
+msgstr "진홍 협곡"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Бастион"
+msgstr "요새"
+
+#: data/treasures/warrior.json
+msgid "Бастион Северных Врат"
+msgstr "북문의 요새"
+
+#: data/treasures/archer.json
+msgid "Бегущая с ветром"
+msgstr "바람의 질주자"
+
+#: data/treasures/archer.json
+msgid "Бегущей с ветром"
+msgstr "바람의 질주자"
+
+#: server/src/world/game.ts
+msgid "Без армии зону не занять — возьмите солдат из замка"
+msgstr "군대 없이는 구역을 점령할 수 없습니다 — 성에서 병사를 데려오세요"
+
+#: scenes/world/world_map.gd
+msgid "Без армии зону не занять: в замке нажмите «Армию из замка →»"
+msgstr "군대 없이는 구역을 점령할 수 없습니다: 성에서 «성에서 군대 출병 →»을 누르세요"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Без заточки"
+msgstr "강화 없음"
+
+#: scenes/ui/settings_panel.tscn scripts/autoload/desktop_window.gd
+msgid "Без звука"
+msgstr "음소거"
+
+#: data/treasures/mage.json
+msgid "Бездна смотрела в него — и отвела взгляд первой."
+msgstr "심연이 그를 들여다보았다 — 그리고 먼저 눈을 돌렸다."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Бессмертный"
+msgstr "불멸자"
+
+#: scenes/ui/journal/journal_bestiary_page.gd scenes/ui/journal_panel.gd
+msgid "Бестиарий"
+msgstr "몬스터 도감"
+
+#: scripts/progress/hero_progress.gd
+msgid "Бестиарий: %s изучен до %d уровня"
+msgstr "몬스터 도감: %s 연구 레벨 %d 달성"
+
+#: scenes/actors/monster.gd
+msgid "Бешеный"
+msgstr "광폭한"
+
+#: scripts/progress/hero_progress.gd
+msgid "Благосклонность судьбы"
+msgstr "운명의 가호"
+
+#: scenes/creation/class_card.gd
+msgid "Ближний бой"
+msgstr "근접전"
+
+#: scripts/progress/hero_progress.gd
+msgid "Богач"
+msgstr "대부호"
+
+#: data/needs/energy.tres
+msgid "Бодрость"
+msgstr "활력"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Боевая выучка"
+msgstr "전투 훈련"
+
+#: data/talents/warrior_talents.tres
+msgid "Боевое безумие"
+msgstr "전투 광기"
+
+#: data/items/war_banner.tres
+msgid "Боевое знамя"
+msgstr "전투 깃발"
+
+#: data/guild/guild.json
+msgid "Боевой дух"
+msgstr "사기"
+
+#: data/skills/warrior_war_cry.tres
+msgid "Боевой клич"
+msgstr "전투의 함성"
+
+#: data/talents/warrior_talents.tres
+msgid "Боевой раж"
+msgstr "전투 격노"
+
+#: data/items/war_horn.tres
+msgid "Боевой рог"
+msgstr "전쟁 뿔나팔"
+
+#: data/buildings/stable.tres
+msgid "Боевые кони для рыцарей. Открывает найм рыцарей и усиливает армию."
+msgstr "기사를 위한 군마. 기사 고용을 해금하고 군대를 강화합니다."
+
+#: scripts/data/monster_data.gd
+msgid "Боец"
+msgstr "전사"
+
+#: scenes/ui/settings_panel.gd scenes/world/battle_replay.gd scenes/world/battle_replay.tscn
+msgid "Бой"
+msgstr "전투"
+
+#: scenes/ui/settings_panel.gd
+msgid "Бой без звука; интерфейс и уведомления остаются."
+msgstr "전투 소리만 끕니다. 인터페이스와 알림 소리는 유지됩니다."
+
+#: scenes/ui/settings_panel.gd
+msgid "Бой и музыка в трее молчат всегда; уведомления (уровень, редкая добыча, нападение) — по этой настройке."
+msgstr "트레이에서는 전투와 음악이 항상 꺼집니다. 알림(레벨 업, 희귀 전리품, 공격)은 이 설정을 따릅니다."
+
+#: scenes/ui/army_view.tscn
+msgid "Больше (Shift — по 10)"
+msgstr "증가 (Shift — 10씩)"
+
+#: server/src/world/guilds.ts
+msgid "Бонус «{perk}» повышен до {rank} ранга"
+msgstr "특전 «{perk}» {rank}랭크로 상승"
+
+#: scenes/world/world_map.gd
+msgid "Бонус владельцу: "
+msgstr "소유자 보너스: "
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Бонус повышен"
+msgstr "특전 강화 완료"
+
+#: server/src/world/guilds.ts
+msgid "Бонус уже на максимальном ранге"
+msgstr "특전이 이미 최대 랭크입니다"
+
+#: scenes/ui/guild_panel.gd
+msgid "Бонусы"
+msgstr "특전"
+
+#: server/src/world/guilds.ts
+msgid "Бонусы гильдии сброшены — очки можно распределить заново"
+msgstr "길드 특전이 초기화되었습니다 — 포인트를 다시 분배할 수 있습니다"
+
+#: server/src/world/guilds.ts
+msgid "Бонусы ещё не выбраны"
+msgstr "아직 선택한 특전이 없습니다"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Бонусы сброшены — распределите очки заново"
+msgstr "특전 초기화됨 — 포인트를 다시 분배하세요"
+
+#: scenes/ui/guild/guild_boss_page.gd scenes/ui/guild_panel.gd
+msgid "Босс"
+msgstr "보스"
+
+#: server/src/world/guilds.ts
+msgid "Босс гильдии {level} уровня повержен! Каждый, кто сражался, получил {gold} золота"
+msgstr "{level}레벨 길드 보스를 처치했습니다! 참여한 모든 인원이 {gold} 골드를 받았습니다"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Босс недели"
+msgstr "주간 보스"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Босс повержен! Награда уже в казне."
+msgstr "보스를 처치했습니다! 보상은 이미 금고에 있습니다."
+
+#: server/src/world/guilds.ts
+msgid "Босс этой недели уже повержен"
+msgstr "이번 주 보스는 이미 처치되었습니다"
+
+#: scripts/data/item_base.gd
+msgid "Ботинки"
+msgstr "신발"
+
+#: scripts/progress/hero_progress.gd
+msgid "Братство"
+msgstr "형제애"
+
+#: scenes/ui/inventory_panel.gd scripts/data/item_base.gd scripts/items/item.gd
+msgid "Броня"
+msgstr "방어력"
+
+#: data/talents/mage_talents.tres
+msgid "Буря заклятий"
+msgstr "주문 폭풍"
+
+#: data/talents/archer_talents.tres
+msgid "Быстрая перезарядка"
+msgstr "빠른 재장전"
+
+#: scripts/data/stat_modifier.gd
+msgid "Быстрота умений"
+msgstr "빠른 시전"
+
+#: data/classes/archer.tres
+msgid "Быстрые выстрелы издалека и частые криты."
+msgstr "원거리에서 빠른 사격과 잦은 치명타."
+
+#: data/units/archer.tres
+msgid "Бьёт издалека: сильная атака, слабая защита."
+msgstr "원거리 공격: 강한 공격력, 약한 방어력."
+
+#: data/treasures/archer.json
+msgid "Бьёт точнее всего в полнолуние."
+msgstr "보름달 아래에서 가장 정확하게 쏜다."
+
+#: server/src/world/guilds.ts
+msgid "В гильдии нет свободных мест"
+msgstr "길드에 빈자리가 없습니다"
+
+#: server/src/world/game.ts
+msgid "В замке армия стоит без гарнизона"
+msgstr "성에 군대가 수비대 없이 주둔 중입니다"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "В замке нет солдат — обучите их в «Замке» [K]."
+msgstr "성에 병사가 없습니다 — «성» [K]에서 훈련하세요."
+
+#: server/src/world/game.ts
+msgid "В замке нет столько солдат"
+msgstr "성에 병사가 그만큼 없습니다"
+
+#: server/src/world/game.ts
+msgid "В замке союзника нет места для стольких подкреплений"
+msgstr "동맹의 성에 그만큼의 지원군을 수용할 공간이 없습니다"
+
+#: scenes/ui/guild_panel.gd
+msgid "В казне замка: %d · 1 золото = 1 опыт"
+msgstr "성 금고: %d · 골드 1 = 경험치 1"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "В моём замке"
+msgstr "내 성에"
+
+#: data/treasures/archer.json
+msgid "В них не хрустнет ни одна ветка."
+msgstr "그들 발밑에서는 나뭇가지 하나 부러지지 않는다."
+
+#: scenes/actors/monster.gd
+msgid "Вампир"
+msgstr "흡혈귀"
+
+#: scenes/world/world_map.gd
+msgid "Ваш замок"
+msgstr "내 성"
+
+#: scenes/world/world_map.gd
+msgid "Ваша зона"
+msgstr "내 구역"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Ваши награды: "
+msgstr "내 보상: "
+
+#: server/src/world/game.ts
+msgid "Ваши подкрепления помогли отбить набег на замок {name}"
+msgstr "당신의 지원군이 {name}님의 성에 대한 습격을 막아내는 데 기여했습니다"
+
+#: scenes/creation/character_creation.tscn
+msgid "Введите имя"
+msgstr "이름을 입력하세요"
+
+#: scripts/data/stat_modifier.gd
+msgid "Везение"
+msgstr "행운"
+
+#: data/treasures/mage.json
+msgid "Венец Тысячи Глаз"
+msgstr "천 개의 눈 서클릿"
+
+#: data/guild/guild.json
+msgid "Вересковые пустоши"
+msgstr "히스 황야"
+
+#: scenes/world/world_map.gd
+msgid "Вернуть армию в замок"
+msgstr "군대를 성으로 귀환"
+
+#: scenes/talents/talent_grid.tscn
+msgid "Вернуть все очки талантов за золото"
+msgstr "골드를 내고 모든 특성 포인트 반환"
+
+#: scenes/world/world_map.tscn
+msgid "Вернуть солдат с карты в армию замка (герой должен быть в замке)"
+msgstr "지도의 병사를 성 군대로 귀환 (영웅이 성에 있어야 함)"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Верные знамёна"
+msgstr "충성의 깃발"
+
+#: data/treasures/mage.json
+msgid "Верховного арканиста"
+msgstr "대마도사"
+
+#: data/treasures/mage.json
+msgid "Верховный арканист"
+msgstr "대마도사"
+
+#: data/treasures/mage.json
+msgid "Ветвь Мудреца"
+msgstr "현자의 가지"
+
+#: data/talents/archer_talents.tres
+msgid "Ветер в оперении"
+msgstr "깃털 속의 바람"
+
+#: data/treasures/archer.json
+msgid "Ветер пустыни"
+msgstr "사막의 바람"
+
+#: data/treasures/archer.json
+msgid "Ветра пустыни"
+msgstr "사막의 바람"
+
+#: data/treasures/warrior.json
+msgid "Вечная Клятва"
+msgstr "영원의 맹세"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Вечные улучшения за души"
+msgstr "영혼으로 구매하는 영구 강화"
+
+#: scripts/progress/hero_progress.gd
+msgid "Вечный герой"
+msgstr "영원한 영웅"
+
+#: data/treasures/archer.json
+msgid "Видит в темноте не хуже совы."
+msgstr "올빼미처럼 어둠 속에서도 잘 본다."
+
+#: data/treasures/mage.json
+msgid "Видит всё. Иногда — слишком много."
+msgstr "모든 것을 본다. 때로는 — 너무 많이."
+
+#: data/skills/warrior_whirlwind.tres
+msgid "Вихрь"
+msgstr "회오리"
+
+#: data/talents/warrior_talents.tres
+msgid "Вихрь и Боевой клич: −{value}% перезарядки."
+msgstr "회오리와 전투의 함성: 재사용 대기시간 −{value}%."
+
+#: scenes/ui/guild_panel.gd
+msgid "Вклад"
+msgstr "기여도"
+
+#: scenes/ui/guild_panel.gd
+msgid "Вклад в опыт гильдии: %d\nВ гильдии с: %s"
+msgstr "길드 경험치 기여: %d\n가입일: %s"
+
+#: scenes/ui/hud.gd
+msgid "Включить звук [S]"
+msgstr "소리 켜기 [S]"
+
+#: scenes/world/world_map.gd
+msgid "Владение"
+msgstr "영지"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Вложено очков: %d"
+msgstr "투자한 포인트: %d"
+
+#: scenes/ui/guild_panel.gd
+msgid "Внесено в гильдию: %d золота"
+msgstr "길드 기부: %d 골드"
+
+#: scripts/progress/hero_progress.gd
+msgid "Внесите золото в гильдию %d раз"
+msgstr "길드에 골드를 %d회 기부하세요"
+
+#: scenes/ui/guild_panel.gd
+msgid "Внести"
+msgstr "기부"
+
+#: scenes/ui/kingdom_panel.gd scenes/ui/kingdom_panel.tscn
+msgid "Внести в казну"
+msgstr "금고에 입금"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Внести в казну %d"
+msgstr "금고에 입금 %d"
+
+#: server/src/http.ts
+msgid "Внутренняя ошибка сервера"
+msgstr "서버 내부 오류"
+
+#: data/treasures/mage.json
+msgid "Внутри кольца — крошечная чёрная дыра. Не заглядывайте."
+msgstr "반지 안에는 작은 블랙홀이 있다. 들여다보지 마라."
+
+#: data/treasures/mage.json
+msgid "Внутри медленно кружатся искры."
+msgstr "안에서 불꽃이 천천히 소용돌이친다."
+
+#: data/treasures/warrior.json
+msgid "Внутри — прядь гривы белого льва."
+msgstr "안에는 흰 사자의 갈기 한 가닥이 들어 있다."
+
+#: data/treasures/archer.json
+msgid "Во внутренних карманах — сотня мелочей для охоты."
+msgstr "안주머니에는 사냥에 필요한 온갖 잡동사니가 가득하다."
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Вода"
+msgstr "물"
+
+#: data/treasures/warrior.json
+msgid "Военачальник"
+msgstr "군주"
+
+#: data/treasures/warrior.json
+msgid "Военачальника"
+msgstr "군주"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Военный совет"
+msgstr "전쟁 회의"
+
+#: data/classes/warrior.tres
+msgid "Воин"
+msgstr "전사"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Война гильдий"
+msgstr "길드 전쟁"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Войска идут до замка союзника, как в набег, и защищают его, пока вы их не отзовёте."
+msgstr "병력은 습격하듯 동맹의 성으로 이동하며, 소환할 때까지 성을 방어합니다."
+
+#: scenes/world/world_map.tscn
+msgid "Войти"
+msgstr "로그인"
+
+#: data/treasures/warrior.json
+msgid "Волки не нападают на того, кто его носит."
+msgstr "이것을 걸친 자는 늑대에게 공격받지 않는다."
+
+#: scenes/ui/hud.gd
+msgid "Волна %d · %s (рекорд %d)"
+msgstr "웨이브 %d · %s (최고 %d)"
+
+#: scenes/battle/battle.gd
+msgid "Волна %d — БОСС: %s!"
+msgstr "웨이브 %d — 보스: %s!"
+
+#: scenes/ui/hud.tscn
+msgid "Волна 1"
+msgstr "웨이브 1"
+
+#: data/treasures/mage.json
+msgid "Волосы встают дыбом, стоит лишь прикоснуться."
+msgstr "손대는 순간 머리카락이 곤두선다."
+
+#: data/guild/guild.json
+msgid "Волчьи холмы"
+msgstr "늑대 언덕"
+
+#: data/talents/warrior_talents.tres
+msgid "Воля воина"
+msgstr "전사의 의지"
+
+#: data/treasures/archer.json
+msgid "Вороны приносят вести — и удачу."
+msgstr "까마귀는 소식을 — 그리고 행운을 가져온다."
+
+#: data/treasures/archer.json
+msgid "Вороньи Перья"
+msgstr "까마귀 깃털"
+
+#: scripts/data/stat_modifier.gd
+msgid "Восстановление"
+msgstr "회복"
+
+#: data/treasures/mage.json
+msgid "Время вокруг него течёт чуть медленнее."
+msgstr "그 주변에서는 시간이 조금 더 느리게 흐른다."
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Время стройки: "
+msgstr "건설 시간: "
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Все очки вернутся, распределить их можно заново. Не чаще раза в сутки."
+msgstr "모든 포인트가 반환되어 다시 분배할 수 있습니다. 하루에 한 번만 가능합니다."
+
+#: data/talents/archer_talents.tres
+msgid "Все умения: −{value}% перезарядки, залп +{value2}% урона."
+msgstr "모든 스킬: 재사용 대기시간 −{value}%, 다중 사격 피해 +{value2}%."
+
+#: scenes/ui/guild_panel.gd
+msgid "Все участники покинут гильдию. Чтобы уйти самому, сначала передайте главенство."
+msgstr "모든 멤버가 길드를 떠나게 됩니다. 본인이 탈퇴하려면 먼저 길드장을 위임하세요."
+
+#: scenes/ui/settings_panel.gd
+msgid "Всегда"
+msgstr "항상"
+
+#: scripts/progress/hero_progress.gd
+msgid "Вступите в гильдию"
+msgstr "길드에 가입하세요"
+
+#: scenes/ui/guild_panel.gd
+msgid "Вступить"
+msgstr "가입"
+
+#: scenes/ui/guild_panel.gd
+msgid "Вступить в другую гильдию можно будет через сутки."
+msgstr "24시간 후에 다른 길드에 가입할 수 있습니다."
+
+#: data/treasures/warrior.json
+msgid "Всё, что осталось от знамени первой армии."
+msgstr "첫 번째 군대의 깃발에서 남은 전부."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Второе дыхание"
+msgstr "재충전"
+
+#: scenes/world/world_map.tscn
+msgid "Вход на сервер карты"
+msgstr "지도 서버 로그인"
+
+#: scenes/ui/guild_panel.gd
+msgid "Вы вступили в гильдию"
+msgstr "길드에 가입했습니다"
+
+#: server/src/world/guilds.ts
+msgid "Вы не состоите в гильдии"
+msgstr "길드에 소속되어 있지 않습니다"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Вы никому не отправляли подкрепления."
+msgstr "아직 아무에게도 지원군을 보내지 않았습니다."
+
+#: scenes/ui/guild_panel.gd
+msgid "Вы покинули гильдию"
+msgstr "길드를 탈퇴했습니다"
+
+#: server/src/world/guilds.ts
+msgid "Вы уже состоите в гильдии"
+msgstr "이미 길드에 소속되어 있습니다"
+
+#: scenes/world/world_map.gd scenes/world/world_map.tscn
+msgid "Выберите зону на карте"
+msgstr "지도에서 구역을 선택하세요"
+
+#: server/src/world/game.ts
+msgid "Выберите отряды"
+msgstr "부대를 선택하세요"
+
+#: scenes/ui/inventory_panel.gd scenes/ui/inventory_panel.tscn
+msgid "Выберите предмет"
+msgstr "아이템을 선택하세요"
+
+#: server/src/world/guilds.ts
+msgid "Выберите цвет гильдии"
+msgstr "길드 색상을 선택하세요"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Выберите, сколько солдат отправить"
+msgstr "보낼 병사 수를 선택하세요"
+
+#: data/treasures/warrior.json
+msgid "Выжили в пожаре, спалившем целый легион."
+msgstr "군단 하나를 통째로 태운 화재에서도 살아남았다."
+
+#: scenes/ui/settings_panel.gd
+msgid "Выкл."
+msgstr "끄기"
+
+#: scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Выключить звук [S]"
+msgstr "소리 끄기 [S]"
+
+#: data/treasures/warrior.json
+msgid "Выкованы в горне, что не гаснет со дня основания королевства."
+msgstr "왕국 건국 이래 한 번도 꺼진 적 없는 용광로에서 벼려졌다."
+
+#: data/treasures/warrior.json
+msgid "Выкованы по ту сторону разлома. По ночам они шепчут хозяину."
+msgstr "균열 너머에서 벼려졌다. 밤이면 주인에게 속삭인다."
+
+#: scripts/data/stat_modifier.gd
+msgid "Выносливость"
+msgstr "지구력"
+
+#: data/treasures/archer.json
+msgid "Выпущенные стрелы падают с неба, как звёзды."
+msgstr "쏘아 올린 화살이 별처럼 하늘에서 쏟아진다."
+
+#: data/buildings/farm.tres
+msgid "Выращивает еду. Герой ест сам, когда проголодается."
+msgstr "식량을 재배합니다. 영웅은 배고프면 알아서 먹습니다."
+
+#: data/talents/archer_talents.tres
+msgid "Выстрел в сердце"
+msgstr "심장 사격"
+
+#: data/treasures/warrior.json
+msgid "Выточен из клыка зверя, что жил в горах."
+msgstr "산에 살던 짐승의 송곳니를 깎아 만들었다."
+
+#: data/skills/mage_drain_life.tres
+msgid "Вытягивание жизни"
+msgstr "생명력 흡수"
+
+#: scenes/creation/character_creation.tscn
+msgid "Выход"
+msgstr "나가기"
+
+#: data/treasures/mage.json
+msgid "Вышиты картой звёзд, которых уже нет на небе."
+msgstr "이제는 하늘에 없는 별들의 지도가 수놓여 있다."
+
+#: data/skills/archer_aimed_shot.tres
+msgid "Гарантированный крит на 300% урона."
+msgstr "확정 치명타로 300% 피해."
+
+#: scenes/world/world_map.gd
+msgid "Гарнизон: "
+msgstr "수비대: "
+
+#: scenes/world/world_map.gd
+msgid "Гарнизон: %d солдат"
+msgstr "수비대: 병사 %d명"
+
+#: data/treasures/warrior.json
+msgid "Где прошёл их хозяин, ещё неделю не утихает ветер."
+msgstr "주인이 지나간 자리에는 일주일 내내 바람이 잦아들지 않는다."
+
+#: scenes/ui/guild_panel.gd scenes/ui/inventory_panel.gd scripts/autoload/world_service.gd
+msgid "Герой"
+msgstr "영웅"
+
+#: scenes/ui/hud.tscn
+msgid "Герой · Воин · ур. 1"
+msgstr "영웅 · 전사 · Lv. 1"
+
+#: scenes/world/world_map.gd
+msgid "Герой в замке"
+msgstr "영웅이 성에 있습니다"
+
+#: scenes/world/world_map.gd
+msgid "Герой в зоне #%d"
+msgstr "영웅이 구역 #%d에 있습니다"
+
+#: server/src/world/game.ts
+msgid "Герой в походе"
+msgstr "영웅이 원정 중입니다"
+
+#: server/src/world/game.ts
+msgid "Герой должен стоять в своём замке"
+msgstr "영웅이 자신의 성에 있어야 합니다"
+
+#: scenes/battle/battle.gd
+msgid "Герой отдохнул и снова в бою!"
+msgstr "영웅이 휴식을 마치고 다시 전투에 나섭니다!"
+
+#: scenes/battle/battle.gd
+msgid "Герой пал! Отступаем на волну %d"
+msgstr "영웅이 쓰러졌습니다! 웨이브 %d(으)로 후퇴합니다"
+
+#: server/src/world/game.ts
+msgid "Герой уже в походе"
+msgstr "영웅이 이미 원정 중입니다"
+
+#: server/src/world/game.ts
+msgid "Герой уже здесь"
+msgstr "영웅이 이미 여기 있습니다"
+
+#: scenes/battle/battle.gd
+msgid "Герой устал и отдыхает…"
+msgstr "영웅이 지쳐서 휴식 중입니다…"
+
+#: data/monsters/giant_spider.tres
+msgid "Гигантский паук"
+msgstr "거대 거미"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Гильдии ещё не набрали очков в этом сезоне."
+msgstr "이번 시즌에 아직 점수를 얻은 길드가 없습니다."
+
+#: scenes/ui/guild/guild_season_page.gd scenes/ui/guild_panel.gd scenes/ui/guild_panel.tscn scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Гильдия"
+msgstr "길드"
+
+#: scenes/ui/hud.gd
+msgid "Гильдия (!)"
+msgstr "길드 (!)"
+
+#: scenes/ui/hud.gd
+msgid "Гильдия (%d)"
+msgstr "길드 (%d)"
+
+#: scenes/ui/hud.tscn
+msgid "Гильдия [G]"
+msgstr "길드 [G]"
+
+#: server/src/world/guilds.ts
+msgid "Гильдия достигла {level} уровня: мест {slots}"
+msgstr "길드가 {level}레벨에 도달했습니다: 정원 {slots}명"
+
+#: server/src/world/guilds.ts
+msgid "Гильдия не найдена"
+msgstr "길드를 찾을 수 없습니다"
+
+#: scenes/ui/guild_panel.gd
+msgid "Гильдия основана!"
+msgstr "길드를 창설했습니다!"
+
+#: scenes/ui/guild_panel.gd
+msgid "Гильдия распущена"
+msgstr "길드가 해산되었습니다"
+
+#: server/src/world/guilds.ts
+msgid "Гильдия с таким названием уже есть"
+msgstr "같은 이름의 길드가 이미 존재합니다"
+
+#: scenes/ui/guild_panel.gd
+msgid "Глава"
+msgstr "길드장"
+
+#: server/src/world/guilds.ts
+msgid "Глава давно не заходил — главенство перешло к {name}"
+msgstr "길드장이 오랫동안 접속하지 않아 {name}님에게 길드장이 위임되었습니다"
+
+#: scenes/ui/guild_panel.gd
+msgid "Главенство передано"
+msgstr "길드장 위임 완료"
+
+#: data/monsters/goblin.tres
+msgid "Гоблин"
+msgstr "고블린"
+
+#: data/monsters/goblin_archer.tres
+msgid "Гоблин-лучник"
+msgstr "고블린 궁수"
+
+#: data/monsters/goblin_axeman.tres
+msgid "Гоблин-рубака"
+msgstr "고블린 도끼병"
+
+#: data/monsters/goblin_shaman.tres
+msgid "Гоблин-шаман"
+msgstr "고블린 주술사"
+
+#: data/treasures/warrior.json
+msgid "Говорят, в них слышно, как гремит далёкая гроза."
+msgstr "그 안에서 먼 천둥소리가 들린다고 한다."
+
+#: data/items/lucky_ring.tres
+msgid "Говорят, его владельцу везёт в бою."
+msgstr "이 반지의 주인은 전투에서 운이 따른다고 한다."
+
+#: data/biomes/mountains.tres
+msgid "Горы"
+msgstr "산악"
+
+#: data/items/field_kitchen.tres
+msgid "Горячая похлёбка: армия сыта и ест меньше."
+msgstr "뜨끈한 수프: 군대가 배불러 식량을 덜 소비합니다."
+
+#: scenes/ui/guild_panel.gd
+msgid "Готово"
+msgstr "완료"
+
+#: data/skills/archer_arrow_rain.tres
+msgid "Град стрел"
+msgstr "화살비"
+
+#: data/talents/warrior_talents.tres
+msgid "Град ударов"
+msgstr "연타"
+
+#: data/guild/guild.json
+msgid "Гремящие утёсы"
+msgstr "천둥 절벽"
+
+#: scripts/progress/hero_progress.gd
+msgid "Гроза боссов"
+msgstr "보스 사냥꾼"
+
+#: data/treasures/archer.json
+msgid "Грозовая стрела"
+msgstr "천둥 화살"
+
+#: data/treasures/archer.json
+msgid "Грозовой стрелы"
+msgstr "천둥 화살"
+
+#: scripts/data/monster_data.gd
+msgid "Громила"
+msgstr "거한"
+
+#: data/guild/guild.json
+msgid "Громкая слава"
+msgstr "명성"
+
+#: data/treasures/warrior.json
+msgid "Громовая Ярость"
+msgstr "천둥의 분노"
+
+#: scripts/progress/hero_progress.gd
+msgid "Дайте герою отдохнуть %d раз"
+msgstr "영웅을 %d회 휴식시키세요"
+
+#: scenes/creation/class_card.gd
+msgid "Дальний бой"
+msgstr "원거리"
+
+#: data/buildings/well.tres
+msgid "Даёт воду: герой пьёт сам, когда хочет пить."
+msgstr "물을 공급합니다. 영웅은 목마르면 알아서 마십니다."
+
+#: scripts/data/stat_modifier.gd
+msgid "Двойной удар"
+msgstr "이중 타격"
+
+#: data/monsters/demon.tres
+msgid "Демон"
+msgstr "악마"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Дерево"
+msgstr "목재"
+
+#: scenes/ui/hud.tscn
+msgid "Дерево талантов [T]"
+msgstr "특성 트리 [T]"
+
+#: server/src/world/game.ts
+msgid "Для набега нужна армия"
+msgstr "습격하려면 군대가 필요합니다"
+
+#: scripts/progress/hero_progress.gd
+msgid "Добудьте %d золота с монстров"
+msgstr "몬스터에게서 골드 %d 획득"
+
+#: scripts/progress/hero_progress.gd
+msgid "Добудьте %s золота с монстров"
+msgstr "몬스터에게서 골드 %s 획득"
+
+#: data/buildings/quarry.tres
+msgid "Добывает камень для построек."
+msgstr "건설용 석재를 채굴합니다."
+
+#: scenes/world/battle_replay.gd scenes/world/world_map.gd
+msgid "Добыча: "
+msgstr "전리품: "
+
+#: scripts/progress/hero_progress.gd
+msgid "Дойдите до %s волны"
+msgstr "웨이브 %s 도달"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Дорога побед"
+msgstr "승리의 길"
+
+#: scenes/ui/journal/journal_achievements_page.gd scenes/ui/journal_panel.gd
+msgid "Достижения"
+msgstr "업적"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Доступно с %d-й волны. Души растут с рекордом волны: на 30-й — %d, на 50-й — %d."
+msgstr "웨이브 %d부터 가능. 영혼은 최고 웨이브에 따라 증가합니다: 웨이브 30 — %d, 웨이브 50 — %d."
+
+#: data/guild/guild.json
+msgid "Драконий хребет"
+msgstr "용의 등뼈"
+
+#: data/talents/mage_talents.tres
+msgid "Древние руны"
+msgstr "고대 룬"
+
+#: data/items/oak_staff.tres
+msgid "Дубовый посох"
+msgstr "참나무 지팡이"
+
+#: data/items/oak_staff.tres
+msgid "Дубовый посох с кристаллом, в котором копится магия."
+msgstr "마력이 모이는 수정이 박힌 참나무 지팡이."
+
+#: scenes/ui/journal_panel.tscn
+msgid "Души — валюта перерождения: за перерождение, задания и достижения. Тратятся на вечные улучшения."
+msgstr "영혼은 환생 화폐입니다: 환생, 퀘스트, 업적으로 획득하며 영구 강화에 사용합니다."
+
+#: scenes/ui/journal/journal_prestige_page.gd scenes/ui/journal_panel.gd
+msgid "Души: %d"
+msgstr "영혼: %d"
+
+#: data/items/war_horn.tres
+msgid "Его зов бросает армию в атаку."
+msgstr "그 부름이 군대를 공격으로 이끈다."
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Еда"
+msgstr "식량"
+
+#: scenes/ui/army_view.gd
+msgid "Еды в минуту"
+msgstr "분당 식량"
+
+#: data/treasures/archer.json
+msgid "Её носитель видит мир глазами ястреба."
+msgstr "착용자는 매의 눈으로 세상을 본다."
+
+#: data/needs/thirst.tres
+msgid "Жажда"
+msgstr "갈증"
+
+#: scripts/data/stat_modifier.gd
+msgid "Жатва"
+msgstr "수확"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Железная воля"
+msgstr "강철 의지"
+
+#: data/items/iron_pauldrons.tres
+msgid "Железные наплечники"
+msgstr "철제 견갑"
+
+#: data/treasures/warrior.json
+msgid "Железный Венец"
+msgstr "강철 왕관"
+
+#: data/items/iron_helmet.tres
+msgid "Железный шлем"
+msgstr "철제 투구"
+
+#: scripts/data/stat_modifier.gd
+msgid "Жестокость"
+msgstr "잔혹함"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Живая крепость"
+msgstr "살아있는 요새"
+
+#: scripts/data/stat_modifier.gd
+msgid "Живучесть"
+msgstr "생존력"
+
+#: data/treasures/mage.json
+msgid "Жрец солнца"
+msgstr "태양의 사제"
+
+#: data/treasures/mage.json
+msgid "Жреца солнца"
+msgstr "태양의 사제"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Забрать"
+msgstr "받기"
+
+#: scenes/world/world_map.tscn
+msgid "Забрать из гарнизона"
+msgstr "수비대에서 빼기"
+
+#: scenes/world/world_map.gd
+msgid "Забрать солдат из гарнизона"
+msgstr "수비대에서 병사 빼기"
+
+#: data/buildings/sawmill.tres
+msgid "Заготавливает дерево для построек."
+msgstr "건설용 목재를 벌목합니다."
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Загрузка замка с сервера…"
+msgstr "서버에서 성 불러오는 중…"
+
+#: scenes/world/world_map_view.gd
+msgid "Загрузка карты…"
+msgstr "지도 불러오는 중…"
+
+#: scripts/progress/hero_progress.gd
+msgid "Задание выполнено: %s"
+msgstr "퀘스트 완료: %s"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Задание ещё не выполнено"
+msgstr "아직 퀘스트를 완료하지 않았습니다"
+
+#: scenes/ui/journal_panel.gd
+msgid "Задания"
+msgstr "퀘스트"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Задания дня"
+msgstr "일일 퀘스트"
+
+#: scripts/data/stat_modifier.gd
+msgid "Закалка"
+msgstr "단련"
+
+#: data/treasures/warrior.json
+msgid "Закалённого горна"
+msgstr "불꽃 용광로"
+
+#: data/treasures/warrior.json
+msgid "Закалённые в горне"
+msgstr "용광로에서 단련된"
+
+#: data/guild/guild.json
+msgid "Закатный берег"
+msgstr "석양 해안"
+
+#: scenes/world/battle_replay.tscn
+msgid "Закрыть"
+msgstr "닫기"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Закрыть [Esc]"
+msgstr "닫기 [Esc]"
+
+#: scenes/ui/guild_panel.tscn
+msgid "Закрыть [G]"
+msgstr "닫기 [G]"
+
+#: scenes/ui/inventory_panel.tscn
+msgid "Закрыть [I]"
+msgstr "닫기 [I]"
+
+#: scenes/ui/journal_panel.tscn
+msgid "Закрыть [J]"
+msgstr "닫기 [J]"
+
+#: scenes/ui/kingdom_panel.tscn
+msgid "Закрыть [K]"
+msgstr "닫기 [K]"
+
+#: scenes/world/world_map.tscn
+msgid "Закрыть [M]"
+msgstr "닫기 [M]"
+
+#: scenes/talents/talent_grid.tscn
+msgid "Закрыть [T]"
+msgstr "닫기 [T]"
+
+#: data/skills/archer_multishot.tres
+msgid "Залп"
+msgstr "다중 사격"
+
+#: scenes/ui/hud.gd scenes/ui/hud.tscn scenes/world/world_map.gd
+msgid "Замок"
+msgstr "성"
+
+#: scenes/ui/hud.gd
+msgid "Замок (!)"
+msgstr "성 (!)"
+
+#: server/src/world/game.ts
+msgid "Замок {name} под щитом — набег сорван"
+msgstr "{name}님의 성은 보호막 상태입니다 — 습격 실패"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Замок без защиты — армия в замке отражает набеги"
+msgstr "성이 보호되지 않습니다 — 성 군대가 습격을 막아냅니다"
+
+#: scenes/ui/kingdom_panel.gd scenes/world/world_map.gd
+msgid "Замок под защитой ещё %s"
+msgstr "성 보호 %s 남음"
+
+#: server/src/world/game.ts
+msgid "Замок под защитой — напасть пока нельзя"
+msgstr "성이 보호 중입니다 — 아직 공격할 수 없습니다"
+
+#: scenes/world/world_map.gd
+msgid "Занять зону"
+msgstr "구역 점령"
+
+#: scenes/ui/needs_panel.gd
+msgid "Запас: %d %s — герой берёт сам"
+msgstr "비축: %d %s — 영웅이 자동으로 사용"
+
+#: scripts/progress/hero_progress.gd
+msgid "Заточите предмет до +%s"
+msgstr "아이템을 +%s까지 강화하세요"
+
+#: scripts/progress/hero_progress.gd
+msgid "Заточите снаряжение %d раза"
+msgstr "장비를 %d회 강화하세요"
+
+#: scenes/ui/inventory_panel.gd scenes/ui/inventory_panel.tscn
+msgid "Заточить"
+msgstr "강화"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Заточить: %d з (%d%%)"
+msgstr "강화: %d G (%d%%)"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Заточка: макс."
+msgstr "강화: 최대"
+
+#: scenes/ui/guild_panel.gd
+msgid "Заходил"
+msgstr "최근 접속"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres scenes/world/battle_replay.tscn scenes/world/world_map.gd
+msgid "Защита"
+msgstr "방어"
+
+#: scripts/items/item.gd
+msgid "Защита армии, %"
+msgstr "군대 방어력, %"
+
+#: scenes/ui/army_view.gd
+msgid "Защита солдата"
+msgstr "병사 방어력"
+
+#: data/talents/mage_talents.tres data/treasures/archer.json data/treasures/mage.json
+msgid "Звездопад"
+msgstr "유성우"
+
+#: data/treasures/mage.json
+msgid "Звездопада"
+msgstr "유성우"
+
+#: data/treasures/archer.json
+msgid "Звенит, если ветер меняет направление."
+msgstr "바람의 방향이 바뀌면 울린다."
+
+#: data/items/chain_leggings.tres
+msgid "Звенят при ходьбе, зато берегут ноги."
+msgstr "걸을 때마다 짤랑거리지만, 다리를 지켜준다."
+
+#: data/treasures/archer.json
+msgid "Звери идут за ним, как за вожаком стаи."
+msgstr "짐승들이 무리의 우두머리를 따르듯 그를 따른다."
+
+#: scenes/ui/settings_panel.tscn
+msgid "Звук"
+msgstr "소리"
+
+#: scenes/ui/hud.gd
+msgid "Звук включён"
+msgstr "소리 켜짐"
+
+#: scenes/ui/hud.gd
+msgid "Звук выключен"
+msgstr "소리 꺼짐"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Звуки боя"
+msgstr "전투 소리"
+
+#: scenes/ui/settings_panel.gd
+msgid "Звуки боя слышны всегда."
+msgstr "전투 소리가 항상 들립니다."
+
+#: scenes/ui/settings_panel.gd
+msgid "Звуки боя слышны, пока курсор над полосой боя или открыто окно, — не мешают работать."
+msgstr "커서가 전투 띠 위에 있거나 창이 열려 있을 때만 전투 소리가 들려 작업을 방해하지 않습니다."
+
+#: data/treasures/mage.json
+msgid "Звёздный Капюшон"
+msgstr "별빛 두건"
+
+#: data/talents/mage_talents.tres
+msgid "Звёздный огонь"
+msgstr "별의 불꽃"
+
+#: scenes/ui/building_slot.tscn
+msgid "Здание"
+msgstr "건물"
+
+#: scenes/ui/kingdom_panel.gd scenes/ui/kingdom_panel.tscn
+msgid "Здания"
+msgstr "건물"
+
+#: scenes/world/world_map.gd
+msgid "Здесь герой: %s (ур. %d)"
+msgstr "이곳의 영웅: %s (Lv. %d)"
+
+#: scenes/ui/inventory_panel.gd scripts/items/item.gd
+msgid "Здоровье"
+msgstr "생명력"
+
+#: data/skills/warrior_earthquake.tres
+msgid "Землетрясение"
+msgstr "지진"
+
+#: data/guild/guild.json
+msgid "Змеиная топь"
+msgstr "뱀의 늪"
+
+#: data/guild/guild.json
+msgid "Знамя гильдии"
+msgstr "길드 깃발"
+
+#: data/talents/mage_talents.tres
+msgid "Знание стихий"
+msgstr "원소 지식"
+
+#: scripts/progress/hero_progress.gd
+msgid "Знаток монстров"
+msgstr "몬스터 전문가"
+
+#: scenes/talents/talent_grid.gd
+msgid "Значимый узел"
+msgstr "주요 노드"
+
+#: data/treasures/archer.json
+msgid "Золотая Пряжка Колчана"
+msgstr "황금 화살통 버클"
+
+#: scripts/progress/hero_progress.gd
+msgid "Золотая жила"
+msgstr "금맥"
+
+#: data/guild/guild.json
+msgid "Золотая степь"
+msgstr "황금 초원"
+
+#: scenes/ui/hud.gd
+msgid "Золото"
+msgstr "골드"
+
+#: scenes/ui/inventory_panel.tscn
+msgid "Золото героя"
+msgstr "영웅의 골드"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Золото героя → казна замка. Лимит копится со временем и растёт с уровнем героя (сейчас %d)."
+msgstr "영웅의 골드 → 성 금고. 한도는 시간이 지나면서 쌓이며 영웅 레벨에 따라 증가합니다 (현재 %d)."
+
+#: scenes/ui/guild_panel.gd
+msgid "Золото из казны замка становится опытом гильдии; ваш вклад виден в списке участников."
+msgstr "성 금고의 골드가 길드 경험치가 됩니다. 내 기여도는 멤버 목록에서 확인할 수 있습니다."
+
+#: scenes/ui/hud.tscn
+msgid "Золото: 0"
+msgstr "골드: 0"
+
+#: data/monsters/zombie.tres
+msgid "Зомби"
+msgstr "좀비"
+
+#: scenes/world/world_map.gd
+msgid "Зона #%d · уровень %d"
+msgstr "구역 #%d · Lv. %d"
+
+#: server/src/world/game.ts
+msgid "Зона занята без боя"
+msgstr "전투 없이 구역 점령"
+
+#: server/src/world/game.ts
+msgid "Зона игрока {name} была без защиты — захвачена"
+msgstr "{name}님의 구역이 무방비 상태였습니다 — 점령 완료"
+
+#: server/src/world/guilds.ts
+msgid "Игрок с таким именем не найден"
+msgstr "해당 이름의 플레이어를 찾을 수 없습니다"
+
+#: server/src/world/guilds.ts
+msgid "Игрок уже в вашей гильдии"
+msgstr "이미 길드에 있는 플레이어입니다"
+
+#: server/src/world/guilds.ts
+msgid "Игрок уже состоит в другой гильдии"
+msgstr "이미 다른 길드에 소속된 플레이어입니다"
+
+#: server/src/world/game.ts
+msgid "Идти можно только в соседнюю зону"
+msgstr "인접한 구역으로만 이동할 수 있습니다"
+
+#: scenes/world/world_map.gd
+msgid "Идти можно только в соседнюю с героем зону"
+msgstr "영웅과 인접한 구역으로만 이동할 수 있습니다"
+
+#: data/treasures/archer.json
+msgid "Из ясеня, что рос на могиле первого лучника."
+msgstr "최초의 궁수의 무덤 위에서 자란 물푸레나무로 만들었다."
+
+#: data/treasures/mage.json
+msgid "Изнутри похож на ночное небо."
+msgstr "안쪽은 밤하늘처럼 보인다."
+
+#: data/guild/guild.json
+msgid "Изумрудный дол"
+msgstr "에메랄드 골짜기"
+
+#: scenes/talents/talent_grid.tscn
+msgid "Изучать можно узлы рядом с уже изученными. Колесо — масштаб, перетаскивание — сдвиг. Малые узлы дальше от центра сильнее, значимые дают два бонуса, золотые ключевые — самые мощные."
+msgstr "이미 습득한 노드와 인접한 노드만 습득할 수 있습니다. 휠 — 확대/축소, 드래그 — 이동. 일반 노드는 중심에서 멀수록 강하고, 주요 노드는 보너스 두 개를 주며, 황금색 핵심 특성이 가장 강력합니다."
+
+#: scenes/talents/talent_grid.gd
+msgid "Изучено"
+msgstr "습득 완료"
+
+#: scenes/talents/talent_grid.gd
+msgid "Изучено: %s"
+msgstr "습득: %s"
+
+#: scripts/progress/hero_progress.gd
+msgid "Изучите %s видов монстров (1000 убийств)"
+msgstr "몬스터 %s종 연구 (처치 1000회)"
+
+#: scenes/talents/talent_grid.tscn
+msgid "Изучить"
+msgstr "습득"
+
+#: scenes/talents/talent_grid.gd
+msgid "Изучить (или двойной клик)"
+msgstr "습득 (또는 더블 클릭)"
+
+#: data/treasures/mage.json
+msgid "Им скрепляли указы Совета магов."
+msgstr "마법사 평의회의 칙령을 봉인하던 반지."
+
+#: scripts/data/item_base.gd server/src/world/game.ts
+msgid "Именной"
+msgstr "고유"
+
+#: scenes/ui/guild_panel.gd
+msgid "Имя"
+msgstr "이름"
+
+#: scenes/creation/character_creation.tscn
+msgid "Имя героя:"
+msgstr "영웅 이름:"
+
+#: scenes/ui/guild_panel.gd
+msgid "Имя игрока"
+msgstr "플레이어 이름"
+
+#: scenes/world/world_map.tscn
+msgid "Имя правителя"
+msgstr "통치자 이름"
+
+#: scenes/ui/inventory_panel.tscn
+msgid "Инвентарь"
+msgstr "인벤토리"
+
+#: scenes/ui/hud.tscn
+msgid "Инвентарь [I]"
+msgstr "인벤토리 [I]"
+
+#: scenes/ui/settings_panel.gd
+msgid "Интерфейс"
+msgstr "인터페이스"
+
+#: data/talents/mage_talents.tres
+msgid "Инферно"
+msgstr "인페르노"
+
+#: scenes/ui/guild_panel.gd
+msgid "Исключить"
+msgstr "추방"
+
+#: data/talents/mage_talents.tres
+msgid "Искра гения"
+msgstr "천재의 불꽃"
+
+#: scripts/progress/hero_progress.gd
+msgid "Истребитель"
+msgstr "학살자"
+
+#: scenes/world/world_map.tscn
+msgid "К герою"
+msgstr "영웅에게"
+
+#: scenes/talents/talent_grid.tscn
+msgid "К центру"
+msgstr "중앙으로"
+
+#: data/treasures/archer.json
+msgid "Каждая стрела несёт в наконечнике искру молнии."
+msgstr "모든 화살촉에 번개의 불꽃이 깃들어 있다."
+
+#: data/treasures/archer.json
+msgid "Каждый охотник хранит клык своей первой добычи."
+msgstr "모든 사냥꾼은 첫 사냥감의 송곳니를 간직한다."
+
+#: data/treasures/warrior.json
+msgid "Каждый удар отдаётся раскатом грома."
+msgstr "일격마다 천둥이 울려 퍼진다."
+
+#: data/buildings/barracks.tres
+msgid "Казармы"
+msgstr "병영"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Казна"
+msgstr "금고"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Казна королевства"
+msgstr "왕실 금고"
+
+#: server/src/world/game.ts
+msgid "Казна полна"
+msgstr "금고가 가득 찼습니다"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Казначей"
+msgstr "재무관"
+
+#: data/guild/guild.json
+msgid "Казначейство"
+msgstr "재정"
+
+#: data/skills/warrior_execute.tres
+msgid "Казнь"
+msgstr "처형"
+
+#: data/treasures/warrior.json
+msgid "Каменная стена"
+msgstr "철벽"
+
+#: data/treasures/warrior.json
+msgid "Каменной стены"
+msgstr "철벽"
+
+#: scenes/actors/monster.gd
+msgid "Каменнокожий"
+msgstr "돌가죽"
+
+#: data/guild/guild.json
+msgid "Каменные врата"
+msgstr "돌의 관문"
+
+#: data/monsters/stone_golem.tres
+msgid "Каменный голем"
+msgstr "돌 골렘"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Каменный щит"
+msgstr "돌 방패"
+
+#: data/buildings/quarry.tres
+msgid "Каменоломня"
+msgstr "채석장"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Камень"
+msgstr "석재"
+
+#: data/treasures/archer.json data/treasures/mage.json
+msgid "Капюшон"
+msgstr "두건"
+
+#: data/treasures/archer.json
+msgid "Капюшон Бегущей с ветром"
+msgstr "바람의 질주자 두건"
+
+#: data/treasures/mage.json
+msgid "Капюшон Верховного арканиста"
+msgstr "대마도사 두건"
+
+#: data/treasures/archer.json
+msgid "Капюшон Ветра пустыни"
+msgstr "사막의 바람 두건"
+
+#: data/treasures/archer.json
+msgid "Капюшон Грозовой стрелы"
+msgstr "천둥 화살 두건"
+
+#: data/treasures/mage.json
+msgid "Капюшон Жреца солнца"
+msgstr "태양의 사제 두건"
+
+#: data/treasures/mage.json
+msgid "Капюшон Звездопада"
+msgstr "유성우 두건"
+
+#: data/treasures/mage.json
+msgid "Капюшон Коснувшегося бездны"
+msgstr "심연에 닿은 자의 두건"
+
+#: data/treasures/archer.json
+msgid "Капюшон Ночного охотника"
+msgstr "밤의 사냥꾼 두건"
+
+#: data/treasures/archer.json
+msgid "Капюшон Орлиного глаза"
+msgstr "독수리의 눈 두건"
+
+#: data/treasures/mage.json
+msgid "Капюшон Повелителя гроз"
+msgstr "폭풍의 군주 두건"
+
+#: data/treasures/archer.json
+msgid "Капюшон Повелителя зверей"
+msgstr "야수의 군주 두건"
+
+#: data/treasures/mage.json
+msgid "Капюшон Призывателя пламени"
+msgstr "화염 소환사 두건"
+
+#: data/treasures/archer.json
+msgid "Капюшон Серебряного листа"
+msgstr "은빛 잎새 두건"
+
+#: data/treasures/archer.json
+msgid "Капюшон Терновой чащи"
+msgstr "가시나무 숲 두건"
+
+#: data/treasures/mage.json
+msgid "Капюшон Ткача льда"
+msgstr "서리 직조자 두건"
+
+#: data/treasures/mage.json
+msgid "Капюшон Хранителя библиотеки"
+msgstr "도서관 수호자 두건"
+
+#: scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Карта"
+msgstr "지도"
+
+#: scenes/ui/hud.gd
+msgid "Карта (!)"
+msgstr "지도 (!)"
+
+#: scenes/world/world_map.tscn
+msgid "Карта мира"
+msgstr "월드맵"
+
+#: data/treasures/warrior.json
+msgid "Кираса коменданта крепости, которую так и не взяли."
+msgstr "끝내 함락되지 않은 요새의 사령관이 입던 흉갑."
+
+#: data/treasures/warrior.json
+msgid "Кираса, внутри которой бьётся каменное сердце."
+msgstr "안에서 돌 심장이 뛰는 흉갑."
+
+#: data/biomes/graveyard.tres
+msgid "Кладбище"
+msgstr "묘지"
+
+#: scenes/creation/class_card.tscn
+msgid "Класс"
+msgstr "직업"
+
+#: data/treasures/warrior.json
+msgid "Клинок Последнего Рассвета"
+msgstr "마지막 새벽의 검"
+
+#: data/treasures/archer.json
+msgid "Клык Первой Добычи"
+msgstr "첫 사냥감의 송곳니"
+
+#: scenes/talents/talent_grid.gd
+msgid "Ключевой талант"
+msgstr "핵심 특성"
+
+#: data/treasures/warrior.json
+msgid "Клятва скреплена кровью. Нарушивший её — платит своей."
+msgstr "피로 맺은 맹세. 어긴 자는 자신의 피로 대가를 치른다."
+
+#: data/monsters/kobold.tres
+msgid "Кобольд"
+msgstr "코볼트"
+
+#: data/items/leather_armor.tres
+msgid "Кожаная броня"
+msgstr "가죽 갑옷"
+
+#: data/items/leather_boots.tres
+msgid "Кожаные сапоги"
+msgstr "가죽 장화"
+
+#: scenes/world/world_map.gd
+msgid "Колесо — масштаб, перетаскивание — сдвиг карты.\nЖёлтая рамка — куда может пойти герой."
+msgstr "휠 — 확대/축소, 드래그 — 지도 이동.\n노란 테두리 — 영웅이 이동할 수 있는 곳."
+
+#: scripts/progress/hero_progress.gd
+msgid "Коллекционер"
+msgstr "수집가"
+
+#: data/buildings/well.tres
+msgid "Колодец"
+msgstr "우물"
+
+#: data/treasures/mage.json
+msgid "Кольцо Бездны"
+msgstr "심연의 반지"
+
+#: data/treasures/archer.json
+msgid "Кольцо Быстрой Руки"
+msgstr "재빠른 손의 반지"
+
+#: data/treasures/warrior.json
+msgid "Кольцо Наковальни"
+msgstr "모루의 반지"
+
+#: data/treasures/mage.json
+msgid "Кольцо Чернильной Печати"
+msgstr "먹물 인장 반지"
+
+#: data/skills/mage_frost_nova.tres
+msgid "Кольцо льда"
+msgstr "서리 고리"
+
+#: data/items/lucky_ring.tres
+msgid "Кольцо удачи"
+msgstr "행운의 반지"
+
+#: data/treasures/warrior.json
+msgid "Кольцо, данное богам. Снять его нельзя — только разбить."
+msgstr "신들에게 바친 반지. 벗을 수는 없다 — 부술 수만 있을 뿐."
+
+#: data/items/chain_leggings.tres
+msgid "Кольчужные поножи"
+msgstr "사슬 각반"
+
+#: scripts/data/stat_modifier.gd
+msgid "Командование"
+msgstr "지휘"
+
+#: data/treasures/mage.json
+msgid "Конец Света"
+msgstr "세상의 종말"
+
+#: data/talents/mage_talents.tres
+msgid "Концентрация"
+msgstr "집중"
+
+#: data/buildings/stable.tres
+msgid "Конюшня"
+msgstr "마구간"
+
+#: data/units/spearman.tres
+msgid "Копейщик"
+msgstr "창병"
+
+#: data/treasures/warrior.json
+msgid "Королевская гвардия"
+msgstr "왕실 근위대"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Королевская милость"
+msgstr "왕의 총애"
+
+#: data/treasures/warrior.json
+msgid "Королевской гвардии"
+msgstr "왕실 근위대"
+
+#: scenes/ui/kingdom_panel.tscn
+msgid "Королевство"
+msgstr "왕국"
+
+#: scenes/ui/hud.tscn
+msgid "Королевство: здания и армия [K]"
+msgstr "왕국: 건물과 군대 [K]"
+
+#: data/treasures/archer.json
+msgid "Корона Ястреба"
+msgstr "매의 왕관"
+
+#: data/treasures/warrior.json
+msgid "Корона без камней — для короля, который сражается сам."
+msgstr "보석 없는 왕관 — 몸소 싸우는 왕을 위한 것."
+
+#: data/treasures/mage.json
+msgid "Коснувшегося бездны"
+msgstr "심연에 닿은 자"
+
+#: data/treasures/mage.json
+msgid "Коснувшийся бездны"
+msgstr "심연에 닿은 자"
+
+#: data/treasures/archer.json
+msgid "Кочевники говорят: песок сам уводит стрелу в цель."
+msgstr "유목민들은 모래가 스스로 화살을 과녁으로 이끈다고 말한다."
+
+#: data/units/militia.tres
+msgid "Крестьяне с вилами. Дёшево и быстро, но слабо."
+msgstr "쇠스랑을 든 농민. 싸고 빠르지만 약합니다."
+
+#: data/treasures/mage.json
+msgid "Кристалл на вершине никогда не тает."
+msgstr "꼭대기의 수정은 결코 녹지 않는다."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Крит"
+msgstr "치명타"
+
+#: data/treasures/warrior.json
+msgid "Кровавая клятва"
+msgstr "피의 맹세"
+
+#: data/guild/guild.json
+msgid "Кровавая река"
+msgstr "피의 강"
+
+#: data/treasures/warrior.json
+msgid "Кровавой клятвы"
+msgstr "피의 맹세"
+
+#: data/treasures/warrior.json
+msgid "Кровавый Венец"
+msgstr "피의 왕관"
+
+#: data/talents/warrior_talents.tres
+msgid "Кровавый клинок"
+msgstr "피의 칼날"
+
+#: scripts/data/stat_modifier.gd
+msgid "Кровожадность"
+msgstr "피의 갈망"
+
+#: data/skills/warrior_rend.tres
+msgid "Кровопускание"
+msgstr "찢어발기기"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Кровь героя"
+msgstr "영웅의 피"
+
+#: data/talents/mage_talents.tres
+msgid "Круг силы"
+msgstr "힘의 고리"
+
+#: data/treasures/warrior.json
+msgid "Крылья на шлеме — дар ангела последнему защитнику павшего храма."
+msgstr "투구의 날개는 무너진 신전의 마지막 수호자에게 천사가 내린 선물이다."
+
+#: data/treasures/warrior.json
+msgid "Кто носил эти латы, не отступал ни на шаг."
+msgstr "이 갑옷을 입은 자는 한 발짝도 물러서지 않았다."
+
+#: data/treasures/archer.json
+msgid "Кто услышал её тетиву — уже не услышит ничего."
+msgstr "그 시위 소리를 들은 자는 다시는 아무것도 듣지 못한다."
+
+#: data/treasures/warrior.json
+msgid "Кузнец выковал его из обломка своей наковальни."
+msgstr "대장장이가 자신의 모루 조각으로 벼려 낸 것."
+
+#: data/buildings/forge.tres
+msgid "Кузнецы точат оружие героя и куют снаряжение для армии."
+msgstr "대장장이들이 영웅의 무기를 벼리고 군대의 장비를 만듭니다."
+
+#: data/buildings/forge.tres
+msgid "Кузница"
+msgstr "대장간"
+
+#: data/treasures/archer.json
+msgid "Куртка"
+msgstr "재킷"
+
+#: data/treasures/archer.json
+msgid "Куртка Бегущей с ветром"
+msgstr "바람의 질주자 재킷"
+
+#: data/treasures/archer.json
+msgid "Куртка Ветра пустыни"
+msgstr "사막의 바람 재킷"
+
+#: data/treasures/archer.json
+msgid "Куртка Грозовой стрелы"
+msgstr "천둥 화살 재킷"
+
+#: data/treasures/archer.json
+msgid "Куртка Ночного охотника"
+msgstr "밤의 사냥꾼 재킷"
+
+#: data/treasures/archer.json
+msgid "Куртка Орлиного глаза"
+msgstr "독수리의 눈 재킷"
+
+#: data/treasures/archer.json
+msgid "Куртка Повелителя зверей"
+msgstr "야수의 군주 재킷"
+
+#: data/treasures/archer.json
+msgid "Куртка Серебряного листа"
+msgstr "은빛 잎새 재킷"
+
+#: data/treasures/archer.json
+msgid "Куртка Следопыта"
+msgstr "추적자의 재킷"
+
+#: data/treasures/archer.json
+msgid "Куртка Терновой чащи"
+msgstr "가시나무 숲 재킷"
+
+#: data/treasures/warrior.json
+msgid "Латы"
+msgstr "판금 갑옷"
+
+#: data/treasures/warrior.json
+msgid "Латы Военачальника"
+msgstr "군주의 판금 갑옷"
+
+#: data/treasures/warrior.json
+msgid "Латы Закалённого горна"
+msgstr "불꽃 용광로 판금 갑옷"
+
+#: data/treasures/warrior.json
+msgid "Латы Каменной стены"
+msgstr "철벽 판금 갑옷"
+
+#: data/treasures/warrior.json
+msgid "Латы Королевской гвардии"
+msgstr "왕실 근위대 판금 갑옷"
+
+#: data/treasures/warrior.json
+msgid "Латы Кровавой клятвы"
+msgstr "피의 맹세 판금 갑옷"
+
+#: data/treasures/warrior.json
+msgid "Латы Ледяной хватки"
+msgstr "서리 손아귀 판금 갑옷"
+
+#: data/treasures/warrior.json
+msgid "Латы Небесного стража"
+msgstr "하늘 수호자 판금 갑옷"
+
+#: data/treasures/warrior.json
+msgid "Латы Пепельного стража"
+msgstr "잿빛 수호자 판금 갑옷"
+
+#: data/treasures/warrior.json
+msgid "Латы Порождения бездны"
+msgstr "심연의 자손 판금 갑옷"
+
+#: data/treasures/warrior.json
+msgid "Латы Сокрушителя бурь"
+msgstr "폭풍 파괴자 판금 갑옷"
+
+#: scripts/data/item_base.gd scripts/items/item.gd server/src/world/game.ts
+msgid "Легендарный"
+msgstr "전설"
+
+#: data/treasures/warrior.json
+msgid "Ледяная хватка"
+msgstr "서리 손아귀"
+
+#: data/treasures/mage.json
+msgid "Ледяной Шпиль"
+msgstr "얼음 첨탑"
+
+#: data/guild/guild.json
+msgid "Ледяной кряж"
+msgstr "서리 능선"
+
+#: data/treasures/warrior.json
+msgid "Ледяной хватки"
+msgstr "서리 손아귀"
+
+#: data/biomes/forest.tres
+msgid "Лес"
+msgstr "숲"
+
+#: data/treasures/archer.json
+msgid "Лес сам бережёт тех, кто бережёт лес."
+msgstr "숲은 숲을 지키는 자를 지킨다."
+
+#: data/monsters/forest_troll.tres
+msgid "Лесной тролль"
+msgstr "숲 트롤"
+
+#: data/buildings/sawmill.tres
+msgid "Лесопилка"
+msgstr "제재소"
+
+#: data/skills/warrior_last_stand.tres
+msgid "Лечит 25% здоровья и даёт +80 брони на 8 с. Сама срабатывает, когда здоровья меньше половины."
+msgstr "생명력을 25% 회복하고 8초간 방어력 +80. 생명력이 절반 미만이 되면 자동 발동."
+
+#: data/skills/mage_arcane_shield.tres
+msgid "Лечит 30% здоровья и даёт +40 брони на 6 секунд. Сам срабатывает, когда здоровья меньше 70%."
+msgstr "생명력을 30% 회복하고 6초간 방어력 +40. 생명력이 70% 미만이면 자동 발동."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Лидерство"
+msgstr "통솔력"
+
+#: server/src/world/game.ts
+msgid "Лимит взносов исчерпан, подождите"
+msgstr "입금 한도에 도달했습니다. 잠시 기다려 주세요"
+
+#: data/treasures/archer.json
+msgid "Лисий Капюшон"
+msgstr "여우 두건"
+
+#: data/guild/guild.json
+msgid "Лисьи овраги"
+msgstr "여우 협곡"
+
+#: data/monsters/lich.tres
+msgid "Лич"
+msgstr "리치"
+
+#: data/skills/archer_snare.tres
+msgid "Ловчая сеть"
+msgstr "올가미"
+
+#: data/treasures/warrior.json
+msgid "Лоскут Первого Знамени"
+msgstr "첫 번째 깃발의 조각"
+
+#: data/treasures/archer.json
+msgid "Лунный Лук"
+msgstr "달의 활"
+
+#: data/classes/archer.tres data/units/archer.tres
+msgid "Лучник"
+msgstr "궁수"
+
+#: data/talents/archer_talents.tres
+msgid "Лёгкая рука"
+msgstr "가벼운 손"
+
+#: data/treasures/warrior.json
+msgid "Лёгкие — чтобы перейти реку и сразу вступить в бой."
+msgstr "가볍다 — 강을 건너 곧바로 전투에 뛰어들 수 있도록."
+
+#: data/items/hunting_bow.tres
+msgid "Лёгкий лук охотника — бьёт метко и далеко."
+msgstr "가벼운 사냥용 활 — 정확하고 사거리가 길다."
+
+#: data/classes/mage.tres
+msgid "Маг"
+msgstr "마법사"
+
+#: data/skills/mage_arcane_shield.tres
+msgid "Магический щит"
+msgstr "비전 보호막"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Максимальная заточка"
+msgstr "최대 강화"
+
+#: scripts/kingdom/kingdom_state.gd server/src/world/kingdom.ts
+msgid "Максимальный уровень"
+msgstr "최대 레벨"
+
+#: scenes/ui/guild_panel.gd
+msgid "Максимальный уровень гильдии"
+msgstr "최대 길드 레벨"
+
+#: scenes/ui/journal/journal_prestige_page.gd scenes/ui/kingdom_panel.gd
+msgid "Максимум"
+msgstr "최대"
+
+#: scenes/ui/army_view.tscn
+msgid "Максимум (по месту и ресурсам)"
+msgstr "최대 (정원 및 자원 기준)"
+
+#: scenes/talents/talent_grid.gd
+msgid "Малый узел"
+msgstr "일반 노드"
+
+#: data/treasures/mage.json
+msgid "Мантия"
+msgstr "로브"
+
+#: data/treasures/mage.json
+msgid "Мантия Верховного арканиста"
+msgstr "대마도사 로브"
+
+#: data/treasures/mage.json
+msgid "Мантия Вечного Ученика"
+msgstr "영원한 학도의 로브"
+
+#: data/treasures/mage.json
+msgid "Мантия Жреца солнца"
+msgstr "태양의 사제 로브"
+
+#: data/treasures/mage.json
+msgid "Мантия Звездопада"
+msgstr "유성우 로브"
+
+#: data/treasures/mage.json
+msgid "Мантия Коснувшегося бездны"
+msgstr "심연에 닿은 자의 로브"
+
+#: data/treasures/mage.json
+msgid "Мантия Повелителя гроз"
+msgstr "폭풍의 군주 로브"
+
+#: data/treasures/mage.json
+msgid "Мантия Призывателя пламени"
+msgstr "화염 소환사 로브"
+
+#: data/treasures/mage.json
+msgid "Мантия Ткача льда"
+msgstr "서리 직조자 로브"
+
+#: data/treasures/mage.json
+msgid "Мантия Хранителя библиотеки"
+msgstr "도서관 수호자 로브"
+
+#: scripts/progress/hero_progress.gd
+msgid "Мастер заточки"
+msgstr "강화의 달인"
+
+#: data/talents/warrior_talents.tres
+msgid "Мастер клинка"
+msgstr "검의 달인"
+
+#: data/treasures/mage.json
+msgid "Мастер носит её, чтобы помнить: учиться никогда не поздно."
+msgstr "대가는 배움에 늦음이 없음을 기억하려고 이것을 입는다."
+
+#: scripts/progress/hero_progress.gd
+msgid "Мастер умений"
+msgstr "스킬의 달인"
+
+#: scripts/data/stat_modifier.gd
+msgid "Мастерство"
+msgstr "숙련"
+
+#: data/classes/mage.tres
+msgid "Медленные, но мощные магические снаряды."
+msgstr "느리지만 강력한 마법 투사체."
+
+#: scenes/ui/army_view.tscn
+msgid "Меньше (Shift — по 10)"
+msgstr "감소 (Shift — 10씩)"
+
+#: scripts/items/item.gd
+msgid "Меньше еды армии, %"
+msgstr "군대 식량 소비 감소, %"
+
+#: scenes/ui/settings_panel.gd
+msgid "Меньше нагрузка на видеокарту и батарею ноутбука."
+msgstr "그래픽 카드와 노트북 배터리 부담 감소."
+
+#: scenes/ui/army_view.gd
+msgid "Мест в армии"
+msgstr "군대 정원"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Мест для подкреплений: %d / %d (половина мест армии замка)"
+msgstr "지원군 정원: %d / %d (성 군대 정원의 절반)"
+
+#: scenes/ui/army_view.gd
+msgid "Места: %d / %d"
+msgstr "정원: %d / %d"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Место"
+msgstr "순위"
+
+#: data/skills/mage_meteor.tres
+msgid "Метеор"
+msgstr "메테오"
+
+#: data/talents/mage_talents.tres
+msgid "Метеор: +{value}% урона и −{value2}% перезарядки."
+msgstr "메테오: 피해 +{value}%, 재사용 대기시간 −{value2}%."
+
+#: data/talents/archer_talents.tres
+msgid "Меткий глаз"
+msgstr "예리한 눈"
+
+#: data/talents/archer_talents.tres scripts/data/stat_modifier.gd
+msgid "Меткость"
+msgstr "명중"
+
+#: data/treasures/warrior.json
+msgid "Меч рыцаря, не нарушившего ни одной клятвы."
+msgstr "단 한 번도 맹세를 어기지 않은 기사의 검."
+
+#: scenes/ui/hud.tscn
+msgid "Мировая карта [M]"
+msgstr "월드맵 [M]"
+
+#: data/classes/warrior.tres
+msgid "Много здоровья и брони. Бьёт в ближнем бою."
+msgstr "높은 생명력과 방어력. 근접전을 펼칩니다."
+
+#: scenes/actors/monster.gd
+msgid "Могучий"
+msgstr "강력한"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Мои подкрепления"
+msgstr "내 지원군"
+
+#: data/skills/mage_chain_lightning.tres
+msgid "Молния бьёт цель на 180% и перескакивает ещё на 4 врагов, каждый раз на 15% слабее."
+msgstr "번개가 대상에게 180% 피해를 주고 적 4명에게 더 튀며, 튈 때마다 15%씩 약해집니다."
+
+#: data/treasures/archer.json
+msgid "Моховые Штаны"
+msgstr "이끼 바지"
+
+#: data/skills/warrior_power_strike.tres
+msgid "Мощный удар"
+msgstr "강타"
+
+#: data/talents/warrior_talents.tres
+msgid "Мощный удар: +{value}% урона и −{value2}% перезарядки."
+msgstr "강타: 피해 +{value}%, 재사용 대기시간 −{value2}%."
+
+#: scripts/data/stat_modifier.gd
+msgid "Мудрость"
+msgstr "지혜"
+
+#: scripts/progress/hero_progress.gd
+msgid "Мудрость веков"
+msgstr "세월의 지혜"
+
+#: scenes/ui/settings_panel.gd
+msgid "Музыка"
+msgstr "음악"
+
+#: scripts/data/stat_modifier.gd
+msgid "Муштра"
+msgstr "조련"
+
+#: data/monsters/moss_giant.tres
+msgid "Мшистый великан"
+msgstr "이끼 거인"
+
+#: data/treasures/archer.json
+msgid "Мягкие и бесшумные, как лесной мох."
+msgstr "숲의 이끼처럼 부드럽고 소리가 없다."
+
+#: data/guild/guild.json
+msgid "Мёртвые болота"
+msgstr "죽음의 늪"
+
+#: server/src/world/game.ts
+msgid "На карте не осталось места для нового замка"
+msgstr "지도에 새 성을 지을 자리가 남아 있지 않습니다"
+
+#: scenes/ui/needs_panel.gd
+msgid "На нуле герой уходит отдыхать"
+msgstr "0이 되면 영웅이 휴식하러 갑니다"
+
+#: server/src/world/game.ts
+msgid "Набег {name} на ваш замок отбит"
+msgstr "{name}님의 성 습격을 막아냈습니다"
+
+#: scenes/world/world_map.gd
+msgid "Набег на замок"
+msgstr "성 습격"
+
+#: server/src/world/game.ts
+msgid "Набег на замок {name} не отбит — ваши подкрепления понесли потери"
+msgstr "{name}님의 성에 대한 습격을 막지 못했습니다 — 지원군이 피해를 입었습니다"
+
+#: server/src/world/game.ts
+msgid "Набег на замок {name} отбит: армия погибла, герой вернулся в замок"
+msgstr "{name}님의 성 습격이 저지되었습니다: 군대가 전멸하고 영웅은 성으로 귀환했습니다"
+
+#: server/src/world/game.ts
+msgid "Набег на замок {name} удался"
+msgstr "{name}님의 성 습격에 성공했습니다"
+
+#: scenes/world/world_map.gd
+msgid "Набег: победа даёт часть ресурсов замка, поход дольше обычного"
+msgstr "습격: 승리하면 성 자원의 일부를 얻으며, 원정 시간이 평소보다 깁니다"
+
+#: data/treasures/mage.json
+msgid "Навершие тлеет уже триста лет."
+msgstr "칼자루 끝이 삼백 년째 타오르고 있다."
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Награда за победу: %d золота в казну каждому, кто сражался, и опыт гильдии."
+msgstr "승리 보상: 참여한 모든 인원의 금고에 %d 골드, 그리고 길드 경험치."
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Награда получена"
+msgstr "보상 수령 완료"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Награды:\n"
+msgstr "보상:\n"
+
+#: data/treasures/warrior.json
+msgid "Надевший их командует не голосом, а одним взглядом."
+msgstr "이것을 착용한 자는 목소리가 아닌 눈빛만으로 명령한다."
+
+#: scenes/ui/inventory_panel.gd scenes/ui/inventory_panel.tscn
+msgid "Надеть"
+msgstr "착용"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Нажмите на предмет в сумке или экипировке"
+msgstr "가방이나 장비의 아이템을 클릭하세요"
+
+#: scenes/ui/guild_panel.gd
+msgid "Название"
+msgstr "이름"
+
+#: server/src/world/guilds.ts
+msgid "Название гильдии: от 3 до 24 символов"
+msgstr "길드 이름: 3~24자"
+
+#: server/src/world/game.ts
+msgid "Найдено сокровище: {item} ({quality})"
+msgstr "보물 발견: {item} ({quality})"
+
+#: scenes/ui/army_view.gd
+msgid "Найм"
+msgstr "고용"
+
+#: scenes/ui/army_view.tscn
+msgid "Нанять"
+msgstr "고용"
+
+#: scenes/ui/army_view.gd
+msgid "Нанять ×%d"
+msgstr "고용 ×%d"
+
+#: scenes/world/world_map.gd
+msgid "Нападение на игрока снимет защиту вашего замка"
+msgstr "플레이어를 공격하면 내 성의 보호가 해제됩니다"
+
+#: scenes/world/world_map.gd
+msgid "Напасть на игрока"
+msgstr "플레이어 공격"
+
+#: data/treasures/archer.json data/treasures/warrior.json
+msgid "Наплечники"
+msgstr "견갑"
+
+#: data/treasures/archer.json
+msgid "Наплечники Бегущей с ветром"
+msgstr "바람의 질주자 어깨망토"
+
+#: data/treasures/archer.json
+msgid "Наплечники Ветра пустыни"
+msgstr "사막의 바람 어깨망토"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Военачальника"
+msgstr "군주의 견갑"
+
+#: data/treasures/archer.json
+msgid "Наплечники Грозовой стрелы"
+msgstr "천둥 화살 어깨망토"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Закалённого горна"
+msgstr "불꽃 용광로 견갑"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Каменной стены"
+msgstr "철벽 견갑"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Королевской гвардии"
+msgstr "왕실 근위대 견갑"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Кровавой клятвы"
+msgstr "피의 맹세 견갑"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Ледяной хватки"
+msgstr "서리 손아귀 견갑"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Небесного стража"
+msgstr "하늘 수호자 견갑"
+
+#: data/treasures/archer.json
+msgid "Наплечники Ночного охотника"
+msgstr "밤의 사냥꾼 어깨망토"
+
+#: data/treasures/archer.json
+msgid "Наплечники Орлиного глаза"
+msgstr "독수리의 눈 어깨망토"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Пепельного стража"
+msgstr "잿빛 수호자 견갑"
+
+#: data/treasures/archer.json
+msgid "Наплечники Повелителя зверей"
+msgstr "야수의 군주 어깨망토"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Порождения бездны"
+msgstr "심연의 자손 견갑"
+
+#: data/treasures/archer.json
+msgid "Наплечники Серебряного листа"
+msgstr "은빛 잎새 어깨망토"
+
+#: data/treasures/warrior.json
+msgid "Наплечники Сокрушителя бурь"
+msgstr "폭풍 파괴자 견갑"
+
+#: data/treasures/archer.json
+msgid "Наплечники Терновой чащи"
+msgstr "가시나무 숲 어깨망토"
+
+#: data/guild/guild.json
+msgid "Наставники"
+msgstr "스승들"
+
+#: scenes/ui/hud.tscn scenes/ui/settings_panel.tscn
+msgid "Настройки"
+msgstr "설정"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Настройки применяются сразу. Свёрнутая в трей игра не рисует кадры и почти не нагружает ПК."
+msgstr "설정은 즉시 적용됩니다. 트레이로 최소화하면 게임이 화면을 그리지 않아 PC에 거의 부담을 주지 않습니다."
+
+#: data/talents/warrior_talents.tres
+msgid "Натиск"
+msgstr "맹공"
+
+#: data/talents/archer_talents.tres
+msgid "Натянутая тетива"
+msgstr "팽팽한 시위"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Наука войны"
+msgstr "전쟁학"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Находка ~%s · неделя %d/%d"
+msgstr "다음 발견 ~%s · %d/%d주차"
+
+#: scenes/talents/talent_grid.gd scripts/data/talent_tree.gd
+msgid "Начало пути"
+msgstr "시작점"
+
+#: scenes/creation/character_creation.tscn
+msgid "Начать приключение"
+msgstr "모험 시작"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Не построено"
+msgstr "건설되지 않음"
+
+#: server/src/world/guilds.ts
+msgid "Не так быстро"
+msgstr "너무 빠릅니다"
+
+#: scripts/autoload/world_service.gd
+msgid "Не удалось отправить запрос"
+msgstr "요청을 보내지 못했습니다"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Не хватает душ"
+msgstr "영혼이 부족합니다"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Не хватает золота"
+msgstr "골드가 부족합니다"
+
+#: server/src/world/guilds.ts
+msgid "Не хватает золота в казне замка"
+msgstr "성 금고에 골드가 부족합니다"
+
+#: scenes/talents/talent_grid.gd
+msgid "Не хватает золота на сброс"
+msgstr "초기화할 골드가 부족합니다"
+
+#: scripts/kingdom/army_state.gd
+msgid "Не хватает места в армии (свободно %d)"
+msgstr "군대 정원이 부족합니다 (남은 자리 %d)"
+
+#: scripts/kingdom/army_state.gd scripts/kingdom/kingdom_state.gd server/src/world/kingdom.ts
+msgid "Не хватает ресурсов"
+msgstr "자원이 부족합니다"
+
+#: data/treasures/warrior.json
+msgid "Небесного стража"
+msgstr "하늘 수호자"
+
+#: data/treasures/warrior.json
+msgid "Небесный страж"
+msgstr "하늘 수호자"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Неделя %d/%d — дальше со след. недели"
+msgstr "%d/%d주차 — 나머지는 다음 주부터"
+
+#: server/src/world/guilds.ts
+msgid "Недостаточно прав"
+msgstr "권한이 부족합니다"
+
+#: scenes/talents/talent_grid.gd
+msgid "Недоступно: изучайте узлы по цепочке от центра"
+msgstr "습득 불가: 중앙부터 이어지는 노드를 습득하세요"
+
+#: server/src/world/guilds.ts
+msgid "Неизвестная роль"
+msgstr "알 수 없는 역할"
+
+#: server/src/world/game.ts
+msgid "Неизвестный бонус армии: "
+msgstr "알 수 없는 군대 보너스: "
+
+#: server/src/world/game.ts
+msgid "Неизвестный класс героя"
+msgstr "알 수 없는 영웅 직업"
+
+#: scenes/world/battle_replay.gd server/src/world/game.ts
+msgid "Нейтралы"
+msgstr "중립 몬스터"
+
+#: server/src/world/game.ts
+msgid "Нейтралы разбиты, зона захвачена"
+msgstr "중립 몬스터 격파, 구역 점령"
+
+#: scenes/world/world_map.gd
+msgid "Нейтралы: %s\nЗащита ≈ %d"
+msgstr "중립 몬스터: %s\n방어력 ≈ %d"
+
+#: server/src/world/game.ts
+msgid "Некорректное значение "
+msgstr "잘못된 값 "
+
+#: server/src/world/game.ts
+msgid "Некорректные бонусы армии"
+msgstr "잘못된 군대 보너스"
+
+#: server/src/http.ts
+msgid "Некорректный JSON"
+msgstr "잘못된 JSON"
+
+#: server/src/world/game.ts
+msgid "Некорректный запрос"
+msgstr "잘못된 요청"
+
+#: server/src/world/game.ts
+msgid "Некорректный уровень героя"
+msgstr "잘못된 영웅 레벨"
+
+#: data/monsters/necromancer.tres
+msgid "Некромант"
+msgstr "강령술사"
+
+#: server/src/world/game.ts
+msgid "Нельзя нападать на союзника по гильдии"
+msgstr "길드 동맹은 공격할 수 없습니다"
+
+#: server/src/world/guilds.ts
+msgid "Нельзя пригласить самого себя"
+msgstr "자기 자신은 초대할 수 없습니다"
+
+#: scripts/items/item.gd
+msgid "Необычный"
+msgstr "고급"
+
+#: data/skills/warrior_last_stand.tres
+msgid "Непоколебимость"
+msgstr "최후의 저항"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Несгибаемость"
+msgstr "불굴"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Несокрушимый"
+msgstr "파괴 불가"
+
+#: scenes/world/world_map.gd
+msgid "Нет входа на сервер карты"
+msgstr "지도 서버에 로그인하지 않았습니다"
+
+#: scripts/autoload/world_service.gd
+msgid "Нет золота"
+msgstr "골드 없음"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Нет реликвий"
+msgstr "유물 없음"
+
+#: server/src/world/guilds.ts
+msgid "Нет свободных мест — повысьте уровень гильдии"
+msgstr "빈자리가 없습니다 — 길드 레벨을 올리세요"
+
+#: scenes/talents/talent_grid.gd
+msgid "Нет свободных очков"
+msgstr "남은 포인트 없음"
+
+#: scenes/talents/talent_grid.gd
+msgid "Нет свободных очков — они даются за уровень"
+msgstr "남은 포인트가 없습니다 — 레벨업 시 획득합니다"
+
+#: server/src/world/guilds.ts
+msgid "Нет свободных очков — повысьте уровень гильдии"
+msgstr "남은 포인트가 없습니다 — 길드 레벨을 올리세요"
+
+#: scripts/kingdom/army_state.gd scripts/kingdom/kingdom_state.gd
+msgid "Нет связи с сервером"
+msgstr "서버에 연결할 수 없습니다"
+
+#: scripts/autoload/world_service.gd
+msgid "Нет связи с сервером (%s)"
+msgstr "서버에 연결할 수 없습니다 (%s)"
+
+#: scenes/ui/guild_panel.gd
+msgid "Нет связи с сервером карты — гильдии работают только онлайн."
+msgstr "지도 서버에 연결할 수 없습니다 — 길드는 온라인에서만 이용할 수 있습니다."
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Нет связи с сервером — замок только для просмотра"
+msgstr "서버에 연결할 수 없습니다 — 성은 보기만 가능합니다"
+
+#: server/src/world/guilds.ts
+msgid "Нет такого бонуса"
+msgstr "해당 특전이 없습니다"
+
+#: server/src/world/game.ts server/src/world/kingdom.ts
+msgid "Нет такого заказа"
+msgstr "해당 주문이 없습니다"
+
+#: server/src/world/kingdom.ts
+msgid "Нет такого здания"
+msgstr "해당 건물이 없습니다"
+
+#: server/src/world/game.ts
+msgid "Нет такого игрока"
+msgstr "해당 플레이어가 없습니다"
+
+#: server/src/world/kingdom.ts
+msgid "Нет такого отряда"
+msgstr "해당 부대가 없습니다"
+
+#: server/src/world/game.ts
+msgid "Нет такого подкрепления"
+msgstr "해당 지원군이 없습니다"
+
+#: server/src/world/game.ts
+msgid "Нет такой зоны"
+msgstr "해당 구역이 없습니다"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Неудача… золото потрачено"
+msgstr "실패… 골드가 소모되었습니다"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Неутомимость"
+msgstr "지칠 줄 모름"
+
+#: scripts/progress/hero_progress.gd
+msgid "Неутомимый"
+msgstr "지치지 않는 자"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "Нечего забирать"
+msgstr "받을 보상이 없습니다"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Нечего сливать"
+msgstr "합성할 아이템이 없습니다"
+
+#: scenes/ui/needs_panel.gd
+msgid "Ниже %d: %s"
+msgstr "%d 미만: %s"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Никто ещё не сражался с боссом на этой неделе."
+msgstr "이번 주에 아직 아무도 보스와 싸우지 않았습니다."
+
+#: scenes/world/world_map.gd
+msgid "Ничья"
+msgstr "무주지"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Новая жизнь начнётся с %d-й волны («Стартовый рывок»)."
+msgstr "새로운 삶은 웨이브 %d부터 시작합니다 («출발 가속»)."
+
+#: scenes/main.gd
+msgid "Новая жизнь! Получено душ: %d"
+msgstr "새로운 삶! 획득한 영혼: %d"
+
+#: scenes/battle/battle.gd
+msgid "Новое умение: %s!"
+msgstr "새 스킬: %s!"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Новые атаки через %s"
+msgstr "%s 후 공격 횟수 충전"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "Новые задания через %s. Награда за каждое: золото и 1 душа (души — валюта перерождения)."
+msgstr "%s 후 새 퀘스트. 퀘스트당 보상: 골드와 영혼 1개 (영혼은 환생 화폐입니다)."
+
+#: scripts/data/item_base.gd
+msgid "Ноги"
+msgstr "다리"
+
+#: data/treasures/mage.json
+msgid "Носитель ступает, почти не касаясь земли."
+msgstr "착용자는 땅에 거의 닿지 않고 걷는다."
+
+#: data/treasures/archer.json
+msgid "Ночного охотника"
+msgstr "밤의 사냥꾼"
+
+#: data/treasures/archer.json
+msgid "Ночной охотник"
+msgstr "밤의 사냥꾼"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Нужна Ратуша %d-го уровня"
+msgstr "시청 Lv. %d 필요"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Нужна связь с сервером"
+msgstr "서버 연결이 필요합니다"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Нужно 3 предмета тира «%s» в слот «%s» в сумке"
+msgstr "가방에 «%s» 등급의 «%s» 슬롯 아이템 3개가 필요합니다"
+
+#: server/src/http.ts
+msgid "Нужно войти заново"
+msgstr "다시 로그인하세요"
+
+#: server/src/world/kingdom.ts
+msgid "Нужно здание более высокого уровня"
+msgstr "더 높은 레벨의 건물이 필요합니다"
+
+#: scripts/kingdom/army_state.gd
+msgid "Нужно: %s %d-го уровня"
+msgstr "필요: %s Lv. %d"
+
+#: data/treasures/archer.json
+msgid "Оберег Ветров"
+msgstr "바람의 부적"
+
+#: data/treasures/mage.json
+msgid "Облачение Архимага"
+msgstr "대마법사의 예복"
+
+#: data/treasures/mage.json
+msgid "Облачение главы Совета магов. Рун на нём больше, чем ниток."
+msgstr "마법사 평의회 수장의 예복. 실보다 룬이 더 많다."
+
+#: data/guild/guild.json
+msgid "Обозы"
+msgstr "보급 행렬"
+
+#: data/monsters/werewolf.tres
+msgid "Оборотень"
+msgstr "늑대인간"
+
+#: data/treasures/mage.json
+msgid "Обруч Совиной Мудрости"
+msgstr "올빼미 지혜의 서클릿"
+
+#: scenes/ui/army_view.gd
+msgid "Обучение: %s"
+msgstr "훈련 중: %s"
+
+#: scenes/ui/hud.gd
+msgid "Обучено: %s ×%d"
+msgstr "훈련 완료: %s ×%d"
+
+#: scenes/ui/settings_panel.gd
+msgid "Общая громкость"
+msgstr "전체 음량"
+
+#: data/guild/guild.json
+msgid "Общая муштра"
+msgstr "공동 조련"
+
+#: scripts/items/item.gd
+msgid "Обычный"
+msgstr "일반"
+
+#: data/skills/mage_fireball.tres
+msgid "Огненный шар"
+msgstr "파이어볼"
+
+#: data/talents/mage_talents.tres
+msgid "Огненный шар: +{value}% урона. +{value2}% скорости атаки."
+msgstr "파이어볼: 피해 +{value}%. 공격 속도 +{value2}%."
+
+#: data/monsters/ogre_boss.tres
+msgid "Огр-вожак"
+msgstr "오우거 족장"
+
+#: server/src/http.ts
+msgid "Ожидался JSON-объект"
+msgstr "JSON 객체가 필요합니다"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Описание здания"
+msgstr "건물 설명"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Описание предмета"
+msgstr "아이템 설명"
+
+#: data/treasures/mage.json
+msgid "Оплечье"
+msgstr "어깨걸이"
+
+#: data/treasures/mage.json
+msgid "Оплечье Верховного арканиста"
+msgstr "대마도사 어깨걸이"
+
+#: data/treasures/mage.json
+msgid "Оплечье Жреца солнца"
+msgstr "태양의 사제 어깨걸이"
+
+#: data/treasures/mage.json
+msgid "Оплечье Звездопада"
+msgstr "유성우 어깨걸이"
+
+#: data/treasures/mage.json
+msgid "Оплечье Коснувшегося бездны"
+msgstr "심연에 닿은 자의 어깨걸이"
+
+#: data/treasures/mage.json
+msgid "Оплечье Повелителя гроз"
+msgstr "폭풍의 군주 어깨걸이"
+
+#: data/treasures/mage.json
+msgid "Оплечье Призывателя пламени"
+msgstr "화염 소환사 어깨걸이"
+
+#: data/treasures/mage.json
+msgid "Оплечье Ткача льда"
+msgstr "서리 직조자 어깨걸이"
+
+#: data/treasures/mage.json
+msgid "Оплечье Хранителя библиотеки"
+msgstr "도서관 수호자 어깨걸이"
+
+#: data/units/militia.tres
+msgid "Ополченец"
+msgstr "민병대"
+
+#: scenes/ui/guild_panel.gd
+msgid "Опыт гильдии: %d / %d\nОпыт дают взносы золотом (1 золото = 1 опыт) и победы участников на карте."
+msgstr "길드 경험치: %d / %d\n경험치는 골드 기부(골드 1 = 경험치 1)와 멤버의 지도 전투 승리로 획득합니다."
+
+#: scenes/ui/hud.gd
+msgid "Опыт: %d / %d"
+msgstr "경험치: %d / %d"
+
+#: data/monsters/orc_warrior.tres
+msgid "Орк-воин"
+msgstr "오크 전사"
+
+#: data/monsters/orc_brute.tres
+msgid "Орк-громила"
+msgstr "오크 거한"
+
+#: data/monsters/orc_thrower.tres
+msgid "Орк-метатель"
+msgstr "오크 투척병"
+
+#: data/monsters/orc_shaman.tres
+msgid "Орк-шаман"
+msgstr "오크 주술사"
+
+#: data/treasures/archer.json
+msgid "Орлиного глаза"
+msgstr "독수리의 눈"
+
+#: data/skills/archer_eagle_eye.tres data/talents/archer_talents.tres data/treasures/archer.json
+msgid "Орлиный глаз"
+msgstr "독수리의 눈"
+
+#: data/talents/warrior_talents.tres scripts/data/item_base.gd
+msgid "Оружие"
+msgstr "무기"
+
+#: scenes/ui/guild_panel.gd
+msgid "Основать"
+msgstr "창설"
+
+#: scenes/ui/guild_panel.gd
+msgid "Основать гильдию"
+msgstr "길드 창설"
+
+#: scenes/world/world_map.tscn
+msgid "Оставить гарнизон"
+msgstr "수비대 배치"
+
+#: scenes/world/world_map.gd
+msgid "Оставить гарнизон в зоне"
+msgstr "구역에 수비대 배치"
+
+#: scenes/world/world_map.tscn
+msgid "Оставить часть армии защищать эту зону"
+msgstr "군대 일부를 남겨 이 구역을 방어"
+
+#: scenes/ui/needs_panel.gd
+msgid "От %d: %s"
+msgstr "%d 이상: %s"
+
+#: data/treasures/mage.json
+msgid "От этой мантии в комнате всегда идёт пар изо рта."
+msgstr "이 로브가 있는 방에서는 언제나 입김이 하얗게 나온다."
+
+#: scenes/ui/needs_panel.gd scenes/ui/needs_panel.tscn
+msgid "Отдых"
+msgstr "휴식"
+
+#: scenes/ui/guild_panel.gd
+msgid "Отказаться"
+msgstr "거절"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Откроется, когда в ветку вложено %d очков"
+msgstr "이 분야에 %d포인트를 투자하면 해금"
+
+#: scenes/world/world_map.tscn
+msgid "Отмена"
+msgstr "취소"
+
+#: scenes/ui/army_view.gd
+msgid "Отменить (ресурсы вернутся)"
+msgstr "취소 (자원 반환)"
+
+#: scenes/ui/guild_panel.gd
+msgid "Отменить приглашение"
+msgstr "초대 취소"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Отозвать"
+msgstr "소환"
+
+#: scenes/ui/guild/guild_reinforce_page.gd scenes/ui/guild_panel.gd
+msgid "Отправить"
+msgstr "보내기"
+
+#: scenes/world/world_map.gd
+msgid "Отправить армию из замка на карту"
+msgstr "성의 군대를 지도로 출병"
+
+#: scenes/ui/needs_panel.tscn
+msgid "Отправить героя отдыхать (восстанавливает бодрость).\nВолна встаёт на паузу."
+msgstr "영웅을 휴식시킵니다 (활력 회복).\n웨이브가 일시 정지됩니다."
+
+#: scenes/world/world_map.tscn
+msgid "Отправить солдат из армии замка к герою на карту (герой должен быть в замке)"
+msgstr "성 군대의 병사를 지도 위 영웅에게 보냅니다 (영웅이 성에 있어야 함)"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Отправить союзнику"
+msgstr "동맹에게 보내기"
+
+#: scenes/ui/unit_slot.tscn
+msgid "Отряд"
+msgstr "부대"
+
+#: scenes/ui/army_view.gd
+msgid "Отряды"
+msgstr "부대"
+
+#: scripts/data/talent_tree.gd
+msgid "Отсюда растёт сетка талантов. Изучайте узлы рядом с уже изученными."
+msgstr "특성 그리드는 여기서부터 뻗어 나갑니다. 이미 습득한 노드와 인접한 노드를 습득하세요."
+
+#: scenes/ui/guild_panel.gd
+msgid "Офицер"
+msgstr "간부"
+
+#: scripts/progress/hero_progress.gd
+msgid "Охотник на элиту"
+msgstr "정예 사냥꾼"
+
+#: data/talents/archer_talents.tres
+msgid "Охотничий инстинкт"
+msgstr "사냥꾼의 본능"
+
+#: data/items/hunting_bow.tres
+msgid "Охотничий лук"
+msgstr "사냥용 활"
+
+#: scenes/ui/army_view.gd
+msgid "Очередь обучения"
+msgstr "훈련 대기열"
+
+#: scripts/kingdom/army_state.gd server/src/world/kingdom.ts
+msgid "Очередь обучения заполнена"
+msgstr "훈련 대기열이 가득 찼습니다"
+
+#: scenes/ui/army_view.gd
+msgid "Очередь пуста — выберите отряд и нажмите «Нанять»"
+msgstr "대기열이 비었습니다 — 부대를 선택하고 «고용»을 누르세요"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Очки"
+msgstr "점수"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Очки: каждый час — сумма уровней зон участников (центр карты ценнее). В регионе, который контролирует гильдия (больше всех зон, не меньше 10), очки ×1,5."
+msgstr "점수: 매시간 — 멤버 구역 레벨의 합 (지도 중앙일수록 가치가 높음). 길드가 지배하는 지역(가장 많은 구역, 최소 10개)에서는 점수 ×1.5."
+
+#: scripts/autoload/world_service.gd
+msgid "Ошибка сервера (%d)"
+msgstr "서버 오류 (%d)"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Панцирь"
+msgstr "갑각"
+
+#: data/treasures/warrior.json
+msgid "Парадные доспехи личной стражи короля — и не только для парадов."
+msgstr "왕의 친위대가 입는 의장 갑옷 — 하지만 행진용만은 아니다."
+
+#: data/treasures/mage.json
+msgid "Пахнут старым пергаментом и чернилами из сажи драконов."
+msgstr "오래된 양피지와 용의 그을음으로 만든 잉크 냄새가 난다."
+
+#: data/guild/guild.json
+msgid "Пепельная долина"
+msgstr "잿빛 골짜기"
+
+#: data/treasures/warrior.json
+msgid "Пепельного стража"
+msgstr "잿빛 수호자"
+
+#: data/treasures/warrior.json
+msgid "Пепельный страж"
+msgstr "잿빛 수호자"
+
+#: scenes/ui/guild_panel.gd
+msgid "Передать главенство"
+msgstr "길드장 위임"
+
+#: scenes/world/world_map.gd
+msgid "Перейти сюда"
+msgstr "여기로 이동"
+
+#: scripts/progress/hero_progress.gd
+msgid "Переродитесь %s раз"
+msgstr "%s회 환생하세요"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Переродиться"
+msgstr "환생"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Переродиться (+%s)"
+msgstr "환생 (+%s)"
+
+#: scenes/ui/journal/journal_prestige_page.gd scenes/ui/journal_panel.gd
+msgid "Перерождение"
+msgstr "환생"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Перерождение пока недоступно"
+msgstr "아직 환생할 수 없습니다"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Перерождение сейчас даст %s. Чем дальше зайти, тем больше: на 50-й волне — %d, на 100-й — %d."
+msgstr "지금 환생하면 %s 획득. 멀리 갈수록 더 많이 얻습니다: 웨이브 50 — %d, 웨이브 100 — %d."
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Перерождений: %d · рекорд волны в этой жизни: %d"
+msgstr "환생 횟수: %d · 이번 생 최고 웨이브: %d"
+
+#: data/treasures/mage.json
+msgid "Перо Феникса"
+msgstr "불사조의 깃털"
+
+#: data/treasures/archer.json
+msgid "Песнь Смерти"
+msgstr "죽음의 노래"
+
+#: scenes/ui/settings_panel.gd
+msgid "Плавнее, но нагрузка выше."
+msgstr "더 부드럽지만 부담이 커집니다."
+
+#: data/talents/mage_talents.tres
+msgid "Пламя души"
+msgstr "영혼의 불꽃"
+
+#: data/treasures/warrior.json
+msgid "Плащ Медвежьей Шкуры"
+msgstr "곰 가죽 망토"
+
+#: scripts/data/item_base.gd
+msgid "Плечи"
+msgstr "어깨"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Площадка Steam"
+msgstr "Steam 장터"
+
+#: server/src/world/game.ts
+msgid "Победа над {name}, зона захвачена"
+msgstr "{name}님에게 승리, 구역 점령"
+
+#: scenes/world/battle_replay.gd
+msgid "Победа!"
+msgstr "승리!"
+
+#: scripts/progress/hero_progress.gd
+msgid "Победите %d боссов"
+msgstr "보스 %d마리 처치"
+
+#: scripts/progress/hero_progress.gd
+msgid "Победите %s боссов"
+msgstr "보스 %s마리 처치"
+
+#: data/treasures/mage.json
+msgid "Повелитель гроз"
+msgstr "폭풍의 군주"
+
+#: data/treasures/archer.json
+msgid "Повелитель зверей"
+msgstr "야수의 군주"
+
+#: data/treasures/mage.json
+msgid "Повелителя гроз"
+msgstr "폭풍의 군주"
+
+#: data/treasures/archer.json
+msgid "Повелителя зверей"
+msgstr "야수의 군주"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Повержен! Следующий босс (сильнее) придёт через %s."
+msgstr "처치 완료! 다음 보스(더 강함)는 %s 후 등장합니다."
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Повысить ранг (1 очко)"
+msgstr "랭크 상승 (1포인트)"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Под контролем: %s"
+msgstr "지배 중: %s"
+
+#: data/items/war_banner.tres
+msgid "Под этим знаменем войска сражаются яростнее."
+msgstr "이 깃발 아래에서 병사들은 더욱 맹렬히 싸운다."
+
+#: data/treasures/archer.json
+msgid "Подарок короля лучшему стрелку турнира."
+msgstr "마상 대회 최고의 궁수에게 왕이 내린 선물."
+
+#: data/skills/mage_ignite.tres
+msgid "Поджигает врагов вокруг цели: 350% урона за 6 с."
+msgstr "대상 주변의 적을 불태움: 6초에 걸쳐 350% 피해."
+
+#: data/skills/mage_ignite.tres
+msgid "Поджог"
+msgstr "점화"
+
+#: scenes/ui/guild_panel.gd
+msgid "Подкрепления"
+msgstr "지원군"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Подкрепления в пути"
+msgstr "지원군 이동 중"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Подкрепления вернулись в замок"
+msgstr "지원군이 성으로 귀환했습니다"
+
+#: server/src/world/game.ts
+msgid "Подкрепления можно отправлять только союзникам по гильдии"
+msgstr "지원군은 길드 동맹에게만 보낼 수 있습니다"
+
+#: scenes/world/world_map.tscn
+msgid "Подтвердить"
+msgstr "확인"
+
+#: scenes/battle/battle.gd
+msgid "Пока вас не было (%s): %s"
+msgstr "부재 중 (%s): %s"
+
+#: scenes/world/world_map.gd
+msgid "Пока нет событий"
+msgstr "아직 이벤트가 없습니다"
+
+#: scenes/ui/guild_panel.gd
+msgid "Покинуть гильдию"
+msgstr "길드 탈퇴"
+
+#: scripts/progress/hero_progress.gd
+msgid "Покоритель волн"
+msgstr "웨이브 정복자"
+
+#: data/treasures/archer.json
+msgid "Покров Лесного Духа"
+msgstr "숲 정령의 덮개"
+
+#: data/items/field_kitchen.tres
+msgid "Полевой котёл"
+msgstr "야전 솥"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Полевой лагерь"
+msgstr "야영지"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Полководец"
+msgstr "총사령관"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "Получено душ: %d"
+msgstr "획득한 영혼: %d"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Получено: %s (%s)"
+msgstr "획득: %s (%s)"
+
+#: data/treasures/warrior.json
+msgid "Поножи"
+msgstr "각반"
+
+#: data/treasures/warrior.json
+msgid "Поножи Военачальника"
+msgstr "군주의 각반"
+
+#: data/treasures/warrior.json
+msgid "Поножи Закалённого горна"
+msgstr "불꽃 용광로 각반"
+
+#: data/treasures/warrior.json
+msgid "Поножи Каменной стены"
+msgstr "철벽 각반"
+
+#: data/treasures/warrior.json
+msgid "Поножи Королевской гвардии"
+msgstr "왕실 근위대 각반"
+
+#: data/treasures/warrior.json
+msgid "Поножи Кровавой клятвы"
+msgstr "피의 맹세 각반"
+
+#: data/treasures/warrior.json
+msgid "Поножи Ледяной хватки"
+msgstr "서리 손아귀 각반"
+
+#: data/treasures/warrior.json
+msgid "Поножи Небесного стража"
+msgstr "하늘 수호자 각반"
+
+#: data/treasures/warrior.json
+msgid "Поножи Пепельного стража"
+msgstr "잿빛 수호자 각반"
+
+#: data/treasures/warrior.json
+msgid "Поножи Порождения бездны"
+msgstr "심연의 자손 각반"
+
+#: data/treasures/warrior.json
+msgid "Поножи Речного Брода"
+msgstr "강 여울의 각반"
+
+#: data/treasures/warrior.json
+msgid "Поножи Сокрушителя бурь"
+msgstr "폭풍 파괴자 각반"
+
+#: scenes/world/battle_replay.gd
+msgid "Поражение"
+msgstr "패배"
+
+#: server/src/world/game.ts
+msgid "Поражение от {name}: армия погибла, герой вернулся в замок"
+msgstr "{name}님에게 패배: 군대가 전멸하고 영웅은 성으로 귀환했습니다"
+
+#: data/treasures/warrior.json
+msgid "Порождение бездны"
+msgstr "심연의 자손"
+
+#: data/treasures/warrior.json
+msgid "Порождения бездны"
+msgstr "심연의 자손"
+
+#: server/src/world/guilds.ts
+msgid "После выхода из гильдии вступить в новую можно только через сутки"
+msgstr "길드를 탈퇴하면 24시간 후에만 새 길드에 가입할 수 있습니다"
+
+#: scenes/world/world_map.gd
+msgid "Посмотреть бой"
+msgstr "전투 보기"
+
+#: data/treasures/mage.json
+msgid "Посох Тлеющих Углей"
+msgstr "타오르는 잉걸불의 지팡이"
+
+#: data/treasures/mage.json
+msgid "Посох, запертый в подвале академии. Теперь — у вас."
+msgstr "아카데미 지하실에 봉인되어 있던 지팡이. 이제는 당신의 것이다."
+
+#: scenes/ui/hud.gd
+msgid "Построено: %s, ур. %d"
+msgstr "건설 완료: %s, Lv. %d"
+
+#: scenes/ui/kingdom_panel.gd scenes/ui/kingdom_panel.tscn
+msgid "Построить"
+msgstr "건설"
+
+#: scenes/world/battle_replay.gd
+msgid "Потери: %s — %s · %s — %s"
+msgstr "손실: %s — %s · %s — %s"
+
+#: data/talents/mage_talents.tres
+msgid "Поток маны"
+msgstr "마나의 흐름"
+
+#: scenes/world/world_map.tscn
+msgid "Поход"
+msgstr "원정"
+
+#: scenes/world/world_map.gd
+msgid "Поход в зону #%d — %s"
+msgstr "구역 #%d(으)로 원정 중 — %s"
+
+#: server/src/world/game.ts
+msgid "Поход сорван: {name} — ваш союзник по гильдии"
+msgstr "원정 중단: {name}님은 길드 동맹입니다"
+
+#: server/src/world/game.ts
+msgid "Поход сорван: без армии зону не занять"
+msgstr "원정 중단: 군대 없이는 구역을 점령할 수 없습니다"
+
+#: server/src/world/game.ts
+msgid "Поход сорван: зону нельзя захватить"
+msgstr "원정 중단: 점령할 수 없는 구역입니다"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Походный марш"
+msgstr "강행군"
+
+#: scenes/ui/settings_panel.gd
+msgid "При наведении"
+msgstr "마우스를 올렸을 때"
+
+#: data/treasures/mage.json
+msgid "Привезены караваном из-за Пяти пустынь."
+msgstr "다섯 사막 너머에서 대상이 실어 온 것."
+
+#: scenes/ui/guild_panel.gd
+msgid "Пригласить"
+msgstr "초대"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашают глава и офицеры"
+msgstr "길드장과 간부가 초대할 수 있습니다"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашение действует ещё %s"
+msgstr "초대 유효 시간: %s"
+
+#: server/src/world/guilds.ts
+msgid "Приглашение не найдено"
+msgstr "초대를 찾을 수 없습니다"
+
+#: server/src/world/guilds.ts
+msgid "Приглашение не найдено или истекло"
+msgstr "초대를 찾을 수 없거나 만료되었습니다"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашение отклонено"
+msgstr "초대를 거절했습니다"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашение отменено"
+msgstr "초대를 취소했습니다"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашение отправлено: %s"
+msgstr "초대 보냄: %s"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашений пока нет. Глава или офицер гильдии может пригласить вас по имени: %s"
+msgstr "아직 초대가 없습니다. 길드장이나 간부가 이름으로 초대할 수 있습니다: %s"
+
+#: scenes/ui/guild_panel.gd
+msgid "Приглашения"
+msgstr "초대"
+
+#: data/treasures/archer.json
+msgid "Призрачный Шаг"
+msgstr "유령 걸음"
+
+#: data/treasures/mage.json
+msgid "Призыватель пламени"
+msgstr "화염 소환사"
+
+#: data/treasures/mage.json
+msgid "Призывателя пламени"
+msgstr "화염 소환사"
+
+#: scripts/progress/hero_progress.gd
+msgid "Примените умения %d раз"
+msgstr "스킬을 %d회 사용하세요"
+
+#: scripts/progress/hero_progress.gd
+msgid "Примените умения %s раз"
+msgstr "스킬을 %s회 사용하세요"
+
+#: scenes/ui/hud.tscn
+msgid "Применять умения автоматически.\nВручную — клик по умению или клавиши 1–9."
+msgstr "스킬 자동 사용.\n수동 — 스킬을 클릭하거나 1–9 키를 누르세요."
+
+#: data/items/iron_pauldrons.tres
+msgid "Принимают на себя удары, летящие в плечо."
+msgstr "어깨로 날아드는 공격을 대신 받아낸다."
+
+#: data/skills/archer_aimed_shot.tres
+msgid "Прицельный выстрел"
+msgstr "조준 사격"
+
+#: data/talents/archer_talents.tres
+msgid "Прицельный выстрел: −{value}% перезарядки. +{value2}% урона."
+msgstr "조준 사격: 재사용 대기시간 −{value}%. 피해 +{value2}%."
+
+#: data/skills/archer_piercing_shot.tres
+msgid "Пробивающий выстрел"
+msgstr "관통 사격"
+
+#: scripts/data/stat_modifier.gd
+msgid "Проворство"
+msgstr "민첩"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Продано за %d з"
+msgstr "%d G에 판매"
+
+#: scenes/ui/inventory_panel.gd scenes/ui/inventory_panel.tscn
+msgid "Продать"
+msgstr "판매"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Продать (%d з)"
+msgstr "판매 (%d G)"
+
+#: scripts/progress/hero_progress.gd
+msgid "Пройдите %d волн"
+msgstr "웨이브 %d개 클리어"
+
+#: scripts/progress/hero_progress.gd
+msgid "Пройдите %s волн"
+msgstr "웨이브 %s개 클리어"
+
+#: data/biomes/cursed.tres
+msgid "Проклятая чаща"
+msgstr "저주받은 수풀"
+
+#: data/treasures/warrior.json
+msgid "Проклятый меч. Им нельзя победить — только казнить."
+msgstr "저주받은 검. 이것으로는 승리할 수 없다 — 처형할 뿐."
+
+#: scenes/world/battle_replay.tscn
+msgid "Пропустить"
+msgstr "건너뛰기"
+
+#: data/items/leather_armor.tres
+msgid "Прочная кожа защищает, не сковывая движений."
+msgstr "질긴 가죽이 움직임을 방해하지 않고 몸을 보호한다."
+
+#: data/treasures/warrior.json
+msgid "Прошли через три королевства и не стёрлись."
+msgstr "세 왕국을 가로질렀지만 닳지 않았다."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Пусто: сокровища находятся за время игры"
+msgstr "비어 있음: 보물은 플레이 시간에 따라 발견됩니다"
+
+#: scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Путь"
+msgstr "여정"
+
+#: scenes/ui/hud.gd
+msgid "Путь (%d)"
+msgstr "여정 (%d)"
+
+#: scenes/ui/journal_panel.tscn
+msgid "Путь героя"
+msgstr "영웅의 여정"
+
+#: scenes/ui/hud.tscn
+msgid "Путь героя: задания, достижения, бестиарий, перерождение [J]"
+msgstr "영웅의 여정: 퀘스트, 업적, 몬스터 도감, 환생 [J]"
+
+#: data/talents/warrior_talents.tres
+msgid "Путь меча"
+msgstr "검의 길"
+
+#: scripts/autoload/desktop_window.gd
+msgid "Развернуть"
+msgstr "복원"
+
+#: scenes/ui/guild_panel.gd
+msgid "Распустить гильдию"
+msgstr "길드 해산"
+
+#: data/skills/warrior_cleave.tres
+msgid "Рассекающий удар"
+msgstr "가르기"
+
+#: data/buildings/town_hall.tres
+msgid "Ратуша"
+msgstr "시청"
+
+#: scenes/world/world_map.gd
+msgid "Регион: %s (%s)"
+msgstr "지역: %s (%s)"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Регионы"
+msgstr "지역"
+
+#: scripts/items/item.gd
+msgid "Редкий"
+msgstr "희귀"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Реликвии армии"
+msgstr "군대 유물"
+
+#: scripts/data/item_base.gd
+msgid "Реликвия армии"
+msgstr "군대 유물"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Реликвия армии: пусто.\nРеликвии выпадают с монстров и усиливают армию замка."
+msgstr "군대 유물: 비어 있음.\n유물은 몬스터에게서 드롭되며 성 군대를 강화합니다."
+
+#: data/items/rusty_sword.tres
+msgid "Ржавый меч"
+msgstr "녹슨 검"
+
+#: scenes/ui/guild_panel.gd
+msgid "Роль"
+msgstr "역할"
+
+#: data/talents/warrior_talents.tres
+msgid "Рубака"
+msgstr "난도질꾼"
+
+#: data/treasures/mage.json
+msgid "Рунное Оплечье"
+msgstr "룬 어깨걸이"
+
+#: data/treasures/mage.json
+msgid "Руны на нём светятся, когда рядом магия."
+msgstr "마법이 가까이 있으면 룬이 빛난다."
+
+#: scripts/autoload/settings.gd
+msgid "Русский"
+msgstr "Русский"
+
+#: data/buildings/market.tres
+msgid "Рынок"
+msgstr "시장"
+
+#: data/units/knight.tres
+msgid "Рыцарь"
+msgstr "기사"
+
+#: data/treasures/archer.json
+msgid "С высоты орлиного полёта не укроется ни одна цель."
+msgstr "독수리가 나는 높이에서는 어떤 목표도 숨을 수 없다."
+
+#: data/treasures/warrior.json
+msgid "Сабатоны"
+msgstr "철제 장화"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Военачальника"
+msgstr "군주의 철제 장화"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Закалённого горна"
+msgstr "불꽃 용광로 철제 장화"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Каменной стены"
+msgstr "철벽 철제 장화"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Королевской гвардии"
+msgstr "왕실 근위대 철제 장화"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Кровавой клятвы"
+msgstr "피의 맹세 철제 장화"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Ледяной хватки"
+msgstr "서리 손아귀 철제 장화"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Небесного стража"
+msgstr "하늘 수호자 철제 장화"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Пепельного стража"
+msgstr "잿빛 수호자 철제 장화"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Порождения бездны"
+msgstr "심연의 자손 철제 장화"
+
+#: data/treasures/warrior.json
+msgid "Сабатоны Сокрушителя бурь"
+msgstr "폭풍 파괴자 철제 장화"
+
+#: data/treasures/archer.json
+msgid "Сапоги"
+msgstr "장화"
+
+#: data/treasures/archer.json
+msgid "Сапоги Бегущей с ветром"
+msgstr "바람의 질주자 장화"
+
+#: data/treasures/archer.json
+msgid "Сапоги Ветра пустыни"
+msgstr "사막의 바람 장화"
+
+#: data/treasures/archer.json
+msgid "Сапоги Грозовой стрелы"
+msgstr "천둥 화살 장화"
+
+#: data/treasures/warrior.json
+msgid "Сапоги Долгого Марша"
+msgstr "머나먼 행군의 장화"
+
+#: data/treasures/archer.json
+msgid "Сапоги Ночного охотника"
+msgstr "밤의 사냥꾼 장화"
+
+#: data/treasures/archer.json
+msgid "Сапоги Оленьего Шага"
+msgstr "사슴 걸음의 장화"
+
+#: data/treasures/archer.json
+msgid "Сапоги Орлиного глаза"
+msgstr "독수리의 눈 장화"
+
+#: data/treasures/archer.json
+msgid "Сапоги Повелителя зверей"
+msgstr "야수의 군주 장화"
+
+#: data/treasures/archer.json
+msgid "Сапоги Серебряного листа"
+msgstr "은빛 잎새 장화"
+
+#: data/treasures/archer.json
+msgid "Сапоги Терновой чащи"
+msgstr "가시나무 숲 장화"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Сбор налогов"
+msgstr "세금 징수"
+
+#: server/src/world/guilds.ts
+msgid "Сбрасывать бонусы можно раз в сутки"
+msgstr "특전은 하루에 한 번 초기화할 수 있습니다"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Сбрасываются волна, уровень и таланты (очки возвращаются). Остаются снаряжение, сокровища, золото, замок, армия и гильдия."
+msgstr "웨이브, 레벨, 특성이 초기화됩니다 (포인트 반환). 장비, 보물, 골드, 성, 군대, 길드는 유지됩니다."
+
+#: scenes/talents/talent_grid.tscn
+msgid "Сброс"
+msgstr "초기화"
+
+#: scenes/talents/talent_grid.gd
+msgid "Сброс (%d з)"
+msgstr "초기화 (%d G)"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Сброс через %s"
+msgstr "%s 후 초기화 가능"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Сбросить бонусы"
+msgstr "특전 초기화"
+
+#: scenes/ui/hud.tscn
+msgid "Свернуть в трей (игра продолжится)"
+msgstr "트레이로 최소화 (게임은 계속 진행)"
+
+#: scenes/talents/talent_grid.gd
+msgid "Свободных очков: %d · изучено %d из %d"
+msgstr "남은 포인트: %d · 습득 %d / %d"
+
+#: scenes/ui/guild/guild_perks_page.gd
+msgid "Свободных очков: %d из %d · каждый уровень гильдии даёт %d"
+msgstr "남은 포인트: %d / %d · 길드 레벨당 %d 지급"
+
+#: scenes/ui/guild_panel.gd
+msgid "Сделать офицером"
+msgstr "간부로 임명"
+
+#: data/guild/guild.json
+msgid "Северные пустоши"
+msgstr "북부 황무지"
+
+#: scenes/ui/guild_panel.gd
+msgid "Сезон"
+msgstr "시즌"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Сезон %d · закончится через %s\nВаша гильдия: %d место, %d очков"
+msgstr "시즌 %d · %s 후 종료\n내 길드: %d위, %d점"
+
+#: server/src/world/guilds.ts
+msgid "Сезон {season} завершён: {place} место! Каждый участник получил {gold} золота"
+msgstr "시즌 {season} 종료: {place}위! 모든 멤버가 {gold} 골드를 받았습니다"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Сейчас: "
+msgstr "현재: "
+
+#: scenes/talents/talent_grid.tscn
+msgid "Секторы"
+msgstr "구역"
+
+#: data/treasures/warrior.json
+msgid "Сердце Горы"
+msgstr "산의 심장"
+
+#: data/buildings/town_hall.tres
+msgid "Сердце королевства. Уровень Ратуши ограничивает уровень остальных зданий и расширяет склад."
+msgstr "왕국의 심장. 시청 레벨이 다른 모든 건물의 레벨 상한이 되며 창고를 확장합니다."
+
+#: data/guild/guild.json
+msgid "Сердце мира"
+msgstr "세계의 심장"
+
+#: data/talents/mage_talents.tres
+msgid "Сердце огня"
+msgstr "불의 심장"
+
+#: data/guild/guild.json
+msgid "Серебряная гавань"
+msgstr "은빛 항구"
+
+#: data/treasures/archer.json
+msgid "Серебряного листа"
+msgstr "은빛 잎새"
+
+#: data/treasures/archer.json
+msgid "Серебряный лист"
+msgstr "은빛 잎새"
+
+#: data/treasures/warrior.json
+msgid "Серый Клык"
+msgstr "회색 송곳니"
+
+#: data/skills/archer_snare.tres
+msgid "Сеть вокруг цели: 60% урона и обездвиживание врагов на 2 с."
+msgstr "대상 주변에 그물: 60% 피해를 주고 적을 2초간 속박."
+
+#: scripts/autoload/world_service.gd
+msgid "Сеть отключена"
+msgstr "네트워크 비활성화됨"
+
+#: scripts/items/item.gd
+msgid "Сила армии, %"
+msgstr "군대 전투력, %"
+
+#: scenes/ui/army_view.gd
+msgid "Сила армии: %d"
+msgstr "군대 전투력: %d"
+
+#: scenes/ui/army_view.tscn
+msgid "Сила армии: 0"
+msgstr "군대 전투력: 0"
+
+#: scripts/progress/hero_progress.gd
+msgid "Сила предков"
+msgstr "선조의 힘"
+
+#: scripts/data/stat_modifier.gd
+msgid "Сила удара"
+msgstr "타격력"
+
+#: data/monsters/skeleton.tres
+msgid "Скелет"
+msgstr "스켈레톤"
+
+#: data/monsters/skeleton_archer.tres
+msgid "Скелет-лучник"
+msgstr "스켈레톤 궁수"
+
+#: scripts/items/item.gd
+msgid "Скорость атаки, %"
+msgstr "공격 속도, %"
+
+#: scripts/items/item.gd
+msgid "Скорость обучения, %"
+msgstr "훈련 속도, %"
+
+#: scenes/world/battle_replay.tscn
+msgid "Скорость повтора"
+msgstr "리플레이 속도"
+
+#: data/guild/guild.json
+msgid "Слава"
+msgstr "영광"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Слава правителя"
+msgstr "통치자의 영광"
+
+#: data/treasures/archer.json
+msgid "Следов не оставляет — даже на снегу."
+msgstr "눈 위에서조차 발자국을 남기지 않는다."
+
+#: data/talents/archer_talents.tres
+msgid "Следопыт"
+msgstr "추적자"
+
+#: data/monsters/slime.tres
+msgid "Слизень"
+msgstr "슬라임"
+
+#: scenes/ui/inventory_panel.tscn
+msgid "Слить 3→1"
+msgstr "합성 3→1"
+
+#: server/src/http.ts
+msgid "Слишком большой запрос"
+msgstr "요청이 너무 큽니다"
+
+#: data/talents/archer_talents.tres
+msgid "Смертельная стрела"
+msgstr "치명적인 화살"
+
+#: data/skills/archer_deadly_volley.tres
+msgid "Смертельный залп"
+msgstr "죽음의 일제 사격"
+
+#: data/talents/archer_talents.tres
+msgid "Снайпер"
+msgstr "저격수"
+
+#: server/src/world/guilds.ts
+msgid "Сначала вложите больше очков в эту ветку"
+msgstr "먼저 이 분야에 포인트를 더 투자하세요"
+
+#: scenes/talents/talent_grid.gd
+msgid "Сначала изучите соседний узел"
+msgstr "먼저 인접한 노드를 습득하세요"
+
+#: server/src/world/guilds.ts
+msgid "Сначала передайте главенство другому участнику"
+msgstr "먼저 다른 멤버에게 길드장을 위임하세요"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Снять"
+msgstr "해제"
+
+#: scenes/ui/guild_panel.gd
+msgid "Снять офицера"
+msgstr "간부 해임"
+
+#: scripts/progress/hero_progress.gd
+msgid "Соберите %s сокровищ"
+msgstr "보물 %s개 수집"
+
+#: scenes/world/world_map.tscn
+msgid "События"
+msgstr "이벤트"
+
+#: data/treasures/archer.json
+msgid "Совиная Маска"
+msgstr "올빼미 가면"
+
+#: data/treasures/mage.json
+msgid "Совы в академии садятся только на него."
+msgstr "아카데미의 올빼미들은 오직 이것 위에만 앉는다."
+
+#: scenes/ui/army_view.gd
+msgid "Содержание: %s еды/мин"
+msgstr "유지비: 분당 식량 %s"
+
+#: scenes/creation/character_creation.tscn
+msgid "Создание героя"
+msgstr "영웅 생성"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сокровища (именные, уникальные, сетовые) находятся раз в несколько часов игры,\nне чаще недельного лимита. Позже их можно будет продавать на торговой площадке Steam."
+msgstr "보물(고유, 유니크, 세트 아이템)은 플레이 몇 시간마다 발견되며,\n주간 한도가 있습니다. 추후 Steam 커뮤니티 장터에서 판매할 수 있게 됩니다."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сокровища будут продаваться на торговой площадке Steam (после выхода игры)."
+msgstr "보물은 Steam 커뮤니티 장터에서 판매할 수 있게 됩니다 (정식 출시 후)."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сокровища не затачиваются: их сила растёт вместе с рекордом волны героя."
+msgstr "보물은 강화할 수 없습니다: 영웅의 최고 웨이브에 따라 힘이 증가합니다."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сокровищница"
+msgstr "보물고"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сокровищница (%d)"
+msgstr "보물고 (%d)"
+
+#: data/talents/warrior_talents.tres
+msgid "Сокрушающий замах"
+msgstr "분쇄의 휘두르기"
+
+#: data/talents/warrior_talents.tres
+msgid "Сокрушение"
+msgstr "파멸"
+
+#: data/treasures/warrior.json
+msgid "Сокрушитель бурь"
+msgstr "폭풍 파괴자"
+
+#: data/treasures/warrior.json
+msgid "Сокрушителя бурь"
+msgstr "폭풍 파괴자"
+
+#: scenes/ui/army_view.gd
+msgid "Солдат в замке: %d"
+msgstr "성의 병사: %d"
+
+#: data/guild/guild.json
+msgid "Солнечные поля"
+msgstr "햇살 들판"
+
+#: scripts/data/stat_modifier.gd
+msgid "Сон воина"
+msgstr "전사의 잠"
+
+#: server/src/world/guilds.ts
+msgid "Сообщение пустое"
+msgstr "메시지가 비어 있습니다"
+
+#: server/src/world/guilds.ts
+msgid "Сообщение слишком длинное"
+msgstr "메시지가 너무 깁니다"
+
+#: scenes/ui/guild_panel.gd
+msgid "Сообщение…"
+msgstr "메시지…"
+
+#: scenes/ui/guild_panel.gd
+msgid "Состав"
+msgstr "구성원"
+
+#: data/treasures/mage.json
+msgid "Сотканы из утреннего света над храмом Зари."
+msgstr "새벽의 신전 위 아침 햇살로 짜였다."
+
+#: scenes/ui/hud.tscn scripts/autoload/desktop_window.gd
+msgid "Сохранить и выйти"
+msgstr "저장 후 종료"
+
+#: scenes/world/world_map.gd
+msgid "Союзник по гильдии — нападать нельзя"
+msgstr "길드 동맹 — 공격할 수 없습니다"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "Союзники пока не присылали войска."
+msgstr "아직 동맹이 보낸 병력이 없습니다."
+
+#: scenes/ui/needs_panel.gd
+msgid "Спит…"
+msgstr "수면 중…"
+
+#: data/treasures/archer.json
+msgid "Сплетён из листьев, которые никогда не вянут."
+msgstr "결코 시들지 않는 잎으로 엮었다."
+
+#: data/treasures/mage.json
+msgid "Срезана с древа, под которым учил первый маг."
+msgstr "최초의 마법사가 가르치던 나무에서 잘라 냈다."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Стальная кожа"
+msgstr "강철 피부"
+
+#: scripts/progress/hero_progress.gd
+msgid "Стартовый рывок"
+msgstr "출발 가속"
+
+#: data/guild/guild.json
+msgid "Старые курганы"
+msgstr "오래된 고분"
+
+#: data/items/rusty_sword.tres
+msgid "Старый, но всё ещё острый клинок."
+msgstr "낡았지만 여전히 날카로운 검."
+
+#: data/units/spearman.tres
+msgid "Стена щитов и копий: крепкая защита."
+msgstr "방패와 창의 벽: 튼튼한 방어."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Стойкость ветерана"
+msgstr "베테랑의 인내"
+
+#: scripts/progress/hero_progress.gd
+msgid "Стойкость предков"
+msgstr "선조의 인내"
+
+#: server/src/world/game.ts
+msgid "Столько солдат в армии нет"
+msgstr "군대에 병사가 그만큼 없습니다"
+
+#: server/src/world/game.ts
+msgid "Столько солдат в гарнизоне нет"
+msgstr "수비대에 병사가 그만큼 없습니다"
+
+#: data/skills/archer_piercing_shot.tres
+msgid "Стрела пробивает насквозь: 220% урона всем врагам в линию."
+msgstr "화살이 관통합니다: 일직선상의 모든 적에게 220% 피해."
+
+#: data/treasures/archer.json
+msgid "Стрела уже летит — а рука ещё не шевельнулась."
+msgstr "화살은 이미 날아가는데 — 손은 아직 움직이지도 않았다."
+
+#: scripts/data/monster_data.gd
+msgid "Стрелок"
+msgstr "사수"
+
+#: data/treasures/archer.json
+msgid "Стрелы в этом наряде летят быстрее мысли."
+msgstr "이 옷을 입으면 화살이 생각보다 빠르게 날아간다."
+
+#: scripts/progress/hero_progress.gd
+msgid "Стремительность"
+msgstr "신속"
+
+#: data/items/drill_manual.tres
+msgid "Строевой устав"
+msgstr "교련 교범"
+
+#: server/src/world/kingdom.ts
+msgid "Строители заняты"
+msgstr "건설 인부가 작업 중입니다"
+
+#: scripts/kingdom/kingdom_state.gd
+msgid "Строители заняты: %s"
+msgstr "건설 인부 작업 중: %s"
+
+#: scenes/ui/kingdom_panel.tscn
+msgid "Строители свободны"
+msgstr "건설 인부 대기 중"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Строители свободны — выберите здание"
+msgstr "건설 인부 대기 중 — 건물을 선택하세요"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Стройка: %s ур. %d — %s"
+msgstr "건설 중: %s Lv. %d — %s"
+
+#: scenes/ui/hud.tscn scenes/ui/inventory_panel.gd
+msgid "Сумка"
+msgstr "가방"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сумка полна"
+msgstr "가방이 가득 찼습니다"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Сумка: %d / %d"
+msgstr "가방: %d / %d"
+
+#: scenes/ui/inventory_panel.tscn
+msgid "Сумка: 0 / 60"
+msgstr "가방: 0 / 60"
+
+#: data/guild/guild.json
+msgid "Сумрачный лес"
+msgstr "황혼의 숲"
+
+#: data/treasures/mage.json
+msgid "Сфера Чистой Маны"
+msgstr "순수한 마나의 구슬"
+
+#: data/needs/hunger.tres
+msgid "Сытость"
+msgstr "포만감"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "Таблица сезона"
+msgstr "시즌 순위표"
+
+#: data/buildings/tavern.tres
+msgid "Таверна"
+msgstr "선술집"
+
+#: data/talents/mage_talents.tres
+msgid "Тайная магия"
+msgstr "비전 마법"
+
+#: server/src/world/guilds.ts
+msgid "Такого участника нет"
+msgstr "해당 멤버가 없습니다"
+
+#: server/src/world/guilds.ts
+msgid "Такой тег уже занят"
+msgstr "이미 사용 중인 태그입니다"
+
+#: scenes/talents/talent_grid.tscn scenes/ui/hud.gd scenes/ui/hud.tscn
+msgid "Таланты"
+msgstr "특성"
+
+#: scenes/ui/hud.gd
+msgid "Таланты (%d)"
+msgstr "특성 (%d)"
+
+#: scenes/talents/talent_grid.gd
+msgid "Таланты сброшены, очки возвращены"
+msgstr "특성 초기화, 포인트 반환 완료"
+
+#: scenes/ui/guild_panel.gd
+msgid "Тег"
+msgstr "태그"
+
+#: scenes/ui/guild_panel.gd
+msgid "Тег и цвет видны на карте: [ТЕГ] Имя. Союзники не нападают друг на друга."
+msgstr "태그와 색상은 지도에 표시됩니다: [태그] 이름. 동맹끼리는 서로 공격할 수 없습니다."
+
+#: server/src/world/guilds.ts
+msgid "Тег: от 2 до 4 букв или цифр"
+msgstr "태그: 문자 또는 숫자 2~4자"
+
+#: data/treasures/archer.json
+msgid "Тень среди теней. Выстрел — и снова тишина."
+msgstr "그림자 속의 그림자. 한 발 — 그리고 다시 정적."
+
+#: data/treasures/archer.json
+msgid "Терновая чаща"
+msgstr "가시나무 숲"
+
+#: data/treasures/archer.json
+msgid "Терновой чащи"
+msgstr "가시나무 숲"
+
+#: scenes/main.gd
+msgid "Тест"
+msgstr "테스트"
+
+#: data/treasures/archer.json
+msgid "Тетива поёт, как ветер в ковыле."
+msgstr "활시위가 억새밭의 바람처럼 노래한다."
+
+#: data/treasures/mage.json
+msgid "Ткань не горит — она сама горит желанием сжечь."
+msgstr "천은 타지 않는다 — 스스로 모든 것을 태우고 싶어 타오를 뿐."
+
+#: data/treasures/mage.json
+msgid "Ткач Времени"
+msgstr "시간의 직조자"
+
+#: data/treasures/mage.json
+msgid "Ткач льда"
+msgstr "서리 직조자"
+
+#: data/treasures/mage.json
+msgid "Ткача льда"
+msgstr "서리 직조자"
+
+#: scenes/ui/inventory_panel.gd
+msgid "Только: "
+msgstr "전용: "
+
+#: data/buildings/market.tres
+msgid "Торговля пополняет казну замка и повышает награду золотом за монстров."
+msgstr "교역으로 성 금고를 채우고 몬스터 처치 골드 보상을 늘립니다."
+
+#: scenes/ui/guild_panel.gd
+msgid "Точно?"
+msgstr "확실합니까?"
+
+#: scenes/talents/talent_grid.gd
+msgid "Точно? %d з"
+msgstr "확실합니까? %d G"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Точно? Получить %s"
+msgstr "확실합니까? %s 획득"
+
+#: data/talents/archer_talents.tres
+msgid "Точность снайпера"
+msgstr "저격수의 정밀함"
+
+#: data/buildings/barracks.tres
+msgid "Тренирует армию замка и самого героя. Открывает новые отряды, даёт место в армии и ускоряет обучение."
+msgstr "성 군대와 영웅을 훈련합니다. 새 부대를 해금하고, 군대 정원을 늘리며, 훈련 속도를 높입니다."
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Трофеи"
+msgstr "전리품"
+
+#: data/guild/guild.json
+msgid "Туманный перевал"
+msgstr "안개 고개"
+
+#: data/treasures/mage.json
+msgid "Туфли"
+msgstr "신발"
+
+#: data/treasures/mage.json
+msgid "Туфли Верховного арканиста"
+msgstr "대마도사 신발"
+
+#: data/treasures/mage.json
+msgid "Туфли Жреца солнца"
+msgstr "태양의 사제 신발"
+
+#: data/treasures/mage.json
+msgid "Туфли Звездопада"
+msgstr "유성우 신발"
+
+#: data/treasures/mage.json
+msgid "Туфли Коснувшегося бездны"
+msgstr "심연에 닿은 자의 신발"
+
+#: data/treasures/mage.json
+msgid "Туфли Мгновенного Шага"
+msgstr "순간 걸음의 신발"
+
+#: data/treasures/mage.json
+msgid "Туфли Облачного Шага"
+msgstr "구름 걸음의 신발"
+
+#: data/treasures/mage.json
+msgid "Туфли Повелителя гроз"
+msgstr "폭풍의 군주 신발"
+
+#: data/treasures/mage.json
+msgid "Туфли Призывателя пламени"
+msgstr "화염 소환사 신발"
+
+#: data/treasures/mage.json
+msgid "Туфли Ткача льда"
+msgstr "서리 직조자 신발"
+
+#: data/treasures/mage.json
+msgid "Туфли Хранителя библиотеки"
+msgstr "도서관 수호자 신발"
+
+#: data/units/knight.tres
+msgid "Тяжёлая конница. Дорого, но очень сильно. Занимает 3 места."
+msgstr "중기병. 비싸지만 매우 강력합니다. 정원 3칸을 차지합니다."
+
+#: data/talents/warrior_talents.tres
+msgid "Тяжёлая рука"
+msgstr "무거운 손"
+
+#: data/monsters/dark_wizard.tres
+msgid "Тёмный маг"
+msgstr "어둠의 마법사"
+
+#: data/treasures/mage.json
+msgid "Тёплое на ощупь — даже зимой."
+msgstr "만지면 따뜻하다 — 한겨울에도."
+
+#: data/treasures/warrior.json
+msgid "Тёплый, тяжёлый и пахнет лесом."
+msgstr "따뜻하고 묵직하며 숲 냄새가 난다."
+
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %d монстров"
+msgstr "몬스터 %d마리 처치"
+
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %d элитных монстров"
+msgstr "정예 몬스터 %d마리 처치"
+
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %s монстров"
+msgstr "몬스터 %s마리 처치"
+
+#: scripts/progress/hero_progress.gd
+msgid "Убейте %s элитных монстров"
+msgstr "정예 몬스터 %s마리 처치"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "Убито: %d"
+msgstr "처치: %d"
+
+#: scenes/ui/settings_panel.gd
+msgid "Уведомления"
+msgstr "알림"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Уведомления, пока игра в трее"
+msgstr "트레이에서도 알림 소리"
+
+#: data/talents/warrior_talents.tres
+msgid "Удар молота"
+msgstr "망치 강타"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Удар на %d урона"
+msgstr "%d 피해를 입혔습니다"
+
+#: data/skills/warrior_whirlwind.tres
+msgid "Удар по всем врагам вокруг на 150% урона."
+msgstr "주변 모든 적에게 150% 피해."
+
+#: data/skills/warrior_power_strike.tres
+msgid "Удар по цели на 250% урона."
+msgstr "대상에게 250% 피해."
+
+#: data/skills/warrior_shield_bash.tres
+msgid "Удар щитом"
+msgstr "방패 강타"
+
+#: data/guild/guild.json
+msgid "Удача гильдии"
+msgstr "길드의 행운"
+
+#: scripts/data/stat_modifier.gd
+msgid "Удача торговца"
+msgstr "상인의 행운"
+
+#: data/items/leather_boots.tres
+msgid "Удобные сапоги: шаг легче, удар быстрее."
+msgstr "편안한 장화: 발걸음은 가볍게, 공격은 빠르게."
+
+#: scenes/talents/talent_grid.gd
+msgid "Уже изучено"
+msgstr "이미 습득함"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Уйдёт через %s. Здоровье общее — бейте всей гильдией."
+msgstr "%s 후 떠납니다. 생명력은 공유됩니다 — 길드 전체가 함께 공격하세요."
+
+#: scripts/kingdom/army_state.gd server/src/world/kingdom.ts
+msgid "Укажите количество"
+msgstr "수량을 입력하세요"
+
+#: server/src/world/game.ts server/src/world/guilds.ts
+msgid "Укажите сумму"
+msgstr "금액을 입력하세요"
+
+#: scripts/autoload/settings.gd
+msgid "Українська"
+msgstr ""
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "Улучшение куплено"
+msgstr "강화 구매 완료"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Улучшить до ур. %d"
+msgstr "Lv. %d(으)로 업그레이드"
+
+#: scripts/data/item_base.gd server/src/world/game.ts
+msgid "Уникальный"
+msgstr "유니크"
+
+#: scenes/ui/guild_panel.gd
+msgid "Управление"
+msgstr "관리"
+
+#: scenes/ui/guild_panel.gd
+msgid "Ур. %d"
+msgstr "Lv. %d"
+
+#: scenes/ui/guild_panel.gd
+msgid "Ур. %d · максимум"
+msgstr "Lv. %d · 최대"
+
+#: scenes/ui/guild_panel.gd
+msgid "Ур. %d · опыт %d / %d"
+msgstr "Lv. %d · 경험치 %d / %d"
+
+#: data/talents/archer_talents.tres
+msgid "Ураган"
+msgstr "허리케인"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "Уровень %d / %d"
+msgstr "레벨 %d / %d"
+
+#: scenes/battle/battle.gd
+msgid "Уровень %d!"
+msgstr "레벨 %d!"
+
+#: scenes/ui/inventory_panel.gd scripts/items/item.gd
+msgid "Урон"
+msgstr "피해"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "Урон против вида: %s за 100 / 1 000 / 10 000 убийств. Полностью изучено видов: %d — +%d%% урона против всех."
+msgstr "종족별 피해: 처치 100 / 1,000 / 10,000회마다 %s. 완전히 연구한 종족: %d — 모든 적에게 피해 +%d%%."
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Урон участников"
+msgstr "멤버별 피해"
+
+#: scenes/ui/guild/guild_boss_page.gd
+msgid "Урон — сила армии замка и героя; солдаты не гибнут."
+msgstr "피해는 성 군대와 영웅의 전투력입니다. 병사는 죽지 않습니다."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Успех! Теперь +%d"
+msgstr "성공! 현재 +%d"
+
+#: data/items/drill_manual.tres
+msgid "Устав строевой подготовки: новобранцы учатся быстрее."
+msgstr "교련 교범: 신병들이 더 빨리 배웁니다."
+
+#: scripts/autoload/world_service.gd
+msgid "Устаревший ответ"
+msgstr "오래된 응답"
+
+#: scenes/ui/guild_panel.gd
+msgid "Участник"
+msgstr "멤버"
+
+#: scenes/ui/guild_panel.gd
+msgid "Участник исключён"
+msgstr "멤버 추방 완료"
+
+#: scenes/ui/guild/guild_season_page.gd scenes/ui/guild_panel.gd
+msgid "Участники"
+msgstr "멤버"
+
+#: scenes/ui/guild_panel.gd
+msgid "Участники: %d / %d · бонус: +%d%% к силе армии"
+msgstr "멤버: %d / %d · 보너스: 군대 전투력 +%d%%"
+
+#: data/buildings/tavern.tres
+msgid "Уютные комнаты: герой быстрее отдыхает, голод и жажда приходят медленнее."
+msgstr "아늑한 방: 영웅이 더 빨리 휴식하고, 배고픔과 갈증이 더 천천히 찾아옵니다."
+
+#: data/buildings/farm.tres
+msgid "Ферма"
+msgstr "농장"
+
+#: scripts/data/stat_modifier.gd
+msgid "Хватка"
+msgstr "악력"
+
+#: data/treasures/archer.json
+msgid "Хитрость лисы — в каждом стежке."
+msgstr "한 땀 한 땀에 여우의 교활함이 깃들어 있다."
+
+#: data/treasures/mage.json
+msgid "Хозяин всегда оказывается там, где нужно, — чуть раньше."
+msgstr "그 주인은 언제나 필요한 곳에 — 조금 일찍 — 나타난다."
+
+#: data/treasures/warrior.json
+msgid "Холодные, как северный ветер, и такие же беспощадные."
+msgstr "북풍처럼 차갑고, 그만큼 무자비하다."
+
+#: data/treasures/warrior.json
+msgid "Хранитель Клятвы"
+msgstr "맹세의 수호자"
+
+#: data/treasures/mage.json
+msgid "Хранитель библиотеки"
+msgstr "도서관 수호자"
+
+#: data/treasures/mage.json
+msgid "Хранителя библиотеки"
+msgstr "도서관 수호자"
+
+#: data/treasures/warrior.json
+msgid "Цареубийца"
+msgstr "왕 시해자"
+
+#: scenes/ui/guild_panel.gd
+msgid "Цвет"
+msgstr "색상"
+
+#: scenes/ui/guild_panel.gd
+msgid "Цена: 1000 золота из казны замка (в казне: %d)"
+msgstr "비용: 성 금고에서 1000 골드 (금고: %d)"
+
+#: data/skills/mage_chain_lightning.tres
+msgid "Цепная молния"
+msgstr "연쇄 번개"
+
+#: data/skills/mage_arcane_power.tres
+msgid "Чародейская мощь"
+msgstr "비전의 힘"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Частота кадров"
+msgstr "프레임 속도"
+
+#: scenes/ui/guild_panel.gd
+msgid "Чат гильдии"
+msgstr "길드 채팅"
+
+#: server/src/world/guilds.ts
+msgid "Чтобы уйти, нажмите «Покинуть гильдию»"
+msgstr "탈퇴하려면 «길드 탈퇴»를 누르세요"
+
+#: data/treasures/warrior.json
+msgid "Шаг Бури"
+msgstr "폭풍의 걸음"
+
+#: scripts/data/monster_data.gd
+msgid "Шаман"
+msgstr "주술사"
+
+#: scripts/items/item.gd
+msgid "Шанс крита, %"
+msgstr "치명타 확률, %"
+
+#: data/treasures/mage.json
+msgid "Шаровары"
+msgstr "바지"
+
+#: data/treasures/mage.json
+msgid "Шаровары Верховного арканиста"
+msgstr "대마도사 바지"
+
+#: data/treasures/mage.json
+msgid "Шаровары Жреца солнца"
+msgstr "태양의 사제 바지"
+
+#: data/treasures/mage.json
+msgid "Шаровары Звездопада"
+msgstr "유성우 바지"
+
+#: data/treasures/mage.json
+msgid "Шаровары Коснувшегося бездны"
+msgstr "심연에 닿은 자의 바지"
+
+#: data/treasures/mage.json
+msgid "Шаровары Повелителя гроз"
+msgstr "폭풍의 군주 바지"
+
+#: data/treasures/mage.json
+msgid "Шаровары Призывателя пламени"
+msgstr "화염 소환사 바지"
+
+#: data/treasures/mage.json
+msgid "Шаровары Ткача льда"
+msgstr "서리 직조자 바지"
+
+#: data/treasures/mage.json
+msgid "Шаровары Хранителя библиотеки"
+msgstr "도서관 수호자 바지"
+
+#: data/treasures/mage.json
+msgid "Шаровары Шёлкового Пути"
+msgstr "비단길 바지"
+
+#: data/guild/guild.json
+msgid "Шепчущие рощи"
+msgstr "속삭이는 숲"
+
+#: data/treasures/archer.json
+msgid "Шепчущий Ветер"
+msgstr "속삭이는 바람"
+
+#: data/treasures/mage.json
+msgid "Шили его семь лет. Каждая нить — отдельное заклинание."
+msgstr "짓는 데 칠 년이 걸렸다. 실 한 올 한 올이 각각의 주문이다."
+
+#: data/treasures/warrior.json
+msgid "Шипы венца пьют кровь врагов — и немного хозяина."
+msgstr "왕관의 가시는 적의 피를 — 그리고 주인의 피도 조금 — 마신다."
+
+#: data/talents/archer_talents.tres
+msgid "Шквал стрел"
+msgstr "화살 폭풍"
+
+#: data/treasures/warrior.json scripts/data/item_base.gd
+msgid "Шлем"
+msgstr "투구"
+
+#: data/treasures/warrior.json
+msgid "Шлем Военачальника"
+msgstr "군주의 투구"
+
+#: data/treasures/warrior.json
+msgid "Шлем Волчьей Стаи"
+msgstr "늑대 무리의 투구"
+
+#: data/treasures/warrior.json
+msgid "Шлем Закалённого горна"
+msgstr "불꽃 용광로 투구"
+
+#: data/treasures/warrior.json
+msgid "Шлем Каменной стены"
+msgstr "철벽 투구"
+
+#: data/treasures/warrior.json
+msgid "Шлем Королевской гвардии"
+msgstr "왕실 근위대 투구"
+
+#: data/treasures/warrior.json
+msgid "Шлем Кровавой клятвы"
+msgstr "피의 맹세 투구"
+
+#: data/treasures/warrior.json
+msgid "Шлем Ледяной хватки"
+msgstr "서리 손아귀 투구"
+
+#: data/treasures/warrior.json
+msgid "Шлем Небесного стража"
+msgstr "하늘 수호자 투구"
+
+#: data/treasures/warrior.json
+msgid "Шлем Пепельного стража"
+msgstr "잿빛 수호자 투구"
+
+#: data/treasures/warrior.json
+msgid "Шлем Порождения бездны"
+msgstr "심연의 자손 투구"
+
+#: data/treasures/warrior.json
+msgid "Шлем Сокрушителя бурь"
+msgstr "폭풍 파괴자 투구"
+
+#: data/items/iron_helmet.tres
+msgid "Шлем с гребнем: и защита, и повод для гордости."
+msgstr "볏이 달린 투구: 보호구이자 자부심의 상징."
+
+#: data/items/commander_standard.tres
+msgid "Штандарт полководца"
+msgstr "사령관의 군기"
+
+#: data/items/commander_standard.tres
+msgid "Штандарт полководца ведёт армию к победе."
+msgstr "사령관의 군기가 군대를 승리로 이끈다."
+
+#: data/treasures/archer.json
+msgid "Штаны"
+msgstr "바지"
+
+#: data/treasures/archer.json
+msgid "Штаны Бегущей с ветром"
+msgstr "바람의 질주자 바지"
+
+#: data/treasures/archer.json
+msgid "Штаны Ветра пустыни"
+msgstr "사막의 바람 바지"
+
+#: data/treasures/archer.json
+msgid "Штаны Грозовой стрелы"
+msgstr "천둥 화살 바지"
+
+#: data/treasures/archer.json
+msgid "Штаны Ночного охотника"
+msgstr "밤의 사냥꾼 바지"
+
+#: data/treasures/archer.json
+msgid "Штаны Орлиного глаза"
+msgstr "독수리의 눈 바지"
+
+#: data/treasures/archer.json
+msgid "Штаны Повелителя зверей"
+msgstr "야수의 군주 바지"
+
+#: data/treasures/archer.json
+msgid "Штаны Серебряного листа"
+msgstr "은빛 잎새 바지"
+
+#: data/treasures/archer.json
+msgid "Штаны Терновой чащи"
+msgstr "가시나무 숲 바지"
+
+#: data/guild/guild.json
+msgid "Щит братства"
+msgstr "형제애의 방패"
+
+#: data/talents/archer_talents.tres data/talents/mage_talents.tres data/talents/warrior_talents.tres
+msgid "Щит веры"
+msgstr "신앙의 방패"
+
+#: data/items/ancestral_shield.tres
+msgid "Щит предков"
+msgstr "선조의 방패"
+
+#: data/items/ancestral_shield.tres
+msgid "Щит предков хранит тех, кто держит строй."
+msgstr "선조의 방패는 대열을 지키는 자를 지켜 준다."
+
+#: scenes/ui/inventory_panel.gd
+msgid "Экипировка"
+msgstr "장비"
+
+#: data/guild/guild.json
+msgid "Экономика"
+msgstr "경제"
+
+#: scenes/battle/battle.gd
+msgid "Элита: %s!"
+msgstr "정예: %s!"
+
+#: data/treasures/archer.json
+msgid "Эльфийская работа: листья на плаще шелестят, даже когда нет ветра."
+msgstr "엘프의 솜씨: 바람이 없어도 망토의 잎사귀가 바스락거린다."
+
+#: scripts/items/item.gd
+msgid "Эпический"
+msgstr "영웅"
+
+#: data/treasures/warrior.json
+msgid "Этим мечом закончили Долгую ночь."
+msgstr "이 검으로 긴 밤이 끝났다."
+
+#: server/src/world/game.ts
+msgid "Это имя уже занято"
+msgstr "이미 사용 중인 이름입니다"
+
+#: server/src/world/game.ts
+msgid "Это не ваша зона"
+msgstr "내 구역이 아닙니다"
+
+#: server/src/world/game.ts
+msgid "Этот замок нельзя атаковать"
+msgstr "이 성은 공격할 수 없습니다"
+
+#: server/src/world/guilds.ts
+msgid "Этот игрок уже приглашён"
+msgstr "이미 초대한 플레이어입니다"
+
+#: data/talents/mage_talents.tres
+msgid "Эфирный щит"
+msgstr "에테르 보호막"
+
+#: data/guild/guild.json
+msgid "Южный предел"
+msgstr "남쪽 변경"
+
+#: data/skills/archer_poison_arrow.tres
+msgid "Ядовитая стрела"
+msgstr "독화살"
+
+#: scenes/ui/settings_panel.tscn
+msgid "Язык / Language"
+msgstr "언어 / Language"
+
+#: data/guild/guild.json
+msgid "Янтарный берег"
+msgstr "호박 해안"
+
+#: data/talents/warrior_talents.tres
+msgid "Ярость битвы"
+msgstr "전투의 분노"
+
+#: data/skills/archer_hunter_fury.tres
+msgid "Ярость охотника"
+msgstr "사냥꾼의 분노"
+
+#: data/treasures/archer.json
+msgid "Ясеневый Длинный Лук"
+msgstr "물푸레나무 장궁"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "армия %d мест"
+msgstr "군대 정원 %d"
+
+#: scripts/data/stat_modifier.gd
+msgid "брони"
+msgstr "방어력"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "в пути %s"
+msgstr "이동 중 %s"
+
+#: scenes/ui/guild_panel.gd
+msgid "в сети"
+msgstr "접속 중"
+
+#: scripts/data/stat_modifier.gd
+msgid "вампиризма"
+msgstr "흡혈"
+
+#: scenes/ui/hud.gd scenes/world/world_map.gd
+msgid "ваш замок"
+msgstr "내 성"
+
+#: scenes/ui/hud.gd
+msgid "вашу зону #%d"
+msgstr "내 구역 #%d"
+
+#: scripts/ui/ui_format.gd
+msgid "душ"
+msgstr "영혼"
+
+#: scripts/ui/ui_format.gd
+msgid "душа"
+msgstr "영혼"
+
+#: scripts/ui/ui_format.gd
+msgid "души"
+msgstr "영혼"
+
+#: scripts/data/stat_modifier.gd
+msgid "замедления голода и жажды"
+msgstr "배고픔·갈증 감소"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "здания до ур. %d"
+msgstr "건물 최대 Lv. %d"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "здоровья"
+msgstr "생명력"
+
+#: data/guild/guild.json
+msgid "здоровья героя"
+msgstr "영웅 생명력"
+
+#: scripts/data/stat_modifier.gd
+msgid "здоровья за убийство"
+msgstr "처치당 생명력"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "золота"
+msgstr "골드"
+
+#: data/guild/guild.json
+msgid "золота с монстров"
+msgstr "몬스터 골드"
+
+#: scenes/world/world_map.gd
+msgid "зону #%d"
+msgstr "구역 #%d"
+
+#: scripts/data/guild_catalog.gd
+msgid "изучите: %s"
+msgstr "습득 필요: %s"
+
+#: scenes/world/world_map.gd
+msgid "контроль: [%s]"
+msgstr "지배: [%s]"
+
+#: scripts/data/stat_modifier.gd
+msgid "крит. урона"
+msgstr "치명타 피해"
+
+#: scenes/ui/needs_panel.gd
+msgid "мало"
+msgstr "부족"
+
+#: data/guild/guild.json
+msgid "меньше еды армии"
+msgstr "군대 식량 소비 감소"
+
+#: scenes/ui/guild/guild_reinforce_page.gd
+msgid "на месте"
+msgstr "도착"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "награда: %s"
+msgstr "보상: %s"
+
+#: scenes/ui/journal/journal_prestige_page.gd
+msgid "начало с %d-й волны"
+msgstr "웨이브 %d부터 시작"
+
+#: scenes/world/battle_replay.gd scenes/world/world_map.gd scripts/ui/panel_ui.gd
+msgid "нет"
+msgstr "없음"
+
+#: scenes/ui/journal/journal_bestiary_page.gd
+msgid "нет бонуса"
+msgstr "보너스 없음"
+
+#: scenes/world/world_map.gd
+msgid "нет — зону займут без боя!"
+msgstr "없음 — 전투 없이 구역을 점령합니다!"
+
+#: scenes/world/world_map.gd
+msgid "никто не контролирует"
+msgstr "지배 세력 없음"
+
+#: scenes/ui/needs_panel.gd
+msgid "норма"
+msgstr "보통"
+
+#: scenes/battle/battle.gd
+msgid "обучено: %s ×%d"
+msgstr "훈련 완료: %s ×%d"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "опыта"
+msgstr "경험치"
+
+#: data/guild/guild.json
+msgid "опыта героя"
+msgstr "영웅 경험치"
+
+#: data/guild/guild.json
+msgid "опыта гильдии за победы и босса"
+msgstr "승리 및 보스 길드 경험치"
+
+#: scenes/ui/guild_panel.gd
+msgid "от 3 до 24 символов"
+msgstr "3~24자"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "пока ни одного региона"
+msgstr "아직 지역 없음"
+
+#: scenes/battle/battle.gd
+msgid "построено: "
+msgstr "건설 완료: "
+
+#: scripts/data/stat_modifier.gd
+msgid "регенерации"
+msgstr "재생"
+
+#: scenes/ui/guild/guild_season_page.gd
+msgid "сезон %d — %d место"
+msgstr "시즌 %d — %d위"
+
+#: scenes/world/battle_replay.gd
+msgid "сила %d · %s"
+msgstr "전투력 %d · %s"
+
+#: data/guild/guild.json scripts/data/stat_modifier.gd
+msgid "силы армии"
+msgstr "군대 전투력"
+
+#: scripts/data/stat_modifier.gd
+msgid "силы клика"
+msgstr "클릭 위력"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "склад %d, казна %d"
+msgstr "창고 %d, 금고 %d"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "скорости атаки"
+msgstr "공격 속도"
+
+#: data/guild/guild.json scripts/data/stat_modifier.gd
+msgid "скорости обучения"
+msgstr "훈련 속도"
+
+#: scripts/data/stat_modifier.gd
+msgid "скорости отдыха"
+msgstr "휴식 속도"
+
+#: scripts/data/stat_modifier.gd
+msgid "сокращения перезарядки"
+msgstr "재사용 대기시간 감소"
+
+#: scenes/world/world_map.gd
+msgid "только что"
+msgstr "방금 전"
+
+#: scenes/ui/guild_panel.gd
+msgid "ур. %d"
+msgstr "Lv. %d"
+
+#: scenes/ui/skill_button.gd
+msgid "ур.%d"
+msgstr "Lv.%d"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "урона"
+msgstr "피해"
+
+#: scenes/ui/inventory_panel.gd
+msgid "урона «%s»"
+msgstr "«%s» 피해"
+
+#: data/guild/guild.json
+msgid "урона героя"
+msgstr "영웅 피해"
+
+#: scenes/ui/inventory_panel.gd scripts/data/stat_modifier.gd
+msgid "урона умений"
+msgstr "스킬 피해"
+
+#: scenes/ui/needs_panel.gd
+msgid "хорошо"
+msgstr "좋음"
+
+#: scripts/data/stat_modifier.gd
+msgid "шанса двойного удара"
+msgstr "이중 타격 확률"
+
+#: data/guild/guild.json
+msgid "шанса добычи"
+msgstr "전리품 확률"
+
+#: scenes/ui/journal/journal_prestige_page.gd scripts/data/stat_modifier.gd
+msgid "шанса дропа"
+msgstr "드롭 확률"
+
+#: scripts/data/stat_modifier.gd
+msgid "шанса крита"
+msgstr "치명타 확률"
+
+#: scenes/world/world_map.tscn
+msgid "← В замок"
+msgstr "← 성으로"
+
+#: scenes/ui/kingdom_panel.gd
+msgid "→ Ур. %d: %s"
+msgstr "→ Lv. %d: %s"
+
+#: scenes/ui/hud.gd
+msgid "⚔ %s идёт на %s (%d солдат), прибудет через %s"
+msgstr "⚔ %s → %s 진군 중 (병사 %d명), %s 후 도착"
+
+#: scenes/ui/army_view.tscn
+msgid "⚠ Армия голодает — сила −50%"
+msgstr "⚠ 군대가 굶주리고 있습니다 — 전투력 −50%"
+
+#: scenes/ui/hud.gd
+msgid "✉ %s приглашает вас в гильдию %s — откройте «Гильдию» [G]"
+msgstr "✉ %s님이 길드 %s에 초대했습니다 — «길드» [G]를 여세요"
+
+#: scenes/ui/journal/journal_quests_page.gd
+msgid "✔ Получено"
+msgstr "✔ 수령 완료"
+
+#: scenes/ui/journal/journal_achievements_page.gd
+msgid "✔ всё"
+msgstr "✔ 완료"
+
+#: scenes/ui/hud.gd
+msgid "✦ Сокровище: %s (%s) — загляните в Сокровищницу [I]"
+msgstr "✦ 보물: %s (%s) — 보물고 [I]를 확인하세요"

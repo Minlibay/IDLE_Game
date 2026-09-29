@@ -34,9 +34,22 @@ func get_description(rank: int) -> String:
 	return text
 
 
+## Иконки ключевых талантов: <id без префикса класса>.png (общие у классов — «Несокрушимый» и т.п.).
+const KEYSTONE_ICON_DIR := "res://assets/sprites/talents/keystones/"
+
+var _keystone_icon: Texture2D
+
+
 func get_icon() -> Texture2D:
 	if icon:
 		return icon
+	if kind == Kind.KEYSTONE:
+		if _keystone_icon == null:
+			var path := KEYSTONE_ICON_DIR + id.substr(id.find("_") + 1) + ".png"
+			if ResourceLoader.exists(path):
+				_keystone_icon = load(path)
+		if _keystone_icon:
+			return _keystone_icon
 	if modifiers.is_empty():
 		return null
 	return StatModifier.get_icon(modifiers[0].stat)

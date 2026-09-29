@@ -16,11 +16,23 @@ static func duration(seconds: float) -> String:
 	return TranslationServer.translate("%d с") % secs
 
 
-## «1 душа», «3 души», «5 душ» (по-английски — «1 soul», «5 souls»).
+## «1 душа», «3 души», «5 душ» — форма по числу и правилам языка (ключи перевода — русские формы:
+## «душа» — для 1, «души» — «несколько» (2–4 в русском, украинском, польском), «душ» — остальное).
 static func souls(count: int) -> String:
-	if TranslationServer.get_locale().begins_with("ru"):
-		return "%d %s" % [count, plural_ru(count, "душа", "души", "душ")]
-	return "%d %s" % [count, "soul" if count == 1 else "souls"]
+	return "%d %s" % [count, TranslationServer.translate(plural(count, "душа", "души", "душ"))]
+
+
+## Форма слова по числу для текущего языка: one / few / many (few есть в русском, украинском и польском).
+static func plural(count: int, one: String, few: String, many: String) -> String:
+	var locale := TranslationServer.get_locale()
+	if locale.begins_with("ru") or locale.begins_with("uk"):
+		return plural_ru(count, one, few, many)
+	if locale.begins_with("pl"):
+		var n := absi(count)
+		if n == 1:
+			return one
+		return few if n % 10 in [2, 3, 4] and not n % 100 in [12, 13, 14] else many
+	return one if absi(count) == 1 else many
 
 
 ## Русская форма слова по числу: 1 — one, 2–4 — few, 5–20 и остальные — many.

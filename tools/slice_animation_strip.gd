@@ -11,11 +11,16 @@ extends SceneTree
 ##                     Сравнивается ПЛОЩАДЬ фигуры (медиана по кадрам): в отличие от высоты, её почти не
 ##                     меняют поднятый меч, присед или прыжок.
 ##   --bg=B            минимальная яркость фона (0.82; для нарисованной «шахматки» ~0.6)
+##   --holes=N         убрать и замкнутые области фона от N пикселей исходника (между луком и тетивой).
+##                     Порог — больше светлых деталей персонажа (перьев, бликов); без опции не трогается,
+##                     чтобы не съесть, например, белую бороду.
 ##
 ## Как режется:
 ## - каждая фигура (связная область, вместе с мечом) относится к «своей» ячейке ленты по центру;
 ##   фигура берётся целиком, даже если меч заходит в соседнюю ячейку, а чужие фигуры в кадр не попадают;
 ## - из всех кадров вырезается одна общая область, так персонаж не дрожит и ноги на одной линии;
+##   если фигур ровно столько, сколько кадров, область отсчитывается от середины ступней каждой фигуры
+##   (у кадров из ChatGPT шаг неровный), иначе — от начала ячейки ленты;
 ## - якорь (anchor_x) — где корпус персонажа в кадре; игра по нему совмещает разные анимации.
 ## Результат — лента одинаковых кадров <выход.png> + <выход>.json.
 
@@ -43,6 +48,8 @@ func _initialize() -> void:
 	image.convert(Image.FORMAT_RGBA8)
 	var min_brightness := float(options.get("bg", ImageTools.DEFAULT_MIN_BRIGHTNESS))
 	ImageTools.remove_background(image, min_brightness)
+	if options.has("holes"):
+		ImageTools.remove_background_holes(image, int(options.holes), min_brightness)
 
 	var labels := _label_components(image)
 	var components: Array = labels.components
@@ -62,7 +69,11 @@ func _initialize() -> void:
 		quit(1)
 		return
 
-	# Каждая область -> кадр по центру своей рамки.
+	# Каждая область -> кадр. Если крупных фигур ровно столько, сколько кадров, мелкие детали (искры, «z»,
+	# выпавший посох) приклеиваются к ближайшей фигуре: кадры из ChatGPT редко стоят по ровной сетке.
+	# Иначе — к ячейке ленты, в которую попал центр области.
+	big.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.rect.position.x < b.rect.position.x)
+	var by_figure := big.size() == frame_count
 	var cell_width := image.get_width() / float(frame_count)
 	var frame_of := PackedInt32Array()
 	frame_of.resize(components.size())
@@ -72,7 +83,7 @@ func _initialize() -> void:
 	frame_areas.resize(frame_count)
 	for i in components.size():
 		var rect: Rect2i = components[i].rect
-		var frame := clampi(int(rect.get_center().x / cell_width), 0, frame_count - 1)
+		var frame := _nearest_figure(big, rect) if by_figure else clampi(int(rect.get_center().x / cell_width), 0, frame_count - 1)
 		frame_of[i] = frame
 		frame_areas[frame] += int(components[i].area)
 		frame_rects[frame] = rect if not frame_rects[frame].has_area() else frame_rects[frame].merge(rect)
@@ -107,20 +118,26 @@ func _initialize() -> void:
 		else:
 			pixel_size = ImageTools.estimate_pixel_size(image, boxes)
 
-	# Общая область в координатах ячейки.
+	# Точка отсчёта кадра: середина ступней своей фигуры или начало ячейки.
+	var label_map: PackedInt32Array = labels.map
+	var w := image.get_width()
+	var frame_ref := PackedInt32Array()
+	frame_ref.resize(frame_count)
+	for frame in frame_count:
+		frame_ref[frame] = _feet_x(label_map, w, components, components.find(big[frame])) if by_figure else int(frame * cell_width)
+
+	# Общая область в координатах кадра (от точки отсчёта).
 	var union := Rect2i()
 	for frame in frame_count:
 		if not frame_rects[frame].has_area():
 			continue
-		var local := Rect2i(frame_rects[frame].position - Vector2i(int(frame * cell_width), 0), frame_rects[frame].size)
+		var local := Rect2i(frame_rects[frame].position - Vector2i(frame_ref[frame], 0), frame_rects[frame].size)
 		union = local if not union.has_area() else union.merge(local)
 	union = union.grow(roundi(PADDING * pixel_size))
 
-	var label_map: PackedInt32Array = labels.map
-	var w := image.get_width()
 	var frames: Array[Image] = []
 	for frame in frame_count:
-		var origin := Vector2i(int(frame * cell_width), 0) + union.position
+		var origin := Vector2i(frame_ref[frame], 0) + union.position
 		var region := Image.create_empty(union.size.x, union.size.y, false, Image.FORMAT_RGBA8)
 		for y in union.size.y:
 			for x in union.size.x:
@@ -152,6 +169,34 @@ func _initialize() -> void:
 
 
 ## Именованные опции вида --key=value (позиционные аргументы остаются в args).
+## Середина ступней фигуры: средний x её пикселей в нижних 15% роста (у шагающего — между ногами).
+func _feet_x(label_map: PackedInt32Array, width: int, components: Array, index: int) -> int:
+	var rect: Rect2i = components[index].rect
+	var band := maxi(3, roundi(rect.size.y * 0.15))
+	var total := 0
+	var count := 0
+	for y in range(rect.end.y - band, rect.end.y):
+		for x in range(rect.position.x, rect.end.x):
+			if label_map[y * width + x] == index:
+				total += x
+				count += 1
+	return total / count if count > 0 else rect.get_center().x
+
+
+## Номер крупной фигуры, ближайшей к области по горизонтали (0 — если область с ней перекрывается).
+func _nearest_figure(figures: Array, rect: Rect2i) -> int:
+	var best := 0
+	var best_gap := INF
+	for j in figures.size():
+		var box: Rect2i = figures[j].rect
+		var gap := float(maxi(0, maxi(box.position.x - rect.end.x, rect.position.x - box.end.x)))
+		gap += absf(box.get_center().x - rect.get_center().x) * 0.001
+		if gap < best_gap:
+			best_gap = gap
+			best = j
+	return best
+
+
 func _parse_options(args: PackedStringArray) -> Dictionary:
 	var options := {}
 	for arg in args:

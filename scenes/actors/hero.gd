@@ -297,6 +297,7 @@ func _halt() -> void:
 
 
 func _attack(target: Monster) -> void:
+	Sound.play(StringName("attack_" + class_data.id))
 	var hit := roll_hit()
 	if not play_action(&"attack"):
 		lunge(signf(target.global_position.x - global_position.x))

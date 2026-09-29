@@ -34,8 +34,11 @@ export const CONFIG = {
   neutralPowerGrowth: 1.6,
   neutralSpread: 0.15,
 
-  // Замки игроков — только в зонах 1-го уровня и не ближе этого расстояния друг к другу.
+  // Замки игроков — на окраине (сначала зоны 1-го уровня, когда там тесно — 2-го и т.д., не дальше
+  // castleMaxTier) и не ближе castleMinDistance друг к другу. Уровень 1 есть только в углах карты
+  // (225 зон), поэтому одних их хватало лишь на ~30 замков.
   castleMinDistance: 3,
+  castleMaxTier: Number(env.CASTLE_MAX_TIER ?? 4),
 
   // Пассивный бонус зоны владельцу: bonusPerTier × уровень зоны (в процентах).
   bonusPerTier: 0.3,
@@ -115,7 +118,7 @@ export const CONFIG = {
   seasonTickMinutes: 1,
   // Карта делится на regionGrid × regionGrid регионов; контроль — у гильдии с большинством зон (не меньше regionMinZones).
   regionGrid: 5,
-  regionMinZones: 10,
+  regionMinZones: Number(env.REGION_MIN_ZONES ?? 10),
   regionControlMultiplier: 1.5,
   // Награды тройке лидеров сезона: золото каждому участнику и опыт гильдии.
   seasonRewards: [{ gold: 3000, xp: 5000 }, { gold: 2000, xp: 3000 }, { gold: 1000, xp: 1500 }],

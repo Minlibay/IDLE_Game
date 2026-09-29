@@ -26,6 +26,7 @@ func _ready() -> void:
 	await _test_biome_ground()
 	await _test_skill_mechanics()
 	_test_translation()
+	_test_sound()
 	await _test_hero_chase()
 	await _test_skill_casting()
 	_test_progress()
@@ -671,6 +672,15 @@ func _test_translation() -> void:
 	var report := {"text": "Набег на замок Бор удался", "template": "Набег на замок {name} удался", "args": {"name": "Бор"}}
 	_check(WorldService.report_text(report) == "The raid on Бор's castle succeeded", "report template not translated: %s" % WorldService.report_text(report))
 	_check(WorldService.report_text({"text": "Зона занята без боя"}) == "Zone taken without a fight", "old report text not translated")
+	# Формы множественного числа по правилам языка (ключи — русские формы).
+	var forms := func(locale: String, counts: Array) -> String:
+		TranslationServer.set_locale(locale)
+		return ",".join(counts.map(func(n: int) -> String: return UiFormat.plural(n, "1", "2", "5")))
+	_check(forms.call("ru", [1, 2, 5, 11, 21, 22, 25]) == "1,2,5,5,1,2,5", "ru plural forms")
+	_check(forms.call("uk", [1, 3, 14, 31]) == "1,2,5,1", "uk plural forms")
+	_check(forms.call("pl", [1, 2, 5, 12, 22, 21]) == "1,2,5,5,2,5", "pl plural forms")
+	_check(forms.call("en", [1, 2, 5]) == "1,5,5", "en plural forms")
+	_check(forms.call("ja", [1, 7]) == "1,5", "ja plural forms")
 	TranslationServer.set_locale("ru")
 	Database.retranslate()
 	_check(goblin.display_name == "Гоблин", "monster name not restored: %s" % goblin.display_name)
@@ -678,6 +688,32 @@ func _test_translation() -> void:
 
 
 ## Бестиарий, задания дня, достижения и улучшения за души.
+## Звук: у каждого звука и трека есть файл, у каждого умения — звук, громкость и «без звука» работают.
+func _test_sound() -> void:
+	for id: StringName in Sound.SOUNDS:
+		_check(Sound.is_file_present(id), "sound file missing: %s" % id)
+	for class_data in Database.classes:
+		_check(Sound.SOUNDS.has(StringName("attack_" + class_data.id)), "no attack sound for class %s" % class_data.id)
+		for skill in class_data.skills:
+			_check(Sound.SKILL_SOUNDS.has(skill.id), "no sound for skill %s" % skill.id)
+	for track: String in ["boss", "menu"]:
+		_check(ResourceLoader.exists(Sound.MUSIC_DIR + track + ".ogg"), "music missing: %s" % track)
+	for biome in Database.biomes:
+		_check(ResourceLoader.exists(Sound.MUSIC_DIR + biome.id + ".ogg"), "music missing for biome %s" % biome.id)
+	_check(Sound.music_for_wave(1, false) == StringName(Database.get_biome_for_wave(1).id), "wave 1 music is not its biome")
+	_check(Sound.music_for_wave(10, true) == &"boss", "boss wave music is not boss")
+	var saved_volume := Settings.get_volume("music")
+	var saved_muted := Settings.muted
+	Settings.set_volume("music", 2.0)
+	_check(is_equal_approx(Settings.get_volume("music"), 1.0), "volume not clamped")
+	Settings.set_volume("music", 0.0)
+	_check(AudioServer.is_bus_mute(AudioServer.get_bus_index(&"Music")), "zero volume does not mute the music bus")
+	Settings.set_muted(true)
+	_check(AudioServer.is_bus_mute(AudioServer.get_bus_index(&"Master")), "mute does not mute the master bus")
+	Settings.set_volume("music", saved_volume)
+	Settings.set_muted(saved_muted)
+
+
 func _test_progress() -> void:
 	var progress := GameState.progress
 	var saved := progress.to_dict()

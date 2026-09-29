@@ -5,12 +5,16 @@ extends SceneTree
 ## 1. Нарезать:   Godot.exe --headless --path . --script res://tools/slice_ui_sheet.gd -- <лист> <папка> p 4
 ## 2. Разложить:  Godot.exe --headless --path . --script res://tools/place_sheet_sprites.gd -- <папка> p <папка_вывода> <колонок> <имя1> <имя2> ...
 ##    пример:     ... -- tmp/monsters p res://assets/sprites/monsters 4 slime goblin goblin_archer goblin_shaman forest_troll ogre skeleton zombie
+##    --keep-details (в любом месте) — искры и частицы рядом с предметом остаются с ним (для иконок).
 
 const SheetLayout := preload("res://tools/sheet_layout.gd")
 
 
 func _initialize() -> void:
 	var args := OS.get_cmdline_user_args()
+	var keep_details := args.has("--keep-details")
+	if keep_details:
+		args.remove_at(args.find("--keep-details"))
 	if args.size() < 5:
 		push_error("Usage: -- <slice_dir> <prefix> <out_dir> <columns> <name1> [name2 ...]")
 		quit(1)
@@ -20,7 +24,7 @@ func _initialize() -> void:
 	var out_dir: String = args[2]
 	var columns := int(args[3])
 	var names: Array = args.slice(4)
-	var rows := SheetLayout.layout(manifest, ceili(names.size() / float(columns)), columns)
+	var rows := SheetLayout.layout(manifest, ceili(names.size() / float(columns)), columns, keep_details)
 	if rows.is_empty():
 		quit(1)
 		return

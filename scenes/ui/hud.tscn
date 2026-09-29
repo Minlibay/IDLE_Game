@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/guild_panel.tscn" id="13"]
 [ext_resource type="Texture2D" path="res://assets/ui/icons/banner.png" id="14"]
 [ext_resource type="PackedScene" path="res://scenes/ui/journal_panel.tscn" id="15"]
-[ext_resource type="Texture2D" path="res://assets/ui/icons/level_up.png" id="16"]
+[ext_resource type="Texture2D" path="res://assets/sprites/progress/journey.png" id="16"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1")
@@ -61,6 +61,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Герой · Воин · ур. 1"
 clip_text = true
+
+[node name="SoundButton" type="Button" parent="Root/BottomBar/StatsPanel/VBox/NameRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(18, 17)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Выключить звук [S]"
+theme_type_variation = &"SoundButton"
 
 [node name="TrayButton" type="Button" parent="Root/BottomBar/StatsPanel/VBox/NameRow"]
 unique_name_in_owner = true

@@ -24,6 +24,21 @@ function march(game: Game, player: Player, target: number, now: number): number 
   return arrival;
 }
 
+describe("world capacity", () => {
+  it("hundreds of players get castles: the outer tiers fill first", () => {
+    const { game } = createGame();
+    const players = Array.from({ length: 300 }, (_, i) => game.register(`P${i}`, 0));
+    const tiers = players.map((player) => game.zones[player.castleZone].tier);
+    assert.ok(tiers.slice(0, 20).every((tier) => tier === 1), "first castles go to tier 1");
+    assert.ok(Math.max(...tiers) <= settings.castleMaxTier);
+    for (let i = 0; i < players.length; i++) {
+      for (let j = i + 1; j < Math.min(players.length, i + 40); j++) {
+        assert.ok(hexDistance(game.zones[players[i].castleZone], game.zones[players[j].castleZone]) >= settings.castleMinDistance);
+      }
+    }
+  });
+});
+
 describe("game rules", () => {
   it("new player gets a castle on the map edge", () => {
     const { game } = createGame();
